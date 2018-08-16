@@ -36,4 +36,5 @@ public class Urls {
     //主页Ugc点赞
     public static final String UGCFABULOUS ="userLikesUgc/insertUserLikesUgc";
     //
+    public static final String  sdfg="";
 }
