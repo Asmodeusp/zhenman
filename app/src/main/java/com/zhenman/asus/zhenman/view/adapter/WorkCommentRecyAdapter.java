@@ -86,7 +86,6 @@ public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecy
                         holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) - 1 + "");
                         count[0]++;
                     }
-
                 }
             });
         }
