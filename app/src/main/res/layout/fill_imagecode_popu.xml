@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="540px"
+    android:layout_height="350px"
+    android:background="@drawable/image_code"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/imageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32px"
+        android:text="请输入图片验证码"
+        android:textColor="@color/h3"
+        android:textSize="26px" />
+
+    <ImageView
+
+        android:id="@+id/image_code_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="24px"
+        android:layout_marginTop="24px"
+        android:src="@mipmap/common_close_small" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="82px"
+        android:background="@drawable/image_code_ed"
+        android:orientation="horizontal">
+
+        <EditText
+
+            android:id="@+id/image_code_Ed"
+            android:layout_width="200px"
+            android:layout_height="88px"
+            android:hint="请输入"
+            android:paddingLeft="24px"
+            android:textColorHint="@color/h5"
+            android:textSize="26px" />
+
+        <ImageView
+            android:id="@+id/image_code_img"
+            android:layout_width="200px"
+            android:layout_height="88px" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/image_code_reload_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="24px"
+        android:layout_marginTop="178px">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/login_code_reload" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8px"
+            android:text="换一张"
+            android:textColor="@color/c1"
+            android:textSize="22px" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentLeft="true"
+
+
+        android:layout_marginTop="234px"
+        android:background="@color/h7"></View>
+
+    <TextView
+        android:id="@+id/image_code_sure_Btn"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center_horizontal"
+        android:text="确定"
+        android:textColor="@color/c1"
+        android:textSize="32px" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

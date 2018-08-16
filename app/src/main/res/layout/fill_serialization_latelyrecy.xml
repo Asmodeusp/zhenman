@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24px"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/Serialization_LatelyRecy_WorkName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24px"
+        android:layout_marginTop="8px"
+        android:text="李鹏帅"
+        android:textColor="@color/h2"
+        android:textSize="30px" />
+
+    <TextView
+        android:id="@+id/Serialization_LatelyRecy_WorkTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24px"
+        android:layout_marginTop="8px"
+        android:text="小三"
+        android:textColor="@color/h4"
+        android:textSize="24px" />
+
+    <ImageView
+        android:id="@+id/Serialization_LatelyRecyImage"
+        android:layout_width="match_parent"
+        android:layout_height="320px"
+        android:layout_margin="2px"
+        android:scaleType="fitXY"
+        android:src="@mipmap/common_qiezi" />
+
+    <TextView
+        android:id="@+id/Serialization_LatelyRecyCatalogName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24px"
+        android:layout_marginTop="8px"
+        android:text="第一话"
+        android:textColor="@color/h3"
+        android:textSize="28px" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16px"
+        android:layout_marginTop="24px"
+        android:background="@color/h7"></View>
+</com.zhy.autolayout.AutoLinearLayout>

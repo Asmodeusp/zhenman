@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/sView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/sView">
+
+        <ImageView
+            android:id="@+id/Work_commentRecy_HeadView"
+            android:layout_width="54px"
+            android:layout_height="54px"
+            android:layout_marginLeft="32px"
+            android:layout_marginTop="20px" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="106px"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Work_commentRecy_UserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="路飞"
+                android:textColor="@color/h3"
+                android:textSize="26px" />
+
+            <TextView
+                android:id="@+id/Work_commentRecy_Comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8px"
+                android:text="哈哈哈哈"
+                android:textColor="@color/h2"
+                android:textSize="30px" />
+
+            <TextView
+                android:id="@+id/Work_commentRecy_Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24px"
+                android:layout_marginTop="8px"
+                android:text="11nain"
+                android:textColor="@color/h5"
+                android:textSize="24px" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="24px"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/Work_commentRecy_Like"
+                android:layout_width="40px"
+                android:layout_height="40px"
+                android:layout_marginTop="24px"
+                android:src="@mipmap/my_like_off" />
+
+            <TextView
+                android:id="@+id/Work_commentRecy_LikeNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8px"
+                android:text="0"
+                android:textColor="@color/h5"
+                android:textSize="24px" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="12px"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/sView"
+        android:background="@color/h9"></View>
+</com.zhy.autolayout.AutoRelativeLayout>

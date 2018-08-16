@@ -1,0 +1,86 @@
+package com.zhenman.asus.zhenman.view.serializaion.fragment;
+
+
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.zhenman.asus.zhenman.R;
+import com.zhenman.asus.zhenman.base.BaseFragment;
+import com.zhenman.asus.zhenman.contract.WorkDetailsCommentContract;
+import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
+import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
+import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
+import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
+import com.zhenman.asus.zhenman.view.adapter.WorkCommentRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.WorkDetailsActorRecyAdapter;
+import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresenterImp> implements WorkDetailsCommentContract.WorkDetailsCommentView {
+    private TextView Work_DescriptionText;
+    private TextView Actor_RecyTips;
+    private RecyclerView Actor_Recy;
+    private RecyclerView Work_commentRecy;
+    private List<WorkDetailsCommentBean.DataBean.ResultBean> result = new ArrayList<>();
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_work_details;
+    }
+
+    @Override
+    protected void init() {
+        //作品描述
+        Work_DescriptionText = getActivity().findViewById(R.id.Work_DescriptionText);
+        //演员列表
+        Actor_Recy = getActivity().findViewById(R.id.Actor_Recy);
+        //评论列表
+        Work_commentRecy = getActivity().findViewById(R.id.Work_commentRecy);
+        //提示文字
+        Actor_RecyTips = getActivity().findViewById(R.id.Actor_RecyTips);
+        //得到连载详情Bean
+        SerializationDetailsBean.DataBean data = ((WorkDetailsActivity) getActivity()).serializationDetailsBeandata;
+        SerializationCatalogBean serializationCatalogBean = ((WorkDetailsActivity) getActivity()).serializationCatalogBean;
+        if (data.getActorList().size() == 0 && data.getActorList() == null) {
+            Actor_RecyTips.setVisibility(View.VISIBLE);
+        }
+        presenter.getWorkDetailsCommentBean(serializationCatalogBean.getData().get(0).getPgcId(),""+1);
+        //设置作品描述
+        Work_DescriptionText.setText(data.getIntroduction());
+        //设置演员列表格式
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        Actor_Recy.setLayoutManager(linearLayoutManager);
+        //设置演员列表适配器
+        Actor_Recy.setAdapter(new WorkDetailsActorRecyAdapter(data.getActorList()));
+        //设置评论列表格式
+        Work_commentRecy.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+    }
+
+    @Override
+    protected void loadDate() {
+
+    }
+
+
+    @Override
+    public void showError(String msg) {
+        if (!msg.equals("成功")) {
+           Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show() ;
+        }
+    }
+
+    @Override
+    public void showWorkDetailsCommentBean(WorkDetailsCommentBean workDetailsCommentBean) {
+        result.addAll(workDetailsCommentBean.getData().getResult()) ;
+        //设置评论列表适配器
+        WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result);
+        Work_commentRecy.setAdapter(workCommentRecyAdapter);
+    }
+}

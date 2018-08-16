@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">真漫</string>
+    <string name="Fast_landing">快捷登陆</string>
+    <string name="Welcome">欢迎进入真漫世界</string>
+    <string name="Login">登录</string>
+    <string name="Password_landing">密码登录</string>
+    <string name="Verification_Code">请输入验证码</string>
+    <string name="Next">下一步</string>
+    <string name="Else_landing">其他登陆方式</string>
+    <string name="Skip">跳过</string>
+    <string name="Cancle">×</string>
+    <string name="InputPassword">请输入密码</string>
+    <string name="ForgetPassword">忘记密码</string>
+    <string name="FindPassword">找回密码</string>
+    <string name="Home">首页</string>
+    <string name="Serialization">连载</string>cancle
+    <string name="Message">消息</string>
+    <string name="Myself">我的</string>
+    <string name="Hot">热门</string>
+    <string name="Following">关注</string>
+    <string name="Comment">评论</string>
+    <string name="Works">TA的作品</string>
+    <string name="Likes">TA喜欢的</string>
+    <string name="Popularity">人气榜</string>
+    <string name="Register">注册</string>
+    <string name="Reward">打赏榜</string>
+    <string name="Vulgar_tycoon">土豪榜</string>
+    <string name="PhoneNumber">请输入手机号</string>
+    <string name="zuojiantou"></string>
+    <string name="youjiantou">></string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

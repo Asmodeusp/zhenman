@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+
+    <external-path
+        name="external_headerImg"
+        path="" />
+    <files-path
+        name="files_headerImg"
+        path="" />
+    <cache-path
+        name="cache_headerImg"
+        path="" />
+    <external-cache-path
+        name="external_cache_headerImg"
+        path="" />
+    <external-files-path
+        name="external_files_headerImg"
+        path="" />
+</paths>

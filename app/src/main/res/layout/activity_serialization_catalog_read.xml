@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/SerializationRelativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.serializaion.SerializationCatalogReadActivity">
+
+
+    <ListView
+        android:id="@+id/serializationCatalogReadRecy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"></ListView>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/serializationCatalogReadFootLin"
+        android:layout_width="match_parent"
+        android:layout_height="290px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/home_footbackground">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:id="@+id/serializationCatalogReadCommentBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40px"
+                android:layout_marginRight="24px"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:layout_marginBottom="8px"
+                    android:src="@mipmap/home_comment" />
+
+                <TextView
+                    android:id="@+id/CatalogReadCommentNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="0"
+                    android:textColor="@color/h9"
+                    android:textSize="24px" />
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:id="@+id/serializationCatalogReadCatalogBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40px"
+                android:layout_marginRight="24px"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="64px"
+                    android:layout_height="64px"
+                    android:layout_marginBottom="8px"
+                    android:src="@mipmap/serial_catalog" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="目录"
+                    android:textColor="@color/h9"
+                    android:textSize="24px" />
+            </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/serializationCatalogReadHeadRel"
+        android:layout_width="match_parent"
+        android:layout_height="128px"
+        android:background="@drawable/home_headbackground">
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/serializationCatalogReadReturnImg"
+                android:layout_width="36px"
+                android:layout_height="36px"
+                android:layout_margin="24px"
+                android:src="@mipmap/common_return_white" />
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <TextView
+                    android:id="@+id/serializationCatalogReadText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="第一话"
+                    android:textColor="@color/h8"
+                    android:textSize="36px" />
+            </com.zhy.autolayout.AutoRelativeLayout>
+        </com.zhy.autolayout.AutoRelativeLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+
+</com.zhy.autolayout.AutoRelativeLayout>

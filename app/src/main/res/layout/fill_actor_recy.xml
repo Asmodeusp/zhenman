@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/Actor_HeadImgdImg"
+            android:layout_width="128px"
+            android:layout_height="128px"
+            android:layout_marginRight="16px"
+            android:layout_marginTop="24px"
+            android:background="@drawable/round_layers"
+            />
+
+        <ImageView
+            android:id="@+id/Actor_followImg"
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:layout_marginLeft="42px"
+            android:layout_marginTop="132px"
+            android:src="@mipmap/home_follow_off" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="128px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16px">
+
+        <TextView
+
+            android:id="@+id/Actor_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="刘德华"
+            android:textColor="@color/h2"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/Actor_Position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Actor_Name"
+            android:layout_centerHorizontal="true"
+            android:text="导演"
+            android:textColor="@color/h3"
+            android:textSize="22px" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="128px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16px">
+
+        <TextView
+            android:id="@+id/Actor_Money"
+            android:layout_width="98px"
+            android:layout_height="48px"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/actor_shape"
+            android:gravity="center"
+            android:text="打赏TA"
+            android:textColor="@color/c1"
+            android:textSize="22px" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+</com.zhy.autolayout.AutoLinearLayout>

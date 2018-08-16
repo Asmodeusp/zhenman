@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.serializaion.fragment.WorkDetailsFragment">
+
+    <TextView
+        android:id="@+id/Work_DescriptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24px"
+        android:layout_marginRight="24px"
+        android:textColor="@color/h3"
+        android:textSize="26px" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16px"
+        android:layout_marginTop="24px"
+        android:background="@color/h7"></View>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24px"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12px"
+            android:src="@mipmap/common_tag" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16px"
+            android:text="演职人员"
+            android:textColor="@color/h2"
+            android:textSize="32px" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="298px"
+        android:layout_marginTop="24px"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/Actor_Recy"
+            android:layout_width="wrap_content"
+            android:layout_height="298px"
+            android:layout_marginLeft="24px"
+            android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/Actor_RecyTips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="演职人员很神秘，他们不想叼你"
+            android:textColor="@color/h3"
+            android:textSize="22px"
+            android:visibility="gone" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16px"
+        android:layout_marginTop="24px"
+        android:background="@color/h7"></View>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24px"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12px"
+            android:src="@mipmap/common_tag" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16px"
+            android:text="热门评论"
+            android:textColor="@color/h2"
+            android:textSize="32px" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/Work_commentRecy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+</com.zhy.autolayout.AutoLinearLayout>

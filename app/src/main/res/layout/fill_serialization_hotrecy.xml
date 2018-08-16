@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8px"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cover_corners">
+
+        <ImageView
+            android:id="@+id/Serialization_HotRecyImg"
+            android:layout_width="228px"
+            android:layout_height="326px"
+            android:padding="2px"
+            android:scaleType="fitXY"
+            android:src="@mipmap/common_qiezi" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <TextView
+        android:id="@+id/Serialization_HotRecy_WorkName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="恶的fsfsd"
+        android:textColor="@color/h3"
+        android:textSize="26px" />
+
+    <TextView
+        android:id="@+id/Serialization_HotRecy_WorkTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="恶的fsfsd"
+        android:textColor="@color/h4"
+        android:textSize="22px" />
+
+</com.zhy.autolayout.AutoLinearLayout>

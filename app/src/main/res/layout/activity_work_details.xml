@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.serializaion.WorkDetailsActivity">
+
+    <com.zhenman.asus.zhenman.view.ui.MyScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="440px">
+
+                <ImageView
+                    android:id="@+id/Work_Detaails_ReturnImg"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="24px"
+                    android:layout_marginTop="24px"
+                    android:src="@mipmap/common_return_white" />
+
+                <ImageView
+                    android:id="@+id/Work_Detaails_CoverImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/common_qiezi" />
+
+                <com.zhy.autolayout.AutoRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="220px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/work_details_cover">
+
+                    <TextView
+                        android:id="@+id/Work_Detaails_Tag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="32px"
+                        android:layout_marginLeft="24px"
+                        android:text="言情"
+                        android:textColor="@color/h9"
+                        android:textSize="24px" />
+
+                    <TextView
+                        android:id="@+id/Work_Detaails_Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/Work_Detaails_Tag"
+                        android:layout_alignLeft="@+id/Work_Detaails_Tag"
+                        android:layout_alignStart="@+id/Work_Detaails_Tag"
+                        android:layout_marginBottom="8px"
+                        android:text="asdfghjhdgfd"
+                        android:textColor="@color/h9"
+                        android:textSize="36px" />
+                </com.zhy.autolayout.AutoRelativeLayout>
+            </com.zhy.autolayout.AutoRelativeLayout>
+
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.zhy.autolayout.AutoRelativeLayout
+                    android:id="@+id/collection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24px">
+
+                    <ImageView
+                        android:id="@+id/Work_Detaails_collectionImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginStart="11dp"
+                        android:src="@mipmap/common_collection_off" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8px"
+                        android:layout_toEndOf="@+id/Work_Detaails_collectionImg"
+                        android:layout_toRightOf="@+id/Work_Detaails_collectionImg"
+                        android:text="收藏"
+                        android:textColor="@color/h2"
+                        android:textSize="32px" />
+
+                    <TextView
+                        android:id="@+id/Work_Detaails_LookUpText"
+                        android:layout_width="428px"
+                        android:layout_height="88px"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="24px"
+                        android:background="@mipmap/common_button_bg"
+                        android:gravity="center"
+                        android:text="查看第一话"
+                        android:textColor="@color/h9"
+                        android:textSize="32px" />
+                </com.zhy.autolayout.AutoRelativeLayout>
+
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/collection"
+                    android:layout_marginTop="48px"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <com.zhy.autolayout.AutoLinearLayout
+                        android:id="@+id/Work_Detaails_detailsBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="200px"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/Work_Detaails_detailsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="详情"
+                            android:textColor="@color/c1"
+                            android:textSize="32px" />
+
+                        <View
+                            android:id="@+id/Work_Detaails_detailsLine"
+                            android:layout_width="64px"
+                            android:layout_height="4px"
+                            android:layout_marginTop="16px"
+                            android:background="@color/c1" />
+                    </com.zhy.autolayout.AutoLinearLayout>
+
+                    <com.zhy.autolayout.AutoLinearLayout
+                        android:id="@+id/Work_Detaails_CatalogBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="200px"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/Work_Detaails_CatalogText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="目录"
+                            android:textColor="@color/h2"
+                            android:textSize="32px" />
+
+                        <View
+                            android:id="@+id/Work_Detaails_CatalogLine"
+                            android:layout_width="64px"
+                            android:layout_height="4px"
+                            android:layout_marginTop="16px"
+                            android:background="@color/c1"
+                            android:visibility="gone" />
+                    </com.zhy.autolayout.AutoLinearLayout>
+
+                </com.zhy.autolayout.AutoLinearLayout>
+
+            </com.zhy.autolayout.AutoRelativeLayout>
+
+            <com.zhy.autolayout.AutoFrameLayout
+                android:id="@+id/Work_Detaails_FrameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="24px"></com.zhy.autolayout.AutoFrameLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </com.zhenman.asus.zhenman.view.ui.MyScrollView>
+</com.zhy.autolayout.AutoLinearLayout>
