@@ -5,4 +5,9 @@
     android:layout_height="match_parent"
     android:background="@mipmap/myself"
     tools:context=".view.fragment.MyselfFragment">
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+    </com.zhy.autolayout.AutoRelativeLayout>
 </com.zhy.autolayout.AutoRelativeLayout>
