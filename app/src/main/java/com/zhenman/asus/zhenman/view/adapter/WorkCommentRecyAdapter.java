@@ -71,20 +71,20 @@ public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecy
             holder.Work_commentRecy_Like.setImageResource(R.mipmap.guanzhu_like_on);
         } else {
             holder.Work_commentRecy_Like.setImageResource(R.mipmap.guanzhu_like_off);
-            int count = 0;
+            final int[] count = {0};
             holder.Work_commentRecy_Like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (count/2==0) {
+                    if (count[0] /2==0) {
                         holder.Work_commentRecy_Like.setImageResource(R.mipmap.guanzhu_like_on);
                         holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
-                        count ++;
+                        count[0]++;
 
                     }
-                    if (count/2==1) {
+                    if (count[0] /2==1) {
                         holder.Work_commentRecy_Like.setImageResource(R.mipmap.guanzhu_like_off);
                         holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) - 1 + "");
-                        count++;
+                        count[0]++;
                     }
 
                 }
