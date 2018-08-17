@@ -27,7 +27,7 @@
         <meta-data android:name="design_height" android:value="1334">
         </meta-data>
 
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -88,11 +88,11 @@
         </provider>
 
         <activity android:name=".view.ContentActivity" />
-        <activity android:name=".view.RegisterCodeActivity" />
-        <activity android:name=".view.SetPasswordActivity" />
-        <activity android:name=".view.ForgetPasswordActivity" />
-        <activity android:name=".view.UserInfoActivity" />
-        <activity android:name=".view.ClassifyActivity" />
+        <activity android:name=".view.login.RegisterCodeActivity" />
+        <activity android:name=".view.login.SetPasswordActivity" />
+        <activity android:name=".view.login.ForgetPasswordActivity" />
+        <activity android:name=".view.login.UserInfoActivity" />
+        <activity android:name=".view.serializaion.ClassifyActivity" />
         <activity android:name=".view.serializaion.WorkDetailsActivity" />
         <activity android:name=".view.serializaion.SerializationCatalogReadActivity"></activity>
     </application>

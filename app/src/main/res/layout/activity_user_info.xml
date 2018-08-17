@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/loginbackground"
     android:orientation="vertical"
-    tools:context=".view.UserInfoActivity">
+    tools:context=".view.login.UserInfoActivity">
 
     <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="wrap_content"

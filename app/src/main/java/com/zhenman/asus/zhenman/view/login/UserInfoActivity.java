@@ -1,4 +1,4 @@
-package com.zhenman.asus.zhenman.view;
+package com.zhenman.asus.zhenman.view.login;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

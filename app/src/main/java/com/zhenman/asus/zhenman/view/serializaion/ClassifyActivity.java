@@ -1,4 +1,4 @@
-package com.zhenman.asus.zhenman.view;
+package com.zhenman.asus.zhenman.view.serializaion;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 

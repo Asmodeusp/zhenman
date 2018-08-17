@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/loginbackground"
     android:orientation="vertical"
-    tools:context=".view.MainActivity">
+    tools:context=".view.login.MainActivity">
 
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/Re"

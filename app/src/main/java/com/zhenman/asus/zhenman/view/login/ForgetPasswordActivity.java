@@ -1,4 +1,4 @@
-package com.zhenman.asus.zhenman.view;
+package com.zhenman.asus.zhenman.view.login;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;

@@ -1,6 +1,6 @@
 package com.zhenman.asus.zhenman.model.service;
 
-import android.database.Observable;
+import io.reactivex.Observable;
 
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.utils.Urls;

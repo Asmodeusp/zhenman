@@ -1,7 +1,5 @@
-package com.zhenman.asus.zhenman.view;
+package com.zhenman.asus.zhenman.view.login;
 
-
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -19,8 +17,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
-import com.zhenman.asus.zhenman.contract.VerificationCodeContract;
-import com.zhenman.asus.zhenman.presenter.VerificationCodePresenterImp;
 import com.zhenman.asus.zhenman.utils.Urls;
 
 import java.io.IOException;
@@ -32,7 +28,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenterImp> implements View.OnClickListener, VerificationCodeContract.VerificationCodeView {
+public class BindPhotoActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView mRegisterReturn;
     private EditText mRegisterPhoneNumber;
@@ -45,6 +41,7 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
     private LinearLayout image_code_reload_btn;
     private ImageView image_code_return;
     private TextView image_code_sure_btn;
+    private TextView register_text;
     private EditText imageCode_ed;
     private PopupWindow window;
 
@@ -58,6 +55,9 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
     protected void init() {
         //返回
         mRegisterReturn = findViewById(R.id.Register_return);
+        //
+        register_text = findViewById(R.id.register_text);
+        register_text.setText("绑定手机号");
         //父容器
         mRegister_Code_Lin = findViewById(R.id.Register_Code_Lin);
         //手机号输入框
@@ -68,13 +68,11 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
         mRegisterPhotoCode = findViewById(R.id.Register_PhotoCodeText);
         //下一步按钮
         mRegisterNextBtn = findViewById(R.id.Register_NextBtn);
-
+        mRegisterNextBtn.setText("绑定");
         mRegisterReturn.setOnClickListener(this);
         mRegisterNextBtn.setOnClickListener(this);
         mRegisterPhotoCode.setOnClickListener(this);
 
-
-//        mRegisterPhotoCode
     }
 
 
@@ -96,7 +94,7 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
                 } else if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    initpopu();
+//                    initpopu();
                 }
                 break;
             case R.id.Register_NextBtn:
@@ -106,19 +104,19 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
                 if (mRegisterPhotoCodeEd.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
                 }else {
-                    presenter.getRegisterLoginCode(mRegisterPhoneNumber.getText().toString().trim(), mRegisterPhotoCodeEd.getText().toString().trim());
+//                    presenter.getRegisterLoginCode(mRegisterPhoneNumber.getText().toString().trim(), mRegisterPhotoCodeEd.getText().toString().trim());
+                    requestPhotoCode(mRegisterPhoneNumber.getText().toString().trim());
                     finish();
                 }
 
                 break;
             case R.id.image_code_reload_Btn:
-                requestPhotoCode(mRegisterPhoneNumber.getText().toString().trim());
                 break;
             case R.id.image_code_return:
                 window.dismiss();
                 break;
             case R.id.image_code_sure_Btn:
-                presenter.getVerificationCode(mRegisterPhoneNumber.getText().toString().trim(), image_code_ed.getText().toString().trim());
+//                presenter.getVerificationCode(mRegisterPhoneNumber.getText().toString().trim(), image_code_ed.getText().toString().trim());
                 window.dismiss();
                 break;
 
@@ -162,49 +160,20 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
             public void onFailure(Call call, IOException e) {
                 Log.e("请求失败", e.toString());
             }
-
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                if (response.body()!=null) {
-//                    Log.d("RegisterCodeActivity", "response.body().bytes():" + response.body().bytes());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Glide.with(RegisterCodeActivity.this)
-                                        .load(response.body().bytes()).into(imageCode);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Glide.with(BindPhotoActivity.this).load(response.body().bytes()).into(imageCode);
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                    });
-                }else {
-                    Toast.makeText(RegisterCodeActivity.this, "网速过慢，加载不出", Toast.LENGTH_SHORT).show();
-                }
-
+                    }
+                });
             }
         });
-    }
-
-
-    @Override
-    public void gotoPassword() {
-        Intent intent = new Intent(RegisterCodeActivity.this, SetPasswordActivity.class);
-        intent.putExtra("msmcode", mRegisterPhotoCodeEd.getText().toString().trim());
-        intent.putExtra("phone", mRegisterPhoneNumber.getText().toString().trim());
-        startActivity(intent);
-    }
-
-    @Override
-    public void gotoLogin() {
-        finish();
-    }
-
-    @Override
-    public void showError(String msg) {
-        if (!msg.equals("成功")) {
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-        }
     }
 
 }

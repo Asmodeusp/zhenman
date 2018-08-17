@@ -1,4 +1,4 @@
-package com.zhenman.asus.zhenman.view;
+package com.zhenman.asus.zhenman.view.login;
 
 
 import android.content.Intent;
@@ -16,6 +16,7 @@ import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.LoginContract;
 import com.zhenman.asus.zhenman.presenter.LoginPresenterImp;
+import com.zhenman.asus.zhenman.view.ContentActivity;
 
 
 public class MainActivity extends BaseActivity<LoginPresenterImp> implements View.OnClickListener, LoginContract.LoginView {
