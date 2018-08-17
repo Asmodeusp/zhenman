@@ -9,10 +9,12 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.model.service.HomeHotService;
 import com.zhenman.asus.zhenman.model.service.LoginService;
+import com.zhenman.asus.zhenman.model.service.PgcFabulousService;
 import com.zhenman.asus.zhenman.model.service.RegisterVerificationCodeService;
 import com.zhenman.asus.zhenman.model.service.SerializationDetailsService;
 import com.zhenman.asus.zhenman.model.service.SerializationService;
 import com.zhenman.asus.zhenman.model.service.SetPasswordService;
+import com.zhenman.asus.zhenman.model.service.UgcFabulousService;
 import com.zhenman.asus.zhenman.model.service.WorkDetailsCommentService;
 import com.zhenman.asus.zhenman.model.service.serializationCatalogReadService;
 
@@ -35,9 +37,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitUtils {
     private static RetrofitUtils retrofitUtils;
     private Retrofit retrofit;
+
     private RetrofitUtils() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//        builder.addInterceptor(addQueryParameterInterceptor());
+        builder.addInterceptor(addQueryParameterInterceptor());
 //        builder.addInterceptor(addHeaderInterceptor());
 
 //      设置缓存
@@ -55,7 +58,7 @@ public class RetrofitUtils {
         retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-//                .client(client)
+                .client(client)
                 .baseUrl(Urls.BASE_URL)
                 .build();
     }
@@ -81,8 +84,8 @@ public class RetrofitUtils {
                 Request originalRequest = chain.request();
                 Request request;
                 HttpUrl modifiedUrl = originalRequest.url().newBuilder()
-                        // Provide your custom parameter here
-                        .addQueryParameter("platform", "android")
+                        .addQueryParameter("os", "Android")
+                        .addQueryParameter("osVersion", Build.VERSION.RELEASE)
                         .addQueryParameter("version", "1.0.0")
                         .build();
                 request = originalRequest.newBuilder().url(modifiedUrl).build();
@@ -124,8 +127,7 @@ public class RetrofitUtils {
 
                 if (!isNetworkAvailable(App.context)) {
                     request = request.newBuilder()
-                            .addHeader("os","Android")
-                            .addHeader("osVersion", Build.VERSION.RELEASE)
+
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build();
                 }
@@ -203,6 +205,14 @@ public class RetrofitUtils {
 
     public WorkDetailsCommentService getWorkDetailsCommentService() {
         return retrofit.create(WorkDetailsCommentService.class);
+    }
+
+    public PgcFabulousService getPgcFabulousService() {
+        return retrofit.create(PgcFabulousService.class);
+    }
+
+    public UgcFabulousService getUgcFabulousService() {
+        return retrofit.create(UgcFabulousService.class);
     }
 }
 

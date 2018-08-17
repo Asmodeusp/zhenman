@@ -25,7 +25,4 @@ public interface serializationCatalogReadService {
     @GET(Urls.SERIALIZATION_CATALOG)
     Observable<SerializationCatalogBean> GetSerializationCatalogBean(@HeaderMap Map<String, String> headers, @QueryMap Map<String, String> params);
 
-    //连载详情
-    @GET(Urls.SERIALIZATION_DETAILS)
-    Observable<SerializationDetailsBean> GetSerializationDetailsBean(@HeaderMap Map<String, String> headers, @QueryMap Map<String, String> params);
 }
