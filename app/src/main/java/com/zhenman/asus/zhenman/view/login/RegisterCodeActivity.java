@@ -96,7 +96,7 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
                 } else if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    presenter.getRegisterLoginCode(mRegisterPhoneNumber.getText().toString().trim(), mRegisterPhotoCodeEd.getText().toString().trim());
+                    initpopu();
                 }
                 break;
             case R.id.Register_NextBtn:
@@ -166,6 +166,7 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 if (response.body()!=null) {
+//                    Log.d("RegisterCodeActivity", "response.body().bytes():" + response.body().bytes());
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
