@@ -109,6 +109,8 @@ public class SetPasswordActivity extends BaseActivity<SetPasswordPresenterImp> i
 
     @Override
     public void showError(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        if (!msg.equals("成功")) {
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        }
     }
 }

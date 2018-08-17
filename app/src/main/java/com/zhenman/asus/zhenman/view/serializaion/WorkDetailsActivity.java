@@ -135,7 +135,9 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
 
     @Override
     public void showError(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        if (!msg.equals("成功")) {
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

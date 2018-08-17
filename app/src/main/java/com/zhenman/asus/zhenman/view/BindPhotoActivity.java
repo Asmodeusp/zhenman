@@ -94,7 +94,7 @@ public class BindPhotoActivity extends BaseActivity implements View.OnClickListe
                 } else if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    initpopu();
+//                    initpopu();
                 }
                 break;
             case R.id.Register_NextBtn:
@@ -105,12 +105,12 @@ public class BindPhotoActivity extends BaseActivity implements View.OnClickListe
                     Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
                 }else {
 //                    presenter.getRegisterLoginCode(mRegisterPhoneNumber.getText().toString().trim(), mRegisterPhotoCodeEd.getText().toString().trim());
+                    requestPhotoCode(mRegisterPhoneNumber.getText().toString().trim());
                     finish();
                 }
 
                 break;
             case R.id.image_code_reload_Btn:
-                requestPhotoCode(mRegisterPhoneNumber.getText().toString().trim());
                 break;
             case R.id.image_code_return:
                 window.dismiss();

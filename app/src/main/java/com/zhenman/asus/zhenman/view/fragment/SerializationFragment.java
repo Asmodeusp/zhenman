@@ -79,7 +79,9 @@ public class SerializationFragment extends BaseFragment<SerializationPresenterIm
 
     @Override
     public void showError(String msg) {
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+        if (!msg.equals("成功")) {
+            Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

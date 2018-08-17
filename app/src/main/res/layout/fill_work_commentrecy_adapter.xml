@@ -62,12 +62,14 @@
             android:layout_marginRight="24px"
             android:orientation="vertical">
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/Work_commentRecy_Like"
                 android:layout_width="40px"
+                android:button="@null"
                 android:layout_height="40px"
                 android:layout_marginTop="24px"
-                android:src="@mipmap/my_like_off" />
+              
+                 />
 
             <TextView
                 android:id="@+id/Work_commentRecy_LikeNumber"

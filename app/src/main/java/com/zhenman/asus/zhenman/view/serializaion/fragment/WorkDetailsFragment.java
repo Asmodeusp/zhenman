@@ -27,6 +27,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     private RecyclerView Actor_Recy;
     private RecyclerView Work_commentRecy;
     private List<WorkDetailsCommentBean.DataBean.ResultBean> result = new ArrayList<>();
+    private SerializationCatalogBean serializationCatalogBean;
 
     @Override
     protected int getLayoutId() {
@@ -45,7 +46,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
         Actor_RecyTips = getActivity().findViewById(R.id.Actor_RecyTips);
         //得到连载详情Bean
         SerializationDetailsBean.DataBean data = ((WorkDetailsActivity) getActivity()).serializationDetailsBeandata;
-        SerializationCatalogBean serializationCatalogBean = ((WorkDetailsActivity) getActivity()).serializationCatalogBean;
+        serializationCatalogBean = ((WorkDetailsActivity) getActivity()).serializationCatalogBean;
         if (data.getActorList().size() == 0 && data.getActorList() == null) {
             Actor_RecyTips.setVisibility(View.VISIBLE);
         }
@@ -80,7 +81,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     public void showWorkDetailsCommentBean(WorkDetailsCommentBean workDetailsCommentBean) {
         result.addAll(workDetailsCommentBean.getData().getResult()) ;
         //设置评论列表适配器
-        WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result);
+        WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result,serializationCatalogBean.getData().get(0).getPgcId());
         Work_commentRecy.setAdapter(workCommentRecyAdapter);
     }
 }

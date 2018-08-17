@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +25,10 @@ public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecy
     private List<WorkDetailsCommentBean.DataBean.ResultBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
-
-    public WorkCommentRecyAdapter(List<WorkDetailsCommentBean.DataBean.ResultBean> list) {
+    String PGCID;
+    public WorkCommentRecyAdapter(List<WorkDetailsCommentBean.DataBean.ResultBean> list,String PGCID) {
         this.list = list;
+        this.PGCID = PGCID;
     }
 
     @NonNull
@@ -68,27 +70,35 @@ public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecy
         holder.Work_commentRecy_Time.setText(SPUtils.transferLongToDate(Long.parseLong(list.get(position).getAddTime())));
         holder.Work_commentRecy_LikeNumber.setText(list.get(position).getLikeNum());
         if (list.get(position).isLike()) {
-            holder.Work_commentRecy_Like.setImageResource(R.mipmap.guanzhu_like_on);
-        } else {
-            holder.Work_commentRecy_Like.setImageResource(R.mipmap.guanzhu_like_off);
-            final int[] count = {0};
+            holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
             holder.Work_commentRecy_Like.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    if (count[0] /2==0) {
-                        holder.Work_commentRecy_Like.setImageResource(R.mipmap.guanzhu_like_on);
-                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
-                        count[0]++;
-
+                public void onClick(View v) {
+                    if (holder.Work_commentRecy_Like.isChecked()) {
+                        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
+                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) -1 + "");
+                    } else {
+                        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
+                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum())  + "");
                     }
-                    if (count[0] /2==1) {
-                        holder.Work_commentRecy_Like.setImageResource(R.mipmap.guanzhu_like_off);
-                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) - 1 + "");
-                        count[0]++;
+                }
+            });
+        } else {
+            holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
+            holder.Work_commentRecy_Like.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (holder.Work_commentRecy_Like.isChecked()) {
+                        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
+                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
+                    } else {
+                        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
+                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
                     }
                 }
             });
         }
+
         holder.Work_commentRecy_UserName.setText(list.get(position).getName());
         holder.itemView.setTag(position);
     }
@@ -110,7 +120,7 @@ public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecy
         //头像
         private ImageView Work_commentRecy_HeadView;
         //评论喜欢
-        private ImageView Work_commentRecy_Like;
+        private CheckBox Work_commentRecy_Like;
         //评论时间
         private TextView Work_commentRecy_Time;
         //评论喜欢个数
