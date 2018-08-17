@@ -96,7 +96,7 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
                 } else if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    initpopu();
+                    presenter.getRegisterLoginCode(mRegisterPhoneNumber.getText().toString().trim(), mRegisterPhotoCodeEd.getText().toString().trim());
                 }
                 break;
             case R.id.Register_NextBtn:
