@@ -166,7 +166,6 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 if (response.body()!=null) {
-//                    Log.d("RegisterCodeActivity", "response.body().bytes():" + response.body().bytes());
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
