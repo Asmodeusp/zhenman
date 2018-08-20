@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'zhenman'
-            keyPassword '123456'
-            storeFile file('D:/zhenman.jks')
-            storePassword '123456'
-        }
-    }
+//    signingConfigs {
+////        config {
+////            keyAlias 'zhenman'
+////            keyPassword '123456'
+////            storeFile file('E:/zhenman.jks')
+////            storePassword '123456'
+////        }
+//    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.zhenman.asus.zhenman"
@@ -60,4 +60,6 @@ dependencies {
     implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     //��Ļ����
     implementation 'com.zhy:autolayout:1.4.5'
+    implementation files('libs/SocialSDK_QQ_Simplify.jar')
+    implementation 'com.umeng.sdk:common:latest.integration'
 }

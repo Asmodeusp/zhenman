@@ -2,8 +2,12 @@ package com.zhenman.asus.zhenman.view.login;
 
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,11 +16,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import com.umeng.qq.tencent.Constants;
+import com.umeng.qq.tencent.IUiListener;
+import com.umeng.qq.tencent.Tencent;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.LoginContract;
 import com.zhenman.asus.zhenman.presenter.LoginPresenterImp;
 import com.zhenman.asus.zhenman.view.ContentActivity;
+import com.zhenman.asus.zhenman.view.login.qqlogin.UMSharePlatform;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MainActivity extends BaseActivity<LoginPresenterImp> implements View.OnClickListener, LoginContract.LoginView {
@@ -32,6 +47,9 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     private ImageView mLoginWeixinImage;
     private ImageView mLoginQqImage;
     private CheckBox mLogin_password_hide;
+    private Tencent mTencent;
+    private IUiListener iUiListener;
+
 
     @Override
     protected int getLayoutId() {
@@ -62,9 +80,34 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         mLoginWeixinImage.setOnClickListener(this);
         mLoginQqImage.setOnClickListener(this);
         mLogin_password_hide.setOnClickListener(this);
+//        QQ登陆
 
+        initHandler();
 
     }
+
+    private void initHandler() {
+        Handler mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 0) {
+                    JSONObject response = (JSONObject) msg.obj;
+                    if (response.has("nickname")) {
+                        Gson gson = new Gson();
+                        Log.d("Sunny", response.toString());
+//                    QQUser user=gson.fromJson(response.toString(),QQUser.class);
+//                    if (user!=null) {
+//                        ViseLog.d("userInfo:昵称："+user.getNickname()+"  性别:"+user.getGender()+"  地址："+user.getProvince()+user.getCity());
+//                        ViseLog.d("头像路径："+user.getFigureurl_qq_2());
+//                            Picasso.with(MainActivity.this).load(response.getString("figureurl_qq_2")).into(imageView);
+                    }
+                }
+            }
+
+
+        };
+    }
+
 
     @Override
     protected void loadDate() {
@@ -97,12 +140,28 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 startActivity(new Intent(this, ForgetPasswordActivity.class));
                 break;
             case R.id.login_weiboImage:
-
+//微博登陆
                 break;
             case R.id.login_weixinImage:
-
+//微信登陆
+                UMSharePlatform.loginThirdParty(this, SHARE_MEDIA.WEIXIN, new UMSharePlatform.LoginSuccessCallback() {
+                    @Override
+                    public void getLoginData(String uid) {
+//                        mLoginPresenter.thirdPartyLoad(uid, "1");
+                        Log.d("Sunny",uid);
+                    }
+                });
                 break;
             case R.id.login_qqImage:
+//                调起QQ登录
+
+                UMSharePlatform.loginThirdParty(this, SHARE_MEDIA.QQ, new UMSharePlatform.LoginSuccessCallback() {
+                    @Override
+                    public void getLoginData(String uid) {
+//                        mLoginPresenter.thirdPartyLoad(uid, "2");
+                    }
+                });
+
 
                 break;
             case R.id.login_password_hide:
@@ -130,5 +189,11 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         if (!msg.equals("成功")) {
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }
