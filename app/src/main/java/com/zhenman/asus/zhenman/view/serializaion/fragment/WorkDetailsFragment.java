@@ -28,6 +28,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     private RecyclerView Work_commentRecy;
     private List<WorkDetailsCommentBean.DataBean.ResultBean> result = new ArrayList<>();
     private SerializationCatalogBean serializationCatalogBean;
+    private TextView work_commentTips;
 
     @Override
     protected int getLayoutId() {
@@ -44,13 +45,18 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
         Work_commentRecy = getActivity().findViewById(R.id.Work_commentRecy);
         //提示文字
         Actor_RecyTips = getActivity().findViewById(R.id.Actor_RecyTips);
+        //评论列表提示文字
+        work_commentTips = getActivity().findViewById(R.id.Work_commentTips);
         //得到连载详情Bean
         SerializationDetailsBean.DataBean data = ((WorkDetailsActivity) getActivity()).serializationDetailsBeandata;
         serializationCatalogBean = ((WorkDetailsActivity) getActivity()).serializationCatalogBean;
         if (data.getActorList().size() == 0 && data.getActorList() == null) {
             Actor_RecyTips.setVisibility(View.VISIBLE);
         }
-        presenter.getWorkDetailsCommentBean(serializationCatalogBean.getData().get(0).getPgcId(),""+1);
+        if (serializationCatalogBean.getData()!=null&&serializationCatalogBean.getData().size()!=0) {
+            presenter.getWorkDetailsCommentBean(serializationCatalogBean.getData().get(0).getPgcId(),""+1);
+
+        }
         //设置作品描述
         Work_DescriptionText.setText(data.getIntroduction());
         //设置演员列表格式
@@ -79,9 +85,15 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
 
     @Override
     public void showWorkDetailsCommentBean(WorkDetailsCommentBean workDetailsCommentBean) {
+
         result.addAll(workDetailsCommentBean.getData().getResult()) ;
-        //设置评论列表适配器
-        WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result,serializationCatalogBean.getData().get(0).getPgcId());
-        Work_commentRecy.setAdapter(workCommentRecyAdapter);
+        if (result.size()==0&&result==null) {
+            work_commentTips.setVisibility(View.VISIBLE);
+            Work_commentRecy.setVisibility(View.GONE);
+        }else{
+            //设置评论列表适配器
+            WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result,serializationCatalogBean.getData().get(0).getPgcId());
+            Work_commentRecy.setAdapter(workCommentRecyAdapter);
+        }
     }
 }

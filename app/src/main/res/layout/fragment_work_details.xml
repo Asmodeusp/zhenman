@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:text="演职人员很神秘，他们不想叼你"
+            android:text="演职人员很神秘，没留下足迹"
             android:textColor="@color/h3"
             android:textSize="22px"
             android:visibility="gone" />
@@ -96,8 +96,17 @@
             android:textSize="32px" />
     </com.zhy.autolayout.AutoLinearLayout>
 
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/Work_commentTips"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="暂时没有评论，快来抢沙发" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/Work_commentRecy"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        ></android.support.v7.widget.RecyclerView>
 </com.zhy.autolayout.AutoLinearLayout>
