@@ -20,6 +20,7 @@ import com.zhenman.asus.zhenman.model.service.serializationCatalogReadService;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.CacheControl;
@@ -49,9 +50,9 @@ public class RetrofitUtils {
         builder.cache(cache).addInterceptor(addCacheInterceptor());
 
         //设置超时
-//        builder.connectTimeout(15, TimeUnit.SECONDS);
-//        builder.readTimeout(20, TimeUnit.SECONDS);
-//        builder.writeTimeout(20, TimeUnit.SECONDS);
+        builder.connectTimeout(15, TimeUnit.SECONDS);
+        builder.readTimeout(20, TimeUnit.SECONDS);
+        builder.writeTimeout(20, TimeUnit.SECONDS);
         //错误重连
         builder.retryOnConnectionFailure(true);
         OkHttpClient client = builder.build();
