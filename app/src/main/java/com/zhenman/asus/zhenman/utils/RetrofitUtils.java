@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.widget.Toast;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.zhenman.asus.zhenman.App;
@@ -146,6 +147,7 @@ public class RetrofitUtils {
                             .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                             .removeHeader("nyn")
                             .build();
+                    Toast.makeText(App.context, "网络连接错误，请检查网络！", Toast.LENGTH_SHORT).show();
                 }
                 return response;
             }

@@ -37,8 +37,9 @@
                 android:id="@+id/Work_commentRecy_Comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+               android:maxEms="16"
                 android:layout_marginTop="8px"
-                android:text="哈哈哈哈"
+                android:text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
                 android:textColor="@color/h2"
                 android:textSize="30px" />
 
@@ -89,5 +90,6 @@
         android:layout_height="12px"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/sView"
-        android:background="@color/h9"></View>
+        android:background="@color/h9"
+        android:layout_alignParentLeft="true"></View>
 </com.zhy.autolayout.AutoRelativeLayout>
