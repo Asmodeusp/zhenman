@@ -9,7 +9,6 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.model.service.HomeHotService;
 import com.zhenman.asus.zhenman.model.service.LoginService;
-import com.zhenman.asus.zhenman.model.service.PgcFabulousService;
 import com.zhenman.asus.zhenman.model.service.RegisterVerificationCodeService;
 import com.zhenman.asus.zhenman.model.service.SerializationDetailsService;
 import com.zhenman.asus.zhenman.model.service.SerializationService;
@@ -208,12 +207,12 @@ public class RetrofitUtils {
         return retrofit.create(WorkDetailsCommentService.class);
     }
 
-    public PgcFabulousService getPgcFabulousService() {
-        return retrofit.create(PgcFabulousService.class);
-    }
+
 
     public UgcFabulousService getUgcFabulousService() {
         return retrofit.create(UgcFabulousService.class);
     }
+
+
 }
 

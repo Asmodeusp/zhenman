@@ -15,6 +15,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.SerializationDetailsContract;
+import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
+import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.presenter.SerializationDetailsPresenterImp;
@@ -125,6 +127,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                 if (Work_Detaails_collectionImg.isChecked()) {
                     if (serializationDetailsBeandata.isCollect()) {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
+//                        presenter.PgcCollection();
                     }else{
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
                     }
@@ -142,8 +145,8 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                 if (serializationCatalogBeandata == null) {
                     Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
                 } else {
-                    intent.putExtra("catalogId", serializationCatalogBeandata.get(serializationCatalogBeandata.size() - 1).getCatalogId());
-                    intent.putExtra("pgcId", serializationCatalogBeandata.get(serializationCatalogBeandata.size() - 1).getPgcId());
+                    intent.putExtra("catalogId", serializationCatalogBeandata.get(0).getCatalogId());
+                    intent.putExtra("pgcId", serializationCatalogBeandata.get(0).getPgcId());
                 }
                 startActivity(intent);
                 break;
@@ -184,6 +187,16 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
             this.serializationCatalogBean = serializationCatalogBean;
             serializationCatalogBeandata.addAll(serializationCatalogBean.getData());
         }
+    }
+
+    @Override
+    public void showPgcCollectionBean(PgcCollectionBean pgcCollectionBean) {
+
+    }
+
+    @Override
+    public void showPGCFabulousBean(PgcFabulousBean pgcFabulousBean) {
+
     }
 
     private void setCatalogText() {
