@@ -46,8 +46,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
         if (presenter != null) {
             presenter.actualView(this);
         }
-        init();
         loadDate();
+        init();
+
     }
 
     @Override

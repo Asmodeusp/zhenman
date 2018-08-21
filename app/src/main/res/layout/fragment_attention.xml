@@ -9,8 +9,8 @@
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/HomeHot_HeadView"
         android:layout_width="match_parent"
-        android:background="@color/h9"
-        android:layout_height="146px">
+        android:layout_height="146px"
+        android:background="@color/h9">
 
         <ImageView
             android:id="@+id/HomeHot_search_Img"

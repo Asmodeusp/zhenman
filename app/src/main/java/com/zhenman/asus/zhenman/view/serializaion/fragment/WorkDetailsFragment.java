@@ -53,7 +53,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
         if (data.getActorList().size() == 0 && data.getActorList() == null) {
             Actor_RecyTips.setVisibility(View.VISIBLE);
         }
-        if (serializationCatalogBean.getData()==null&&serializationCatalogBean.getData().size()==0) {
+        if (serializationCatalogBean.getData()!=null&&serializationCatalogBean.getData().size()!=0) {
             presenter.getWorkDetailsCommentBean(serializationCatalogBean.getData().get(0).getPgcId(),""+1);
         }
         //设置作品描述
