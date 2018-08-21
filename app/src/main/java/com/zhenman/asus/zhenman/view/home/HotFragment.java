@@ -1,4 +1,4 @@
-package com.zhenman.asus.zhenman.view.fragment;
+package com.zhenman.asus.zhenman.view.home;
 
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +18,7 @@ import com.zhenman.asus.zhenman.view.adapter.HomeHotAdapter;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView {
+public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView {
 
 
     ArrayList<HomeHotBean.DataBean> mlist = new ArrayList<>();
@@ -30,6 +30,9 @@ public class HomeFragment extends BaseFragment<HomeHotPresenterImp> implements H
     private TextView Home_FollowText;
     private HomeHotAdapter homeHotAdapter;
 
+    public HotFragment() {
+
+    }
 
     @Override
     protected int getLayoutId() {

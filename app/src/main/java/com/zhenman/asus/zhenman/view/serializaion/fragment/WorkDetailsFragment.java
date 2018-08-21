@@ -55,7 +55,6 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
         }
         if (serializationCatalogBean.getData()==null&&serializationCatalogBean.getData().size()==0) {
             presenter.getWorkDetailsCommentBean(serializationCatalogBean.getData().get(0).getPgcId(),""+1);
-
         }
         //设置作品描述
         Work_DescriptionText.setText(data.getIntroduction());

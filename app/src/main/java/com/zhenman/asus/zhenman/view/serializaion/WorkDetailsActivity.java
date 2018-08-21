@@ -51,7 +51,6 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
 
     @Override
     protected void init() {
-
         Intent intent = getIntent();
         pgcid = intent.getStringExtra("pgcid");
         initView();

@@ -11,7 +11,9 @@ import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
-import com.zhenman.asus.zhenman.view.fragment.HomeFragment;
+import com.zhenman.asus.zhenman.view.fragment.HomepageFragment;
+import com.zhenman.asus.zhenman.view.fragment.IntroducedFragment;
+import com.zhenman.asus.zhenman.view.home.HotFragment;
 import com.zhenman.asus.zhenman.view.fragment.MessageFragment;
 import com.zhenman.asus.zhenman.view.fragment.MyselfFragment;
 import com.zhenman.asus.zhenman.view.fragment.SerializationFragment;
@@ -52,7 +54,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
         ReleaseButton.setOnClickListener(this);
         MessageButton.setOnClickListener(this);
         MyselfButton.setOnClickListener(this);
-        setContentView(R.id.contentview, HomeFragment.class);
+        setContentView(R.id.contentview, HotFragment.class);
         setText(36, 32, 32, 32);
     }
     @Override
@@ -63,7 +65,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
         switch (view.getId()) {
             case R.id.HomeButton:
                 group.setBackgroundColor(this.getResources().getColor(R.color.touming));
-                setContentView(R.id.contentview, HomeFragment.class);
+                setContentView(R.id.contentview, HomepageFragment.class);
                 setText(38, 32, 32, 32);
                 setTextColor("#ffffff");
                 setHeight(0);
@@ -76,8 +78,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
                 setHeight(98);
                 break;
             case R.id.ReleaseButton:
-//                group.setVisibility(View.GONE);
-//                setContentView(R.id.contentview, IntroducedFragment.class);
+           setContentView(R.id.contentview, IntroducedFragment.class);
                 Toast.makeText(this, "该功能暂未开放", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.MessageButton:
