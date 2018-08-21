@@ -35,5 +35,6 @@ public class Urls {
     public static final String PGCFABULOUS = "likesPgcCommentInfo/insertLikesPgcCommentInfo";
     //主页Ugc点赞
     public static final String UGCFABULOUS ="userLikesUgc/insertUserLikesUgc";
-    //
+    //Pgc收藏
+    public static final String PGC_COLLECTION ="userLikesPgc/insertUserLikesPgc";
 }

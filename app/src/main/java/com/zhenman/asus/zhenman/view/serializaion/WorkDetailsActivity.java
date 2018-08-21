@@ -91,7 +91,6 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         Work_Detaails_FrameLayout = findViewById(R.id.Work_Detaails_FrameLayout);
         //作品名字
         Work_Detaails_Name = findViewById(R.id.Work_Detaails_Name);
-
         //点击事件
         Work_Detaails_ReturnImg.setOnClickListener(this);
         Work_Detaails_detailsBtn.setOnClickListener(this);
@@ -123,12 +122,17 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                 break;
                 //收藏
             case R.id.Work_Detaails_collectionImg:
-
                 if (Work_Detaails_collectionImg.isChecked()) {
                     if (serializationDetailsBeandata.isCollect()) {
-
+                        Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
                     }else{
-
+                        Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
+                    }
+                }else {
+                    if (serializationDetailsBeandata.isCollect()) {
+                        Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
+                    }else{
+                        Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
                     }
                 }
                 break;
