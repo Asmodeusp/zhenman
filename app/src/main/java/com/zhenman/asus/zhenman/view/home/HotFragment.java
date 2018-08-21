@@ -30,9 +30,6 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     private TextView Home_FollowText;
     private HomeHotAdapter homeHotAdapter;
 
-    public HotFragment() {
-
-    }
 
     @Override
     protected int getLayoutId() {
@@ -47,11 +44,11 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     }
 
     private void initView() {
-        Home_ListView = getActivity().findViewById(R.id.Home_List);
-        Home_HotText = getActivity().findViewById(R.id.Home_HotText);
-        Home_FollowText = getActivity().findViewById(R.id.Home_FollowText);
-        Home_search_Img = getActivity().findViewById(R.id.Home_search_Img);
-        Home_headView = getActivity().findViewById(R.id.Home_headView);
+        Home_ListView = getActivity().findViewById(R.id.HomeHot_List);
+        Home_HotText = getActivity().findViewById(R.id.HomeHot_HotText);
+        Home_FollowText = getActivity().findViewById(R.id.HomeHot_AttentionText);
+        Home_search_Img = getActivity().findViewById(R.id.HomeHot_search_Img);
+        Home_headView = getActivity().findViewById(R.id.HomeHot_HeadView);
 
         presenter.getHomeHotBean("1");
         initListView();

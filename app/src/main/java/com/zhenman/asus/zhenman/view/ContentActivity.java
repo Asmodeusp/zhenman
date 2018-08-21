@@ -54,7 +54,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
         ReleaseButton.setOnClickListener(this);
         MessageButton.setOnClickListener(this);
         MyselfButton.setOnClickListener(this);
-        setContentView(R.id.contentview, HotFragment.class);
+        setContentView(R.id.contentview, HomepageFragment.class);
         setText(36, 32, 32, 32);
     }
     @Override
