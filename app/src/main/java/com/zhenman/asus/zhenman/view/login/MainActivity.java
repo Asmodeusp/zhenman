@@ -18,9 +18,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import com.umeng.qq.tencent.Constants;
-import com.umeng.qq.tencent.IUiListener;
-import com.umeng.qq.tencent.Tencent;
+import com.umeng.commonsdk.UMConfigure;
+
+import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.zhenman.asus.zhenman.R;
@@ -32,6 +32,8 @@ import com.zhenman.asus.zhenman.view.login.qqlogin.UMSharePlatform;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Map;
 
 
 public class MainActivity extends BaseActivity<LoginPresenterImp> implements View.OnClickListener, LoginContract.LoginView {
@@ -47,8 +49,8 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     private ImageView mLoginWeixinImage;
     private ImageView mLoginQqImage;
     private CheckBox mLogin_password_hide;
-    private Tencent mTencent;
-    private IUiListener iUiListener;
+//    private Tencent mTencent;
+//    private IUiListener iUiListener;
 
 
     @Override
@@ -80,32 +82,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         mLoginWeixinImage.setOnClickListener(this);
         mLoginQqImage.setOnClickListener(this);
         mLogin_password_hide.setOnClickListener(this);
-//        QQ登陆
 
-        initHandler();
-
-    }
-
-    private void initHandler() {
-        Handler mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                if (msg.what == 0) {
-                    JSONObject response = (JSONObject) msg.obj;
-                    if (response.has("nickname")) {
-                        Gson gson = new Gson();
-                        Log.d("Sunny", response.toString());
-//                    QQUser user=gson.fromJson(response.toString(),QQUser.class);
-//                    if (user!=null) {
-//                        ViseLog.d("userInfo:昵称："+user.getNickname()+"  性别:"+user.getGender()+"  地址："+user.getProvince()+user.getCity());
-//                        ViseLog.d("头像路径："+user.getFigureurl_qq_2());
-//                            Picasso.with(MainActivity.this).load(response.getString("figureurl_qq_2")).into(imageView);
-                    }
-                }
-            }
-
-
-        };
     }
 
 
@@ -141,26 +118,30 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 break;
             case R.id.login_weiboImage:
 //微博登陆
+
                 break;
             case R.id.login_weixinImage:
 //微信登陆
-                UMSharePlatform.loginThirdParty(this, SHARE_MEDIA.WEIXIN, new UMSharePlatform.LoginSuccessCallback() {
-                    @Override
-                    public void getLoginData(String uid) {
-//                        mLoginPresenter.thirdPartyLoad(uid, "1");
-                        Log.d("Sunny",uid);
-                    }
-                });
+
+                UMShareAPI.get(this).getPlatformInfo(MainActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);
+
+//                UMSharePlatform.loginThirdParty(this, SHARE_MEDIA.WEIXIN, new UMSharePlatform.LoginSuccessCallback() {
+//                    @Override
+//                    public void getLoginData(String uid) {
+////                        mLoginPresenter.thirdPartyLoad(uid, "1");
+//                        Log.d("Sunny", uid);
+//                    }
+//                });
                 break;
             case R.id.login_qqImage:
 //                调起QQ登录
 
-                UMSharePlatform.loginThirdParty(this, SHARE_MEDIA.QQ, new UMSharePlatform.LoginSuccessCallback() {
-                    @Override
-                    public void getLoginData(String uid) {
-//                        mLoginPresenter.thirdPartyLoad(uid, "2");
-                    }
-                });
+//                UMSharePlatform.loginThirdParty(this, SHARE_MEDIA.QQ, new UMSharePlatform.LoginSuccessCallback() {
+//                    @Override
+//                    public void getLoginData(String uid) {
+////                        mLoginPresenter.thirdPartyLoad(uid, "2");
+//                    }
+//                });
 
 
                 break;
@@ -190,6 +171,54 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
     }
+
+    //    其中umAuthListener为授权回调，构建如下：
+    UMAuthListener umAuthListener = new UMAuthListener() {
+        /**
+         * @desc 授权开始的回调
+         * @param platform 平台名称
+         */
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+
+        }
+
+
+        /**
+         * @desc 授权成功的回调
+         * @param platform 平台名称
+         * @param action 行为序号，开发者用不上
+         * @param data 用户资料返回
+         */
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+
+            Toast.makeText(MainActivity.this, "成功了", Toast.LENGTH_LONG).show();
+
+        }
+
+        /**
+         * @desc 授权失败的回调
+         * @param platform 平台名称
+         * @param action 行为序号，开发者用不上
+         * @param t 错误原因
+         */
+        @Override
+        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+
+            Toast.makeText(MainActivity.this, "失败：" + t.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+        /**
+         * @desc 授权取消的回调
+         * @param platform 平台名称
+         * @param action 行为序号，开发者用不上
+         */
+        @Override
+        public void onCancel(SHARE_MEDIA platform, int action) {
+            Toast.makeText(MainActivity.this, "取消了", Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

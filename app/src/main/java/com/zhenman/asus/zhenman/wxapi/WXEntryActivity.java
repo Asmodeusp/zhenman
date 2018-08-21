@@ -1,4 +1,4 @@
-package com.zhenman.asus.zhenman.view.login.wxapi;
+package com.zhenman.asus.zhenman.wxapi;
 
 import com.umeng.socialize.weixin.view.WXCallbackActivity;
 

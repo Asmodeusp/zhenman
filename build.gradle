@@ -23,6 +23,7 @@ allprojects {
         jcenter()
 //        加入友盟的时候加的
         mavenCentral()
+
     }
 }
 

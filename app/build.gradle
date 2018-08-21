@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-//    signingConfigs {
-////        config {
-////            keyAlias 'zhenman'
-////            keyPassword '123456'
-////            storeFile file('E:/zhenman.jks')
-////            storePassword '123456'
-////        }
-//    }
+    signingConfigs {
+        debug {
+            keyAlias 'zhenman'
+            keyPassword '123456'
+            storeFile file('E:/ZhenmanData/zhenman.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.zhenman.asus.zhenman"
@@ -20,8 +20,15 @@ android {
     }
     buildTypes {
         release {
+
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
+        }
+        debug{
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
         }
     }
 }
@@ -60,6 +67,5 @@ dependencies {
     implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     //��Ļ����
     implementation 'com.zhy:autolayout:1.4.5'
-    implementation files('libs/SocialSDK_QQ_Simplify.jar')
-    implementation 'com.umeng.sdk:common:latest.integration'
+    //友盟自动集成
 }

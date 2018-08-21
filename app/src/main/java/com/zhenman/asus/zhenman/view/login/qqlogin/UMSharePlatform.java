@@ -3,9 +3,7 @@ package com.zhenman.asus.zhenman.view.login.qqlogin;
 import android.app.Activity;
 import android.util.Log;
 
-import com.umeng.socialize.UMAuthListener;
-import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.bean.SHARE_MEDIA;
+
 
 import java.util.Map;
 
@@ -17,7 +15,7 @@ public class UMSharePlatform {
      * @param media
      * @param callback
      */
-    public static void loginThirdParty(Activity activity, SHARE_MEDIA media, final LoginSuccessCallback callback) {
+   /* public static void loginThirdParty(Activity activity, SHARE_MEDIA media, final LoginSuccessCallback callback) {
         UMShareAPI.get(activity).getPlatformInfo(activity, media, new UMAuthListener() {
             @Override
             public void onStart(SHARE_MEDIA share_media) {
@@ -41,7 +39,7 @@ public class UMSharePlatform {
                 Log.e("lee", "onCancel授权取消: ");
             }
         });
-    }
+    }*/
 
     /**
      * 回调接口
