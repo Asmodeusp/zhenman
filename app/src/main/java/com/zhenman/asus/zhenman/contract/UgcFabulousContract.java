@@ -1,7 +1,6 @@
 package com.zhenman.asus.zhenman.contract;
 
 import com.zhenman.asus.zhenman.base.BasePresenter;
-import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 
 public interface UgcFabulousContract {

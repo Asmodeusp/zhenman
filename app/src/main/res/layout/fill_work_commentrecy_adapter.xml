@@ -38,7 +38,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8px"
-                android:text="哈哈哈哈"
+                android:maxEms="16"
+                android:text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
                 android:textColor="@color/h2"
                 android:textSize="30px" />
 
@@ -65,11 +66,11 @@
             <CheckBox
                 android:id="@+id/Work_commentRecy_Like"
                 android:layout_width="40px"
-                android:button="@null"
                 android:layout_height="40px"
                 android:layout_marginTop="24px"
-              
-                 />
+                android:button="@null"
+
+                />
 
             <TextView
                 android:id="@+id/Work_commentRecy_LikeNumber"
@@ -87,6 +88,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="12px"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/sView"
         android:background="@color/h9"></View>
