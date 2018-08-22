@@ -42,7 +42,7 @@ public class RetrofitUtils {
     private RetrofitUtils() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.addInterceptor(addQueryParameterInterceptor());
-//        builder.addInterceptor(addHeaderInterceptor());
+        builder.addInterceptor(addHeaderInterceptor());
 
 //      设置缓存
         File cacheFile = new File(App.context.getExternalCacheDir(), "RetrofitCache");
@@ -50,16 +50,16 @@ public class RetrofitUtils {
         builder.cache(cache).addInterceptor(addCacheInterceptor());
 
         //设置超时
-        builder.connectTimeout(15, TimeUnit.SECONDS);
-        builder.readTimeout(20, TimeUnit.SECONDS);
-        builder.writeTimeout(20, TimeUnit.SECONDS);
+        builder.connectTimeout(150, TimeUnit.SECONDS);
+        builder.readTimeout(200, TimeUnit.SECONDS);
+        builder.writeTimeout(200, TimeUnit.SECONDS);
         //错误重连
         builder.retryOnConnectionFailure(true);
         OkHttpClient client = builder.build();
         retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
+//                .client(client)
                 .baseUrl(Urls.BASE_URL)
                 .build();
     }

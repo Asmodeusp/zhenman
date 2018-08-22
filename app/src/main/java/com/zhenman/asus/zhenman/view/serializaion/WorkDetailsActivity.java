@@ -3,6 +3,7 @@ package com.zhenman.asus.zhenman.view.serializaion;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,7 +33,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
     private ImageView Work_Detaails_ReturnImg;
     private ImageView Work_Detaails_CoverImg;
     private TextView Work_Detaails_Tag;
-    private ImageView Work_Detaails_collectionImg;
+    private CheckBox Work_Detaails_collectionImg;
     private TextView Work_Detaails_LookUpBtn;
     private View Work_Detaails_detailsLine;
     private LinearLayout Work_Detaails_detailsBtn;
@@ -52,14 +53,15 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
     @Override
     protected void init() {
 
-        Intent intent = getIntent();
-        pgcid = intent.getStringExtra("pgcid");
         initView();
     }
 
     @Override
     protected void loadDate() {
-
+        Intent intent = getIntent();
+        pgcid = intent.getStringExtra("pgcid");
+        presenter.getSerializationDetailsBean(pgcid);
+        presenter.getSerializationCatalogBean(pgcid);
     }
 
     private void initView() {
@@ -70,7 +72,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         //标签
         Work_Detaails_Tag = findViewById(R.id.Work_Detaails_Tag);
         //收藏
-        Work_Detaails_collectionImg = findViewById(R.id.Work_Detaails_collectionImg);
+        Work_Detaails_collectionImg = findViewById(R.id.Work_Detaails_collectionImg);//common_collection_off
         //观看第一话
         Work_Detaails_LookUpBtn = findViewById(R.id.Work_Detaails_LookUpText);
         //详情线
@@ -89,14 +91,13 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         Work_Detaails_FrameLayout = findViewById(R.id.Work_Detaails_FrameLayout);
         //作品名字
         Work_Detaails_Name = findViewById(R.id.Work_Detaails_Name);
-        presenter.getSerializationDetailsBean(pgcid);
-        presenter.getSerializationCatalogBean(pgcid);
         //点击事件
         Work_Detaails_ReturnImg.setOnClickListener(this);
         Work_Detaails_detailsBtn.setOnClickListener(this);
         Work_Detaails_CatalogBtn.setOnClickListener(this);
         Work_Detaails_LookUpBtn.setOnClickListener(this);
-
+        //收藏
+        Work_Detaails_collectionImg.setOnClickListener(this);
     }
 
     @Override
@@ -119,12 +120,28 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                 Work_Detaails_CatalogLine.setVisibility(View.VISIBLE);
                 setContentView(R.id.Work_Detaails_FrameLayout, WorkCatalogFragment.class);
                 break;
+                //收藏
+            case R.id.Work_Detaails_collectionImg:
+                if (Work_Detaails_collectionImg.isChecked()) {
+                    if (serializationDetailsBeandata.isCollect()) {
+                        Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
+                    }else{
+                        Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
+                    }
+                }else {
+                    if (serializationDetailsBeandata.isCollect()) {
+                        Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
+                    }else{
+                        Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
+                    }
+                }
+                break;
             //观看第一话
             case R.id.Work_Detaails_LookUpText:
                 Intent intent = new Intent(this, SerializationCatalogReadActivity.class);
-                if (serializationCatalogBeandata ==null) {
+                if (serializationCatalogBeandata == null) {
                     Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     intent.putExtra("catalogId", serializationCatalogBeandata.get(serializationCatalogBeandata.size() - 1).getCatalogId());
                     intent.putExtra("pgcId", serializationCatalogBeandata.get(serializationCatalogBeandata.size() - 1).getPgcId());
                 }
@@ -147,10 +164,15 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         } else {
             Glide.with(this).load(serializationDetailsBean.getData().getImageUrl()).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(Work_Detaails_CoverImg);
             Work_Detaails_Name.setText(serializationDetailsBean.getData().getTitle());
-            SPUtils.put(this,"DetaailsName",serializationDetailsBean.getData().getTitle());
+            SPUtils.put(this, "DetaailsName", serializationDetailsBean.getData().getTitle());
             Work_Detaails_Tag.setText(serializationDetailsBean.getData().getTag());
             serializationDetailsBeandata = serializationDetailsBean.getData();
             setContentView(R.id.Work_Detaails_FrameLayout, WorkDetailsFragment.class);
+        }
+        if (serializationDetailsBeandata.isCollect()) {
+            Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
+        }else{
+            Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
         }
     }
 

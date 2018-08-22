@@ -1,4 +1,4 @@
-package com.zhenman.asus.zhenman.view.fragment;
+package com.zhenman.asus.zhenman.view.home;
 
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +18,7 @@ import com.zhenman.asus.zhenman.view.adapter.HomeHotAdapter;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView {
+public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView {
 
 
     ArrayList<HomeHotBean.DataBean> mlist = new ArrayList<>();
@@ -44,11 +44,11 @@ public class HomeFragment extends BaseFragment<HomeHotPresenterImp> implements H
     }
 
     private void initView() {
-        Home_ListView = getActivity().findViewById(R.id.Home_List);
-        Home_HotText = getActivity().findViewById(R.id.Home_HotText);
-        Home_FollowText = getActivity().findViewById(R.id.Home_FollowText);
-        Home_search_Img = getActivity().findViewById(R.id.Home_search_Img);
-        Home_headView = getActivity().findViewById(R.id.Home_headView);
+        Home_ListView = getActivity().findViewById(R.id.HomeHot_List);
+        Home_HotText = getActivity().findViewById(R.id.HomeHot_HotText);
+        Home_FollowText = getActivity().findViewById(R.id.HomeHot_AttentionText);
+        Home_search_Img = getActivity().findViewById(R.id.HomeHot_search_Img);
+        Home_headView = getActivity().findViewById(R.id.HomeHot_HeadView);
 
         presenter.getHomeHotBean("1");
         initListView();
