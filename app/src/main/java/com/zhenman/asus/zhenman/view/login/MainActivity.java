@@ -118,6 +118,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 break;
             case R.id.login_weiboImage:
 //微博登陆
+                UMShareAPI.get(this).getPlatformInfo(MainActivity.this, SHARE_MEDIA.SINA, umAuthListener);
 
                 break;
             case R.id.login_weixinImage:
@@ -135,7 +136,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 break;
             case R.id.login_qqImage:
 //                调起QQ登录
-
+                UMShareAPI.get(this).getPlatformInfo(MainActivity.this, SHARE_MEDIA.QQ, umAuthListener);
 //                UMSharePlatform.loginThirdParty(this, SHARE_MEDIA.QQ, new UMSharePlatform.LoginSuccessCallback() {
 //                    @Override
 //                    public void getLoginData(String uid) {
@@ -184,15 +185,19 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         }
 
 
-        /**
-         * @desc 授权成功的回调
-         * @param platform 平台名称
-         * @param action 行为序号，开发者用不上
-         * @param data 用户资料返回
-         */
-        @Override
-        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
 
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> map) {
+            String uid = map.get("uid");
+            String openid = map.get("openid");//微博没有
+            String unionid = map.get("unionid");//微博没有
+            String access_token = map.get("access_token");
+            String refresh_token = map.get("refresh_token");//微信,qq,微博都没有获取到
+            String expires_in = map.get("expires_in");
+            String name = map.get("name");
+            String gender = map.get("gender");
+            String iconurl = map.get("iconurl");
+            startActivity(new Intent(MainActivity.this, ContentActivity.class));
             Toast.makeText(MainActivity.this, "成功了", Toast.LENGTH_LONG).show();
 
         }

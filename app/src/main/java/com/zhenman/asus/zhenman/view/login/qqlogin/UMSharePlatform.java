@@ -1,53 +1,79 @@
 package com.zhenman.asus.zhenman.view.login.qqlogin;
 
+
 import android.app.Activity;
 import android.util.Log;
+import android.widget.Toast;
 
 
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.util.Map;
 
 public class UMSharePlatform {
-    /**
-     * 第三方登录
-     *
-     * @param activity
-     * @param media
-     * @param callback
-     */
-   /* public static void loginThirdParty(Activity activity, SHARE_MEDIA media, final LoginSuccessCallback callback) {
-        UMShareAPI.get(activity).getPlatformInfo(activity, media, new UMAuthListener() {
-            @Override
-            public void onStart(SHARE_MEDIA share_media) {
-                Log.e("lee", "onStart授权开始: ");
-            }
 
-            @Override
-            public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-                callback.getLoginData(map.get("uid"));
-                //在该回调的map中可以拿到第三方返回的好多信息：比如昵称，头像，性别等等，由于我这里只需要uid所以就只取了uid。
-                Log.e("lee", "onComplete授权成功: ");
-            }
-
-            @Override
-            public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-                Log.e("lee", "onError授权异常: ");
-            }
-
-            @Override
-            public void onCancel(SHARE_MEDIA share_media, int i) {
-                Log.e("lee", "onCancel授权取消: ");
-            }
-        });
-    }*/
-
-    /**
-     * 回调接口
-     */
-    public interface LoginSuccessCallback {
-        /**
-         * @param uid 第三方平台返回的唯一标识
-         */
-        void getLoginData(String uid);
+    public static UMSharePlatform umSharePlatform;
+    public static UMSharePlatform getImstance(){
+        if (umSharePlatform==null){
+            umSharePlatform=new UMSharePlatform();
+        }
+        return umSharePlatform;
     }
+
+    public void shareText(Activity activity,SHARE_MEDIA platform) {
+        new ShareAction(activity)
+                .setPlatform(SHARE_MEDIA.QQ)//传入平台
+                .withText("hello")//分享内容
+                .setCallback(umShareListener)//回调监听器
+                .share();
+    }
+    public void shareImage(Activity activity){
+        new ShareAction(activity)
+                .withText("hello")
+                .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                .setCallback(umShareListener)
+                .open();
+    }
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        /**
+         * @descrption 分享开始的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+
+        }
+
+        /**
+         * @descrption 分享成功的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+//            Toast.makeText(act,"成功 了",Toast.LENGTH_LONG).show()；
+        }
+
+        /**
+         * @descrption 分享失败的回调
+         * @param platform 平台类型
+         * @param t 错误原因
+         */
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+//            Toast.makeText(ShareDetailActivity.this,"失                                            败"+t.getMessage(),Toast.LENGTH_LONG).show();
+        }
+
+        /**
+         * @descrption 分享取消的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+//            Toast.makeText(ShareDetailActivity.this,"取消                                          了",Toast.LENGTH_LONG).show();
+
+        }
+    };
 }

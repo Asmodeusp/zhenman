@@ -3,12 +3,13 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         debug {
-            keyAlias 'zhenman'
+            keyAlias 'key0'
             keyPassword '123456'
-            storeFile file('E:/ZhenmanData/zhenman.jks')
+            storeFile file('E:/ZHEN_MAN/zhenman/app/zhenman.jks')
             storePassword '123456'
         }
     }
+<<<<<<< Updated upstream
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.zhenman.asus.zhenman"
@@ -19,9 +20,10 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
     }
+=======
+>>>>>>> Stashed changes
     buildTypes {
         release {
-
             minifyEnabled false
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
@@ -32,8 +34,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
         }
     }
+<<<<<<< Updated upstream
     productFlavors {
     }
+=======
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.zhenman.asus.zhenman"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+>>>>>>> Stashed changes
 }
 
 dependencies {

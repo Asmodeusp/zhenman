@@ -30,6 +30,7 @@ import com.zhenman.asus.zhenman.utils.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.CatalogReadActorAdapter;
 import com.zhenman.asus.zhenman.view.adapter.SerializationCatalogAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serializationCatalogReadRecyAdapter;
+import com.zhenman.asus.zhenman.view.login.qqlogin.UMSharePlatform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -301,6 +302,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         CataLog_PopuPosition.setOnClickListener(this);
         //下载
         CataLog_PopuBottom.setOnClickListener(this);
+//        分享
+        CataLog_FootViewShareBtn.setOnClickListener(this);
     }
 
     //消息弹出PopuWindow
@@ -382,6 +385,10 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 serializationCatalogReadFootLin.setVisibility(View.GONE);
                 SetTextColorRules();
 
+                break;
+//                分享
+            case R.id.CataLog_FootViewShareBtn:
+                UMSharePlatform.getImstance().shareImage(SerializationCatalogReadActivity.this);
                 break;
 
         }
