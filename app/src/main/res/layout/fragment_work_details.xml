@@ -100,7 +100,7 @@
         android:visibility="gone"
         android:id="@+id/Work_commentTips"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:gravity="center"
         android:text="暂时没有评论，快来抢沙发" />
 

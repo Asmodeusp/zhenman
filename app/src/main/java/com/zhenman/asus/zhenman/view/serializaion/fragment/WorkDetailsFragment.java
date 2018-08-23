@@ -56,6 +56,10 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
         if (serializationCatalogBean.getData()!=null&&serializationCatalogBean.getData().size()!=0) {
             presenter.getWorkDetailsCommentBean(serializationCatalogBean.getData().get(0).getPgcId(),""+1);
         }
+        if (result.size()==0) {
+            work_commentTips.setVisibility(View.VISIBLE);
+            Work_commentRecy.setVisibility(View.GONE);
+        }
         //设置作品描述
         Work_DescriptionText.setText(data.getIntroduction());
         //设置演员列表格式
@@ -84,10 +88,11 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     public void showWorkDetailsCommentBean(WorkDetailsCommentBean workDetailsCommentBean) {
 
         result.addAll(workDetailsCommentBean.getData().getResult()) ;
-        if (result.size()==0&&result==null) {
-            work_commentTips.setVisibility(View.VISIBLE);
-            Work_commentRecy.setVisibility(View.GONE);
+        if (result.size()==0) {
+
         }else{
+            work_commentTips.setVisibility(View.GONE);
+            Work_commentRecy.setVisibility(View.VISIBLE);
             //设置评论列表适配器
             WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result,serializationCatalogBean.getData().get(0).getPgcId());
             Work_commentRecy.setAdapter(workCommentRecyAdapter);
