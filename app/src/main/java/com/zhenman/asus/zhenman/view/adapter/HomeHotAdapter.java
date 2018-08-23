@@ -1,6 +1,8 @@
 package com.zhenman.asus.zhenman.view.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -8,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -40,8 +43,8 @@ public class HomeHotAdapter extends RecyclerView.Adapter<HomeHotAdapter.Holder> 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
-        HomeHotBean.DataBean listBean = list.get(position);
-        Glide.with(context).load(listBean.getHeadImg()).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.home_HeadImg);
+        final HomeHotBean.DataBean listBean = list.get(position);
+        Glide.with(context).load(listBean.getHeadImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.home_HeadImg);
         holder.home_likeText.setText(listBean.getLikeNum());
         holder.home_ChallengeText.setText(listBean.getChallengeFlag());
         holder.home_describe.setText(listBean.getDescription());
@@ -55,6 +58,40 @@ public class HomeHotAdapter extends RecyclerView.Adapter<HomeHotAdapter.Holder> 
         holder.home_Recy_fill_Recy.setLayoutParams(params);
         holder.home_Recy_fill_Recy.setAdapter(homeHotRecy_recyAdapter);
         holder.home_UserNameText.setText("@ "+listBean.getName());
+        if (listBean.isLike()) {
+            holder.home_likeImg.setButtonDrawable(R.mipmap.home_like_on);
+        }else{
+            holder.home_likeImg.setButtonDrawable(R.mipmap.home_like_off);
+        }
+        holder.home_likeImg.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+                if (listBean.isLike()) {
+                    if (holder.home_likeImg.isChecked()) {
+                        holder.home_likeImg.setButtonDrawable(R.drawable.hot_guanzhu_unlike);
+                        AnimationDrawable animationDrawable = (AnimationDrawable) holder.home_likeImg.getButtonDrawable();
+                        animationDrawable.start();
+                    }else {
+                        holder.home_likeImg.setButtonDrawable(R.drawable.hot_guanzhu_like);
+                        AnimationDrawable animationDrawable = (AnimationDrawable) holder.home_likeImg.getButtonDrawable();
+                        animationDrawable.start();
+                    }
+
+                }else{
+                    if (holder.home_likeImg.isChecked()) {
+                        holder.home_likeImg.setButtonDrawable(R.drawable.hot_guanzhu_like);
+                        AnimationDrawable animationDrawable = (AnimationDrawable) holder.home_likeImg.getButtonDrawable();
+                        animationDrawable.start();
+                    }else {
+                        holder.home_likeImg.setButtonDrawable(R.drawable.hot_guanzhu_unlike);
+                        AnimationDrawable animationDrawable = (AnimationDrawable) holder.home_likeImg.getButtonDrawable();
+                        animationDrawable.start();
+                    }
+
+                }
+            }
+        });
     }
 
 
@@ -73,7 +110,7 @@ public class HomeHotAdapter extends RecyclerView.Adapter<HomeHotAdapter.Holder> 
         //喜欢的Linearlayout
         private LinearLayout home_like;
         //喜欢的ImageView
-        private ImageView home_likeImg;
+        private CheckBox home_likeImg;
         //评论
         private LinearLayout home_comment;
         //分项

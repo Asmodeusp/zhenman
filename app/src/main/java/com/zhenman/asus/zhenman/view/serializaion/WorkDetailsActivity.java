@@ -127,15 +127,18 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                 if (Work_Detaails_collectionImg.isChecked()) {
                     if (serializationDetailsBeandata.isCollect()) {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
-//                        presenter.PgcCollection();
+                        presenter.PgcCollection(pgcid,"0");
                     }else{
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
+                        presenter.PgcCollection(pgcid,"1");
                     }
                 }else {
                     if (serializationDetailsBeandata.isCollect()) {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
+                        presenter.PgcCollection(pgcid,"1");
                     }else{
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
+                        presenter.PgcCollection(pgcid,"0");
                     }
                 }
                 break;
@@ -191,6 +194,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
 
     @Override
     public void showPgcCollectionBean(PgcCollectionBean pgcCollectionBean) {
+
 
     }
 
