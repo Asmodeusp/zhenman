@@ -74,7 +74,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         //标签
         Work_Detaails_Tag = findViewById(R.id.Work_Detaails_Tag);
         //收藏
-        Work_Detaails_collectionImg = findViewById(R.id.Work_Detaails_collectionImg);//common_collection_off
+        Work_Detaails_collectionImg = findViewById(R.id.Work_Detaails_collectionImg);
         //观看第一话
         Work_Detaails_LookUpBtn = findViewById(R.id.Work_Detaails_LookUpText);
         //详情线
