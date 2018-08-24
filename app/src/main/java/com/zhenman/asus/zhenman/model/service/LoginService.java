@@ -7,8 +7,11 @@ import com.zhenman.asus.zhenman.utils.Urls;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.POST;
 
 public interface LoginService {
@@ -19,5 +22,5 @@ public interface LoginService {
     //第三方登陆
     @FormUrlEncoded
     @POST(Urls.THIRD_PARTY_LOGING)
-    Observable<ThirdPartyLoginBean> GetThirdPartyLoginBean(@FieldMap Map<String, String> params);
+    Observable<ThirdPartyLoginBean> GetThirdPartyLoginBean(@HeaderMap Map<String,String> head,@FieldMap Map<String, String> params);
 }

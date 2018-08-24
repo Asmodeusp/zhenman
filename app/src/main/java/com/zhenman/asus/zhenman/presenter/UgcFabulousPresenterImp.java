@@ -33,7 +33,8 @@ public class UgcFabulousPresenterImp implements UgcFabulousContract.UgcFabulousP
         Map<String, String> map = new HashMap<>();
         map.put("productId", productId);
         map.put("status", status);
-        RetrofitUtils.getInstance().getUgcFabulousService().GetUgcFabulousBean(Headermap,map).subscribeOn(Schedulers.newThread())
+        RetrofitUtils.getInstance().getUgcFabulousService().GetUgcFabulousBean(Headermap,map)
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<UgcFabulousBean>() {
                     @Override

@@ -14,6 +14,7 @@ import com.zhenman.asus.zhenman.model.service.RegisterVerificationCodeService;
 import com.zhenman.asus.zhenman.model.service.SerializationDetailsService;
 import com.zhenman.asus.zhenman.model.service.SerializationService;
 import com.zhenman.asus.zhenman.model.service.SetPasswordService;
+import com.zhenman.asus.zhenman.model.service.UMengLoginService;
 import com.zhenman.asus.zhenman.model.service.UgcFabulousService;
 import com.zhenman.asus.zhenman.model.service.WorkDetailsCommentService;
 import com.zhenman.asus.zhenman.model.service.serializationCatalogReadService;
@@ -59,7 +60,7 @@ public class RetrofitUtils {
         retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-//                .client(client)
+                .client(client)
                 .baseUrl(Urls.BASE_URL)
                 .build();
     }
@@ -85,9 +86,7 @@ public class RetrofitUtils {
                 Request originalRequest = chain.request();
                 Request request;
                 HttpUrl modifiedUrl = originalRequest.url().newBuilder()
-                        .addQueryParameter("os", "Android")
-                        .addQueryParameter("osVersion", Build.VERSION.RELEASE)
-                        .addQueryParameter("version", "1.0.0")
+
                         .build();
                 request = originalRequest.newBuilder().url(modifiedUrl).build();
                 return chain.proceed(request);
@@ -106,6 +105,9 @@ public class RetrofitUtils {
                 Request originalRequest = chain.request();
                 Request.Builder requestBuilder = originalRequest.newBuilder()
                         // Provide your custom header here
+                        .header("os", "Android")
+                        .header("osVersion", Build.VERSION.RELEASE)
+                        .header("version", "1.0.0")
                         .header("AppType", "TPOS")
                         .header("Accept", "application/json")
                         .method(originalRequest.method(), originalRequest.body());
@@ -210,11 +212,19 @@ public class RetrofitUtils {
     }
 
 
-
     public UgcFabulousService getUgcFabulousService() {
         return retrofit.create(UgcFabulousService.class);
     }
 
-
+    /**
+     * 获取Service对象
+     *
+     * @param tClass 要获取Service的class对象
+     * @param <T>    Service对象的类型
+     * @return Service对象
+     */
+    public <T> T getService(Class<T> tClass) {
+        return retrofit.create(tClass);
+    }
 }
 

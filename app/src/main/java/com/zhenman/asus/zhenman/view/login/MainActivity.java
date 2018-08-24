@@ -26,7 +26,13 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.LoginContract;
+import com.zhenman.asus.zhenman.model.bean.UMengLoginBean;
 import com.zhenman.asus.zhenman.presenter.LoginPresenterImp;
+import com.zhenman.asus.zhenman.utils.SPKey;
+import com.zhenman.asus.zhenman.utils.SPUtils;
+import com.zhenman.asus.zhenman.utils.UMShareUtils;
+import com.zhenman.asus.zhenman.utils.umeng.ShareCallBack;
+import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
 import com.zhenman.asus.zhenman.view.ContentActivity;
 import com.zhenman.asus.zhenman.view.login.qqlogin.UMSharePlatform;
 
@@ -49,9 +55,136 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     private ImageView mLoginWeixinImage;
     private ImageView mLoginQqImage;
     private CheckBox mLogin_password_hide;
-//    private Tencent mTencent;
-//    private IUiListener iUiListener;
+    //QQ分享的请求码
+    public static final int SHARE_QQ_REQUEST_CODE = 1;
+    //QQ分享不带面板的请求码
+    public static final int SHARE_QQ_UN_REQUEST_CODE = 2;
+    //微信分享的请求码
+    public static final int SHARE_WE_CAT_REQUEST_CODE = 3;
+    //微信分享不带面板的请求码
+    public static final int SHARE_WE_CAT_UN_REQUEST_CODE = 4;
+    //微博分享的请求码
+    public static final int SHARE_SINA_REQUEST_CODE = 5;
+    //微博分享不带面板的请求码
+    public static final int SHARE_SINA_UN_REQUEST_CODE = 6;
+    //qq登录
+    public static final int QQ_LOGIN = 7;
+    //微信登录
+    public static final int WE_CAT_LOGIN = 8;
+    //微博登录
+    public static final int SINA_LOGIN = 9;
+    private String umeng_type;
+    private String uMeng_otheruserId;
+    private String uMeng_openid;
+    private String uMeng_headimage;
+    private String uMeng_name;
+    private String uMeng_cityname;
+    private String uMeng_sex;
+    UMAuthListener umAuthListener = new UMAuthListener() {
+        /**
+         //         * @desc 授权开始的回调
+         //         * @param platform 平台名称
+         //         */
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
 
+        }
+
+        /**
+         * @desc 授权成功的回调
+         * @param platform 平台名称
+         * @param action 行为序号，开发者用不上
+         * @param data 用户资料返回
+         */
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+//                type值判断是哪个第三方登录的   微信 1 新浪2 QQ 3
+            if (platform.equals(SHARE_MEDIA.WEIXIN)) {
+                TYPE = "1";
+            } else if (platform.equals(SHARE_MEDIA.SINA)) {
+                TYPE = "2";
+            } else if (platform.equals(SHARE_MEDIA.QQ)) {
+                TYPE = "3";
+            }
+            Toast.makeText(MainActivity.this, "成功了", Toast.LENGTH_LONG).show();
+            Log.e("UMengHelp", data.toString());
+
+            String name = data.get("name");
+            String gender = data.get("gender");
+            String iconurl = data.get("iconurl");
+            Log.e("UMengHelp", "name = " + name);
+            Log.e("UMengHelp", "sex = " + gender);
+            Log.e("UMengHelp", "用户头像headImg =    " + iconurl);
+            Log.e("UMengHelp", "用户unionid=   " + data.get("unionid"));
+            Log.e("UMengHelp", "用户城市cityName=   " + data.get("city"));
+            Log.e("UMengHelp", "用户的openid=      " + data.get("openid"));
+            String sex = "";
+            if ("女".equals(gender)) {
+//                    男1 女2
+                sex = "2";
+                SPUtils.put(MainActivity.this, SPKey.UMeng_SEX, "2");
+            } else {
+                sex = "1";
+                SPUtils.put(MainActivity.this, SPKey.UMeng_SEX, "1");
+            }
+//                成功的话保存到sp中
+            SPUtils.put(MainActivity.this, SPKey.UMeng_CITYNAME, data.get("city"));
+            SPUtils.put(MainActivity.this, SPKey.UMeng_NAME, data.get("name"));
+            SPUtils.put(MainActivity.this, SPKey.UMeng_HEADIMAGE, data.get("iconurl"));
+            SPUtils.put(MainActivity.this, SPKey.UMeng_OPENID, data.get("openid"));
+            SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
+            SPUtils.put(MainActivity.this, SPKey.UMENG_TYPE, TYPE);
+            Log.e("Sunny", TYPE + "----" + data.get("city") + "-------" + data.get("name") + "---" + data.get("iconurl")
+                    + "-----" + data.get("openid") + "--------" + data.get("unionid"));
+            //微信登录
+//                                presenter.sendUMengLoginData(uMeng_otheruserId, uMeng_name, uMeng_cityname, uMeng_headimage, uMeng_sex, umeng_type, uMeng_openid);
+            UMShareAPI.get(MainActivity.this).deleteOauth(MainActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+                @Override
+                public void onStart(SHARE_MEDIA share_media) {
+
+                }
+
+                @Override
+                public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+
+                }
+
+                @Override
+                public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+                }
+
+                @Override
+                public void onCancel(SHARE_MEDIA share_media, int i) {
+
+                }
+            });
+            presenter.sendUMengLoginData(data.get("unionid"), data.get("name"), data.get("city"),
+                    data.get("iconurl"), sex, TYPE, data.get("openid"));
+
+        }
+
+        /**
+         * @desc 授权失败的回调
+         * @param platform 平台名称
+         * @param action 行为序号，开发者用不上
+         * @param t 错误原因
+         */
+        @Override
+        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+            Toast.makeText(MainActivity.this, "失败：" + t.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+        /**
+         * @desc 授权取消的回调
+         * @param platform 平台名称
+         * @param action 行为序号，开发者用不上
+         */
+        @Override
+        public void onCancel(SHARE_MEDIA platform, int action) {
+            Toast.makeText(MainActivity.this, "取消了", Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     protected int getLayoutId() {
@@ -91,6 +224,9 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 
     }
 
+    //    给定登陆方式
+    private static String TYPE;
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -117,33 +253,41 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 startActivity(new Intent(this, ForgetPasswordActivity.class));
                 break;
             case R.id.login_weiboImage:
-//微博登陆
-                UMShareAPI.get(this).getPlatformInfo(MainActivity.this, SHARE_MEDIA.SINA, umAuthListener);
+
+                //微博登录
+                UMengHelp.applySharePermission(this, SINA_LOGIN, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.SINA);
+                    }
+                });
+                //微博登陆
+//                presenter.sendUMengLoginData(uMeng_otheruserId, uMeng_name, uMeng_cityname, uMeng_headimage, uMeng_sex, umeng_type, uMeng_openid);
 
                 break;
             case R.id.login_weixinImage:
-//微信登陆
+                //微信登录
+                UMengHelp.applySharePermission(this, WE_CAT_LOGIN, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);
+                    }
+                });
+//                getDatafromSP();
+//                //微信登录
+//                presenter.sendUMengLoginData(uMeng_otheruserId, uMeng_name, uMeng_cityname, uMeng_headimage, uMeng_sex, umeng_type, uMeng_openid);
 
-                UMShareAPI.get(this).getPlatformInfo(MainActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);
-
-//                UMSharePlatform.loginThirdParty(this, SHARE_MEDIA.WEIXIN, new UMSharePlatform.LoginSuccessCallback() {
-//                    @Override
-//                    public void getLoginData(String uid) {
-////                        mLoginPresenter.thirdPartyLoad(uid, "1");
-//                        Log.d("Sunny", uid);
-//                    }
-//                });
                 break;
             case R.id.login_qqImage:
-//                调起QQ登录
-                UMShareAPI.get(this).getPlatformInfo(MainActivity.this, SHARE_MEDIA.QQ, umAuthListener);
-//                UMSharePlatform.loginThirdParty(this, SHARE_MEDIA.QQ, new UMSharePlatform.LoginSuccessCallback() {
-//                    @Override
-//                    public void getLoginData(String uid) {
-////                        mLoginPresenter.thirdPartyLoad(uid, "2");
-//                    }
-//                });
 
+                //qq登录
+                UMengHelp.applySharePermission(this, QQ_LOGIN, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.QQ);
+                    }
+                }); //qq登录
+//                presenter.sendUMengLoginData(uMeng_otheruserId, uMeng_name, uMeng_cityname, uMeng_headimage, uMeng_sex, umeng_type, uMeng_openid);
 
                 break;
             case R.id.login_password_hide:
@@ -160,10 +304,26 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 
     }
 
+    //    从SP中取到数据
+    private void getDatafromSP() {
+        umeng_type = (String) SPUtils.get(this, SPKey.UMENG_TYPE, "");
+        uMeng_otheruserId = (String) SPUtils.get(this, SPKey.UMeng_OTHERUSERId, "");
+        uMeng_openid = (String) SPUtils.get(this, SPKey.UMeng_OPENID, "");
+        uMeng_headimage = (String) SPUtils.get(this, SPKey.UMeng_HEADIMAGE, "");
+        uMeng_name = (String) SPUtils.get(this, SPKey.UMeng_NAME, "");
+        uMeng_cityname = (String) SPUtils.get(this, SPKey.UMeng_CITYNAME, "");
+        uMeng_sex = (String) SPUtils.get(this, SPKey.UMeng_SEX, "");
+    }
 
     @Override
     public void gotoContent() {
         startActivity(new Intent(MainActivity.this, ContentActivity.class));
+    }
+
+    //    得到友盟返回的数据
+    @Override
+    public void showUMengLoginData(UMengLoginBean uMengLoginBean) {
+        Log.d("uMengLoginBean", uMengLoginBean.getData().getName());
     }
 
     @Override
@@ -173,58 +333,95 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         }
     }
 
-    //    其中umAuthListener为授权回调，构建如下：
-    UMAuthListener umAuthListener = new UMAuthListener() {
-        /**
-         * @desc 授权开始的回调
-         * @param platform 平台名称
-         */
-        @Override
-        public void onStart(SHARE_MEDIA platform) {
 
+    /**
+     * 分享权限的回调
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case SHARE_QQ_REQUEST_CODE:
+                UMengHelp.responseSharePermission(this, grantResults, SHARE_QQ_REQUEST_CODE, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.shareWeb(MainActivity.this, "https://www.asda.com/", "分享的链接", "2432423423",
+                                "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1782685035,253150800&fm=27&gp=0.jpg", R.mipmap.guanzhu_like_off, SHARE_MEDIA.QZONE, true);
+                    }
+                });
+                break;
+            case SHARE_QQ_UN_REQUEST_CODE:
+                UMengHelp.responseSharePermission(this, grantResults, SHARE_QQ_UN_REQUEST_CODE, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.shareWeb(MainActivity.this, "https://www.asda.com/", "分享的链接", "2432423423",
+                                "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1782685035,253150800&fm=27&gp=0.jpg", R.mipmap.guanzhu_like_off, SHARE_MEDIA.QZONE, true);
+                    }
+                });
+                break;
+            case SHARE_WE_CAT_REQUEST_CODE:
+                UMengHelp.responseSharePermission(this, grantResults, SHARE_WE_CAT_REQUEST_CODE, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.shareText(MainActivity.this, SHARE_MEDIA.WEIXIN, "分享纯文本到微信", true);
+                    }
+                });
+                break;
+            case SHARE_WE_CAT_UN_REQUEST_CODE:
+                UMengHelp.responseSharePermission(this, grantResults, SHARE_WE_CAT_UN_REQUEST_CODE, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.shareText(MainActivity.this, SHARE_MEDIA.WEIXIN, "分享纯文本到微信", false);
+                    }
+                });
+                break;
+            case SHARE_SINA_REQUEST_CODE:
+                UMengHelp.responseSharePermission(this, grantResults, SHARE_SINA_REQUEST_CODE, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.shareText(MainActivity.this, SHARE_MEDIA.SINA, "分享纯文本", true);
+                    }
+                });
+                break;
+            case SHARE_SINA_UN_REQUEST_CODE:
+                UMengHelp.responseSharePermission(this, grantResults, SHARE_SINA_UN_REQUEST_CODE, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.shareText(MainActivity.this, SHARE_MEDIA.SINA, "分享纯文本", false);
+                    }
+                });
+                break;
+            case QQ_LOGIN:
+                UMengHelp.responseSharePermission(this, grantResults, QQ_LOGIN, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.QQ);
+                    }
+                });
+                break;
+            case WE_CAT_LOGIN:
+                UMengHelp.responseSharePermission(this, grantResults, WE_CAT_LOGIN, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.WEIXIN,umAuthListener);
+                    }
+                });
+                break;
+            case SINA_LOGIN:
+                UMengHelp.responseSharePermission(this, grantResults, SINA_LOGIN, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.SINA);
+                    }
+                });
+                break;
         }
+    }
 
-
-
-        @Override
-        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> map) {
-            String uid = map.get("uid");
-            String openid = map.get("openid");//微博没有
-            String unionid = map.get("unionid");//微博没有
-            String access_token = map.get("access_token");
-            String refresh_token = map.get("refresh_token");//微信,qq,微博都没有获取到
-            String expires_in = map.get("expires_in");
-            String name = map.get("name");
-            String gender = map.get("gender");
-            String iconurl = map.get("iconurl");
-            startActivity(new Intent(MainActivity.this, ContentActivity.class));
-            Toast.makeText(MainActivity.this, "成功了", Toast.LENGTH_LONG).show();
-
-        }
-
-        /**
-         * @desc 授权失败的回调
-         * @param platform 平台名称
-         * @param action 行为序号，开发者用不上
-         * @param t 错误原因
-         */
-        @Override
-        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-
-            Toast.makeText(MainActivity.this, "失败：" + t.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-        /**
-         * @desc 授权取消的回调
-         * @param platform 平台名称
-         * @param action 行为序号，开发者用不上
-         */
-        @Override
-        public void onCancel(SHARE_MEDIA platform, int action) {
-            Toast.makeText(MainActivity.this, "取消了", Toast.LENGTH_LONG).show();
-        }
-    };
-
+    //    新浪和QQ需要加
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
