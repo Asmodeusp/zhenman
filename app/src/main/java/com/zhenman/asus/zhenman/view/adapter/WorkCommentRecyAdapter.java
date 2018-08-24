@@ -68,7 +68,7 @@ public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecy
 
             @Override
             public void onLoadingError(String source, Exception e) {
-                Toast.makeText(context, source, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, source, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -89,10 +89,10 @@ public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecy
                 public void onClick(View v) {
                     if (holder.Work_commentRecy_Like.isChecked()) {
                         holder. Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
-                        presenter.PGCFabulous(null, list.get(position).getCommentId(), "0", PGCID);
+                        presenter.PGCFabulous(PGCID, list.get(position).getCommentId(), "0", PGCID);
                         holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) - 1 + "");
                     } else {
-                        presenter.PGCFabulous(null, list.get(position).getCommentId(), "1", PGCID);
+                        presenter.PGCFabulous(PGCID, list.get(position).getCommentId(), "1", PGCID);
                         holder. Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
                         holder.  Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
                     }
@@ -104,11 +104,11 @@ public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecy
                 @Override
                 public void onClick(View v) {
                     if (holder.Work_commentRecy_Like.isChecked()) {
-                        presenter.PGCFabulous("", list.get(position).getCommentId(), "1", PGCID);
+                        presenter.PGCFabulous(PGCID, list.get(position).getCommentId(), "1", PGCID);
                         holder. Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
                         holder. Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
                     } else {
-                        presenter.PGCFabulous("", list.get(position).getCommentId(), "0", PGCID);
+                        presenter.PGCFabulous(PGCID, list.get(position).getCommentId(), "0", PGCID);
                         holder. Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
                         holder. Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
                     }

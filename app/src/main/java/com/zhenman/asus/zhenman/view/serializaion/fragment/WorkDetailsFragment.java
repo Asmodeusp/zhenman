@@ -98,19 +98,13 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
             //设置评论列表适配器
             WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, serializationCatalogBean.getData().get(0).getPgcId(),presenter);
             Work_commentRecy.setAdapter(workCommentRecyAdapter);
-            workCommentRecyAdapter.setRecyclerViewOnCLickListener(new WorkCommentRecyAdapter.RecyclerViewOnCLickListener() {
-                @Override
-                public void myClick(View view, final int position) {
-                    final CheckBox Work_commentRecy_Like = view.findViewById(R.id.Work_commentRecy_Like);
-                    final TextView Work_commentRecy_LikeNumber = view.findViewById(R.id.Work_commentRecy_LikeNumber);
 
-                }
-            });
         }
     }
 
     @Override
     public void showPGCFabulousBean(PgcFabulousBean pgcFabulousBean) {
+        Toast.makeText(getContext(), pgcFabulousBean.getMsg(), Toast.LENGTH_SHORT).show();
 
     }
 }

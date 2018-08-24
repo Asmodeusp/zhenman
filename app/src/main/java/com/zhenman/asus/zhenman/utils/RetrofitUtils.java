@@ -51,9 +51,9 @@ public class RetrofitUtils {
         builder.cache(cache).addInterceptor(addCacheInterceptor());
 
         //设置超时
-        builder.connectTimeout(150, TimeUnit.SECONDS);
-        builder.readTimeout(200, TimeUnit.SECONDS);
-        builder.writeTimeout(200, TimeUnit.SECONDS);
+        builder.connectTimeout(1500, TimeUnit.SECONDS);
+        builder.readTimeout(2000, TimeUnit.SECONDS);
+        builder.writeTimeout(2000, TimeUnit.SECONDS);
         //错误重连
         builder.retryOnConnectionFailure(true);
         OkHttpClient client = builder.build();
