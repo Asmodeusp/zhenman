@@ -48,7 +48,6 @@ public class RetrofitUtils {
 
 //      设置缓存
         File cacheFile = new File("/storage/emulated/0/Android/data/com.zhenman.asus.zhenman/cache", "RetrofitCache");
-
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
         builder.cache(cache).addInterceptor(addCacheInterceptor());
 
@@ -62,7 +61,7 @@ public class RetrofitUtils {
         retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
+//                .client(client)
                 .baseUrl(Urls.BASE_URL)
                 .build();
     }

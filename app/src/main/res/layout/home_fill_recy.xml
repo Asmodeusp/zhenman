@@ -206,10 +206,9 @@
 
         <TextView
             android:id="@+id/home_describe"
-            android:layout_width="wrap_content"
+            android:layout_width="522px"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40px"
-            android:maxEms="14"
             android:text="你们知道吗？这个世界上每三个人终究有一个傻B，你们知道吗？这个世界上每三个人终究有一个傻B，"
             android:textColor="@color/h9"
             android:textSize="30px" />
