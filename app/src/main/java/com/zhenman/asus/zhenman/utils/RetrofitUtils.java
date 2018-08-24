@@ -15,7 +15,7 @@ import com.zhenman.asus.zhenman.model.service.RegisterVerificationCodeService;
 import com.zhenman.asus.zhenman.model.service.SerializationDetailsService;
 import com.zhenman.asus.zhenman.model.service.SerializationService;
 import com.zhenman.asus.zhenman.model.service.SetPasswordService;
-import com.zhenman.asus.zhenman.model.service.UMengLoginService;
+
 import com.zhenman.asus.zhenman.model.service.UgcFabulousService;
 import com.zhenman.asus.zhenman.model.service.WorkDetailsCommentService;
 import com.zhenman.asus.zhenman.model.service.serializationCatalogReadService;

@@ -5,7 +5,7 @@ android {
         debug {
             keyAlias 'key0'
             keyPassword '123456'
-            storeFile file('E:/zhenman.jks')
+            storeFile file('E:/ZHEN_MAN/zhenman/app/zhenman.jks')
             storePassword '123456'
         }
     }
@@ -83,6 +83,6 @@ dependencies {
     implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     //��Ļ����
     implementation 'com.zhy:autolayout:1.4.5'
-//    蚂蚁金服   支付
+    //    蚂蚁金服   支付
     implementation files('libs/alipaySdk-20180601.jar')
 }

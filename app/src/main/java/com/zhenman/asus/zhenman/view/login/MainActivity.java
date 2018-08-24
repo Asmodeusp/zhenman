@@ -380,7 +380,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 UMengHelp.responseSharePermission(this, grantResults, QQ_LOGIN, new ShareCallBack() {
                     @Override
                     public void shareOrLogin() {
-                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.QQ);
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.QQ,umAuthListener);
                     }
                 });
                 break;
@@ -396,7 +396,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 UMengHelp.responseSharePermission(this, grantResults, SINA_LOGIN, new ShareCallBack() {
                     @Override
                     public void shareOrLogin() {
-                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.SINA);
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.SINA,umAuthListener);
                     }
                 });
                 break;
