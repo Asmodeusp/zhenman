@@ -35,10 +35,10 @@
 
             <TextView
                 android:id="@+id/Work_commentRecy_Comment"
-                android:layout_width="wrap_content"
+                android:layout_width="540px"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8px"
-                android:maxEms="16"
+                android:maxEms="14"
                 android:text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
                 android:textColor="@color/h2"
                 android:textSize="30px" />

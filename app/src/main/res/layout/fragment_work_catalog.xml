@@ -84,6 +84,7 @@
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:nestedScrollingEnabled="false"
         android:id="@+id/Detaails_CatalogRecy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
