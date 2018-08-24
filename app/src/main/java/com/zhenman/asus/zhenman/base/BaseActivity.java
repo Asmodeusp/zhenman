@@ -7,6 +7,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -43,6 +44,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
         }
         //全局context赋值
         App.context = this;
+        Log.e("Sunny","__________________");
+
         presenter = getPresenter();
         if (presenter != null) {
             presenter.actualView(this);
@@ -78,6 +81,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
     protected void onResume() {
         super.onResume();
         App.context = this;
+        Log.e("Sunny","111111111111111111111111111");
+
         presenter = getPresenter();
         if (presenter != null) {
             presenter.actualView(this);

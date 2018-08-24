@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
-import com.zhenman.asus.zhenman.utils.SPUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;

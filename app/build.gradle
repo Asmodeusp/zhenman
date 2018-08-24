@@ -25,12 +25,12 @@ android {
         release {
             minifyEnabled false
             signingConfig signingConfigs.debug
-            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug{
+        debug {
             minifyEnabled false
             signingConfig signingConfigs.debug
-            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -83,5 +83,6 @@ dependencies {
     implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     //��Ļ����
     implementation 'com.zhy:autolayout:1.4.5'
-    //友盟自动集成
+//    蚂蚁金服   支付
+    implementation files('libs/alipaySdk-20180601.jar')
 }

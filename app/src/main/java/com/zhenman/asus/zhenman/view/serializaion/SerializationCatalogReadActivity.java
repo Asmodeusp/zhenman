@@ -26,7 +26,7 @@ import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.presenter.SerializationCatalogReadPresenterImp;
-import com.zhenman.asus.zhenman.utils.SPUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.CatalogReadActorAdapter;
 import com.zhenman.asus.zhenman.view.adapter.SerializationCatalogAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serializationCatalogReadRecyAdapter;

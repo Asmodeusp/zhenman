@@ -5,11 +5,10 @@ import android.util.Log;
 import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.LoginContract;
 import com.zhenman.asus.zhenman.model.bean.ThirdPartyLoginBean;
-import com.zhenman.asus.zhenman.model.bean.UMengLoginBean;
 import com.zhenman.asus.zhenman.model.bean.UserBean;
 import com.zhenman.asus.zhenman.model.service.LoginService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
-import com.zhenman.asus.zhenman.utils.SPUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +16,6 @@ import java.util.Map;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class LoginPresenterImp implements LoginContract.LoginPresenter {

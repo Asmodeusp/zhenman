@@ -1,4 +1,4 @@
-package com.zhenman.asus.zhenman.utils;
+package com.zhenman.asus.zhenman.utils.sp;
 
 import android.content.Context;
 import android.content.SharedPreferences;

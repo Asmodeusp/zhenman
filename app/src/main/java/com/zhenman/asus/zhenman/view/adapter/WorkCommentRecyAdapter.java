@@ -9,14 +9,13 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
 import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
-import com.zhenman.asus.zhenman.utils.SPUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;

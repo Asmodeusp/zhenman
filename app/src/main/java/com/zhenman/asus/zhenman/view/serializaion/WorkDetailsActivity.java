@@ -16,11 +16,10 @@ import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.SerializationDetailsContract;
 import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
-import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.presenter.SerializationDetailsPresenterImp;
-import com.zhenman.asus.zhenman.utils.SPUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.serializaion.fragment.WorkCatalogFragment;
 import com.zhenman.asus.zhenman.view.serializaion.fragment.WorkDetailsFragment;
 

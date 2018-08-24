@@ -2,9 +2,6 @@ package com.zhenman.asus.zhenman.view.login;
 
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -16,10 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
-import com.umeng.commonsdk.UMConfigure;
-
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -28,16 +21,11 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.LoginContract;
 import com.zhenman.asus.zhenman.model.bean.UMengLoginBean;
 import com.zhenman.asus.zhenman.presenter.LoginPresenterImp;
-import com.zhenman.asus.zhenman.utils.SPKey;
-import com.zhenman.asus.zhenman.utils.SPUtils;
-import com.zhenman.asus.zhenman.utils.UMShareUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.utils.umeng.ShareCallBack;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
 import com.zhenman.asus.zhenman.view.ContentActivity;
-import com.zhenman.asus.zhenman.view.login.qqlogin.UMSharePlatform;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -136,9 +124,10 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             SPUtils.put(MainActivity.this, SPKey.UMENG_TYPE, TYPE);
             Log.e("Sunny", TYPE + "----" + data.get("city") + "-------" + data.get("name") + "---" + data.get("iconurl")
                     + "-----" + data.get("openid") + "--------" + data.get("unionid"));
+
             //微信登录
-//                                presenter.sendUMengLoginData(uMeng_otheruserId, uMeng_name, uMeng_cityname, uMeng_headimage, uMeng_sex, umeng_type, uMeng_openid);
-            UMShareAPI.get(MainActivity.this).deleteOauth(MainActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+//          presenter.sendUMengLoginData(uMeng_otheruserId, uMeng_name, uMeng_cityname, uMeng_headimage, uMeng_sex, umeng_type, uMeng_openid);
+           /* UMShareAPI.get(MainActivity.this).deleteOauth(MainActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
                 @Override
                 public void onStart(SHARE_MEDIA share_media) {
 
@@ -158,7 +147,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 public void onCancel(SHARE_MEDIA share_media, int i) {
 
                 }
-            });
+            });*/
             presenter.sendUMengLoginData(data.get("unionid"), data.get("name"), data.get("city"),
                     data.get("iconurl"), sex, TYPE, data.get("openid"));
 
@@ -258,12 +247,9 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 UMengHelp.applySharePermission(this, SINA_LOGIN, new ShareCallBack() {
                     @Override
                     public void shareOrLogin() {
-                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.SINA);
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.SINA,umAuthListener);
                     }
                 });
-                //微博登陆
-//                presenter.sendUMengLoginData(uMeng_otheruserId, uMeng_name, uMeng_cityname, uMeng_headimage, uMeng_sex, umeng_type, uMeng_openid);
-
                 break;
             case R.id.login_weixinImage:
                 //微信登录
@@ -273,10 +259,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                         UMengHelp.login(MainActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);
                     }
                 });
-//                getDatafromSP();
-//                //微信登录
-//                presenter.sendUMengLoginData(uMeng_otheruserId, uMeng_name, uMeng_cityname, uMeng_headimage, uMeng_sex, umeng_type, uMeng_openid);
-
                 break;
             case R.id.login_qqImage:
 
@@ -284,7 +266,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 UMengHelp.applySharePermission(this, QQ_LOGIN, new ShareCallBack() {
                     @Override
                     public void shareOrLogin() {
-                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.QQ);
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.QQ,umAuthListener);
                     }
                 }); //qq登录
 //                presenter.sendUMengLoginData(uMeng_otheruserId, uMeng_name, uMeng_cityname, uMeng_headimage, uMeng_sex, umeng_type, uMeng_openid);

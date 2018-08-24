@@ -98,7 +98,7 @@ public class RetrofitUtils {
     }
 
     /**
-     * 设置头
+     * 设置请求头
      */
     private static Interceptor addHeaderInterceptor() {
         Interceptor headerInterceptor = new Interceptor() {

@@ -1,4 +1,4 @@
-package com.zhenman.asus.zhenman.utils;
+package com.zhenman.asus.zhenman.utils.sp;
 
 public class SPKey {
 //    友盟用户信息

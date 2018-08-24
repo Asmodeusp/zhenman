@@ -19,10 +19,6 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
-import com.zhenman.asus.zhenman.utils.SPKey;
-import com.zhenman.asus.zhenman.utils.SPUtils;
-
-import java.util.Map;
 
 /**
  * 封装关于友盟的分享与登录
