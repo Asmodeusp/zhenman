@@ -16,8 +16,7 @@ public interface SerializationDetailsContract {
         void showSerializationCatalogBean(SerializationCatalogBean serializationCatalogBean);
         //Pgc收藏
         void showPgcCollectionBean(PgcCollectionBean pgcCollectionBean);
-        //Pgc点赞
-        void showPGCFabulousBean(PgcFabulousBean pgcFabulousBean);
+
     }
 
     interface SerializationDetailsPresenter extends BasePresenter<SerializationDetailsContract.SerializationDetailsView> {
@@ -27,8 +26,7 @@ public interface SerializationDetailsContract {
         void getSerializationCatalogBean(String PgcId);
         //收藏  1 收藏   0 取消
         void PgcCollection (String productId,String status);
-        //点赞  1 点赞   0 取消
-        void PGCFabulous (String productId, String commentId,String status,String pgcId);
+
 
     }
 }

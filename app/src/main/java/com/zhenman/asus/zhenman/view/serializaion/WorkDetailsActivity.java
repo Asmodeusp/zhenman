@@ -74,7 +74,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         //标签
         Work_Detaails_Tag = findViewById(R.id.Work_Detaails_Tag);
         //收藏
-        Work_Detaails_collectionImg = findViewById(R.id.Work_Detaails_collectionImg);//common_collection_off
+        Work_Detaails_collectionImg = findViewById(R.id.Work_Detaails_collectionImg);
         //观看第一话
         Work_Detaails_LookUpBtn = findViewById(R.id.Work_Detaails_LookUpText);
         //详情线
@@ -122,20 +122,23 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                 Work_Detaails_CatalogLine.setVisibility(View.VISIBLE);
                 setContentView(R.id.Work_Detaails_FrameLayout, WorkCatalogFragment.class);
                 break;
-                //收藏
+            //收藏
             case R.id.Work_Detaails_collectionImg:
                 if (Work_Detaails_collectionImg.isChecked()) {
                     if (serializationDetailsBeandata.isCollect()) {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
-//                        presenter.PgcCollection();
-                    }else{
+                        presenter.PgcCollection(pgcid, "0");
+                    } else {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
+                        presenter.PgcCollection(pgcid, "1");
                     }
-                }else {
+                } else {
                     if (serializationDetailsBeandata.isCollect()) {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
-                    }else{
+                        presenter.PgcCollection(pgcid, "1");
+                    } else {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
+                        presenter.PgcCollection(pgcid, "0");
                     }
                 }
                 break;
@@ -174,7 +177,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         }
         if (serializationDetailsBeandata.isCollect()) {
             Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
-        }else{
+        } else {
             Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
         }
     }
@@ -192,12 +195,9 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
     @Override
     public void showPgcCollectionBean(PgcCollectionBean pgcCollectionBean) {
 
-    }
-
-    @Override
-    public void showPGCFabulousBean(PgcFabulousBean pgcFabulousBean) {
 
     }
+
 
     private void setCatalogText() {
         work_detaails_catalogText.setTextColor(Color.parseColor("#b37feb"));

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
+import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.SPUtils;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -26,9 +27,11 @@ public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecy
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
     String PGCID;
-    public WorkCommentRecyAdapter(List<WorkDetailsCommentBean.DataBean.ResultBean> list,String PGCID) {
+    WorkDetailsCommentPresenterImp presenter;
+    public WorkCommentRecyAdapter(List<WorkDetailsCommentBean.DataBean.ResultBean> list, String PGCID, WorkDetailsCommentPresenterImp presenter) {
         this.list = list;
         this.PGCID = PGCID;
+        this.presenter = presenter;
     }
 
     @NonNull
@@ -38,6 +41,7 @@ public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecy
         View inflate = LayoutInflater.from(context).inflate(R.layout.fill_work_commentrecy_adapter, parent, false);
         Holder holder = new Holder(inflate);
         inflate.setOnClickListener(this);
+
         return holder;
     }
 
@@ -46,6 +50,7 @@ public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecy
         if (myCLick != null) {
             myCLick.myClick(v, (int) v.getTag());
         }
+
     }
 
     public void setRecyclerViewOnCLickListener(RecyclerViewOnCLickListener myCLick) {
@@ -71,34 +76,45 @@ public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecy
         holder.Work_commentRecy_LikeNumber.setText(list.get(position).getLikeNum());
         if (list.get(position).isLike()) {
             holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
+
+        } else {
+            holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
+
+        }
+        if (list.get(position).isLike()) {
+
+            holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
             holder.Work_commentRecy_Like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (holder.Work_commentRecy_Like.isChecked()) {
-                        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
-                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) -1 + "");
+                        holder. Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
+                        presenter.PGCFabulous(null, list.get(position).getCommentId(), "0", PGCID);
+                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) - 1 + "");
                     } else {
-                        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
-                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum())  + "");
+                        presenter.PGCFabulous(null, list.get(position).getCommentId(), "1", PGCID);
+                        holder. Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
+                        holder.  Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
                     }
                 }
             });
         } else {
-            holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
+            holder.  Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
             holder.Work_commentRecy_Like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (holder.Work_commentRecy_Like.isChecked()) {
-                        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
-                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
+                        presenter.PGCFabulous("", list.get(position).getCommentId(), "1", PGCID);
+                        holder. Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
+                        holder. Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
                     } else {
-                        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
-                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
+                        presenter.PGCFabulous("", list.get(position).getCommentId(), "0", PGCID);
+                        holder. Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
+                        holder. Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
                     }
                 }
             });
         }
-
         holder.Work_commentRecy_UserName.setText(list.get(position).getName());
         holder.itemView.setTag(position);
     }
