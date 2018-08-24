@@ -30,8 +30,5 @@ public interface SerializationDetailsService {
     @POST(Urls.PGC_COLLECTION)
     Observable<PgcCollectionBean> GetPgcCollectionBean(@HeaderMap Map<String,String > Heards, @FieldMap Map<String, String> params);
 
-    //PGC评论点赞
-    @FormUrlEncoded
-    @POST(Urls.PGCFABULOUS)
-    Observable<PgcFabulousBean> GetPgcFabulousBean(@HeaderMap Map<String,String >Heards, @FieldMap Map<String, String> params);
+
 }

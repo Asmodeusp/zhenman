@@ -122,23 +122,23 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                 Work_Detaails_CatalogLine.setVisibility(View.VISIBLE);
                 setContentView(R.id.Work_Detaails_FrameLayout, WorkCatalogFragment.class);
                 break;
-                //收藏
+            //收藏
             case R.id.Work_Detaails_collectionImg:
                 if (Work_Detaails_collectionImg.isChecked()) {
                     if (serializationDetailsBeandata.isCollect()) {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
-                        presenter.PgcCollection(pgcid,"0");
-                    }else{
+                        presenter.PgcCollection(pgcid, "0");
+                    } else {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
-                        presenter.PgcCollection(pgcid,"1");
+                        presenter.PgcCollection(pgcid, "1");
                     }
-                }else {
+                } else {
                     if (serializationDetailsBeandata.isCollect()) {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
-                        presenter.PgcCollection(pgcid,"1");
-                    }else{
+                        presenter.PgcCollection(pgcid, "1");
+                    } else {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
-                        presenter.PgcCollection(pgcid,"0");
+                        presenter.PgcCollection(pgcid, "0");
                     }
                 }
                 break;
@@ -177,7 +177,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         }
         if (serializationDetailsBeandata.isCollect()) {
             Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
-        }else{
+        } else {
             Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
         }
     }
@@ -198,10 +198,6 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
 
     }
 
-    @Override
-    public void showPGCFabulousBean(PgcFabulousBean pgcFabulousBean) {
-
-    }
 
     private void setCatalogText() {
         work_detaails_catalogText.setTextColor(Color.parseColor("#b37feb"));

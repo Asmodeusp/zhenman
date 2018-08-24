@@ -4,12 +4,14 @@ package com.zhenman.asus.zhenman.view.serializaion.fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.WorkDetailsCommentContract;
+import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
@@ -53,10 +55,10 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
         if (data.getActorList().size() == 0 && data.getActorList() == null) {
             Actor_RecyTips.setVisibility(View.VISIBLE);
         }
-        if (serializationCatalogBean.getData()!=null&&serializationCatalogBean.getData().size()!=0) {
-            presenter.getWorkDetailsCommentBean(serializationCatalogBean.getData().get(0).getPgcId(),""+1);
+        if (serializationCatalogBean.getData() != null && serializationCatalogBean.getData().size() != 0) {
+            presenter.getWorkDetailsCommentBean(serializationCatalogBean.getData().get(0).getPgcId(), "" + 1);
         }
-        if (result.size()==0) {
+        if (result.size() == 0) {
             work_commentTips.setVisibility(View.VISIBLE);
             Work_commentRecy.setVisibility(View.GONE);
         }
@@ -80,22 +82,35 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     @Override
     public void showError(String msg) {
         if (!msg.equals("成功")) {
-           Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show() ;
+            Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void showWorkDetailsCommentBean(WorkDetailsCommentBean workDetailsCommentBean) {
 
-        result.addAll(workDetailsCommentBean.getData().getResult()) ;
-        if (result.size()==0) {
+        result.addAll(workDetailsCommentBean.getData().getResult());
+        if (result.size() == 0) {
 
-        }else{
+        } else {
             work_commentTips.setVisibility(View.GONE);
             Work_commentRecy.setVisibility(View.VISIBLE);
             //设置评论列表适配器
-            WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result,serializationCatalogBean.getData().get(0).getPgcId());
+            WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, serializationCatalogBean.getData().get(0).getPgcId(),presenter);
             Work_commentRecy.setAdapter(workCommentRecyAdapter);
+            workCommentRecyAdapter.setRecyclerViewOnCLickListener(new WorkCommentRecyAdapter.RecyclerViewOnCLickListener() {
+                @Override
+                public void myClick(View view, final int position) {
+                    final CheckBox Work_commentRecy_Like = view.findViewById(R.id.Work_commentRecy_Like);
+                    final TextView Work_commentRecy_LikeNumber = view.findViewById(R.id.Work_commentRecy_LikeNumber);
+
+                }
+            });
         }
+    }
+
+    @Override
+    public void showPGCFabulousBean(PgcFabulousBean pgcFabulousBean) {
+
     }
 }
