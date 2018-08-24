@@ -50,6 +50,7 @@ public class SetPasswordActivity extends BaseActivity<SetPasswordPresenterImp> i
 
     private void initView() {
         //查找ID
+        //返回
         mSetPasswordReturn = (ImageView) findViewById(R.id.SetPassword_return);
         mSetPasswordInputPasswordEd = (EditText) findViewById(R.id.SetPasswordInputPassword_Ed);
         mSetPasswordHide = (CheckBox) findViewById(R.id.SetPassword_hide);

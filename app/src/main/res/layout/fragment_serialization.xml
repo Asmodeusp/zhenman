@@ -144,7 +144,7 @@
                         android:layout_below="@+id/serial_collection"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="16px"
-                        android:text="收藏"
+                        android:text="书架"
                         android:textColor="@color/h2"
                         android:textSize="26px" />
                 </com.zhy.autolayout.AutoRelativeLayout>

@@ -1,7 +1,5 @@
 package com.zhenman.asus.zhenman.view.login;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
