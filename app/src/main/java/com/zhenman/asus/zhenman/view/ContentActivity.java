@@ -78,7 +78,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
                 setHeight(98);
                 break;
             case R.id.ReleaseButton:
-           setContentView(R.id.contentview, IntroducedFragment.class);
+//           setContentView(R.id.contentview, IntroducedFragment.class);
                 Toast.makeText(this, "该功能暂未开放", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.MessageButton:

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -46,7 +47,8 @@ public class RetrofitUtils {
         builder.addInterceptor(addHeaderInterceptor());
 
 //      设置缓存
-        File cacheFile = new File(App.context.getExternalCacheDir(), "RetrofitCache");
+        File cacheFile = new File("/storage/emulated/0/Android/data/com.zhenman.asus.zhenman/cache", "RetrofitCache");
+
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
         builder.cache(cache).addInterceptor(addCacheInterceptor());
 
