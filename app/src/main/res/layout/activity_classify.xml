@@ -65,7 +65,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/h7"></View>
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/Classify_TypeTagsAll"
+                    android:gravity="center"
+                    android:text="全部"
+                    android:textColor="@color/h2"
+                    android:layout_width="100px"
+                    android:layout_height="80px"
+                    android:layout_marginLeft="24px" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/Classify_TypeTagsRecy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+
+
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/h7"></View>
             <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,34 +142,12 @@
 
 
             </com.zhy.autolayout.AutoLinearLayout>
-
-            <com.zhy.autolayout.AutoLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/Classify_TypeTagsAll"
-                    android:gravity="center"
-                    android:text="全部"
-                    android:textColor="@color/h2"
-                    android:layout_width="100px"
-                    android:layout_height="80px"
-                    android:layout_marginLeft="24px" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/Classify_TypeTagsRecy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
-
-
-            </com.zhy.autolayout.AutoLinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/h7"></View>
+
+
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/Classify_Product_Recy"
