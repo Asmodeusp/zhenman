@@ -14,6 +14,10 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.SerializationClassifyContract;
 import com.zhenman.asus.zhenman.model.bean.ClassifyTagBean;
 import com.zhenman.asus.zhenman.presenter.SerializationClassifyPresenterImp;
+import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifyBackgroundTagsRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifyStatusTagsRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifySubjectTagsRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifyTypeTagsRecyAdapter;
 
 import java.util.ArrayList;
 
@@ -82,6 +86,7 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
         Classify_TypeTagsRecy.setLayoutManager(linearLayoutManager);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         Classify_Product_Recy.setLayoutManager(gridLayoutManager);
+
     }
 
     @Override
@@ -104,8 +109,22 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
             statusTagsBeans.addAll(classifyTagBean.getData().getStatusTags());
             subjectTagsBeans.addAll(classifyTagBean.getData().getSubjectTags());
             typeTagsBeans.addAll(classifyTagBean.getData().getTypeTags());
+            initAdapter();
+
         }
 
+    }
+
+    private void initAdapter() {
+        //设置适配器
+        ClassifyBackgroundTagsRecyAdapter classifyBackgroundTagsRecyAdapter = new ClassifyBackgroundTagsRecyAdapter(backgroundTagsBeans);
+        Classify_backgroundTagsRecy.setAdapter(classifyBackgroundTagsRecyAdapter);
+        ClassifyStatusTagsRecyAdapter classifyStatusTagsRecyAdapter = new ClassifyStatusTagsRecyAdapter(statusTagsBeans);
+        Classify_StatusTagsRecy.setAdapter(classifyStatusTagsRecyAdapter);
+        ClassifySubjectTagsRecyAdapter classifySubjectTagsRecyAdapter = new ClassifySubjectTagsRecyAdapter(subjectTagsBeans);
+        Classify_subjectTagsRecy.setAdapter(classifySubjectTagsRecyAdapter);
+        ClassifyTypeTagsRecyAdapter classifyTypeTagsRecyAdapter = new ClassifyTypeTagsRecyAdapter(typeTagsBeans);
+        Classify_TypeTagsRecy.setAdapter(classifyTypeTagsRecyAdapter);
     }
 
 
