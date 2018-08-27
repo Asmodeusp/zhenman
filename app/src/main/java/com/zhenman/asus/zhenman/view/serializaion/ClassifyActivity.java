@@ -78,12 +78,18 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
         Classify_subjectTagsAll.setOnClickListener(this);
         Classify_TypeTagsAll.setOnClickListener(this);
         //设置Recy的格式
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        Classify_backgroundTagsRecy.setLayoutManager(linearLayoutManager);
-        Classify_StatusTagsRecy.setLayoutManager(linearLayoutManager);
-        Classify_subjectTagsRecy.setLayoutManager(linearLayoutManager);
-        Classify_TypeTagsRecy.setLayoutManager(linearLayoutManager);
+        LinearLayoutManager backgroundlinearLayoutManager = new LinearLayoutManager(this);
+        backgroundlinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        Classify_backgroundTagsRecy.setLayoutManager(backgroundlinearLayoutManager);
+        LinearLayoutManager StatuslinearLayoutManager = new LinearLayoutManager(this);
+        StatuslinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        Classify_StatusTagsRecy.setLayoutManager(StatuslinearLayoutManager);
+        LinearLayoutManager subjectlinearLayoutManager = new LinearLayoutManager(this);
+        subjectlinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        Classify_subjectTagsRecy.setLayoutManager(subjectlinearLayoutManager);
+        LinearLayoutManager TypelinearLayoutManager = new LinearLayoutManager(this);
+        TypelinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        Classify_TypeTagsRecy.setLayoutManager(TypelinearLayoutManager);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         Classify_Product_Recy.setLayoutManager(gridLayoutManager);
 

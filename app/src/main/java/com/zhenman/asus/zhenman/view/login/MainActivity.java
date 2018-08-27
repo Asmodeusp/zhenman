@@ -122,8 +122,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             SPUtils.put(MainActivity.this, SPKey.UMeng_OPENID, data.get("openid"));
             SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
             SPUtils.put(MainActivity.this, SPKey.UMENG_TYPE, TYPE);
-            Log.e("Sunny", TYPE + "----" + data.get("city") + "-------" + data.get("name") + "---" + data.get("iconurl")
-                    + "-----" + data.get("openid") + "--------" + data.get("unionid"));
+
 
             //微信登录
 //          presenter.sendUMengLoginData(uMeng_otheruserId, uMeng_name, uMeng_cityname, uMeng_headimage, uMeng_sex, umeng_type, uMeng_openid);
@@ -305,7 +304,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     //    得到友盟返回的数据
     @Override
     public void showUMengLoginData(UMengLoginBean uMengLoginBean) {
-        Log.d("uMengLoginBean", uMengLoginBean.getData().getName());
     }
 
     @Override
