@@ -1,8 +1,7 @@
-package com.zhenman.asus.zhenman.view.adapter;
+package com.zhenman.asus.zhenman.view.adapter.home;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;

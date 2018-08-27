@@ -1,4 +1,4 @@
-package com.zhenman.asus.zhenman.view.adapter;
+package com.zhenman.asus.zhenman.view.adapter.home;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

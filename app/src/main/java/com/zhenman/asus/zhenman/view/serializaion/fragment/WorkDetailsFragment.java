@@ -4,7 +4,6 @@ package com.zhenman.asus.zhenman.view.serializaion.fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,8 +15,8 @@ import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
 import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
-import com.zhenman.asus.zhenman.view.adapter.WorkCommentRecyAdapter;
-import com.zhenman.asus.zhenman.view.adapter.WorkDetailsActorRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.WorkCommentRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.WorkDetailsActorRecyAdapter;
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 
 import java.util.ArrayList;

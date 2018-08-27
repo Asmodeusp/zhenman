@@ -1,4 +1,4 @@
-package com.zhenman.asus.zhenman.view.adapter;
+package com.zhenman.asus.zhenman.view.adapter.serialization;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

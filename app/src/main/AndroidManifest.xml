@@ -17,10 +17,10 @@
 
     <application
         android:name=".App"
-        android:resizeableActivity="true"
         android:allowBackup="true"
         android:icon="@drawable/zhenman"
         android:label="@string/app_name"
+        android:resizeableActivity="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -31,10 +31,16 @@
         <meta-data
             android:name="design_height"
             android:value="1334"></meta-data>
-
-        <meta-data
-            android:name="android.max_aspect"
-            android:value="2.2" />
+        <!--&lt;!&ndash;刘海屏适配&ndash;&gt;-->
+        <!--<meta-data-->
+            <!--android:name="android.notch_support"-->
+            <!--android:value="true" />-->
+        <!--<meta-data-->
+            <!--android:name="android.max_aspect"-->
+            <!--android:value="2.2" />-->
+        <!--<meta-data-->
+            <!--android:name="notch.config"-->
+            <!--android:value="portrait|landscape"/>-->
         <!--友盟-->
         <meta-data
             android:name="UMENG_APPKEY"
@@ -42,6 +48,7 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="Umeng" />
+
         <activity android:name=".view.login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

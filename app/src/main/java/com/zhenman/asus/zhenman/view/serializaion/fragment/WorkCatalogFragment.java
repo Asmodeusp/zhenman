@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
-import com.zhenman.asus.zhenman.view.adapter.SerializationCatalogAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
 import com.zhenman.asus.zhenman.view.serializaion.SerializationCatalogReadActivity;
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 

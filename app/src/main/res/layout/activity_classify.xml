@@ -8,10 +8,11 @@
 
     <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/Classify_returnImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/common_return_black" />
@@ -26,5 +27,132 @@
             android:textColor="@color/h2"
             android:textSize="36px" />
     </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhenman.asus.zhenman.view.ui.MyScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Classify_backgroundTagsAll"
+                    android:gravity="center"
+                    android:text="全部"
+                    android:textColor="@color/h2"
+                    android:layout_width="100px"
+                    android:layout_height="80px"
+                    android:layout_marginLeft="24px" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/Classify_backgroundTagsRecy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+
+
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/h7"></View>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Classify_StatusTagsAll"
+                    android:gravity="center"
+                    android:text="全部"
+                    android:textColor="@color/h2"
+                    android:layout_width="100px"
+                    android:layout_height="80px"
+                    android:layout_marginLeft="24px" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/Classify_StatusTagsRecy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+
+
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/h7"></View>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Classify_subjectTagsAll"
+                    android:gravity="center"
+                    android:text="全部"
+                    android:textColor="@color/h2"
+                    android:layout_width="100px"
+                    android:layout_height="80px"
+                    android:layout_marginLeft="24px" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/Classify_subjectTagsRecy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+
+
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Classify_TypeTagsAll"
+                    android:gravity="center"
+                    android:text="全部"
+                    android:textColor="@color/h2"
+                    android:layout_width="100px"
+                    android:layout_height="80px"
+                    android:layout_marginLeft="24px" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/Classify_TypeTagsRecy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+
+
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/h7"></View>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/Classify_Product_Recy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </com.zhenman.asus.zhenman.view.ui.MyScrollView>
 
 </com.zhy.autolayout.AutoLinearLayout>

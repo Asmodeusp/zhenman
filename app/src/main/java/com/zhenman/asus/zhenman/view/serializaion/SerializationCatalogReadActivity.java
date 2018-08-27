@@ -27,9 +27,9 @@ import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.presenter.SerializationCatalogReadPresenterImp;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
-import com.zhenman.asus.zhenman.view.adapter.CatalogReadActorAdapter;
-import com.zhenman.asus.zhenman.view.adapter.SerializationCatalogAdapter;
-import com.zhenman.asus.zhenman.view.adapter.serializationCatalogReadRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogReadActorAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.serializationCatalogReadRecyAdapter;
 import com.zhenman.asus.zhenman.view.login.qqlogin.UMSharePlatform;
 
 import java.util.ArrayList;

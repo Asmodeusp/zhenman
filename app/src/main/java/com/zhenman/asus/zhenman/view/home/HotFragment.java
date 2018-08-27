@@ -14,7 +14,7 @@ import com.zhenman.asus.zhenman.contract.HomeHotContract;
 import com.zhenman.asus.zhenman.layoutmessage.ViewPagerLayoutManager;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
-import com.zhenman.asus.zhenman.view.adapter.HomeHotAdapter;
+import com.zhenman.asus.zhenman.view.adapter.home.HomeHotAdapter;
 
 import java.util.ArrayList;
 

@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
-import com.zhenman.asus.zhenman.view.adapter.HomeVPAdapter;
+import com.zhenman.asus.zhenman.view.adapter.home.HomeVPAdapter;
 import com.zhenman.asus.zhenman.view.home.AttentionFragment;
 import com.zhenman.asus.zhenman.view.home.HotFragment;
 import com.zhy.autolayout.AutoRelativeLayout;

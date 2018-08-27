@@ -18,8 +18,9 @@ import com.zhenman.asus.zhenman.contract.SerializationContract;
 import com.zhenman.asus.zhenman.model.bean.SerializationBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationLatelyBean;
 import com.zhenman.asus.zhenman.presenter.SerializationPresenterImp;
-import com.zhenman.asus.zhenman.view.adapter.SerializationHotRecyAdapter;
-import com.zhenman.asus.zhenman.view.adapter.SerializationLatelyRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationHotRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationLatelyRecyAdapter;
+import com.zhenman.asus.zhenman.view.serializaion.ClassifyActivity;
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 
 import java.util.ArrayList;
@@ -137,7 +138,7 @@ public class SerializationFragment extends BaseFragment<SerializationPresenterIm
         switch (view.getId()) {
             //分类
             case R.id.Serialization_serial_classButton:
-
+                startActivity(new Intent(getContext(), ClassifyActivity.class));
                 break;
             //搜索
             case R.id.Serialization_common_search:
