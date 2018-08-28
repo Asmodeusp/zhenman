@@ -90,17 +90,19 @@
             android:layout_height="wrap_content">
 
             <ImageView
+
                 android:id="@+id/serializationCatalogReadReturnImg"
                 android:layout_width="36px"
                 android:layout_height="36px"
                 android:layout_margin="24px"
                 android:src="@mipmap/common_return_white" />
             <com.zhy.autolayout.AutoRelativeLayout
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true">
 
-                <TextView
+                <TextView   android:layout_marginTop="24px"
                     android:id="@+id/serializationCatalogReadText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

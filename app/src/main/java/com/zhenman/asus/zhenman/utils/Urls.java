@@ -41,4 +41,6 @@ public class Urls {
     public static final String UMENG_LOGIN = "userOauth/register";
     //连载分类标签
     public static final String SERIALIZATION_CLASSIFY_TAG = "pgcTag/getPgcTag";
+    //连载分类标签
+    public static final String SERIALIZATION_CLASSIFY = "userPgcInfo/getPgcListByTags";
 }

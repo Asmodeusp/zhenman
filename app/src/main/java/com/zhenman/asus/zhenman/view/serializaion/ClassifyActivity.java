@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.serializaion;
 
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,14 +13,17 @@ import android.widget.Toast;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.SerializationClassifyContract;
+import com.zhenman.asus.zhenman.model.bean.ClassifyBean;
 import com.zhenman.asus.zhenman.model.bean.ClassifyTagBean;
 import com.zhenman.asus.zhenman.presenter.SerializationClassifyPresenterImp;
 import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifyBackgroundTagsRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifyProductRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifyStatusTagsRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifySubjectTagsRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifyTypeTagsRecyAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClassifyActivity extends BaseActivity<SerializationClassifyPresenterImp> implements SerializationClassifyContract.SerializationClassifyView, View.OnClickListener {
 
@@ -38,11 +42,13 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
     private TextView Classify_StatusTagsAll;
     private TextView Classify_subjectTagsAll;
     private TextView Classify_TypeTagsAll;
-    private String backgroundTag = null;
-    private String statusTag = null;
-    private String subjectTag = null;
-    private String typeTag = null;
+    private String backgroundTag = "";
+    private String statusTag = "";
+    private String subjectTag = "";
+    private String typeTag = "";
     private TextView lastView =null;
+    private List<ClassifyBean.DataBean.ResultBean> result =new ArrayList<>();
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_classify;
@@ -50,6 +56,7 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
 
     @Override
     protected void init() {
+        presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
         presenter.getClassifyTagBean();
         //返回
         Classify_returnImg = findViewById(R.id.Classify_returnImg);
@@ -121,16 +128,68 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
 
     }
 
+    @Override
+    public void showClassifyBean(ClassifyBean classifyBean) {
+        if (classifyBean.getMsg().equals("成功")) {
+            result .addAll( classifyBean.getData().getResult());
+            ClassifyProductRecyAdapter classifyProductRecyAdapter = new ClassifyProductRecyAdapter(result);
+            Classify_Product_Recy.setAdapter(classifyProductRecyAdapter);
+            classifyProductRecyAdapter.notifyDataSetChanged();
+            classifyProductRecyAdapter.setRecyclerViewOnCLickListener(new ClassifyProductRecyAdapter.RecyclerViewOnCLickListener() {
+                @Override
+                public void myClick(View view, int position) {
+                    Intent intent = new Intent(ClassifyActivity.this,SerializationCatalogReadActivity.class);
+                    intent.putExtra("catalogId",result.get(position).getCatalogId());
+                    intent.putExtra("pgcId", result.get(position).getPgcId());
+                    startActivity(intent);
+
+                }
+            });
+        }
+
+    }
+
     private void initAdapter() {
         //设置适配器
         ClassifyBackgroundTagsRecyAdapter classifyBackgroundTagsRecyAdapter = new ClassifyBackgroundTagsRecyAdapter(backgroundTagsBeans);
         Classify_backgroundTagsRecy.setAdapter(classifyBackgroundTagsRecyAdapter);
+        classifyBackgroundTagsRecyAdapter.setRecyclerViewOnCLickListener(new ClassifyBackgroundTagsRecyAdapter.RecyclerViewOnCLickListener() {
+            @Override
+            public void myClick(View view, int position) {
+                TextView fill_classifyTags_Recy = view.findViewById(R.id.fill_classifyTags_Recy);
+                lastView = fill_classifyTags_Recy;
+
+                backgroundTag = backgroundTagsBeans.get(position).getTagName();
+                presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
+            }
+        });
         ClassifyStatusTagsRecyAdapter classifyStatusTagsRecyAdapter = new ClassifyStatusTagsRecyAdapter(statusTagsBeans);
         Classify_StatusTagsRecy.setAdapter(classifyStatusTagsRecyAdapter);
+        classifyStatusTagsRecyAdapter.setRecyclerViewOnCLickListener(new ClassifyStatusTagsRecyAdapter.RecyclerViewOnCLickListener() {
+            @Override
+            public void myClick(View view, int position) {
+                statusTag = statusTagsBeans.get(position).getTagName();
+                presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
+            }
+        });
         ClassifySubjectTagsRecyAdapter classifySubjectTagsRecyAdapter = new ClassifySubjectTagsRecyAdapter(subjectTagsBeans);
         Classify_subjectTagsRecy.setAdapter(classifySubjectTagsRecyAdapter);
+        classifySubjectTagsRecyAdapter.setRecyclerViewOnCLickListener(new ClassifySubjectTagsRecyAdapter.RecyclerViewOnCLickListener() {
+            @Override
+            public void myClick(View view, int position) {
+                subjectTag = subjectTagsBeans.get(position).getTagName();
+                presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
+            }
+        });
         ClassifyTypeTagsRecyAdapter classifyTypeTagsRecyAdapter = new ClassifyTypeTagsRecyAdapter(typeTagsBeans);
         Classify_TypeTagsRecy.setAdapter(classifyTypeTagsRecyAdapter);
+        classifyTypeTagsRecyAdapter.setRecyclerViewOnCLickListener(new ClassifyTypeTagsRecyAdapter.RecyclerViewOnCLickListener() {
+            @Override
+            public void myClick(View view, int position) {
+                typeTag =typeTagsBeans.get(position).getTagName();
+                presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
+            }
+        });
     }
 
 
@@ -141,16 +200,20 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
                 finish();
                 break;
             case R.id.Classify_backgroundTagsAll:
-                backgroundTag =null;
+                backgroundTag ="";
+                presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
                 break;
             case R.id.Classify_StatusTagsAll:
-                statusTag =null;
+                statusTag ="";
+                presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
                 break;
             case R.id.Classify_subjectTagsAll:
-                subjectTag =null;
+                subjectTag ="";
+                presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
                 break;
             case R.id.Classify_TypeTagsAll:
-                typeTag=null;
+                typeTag="";
+                presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
                 break;
 
         }

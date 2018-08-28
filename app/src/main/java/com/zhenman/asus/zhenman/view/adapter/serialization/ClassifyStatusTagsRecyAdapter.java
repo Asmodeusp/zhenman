@@ -47,6 +47,7 @@ public class ClassifyStatusTagsRecyAdapter extends RecyclerView.Adapter<Classify
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
         holder.fill_classifyTags_Recy.setText(list.get(position).getTagName());
+        holder.itemView.setTag(position);
     }
 
     @Override

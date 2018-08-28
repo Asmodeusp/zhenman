@@ -27,7 +27,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        ImmersionBar.with(this).init();
+//        ImmersionBar.with(this).init();
 //        权限配置
         if (Build.VERSION.SDK_INT >= 23) {
             String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_APN_SETTINGS};
@@ -44,7 +44,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
         }
         //全局context赋值
         App.context = this;
-        Log.e("Sunny","__________________");
 
         presenter = getPresenter();
         if (presenter != null) {
@@ -81,7 +80,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
     protected void onResume() {
         super.onResume();
         App.context = this;
-        Log.e("Sunny","111111111111111111111111111");
 
         presenter = getPresenter();
         if (presenter != null) {
