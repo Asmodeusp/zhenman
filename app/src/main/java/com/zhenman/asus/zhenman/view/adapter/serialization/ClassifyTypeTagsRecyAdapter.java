@@ -20,7 +20,7 @@ public class ClassifyTypeTagsRecyAdapter extends RecyclerView.Adapter<ClassifyTy
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
 
-    public ClassifyTypeTagsRecyAdapter(List<ClassifyTagBean.DataBean.TypeTagsBean> list) {
+    public ClassifyTypeTagsRecyAdapter(List<ClassifyTagBean.DataBean.TypeTagsBean> list, TextView classify_TypeTagsAll) {
         this.list = list;
     }
 

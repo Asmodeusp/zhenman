@@ -2,10 +2,12 @@ package com.zhenman.asus.zhenman.view.serializaion;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,15 +40,15 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
     private RecyclerView Classify_subjectTagsRecy;
     private RecyclerView Classify_TypeTagsRecy;
     private RecyclerView Classify_Product_Recy;
-    private TextView Classify_backgroundTagsAll;
-    private TextView Classify_StatusTagsAll;
-    private TextView Classify_subjectTagsAll;
-    private TextView Classify_TypeTagsAll;
+    private CheckBox Classify_backgroundTagsAll;
+    private CheckBox Classify_StatusTagsAll;
+    private CheckBox Classify_subjectTagsAll;
+    private CheckBox Classify_TypeTagsAll;
     private String backgroundTag = "";
     private String statusTag = "";
     private String subjectTag = "";
     private String typeTag = "";
-    private TextView lastView =null;
+    private CheckBox lastView =null;
     private List<ClassifyBean.DataBean.ResultBean> result =new ArrayList<>();
 
     @Override
@@ -151,19 +153,28 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
 
     private void initAdapter() {
         //设置适配器
-        ClassifyBackgroundTagsRecyAdapter classifyBackgroundTagsRecyAdapter = new ClassifyBackgroundTagsRecyAdapter(backgroundTagsBeans);
+        ClassifyBackgroundTagsRecyAdapter classifyBackgroundTagsRecyAdapter = new ClassifyBackgroundTagsRecyAdapter(backgroundTagsBeans,Classify_backgroundTagsAll);
         Classify_backgroundTagsRecy.setAdapter(classifyBackgroundTagsRecyAdapter);
         classifyBackgroundTagsRecyAdapter.setRecyclerViewOnCLickListener(new ClassifyBackgroundTagsRecyAdapter.RecyclerViewOnCLickListener() {
+
+            private CheckBox fill_classifyTags_recy;
+
             @Override
             public void myClick(View view, int position) {
-                TextView fill_classifyTags_Recy = view.findViewById(R.id.fill_classifyTags_Recy);
-                lastView = fill_classifyTags_Recy;
 
+                fill_classifyTags_recy = view.findViewById(R.id.fill_classifyTags_Recy);
+                lastView =fill_classifyTags_recy;
+                if(fill_classifyTags_recy==lastView){
+                    fill_classifyTags_recy.setTextColor(Color.parseColor("#333333"));
+                }
+                if(fill_classifyTags_recy!=lastView){
+                    fill_classifyTags_recy.setTextColor(Color.parseColor("#666666"));
+                }
                 backgroundTag = backgroundTagsBeans.get(position).getTagName();
                 presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
             }
         });
-        ClassifyStatusTagsRecyAdapter classifyStatusTagsRecyAdapter = new ClassifyStatusTagsRecyAdapter(statusTagsBeans);
+        ClassifyStatusTagsRecyAdapter classifyStatusTagsRecyAdapter = new ClassifyStatusTagsRecyAdapter(statusTagsBeans,Classify_StatusTagsAll);
         Classify_StatusTagsRecy.setAdapter(classifyStatusTagsRecyAdapter);
         classifyStatusTagsRecyAdapter.setRecyclerViewOnCLickListener(new ClassifyStatusTagsRecyAdapter.RecyclerViewOnCLickListener() {
             @Override
@@ -172,7 +183,7 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
                 presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
             }
         });
-        ClassifySubjectTagsRecyAdapter classifySubjectTagsRecyAdapter = new ClassifySubjectTagsRecyAdapter(subjectTagsBeans);
+        ClassifySubjectTagsRecyAdapter classifySubjectTagsRecyAdapter = new ClassifySubjectTagsRecyAdapter(subjectTagsBeans,Classify_subjectTagsAll);
         Classify_subjectTagsRecy.setAdapter(classifySubjectTagsRecyAdapter);
         classifySubjectTagsRecyAdapter.setRecyclerViewOnCLickListener(new ClassifySubjectTagsRecyAdapter.RecyclerViewOnCLickListener() {
             @Override
@@ -181,7 +192,7 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
                 presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
             }
         });
-        ClassifyTypeTagsRecyAdapter classifyTypeTagsRecyAdapter = new ClassifyTypeTagsRecyAdapter(typeTagsBeans);
+        ClassifyTypeTagsRecyAdapter classifyTypeTagsRecyAdapter = new ClassifyTypeTagsRecyAdapter(typeTagsBeans,Classify_TypeTagsAll);
         Classify_TypeTagsRecy.setAdapter(classifyTypeTagsRecyAdapter);
         classifyTypeTagsRecyAdapter.setRecyclerViewOnCLickListener(new ClassifyTypeTagsRecyAdapter.RecyclerViewOnCLickListener() {
             @Override
@@ -202,6 +213,8 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
             case R.id.Classify_backgroundTagsAll:
                 backgroundTag ="";
                 presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
+                Classify_backgroundTagsAll.setTextColor(Color.parseColor("#333333"));
+                lastView.setTextColor(Color.parseColor("#666666"));
                 break;
             case R.id.Classify_StatusTagsAll:
                 statusTag ="";

@@ -225,10 +225,11 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
     }
-   //获取详情
+
+    //获取详情
     @Override
     public void showSerializationDetailsBean(SerializationDetailsBean serializationDetailsBean) {
-        if (serializationDetailsBean!=null) {
+        if (serializationDetailsBean != null) {
             CataLog_FootViewActor_Recy.setAdapter(new CatalogReadActorAdapter(serializationDetailsBean.getData().getActorList()));
         }
     }
@@ -260,7 +261,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         }
     }
 
-    //章节弹出popuWindow
+    //章节弹出 popuWindow
     private void initCataLogpopu() {
         View contentView = LayoutInflater.from(this).inflate(R.layout.fill_catalog_popu, null, false);
         //书名
@@ -286,42 +287,25 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
             }
         });
-        // 创建PopupWindow对象，其中：
-        // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
-        // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
+
         PopupWindow popupWindow = new PopupWindow(contentView, 560, ViewGroup.LayoutParams.MATCH_PARENT, true);
-        // 设置PopupWindow的背景
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        // 设置PopupWindow是否能响应外部点击事件
         popupWindow.setOutsideTouchable(true);
-        // 设置PopupWindow是否能响应点击事件
         popupWindow.setTouchable(true);
         popupWindow.showAtLocation(SerializationRelativeLayout, Gravity.BOTTOM | Gravity.RIGHT, 0, 0);
-        //设置PopupWindow中View的点击事件
-        //定位
         CataLog_PopuPosition.setOnClickListener(this);
-        //下载
         CataLog_PopuBottom.setOnClickListener(this);
-//        分享
         CataLog_FootViewShareBtn.setOnClickListener(this);
     }
 
-    //消息弹出PopuWindow
+    //消息弹出 PopuWindow
     private void initCommentpopu() {
         View contentView = LayoutInflater.from(this).inflate(R.layout.fill_comment_popu, null, false);
-        // 创建PopupWindow对象，其中：
-        // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
-        // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
         PopupWindow popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT, 978, true);
-        // 设置PopupWindow的背景
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        // 设置PopupWindow是否能响应外部点击事件
         popupWindow.setOutsideTouchable(true);
-        // 设置PopupWindow是否能响应点击事件
         popupWindow.setTouchable(true);
-        //设置摆放位置
         popupWindow.showAtLocation(SerializationRelativeLayout, Gravity.BOTTOM, 0, 0);
-        //设置PopupWindow中View的点击事件
 
     }
 
@@ -348,11 +332,11 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             case R.id.CataLog_PopuBottom:
 
                 break;
-                //第一话
+            //第一话
             case R.id.SeeFirstBtn:
                 StartcatalogId = data.get(data.size() - 1).getCatalogId();
                 presenter.getSerializationCatalogReadBean(StartcatalogId);
-               SetTextColorRules();
+                SetTextColorRules();
                 break;
             //上一话
             case R.id.CataLog_FootViewUpperBtn:
@@ -423,7 +407,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             CataLog_FootViewNexterBtn.setClickable(true);
             weiwandaixuReLa.setVisibility(View.GONE);
         }
-        if (data.size()==1) {
+        if (data.size() == 1) {
             CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h4));
             CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h4));
             CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h4));

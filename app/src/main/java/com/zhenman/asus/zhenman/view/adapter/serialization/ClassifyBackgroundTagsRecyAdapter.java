@@ -1,11 +1,13 @@
 package com.zhenman.asus.zhenman.view.adapter.serialization;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.R;
@@ -19,9 +21,11 @@ public class ClassifyBackgroundTagsRecyAdapter extends RecyclerView.Adapter<Clas
     private List<ClassifyTagBean.DataBean.BackgroundTagsBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
+    private CheckBox classify_backgroundTagsAll;
 
-    public ClassifyBackgroundTagsRecyAdapter(List<ClassifyTagBean.DataBean.BackgroundTagsBean> list) {
+    public ClassifyBackgroundTagsRecyAdapter(List<ClassifyTagBean.DataBean.BackgroundTagsBean> list, CheckBox classify_backgroundTagsAll) {
         this.list = list;
+        this.classify_backgroundTagsAll = classify_backgroundTagsAll;
     }
 
     @NonNull
@@ -47,7 +51,30 @@ public class ClassifyBackgroundTagsRecyAdapter extends RecyclerView.Adapter<Clas
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
-       holder.fill_classifyTags_Recy.setText(list.get(position).getTagName());
+        holder.fill_classifyTags_Recy.setText(list.get(position).getTagName());
+//        holder.fill_classifyTags_Recy.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                CheckBox lastview =null;
+//                if (holder.fill_classifyTags_Recy.isChecked()) {
+//                    lastview =holder.fill_classifyTags_Recy;
+//
+//                    holder.fill_classifyTags_Recy.setTextColor(Color.parseColor("#333333"));
+//                    classify_backgroundTagsAll.setTextColor(Color.parseColor("#666666"));
+//                }else{
+//                    holder.fill_classifyTags_Recy.setTextColor(Color.parseColor("#666666"));
+//                    classify_backgroundTagsAll.setTextColor(Color.parseColor("#333333"));
+//                }
+//                 lastview.setTextColor(Color.parseColor("#333333"));
+//            }
+//        });
+        classify_backgroundTagsAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.fill_classifyTags_Recy.setTextColor(Color.parseColor("#666666"));
+                classify_backgroundTagsAll.setTextColor(Color.parseColor("#333333"));
+            }
+        });
         holder.itemView.setTag(position);
     }
 
@@ -63,7 +90,7 @@ public class ClassifyBackgroundTagsRecyAdapter extends RecyclerView.Adapter<Clas
     public class Holder extends RecyclerView.ViewHolder {
 
         //标签内容
-        private TextView fill_classifyTags_Recy;
+        private CheckBox fill_classifyTags_Recy;
 
         public Holder(View itemView) {
             super(itemView);

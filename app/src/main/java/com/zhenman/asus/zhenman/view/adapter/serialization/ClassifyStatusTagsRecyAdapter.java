@@ -19,7 +19,7 @@ public class ClassifyStatusTagsRecyAdapter extends RecyclerView.Adapter<Classify
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
 
-    public ClassifyStatusTagsRecyAdapter(List<ClassifyTagBean.DataBean.StatusTagsBean> list) {
+    public ClassifyStatusTagsRecyAdapter(List<ClassifyTagBean.DataBean.StatusTagsBean> list, TextView classify_StatusTagsAll) {
         this.list = list;
     }
 

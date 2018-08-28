@@ -44,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <CheckBox
+                    android:button="@null"
                     android:id="@+id/Classify_backgroundTagsAll"
                     android:gravity="center"
                     android:text="全部"
@@ -73,7 +74,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <CheckBox
+                    android:button="@null"
                     android:textSize="24px"
                     android:id="@+id/Classify_TypeTagsAll"
                     android:gravity="center"
@@ -101,7 +103,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <CheckBox
+                    android:button="@null"
                     android:textSize="24px"
                     android:id="@+id/Classify_StatusTagsAll"
                     android:gravity="center"
@@ -130,7 +133,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <CheckBox
+                    android:button="@null"
                     android:textSize="24px"
                     android:id="@+id/Classify_subjectTagsAll"
                     android:gravity="center"
