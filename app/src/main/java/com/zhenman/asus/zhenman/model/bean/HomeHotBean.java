@@ -1,8 +1,9 @@
 package com.zhenman.asus.zhenman.model.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class HomeHotBean {
+public class HomeHotBean implements Serializable {
     private int state;
     private String msg;
     private List<DataBean> data;
@@ -31,7 +32,7 @@ public class HomeHotBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         private String name;
         private String id;
         private Object catalogId;

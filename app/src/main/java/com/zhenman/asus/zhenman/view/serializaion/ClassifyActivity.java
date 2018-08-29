@@ -161,7 +161,6 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
 
             @Override
             public void myClick(View view, int position) {
-
                 fill_classifyTags_recy = view.findViewById(R.id.fill_classifyTags_Recy);
                 lastView =fill_classifyTags_recy;
                 if(fill_classifyTags_recy==lastView){
@@ -224,7 +223,7 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
                 subjectTag ="";
                 presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
                 break;
-            case R.id.Classify_TypeTagsAll:
+            case R.id.Classify_TypeTagsAll: 
                 typeTag="";
                 presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
                 break;

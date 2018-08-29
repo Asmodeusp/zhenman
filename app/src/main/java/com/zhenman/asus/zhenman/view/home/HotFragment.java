@@ -1,35 +1,35 @@
 package com.zhenman.asus.zhenman.view.home;
 
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.HomeHotContract;
-import com.zhenman.asus.zhenman.layoutmessage.ViewPagerLayoutManager;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
-import com.zhenman.asus.zhenman.view.adapter.home.HomeHotAdapter;
+import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.home.HomeHotVpAdapter;
 
 import java.util.ArrayList;
+import cn.youngkaaa.yviewpager.YViewPager;
 
 public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView {
 
 
     ArrayList<HomeHotBean.DataBean> mlist = new ArrayList<>();
-    private RecyclerView Home_ListView;
+    private YViewPager Home_ListView;
     private View headview;
     private ImageView Home_search_Img;
     private RelativeLayout Home_headView;
     private TextView Home_HotText;
-    private TextView Home_FollowText;
-    private HomeHotAdapter homeHotAdapter;
-
+    private TextView HomeHot_AttentionText;
+    private HomeHotRecyAdapter homeHotAdapter;
+    ArrayList<Fragment> fragments = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -44,35 +44,21 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     }
 
     private void initView() {
+        presenter.getHomeHotBean("1");
         Home_ListView = getActivity().findViewById(R.id.HomeHot_List);
         Home_HotText = getActivity().findViewById(R.id.HomeHot_HotText);
-        Home_FollowText = getActivity().findViewById(R.id.HomeHot_AttentionText);
+        HomeHot_AttentionText = getActivity().findViewById(R.id.HomeHot_AttentionText);
         Home_search_Img = getActivity().findViewById(R.id.HomeHot_search_Img);
         Home_headView = getActivity().findViewById(R.id.HomeHot_HeadView);
 
-        presenter.getHomeHotBean("1");
+
         initListView();
     }
 
     private void initListView() {
-        ViewPagerLayoutManager viewPagerLayoutManager = new ViewPagerLayoutManager(getActivity(), OrientationHelper.VERTICAL);
-        Home_ListView.setLayoutManager(viewPagerLayoutManager);
-        homeHotAdapter = new HomeHotAdapter(mlist);
-
-//        viewPagerLayoutManager.setOnViewPagerListener(new OnViewPagerListener() {
-//            @Override
-//            public void onInitComplete() {
-//            }
-//            @Override
-//            public void onPageRelease(boolean isNext, int position) {
-//                if (isNext) {
-//                }
-//            }
-//            @Override
-//            public void onPageSelected(int position, boolean isBottom) {
-//            }
-//        });
-        Home_ListView.setAdapter(homeHotAdapter);
+        HomeHotVpAdapter homeHotVpAdapter = new HomeHotVpAdapter(getActivity().getSupportFragmentManager(), fragments);
+        Home_ListView.setAdapter(homeHotVpAdapter);
+        homeHotAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -91,11 +77,14 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     @Override
     public void showHotBean(HomeHotBean homeHotBean) {
-        if (homeHotBean==null) {
-            Toast.makeText(getActivity(), "无网络或网速过慢", Toast.LENGTH_SHORT).show();
-        }else {
-            mlist.addAll(homeHotBean.getData());
-            homeHotAdapter.notifyDataSetChanged();
+        for (HomeHotBean.DataBean dataBean : homeHotBean.getData()) {
+            HomeItemFragment homeItemFragment = new HomeItemFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("HotItem",dataBean);
+            homeItemFragment.setArguments(bundle);
+            fragments.add(homeItemFragment);
+
         }
+
     }
 }

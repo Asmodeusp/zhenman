@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.home.HotFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <cn.youngkaaa.yviewpager.YViewPager
         android:id="@+id/HomeHot_List"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ></android.support.v7.widget.RecyclerView>
-
+        app:orientation="vertical"></cn.youngkaaa.yviewpager.YViewPager>
 
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/HomeHot_HeadView"
         android:layout_width="match_parent"
-        android:background="@drawable/home_headbackground"
-        android:layout_height="146px">
+        android:layout_height="146px"
+        android:background="@drawable/home_headbackground">
 
         <ImageView
             android:id="@+id/HomeHot_search_Img"
