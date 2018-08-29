@@ -28,7 +28,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     private RelativeLayout Home_headView;
     private TextView Home_HotText;
     private TextView HomeHot_AttentionText;
-    private HomeHotRecyAdapter homeHotAdapter;
+
     ArrayList<Fragment> fragments = new ArrayList<>();
 
     @Override
@@ -56,9 +56,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     }
 
     private void initListView() {
-        HomeHotVpAdapter homeHotVpAdapter = new HomeHotVpAdapter(getActivity().getSupportFragmentManager(), fragments);
-        Home_ListView.setAdapter(homeHotVpAdapter);
-        homeHotAdapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -85,6 +83,8 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
             fragments.add(homeItemFragment);
 
         }
-
+        HomeHotVpAdapter homeHotVpAdapter = new HomeHotVpAdapter(getActivity().getSupportFragmentManager(), fragments);
+        Home_ListView.setAdapter(homeHotVpAdapter);
+        homeHotVpAdapter.notifyDataSetChanged();
     }
 }
