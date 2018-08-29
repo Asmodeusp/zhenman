@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 public class SerializationCatalogReadActivity extends BaseActivity<SerializationCatalogReadPresenterImp> implements View.OnClickListener, SerializationCatalogReadContract.serializationCatalogReadView, CatalogReadActorAdapter.CatalogReadActorCallback {
     public String StartcatalogId;
     private ImageView serializationCatalogReadReturnImg;
@@ -299,15 +300,17 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             catalogReadActorAdapter.CatalogReadActorCallback(this);
             CataLog_FootViewActor_Recy.setAdapter(catalogReadActorAdapter);
 
-    public void showSerializationDetailsBean(serializationDetailsBean serializationDetailsBean) {
-        if (serializationDetailsBean != null) {
-            CataLog_FootViewActor_Recy.setAdapter(new CatalogReadActorAdapter(serializationDetailsBean.getData().getActorList()));
+
+
+
         }
+
     }
 
     //章节实体类
     @Override
-    public void showSerializationCatalogBean(SerializationCatalogBean serializationCatalogBean) {
+    public void showSerializationCatalogBean (SerializationCatalogBean
+                                                      serializationCatalogBean){
         if (serializationCatalogBean.getData() == null) {
             Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
         } else {
@@ -318,7 +321,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     //阅读实体类
     @Override
-    public void showserializationCatalogReadBean(SerializationCatalogReadBean serializationCatalogReadBean) {
+    public void showserializationCatalogReadBean (SerializationCatalogReadBean
+                                                          serializationCatalogReadBean){
         if (serializationCatalogReadBean == null) {
             Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
         } else {
@@ -334,7 +338,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     //章节弹出popuWindow
-    private void initCataLogpopu() {
+    private void initCataLogpopu () {
         View contentView = LayoutInflater.from(this).inflate(R.layout.fill_catalog_popu, null, false);
         //书名
         CataLog_PopuTitle = contentView.findViewById(R.id.CataLog_PopuTitle);
@@ -380,7 +384,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     //消息弹出PopuWindow
-    private void initCommentpopu() {
+    private void initCommentpopu () {
         View contentView = LayoutInflater.from(this).inflate(R.layout.fill_comment_popu, null, false);
         // 创建PopupWindow对象，其中：
         // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
@@ -399,7 +403,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick (View view){
         switch (view.getId()) {
             //返回
             case R.id.serializationCatalogReadReturnImg:
@@ -467,7 +471,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         }
     }
 
-    private void SetTextColorRules() {
+    private void SetTextColorRules () {
         //第一话
         if (data.get(data.size() - 1).getCatalogId().equals(StartcatalogId)) {
             CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h2));
@@ -496,7 +500,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             CataLog_FootViewNexterBtn.setClickable(true);
             weiwandaixuReLa.setVisibility(View.GONE);
         }
-        if (data.size()==1) {
+        if (data.size() == 1) {
             CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h4));
             CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h4));
             CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h4));
@@ -509,13 +513,13 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     //    创建订单的回调
     @Override
-    public void makeOrder() {
+    public void makeOrder () {
         presenter.setMakeOrderData("1", "1", StartcatalogId, "262", "1", "支付");
     }
 
     //    得到订单数据
     @Override
-    public void getMakeOrderData(MakeOrderBean productListBean) {
+    public void getMakeOrderData (MakeOrderBean productListBean){
         orderNumber = productListBean.getData().getOrderNumber();
         Log.e("Sunny", orderNumber + "++++++++++++");
 
@@ -525,7 +529,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     //    得到订单号,开始支付
     @Override
-    public void showGetPayData(final GetPayDataBean getPayDataBean) {
+    public void showGetPayData ( final GetPayDataBean getPayDataBean){
         payV2(getPayDataBean.getData().getOrderSign());
     }
 
@@ -534,7 +538,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
      *
      * @param
      */
-    public void payV2(final String orderSign) {
+    public void payV2 ( final String orderSign){
         Runnable authRunnable = new Runnable() {
 
             @Override
