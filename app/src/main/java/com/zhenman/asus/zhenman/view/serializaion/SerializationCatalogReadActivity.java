@@ -3,8 +3,12 @@ package com.zhenman.asus.zhenman.view.serializaion;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,13 +23,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
-import com.zhenman.asus.zhenman.contract.serializationCatalogReadContract;
+import com.zhenman.asus.zhenman.contract.SerializationCatalogReadContract;
+import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
+import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.presenter.SerializationCatalogReadPresenterImp;
+import com.zhenman.asus.zhenman.utils.alipay.AuthResult;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogReadActorAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
@@ -34,8 +42,9 @@ import com.zhenman.asus.zhenman.view.login.qqlogin.UMSharePlatform;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class SerializationCatalogReadActivity extends BaseActivity<SerializationCatalogReadPresenterImp> implements View.OnClickListener, serializationCatalogReadContract.serializationCatalogReadView {
+public class SerializationCatalogReadActivity extends BaseActivity<SerializationCatalogReadPresenterImp> implements View.OnClickListener, SerializationCatalogReadContract.serializationCatalogReadView, CatalogReadActorAdapter.CatalogReadActorCallback {
     public String StartcatalogId;
     private ImageView serializationCatalogReadReturnImg;
     private TextView serializationCatalogReadText;
@@ -72,6 +81,62 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private TextView ChapterText;
     //章节名字
     private TextView ChapterNameText;
+
+    /**
+     * 支付宝支付业务：入参app_id
+     */
+    public static final String APPID = "2018060960348052";
+
+    /**
+     * 支付宝账户登录授权业务：入参pid值
+     */
+    public static final String PID = "2088131025795926";
+    /**
+     * 支付宝账户登录授权业务：入参target_id值
+     */
+    public static final String TARGET_ID = "";
+
+    /** 商户私钥，pkcs8格式 */
+    /** 如下私钥，RSA2_PRIVATE 或者 RSA_PRIVATE 只需要填入一个 */
+    /** 如果商户两个都设置了，优先使用 RSA2_PRIVATE */
+    /** RSA2_PRIVATE 可以保证商户交易在更加安全的环境下进行，建议使用 RSA2_PRIVATE */
+    /** 获取 RSA2_PRIVATE，建议使用支付宝提供的公私钥生成工具生成， */
+    /**
+     * 工具地址：https://doc.open.alipay.com/docs/doc.htm?treeId=291&articleId=106097&docType=1
+     */
+    public static final String RSA2_PRIVATE = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzB8Xr2vclEeuXreG7ZzYYaT9hZfFD4hbOIJFehG+UkbYPovwrd1b5dOW8bq4w+P9fQInbIqjKUXUBjtNkfoaESy5ijfLGqUXL3qnA2onkZ/K74hm6nWNRdiKcg28Zc9d+dDnq1PVnTf0eBVf1RK3VCI6MgYJ0+rc6fsu3Jms7KyFJ7J+NJpmHn4txDkw6+8MQkP5xvRjltaaO/khJHXz6C8Puhu7ioVHp2jtYEZjFnr7XlsxzXYbESkzn9irgm1wQvetHrjPVA0hXFmriXX9k1MBRo3L05da2cW32k5SQbjRcLogxzSH1h+TbJa8hEQe+xop46lMO0bXcBHfVvIhaQIDAQAB";
+    public static final String RSA_PRIVATE = "";
+
+    private static final int SDK_PAY_FLAG = 1;
+    private static final int SDK_AUTH_FLAG = 2;
+
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            @SuppressWarnings("unchecked")
+            AuthResult authResult = new AuthResult((Map<String, String>) msg.obj, true);
+            String resultStatus = authResult.getResultStatus();
+
+            // 判断resultStatus 为“9000”且result_code
+            // 为“200”则代表授权成功，具体状态码代表含义可参考授权接口文档
+            if (TextUtils.equals(resultStatus, "9000") && TextUtils.equals(authResult.getResultCode(), "200")) {
+                // 获取alipay_open_id，调支付时作为参数extern_token 的value
+                // 传入，则支付账户为该授权账户
+                Toast.makeText(SerializationCatalogReadActivity.this,
+                        "授权成功\n" + String.format("authCode:%s", authResult.getAuthCode()), Toast.LENGTH_SHORT)
+                        .show();//单击一下
+            } else {
+                // 其他状态值则为授权失败
+                Toast.makeText(SerializationCatalogReadActivity.this,
+                        "授权失败" + String.format("authCode:%s", authResult.getAuthCode()), Toast.LENGTH_SHORT).show();
+
+            }
+        }
+
+        ;
+    };
+    private CatalogReadActorAdapter catalogReadActorAdapter;
+    private String orderNumber;
+
 
     public String getStartcatalogId() {
         return StartcatalogId;
@@ -228,7 +293,13 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     //获取详情
     @Override
-    public void showSerializationDetailsBean(SerializationDetailsBean serializationDetailsBean) {
+    public void showSerializationDetailsBean(final SerializationDetailsBean serializationDetailsBean) {
+        if (serializationDetailsBean != null) {
+            catalogReadActorAdapter = new CatalogReadActorAdapter(serializationDetailsBean.getData().getActorList());
+            catalogReadActorAdapter.CatalogReadActorCallback(this);
+            CataLog_FootViewActor_Recy.setAdapter(catalogReadActorAdapter);
+
+    public void showSerializationDetailsBean(serializationDetailsBean serializationDetailsBean) {
         if (serializationDetailsBean != null) {
             CataLog_FootViewActor_Recy.setAdapter(new CatalogReadActorAdapter(serializationDetailsBean.getData().getActorList()));
         }
@@ -243,6 +314,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             data.addAll(serializationCatalogBean.getData());
         }
     }
+
 
     //阅读实体类
     @Override
@@ -261,7 +333,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         }
     }
 
-    //章节弹出 popuWindow
+    //章节弹出popuWindow
     private void initCataLogpopu() {
         View contentView = LayoutInflater.from(this).inflate(R.layout.fill_catalog_popu, null, false);
         //书名
@@ -287,25 +359,42 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
             }
         });
-
+        // 创建PopupWindow对象，其中：
+        // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
+        // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
         PopupWindow popupWindow = new PopupWindow(contentView, 560, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        // 设置PopupWindow的背景
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        // 设置PopupWindow是否能响应外部点击事件
         popupWindow.setOutsideTouchable(true);
+        // 设置PopupWindow是否能响应点击事件
         popupWindow.setTouchable(true);
         popupWindow.showAtLocation(SerializationRelativeLayout, Gravity.BOTTOM | Gravity.RIGHT, 0, 0);
+        //设置PopupWindow中View的点击事件
+        //定位
         CataLog_PopuPosition.setOnClickListener(this);
+        //下载
         CataLog_PopuBottom.setOnClickListener(this);
+//        分享
         CataLog_FootViewShareBtn.setOnClickListener(this);
     }
 
-    //消息弹出 PopuWindow
+    //消息弹出PopuWindow
     private void initCommentpopu() {
         View contentView = LayoutInflater.from(this).inflate(R.layout.fill_comment_popu, null, false);
+        // 创建PopupWindow对象，其中：
+        // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
+        // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
         PopupWindow popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT, 978, true);
+        // 设置PopupWindow的背景
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        // 设置PopupWindow是否能响应外部点击事件
         popupWindow.setOutsideTouchable(true);
+        // 设置PopupWindow是否能响应点击事件
         popupWindow.setTouchable(true);
+        //设置摆放位置
         popupWindow.showAtLocation(SerializationRelativeLayout, Gravity.BOTTOM, 0, 0);
+        //设置PopupWindow中View的点击事件
 
     }
 
@@ -407,7 +496,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             CataLog_FootViewNexterBtn.setClickable(true);
             weiwandaixuReLa.setVisibility(View.GONE);
         }
-        if (data.size() == 1) {
+        if (data.size()==1) {
             CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h4));
             CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h4));
             CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h4));
@@ -418,4 +507,51 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         }
     }
 
+    //    创建订单的回调
+    @Override
+    public void makeOrder() {
+        presenter.setMakeOrderData("1", "1", StartcatalogId, "262", "1", "支付");
+    }
+
+    //    得到订单数据
+    @Override
+    public void getMakeOrderData(MakeOrderBean productListBean) {
+        orderNumber = productListBean.getData().getOrderNumber();
+        Log.e("Sunny", orderNumber + "++++++++++++");
+
+        presenter.sendGetPayData(productListBean.getData().getOrderNumber());
+
+    }
+
+    //    得到订单号,开始支付
+    @Override
+    public void showGetPayData(final GetPayDataBean getPayDataBean) {
+        payV2(getPayDataBean.getData().getOrderSign());
+    }
+
+    /**
+     * 支付宝支付业务
+     *
+     * @param
+     */
+    public void payV2(final String orderSign) {
+        Runnable authRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+
+                PayTask alipay = new PayTask(SerializationCatalogReadActivity.this);
+                Map<String, String> result = alipay.payV2(orderSign, true);
+
+                Message msg = new Message();
+                msg.what = SDK_PAY_FLAG;
+                msg.obj = result;
+                mHandler.sendMessage(msg);
+            }
+        };
+
+        // 必须异步调用
+        Thread authThread = new Thread(authRunnable);
+        authThread.start();
+    }
 }

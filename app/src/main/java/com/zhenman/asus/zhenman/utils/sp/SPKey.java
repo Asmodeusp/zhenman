@@ -9,5 +9,7 @@ public class SPKey {
     public static String UMeng_CITYNAME="cityName";
     public static String UMeng_OPENID="openId";
     public static String UMENG_TYPE="type";
+    public static String IS_LOGIN="isLogin";
+
 
 }

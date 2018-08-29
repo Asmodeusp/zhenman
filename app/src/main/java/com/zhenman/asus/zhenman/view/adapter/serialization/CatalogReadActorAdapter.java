@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
+import com.zhenman.asus.zhenman.presenter.SerializationCatalogReadPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhy.autolayout.utils.AutoUtils;
 
@@ -23,10 +24,20 @@ public class CatalogReadActorAdapter extends RecyclerView.Adapter<CatalogReadAct
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
 
+    private CatalogReadActorCallback CatalogReadActorCallback;
+
     public CatalogReadActorAdapter(List<SerializationDetailsBean.DataBean.ActorListBean> list) {
         this.list = list;
     }
+    public void CatalogReadActorCallback(CatalogReadActorCallback CatalogReadActorCallback) {
+        this.CatalogReadActorCallback = CatalogReadActorCallback;
+    }
 
+
+    public interface CatalogReadActorCallback {
+        void makeOrder();
+
+    }
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,16 +55,19 @@ public class CatalogReadActorAdapter extends RecyclerView.Adapter<CatalogReadAct
         }
     }
 
-    public void setRecyclerViewOnCLickListener(RecyclerViewOnCLickListener myCLick) {
-        this.myCLick = myCLick;
-    }
-
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
         SerializationDetailsBean.DataBean.ActorListBean listBean = list.get(position);
         holder.Actor_Position.setText(listBean.getTagName());
         holder.Actor_Name.setText(listBean.getName());
         holder.itemView.setTag(position);
+        holder.Actor_Money.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CatalogReadActorCallback.makeOrder();
+            }
+        });
+//        加载圆形图片
         GlideUtils.loadCircleImage(listBean.getHeadImg(), holder.Actor_HeadImgdImg, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
             @Override
             public void onLoadingComplete(String uri, ImageView view, GlideDrawable resource) {

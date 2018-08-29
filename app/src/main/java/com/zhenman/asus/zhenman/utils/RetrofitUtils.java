@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -18,7 +17,7 @@ import com.zhenman.asus.zhenman.model.service.SetPasswordService;
 
 import com.zhenman.asus.zhenman.model.service.UgcFabulousService;
 import com.zhenman.asus.zhenman.model.service.WorkDetailsCommentService;
-import com.zhenman.asus.zhenman.model.service.serializationCatalogReadService;
+import com.zhenman.asus.zhenman.model.service.SerializationCatalogReadService;
 
 import java.io.File;
 import java.io.IOException;
@@ -204,9 +203,9 @@ public class RetrofitUtils {
         return retrofit.create(SerializationDetailsService.class);
     }
 
-    public serializationCatalogReadService getserializationCatalogReadService() {
-        return retrofit.create(serializationCatalogReadService.class);
-    }
+//    public SerializationCatalogReadService getserializationCatalogReadService() {
+//        return retrofit.create(SerializationCatalogReadService.class);
+//    }
 
     public WorkDetailsCommentService getWorkDetailsCommentService() {
         return retrofit.create(WorkDetailsCommentService.class);

@@ -19,7 +19,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.LoginContract;
-import com.zhenman.asus.zhenman.model.bean.UMengLoginBean;
+import com.zhenman.asus.zhenman.model.bean.ThirdPartyLoginBean;
 import com.zhenman.asus.zhenman.presenter.LoginPresenterImp;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
@@ -94,18 +94,9 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             } else if (platform.equals(SHARE_MEDIA.QQ)) {
                 TYPE = "3";
             }
-            Toast.makeText(MainActivity.this, "成功了", Toast.LENGTH_LONG).show();
-            Log.e("UMengHelp", data.toString());
+            Toast.makeText(MainActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
 
-            String name = data.get("name");
             String gender = data.get("gender");
-            String iconurl = data.get("iconurl");
-            Log.e("UMengHelp", "name = " + name);
-            Log.e("UMengHelp", "sex = " + gender);
-            Log.e("UMengHelp", "用户头像headImg =    " + iconurl);
-            Log.e("UMengHelp", "用户unionid=   " + data.get("unionid"));
-            Log.e("UMengHelp", "用户城市cityName=   " + data.get("city"));
-            Log.e("UMengHelp", "用户的openid=      " + data.get("openid"));
             String sex = "";
             if ("女".equals(gender)) {
 //                    男1 女2
@@ -122,6 +113,9 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             SPUtils.put(MainActivity.this, SPKey.UMeng_OPENID, data.get("openid"));
             SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
             SPUtils.put(MainActivity.this, SPKey.UMENG_TYPE, TYPE);
+            SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, true);
+
+
 
 
             //微信登录
@@ -151,7 +145,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                     data.get("iconurl"), sex, TYPE, data.get("openid"));
 
         }
-
         /**
          * @desc 授权失败的回调
          * @param platform 平台名称
@@ -203,6 +196,8 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         mLoginWeixinImage.setOnClickListener(this);
         mLoginQqImage.setOnClickListener(this);
         mLogin_password_hide.setOnClickListener(this);
+//        判断是否登陆
+        getDatafromSP();
 
     }
 
@@ -220,6 +215,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         switch (view.getId()) {
 
             case R.id.common_closeImage:
+//                跳转到首页
                 startActivity(new Intent(this, ContentActivity.class));
                 break;
             case R.id.loginbtn:
@@ -267,8 +263,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                     public void shareOrLogin() {
                         UMengHelp.login(MainActivity.this, SHARE_MEDIA.QQ,umAuthListener);
                     }
-                }); //qq登录
-//                presenter.sendUMengLoginData(uMeng_otheruserId, uMeng_name, uMeng_cityname, uMeng_headimage, uMeng_sex, umeng_type, uMeng_openid);
+                });
 
                 break;
             case R.id.login_password_hide:
@@ -294,6 +289,14 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         uMeng_name = (String) SPUtils.get(this, SPKey.UMeng_NAME, "");
         uMeng_cityname = (String) SPUtils.get(this, SPKey.UMeng_CITYNAME, "");
         uMeng_sex = (String) SPUtils.get(this, SPKey.UMeng_SEX, "");
+        Boolean is_login = (Boolean) SPUtils.get(this, SPKey.IS_LOGIN, false);
+//       判断是否登陆，如果登陆过就直接进入首页
+        if (is_login){
+            startActivity(new Intent(this, ContentActivity.class));
+        }else {
+            Toast.makeText(this, "请登陆", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
@@ -303,7 +306,9 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 
     //    得到友盟返回的数据
     @Override
-    public void showUMengLoginData(UMengLoginBean uMengLoginBean) {
+    public void showUMengLoginData(ThirdPartyLoginBean uMengLoginBean) {
+        Log.d("uMengLoginBean", uMengLoginBean.getData().getName());
+        gotoContent();
     }
 
     @Override
