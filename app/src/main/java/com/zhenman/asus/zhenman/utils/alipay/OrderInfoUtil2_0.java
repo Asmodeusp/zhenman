@@ -1,5 +1,7 @@
 package com.zhenman.asus.zhenman.utils.alipay;
 
+
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -11,7 +13,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
-
 
 public class OrderInfoUtil2_0 {
 	

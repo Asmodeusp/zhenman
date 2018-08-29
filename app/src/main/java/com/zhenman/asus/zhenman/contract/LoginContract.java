@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.contract;
 
 import com.zhenman.asus.zhenman.base.BasePresenter;
+import com.zhenman.asus.zhenman.model.bean.ThirdPartyLoginBean;
 import com.zhenman.asus.zhenman.model.bean.UMengLoginBean;
 
 public interface LoginContract {
@@ -8,7 +9,7 @@ public interface LoginContract {
     interface LoginView {
         void gotoContent();
 //        展示用户友盟登陆的数据
-        void showUMengLoginData(UMengLoginBean uMengLoginBean);
+        void showUMengLoginData(ThirdPartyLoginBean uMengLoginBean);
 
         void showError(String msg);
     }

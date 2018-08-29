@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_prograss_bg"
+    android:orientation="vertical"
+    tools:context=".view.myself.MySettingActivity">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:background="@color/h9">
+
+        <ImageView
+            android:id="@+id/set_Back"
+            android:layout_width="wrap_content"
+            android:layout_height="32px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="24px"
+            app:srcCompat="@mipmap/common_return_black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="设置"
+            android:textColor="@color/h2"
+            android:textSize="36px" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="128px"
+        android:layout_marginTop="24px"
+        android:background="@color/h9">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32px"
+            android:text="消息通知"
+            android:textColor="@color/h3"
+            android:textSize="32px" />
+
+        <CheckBox
+
+            android:id="@+id/set_MessageNotification"
+            android:layout_width="88px"
+            android:layout_height="54px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="48px"
+            android:src="@drawable/setting_message" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/setting_clearCache"
+        android:layout_width="match_parent"
+        android:layout_height="128px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="1px"
+        android:background="@color/h9">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32px"
+            android:text="清除缓存"
+            android:textColor="@color/h3"
+            android:textSize="32px" />
+
+        <ImageView
+            android:id="@+id/setting_orher01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="48px"
+            app:srcCompat="@mipmap/common_more" />
+
+        <TextView
+            android:id="@+id/set_CacheSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16px"
+            android:layout_toLeftOf="@id/setting_orher01"
+            android:text="17.9M"
+            android:textColor="@color/h4"
+            android:textSize="32px" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/setting_customeFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="128px"
+        android:layout_marginTop="1px"
+        android:background="@color/h9">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32px"
+            android:text="用户反馈"
+            android:textColor="@color/h3"
+            android:textSize="32px" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="48px"
+            app:srcCompat="@mipmap/common_more" />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/setting_update"
+        android:layout_width="match_parent"
+        android:layout_height="128px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="1px"
+        android:background="@color/h9">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32px"
+            android:text="检测更新"
+            android:textColor="@color/h3"
+            android:textSize="32px" />
+
+        <ImageView
+            android:id="@+id/setting_other02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="48px"
+            app:srcCompat="@mipmap/common_more" />
+
+        <TextView
+            android:id="@+id/set_UpdateNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16px"
+            android:layout_toLeftOf="@id/setting_other02"
+            android:text="v1.1.0"
+            android:textColor="@color/h4"
+            android:textSize="32px" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/setting_aboutZhenman"
+        android:layout_width="match_parent"
+        android:layout_height="128px"
+        android:layout_marginTop="1px"
+        android:background="@color/h9">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32px"
+            android:text="关于真漫"
+            android:textColor="@color/h3"
+            android:textSize="32px" />
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="48px"
+            app:srcCompat="@mipmap/common_more" />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/set_Cancellation"
+        android:layout_width="match_parent"
+        android:layout_height="128px"
+        android:layout_marginTop="72px"
+        android:background="@color/h9">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="注销登录"
+            android:textColor="@color/h3"
+            android:textSize="32px" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+</com.zhy.autolayout.AutoLinearLayout>
