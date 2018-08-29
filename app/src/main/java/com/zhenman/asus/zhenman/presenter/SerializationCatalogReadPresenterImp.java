@@ -1,6 +1,10 @@
 package com.zhenman.asus.zhenman.presenter;
 
+import android.util.Log;
+
 import com.zhenman.asus.zhenman.contract.SerializationCatalogReadContract;
+import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
+import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
@@ -13,6 +17,7 @@ import java.util.Map;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 

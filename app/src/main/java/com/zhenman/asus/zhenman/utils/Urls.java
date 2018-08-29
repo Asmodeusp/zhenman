@@ -39,4 +39,8 @@ public class Urls {
     public static final String PGC_COLLECTION ="userLikesPgc/insertUserLikesPgc";
 //    友盟第三方登录{QQ 微信，微博   的注册和登陆}
     public static final String UMENG_LOGIN="userOauth/register";
+    //分类标签
+    public static final String SERIALIZATION_CLASSIFY_TAG ="pgcTag/getPgcTag";
+    //分类数据
+    public static final String SERIALIZATION_CLASSIFY ="userPgcInfo/getPgcListByTags";
 }
