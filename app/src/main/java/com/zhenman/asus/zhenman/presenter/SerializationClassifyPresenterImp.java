@@ -3,7 +3,6 @@ package com.zhenman.asus.zhenman.presenter;
 import com.zhenman.asus.zhenman.contract.SerializationClassifyContract;
 import com.zhenman.asus.zhenman.model.bean.ClassifyBean;
 import com.zhenman.asus.zhenman.model.bean.ClassifyTagBean;
-import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.service.SerializationClassifyService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 
@@ -19,7 +18,8 @@ public class SerializationClassifyPresenterImp implements SerializationClassifyC
     SerializationClassifyContract.SerializationClassifyView serializationClassifyView ;
     @Override
     public void getClassifyTagBean() {
-        RetrofitUtils.getInstance().getService(SerializationClassifyService.class).GetClassifyTagBean().subscribeOn(Schedulers.newThread())
+        RetrofitUtils.getInstance().getService(SerializationClassifyService.class)
+                .GetClassifyTagBean().subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ClassifyTagBean>() {
                     @Override
@@ -54,7 +54,9 @@ public class SerializationClassifyPresenterImp implements SerializationClassifyC
         map.put("subjectTag", subjectTag);
         map.put("backgroundTag", backgroundTag);
         map.put("typeTag", typeTag);
-        RetrofitUtils.getInstance().getService(SerializationClassifyService.class).GetClassifyBean(map).subscribeOn(Schedulers.newThread())
+        RetrofitUtils.getInstance().getService(SerializationClassifyService.class)
+                .GetClassifyBean(map)
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ClassifyBean>() {
                     @Override

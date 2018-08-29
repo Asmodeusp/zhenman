@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.myself;
 
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,7 +13,7 @@ public class MySettingActivity extends BaseActivity implements View.OnClickListe
 
 
     private ImageView set_Back;
-    private ImageView set_MessageNotification;
+    private CheckBox set_MessageNotification;
     private TextView set_CacheSize;
     private AutoRelativeLayout setting_clearCache;
     private AutoRelativeLayout setting_customeFeedback;
@@ -66,7 +67,12 @@ public class MySettingActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.set_MessageNotification:
-                
+                if (set_MessageNotification.isChecked()){
+                    set_MessageNotification.setButtonDrawable(R.drawable.edit_outline_button_on);
+                }else {
+                    set_MessageNotification.setButtonDrawable(R.drawable.edit_outline_button_off);
+
+                }
                 break;
             case R.id.setting_clearCache:
                 break;

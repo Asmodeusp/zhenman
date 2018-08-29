@@ -46,14 +46,13 @@
             android:textSize="32px" />
 
         <CheckBox
-
+            android:button="@null"
             android:id="@+id/set_MessageNotification"
             android:layout_width="88px"
             android:layout_height="54px"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="48px"
-            android:src="@drawable/setting_message" />
+            android:layout_marginRight="48px" />
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <com.zhy.autolayout.AutoRelativeLayout

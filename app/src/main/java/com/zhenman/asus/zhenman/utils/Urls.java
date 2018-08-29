@@ -37,6 +37,11 @@ public class Urls {
     public static final String UGCFABULOUS ="userLikesUgc/insertUserLikesUgc";
     //Pgc收藏
     public static final String PGC_COLLECTION ="userLikesPgc/insertUserLikesPgc";
+//    创建订单
+    public static final String MAKE_ORDER="userOrder/createOrder";
+//    获取支付数据
+    public static final String GET_PAY_DATA="userOrder/getPaySignByAli?orderSn";
+//
 //    友盟第三方登录{QQ 微信，微博   的注册和登陆}
     public static final String UMENG_LOGIN="userOauth/register";
     //分类标签
