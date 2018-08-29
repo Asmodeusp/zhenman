@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
-import com.zhenman.asus.zhenman.contract.serializationCatalogReadContract;
+import com.zhenman.asus.zhenman.contract.SerializationCatalogReadContract;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
@@ -35,7 +35,7 @@ import com.zhenman.asus.zhenman.view.login.qqlogin.UMSharePlatform;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SerializationCatalogReadActivity extends BaseActivity<SerializationCatalogReadPresenterImp> implements View.OnClickListener, serializationCatalogReadContract.serializationCatalogReadView {
+public class SerializationCatalogReadActivity extends BaseActivity<SerializationCatalogReadPresenterImp> implements View.OnClickListener, SerializationCatalogReadContract.serializationCatalogReadView {
     public String StartcatalogId;
     private ImageView serializationCatalogReadReturnImg;
     private TextView serializationCatalogReadText;

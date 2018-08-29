@@ -1,6 +1,6 @@
 package com.zhenman.asus.zhenman.presenter;
 
-import com.zhenman.asus.zhenman.contract.serializationCatalogReadContract;
+import com.zhenman.asus.zhenman.contract.SerializationCatalogReadContract;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
@@ -12,8 +12,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class SerializationCatalogReadPresenterImp implements serializationCatalogReadContract.serializationCatalogReadPresenter {
-    serializationCatalogReadContract.serializationCatalogReadView serializationCatalogReadView;
+public class SerializationCatalogReadPresenterImp implements SerializationCatalogReadContract.serializationCatalogReadPresenter {
+    SerializationCatalogReadContract.serializationCatalogReadView serializationCatalogReadView;
 
     @Override
     public void getSerializationCatalogReadBean(String catalogId) {
@@ -109,7 +109,7 @@ public class SerializationCatalogReadPresenterImp implements serializationCatalo
     }
 
     @Override
-    public void actualView(serializationCatalogReadContract.serializationCatalogReadView serializationCatalogReadView) {
+    public void actualView(SerializationCatalogReadContract.serializationCatalogReadView serializationCatalogReadView) {
         this.serializationCatalogReadView = serializationCatalogReadView;
     }
 
