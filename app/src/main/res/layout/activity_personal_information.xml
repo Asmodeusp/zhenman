@@ -142,11 +142,23 @@
             />
 
         <TextView
+            android:id="@+id/myInfo_other04"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="24px"
             android:text="个人简介"
+            android:textSize="32px"
             android:textColor="@color/h9" />
+        <TextView
+            android:id="@+id/myInfo_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/h9"
+            android:textSize="26px"
+            android:layout_alignLeft="@+id/myInfo_other04"
+            android:text="wrwerwerqwrew"
+            android:layout_below="@id/myInfo_other04"
+            />
 
     </RelativeLayout>
 
