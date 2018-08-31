@@ -6,12 +6,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
+import com.zhenman.asus.zhenman.contract.MySelfContract;
+import com.zhenman.asus.zhenman.model.bean.GetMyDataBean;
+import com.zhenman.asus.zhenman.presenter.MySelfPresenter;
+import com.zhenman.asus.zhenman.view.myself.AccountManagementActivity;
 import com.zhenman.asus.zhenman.view.myself.MySettingActivity;
+import com.zhenman.asus.zhenman.view.myself.MyWalletActivity;
+import com.zhenman.asus.zhenman.view.myself.PersonalInformationActivity;
 import com.zhy.autolayout.AutoRelativeLayout;
 
-public class MyselfFragment extends BaseFragment implements View.OnClickListener {
+public class MyselfFragment extends BaseFragment<MySelfPresenter> implements View.OnClickListener, MySelfContract.MySelfInView {
 
 
     private ImageView my_Avatar;
@@ -60,6 +67,8 @@ public class MyselfFragment extends BaseFragment implements View.OnClickListener
         my_ShelfPage = getActivity().findViewById(R.id.my_ShelfPage);//个人书架
         my_DraftPage = getActivity().findViewById(R.id.my_DraftPage);//个人草稿
         my_AccountNumberPage = getActivity().findViewById(R.id.my_AccountNumberPage);//个人账号管理
+//        accessToken   oauthId
+        presenter.sendGetMyData("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzQ4MzYzOTAsInN1YiI6IntcInVzZXJJZFwiOjMwNixcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiQjUyNzI3NkIyODlFRjcyRTM5NzAxRUJDQjMyNzdFRUVcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4xLjVcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NjM3MjM5MH0.0nQECGVov3ZMpdbblKfBKThM7ogDtP-qJrOwT7bYHDs", "69");
         idListener();
 
     }
@@ -87,23 +96,40 @@ public class MyselfFragment extends BaseFragment implements View.OnClickListener
                 Intent intent = new Intent(getActivity(), MySettingActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.my_data:
-
+            case R.id.my_data://完善个人资料
+                startActivity(new Intent(getActivity(), PersonalInformationActivity.class));
                 break;
             case R.id.my_PersonalHomePage:
                 break;
             case R.id.my_WalletPage:
-
+                startActivity(new Intent(getActivity(), MyWalletActivity.class));
                 break;
             case R.id.my_ShelfPage:
+
                 break;
             case R.id.my_DraftPage:
                 break;
 
-            case R.id.my_AccountNumberPage:
+            case R.id.my_AccountNumberPage://账号管理
+                startActivity(new Intent(getActivity(), AccountManagementActivity.class));
                 break;
         }
     }
 
 
+    @Override
+    public void showGetMyData(GetMyDataBean getMyDataBean) {
+        Glide.with(this).load(getMyDataBean.getData().getHeadImg()).into(my_Avatar);
+        my_Name.setText(getMyDataBean.getData().getName());
+        if ("1".equals(getMyDataBean.getData().getSex())) {
+            my_Sex.setImageDrawable(getResources().getDrawable((R.drawable.my_f)));
+
+        } else {
+            my_Sex.setImageDrawable(getResources().getDrawable((R.drawable.my_m)));
+
+        }
+        my_Resume.setText(getMyDataBean.getData().getIntroduction());
+
+
+    }
 }

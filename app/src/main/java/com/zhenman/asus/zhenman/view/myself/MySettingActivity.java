@@ -1,15 +1,22 @@
 package com.zhenman.asus.zhenman.view.myself;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
+import com.zhenman.asus.zhenman.contract.MySettingContract;
+import com.zhenman.asus.zhenman.model.bean.CancelLoginBean;
+import com.zhenman.asus.zhenman.presenter.MySettingPresenter;
+import com.zhenman.asus.zhenman.utils.DataCleanUtils;
+import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhy.autolayout.AutoRelativeLayout;
 
-public class MySettingActivity extends BaseActivity implements View.OnClickListener {
+public class MySettingActivity extends BaseActivity<MySettingPresenter> implements View.OnClickListener,MySettingContract.MySettingInView {
 
 
     private ImageView set_Back;
@@ -21,6 +28,7 @@ public class MySettingActivity extends BaseActivity implements View.OnClickListe
     private AutoRelativeLayout setting_update;
     private AutoRelativeLayout setting_aboutZhenman;
     private AutoRelativeLayout set_Cancellation;
+    private String totalCacheSize;
 
     @Override
     protected int getLayoutId() {
@@ -39,7 +47,14 @@ public class MySettingActivity extends BaseActivity implements View.OnClickListe
         setting_aboutZhenman = findViewById(R.id.setting_aboutZhenman);//       关于真漫
         set_Cancellation = findViewById(R.id.set_Cancellation);//       退出登陆
         idListener();
+        try {
+            //获取缓存大小
+            totalCacheSize = DataCleanUtils.getTotalCacheSize(MySettingActivity.this);
+            set_CacheSize.setText(totalCacheSize);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -67,23 +82,46 @@ public class MySettingActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.set_MessageNotification:
-                if (set_MessageNotification.isChecked()){
-                    set_MessageNotification.setButtonDrawable(R.drawable.edit_outline_button_on);
-                }else {
-                    set_MessageNotification.setButtonDrawable(R.drawable.edit_outline_button_off);
+                if (set_MessageNotification.isChecked()) {
+                    set_MessageNotification.setButtonDrawable(R.mipmap.edit_outline_button_on);
+                } else {
+                    set_MessageNotification.setButtonDrawable(R.mipmap.edit_outline_button_off);
 
                 }
                 break;
             case R.id.setting_clearCache:
+//                清除缓存
+                DataCleanUtils.clearAllCache(this);
+                try {
+                    totalCacheSize = DataCleanUtils.getTotalCacheSize(MySettingActivity.this);
+                    set_CacheSize.setText(totalCacheSize);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                set_CacheSize.setText(totalCacheSize);
+
                 break;
             case R.id.setting_customeFeedback:
+
                 break;
             case R.id.setting_update:
                 break;
             case R.id.setting_aboutZhenman:
                 break;
             case R.id.set_Cancellation:
+                presenter.sendCancelLoginData("18810611680","1","oxqjH1fxsAwFKx7M6u0N3kz59Od0");
                 break;
+        }
+    }
+//注销登陆
+    @Override
+    public void showCancelLoginData(CancelLoginBean cancelLoginBean) {
+        if (cancelLoginBean.getMsg().equals("成功")){
+            startActivity(new Intent(MySettingActivity.this, MainActivity.class));
+        }else {
+            Toast.makeText(this, "退出登陆失败", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -29,7 +29,12 @@
     <string name="zuojiantou"></string>
     <string name="youjiantou">></string>
     <string name="shareto">分享到</string>
-
+    <!--个人资料-->
+    <string name="myInfo">完善资料</string>
+    <string name="myInfo_eterNikename">输入昵称</string>
+    <string name="myInfo_selectBorn">选择出生年月</string>
+    <string name="myInfo_finish">完成</string>
+    <string name="myWallet_pay">购买茄子籽</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

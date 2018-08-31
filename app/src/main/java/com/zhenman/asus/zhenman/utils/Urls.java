@@ -12,7 +12,7 @@ public class Urls {
     //请求手机验证码
     public static final String REQUEST_CELL_PHONE_VERIFICATION_CODE = "login/sendSms";
     //忘记密码
-    public static final String FORGET_PASSWORD = "";
+    public static final String FORGET_PASSWORD = "login/setPassword";
     //注册手机号和验证码
     public static final String REGISTER_PHONE_CODE = "/ogin/register";
     //注册手机号和验证码
@@ -34,18 +34,21 @@ public class Urls {
     //Pgc点赞
     public static final String PGCFABULOUS = "likesPgcCommentInfo/insertLikesPgcCommentInfo";
     //主页Ugc点赞
-    public static final String UGCFABULOUS ="userLikesUgc/insertUserLikesUgc";
+    public static final String UGCFABULOUS = "userLikesUgc/insertUserLikesUgc";
     //Pgc收藏
-    public static final String PGC_COLLECTION ="userLikesPgc/insertUserLikesPgc";
-//    创建订单
-    public static final String MAKE_ORDER="userOrder/createOrder";
-//    获取支付数据
-    public static final String GET_PAY_DATA="userOrder/getPaySignByAli?orderSn";
-//
-//    友盟第三方登录{QQ 微信，微博   的注册和登陆}
-    public static final String UMENG_LOGIN="userOauth/register";
+    public static final String PGC_COLLECTION = "userLikesPgc/insertUserLikesPgc";
+    //    创建订单
+    public static final String MAKE_ORDER = "userOrder/createOrder";
+    //    获取支付数据
+    public static final String GET_PAY_DATA = "userOrder/getPaySignByAli?orderSn";
     //分类标签
-    public static final String SERIALIZATION_CLASSIFY_TAG ="pgcTag/getPgcTag";
+    public static final String SERIALIZATION_CLASSIFY_TAG = "pgcTag/getPgcTag";
     //分类数据
-    public static final String SERIALIZATION_CLASSIFY ="userPgcInfo/getPgcListByTags";
+    public static final String SERIALIZATION_CLASSIFY = "userPgcInfo/getPgcListByTags";
+    //    注销登陆
+    public static final String CANCLE_LOGIN = "userOauth/unbindMobile";
+    //    获得个人资料信息
+    public static final String GET_MYDATA = "userOauth/getPersonalData";
+    //    修改个人资料
+    public static final String ALART_MYDATA = "userOauth/updatePersonalData";
 }

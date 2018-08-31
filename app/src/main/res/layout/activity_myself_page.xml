@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.myself.MyselfPageActivity">
+
+    <include layout="@layout/above_head" />
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/my_data"
+        android:layout_width="match_parent"
+        android:layout_height="240px">
+
+        <ImageView
+            android:id="@+id/mySelf_Avatar"
+            android:layout_width="148px"
+            android:layout_height="148px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16px"
+            android:src="@mipmap/mySelf_qiezi" />
+
+        <TextView
+            android:id="@+id/mySelf_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/mySelf_Avatar"
+            android:layout_marginLeft="24px"
+            android:layout_marginTop="2px"
+            android:layout_toEndOf="@+id/mySelf_Avatar"
+            android:layout_toRightOf="@+id/mySelf_Avatar"
+            android:text="桃太萌"
+            android:textColor="@color/h2"
+            android:textSize="40px" />
+
+        <ImageView
+            android:id="@+id/mySelf_Sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/mySelf_Name"
+            android:layout_alignLeft="@+id/mySelf_FansNumber"
+            android:layout_alignStart="@+id/mySelf_FansNumber"
+            android:src="@mipmap/my_f" />
+
+        <TextView
+            android:id="@+id/mySelf_WorksNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mySelf_Name"
+            android:layout_marginLeft="24px"
+            android:layout_marginTop="8px"
+            android:layout_toRightOf="@+id/mySelf_Avatar"
+            android:text="16"
+            android:textColor="@color/h2"
+            android:textSize="36px" />
+
+        <TextView
+            android:id="@+id/mySelf_Other01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/mySelf_WorksNumber"
+            android:layout_marginLeft="8px"
+            android:layout_toRightOf="@+id/mySelf_WorksNumber"
+            android:text="作品"
+            android:textColor="@color/h4"
+            android:textSize="26px" />
+
+        <TextView
+            android:id="@+id/mySelf_FansNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/mySelf_WorksNumber"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="32px"
+            android:layout_toRightOf="@+id/mySelf_Other01"
+            android:text="6.6万"
+            android:textColor="@color/h2"
+            android:textSize="36px" />
+
+        <TextView
+            android:id="@+id/mySelf_Other02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/mySelf_WorksNumber"
+            android:layout_marginLeft="8px"
+            android:layout_toEndOf="@+id/mySelf_FansNumber"
+            android:layout_toRightOf="@+id/mySelf_FansNumber"
+            android:text="粉丝"
+            android:textColor="@color/h4"
+            android:textSize="26px" />
+
+        <TextView
+            android:id="@+id/mySelf_CareNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/mySelf_WorksNumber"
+            android:layout_marginLeft="32px"
+
+            android:layout_toRightOf="@+id/mySelf_Other02"
+            android:text="30"
+            android:textColor="@color/h2"
+            android:textSize="36px" />
+
+        <TextView
+            android:id="@+id/mySelf_Other03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/mySelf_WorksNumber"
+            android:layout_marginLeft="8px"
+            android:layout_toEndOf="@+id/mySelf_CareNumber"
+            android:layout_toRightOf="@+id/mySelf_CareNumber"
+            android:text="关注"
+            android:textColor="@color/h4"
+            android:textSize="26px" />
+
+        <TextView
+            android:id="@+id/mySelf_Resume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/mySelf_WorksNumber"
+            android:layout_alignStart="@+id/mySelf_WorksNumber"
+            android:layout_below="@+id/mySelf_WorksNumber"
+
+            android:layout_marginRight="24px"
+            android:layout_marginTop="16px"
+            android:text="本宝宝的个人简历最多两行，所以我要写两行啊么么哒~"
+            android:textColor="@color/h4"
+            android:textSize="26px" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mySelf_Resume"
+            android:layout_marginTop="16px"
+            android:background="@drawable/actor_shape"
+            android:text="互相关注"
+            android:textColor="@color/h5"
+            android:textSize="26px"
+
+            />
+    </com.zhy.autolayout.AutoRelativeLayout>
+</com.zhy.autolayout.AutoLinearLayout>

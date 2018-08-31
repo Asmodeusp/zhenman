@@ -10,6 +10,15 @@ public class SPKey {
     public static String UMeng_OPENID="openId";
     public static String UMENG_TYPE="type";
     public static String IS_LOGIN="isLogin";
+    public static String USER_TOKEN="token";
+    public static String USER_BIRTHDAY="birthdate";
+    public static String USER_MOBILE="mobile";
+    public static String USER_AVATAR="headImg";
+    public static String USER_ID="id";
+    public static String USER_INTRODUCTION="introduction";
+    public static String USER_REFRESHTOKEN="refreshToken";
+    public static String USER_OAUTHID="oauthId";
+    public static String USER_SEX="sex";
 
 
 }

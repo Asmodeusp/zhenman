@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_prograss_bg"
+    tools:context=".view.myself.AccountManagementActivity">
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/h9"
+        android:layout_height="88px">
+        <ImageView
+            android:id="@+id/account_Back"
+            android:layout_width="wrap_content"
+            android:layout_height="32px"
+            android:layout_marginLeft="24px"
+            android:layout_centerVertical="true"
+            app:srcCompat="@mipmap/common_return_black"/>
+        <TextView
+            android:text="账号管理"
+            android:textSize="36px"
+            android:layout_centerInParent="true"
+            android:textColor="@color/h2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/account_modifyPassword"
+        android:layout_marginTop="24px"
+        android:layout_width="match_parent"
+        android:background="@color/h9"
+        android:layout_height="128px">
+        <TextView
+            android:text="修改密码"
+            android:textColor="@color/h3"
+            android:textSize="32px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="48px"
+            app:srcCompat="@mipmap/common_more"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/account_bindPhoneNum"
+        android:layout_marginTop="1px"
+        android:layout_width="match_parent"
+        android:background="@color/h9"
+        android:layout_height="128px">
+        <TextView
+            android:text="绑定手机"
+            android:textColor="@color/h3"
+            android:textSize="32px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/account_Tel"
+            android:text="13568570881"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="48px"
+            />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/account_bindWeixin"
+        android:layout_marginTop="1px"
+        android:layout_width="match_parent"
+        android:background="@color/h9"
+        android:layout_height="128px">
+        <TextView
+            android:text="微信"
+            android:textColor="@color/h3"
+            android:textSize="32px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/account_weixin"
+            android:text="wen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="48px"
+            />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/account_bindQQ"
+        android:layout_marginTop="1px"
+        android:layout_width="match_parent"
+        android:background="@color/h9"
+        android:layout_height="128px">
+        <TextView
+            android:text="QQ"
+            android:textColor="@color/h3"
+            android:textSize="32px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/account_qq"
+            android:text="未绑定"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="48px"
+            />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/account_bindSina"
+        android:layout_marginTop="1px"
+        android:layout_width="match_parent"
+        android:background="@color/h9"
+        android:layout_height="128px">
+        <TextView
+            android:text="新浪微博"
+            android:textColor="@color/h3"
+            android:textSize="32px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/account_sina"
+            android:text="未绑定"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="48px"
+            />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+</com.zhy.autolayout.AutoLinearLayout>

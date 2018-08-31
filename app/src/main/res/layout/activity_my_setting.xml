@@ -46,12 +46,13 @@
             android:textSize="32px" />
 
         <CheckBox
-            android:button="@null"
+            android:button="@mipmap/edit_outline_button_off"
             android:id="@+id/set_MessageNotification"
             android:layout_width="88px"
             android:layout_height="54px"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+
             android:layout_marginRight="48px" />
     </com.zhy.autolayout.AutoRelativeLayout>
 
@@ -88,8 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="16px"
-            android:layout_toLeftOf="@id/setting_orher01"
+            android:layout_toLeftOf="@+id/setting_orher01"
             android:text="17.9M"
             android:textColor="@color/h4"
             android:textSize="32px" />

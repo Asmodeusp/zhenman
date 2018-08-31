@@ -7,7 +7,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -28,6 +27,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
 //        ImmersionBar.with(this).init();
+
 //        权限配置
         if (Build.VERSION.SDK_INT >= 23) {
             String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_APN_SETTINGS};
@@ -145,4 +145,5 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
         lastFragment = fragment;
         transaction.commit();
     }
+
 }

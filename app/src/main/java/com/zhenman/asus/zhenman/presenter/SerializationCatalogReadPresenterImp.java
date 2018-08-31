@@ -17,7 +17,6 @@ import java.util.Map;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 

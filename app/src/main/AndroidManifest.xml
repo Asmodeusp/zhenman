@@ -4,18 +4,17 @@
     package="com.zhenman.asus.zhenman">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--友盟的权限 -->
+    <!-- 友盟的权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
+    <!-- 相机相册 -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".App"
@@ -26,7 +25,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--书稿尺寸-->
+
+        <!-- 书稿尺寸 -->
         <meta-data
             android:name="design_width"
             android:value="750" />
@@ -41,11 +41,23 @@
             android:name="UMENG_CHANNEL"
             android:value="Umeng" />
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.MainActivity.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider" />
+        </provider>
 
         <activity android:name=".view.login.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
 
         <!-- 微信 -->
         <activity
@@ -64,16 +76,16 @@
             android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
         <!-- qq精简版 -->
         <activity
@@ -82,8 +94,10 @@
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent1107229352" />
             </intent-filter>
         </activity>
@@ -102,25 +116,14 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
-
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.zhenman.zhenman"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_provider" />
-        </provider>
-
-        <activity android:name=".view.ContentActivity" >
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".view.ContentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -134,7 +137,11 @@
         <activity android:name=".view.serializaion.ClassifyActivity" />
         <activity android:name=".view.serializaion.WorkDetailsActivity" />
         <activity android:name=".view.serializaion.SerializationCatalogReadActivity" />
-        <activity android:name=".view.myself.MySettingActivity"></activity>
+        <activity android:name=".view.myself.MySettingActivity" />
+        <activity android:name=".view.myself.AccountManagementActivity" />
+        <activity android:name=".view.myself.PersonalInformationActivity" />
+        <activity android:name=".view.myself.MyWalletActivity" />
+        <activity android:name=".view.myself.MyselfPageActivity"></activity>
     </application>
 
 </manifest>

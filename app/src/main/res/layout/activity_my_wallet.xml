@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".view.myself.MyWalletActivity">
+
+    <include layout="@layout/above_head"></include>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24px"
+        android:background="@color/h7" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32px"
+        android:layout_marginTop="32px"
+        android:text="@string/myWallet_pay"
+        android:textColor="@color/h2"
+        android:textSize="32px" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="72px"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="80px"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/my_coin" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/h2"
+            android:textSize="48px"
+            android:text="e3324"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16px"/>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+    <RelativeLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="360px"
+        android:layout_marginTop="88px"
+        android:layout_height="88px">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/my_wallet_paybtn"/>
+    </RelativeLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>

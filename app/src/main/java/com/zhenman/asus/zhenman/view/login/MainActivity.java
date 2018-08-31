@@ -4,7 +4,6 @@ package com.zhenman.asus.zhenman.view.login;
 import android.content.Intent;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -68,6 +67,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     private String uMeng_name;
     private String uMeng_cityname;
     private String uMeng_sex;
+
     UMAuthListener umAuthListener = new UMAuthListener() {
         /**
          //         * @desc 授权开始的回调
@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
          */
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-//                type值判断是哪个第三方登录的   微信 1 新浪2 QQ 3
+            //                type值判断是哪个第三方登录的   微信 1 新浪2 QQ 3
             if (platform.equals(SHARE_MEDIA.WEIXIN)) {
                 TYPE = "1";
             } else if (platform.equals(SHARE_MEDIA.SINA)) {
@@ -106,15 +106,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 sex = "1";
                 SPUtils.put(MainActivity.this, SPKey.UMeng_SEX, "1");
             }
-//                成功的话保存到sp中
-            SPUtils.put(MainActivity.this, SPKey.UMeng_CITYNAME, data.get("city"));
-            SPUtils.put(MainActivity.this, SPKey.UMeng_NAME, data.get("name"));
-            SPUtils.put(MainActivity.this, SPKey.UMeng_HEADIMAGE, data.get("iconurl"));
-            SPUtils.put(MainActivity.this, SPKey.UMeng_OPENID, data.get("openid"));
-            SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
-            SPUtils.put(MainActivity.this, SPKey.UMENG_TYPE, TYPE);
-            SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, true);
-
 
 
 
@@ -174,6 +165,8 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 
     @Override
     protected void init() {
+        //        判断是否登陆
+        getDatafromSP();
         //查找ID
         mFastLanding = findViewById(R.id.Fast_landing);
         mCommonCloseImage = findViewById(R.id.common_closeImage);
@@ -196,8 +189,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         mLoginWeixinImage.setOnClickListener(this);
         mLoginQqImage.setOnClickListener(this);
         mLogin_password_hide.setOnClickListener(this);
-//        判断是否登陆
-        getDatafromSP();
+
 
     }
 
@@ -307,7 +299,19 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     //    得到友盟返回的数据
     @Override
     public void showUMengLoginData(ThirdPartyLoginBean uMengLoginBean) {
-        Log.d("uMengLoginBean", uMengLoginBean.getData().getName());
+
+//                成功的话保存到sp中
+        SPUtils.put(MainActivity.this, SPKey.UMeng_CITYNAME, uMengLoginBean.getData().getCityName());
+        SPUtils.put(MainActivity.this, SPKey.UMeng_NAME, uMengLoginBean.getData().getName());
+        SPUtils.put(MainActivity.this, SPKey.USER_MOBILE, uMengLoginBean.getData().getMobile());
+        SPUtils.put(MainActivity.this, SPKey.USER_AVATAR, uMengLoginBean.getData().getHeadImg());
+        SPUtils.put(MainActivity.this, SPKey.USER_ID, uMengLoginBean.getData().getId());
+        SPUtils.put(MainActivity.this, SPKey.USER_INTRODUCTION, uMengLoginBean.getData().getIntroduction());
+        SPUtils.put(MainActivity.this, SPKey.USER_REFRESHTOKEN,uMengLoginBean.getData().getRefreshToken());
+        SPUtils.put(MainActivity.this, SPKey.USER_OAUTHID, uMengLoginBean.getData().getOauthId());
+        SPUtils.put(MainActivity.this, SPKey.USER_BIRTHDAY, uMengLoginBean.getData().getBirthdate());
+        SPUtils.put(MainActivity.this, SPKey.USER_SEX, uMengLoginBean.getData().getSex());
+        SPUtils.put(MainActivity.this, SPKey.USER_TOKEN, uMengLoginBean.getData().getToken());
         gotoContent();
     }
 

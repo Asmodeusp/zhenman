@@ -2,10 +2,11 @@ package com.zhenman.asus.zhenman.model.bean;
 
 public class ThirdPartyLoginBean {
 
+
     /**
      * state : 0
      * msg : 成功
-     * data : {"isBindMobile":"0","headImg":"34324324","cityName":"32332323","sex":"1","name":"2323323","mobile":null,"id":"210","introduction":null,"token":"eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzIxNjcwNzksInN1YiI6IntcInVzZXJJZFwiOjQsXCJyb2xlVHlwZVwiOm51bGwsXCJzZXNzaW9uSWRcIjpcIkNBMkFDNDZDM0ZGMEVERDA3MUUwNkFCODdBQTRBRDlBXCIsXCJ1c2VyQWdlbnRcIjpcIlBvc3RtYW5SdW50aW1lLzcuMS41XCIsXCJpbmRleFwiOjAsXCJyZWZyZXNoVG9rZW5cIjpmYWxzZX0iLCJleHAiOjE1NjM3MDMwNzl9.g_6KgrHDvTC0PFiOCR4smsaKBLJjiKDMvkfRL_7eUpw","refreshToken":"eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzIxNjcwNzksInN1YiI6IntcInVzZXJJZFwiOjQsXCJyb2xlVHlwZVwiOm51bGwsXCJzZXNzaW9uSWRcIjpcIkNBMkFDNDZDM0ZGMEVERDA3MUUwNkFCODdBQTRBRDlBXCIsXCJ1c2VyQWdlbnRcIjpcIlBvc3RtYW5SdW50aW1lLzcuMS41XCIsXCJpbmRleFwiOjAsXCJyZWZyZXNoVG9rZW5cIjp0cnVlfSIsImV4cCI6MTU2MzcwMzA3OX0.zc_LW5AMWkBJzL5AcTmWm4GzvslONkhIPzVZRnUHtf0"}
+     * data : {"birthdate":null,"weiboName":null,"headImg":"http://pa1qj1jlg.bkt.clouddn.com/headImage/d0a4cca3a1504e5790a6f3550b29fcd8_","sex":2,"weixinName":"Sunshine","mobile":null,"token":"eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzU3MDU3NzAsInN1YiI6IntcInVzZXJJZFwiOjM3NCxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMjBFNDJFNTc4OTUwQTM2OTI5RjM1NjVENTkzOEQyNjVcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvMy4wLjlcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NzI0MTc3MH0.VYp6BfDrKS5EI9lZj0PDz_fs1JAvzHXIyEX89oovu-U","isBindMobile":"0","oauthId":"86","cityName":"","name":"Sunshine","id":"374","qqName":null,"introduction":null,"refreshToken":"eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzU3MDU3NzAsInN1YiI6IntcInVzZXJJZFwiOjM3NCxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMjBFNDJFNTc4OTUwQTM2OTI5RjM1NjVENTkzOEQyNjVcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvMy4wLjlcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOnRydWV9IiwiZXhwIjoxNTY3MjQxNzcwfQ.2W-1XIT-M1KK4v3XYStAavhkDgYLwbY6EnVPMzf1yNU"}
      */
 
     private int state;
@@ -38,35 +39,53 @@ public class ThirdPartyLoginBean {
 
     public static class DataBean {
         /**
-         * isBindMobile : 0
-         * headImg : 34324324
-         * cityName : 32332323
-         * sex : 1
-         * name : 2323323
+         * birthdate : null
+         * weiboName : null
+         * headImg : http://pa1qj1jlg.bkt.clouddn.com/headImage/d0a4cca3a1504e5790a6f3550b29fcd8_
+         * sex : 2
+         * weixinName : Sunshine
          * mobile : null
-         * id : 210
+         * token : eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzU3MDU3NzAsInN1YiI6IntcInVzZXJJZFwiOjM3NCxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMjBFNDJFNTc4OTUwQTM2OTI5RjM1NjVENTkzOEQyNjVcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvMy4wLjlcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NzI0MTc3MH0.VYp6BfDrKS5EI9lZj0PDz_fs1JAvzHXIyEX89oovu-U
+         * isBindMobile : 0
+         * oauthId : 86
+         * cityName :
+         * name : Sunshine
+         * id : 374
+         * qqName : null
          * introduction : null
-         * token : eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzIxNjcwNzksInN1YiI6IntcInVzZXJJZFwiOjQsXCJyb2xlVHlwZVwiOm51bGwsXCJzZXNzaW9uSWRcIjpcIkNBMkFDNDZDM0ZGMEVERDA3MUUwNkFCODdBQTRBRDlBXCIsXCJ1c2VyQWdlbnRcIjpcIlBvc3RtYW5SdW50aW1lLzcuMS41XCIsXCJpbmRleFwiOjAsXCJyZWZyZXNoVG9rZW5cIjpmYWxzZX0iLCJleHAiOjE1NjM3MDMwNzl9.g_6KgrHDvTC0PFiOCR4smsaKBLJjiKDMvkfRL_7eUpw
-         * refreshToken : eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzIxNjcwNzksInN1YiI6IntcInVzZXJJZFwiOjQsXCJyb2xlVHlwZVwiOm51bGwsXCJzZXNzaW9uSWRcIjpcIkNBMkFDNDZDM0ZGMEVERDA3MUUwNkFCODdBQTRBRDlBXCIsXCJ1c2VyQWdlbnRcIjpcIlBvc3RtYW5SdW50aW1lLzcuMS41XCIsXCJpbmRleFwiOjAsXCJyZWZyZXNoVG9rZW5cIjp0cnVlfSIsImV4cCI6MTU2MzcwMzA3OX0.zc_LW5AMWkBJzL5AcTmWm4GzvslONkhIPzVZRnUHtf0
+         * refreshToken : eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzU3MDU3NzAsInN1YiI6IntcInVzZXJJZFwiOjM3NCxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMjBFNDJFNTc4OTUwQTM2OTI5RjM1NjVENTkzOEQyNjVcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvMy4wLjlcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOnRydWV9IiwiZXhwIjoxNTY3MjQxNzcwfQ.2W-1XIT-M1KK4v3XYStAavhkDgYLwbY6EnVPMzf1yNU
          */
 
-        private String isBindMobile;
+        private Object birthdate;
+        private Object weiboName;
         private String headImg;
-        private String cityName;
-        private String sex;
-        private String name;
+        private int sex;
+        private String weixinName;
         private Object mobile;
-        private String id;
-        private Object introduction;
         private String token;
+        private String isBindMobile;
+        private String oauthId;
+        private String cityName;
+        private String name;
+        private String id;
+        private Object qqName;
+        private Object introduction;
         private String refreshToken;
 
-        public String getIsBindMobile() {
-            return isBindMobile;
+        public Object getBirthdate() {
+            return birthdate;
         }
 
-        public void setIsBindMobile(String isBindMobile) {
-            this.isBindMobile = isBindMobile;
+        public void setBirthdate(Object birthdate) {
+            this.birthdate = birthdate;
+        }
+
+        public Object getWeiboName() {
+            return weiboName;
+        }
+
+        public void setWeiboName(Object weiboName) {
+            this.weiboName = weiboName;
         }
 
         public String getHeadImg() {
@@ -77,28 +96,20 @@ public class ThirdPartyLoginBean {
             this.headImg = headImg;
         }
 
-        public String getCityName() {
-            return cityName;
-        }
-
-        public void setCityName(String cityName) {
-            this.cityName = cityName;
-        }
-
-        public String getSex() {
+        public int getSex() {
             return sex;
         }
 
-        public void setSex(String sex) {
+        public void setSex(int sex) {
             this.sex = sex;
         }
 
-        public String getName() {
-            return name;
+        public String getWeixinName() {
+            return weixinName;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setWeixinName(String weixinName) {
+            this.weixinName = weixinName;
         }
 
         public Object getMobile() {
@@ -109,6 +120,46 @@ public class ThirdPartyLoginBean {
             this.mobile = mobile;
         }
 
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
+        }
+
+        public String getIsBindMobile() {
+            return isBindMobile;
+        }
+
+        public void setIsBindMobile(String isBindMobile) {
+            this.isBindMobile = isBindMobile;
+        }
+
+        public String getOauthId() {
+            return oauthId;
+        }
+
+        public void setOauthId(String oauthId) {
+            this.oauthId = oauthId;
+        }
+
+        public String getCityName() {
+            return cityName;
+        }
+
+        public void setCityName(String cityName) {
+            this.cityName = cityName;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
         public String getId() {
             return id;
         }
@@ -117,20 +168,20 @@ public class ThirdPartyLoginBean {
             this.id = id;
         }
 
+        public Object getQqName() {
+            return qqName;
+        }
+
+        public void setQqName(Object qqName) {
+            this.qqName = qqName;
+        }
+
         public Object getIntroduction() {
             return introduction;
         }
 
         public void setIntroduction(Object introduction) {
             this.introduction = introduction;
-        }
-
-        public String getToken() {
-            return token;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
         }
 
         public String getRefreshToken() {

@@ -5,7 +5,7 @@ android {
         debug {
             keyAlias 'key0'
             keyPassword '123456'
-            storeFile file('E:/zhenman.jks')
+            storeFile file('E:/ZHEN_MAN/zhenman/app/zhenman.jks')
             storePassword '123456'
         }
     }
@@ -86,4 +86,6 @@ dependencies {
     implementation files('libs/alipaySdk-20180601.jar')
     //垂直Viewpager
     implementation 'com.github.open-android:ViewPager:0.1.0'
+    //时间地区选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.6'
 }

@@ -14,10 +14,8 @@ import com.zhenman.asus.zhenman.model.service.RegisterVerificationCodeService;
 import com.zhenman.asus.zhenman.model.service.SerializationDetailsService;
 import com.zhenman.asus.zhenman.model.service.SerializationService;
 import com.zhenman.asus.zhenman.model.service.SetPasswordService;
-
 import com.zhenman.asus.zhenman.model.service.UgcFabulousService;
 import com.zhenman.asus.zhenman.model.service.WorkDetailsCommentService;
-import com.zhenman.asus.zhenman.model.service.SerializationCatalogReadService;
 
 import java.io.File;
 import java.io.IOException;
@@ -202,10 +200,6 @@ public class RetrofitUtils {
     public SerializationDetailsService getSerializationDetailsService() {
         return retrofit.create(SerializationDetailsService.class);
     }
-
-//    public SerializationCatalogReadService getserializationCatalogReadService() {
-//        return retrofit.create(SerializationCatalogReadService.class);
-//    }
 
     public WorkDetailsCommentService getWorkDetailsCommentService() {
         return retrofit.create(WorkDetailsCommentService.class);

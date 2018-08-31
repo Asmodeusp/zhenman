@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbackground"
+    android:orientation="vertical"
+    tools:context=".view.myself.PersonalInformationActivity">
+
+    <TextView
+        android:id="@+id/myInfo_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="88px"
+        android:layout_gravity="right"
+        android:layout_marginRight="48px"
+        android:text="@string/Skip"
+        android:textColor="@color/h9"
+        android:textSize="26px" />
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/myInfo_other01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64px"
+            android:text="@string/myInfo"
+            android:textColor="@color/h9"
+            android:textSize="42px" />
+
+        <ImageView
+            android:layout_width="654px"
+            android:layout_height="518px"
+            android:layout_below="@id/myInfo_other01"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="160px"
+            android:alpha="0.2"
+            android:background="@drawable/my_information_bg"
+
+            />
+
+        <ImageView
+            android:id="@+id/myInfo_avatar"
+            android:layout_width="192px"
+            android:layout_height="192px"
+            android:layout_below="@id/myInfo_other01"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64px"
+            android:src="@mipmap/common_portrait_m" />
+
+        <EditText
+            android:id="@+id/myInfo_enterNikeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/myInfo_avatar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64px"
+            android:alpha="0.5"
+            android:background="@null"
+            android:hint="@string/myInfo_eterNikename"
+            android:textColorHint="@color/h9"
+            android:textSize="40px" />
+
+        <View
+            android:id="@+id/myInfo_other03"
+            android:layout_width="606px"
+            android:layout_height="1px"
+            android:layout_below="@+id/myInfo_enterNikeName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24px"
+            android:background="@color/h7" />
+
+        <TextView
+            android:id="@+id/myInfo_selectBorn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/myInfo_other03"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="48px"
+            android:alpha="0.5"
+            android:text="@string/myInfo_selectBorn"
+            android:textColor="@color/h9"
+            android:textSize="32px" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/myInfo_selectBorn"
+            android:layout_marginTop="56px"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/login_f"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/myInfo_boy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/login_m" />
+
+            <ImageView
+                android:id="@+id/myInfo_girl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/login_f" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/login_f"
+                android:visibility="invisible" />
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="654px"
+        android:layout_height="208px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16px"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+
+            android:alpha="0.2"
+            android:background="@drawable/my_information_bg"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24px"
+            android:text="个人简介"
+            android:textColor="@color/h9" />
+
+    </RelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/myInfo_finish"
+        android:layout_width="704px"
+        android:layout_height="94px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="72px">
+
+        <ImageView
+            android:layout_width="704px"
+            android:layout_height="94px"
+            android:alpha="0.2"
+            android:background="@drawable/my_information_bg" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:alpha="0.7"
+            android:text="@string/myInfo_finish"
+            android:textColor="@color/h9"
+            android:textSize="42px" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+
+</com.zhy.autolayout.AutoLinearLayout>
