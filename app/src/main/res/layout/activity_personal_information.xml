@@ -11,9 +11,10 @@
     <TextView
         android:id="@+id/myInfo_skip"
         android:layout_width="wrap_content"
-        android:layout_height="88px"
+        android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginRight="48px"
+        android:layout_marginTop="48px"
         android:text="@string/Skip"
         android:textColor="@color/h9"
         android:textSize="26px" />
@@ -37,7 +38,7 @@
             android:layout_height="518px"
             android:layout_below="@id/myInfo_other01"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="160px"
+            android:layout_marginTop="140px"
             android:alpha="0.2"
             android:background="@drawable/my_information_bg"
 
@@ -49,7 +50,7 @@
             android:layout_height="192px"
             android:layout_below="@id/myInfo_other01"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="64px"
+            android:layout_marginTop="48px"
             android:src="@mipmap/common_portrait_m" />
 
         <EditText
@@ -128,18 +129,14 @@
         android:layout_width="654px"
         android:layout_height="208px"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16px"
-        >
+        android:layout_marginTop="16px">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-
             android:alpha="0.2"
-            android:background="@drawable/my_information_bg"
-
-            />
+            android:background="@drawable/my_information_bg" />
 
         <TextView
             android:id="@+id/myInfo_other04"
@@ -147,19 +144,19 @@
             android:layout_height="wrap_content"
             android:layout_margin="24px"
             android:text="个人简介"
-            android:textSize="32px"
-            android:textColor="@color/h9" />
+            android:textColor="@color/h9"
+            android:textSize="32px" />
+
         <TextView
-            android:id="@+id/myInfo_"
+            android:id="@+id/myInfo_introduction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/h9"
-            android:textSize="26px"
             android:layout_alignLeft="@+id/myInfo_other04"
-            android:text="wrwerwerqwrew"
             android:layout_below="@id/myInfo_other04"
-            />
-
+            android:layout_marginTop="16px"
+            android:text="wrwerwerqwrew"
+            android:textColor="@color/h9"
+            android:textSize="26px" />
     </RelativeLayout>
 
     <com.zhy.autolayout.AutoRelativeLayout
@@ -176,7 +173,6 @@
             android:background="@drawable/my_information_bg" />
 
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -185,6 +181,5 @@
             android:textColor="@color/h9"
             android:textSize="42px" />
     </com.zhy.autolayout.AutoRelativeLayout>
-
 
 </com.zhy.autolayout.AutoLinearLayout>

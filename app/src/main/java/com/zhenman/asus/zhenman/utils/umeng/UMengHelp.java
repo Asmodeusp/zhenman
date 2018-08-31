@@ -34,7 +34,7 @@ public class UMengHelp {
     private static final String QQ_APP_ID = "1107229352";
     //qq的AppKey
     private static final String QQ_APP_KEY = "K8M5rfupOFe0VSzw";
-    //新浪AppId
+    //新浪AppId1406219590
     private static final String WEI_BO_APP_ID = "3291048097";
     //新浪AppKey
     private static final String WEI_BO_APP_KEY = "7112b7d84d5734839c4eb126ebdb4200";
@@ -50,7 +50,7 @@ public class UMengHelp {
         UMConfigure.init(context, UM_APP_KEY, "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//
         PlatformConfig.setWeixin(WEI_XIN_APP_ID, WEI_XIN_APP_KEY);
         PlatformConfig.setQQZone(QQ_APP_ID, QQ_APP_KEY);
-        PlatformConfig.setSinaWeibo(WEI_BO_APP_ID, WEI_BO_APP_KEY, "https://www.baidu.com/");
+        PlatformConfig.setSinaWeibo(WEI_BO_APP_ID, WEI_BO_APP_KEY, "https://sns.whalecloud.com/sina2/callback");
     }
 
     /**

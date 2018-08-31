@@ -106,7 +106,8 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 sex = "1";
                 SPUtils.put(MainActivity.this, SPKey.UMeng_SEX, "1");
             }
-
+            SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, true);
+            gotoContent();
 
 
             //微信登录
@@ -312,7 +313,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         SPUtils.put(MainActivity.this, SPKey.USER_BIRTHDAY, uMengLoginBean.getData().getBirthdate());
         SPUtils.put(MainActivity.this, SPKey.USER_SEX, uMengLoginBean.getData().getSex());
         SPUtils.put(MainActivity.this, SPKey.USER_TOKEN, uMengLoginBean.getData().getToken());
-        gotoContent();
+
     }
 
     @Override
