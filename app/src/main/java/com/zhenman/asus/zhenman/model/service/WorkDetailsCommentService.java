@@ -17,7 +17,7 @@ import retrofit2.http.QueryMap;
 public interface WorkDetailsCommentService {
     //作品下的评论列表
     @GET(Urls.WORKS_COMMENT)
-    Observable<WorkDetailsCommentBean> GetWorkDetailsCommentBean( @QueryMap Map<String,String> params);
+    Observable<WorkDetailsCommentBean> GetWorkDetailsCommentBean(@HeaderMap Map<String, String> headers, @QueryMap Map<String,String> params);
     //PGC评论点赞
     @FormUrlEncoded
     @POST(Urls.PGCFABULOUS)

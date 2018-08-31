@@ -32,12 +32,14 @@ public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContrac
 
     @Override
     public void getWorkDetailsCommentBean(String pgcId, String pageNum) {
+        Map<String, String> Headermap = new HashMap<>();
+        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzU3MDY0MzMsInN1YiI6IntcInVzZXJJZFwiOjM3NCxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMjY5MjM3ODlDRjhGQzJGOUE2OUQzQkFBMTU1QUMwQTRcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4xLjVcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NzI0MjQzM30.MgRXQqZ-UXG6NyRU95PBpl2FQF84TjkU0bT-0bgXOMg");
 
         Map<String, String> map = new HashMap<>();
         map.put("pgcId", pgcId);
         map.put("pageNum", pageNum);
         map.put("pageSize", "20");
-        RetrofitUtils.getInstance().getWorkDetailsCommentService().GetWorkDetailsCommentBean(map).subscribeOn(Schedulers.newThread())
+        RetrofitUtils.getInstance().getWorkDetailsCommentService().GetWorkDetailsCommentBean(Headermap,map).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<WorkDetailsCommentBean>() {
                     @Override
@@ -68,7 +70,9 @@ public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContrac
     @Override
     public void PGCFabulous(String productId, String commentId, String status, String pgcId) {
         Map<String, String> Headermap = new HashMap<>();
-        Headermap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN, ""));
+//        Headermap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN, ""));
+        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzU3MDY0MzMsInN1YiI6IntcInVzZXJJZFwiOjM3NCxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMjY5MjM3ODlDRjhGQzJGOUE2OUQzQkFBMTU1QUMwQTRcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4xLjVcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NzI0MjQzM30.MgRXQqZ-UXG6NyRU95PBpl2FQF84TjkU0bT-0bgXOMg");
+
         Map<String, String> map = new HashMap<>();
         map.put("productId", productId);
         map.put("commentId", commentId);

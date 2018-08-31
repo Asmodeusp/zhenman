@@ -29,8 +29,11 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
     @Override
     public void getSerializationCatalogReadBean(String catalogId) {
         Map<String, String> Headermap = new HashMap<>();
-        Headermap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN,""));
+//        Headermap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN,""));
+        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzU3MDY0MzMsInN1YiI6IntcInVzZXJJZFwiOjM3NCxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMjY5MjM3ODlDRjhGQzJGOUE2OUQzQkFBMTU1QUMwQTRcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4xLjVcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NzI0MjQzM30.MgRXQqZ-UXG6NyRU95PBpl2FQF84TjkU0bT-0bgXOMg");
+
         Map<String, String> map = new HashMap<>();
+
         map.put("catalogId", catalogId);
         RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
                 .getSerializationCatalogReadBean(Headermap,map)
