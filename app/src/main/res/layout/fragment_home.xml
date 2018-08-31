@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".view.home.HotFragment">
 
-    <cn.youngkaaa.yviewpager.YViewPager
-        android:id="@+id/HomeHot_List"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:orientation="vertical"></cn.youngkaaa.yviewpager.YViewPager>
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/HomeHot_List"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/HomeHot_HeadView"

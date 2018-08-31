@@ -1,28 +1,31 @@
 package com.zhenman.asus.zhenman.view.home;
 
-import android.os.Bundle;
+import android.os.Build;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.HomeHotContract;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
-import com.zhenman.asus.zhenman.view.adapter.home.HomeHotVpAdapter;
+import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
 
 import java.util.ArrayList;
-import cn.youngkaaa.yviewpager.YViewPager;
 
 public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView {
 
-
-    ArrayList<HomeHotBean.DataBean> mlist = new ArrayList<>();
-    private YViewPager Home_ListView;
+    private RecyclerView Home_ListView;
     private View headview;
     private ImageView Home_search_Img;
     private RelativeLayout Home_headView;
@@ -44,20 +47,25 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     }
 
     private void initView() {
-        presenter.getHomeHotBean("1");
         Home_ListView = getActivity().findViewById(R.id.HomeHot_List);
         Home_HotText = getActivity().findViewById(R.id.HomeHot_HotText);
         HomeHot_AttentionText = getActivity().findViewById(R.id.HomeHot_AttentionText);
         Home_search_Img = getActivity().findViewById(R.id.HomeHot_search_Img);
         Home_headView = getActivity().findViewById(R.id.HomeHot_HeadView);
 
+        //        ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(),LinearLayoutManager.VERTICAL);
+        ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(), LinearLayoutManager.VERTICAL) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT);
+            }
+        };
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        Home_ListView.setLayoutManager(layoutManager);
 
-        initListView();
     }
 
-    private void initListView() {
-
-    }
 
     @Override
     protected void loadDate() {
@@ -75,16 +83,9 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     @Override
     public void showHotBean(HomeHotBean homeHotBean) {
-        for (HomeHotBean.DataBean dataBean : homeHotBean.getData()) {
-            HomeItemFragment homeItemFragment = new HomeItemFragment();
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("HotItem",dataBean);
-            homeItemFragment.setArguments(bundle);
-            fragments.add(homeItemFragment);
 
-        }
-        HomeHotVpAdapter homeHotVpAdapter = new HomeHotVpAdapter(getActivity().getSupportFragmentManager(), fragments);
-        Home_ListView.setAdapter(homeHotVpAdapter);
-        homeHotVpAdapter.notifyDataSetChanged();
+
+        Home_ListView.setAdapter(new HomeHotRecyAdapter(homeHotBean.getData()));
+
     }
 }
