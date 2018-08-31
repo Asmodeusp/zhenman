@@ -142,6 +142,7 @@
         <activity android:name=".view.myself.PersonalInformationActivity" />
         <activity android:name=".view.myself.MyWalletActivity" />
         <activity android:name=".view.myself.MyselfPageActivity"></activity>
+        <activity android:name=".view.serializaion.SerializaionCommentDetailsActivity"></activity>
     </application>
 
 </manifest>

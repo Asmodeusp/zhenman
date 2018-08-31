@@ -89,7 +89,6 @@ public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContrac
                     public void onNext(PgcFabulousBean pgcFabulousBean) {
                         if (pgcFabulousBean.getState() == 0) {
                             commentView.showError(pgcFabulousBean.getMsg());
-
                             commentView.showPGCFabulousBean(pgcFabulousBean);
                         } else {
                             commentView.showError(pgcFabulousBean.getMsg());
