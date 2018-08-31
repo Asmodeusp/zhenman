@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.serializaion.fragment;
 
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
 import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
 import com.zhenman.asus.zhenman.view.adapter.serialization.WorkCommentRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.WorkDetailsActorRecyAdapter;
+import com.zhenman.asus.zhenman.view.serializaion.SerializaionCommentDetailsActivity;
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     private List<WorkDetailsCommentBean.DataBean.ResultBean> result = new ArrayList<>();
     private SerializationCatalogBean serializationCatalogBean;
     private TextView work_commentTips;
+    private String pgcId;
 
     @Override
     protected int getLayoutId() {
@@ -54,8 +57,9 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
         if (data.getActorList().size() == 0 && data.getActorList() == null) {
             Actor_RecyTips.setVisibility(View.VISIBLE);
         }
-        if (serializationCatalogBean.getData() != null && serializationCatalogBean.getData().size() != 0) {
-            presenter.getWorkDetailsCommentBean(serializationCatalogBean.getData().get(0).getPgcId(), "" + 1);
+        if (serializationCatalogBean.getData() != null) {
+            pgcId = serializationCatalogBean.getData().get(0).getPgcId();
+            presenter.getWorkDetailsCommentBean(pgcId, "" + 1);
         }
         if (result.size() == 0) {
             work_commentTips.setVisibility(View.VISIBLE);
@@ -86,7 +90,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     }
 
     @Override
-    public void showWorkDetailsCommentBean(WorkDetailsCommentBean workDetailsCommentBean) {
+    public void showWorkDetailsCommentBean(final WorkDetailsCommentBean workDetailsCommentBean) {
 
         result.addAll(workDetailsCommentBean.getData().getResult());
         if (result.size() == 0) {
@@ -95,8 +99,17 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
             work_commentTips.setVisibility(View.GONE);
             Work_commentRecy.setVisibility(View.VISIBLE);
             //设置评论列表适配器
-            WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, serializationCatalogBean.getData().get(0).getPgcId(),presenter);
+            WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, serializationCatalogBean.getData().get(0).getPgcId(), presenter);
             Work_commentRecy.setAdapter(workCommentRecyAdapter);
+            workCommentRecyAdapter.setRecyclerViewOnCLickListener(new WorkCommentRecyAdapter.RecyclerViewOnCLickListener() {
+                @Override
+                public void myClick(View view, int position) {
+                    Intent intent = new Intent(getActivity(), SerializaionCommentDetailsActivity.class);
+                    intent.putExtra("CommentId",workDetailsCommentBean.getData().getResult().get(position).getCommentId());
+                    intent.putExtra("PgcId",pgcId);
+                    startActivity(intent);
+                }
+            });
 
         }
     }

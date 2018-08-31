@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.serializaion.SerializaionCommentDetailsActivity">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/SerializaionCommentDetails_return"
+            android:layout_width="32px"
+            android:layout_height="32px"
+            android:layout_margin="24px"
+            android:layout_marginRight="24px"
+            android:layout_marginTop="24px"
+            android:src="@mipmap/common_return_black" />
+
+        <TextView
+            android:id="@+id/SerializaionCommentDetails_CommentNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24px"
+            android:text="11条评论"
+            android:textColor="@color/h3"
+            android:textSize="26px" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/sView"
+        android:layout_marginTop="24px">
+
+        <ImageView
+            android:id="@+id/SerializaionCommentDetails_HeadView"
+            android:layout_width="54px"
+            android:layout_height="54px"
+            android:layout_marginLeft="32px"
+            android:layout_marginTop="20px" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="106px"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/SerializaionCommentDetails_UserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="路飞"
+                android:textColor="@color/h3"
+                android:textSize="26px" />
+
+            <TextView
+                android:id="@+id/SerializaionCommentDetails_Comment"
+                android:layout_width="540px"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8px"
+                android:maxEms="14"
+                android:text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
+                android:textColor="@color/h2"
+                android:textSize="30px" />
+
+            <TextView
+                android:id="@+id/SerializaionCommentDetails_Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24px"
+                android:layout_marginTop="8px"
+                android:text="11nain"
+                android:textColor="@color/h5"
+                android:textSize="24px" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="24px"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/SerializaionCommentDetails_Like"
+                android:layout_width="40px"
+                android:layout_height="40px"
+                android:layout_marginTop="24px"
+                android:button="@null" />
+
+            <TextView
+                android:id="@+id/SerializaionCommentDetails_LikeNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8px"
+                android:text="0"
+                android:textColor="@color/h5"
+                android:textSize="24px" />
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/SerializaionCommentDetails_CommentRecy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+</com.zhy.autolayout.AutoLinearLayout>

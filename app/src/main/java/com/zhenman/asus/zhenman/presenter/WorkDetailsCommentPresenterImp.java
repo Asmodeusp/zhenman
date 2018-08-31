@@ -1,10 +1,13 @@
 package com.zhenman.asus.zhenman.presenter;
 
 
+import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.WorkDetailsCommentContract;
 import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +27,7 @@ public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContrac
 
     @Override
     public void unActualView() {
-        this.commentView =null;
+        this.commentView = null;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContrac
         map.put("pgcId", pgcId);
         map.put("pageNum", pageNum);
         map.put("pageSize", "20");
-        RetrofitUtils.getInstance().getWorkDetailsCommentService().GetWorkDetailsCommentBean( map).subscribeOn(Schedulers.newThread())
+        RetrofitUtils.getInstance().getWorkDetailsCommentService().GetWorkDetailsCommentBean(map).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<WorkDetailsCommentBean>() {
                     @Override
@@ -65,7 +68,7 @@ public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContrac
     @Override
     public void PGCFabulous(String productId, String commentId, String status, String pgcId) {
         Map<String, String> Headermap = new HashMap<>();
-        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
+        Headermap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN, ""));
         Map<String, String> map = new HashMap<>();
         map.put("productId", productId);
         map.put("commentId", commentId);

@@ -1,9 +1,12 @@
 package com.zhenman.asus.zhenman.presenter;
 
+import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.MySelfContract;
 import com.zhenman.asus.zhenman.model.bean.GetMyDataBean;
 import com.zhenman.asus.zhenman.model.service.MySelfService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 
 import java.util.HashMap;
 
@@ -17,7 +20,7 @@ public class MySelfPresenter implements MySelfContract.MySelfInPresenter {
     @Override
     public void sendGetMyData(String accessToken, String oauthId) {
         HashMap<String, String> headMap = new HashMap<>();
-        headMap.put("accessToken","eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
+        headMap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN,""));
 
         RetrofitUtils.getInstance().getService(MySelfService.class)
                 .getMyDataBean(headMap,oauthId)

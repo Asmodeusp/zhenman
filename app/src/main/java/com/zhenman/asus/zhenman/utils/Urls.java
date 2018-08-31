@@ -5,14 +5,14 @@ public class Urls {
     public static final String BASE_URL = "http://api.dev.zhenmanapp.com/";
     //登陆
     public static final String LOGING = "login/passwordLogin";
-    //    友盟第三方登录{QQ 微信，微博   的注册和登陆}
+    //友盟第三方登录{QQ 微信，微博   的注册和登陆}
     public static final String THIRD_PARTY_LOGING = "userOauth/register";
     //请求图片验证码
     public static final String REQUES_PICTURE_VERIFICATION_CODE = "login/getImageCode";
     //请求手机验证码
     public static final String REQUEST_CELL_PHONE_VERIFICATION_CODE = "login/sendSms";
     //忘记密码
-    public static final String FORGET_PASSWORD = "login/setPassword";
+    public static final String FORGET_PASSWORD = "";
     //注册手机号和验证码
     public static final String REGISTER_PHONE_CODE = "/ogin/register";
     //注册手机号和验证码
@@ -37,14 +37,18 @@ public class Urls {
     public static final String UGCFABULOUS = "userLikesUgc/insertUserLikesUgc";
     //Pgc收藏
     public static final String PGC_COLLECTION = "userLikesPgc/insertUserLikesPgc";
-    //    创建订单
+    //创建订单
     public static final String MAKE_ORDER = "userOrder/createOrder";
-    //    获取支付数据
+    //获取支付数据
     public static final String GET_PAY_DATA = "userOrder/getPaySignByAli?orderSn";
+    //友盟第三方登录{QQ 微信，微博   的注册和登陆}
+    public static final String UMENG_LOGIN = "userOauth/register";
     //分类标签
     public static final String SERIALIZATION_CLASSIFY_TAG = "pgcTag/getPgcTag";
     //分类数据
     public static final String SERIALIZATION_CLASSIFY = "userPgcInfo/getPgcListByTags";
+    //Pgc作品下主评论下的列表
+    public static final String PGC_CHAPTER_COMMENT_DETAIL="pgcChapterCommentDetail/getCommentDetailListByPcciId";
     //    注销登陆
     public static final String CANCLE_LOGIN = "userOauth/unbindMobile";
     //    获得个人资料信息
