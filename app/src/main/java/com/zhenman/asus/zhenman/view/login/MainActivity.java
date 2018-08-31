@@ -222,6 +222,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 
 
                 presenter.getLogin(mPhoneNumber.getText().toString().trim(), mInputPassword.getText().toString().trim());
+                SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, true);
                 break;
             case R.id.RegisterBtn:
                 startActivity(new Intent(this, RegisterCodeActivity.class));
