@@ -147,7 +147,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                 if (serializationCatalogBeandata == null) {
                     Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
                 } else {
-                    intent.putExtra("catalogId", serializationCatalogBeandata.get(0).getCatalogId());
+                    intent.putExtra("catalogId", serializationCatalogBeandata.get(serializationCatalogBeandata.size()-1).getCatalogId());
                     intent.putExtra("pgcId", serializationCatalogBeandata.get(0).getPgcId());
                 }
                 startActivity(intent);

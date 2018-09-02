@@ -3,6 +3,8 @@ package com.zhenman.asus.zhenman.contract;
 import com.zhenman.asus.zhenman.base.BasePresenter;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
+import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
+import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
@@ -20,7 +22,10 @@ public interface SerializationCatalogReadContract {
         void getMakeOrderData(MakeOrderBean productListBean);
 //        得到订单号
         void showGetPayData(GetPayDataBean getPayDataBean);
-
+        //得到作品章节下页对应的评论列表
+        void showPgcChapterCommentListByOffSetBean(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean);
+        //Pgc点赞
+        void showPGCFabulousBean(PgcFabulousBean pgcFabulousBean);
 
     }
     //连载页阅读Presenter
@@ -32,7 +37,10 @@ public interface SerializationCatalogReadContract {
         void setMakeOrderData(String productId,String type,String catalogId,String toUserId,String amount,String comment);
 //        得到订单号
         void sendGetPayData(String orderSn);
-
+        //得到作品章节下页对应的评论列表
+        void getPgcChapterCommentListByOffSetBean(String chapterId,String start,String end,String pageNum );
+        //点赞  1 点赞   0 取消
+        void PGCFabulous (String productId, String commentId,String status,String pgcId);
 
     }
 }

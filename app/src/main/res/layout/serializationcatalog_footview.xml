@@ -255,6 +255,25 @@
                     android:textColor="@color/h2"
                     android:textSize="32px" />
             </com.zhy.autolayout.AutoLinearLayout>
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+                <android.support.v7.widget.RecyclerView
+                    android:visibility="gone"
+                    android:layout_marginTop="24px"
+                    android:id="@+id/CataLog_FootViewComment_Recy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24px"
+                    android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/CataLog_FootViewComment_RecyTip"
+                    android:gravity="center"
+                    android:text="还没有评论，快来占沙发"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.zhy.autolayout.AutoLinearLayout>
+
         </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoRelativeLayout>
 

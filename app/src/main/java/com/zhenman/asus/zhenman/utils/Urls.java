@@ -55,4 +55,6 @@ public class Urls {
     public static final String GET_MYDATA = "userOauth/getPersonalData";
     //    修改个人资料
     public static final String ALART_MYDATA = "userOauth/updatePersonalData";
+    //作品章节下页对应的评论列表
+    public static final String PGC_CHAPTER_COMMENT_LIST_BY_OFFSET  ="pgcChapterCommentInfo/getPgcChapterCommentListByOffSet";
 }

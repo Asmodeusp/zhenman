@@ -67,17 +67,23 @@ public class ViewPagerLayoutManager extends LinearLayoutManager {
             case RecyclerView.SCROLL_STATE_IDLE:
                 View viewIdle = mPagerSnapHelper.findSnapView(this);
                 int positionIdle = getPosition(viewIdle);
+                Log.e("空闲状态",positionIdle+"");
                 if (mOnViewPagerListener != null && getChildCount() == 1) {
                     mOnViewPagerListener.onPageSelected(positionIdle,positionIdle == getItemCount() - 1);
                 }
                 break;
             case RecyclerView.SCROLL_STATE_DRAGGING:
                 View viewDrag = mPagerSnapHelper.findSnapView(this);
-                int positionDrag = getPosition(viewDrag);
+                if (viewDrag!=null) {
+                    int positionDrag = getPosition(viewDrag);
+                    Log.e("缓慢拖拽",positionDrag+"");
+
+                }
                 break;
             case RecyclerView.SCROLL_STATE_SETTLING:
                 View viewSettling = mPagerSnapHelper.findSnapView(this);
                 int positionSettling = getPosition(viewSettling);
+                Log.e("快速滚动",positionSettling+"");
                 break;
 
         }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#F7ffffff"
-    android:layout_height="978px">
+    android:layout_height="978px"
+    android:background="#F7ffffff">
 
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/TopRela"
@@ -32,24 +32,27 @@
             android:src="@mipmap/common_close" />
     </com.zhy.autolayout.AutoRelativeLayout>
 
-    <com.zhenman.asus.zhenman.view.ui.MyScrollView
+    <android.support.v7.widget.RecyclerView
+        android:visibility="visible"
+        android:id="@+id/CommentPopu_Recy"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentLeft="true"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/TopRela">
+        android:layout_below="@+id/TopRela"
+        android:layout_alignParentLeft="true"></android.support.v7.widget.RecyclerView>
 
-        <com.zhy.autolayout.AutoRelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/CommentPopu_Recy"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </android.support.v7.widget.RecyclerView>
-        </com.zhy.autolayout.AutoRelativeLayout>
-    </com.zhenman.asus.zhenman.view.ui.MyScrollView>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/CommentPopu_RecyTip"
+        android:gravity="center"
+        android:text="还没有评论，快来抢沙发"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/TopRela"
+        android:layout_alignParentLeft="true"></TextView>
+
 
     <View
         android:layout_width="match_parent"
@@ -58,10 +61,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@color/h6"></View>
-
+<com.zhy.autolayout.AutoLinearLayout
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
     <EditText
         android:id="@+id/common_EdText"
-        android:layout_width="match_parent"
+        android:layout_width="600px"
         android:layout_height="98px"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -70,5 +79,13 @@
         android:hint="发表评论~"
         android:textColorHint="@color/h4"
         android:textSize="30px" />
+<Button
+    android:id="@+id/common_SendEdText"
+    android:text="发送"
+    android:layout_width="wrap_content"
+    android:background="@color/h7"
+    android:layout_height="wrap_content" />
+</com.zhy.autolayout.AutoLinearLayout>
+
 
 </com.zhy.autolayout.AutoRelativeLayout>

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.zhenman.asus.zhenman.contract.HomeHotContract;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
+import com.zhenman.asus.zhenman.view.ui.layoutmessage.OnViewPagerListener;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
 
 import java.util.ArrayList;
@@ -61,6 +63,25 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
                         ViewGroup.LayoutParams.MATCH_PARENT);
             }
         };
+        layoutManager.setOnViewPagerListener(new OnViewPagerListener() {
+            @Override
+            public void onInitComplete() {
+
+            }
+
+            @Override
+            public void onPageRelease(boolean isNext, int position) {
+                Log.e("onPageRelease",""+isNext);
+            }
+
+            @Override
+            public void onPageSelected(int position, boolean isBottom) {
+                Log.e("onPageSelected",""+position);
+                Log.e("onPageSelected",""+isBottom);
+                if(!isBottom)
+                Home_ListView.scrollToPosition(position);
+            }
+        });
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         Home_ListView.setLayoutManager(layoutManager);
 
@@ -83,9 +104,14 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     @Override
     public void showHotBean(HomeHotBean homeHotBean) {
+       ArrayList<HomeHotBean.DataBean>dataBeans =  new ArrayList<>();
+        for (HomeHotBean.DataBean dataBean : homeHotBean.getData()) {
+            if (dataBean.getPageDtoList().size()>=3) {
+                dataBeans.add(dataBean);
+            }
+        }
 
-
-        Home_ListView.setAdapter(new HomeHotRecyAdapter(homeHotBean.getData()));
+        Home_ListView.setAdapter(new HomeHotRecyAdapter(dataBeans));
 
     }
 }
