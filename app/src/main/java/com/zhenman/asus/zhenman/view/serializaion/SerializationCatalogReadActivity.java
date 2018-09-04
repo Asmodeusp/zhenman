@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,12 +26,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
-
 import com.zhenman.asus.zhenman.contract.SerializationCatalogReadContract;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
+import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
@@ -40,6 +47,7 @@ import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogReadActorAdapt
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.serializationCatalogReadRecyAdapter;
 import com.zhenman.asus.zhenman.view.login.qqlogin.UMSharePlatform;
+import com.zhy.autolayout.AutoLinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,40 +91,17 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     //章节名字
     private TextView ChapterNameText;
 
-    /**
-     * 支付宝支付业务：入参app_id
-     */
-    public static final String APPID = "2018060960348052";
-
-    /**
-     * 支付宝账户登录授权业务：入参pid值
-     */
-    public static final String PID = "2088131025795926";
-    /**
-     * 支付宝账户登录授权业务：入参target_id值
-     */
-    public static final String TARGET_ID = "";
-
-    /** 商户私钥，pkcs8格式 */
-    /** 如下私钥，RSA2_PRIVATE 或者 RSA_PRIVATE 只需要填入一个 */
-    /** 如果商户两个都设置了，优先使用 RSA2_PRIVATE */
-    /** RSA2_PRIVATE 可以保证商户交易在更加安全的环境下进行，建议使用 RSA2_PRIVATE */
-    /** 获取 RSA2_PRIVATE，建议使用支付宝提供的公私钥生成工具生成， */
-    /**
-     * 工具地址：https://doc.open.alipay.com/docs/doc.htm?treeId=291&articleId=106097&docType=1
-     */
-    public static final String RSA2_PRIVATE = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzB8Xr2vclEeuXreG7ZzYYaT9hZfFD4hbOIJFehG+UkbYPovwrd1b5dOW8bq4w+P9fQInbIqjKUXUBjtNkfoaESy5ijfLGqUXL3qnA2onkZ/K74hm6nWNRdiKcg28Zc9d+dDnq1PVnTf0eBVf1RK3VCI6MgYJ0+rc6fsu3Jms7KyFJ7J+NJpmHn4txDkw6+8MQkP5xvRjltaaO/khJHXz6C8Puhu7ioVHp2jtYEZjFnr7XlsxzXYbESkzn9irgm1wQvetHrjPVA0hXFmriXX9k1MBRo3L05da2cW32k5SQbjRcLogxzSH1h+TbJa8hEQe+xop46lMO0bXcBHfVvIhaQIDAQAB";
-    public static final String RSA_PRIVATE = "";
-
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_AUTH_FLAG = 2;
-
+    private PopupWindow popupWindow;
+    private View popupView;
+    private View popupView1;
+    //    支付宝支付成功的回调
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             @SuppressWarnings("unchecked")
             AuthResult authResult = new AuthResult((Map<String, String>) msg.obj, true);
             String resultStatus = authResult.getResultStatus();
-
             // 判断resultStatus 为“9000”且result_code
             // 为“200”则代表授权成功，具体状态码代表含义可参考授权接口文档
             if (TextUtils.equals(resultStatus, "9000") && TextUtils.equals(authResult.getResultCode(), "200")) {
@@ -127,22 +112,18 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                         .show();//单击一下
             } else {
                 // 其他状态值则为授权失败
-                Toast.makeText(SerializationCatalogReadActivity.this,
-                        "授权失败" + String.format("authCode:%s", authResult.getAuthCode()), Toast.LENGTH_SHORT).show();
-
+//                Toast.makeText(SerializationCatalogReadActivity.this, "授权失败" + String.format("authCode:%s", authResult.getAuthCode()), Toast.LENGTH_SHORT).show();
             }
         }
 
         ;
     };
+
     private CatalogReadActorAdapter catalogReadActorAdapter;
     private String orderNumber;
-
-
-    public String getStartcatalogId() {
-        return StartcatalogId;
-    }
-
+    private ImageView ppwPay_weixin;
+    private ImageView ppwPay_zhifubao;
+    private AutoLinearLayout ppwPay_cancel;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_serialization_catalog_read;
@@ -153,7 +134,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         Intent intent = getIntent();
         StartcatalogId = intent.getStringExtra("catalogId");
         String PgcId = intent.getStringExtra("pgcId");
-
         //返回
         serializationCatalogReadReturnImg = findViewById(R.id.serializationCatalogReadReturnImg);
         //整布局
@@ -306,8 +286,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     //章节实体类
     @Override
-    public void showSerializationCatalogBean (SerializationCatalogBean
-                                                      serializationCatalogBean){
+    public void showSerializationCatalogBean(SerializationCatalogBean
+                                                     serializationCatalogBean) {
         if (serializationCatalogBean.getData() == null) {
             Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
         } else {
@@ -317,8 +297,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     //阅读实体类
     @Override
-    public void showserializationCatalogReadBean (SerializationCatalogReadBean
-                                                          serializationCatalogReadBean){
+    public void showserializationCatalogReadBean(SerializationCatalogReadBean
+                                                         serializationCatalogReadBean) {
         if (serializationCatalogReadBean == null) {
             Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
         } else {
@@ -334,7 +314,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     //章节弹出popuWindow
-    private void initCataLogpopu () {
+    private void initCataLogpopu() {
         View contentView = LayoutInflater.from(this).inflate(R.layout.fill_catalog_popu, null, false);
         //书名
         CataLog_PopuTitle = contentView.findViewById(R.id.CataLog_PopuTitle);
@@ -380,7 +360,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     //消息弹出PopuWindow
-    private void initCommentpopu () {
+    private void initCommentpopu() {
         View contentView = LayoutInflater.from(this).inflate(R.layout.fill_comment_popu, null, false);
         // 创建PopupWindow对象，其中：
         // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
@@ -399,7 +379,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     @Override
-    public void onClick (View view){
+    public void onClick(View view) {
         switch (view.getId()) {
             //返回
             case R.id.serializationCatalogReadReturnImg:
@@ -463,11 +443,20 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             case R.id.CataLog_FootViewShareBtn:
                 UMSharePlatform.getImstance().shareImage(SerializationCatalogReadActivity.this);
                 break;
+            case R.id.ppwPay_weixin:
+                presenter.setWxMakeOrderData("1", "1", StartcatalogId, "262", "0.1", "支付");
+                break;
+            case R.id.ppwPay_zhifubao:
+                presenter.setMakeOrderData("1", "1", StartcatalogId, "262", "1", "支付");
+                break;
+            case R.id.ppwPay_cancel:
+                popupWindow.dismiss();
+                break;
 
         }
     }
 
-    private void SetTextColorRules () {
+    private void SetTextColorRules() {
         //第一话
         if (data.get(data.size() - 1).getCatalogId().equals(StartcatalogId)) {
             CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h2));
@@ -507,26 +496,105 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         }
     }
 
+    private void showPopueWindow() {
+        popupView1 = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
+        ppwPay_weixin = popupView1.findViewById(R.id.ppwPay_weixin);
+        ppwPay_zhifubao = popupView1.findViewById(R.id.ppwPay_zhifubao);
+        ppwPay_cancel = popupView1.findViewById(R.id.ppwPay_cancel);
+        //获取屏幕宽高
+        int weight = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels * 1 / 4;
+
+        popupWindow = new PopupWindow(popupView1, weight, height);
+        // popupWindow.setAnimationStyle(R.style.anim_popup_dir);
+        popupWindow.setFocusable(true);
+        //点击外部popueWindow消失
+        popupWindow.setOutsideTouchable(true);
+        ppwPay_weixin.setOnClickListener(this);
+        ppwPay_zhifubao.setOnClickListener(this);
+        ppwPay_cancel.setOnClickListener(this);
+        //popupWindow消失屏幕变为不透明
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1.0f;
+                getWindow().setAttributes(lp);
+            }
+        });
+        popupWindow.showAtLocation(popupView1, Gravity.BOTTOM, 0, 0);
+    }
+
     //    创建订单的回调
     @Override
-    public void makeOrder () {
-        presenter.setMakeOrderData("1", "1", StartcatalogId, "262", "1", "支付");
+    public void makeOrder(int position) {
+        showPopueWindow();
     }
 
     //    得到订单数据
     @Override
-    public void getMakeOrderData (MakeOrderBean productListBean){
+    public void getMakeOrderData(MakeOrderBean productListBean) {
         orderNumber = productListBean.getData().getOrderNumber();
-        Log.e("Sunny", orderNumber + "++++++++++++");
+        if (orderNumber!=null) {
+            Log.e("Sunny", orderNumber + "++++++++++++");
+            presenter.sendGetPayData(orderNumber);
+        }
 
-        presenter.sendGetPayData(productListBean.getData().getOrderNumber());
+    }
 
+    @Override
+    public void getWxMakeOrderData(MakeOrderBean payWeChatBean) {
+        if (payWeChatBean.getData().getOrderNumber()!=null){
+            presenter.sendGetWxPayData(payWeChatBean.getData().getOrderNumber());
+        }
     }
 
     //    得到订单号,开始支付
     @Override
-    public void showGetPayData ( final GetPayDataBean getPayDataBean){
-        payV2(getPayDataBean.getData().getOrderSign());
+    public void showGetPayData(final GetPayDataBean getPayDataBean) {
+        if (getPayDataBean.getData().getOrderSign() != null) {
+                payV2(getPayDataBean.getData().getOrderSign());
+        } else {
+            Toast.makeText(this, "失敗", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    //得到微信支付数据
+    @Override
+    public void showGetWxPayData(PayWeChatBean payWeChatBean) {
+        if (payWeChatBean.getData().getOrderSign() != null) {
+            Log.e("Sunny", payWeChatBean.getData().getOrderSign().getAppid());
+            PayWeChatBean.DataBean.OrderSignBean orderSign = payWeChatBean.getData().getOrderSign();
+            payV1(orderSign);
+        }else {
+            Toast.makeText(this, "失敗", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void payV1(PayWeChatBean.DataBean.OrderSignBean orderSign) {
+        // 通过WXAPIFactory工厂，获取IWXAPI的实例
+        IWXAPI api = WXAPIFactory.createWXAPI(this, "wx658d27e48aa3a824");
+        // 将该app注册到微信
+//        api.registerApp("wx658d27e48aa3a824");
+        PayReq request = new PayReq();
+        request.appId = orderSign.getAppid();
+        request.partnerId = orderSign.getPartnerid();
+        request.prepayId = orderSign.getPrepayid();
+        request.packageValue = orderSign.getPackageX();
+        request.nonceStr = orderSign.getNoncestr();
+        request.timeStamp = orderSign.getTimestamp()+"";
+        request.sign = orderSign.getSign();
+        api.sendReq(request);
+        popupWindow.dismiss();
+    }
+
+    public void onResp(BaseResp resp) {
+        if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
+            Log.d("Sunny", "onPayFinish,errCode=" + resp.errCode);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.FindPassword);
+        }
     }
 
     /**
@@ -534,7 +602,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
      *
      * @param
      */
-    public void payV2 ( final String orderSign){
+    public void payV2(final String orderSign) {
         Runnable authRunnable = new Runnable() {
 
             @Override
@@ -549,7 +617,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 mHandler.sendMessage(msg);
             }
         };
-
         // 必须异步调用
         Thread authThread = new Thread(authRunnable);
         authThread.start();

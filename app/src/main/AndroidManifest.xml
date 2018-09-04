@@ -16,6 +16,7 @@
     <!-- 相机相册 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -43,7 +44,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.MainActivity.provider"
+            android:authorities="com.zhenman.asus.zhenman.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -124,11 +125,7 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".view.ContentActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".view.login.RegisterCodeActivity" />
         <activity android:name=".view.login.SetPasswordActivity" />
@@ -136,7 +133,9 @@
         <activity android:name=".view.login.UserInfoActivity" />
         <activity android:name=".view.serializaion.ClassifyActivity" />
         <activity android:name=".view.serializaion.WorkDetailsActivity" />
-        <activity android:name=".view.serializaion.SerializationCatalogReadActivity" />
+        <activity android:name=".view.serializaion.SerializationCatalogReadActivity"
+            android:exported="true" android:launchMode="singleTop"
+          />
         <activity android:name=".view.myself.MySettingActivity" />
         <activity android:name=".view.myself.AccountManagementActivity" />
         <activity android:name=".view.myself.PersonalInformationActivity" />

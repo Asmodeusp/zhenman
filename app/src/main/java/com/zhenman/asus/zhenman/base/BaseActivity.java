@@ -1,18 +1,22 @@
 package com.zhenman.asus.zhenman.base;
 
 import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.utils.NetUtils;
+import com.zhenman.asus.zhenman.utils.OnBooleanListener;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.lang.reflect.ParameterizedType;
@@ -21,6 +25,7 @@ import java.lang.reflect.Type;
 public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutActivity {
     protected T presenter;
     private Fragment lastFragment;
+    private OnBooleanListener onPermissionListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +59,52 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    //    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+//    }
+//
+    public void onPermissionRequests(String permission, OnBooleanListener onBooleanListener) {
+        onPermissionListener = onBooleanListener;
+        Log.d("MainActivity", "0");
+        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+            // Should we show an explanation?
+            Log.d("MainActivity", "1");
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_CONTACTS)) {
+                //权限已有
+                onPermissionListener.onClick(true);
+            } else {
+                //没有权限，申请一下
+                ActivityCompat.requestPermissions(this,
+                        new String[]{permission},
+                        1);
+            }
+        } else {
+            onPermissionListener.onClick(true);
+            Log.d("MainActivity", "2" + ContextCompat.checkSelfPermission(this,
+                    permission));
+        }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //权限通过
+                if (onPermissionListener != null) {
+                    onPermissionListener.onClick(true);
+                }
+            } else {
+                //权限拒绝
+                if (onPermissionListener != null) {
+                    onPermissionListener.onClick(false);
+                }
+            }
+            return;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
 
     protected T getPresenter() {
         Type type = getClass().getGenericSuperclass();
@@ -104,6 +151,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
 
     /**
      * 加载布局
+     *
      * @return 要加载的布局文件
      */
     protected abstract int getLayoutId();
@@ -120,6 +168,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
 
     /**
      * 切换Fragment
+     *
      * @param layoutId      Fragment要显示的布局id
      * @param fragmentClass 要显示的Fragment
      */

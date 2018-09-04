@@ -2,17 +2,15 @@ package com.zhenman.asus.zhenman.presenter;
 
 import android.util.Log;
 
-import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.SerializationCatalogReadContract;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
+import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.model.service.SerializationCatalogReadService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
-import com.zhenman.asus.zhenman.utils.sp.SPKey;
-import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +18,6 @@ import java.util.Map;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class SerializationCatalogReadPresenterImp implements SerializationCatalogReadContract.serializationCatalogReadPresenter {
@@ -142,14 +139,71 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                 .getMakeOrderBean(headerMap,maps)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<MakeOrderBean>() {
+                .subscribe(new Observer<MakeOrderBean>() {
                     @Override
-                    public void accept(MakeOrderBean productListBean) throws Exception {
-                        serializationCatalogReadView.getMakeOrderData(productListBean);
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(MakeOrderBean makeOrderBean) {
+                        serializationCatalogReadView.getMakeOrderData(makeOrderBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("Sunny",e.getMessage());
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }
-// 得到订单号
+//创建微信订单
+    @Override
+    public void setWxMakeOrderData(String productId, String type, String catalogId, String toUserId, String amount, String comment) {
+        Map<String, String> headerMap = new HashMap<>();
+        headerMap.put("accessToken","eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
+        Map<String,String > maps=new HashMap<>();
+        maps.put("productId",productId);
+        maps.put("type",type);
+        maps.put("catalogId",catalogId);
+        maps.put("toUserId",toUserId);
+        maps.put("amount",amount);
+        maps.put("comment","充值");
+        RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
+                .getWxMakeOrderBean(headerMap,maps)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<MakeOrderBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(MakeOrderBean makeOrderBean) {
+                        serializationCatalogReadView.getWxMakeOrderData(makeOrderBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("Sunny",e.getMessage());
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+    }
+
+    // 得到订单号
     @Override
     public void sendGetPayData(String orderSn) {
         RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
@@ -165,13 +219,41 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                     @Override
                     public void onNext(GetPayDataBean getPayDataBean) {
                         serializationCatalogReadView.showGetPayData(getPayDataBean);
-                        Log.e("Sunny","+++++"+getPayDataBean.getData().getOrderSign());
-
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("Sunny","00000000000"+e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+//得到微信支付数据
+    @Override
+    public void sendGetWxPayData(String orderSn) {
+        RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
+                .getWXPayData(orderSn)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<PayWeChatBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(PayWeChatBean payWeChatBean) {
+                        if (payWeChatBean!=null){
+                            serializationCatalogReadView.showGetWxPayData(payWeChatBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
                     }
 
                     @Override

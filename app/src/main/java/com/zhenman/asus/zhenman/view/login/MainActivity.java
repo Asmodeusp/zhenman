@@ -106,8 +106,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 sex = "1";
                 SPUtils.put(MainActivity.this, SPKey.UMeng_SEX, "1");
             }
-            SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, true);
-            gotoContent();
 
 
             //微信登录
@@ -137,6 +135,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                     data.get("iconurl"), sex, TYPE, data.get("openid"));
 
         }
+
         /**
          * @desc 授权失败的回调
          * @param platform 平台名称
@@ -219,10 +218,8 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                     Toast.makeText(this, "请输入正确手机号", Toast.LENGTH_SHORT).show();
                 }
                 //密码正则判断
-
-
                 presenter.getLogin(mPhoneNumber.getText().toString().trim(), mInputPassword.getText().toString().trim());
-                SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, true);
+                SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, (Boolean)true);
                 break;
             case R.id.RegisterBtn:
                 startActivity(new Intent(this, RegisterCodeActivity.class));
@@ -236,7 +233,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 UMengHelp.applySharePermission(this, SINA_LOGIN, new ShareCallBack() {
                     @Override
                     public void shareOrLogin() {
-                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.SINA,umAuthListener);
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.SINA, umAuthListener);
                     }
                 });
                 break;
@@ -250,12 +247,11 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 });
                 break;
             case R.id.login_qqImage:
-
                 //qq登录
                 UMengHelp.applySharePermission(this, QQ_LOGIN, new ShareCallBack() {
                     @Override
                     public void shareOrLogin() {
-                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.QQ,umAuthListener);
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.QQ, umAuthListener);
                     }
                 });
 
@@ -276,18 +272,18 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 
     //    从SP中取到数据
     private void getDatafromSP() {
-        umeng_type = (String) SPUtils.get(this, SPKey.UMENG_TYPE, "");
-        uMeng_otheruserId = (String) SPUtils.get(this, SPKey.UMeng_OTHERUSERId, "");
-        uMeng_openid = (String) SPUtils.get(this, SPKey.UMeng_OPENID, "");
-        uMeng_headimage = (String) SPUtils.get(this, SPKey.UMeng_HEADIMAGE, "");
-        uMeng_name = (String) SPUtils.get(this, SPKey.UMeng_NAME, "");
-        uMeng_cityname = (String) SPUtils.get(this, SPKey.UMeng_CITYNAME, "");
-        uMeng_sex = (String) SPUtils.get(this, SPKey.UMeng_SEX, "");
+//        umeng_type = (String) SPUtils.get(this, SPKey.UMENG_TYPE, "");
+//        uMeng_otheruserId = (String) SPUtils.get(this, SPKey.UMeng_OTHERUSERId, "");
+//        uMeng_openid = (String) SPUtils.get(this, SPKey.UMeng_OPENID, "");
+//        uMeng_headimage = (String) SPUtils.get(this, SPKey.UMeng_HEADIMAGE, "");
+//        uMeng_name = (String) SPUtils.get(this, SPKey.UMeng_NAME, "");
+//        uMeng_cityname = (String) SPUtils.get(this, SPKey.UMeng_CITYNAME, "");
+//        uMeng_sex = (String) SPUtils.get(this, SPKey.UMeng_SEX, "");
         Boolean is_login = (Boolean) SPUtils.get(this, SPKey.IS_LOGIN, false);
 //       判断是否登陆，如果登陆过就直接进入首页
-        if (is_login){
+        if (is_login) {
             startActivity(new Intent(this, ContentActivity.class));
-        }else {
+        } else {
             Toast.makeText(this, "请登陆", Toast.LENGTH_SHORT).show();
         }
 
@@ -301,20 +297,32 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     //    得到友盟返回的数据
     @Override
     public void showUMengLoginData(ThirdPartyLoginBean uMengLoginBean) {
-
+        if (!uMengLoginBean.getMsg().isEmpty() && uMengLoginBean.getMsg().equals("成功")) {
 //                成功的话保存到sp中
-        SPUtils.put(MainActivity.this, SPKey.UMeng_CITYNAME, uMengLoginBean.getData().getCityName());
-        SPUtils.put(MainActivity.this, SPKey.UMeng_NAME, uMengLoginBean.getData().getName());
-        SPUtils.put(MainActivity.this, SPKey.USER_MOBILE, uMengLoginBean.getData().getMobile());
-        SPUtils.put(MainActivity.this, SPKey.USER_AVATAR, uMengLoginBean.getData().getHeadImg());
-        SPUtils.put(MainActivity.this, SPKey.USER_ID, uMengLoginBean.getData().getId());
-        SPUtils.put(MainActivity.this, SPKey.USER_INTRODUCTION, uMengLoginBean.getData().getIntroduction());
-        SPUtils.put(MainActivity.this, SPKey.USER_REFRESHTOKEN,uMengLoginBean.getData().getRefreshToken());
-        SPUtils.put(MainActivity.this, SPKey.USER_OAUTHID, uMengLoginBean.getData().getOauthId());
-        SPUtils.put(MainActivity.this, SPKey.USER_BIRTHDAY, uMengLoginBean.getData().getBirthdate());
-        SPUtils.put(MainActivity.this, SPKey.USER_SEX, uMengLoginBean.getData().getSex());
-        SPUtils.put(MainActivity.this, SPKey.USER_TOKEN, uMengLoginBean.getData().getToken());
+            SPUtils.put(MainActivity.this, SPKey.UMeng_CITYNAME, uMengLoginBean.getData().getCityName());
+            SPUtils.put(MainActivity.this, SPKey.UMeng_NAME, uMengLoginBean.getData().getName());
+            if (uMengLoginBean.getData().getMobile()!=null) {
+                SPUtils.put(MainActivity.this, SPKey.USER_MOBILE, uMengLoginBean.getData().getMobile());
+            }
+            SPUtils.put(MainActivity.this, SPKey.USER_ID, uMengLoginBean.getData().getId());
+            if (uMengLoginBean.getData().getIntroduction()!=null) {
+                SPUtils.put(MainActivity.this, SPKey.USER_INTRODUCTION, uMengLoginBean.getData().getIntroduction());
+            }
+            SPUtils.put(MainActivity.this, SPKey.USER_REFRESHTOKEN, uMengLoginBean.getData().getRefreshToken());
+            SPUtils.put(MainActivity.this, SPKey.USER_OAUTHID, uMengLoginBean.getData().getOauthId());
+            if (uMengLoginBean.getData().getBirthdate()!=null) {
+                SPUtils.put(MainActivity.this, SPKey.USER_BIRTHDAY, uMengLoginBean.getData().getBirthdate());
+            }
+            SPUtils.put(MainActivity.this, SPKey.USER_SEX, uMengLoginBean.getData().getSex());
+            SPUtils.put(MainActivity.this, SPKey.USER_TOKEN, uMengLoginBean.getData().getToken());
+            SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, (Boolean)true);
+            SPUtils.put(MainActivity.this, SPKey.USER_AVATAR, uMengLoginBean.getData().getHeadImg());
 
+            startActivity(new Intent(MainActivity.this, ContentActivity.class));
+
+        }else {
+            Toast.makeText(this, "登陆失败", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -389,7 +397,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 UMengHelp.responseSharePermission(this, grantResults, QQ_LOGIN, new ShareCallBack() {
                     @Override
                     public void shareOrLogin() {
-                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.QQ,umAuthListener);
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.QQ, umAuthListener);
                     }
                 });
                 break;
@@ -397,7 +405,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 UMengHelp.responseSharePermission(this, grantResults, WE_CAT_LOGIN, new ShareCallBack() {
                     @Override
                     public void shareOrLogin() {
-                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.WEIXIN,umAuthListener);
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);
                     }
                 });
                 break;
@@ -405,7 +413,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 UMengHelp.responseSharePermission(this, grantResults, SINA_LOGIN, new ShareCallBack() {
                     @Override
                     public void shareOrLogin() {
-                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.SINA,umAuthListener);
+                        UMengHelp.login(MainActivity.this, SHARE_MEDIA.SINA, umAuthListener);
                     }
                 });
                 break;
@@ -417,5 +425,17 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Boolean is_login = (Boolean) SPUtils.get(this, SPKey.IS_LOGIN, false);
+//       判断是否登陆，如果登陆过就直接进入首页
+        if (is_login) {
+            finish();
+        } else {
+            Toast.makeText(this, "请登陆", Toast.LENGTH_SHORT).show();
+        }
     }
 }
