@@ -1,5 +1,6 @@
 <resources>
     <!-- Base application theme. -->
+    <!--Base.Theme.AppCompat.Light.DarkActionBar-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -7,7 +8,62 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
+
     <style name="MainTheme" parent="AppTheme">
         <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+    <style name="Style24H5">
+        <item name="android:textColor">@color/h5</item>
+        <item name="android:textSize">@dimen/px_24</item>
+    </style>
+
+    <style name="Style26H4">
+        <item name="android:textColor">@color/h4</item>
+        <item name="android:textSize">@dimen/px_26</item>
+    </style>
+
+
+    <style name="Style26H5">
+        <item name="android:textColor">@color/h5</item>
+        <item name="android:textSize">@dimen/px_26</item>
+    </style>
+
+    <style name="Style26H3">
+        <item name="android:textColor">@color/h3</item>
+        <item name="android:textSize">@dimen/px_26</item>
+    </style>
+
+    <style name="Style26C1">
+        <item name="android:textColor">@color/c1</item>
+        <item name="android:textSize">@dimen/px_26</item>
+    </style>
+
+    <style name="Style26C5">
+        <item name="android:textColor">@color/c5</item>
+        <item name="android:textSize">@dimen/px_26</item>
+    </style>
+
+    <style name="Style32H2">
+        <item name="android:textColor">@color/h2</item>
+        <item name="android:textSize">@dimen/px_32</item>
+    </style>
+    <style name="Style32H3">
+        <item name="android:textColor">@color/h3</item>
+        <item name="android:textSize">@dimen/px_32</item>
+    </style>
+    <style name="Style32C1">
+        <item name="android:textColor">@color/c1</item>
+        <item name="android:textSize">@dimen/px_32</item>
+    </style>
+
+
+    <style name="Style36H2">
+        <item name="android:textColor">@color/h2</item>
+        <item name="android:textSize">@dimen/px_36</item>
+    </style>
+    <style name="Style40H2">
+        <item name="android:textColor">@color/h2</item>
+        <item name="android:textSize">@dimen/px_40</item>
     </style>
 </resources>

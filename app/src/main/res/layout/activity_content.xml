@@ -25,7 +25,7 @@
 
         <com.zhy.autolayout.AutoRelativeLayout
             android:id="@+id/HomeButton"
-            android:layout_width="@dimen/dp_0"
+            android:layout_width="@dimen/px_0"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
@@ -42,7 +42,7 @@
 
         <com.zhy.autolayout.AutoRelativeLayout
             android:id="@+id/SerializationButton"
-            android:layout_width="@dimen/dp_0"
+            android:layout_width="@dimen/px_0"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
@@ -59,7 +59,7 @@
 
         <com.zhy.autolayout.AutoRelativeLayout
             android:id="@+id/ReleaseButton"
-            android:layout_width="@dimen/dp_0"
+            android:layout_width="@dimen/px_0"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
@@ -73,7 +73,7 @@
 
         <com.zhy.autolayout.AutoRelativeLayout
             android:id="@+id/MessageButton"
-            android:layout_width="@dimen/dp_0"
+            android:layout_width="@dimen/px_0"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
@@ -90,7 +90,7 @@
 
         <com.zhy.autolayout.AutoRelativeLayout
             android:id="@+id/MyselfButton"
-            android:layout_width="@dimen/dp_0"
+            android:layout_width="@dimen/px_0"
             android:layout_height="match_parent"
             android:layout_weight="1">
 

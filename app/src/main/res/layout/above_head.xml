@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="88px">
+    android:layout_height="100px">
 
     <ImageView
         android:id="@+id/app_back"
@@ -22,10 +22,20 @@
         android:textColor="@color/h2"
         android:textSize="36px" />
 
+    <TextView
+        android:id="@+id/app_otherID"
+        style="@style/Style32H2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="清空"
+        android:visibility="gone" />
+
     <View
-        android:layout_marginTop="87px"
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="2px"
+        android:layout_marginTop="87px"
         android:background="@color/h7"></View>
 
 </com.zhy.autolayout.AutoRelativeLayout>

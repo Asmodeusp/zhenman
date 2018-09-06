@@ -57,4 +57,8 @@ public class Urls {
     public static final String GET_MYDATA = "userOauth/getPersonalData";
     //    修改个人资料
     public static final String ALART_MYDATA = "userOauth/updatePersonalData";
+//    手机号解绑
+    public static final String UNBIND_MOBILE="userOauth/unbindMobile";
+//    交易记录
+    public static final String PURCHASE_HISTORY="userCoinAccount/getCoinAccountOutList";
 }

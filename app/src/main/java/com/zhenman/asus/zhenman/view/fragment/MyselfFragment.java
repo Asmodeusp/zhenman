@@ -13,6 +13,8 @@ import com.zhenman.asus.zhenman.contract.MySelfContract;
 import com.zhenman.asus.zhenman.model.bean.GetMyDataBean;
 import com.zhenman.asus.zhenman.presenter.MySelfPresenter;
 import com.zhenman.asus.zhenman.view.myself.AccountManagementActivity;
+import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
+import com.zhenman.asus.zhenman.view.myself.MyDraftActivity;
 import com.zhenman.asus.zhenman.view.myself.MySettingActivity;
 import com.zhenman.asus.zhenman.view.myself.MyWalletActivity;
 import com.zhenman.asus.zhenman.view.myself.PersonalInformationActivity;
@@ -100,6 +102,8 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 startActivity(new Intent(getActivity(), PersonalInformationActivity.class));
                 break;
             case R.id.my_PersonalHomePage:
+                startActivity(new Intent(getActivity(), HomepageActivity.class));
+
                 break;
             case R.id.my_WalletPage:
                 startActivity(new Intent(getActivity(), MyWalletActivity.class));
@@ -108,6 +112,8 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
 
                 break;
             case R.id.my_DraftPage:
+                startActivity(new Intent(getActivity(), MyDraftActivity.class));
+
                 break;
 
             case R.id.my_AccountNumberPage://账号管理

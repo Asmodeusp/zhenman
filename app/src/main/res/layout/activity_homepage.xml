@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.myself.HomepageActivity">
+
+    <include layout="@layout/above_head" />
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/my_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/homePage_Avatar"
+            android:layout_width="148px"
+            android:layout_height="148px"
+            android:layout_marginLeft="@dimen/px_24"
+            android:layout_marginTop="@dimen/px_8"
+            android:src="@mipmap/my_qiezi" />
+
+        <TextView
+            android:id="@+id/homePage_Name"
+            style="@style/Style40H2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24px"
+            android:layout_marginTop="@dimen/px_8"
+            android:layout_toRightOf="@+id/homePage_Avatar"
+            android:text="桃太萌"
+            android:textColor="@color/h2"
+            android:textSize="40px" />
+
+        <ImageView
+            android:id="@+id/homePage_Sex"
+            android:layout_width="@dimen/px_32"
+            android:layout_height="@dimen/px_32"
+            android:layout_alignBottom="@+id/my_Name"
+            android:layout_marginLeft="@dimen/px_16"
+            android:layout_toRightOf="@id/homePage_Name"
+            android:src="@mipmap/my_f" />
+
+        <TextView
+            android:id="@+id/my_Resume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/homePage_Name"
+            android:layout_below="@+id/homePage_Name"
+            android:layout_marginRight="24px"
+            android:layout_marginTop="@dimen/px_16"
+            android:text="本宝宝的个人简历最多两行，所以我要写两行啊么么哒~"
+            android:textColor="@color/h4"
+            android:textSize="26px" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/homePage_other01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/homePage_Avatar"
+            android:layout_marginLeft="@dimen/px_88"
+            android:layout_marginTop="@dimen/px_24"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/homePage_works"
+                style="@style/Style36H2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="6" />
+
+            <TextView
+                android:id="@+id/homePage_fans"
+                style="@style/Style36H2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="6.6" />
+
+            <TextView
+                android:id="@+id/homePage_attention"
+                style="@style/Style36H2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="30" />
+
+            <TextView
+                android:id="@+id/homePage_theme"
+                style="@style/Style36H2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="30" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/homePage_other01"
+            android:layout_marginLeft="@dimen/px_77"
+            android:layout_marginTop="@dimen/px_20"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/homePage_other02"
+                style="@style/Style26H4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="作品" />
+
+            <TextView
+                android:id="@+id/homePage_other03"
+                style="@style/Style26H4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="粉丝" />
+
+            <TextView
+                android:id="@+id/homePage_other04"
+                style="@style/Style26H4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="关注" />
+
+            <TextView
+                android:id="@+id/homePage_other05"
+                style="@style/Style26H4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="主题" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/px_24"
+        android:background="@color/h7" />
+
+
+    <com.zhy.autolayout.AutoRelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="148px"
+        android:layout_marginTop="@dimen/px_24"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/homePage_myWorks"
+            style="@style/Style32C1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TA的作品" />
+
+
+        <TextView
+            android:id="@+id/homePage_myLike"
+            style="@style/Style32H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="128px"
+            android:layout_toRightOf="@+id/homePage_myWorks"
+            android:layout_weight="1"
+            android:text="他喜欢的" />
+
+        <View
+            android:id="@+id/homePage_other06"
+            android:layout_width="138px"
+            android:layout_height="4px"
+            android:layout_below="@id/homePage_myWorks"
+            android:layout_marginTop="@dimen/px_16"
+            android:background="@color/c1" />
+
+        <View
+            android:id="@+id/homePage_other07"
+            android:layout_width="138px"
+            android:layout_height="4px"
+            android:layout_below="@id/homePage_myLike"
+            android:layout_marginLeft="128px"
+            android:layout_marginTop="@dimen/px_16"
+            android:layout_toRightOf="@id/homePage_other06"
+            android:background="@color/c1"
+            android:visibility="gone" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/h7" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/homePage_MyWorkPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/homePage_myWorksTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_24">
+
+        </android.support.design.widget.TabLayout>
+
+        <FrameLayout
+            android:id="@+id/homePage_myWorkContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/px_24" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/homePage_myLikePage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+
+
+</com.zhy.autolayout.AutoLinearLayout>
