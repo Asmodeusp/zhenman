@@ -44,14 +44,25 @@
 
             />
 
-        <ImageView
+       <!-- <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/myInfo_avatar"
             android:layout_width="192px"
             android:layout_height="192px"
             android:layout_below="@id/myInfo_other01"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="48px"
-            android:src="@mipmap/common_portrait_m" />
+            android:src="@mipmap/common_portrait_m"
+            app:civ_border_color="@color/h9"
+            app:civ_border_width="1dp" />-->
+
+         <de.hdodenhof.circleimageview.CircleImageView
+             android:id="@+id/myInfo_avatar"
+             android:layout_width="192px"
+             android:layout_height="192px"
+             android:layout_below="@id/myInfo_other01"
+             android:layout_centerHorizontal="true"
+             android:layout_marginTop="48px"
+             android:src="@mipmap/common_portrait_m" />
 
         <EditText
             android:id="@+id/myInfo_enterNikeName"
@@ -63,6 +74,7 @@
             android:alpha="0.5"
             android:background="@null"
             android:hint="@string/myInfo_eterNikename"
+            android:textColor="@color/h9"
             android:textColorHint="@color/h9"
             android:textSize="40px" />
 
@@ -147,13 +159,14 @@
             android:textColor="@color/h9"
             android:textSize="32px" />
 
-        <TextView
+        <EditText
             android:id="@+id/myInfo_introduction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/myInfo_other04"
             android:layout_below="@id/myInfo_other04"
             android:layout_marginTop="16px"
+            android:background="@null"
             android:text="wrwerwerqwrew"
             android:textColor="@color/h9"
             android:textSize="26px" />
@@ -173,6 +186,7 @@
             android:background="@drawable/my_information_bg" />
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

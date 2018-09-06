@@ -6,9 +6,6 @@ import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.SerializationCatalogReadContract;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
-import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
-import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
-import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
@@ -39,14 +36,13 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
 
         map.put("catalogId", catalogId);
         RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
-                .getSerializationCatalogReadBean(Headermap, map)
+                .getSerializationCatalogReadBean(Headermap,map)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<SerializationCatalogReadBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
-
                     @Override
                     public void onNext(SerializationCatalogReadBean serializationCatalogReadBean) {
                         if (serializationCatalogReadBean.getState() == 0) {
@@ -56,11 +52,9 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                             serializationCatalogReadView.showError(serializationCatalogReadBean.getMsg());
                         }
                     }
-
                     @Override
                     public void onError(Throwable e) {
                     }
-
                     @Override
                     public void onComplete() {
 
@@ -71,19 +65,18 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
     @Override
     public void getSerializationCatalogBean(String PgcId) {
         Map<String, String> Headermap = new HashMap<>();
-        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
+        Headermap.put("accessToken","eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
         Map<String, String> map = new HashMap<>();
         map.put("pgcId", PgcId);
         RetrofitUtils.getInstance()
                 .getService(SerializationCatalogReadService.class)
-                .getSerializationCatalogBean(Headermap, map)
+                .getSerializationCatalogBean(Headermap,map)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<SerializationCatalogBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
-
                     @Override
                     public void onNext(SerializationCatalogBean userBean) {
                         if (userBean.getState() == 0) {
@@ -93,11 +86,9 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                             serializationCatalogReadView.showError(userBean.getMsg());
                         }
                     }
-
                     @Override
                     public void onError(Throwable e) {
                     }
-
                     @Override
                     public void onComplete() {
 
@@ -108,16 +99,15 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
     @Override
     public void getSerializationDetailsBean(String PgcId) {
         Map<String, String> Headermap = new HashMap<>();
-        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
+        Headermap.put("accessToken","eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
         Map<String, String> map = new HashMap<>();
         map.put("pgcId", PgcId);
-        RetrofitUtils.getInstance().getSerializationDetailsService().GetSerializationDetailsBean(Headermap, map).subscribeOn(Schedulers.newThread())
+        RetrofitUtils.getInstance().getSerializationDetailsService().GetSerializationDetailsBean(Headermap,map).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<SerializationDetailsBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
-
                     @Override
                     public void onNext(SerializationDetailsBean userBean) {
                         if (userBean.getState() == 0) {
@@ -127,9 +117,46 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                             serializationCatalogReadView.showError(userBean.getMsg());
                         }
                     }
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+//    创建订单
+    @Override
+    public void setMakeOrderData(String productId, String type, String catalogId, String toUserId, String amount,String comment) {
+        Map<String, String> headerMap = new HashMap<>();
+        headerMap.put("accessToken","eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
+        Map<String,String > maps=new HashMap<>();
+        maps.put("productId",productId);
+        maps.put("type",type);
+        maps.put("catalogId",catalogId);
+        maps.put("toUserId",toUserId);
+        maps.put("amount",amount);
+        maps.put("comment","充值");
+        RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
+                .getMakeOrderBean(headerMap,maps)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<MakeOrderBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(MakeOrderBean makeOrderBean) {
+                        serializationCatalogReadView.getWxMakeOrderData(makeOrderBean);
+                    }
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.e("Sunny",e.getMessage());
+
                     }
 
                     @Override
@@ -138,32 +165,45 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                     }
                 });
     }
-
-    //    创建订单
+    //创建微信订单
     @Override
-    public void setMakeOrderData(final String productId, String type, String catalogId, String toUserId, String amount, String comment) {
+    public void setWxMakeOrderData(String productId, String type, String catalogId, String toUserId, String amount, String comment) {
         Map<String, String> headerMap = new HashMap<>();
-        headerMap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
-        Map<String, String> maps = new HashMap<>();
-        maps.put("productId", productId);
-        maps.put("type", type);
-        maps.put("catalogId", catalogId);
-        maps.put("toUserId", toUserId);
-        maps.put("amount", amount);
-        maps.put("comment", "充值");
+        headerMap.put("accessToken","eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
+        Map<String,String > maps=new HashMap<>();
+        maps.put("productId",productId);
+        maps.put("type",type);
+        maps.put("catalogId",catalogId);
+        maps.put("toUserId",toUserId);
+        maps.put("amount",amount);
+        maps.put("comment","充值");
         RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
-                .getMakeOrderBean(headerMap, maps)
+                .getWxMakeOrderBean(headerMap,maps)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<MakeOrderBean>() {
+                .subscribe(new Observer<MakeOrderBean>() {
                     @Override
-                    public void accept(MakeOrderBean productListBean) throws Exception {
-                        if (productListBean!=null) {
-                            serializationCatalogReadView.getMakeOrderData(productListBean);
-                        }
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(MakeOrderBean makeOrderBean) {
+                        serializationCatalogReadView.getWxMakeOrderData(makeOrderBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("Sunny",e.getMessage());
+
+                    }
+
+                    @Override
+                    public void onComplete() {
 
                     }
                 });
+
     }
 
     // 得到订单号
@@ -182,13 +222,13 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                     @Override
                     public void onNext(GetPayDataBean getPayDataBean) {
                         serializationCatalogReadView.showGetPayData(getPayDataBean);
-                        Log.e("Sunny", "+++++" + getPayDataBean.getData().getOrderSign());
+                        Log.e("Sunny","+++++"+getPayDataBean.getData().getOrderSign());
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("Sunny", "00000000000" + e.getMessage());
+                        Log.e("Sunny","00000000000"+e.getMessage());
                     }
 
                     @Override
@@ -197,39 +237,29 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                     }
                 });
     }
-
+    //得到微信支付数据
     @Override
-    public void getPgcChapterCommentListByOffSetBean(String chapterId, String start, String end, String pageNum) {
-        Map<String, String> Headermap = new HashMap<>();
-        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
-        Map<String, String> map = new HashMap<>();
-        map.put("chapterId", chapterId);
-        map.put("start", start);
-        map.put("end", end);
-        map.put("pageNum", pageNum);
-        map.put("pageSize", "60");
-        RetrofitUtils.getInstance()
-                .getService(SerializationCatalogReadService.class)
-                .getPgcChapterCommentListByOffSetBean(Headermap, map)
+    public void sendGetWxPayData(String orderSn) {
+        RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
+                .getWXPayData(orderSn)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<PgcChapterCommentListByOffSetBean>() {
+                .subscribe(new Observer<PayWeChatBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
+
                     }
 
                     @Override
-                    public void onNext(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean) {
-                        if (pgcChapterCommentListByOffSetBean.getState() == 0) {
-                            serializationCatalogReadView.showError(pgcChapterCommentListByOffSetBean.getMsg());
-                            serializationCatalogReadView.showPgcChapterCommentListByOffSetBean(pgcChapterCommentListByOffSetBean);
-                        } else {
-                            serializationCatalogReadView.showError(pgcChapterCommentListByOffSetBean.getMsg());
+                    public void onNext(PayWeChatBean payWeChatBean) {
+                        if (payWeChatBean!=null){
+                            serializationCatalogReadView.showGetWxPayData(payWeChatBean);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
+
                     }
 
                     @Override
@@ -239,61 +269,14 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                 });
     }
 
-
-    @Override
-    public void PGCReadFabulous(String productId, String commentId, String status, String pgcId) {
-        Map<String, String> Headermap = new HashMap<>();
-//        Headermap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN, ""));
-        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
-        Map<String, String> map = new HashMap<>();
-        map.put("productId", productId);
-        map.put("commentId", commentId);
-        map.put("status", status);
-        map.put("pgcId", pgcId);
-        RetrofitUtils.getInstance()
-                .getService(SerializationCatalogReadService.class)
-                .GetPGCReadFabulousBean(Headermap, map)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<PgcReadFabulousBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                    }
-
-                    @Override
-                    public void onNext(PgcReadFabulousBean pgcReadFabulousBean) {
-                        if (pgcReadFabulousBean != null) {
-                            Log.e("12345",serializationCatalogReadView.toString());
-                            serializationCatalogReadView.showError(pgcReadFabulousBean.getMsg());
-                            serializationCatalogReadView.showPGCReadFabulousBean(pgcReadFabulousBean);
-                            Log.e("123456",serializationCatalogReadView.toString());
-                        }
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 
     @Override
     public void actualView(SerializationCatalogReadContract.serializationCatalogReadView serializationCatalogReadView) {
-        if (serializationCatalogReadView!=null) {
-            this.serializationCatalogReadView = serializationCatalogReadView;
-        }
+        this.serializationCatalogReadView = serializationCatalogReadView;
     }
 
     @Override
     public void unActualView() {
-        if (serializationCatalogReadView!=null) {
-            this.serializationCatalogReadView = null;
-        }
-
+        this.serializationCatalogReadView = null;
     }
 }

@@ -134,6 +134,7 @@
         <activity android:name=".view.serializaion.WorkDetailsActivity" />
         <activity
             android:name=".view.serializaion.SerializationCatalogReadActivity"
+            android:exported="true" android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".view.myself.MySettingActivity" />
         <activity android:name=".view.myself.AccountManagementActivity" />

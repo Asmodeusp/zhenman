@@ -1,43 +1,54 @@
 package com.zhenman.asus.zhenman.view.myself;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.StrictMode;
-import android.provider.MediaStore;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
-import com.zhenman.asus.zhenman.utils.umeng.PhotoUtils;
+import com.zhenman.asus.zhenman.contract.AlartDataContract;
+import com.zhenman.asus.zhenman.model.bean.AlartDataBean;
+import com.zhenman.asus.zhenman.presenter.AlartDataPresenter;
+import com.zhenman.asus.zhenman.utils.UploadUtil;
+import com.zhenman.asus.zhenman.utils.photo.PhotoHelp;
+import com.zhenman.asus.zhenman.utils.photo.PhotoUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class PersonalInformationActivity extends BaseActivity implements View.OnClickListener {
+import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.annotations.NonNull;
+
+public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter> implements View.OnClickListener, AlartDataContract.AlartDataInView {
 
 
     private TextView myInfo_skip;
-    private ImageView myInfo_avatar;
+    private CircleImageView myInfo_avatar;
     private EditText myInfo_enterNikeName;
     private TextView myInfo_selectBorn;
     private ImageView myInfo_boy;
@@ -55,9 +66,21 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
     private LinearLayout selector_popup_photo_line;
     private View popupView;
     private View popupView1;
-    private static String selectSex="";
-
-    @Override
+    private static String selectSex = "";
+    private EditText myInfo_introduction;
+    private static String bitmapString;
+    private TranslateAnimation animation;
+    //这是相册权限
+    private final int STORAGE_PERMISSIONS_REQUEST_CODE = 100;
+    //这是相册请求码
+    private final int CODE_GALLERY_REQUEST = 200;
+    //相机权限码
+    private final int CAMERA_PERMISSIONS_REQUEST_CODE = 300;
+    //相机请求码
+    private final int CODE_CAMERA_REQUEST = 400;
+    private String filePath;
+    private Map<ImageView,String> mHashMap;
+    private List<String> mList;
     protected int getLayoutId() {
         return R.layout.activity_personal_information;
     }
@@ -72,8 +95,12 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
         myInfo_boy = findViewById(R.id.myInfo_boy);
         myInfo_girl = findViewById(R.id.myInfo_girl);
         myInfo_finish = findViewById(R.id.myInfo_finish);
-        seventBug();
-        initPopup();
+        myInfo_introduction = findViewById(R.id.myInfo_introduction);
+        mHashMap = new HashMap<>();
+        mList=new ArrayList<>();
+//        seventBug();
+//        initPopup();
+
         idListener();
 
     }
@@ -118,7 +145,11 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                 break;
 //                切换头像
             case R.id.myInfo_avatar:
-                popupWindow.showAsDropDown(myInfo_finish, 0, 0);
+                showPopueWindow();
+//                popupWindow.showAsDropDown(myInfo_introduction, 0, 0);
+//// 设置popupWindow的显示位置，此处是在手机屏幕底部且水平居中的位置
+//                popupWindow.showAtLocation(PersonalInformationActivity.this.findViewById(R.id.myInfo_introduction), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+//                popupView.startAnimation(animation);
 
                 break;
             case R.id.myInfo_enterNikeName:
@@ -129,60 +160,122 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
             case R.id.myInfo_boy:
                 myInfo_boy.setAlpha(0.5f);
                 myInfo_girl.setAlpha(1.0f);
-                selectSex="男";
+                selectSex = "2";
                 break;
             case R.id.myInfo_girl:
                 myInfo_boy.setAlpha(1.0f);
                 myInfo_girl.setAlpha(0.5f);
-                selectSex="女";
+                selectSex = "1";
                 break;
             case R.id.myInfo_finish:
-
+                String accessToken = (String) SPUtils.get(PersonalInformationActivity.this, SPKey.USER_REFRESHTOKEN, "");
+                String oauthId = (String) SPUtils.get(this, SPKey.USER_OAUTHID, "");
+                Log.e("Sushine",accessToken);
+                Log.e("Sushine",oauthId);
+                presenter.sendAlartData("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzQ4MzYzOTAsInN1YiI6IntcInVzZXJJZFwiOjMwNixcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiQjUyNzI3NkIyODlFRjcyRTM5NzAxRUJDQjMyNzdFRUVcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4xLjVcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NjM3MjM5MH0.0nQECGVov3ZMpdbblKfBKThM7ogDtP-qJrOwT7bYHDs","69",selectSex,myInfo_enterNikeName.getText().toString(),myInfo_introduction.getText().toString(),bitmapString,myInfo_selectBorn.getText().toString());
                 break;
             case R.id.selector_popup_imgLibily_line:
-                showImgLibily();
+                PhotoHelp.autoObtainStoragePermission(PersonalInformationActivity.this, STORAGE_PERMISSIONS_REQUEST_CODE, CODE_GALLERY_REQUEST);
+                popupWindow.dismiss();
                 break;
             case R.id.selector_popup_photo_line:
-                showPhoto();
+                filePath = PhotoHelp.getFilePath();
+                PhotoHelp.applyForCameraPermission(PersonalInformationActivity.this, CAMERA_PERMISSIONS_REQUEST_CODE, filePath, CODE_CAMERA_REQUEST);
+                popupWindow.dismiss();
                 break;
             case R.id.selector_popup_dissmis_line:
                 popupWindow.dismiss();
                 break;
         }
     }
-
-    // android 7.0系统解决拍照的问题
-    @SuppressLint("NewApi")
-    private void seventBug() {
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
-        builder.detectFileUriExposure();
+    //显示详情
+    private void startIntent(ImageView view){
+        Intent intent = new Intent(this, PersonalInformationActivity.class);
+        intent.putExtra("name",mHashMap.get(view));
+        startActivity(intent);
+    }
+    //删除图片
+    private void delete(ImageView image, RelativeLayout relativeLayout, LinearLayout linearLayout){
+        mHashMap.remove(image);
+        relativeLayout.setVisibility(View.GONE);
+        linearLayout.setVisibility(View.VISIBLE);
     }
 
-    //调用系统相机
-    private void showPhoto() {
-        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        file = new File(Environment.getExternalStorageDirectory(), "image.jpg");
-        tempUri = Uri.fromFile(file);
-        // 指定照片保存路径（SD卡），image.jpg为一个临时文件，每次拍照后这个图片都会被替换
-        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
-        startActivityForResult(openCameraIntent, TAKE_PICTURE);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case CAMERA_PERMISSIONS_REQUEST_CODE:
+                filePath = PhotoHelp.getFilePath();
+                PhotoHelp.cameraPermissionResult(this, grantResults, CAMERA_PERMISSIONS_REQUEST_CODE, filePath, CODE_CAMERA_REQUEST);
+                break;
+            case STORAGE_PERMISSIONS_REQUEST_CODE://调用系统相册申请Sdcard权限回调
+                PhotoHelp.xiangCePermissionResult(this, grantResults, CODE_GALLERY_REQUEST);
+                break;
+        }
     }
 
-    //从相册选择图片
-    private void showImgLibily() {
-        Intent openAlbumIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        openAlbumIntent.setType("image/*");
-        startActivityForResult(openAlbumIntent, CHOOSE_PICTURE);
-        // 在点击之后设置popupwindow的销毁
-        if (popupWindow.isShowing()) {
-            popupWindow.dismiss();
-            lighton();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case CODE_CAMERA_REQUEST://拍照完成回调
+                    Bitmap cameraBitmap = BitmapFactory.decodeFile(filePath);
+                    Log.d("xaingji", filePath);
+
+                    myInfo_avatar.setImageBitmap(cameraBitmap);
+                    break;
+                case CODE_GALLERY_REQUEST://访问相册完成回调
+                    Bitmap xiangCeBitmap = PhotoHelp.xiangCeResult(this, data);
+                    String path = PhotoUtils.getPath(PersonalInformationActivity.this, data.getData());
+                    Log.d("xiangce", path);
+//                    这个不行
+                    myInfo_avatar.setImageBitmap(xiangCeBitmap);
+                    break;
+            }
         }
     }
 
 
-    //对图片处理的回调
+    private void showPopueWindow() {
+        popupView1 = LayoutInflater.from(this).inflate(R.layout.img_selector_popup, null);
+        selector_popup_dissmis_line = popupView1.findViewById(R.id.selector_popup_dissmis_line);
+        selector_popup_imgLibily_line = popupView1.findViewById(R.id.selector_popup_imgLibily_line);
+        selector_popup_photo_line = popupView1.findViewById(R.id.selector_popup_photo_line);
+        //获取屏幕宽高
+        int weight = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels * 1 / 4;
+
+        popupWindow = new PopupWindow(popupView1, weight, height);
+        // popupWindow.setAnimationStyle(R.style.anim_popup_dir);
+        popupWindow.setFocusable(true);
+        //点击外部popueWindow消失
+        popupWindow.setOutsideTouchable(true);
+        selector_popup_imgLibily_line.setOnClickListener(this);
+        selector_popup_photo_line.setOnClickListener(this);
+        selector_popup_dissmis_line.setOnClickListener(this);
+        //popupWindow消失屏幕变为不透明
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1.0f;
+                getWindow().setAttributes(lp);
+            }
+        });
+        popupWindow.showAtLocation(popupView1, Gravity.BOTTOM, 0, 0);
+    }
+
+
+
+
+
+
+
+
+  /*  //对图片处理的回调
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -201,100 +294,32 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                     break;
             }
         }
-    }
-
-    /**
-     * 裁剪图片方法实现
-     *
-     * @param uri
-     */
-    protected void startPhotoZoom(Uri uri) {
-        if (uri == null) {
-
-        }
-        tempUri = uri;
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        // 设置裁剪
-        intent.putExtra("crop", "true");
-        // aspectX aspectY 是宽高的比例
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 150);
-        intent.putExtra("outputY", 150);
-        intent.putExtra("return-data", true);
-        startActivityForResult(intent, CROP_SMALL_PICTURE);
-    }
-
-    /**
-     * 保存裁剪之后的图片数据
-     *
-     * @param
-     * @param
-     */
-    protected void setImageToView(Intent data) {
-        Bundle extras = data.getExtras();
-        if (extras != null) {
-            Bitmap photo = extras.getParcelable("data");
-            photo = PhotoUtils.toRoundBitmap(photo, tempUri); // 这个时候的图片已经被处理成圆形的了
-//            toUploadFile();
-            myInfo_avatar.setImageBitmap(photo);
-        }
-    }
-
-    private void initPopup() {
-        popupView1 = LayoutInflater.from(this).inflate(R.layout.img_selector_popup, null);
-        selector_popup_dissmis_line = popupView1.findViewById(R.id.selector_popup_dissmis_line);
-        selector_popup_imgLibily_line = popupView1.findViewById(R.id.selector_popup_imgLibily_line);
-        selector_popup_photo_line = popupView1.findViewById(R.id.selector_popup_photo_line);
-        selector_popup_dissmis_line.setOnClickListener(this);
-        selector_popup_imgLibily_line.setOnClickListener(this);
-        selector_popup_photo_line.setOnClickListener(this);
-        popupWindow = new PopupWindow(popupView1, WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT);
-        // 需要设置一下此参数，点击外边可消失
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        //设置点击窗口外边窗口消失
-        popupWindow.setOutsideTouchable(true);
-        // 设置此参数获得焦点，否则无法点击
-        popupWindow.setFocusable(true);
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                lighton();
-            }
-        });
-        // 平移动画相对于手机屏幕的底部开始，X轴不变，Y轴从1变0
-        TranslateAnimation animation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0,
-                Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0);
-        animation.setInterpolator(new AccelerateInterpolator());
-        animation.setDuration(200);
-
-    }
-
-    /**
-     * 设置手机屏幕亮度显示正常
-     */
-    private void lighton() {
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.alpha = 1f;
-        getWindow().setAttributes(lp);
-    }
-
+    }*/
     /**
      * 上传图片到服务器
      */
     private void toUploadFile() {
-//        String fileKey = "avatarFile";
-//        UploadUtil uploadUtil = UploadUtil.getInstance();
+
+        String fileKey = "avatarFile";
+        UploadUtil uploadUtil = UploadUtil.getInstance();
 //        uploadUtil.setOnUploadProcessListener(this); //设置监听器监听上传状态
-//        Map<String, String> params = new HashMap<>();//上传map对象
-//        params.put("picName", "UserIcon");
-//        params.put("code", "1");
-//        uploadUtil.uploadFile(file, fileKey, "http://154.8.215.210:8888/api/Public/uploadPic", params);
-//        Toast.makeText(this, "上传成功", Toast.LENGTH_LONG).show();
+        Map<String, String> params = new HashMap<>();//上传map对象
+        params.put("picName", "UserIcon");
+        params.put("code", "1");
+        uploadUtil.uploadFile(file, fileKey, "http://154.8.215.210:8888/api/Public/uploadPic", params);
+        Toast.makeText(this, "上传成功", Toast.LENGTH_LONG).show();
 //        uploadPicturePresenter.loadUploadPictureData("UserIcon",1);
     }
 
+    //修改个人资料
+    @Override
+    public void showAlartData(AlartDataBean alartDataBean) {
+        Log.e("Sunshine",alartDataBean.getMsg());
+        if (!alartDataBean.getMsg().isEmpty()&&alartDataBean.getMsg().equals("成功")) {
+            Toast.makeText(this, "修改资料成功", Toast.LENGTH_SHORT).show();
+            finish();
+        }else {
+            Toast.makeText(this, "请先完成登陆", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

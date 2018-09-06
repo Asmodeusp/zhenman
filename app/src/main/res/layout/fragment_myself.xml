@@ -55,8 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/my_Name"
-            android:layout_alignLeft="@+id/my_FansNumber"
-            android:layout_alignStart="@+id/my_FansNumber"
+            android:layout_toRightOf="@id/my_Name"
+            android:layout_marginLeft="8px"
             android:src="@mipmap/my_f" />
 
         <TextView

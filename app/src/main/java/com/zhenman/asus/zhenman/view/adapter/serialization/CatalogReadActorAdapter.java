@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
-import com.zhenman.asus.zhenman.presenter.SerializationCatalogReadPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhy.autolayout.utils.AutoUtils;
 
@@ -35,7 +34,7 @@ public class CatalogReadActorAdapter extends RecyclerView.Adapter<CatalogReadAct
 
 
     public interface CatalogReadActorCallback {
-        void makeOrder();
+        void makeOrder(int position);
 
     }
     @NonNull
@@ -56,7 +55,7 @@ public class CatalogReadActorAdapter extends RecyclerView.Adapter<CatalogReadAct
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final Holder holder, int position) {
+    public void onBindViewHolder(@NonNull final Holder holder, final int position) {
         SerializationDetailsBean.DataBean.ActorListBean listBean = list.get(position);
         holder.Actor_Position.setText(listBean.getTagName());
         holder.Actor_Name.setText(listBean.getName());
@@ -64,7 +63,7 @@ public class CatalogReadActorAdapter extends RecyclerView.Adapter<CatalogReadAct
         holder.Actor_Money.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CatalogReadActorCallback.makeOrder();
+                CatalogReadActorCallback.makeOrder(position);
             }
         });
 //        加载圆形图片

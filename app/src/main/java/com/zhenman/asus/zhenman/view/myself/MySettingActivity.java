@@ -13,6 +13,7 @@ import com.zhenman.asus.zhenman.contract.MySettingContract;
 import com.zhenman.asus.zhenman.model.bean.CancelLoginBean;
 import com.zhenman.asus.zhenman.presenter.MySettingPresenter;
 import com.zhenman.asus.zhenman.utils.DataCleanUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhy.autolayout.AutoRelativeLayout;
 
@@ -119,6 +120,7 @@ public class MySettingActivity extends BaseActivity<MySettingPresenter> implemen
     @Override
     public void showCancelLoginData(CancelLoginBean cancelLoginBean) {
         if (cancelLoginBean.getMsg().equals("成功")){
+            SPUtils.clear(this);
             startActivity(new Intent(MySettingActivity.this, MainActivity.class));
         }else {
             Toast.makeText(this, "退出登陆失败", Toast.LENGTH_SHORT).show();
