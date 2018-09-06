@@ -16,6 +16,7 @@
     <!-- 相机相册 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -43,7 +44,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.MainActivity.provider"
+            android:authorities="com.zhenman.asus.zhenman.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -52,7 +53,11 @@
         </provider>
 
         <activity android:name=".view.login.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <!-- 微信 -->
@@ -132,16 +137,19 @@
         <activity android:name=".view.login.UserInfoActivity" />
         <activity android:name=".view.serializaion.ClassifyActivity" />
         <activity android:name=".view.serializaion.WorkDetailsActivity" />
-        <activity
-            android:name=".view.serializaion.SerializationCatalogReadActivity"
+        <activity android:name=".view.serializaion.SerializationCatalogReadActivity"
             android:exported="true" android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustResize"></activity>
+          />
         <activity android:name=".view.myself.MySettingActivity" />
         <activity android:name=".view.myself.AccountManagementActivity" />
         <activity android:name=".view.myself.PersonalInformationActivity" />
         <activity android:name=".view.myself.MyWalletActivity" />
-        <activity android:name=".view.myself.MyselfPageActivity"></activity>
-        <activity android:name=".view.serializaion.SerializaionCommentDetailsActivity"></activity>
+        <activity android:name=".view.myself.MyselfPageActivity" />
+        <activity android:name=".view.serializaion.SerializaionCommentDetailsActivity" />
+        <activity android:name=".view.myself.ModifyPasswordOneActivity" />
+        <activity android:name=".view.myself.PurchaseHistoryActivity" />
+        <activity android:name=".view.myself.MyDraftActivity" />
+        <activity android:name=".view.myself.HomepageActivity"></activity>
     </application>
 
 </manifest>
