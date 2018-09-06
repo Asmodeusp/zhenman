@@ -6,6 +6,9 @@ import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.SerializationCatalogReadContract;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
+import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
+import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
+import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
@@ -237,6 +240,90 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                     }
                 });
     }
+
+    @Override
+    public void getPgcChapterCommentListByOffSetBean(String chapterId, String start, String end, String pageNum) {
+        Map<String, String> Headermap = new HashMap<>();
+        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
+        Map<String, String> map = new HashMap<>();
+        map.put("chapterId", chapterId);
+        map.put("start", start);
+        map.put("end", end);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", "60");
+        RetrofitUtils.getInstance()
+                .getService(SerializationCatalogReadService.class)
+                .getPgcChapterCommentListByOffSetBean(Headermap, map)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<PgcChapterCommentListByOffSetBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean) {
+                        if (pgcChapterCommentListByOffSetBean.getState() == 0) {
+                            serializationCatalogReadView.showError(pgcChapterCommentListByOffSetBean.getMsg());
+                            serializationCatalogReadView.showPgcChapterCommentListByOffSetBean(pgcChapterCommentListByOffSetBean);
+                        } else {
+                            serializationCatalogReadView.showError(pgcChapterCommentListByOffSetBean.getMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void PGCReadFabulous(String productId, String commentId, String status, String pgcId) {
+        Map<String, String> Headermap = new HashMap<>();
+//        Headermap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN, ""));
+        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
+        Map<String, String> map = new HashMap<>();
+        map.put("productId", productId);
+        map.put("commentId", commentId);
+        map.put("status", status);
+        map.put("pgcId", pgcId);
+        RetrofitUtils.getInstance()
+                .getService(SerializationCatalogReadService.class)
+                .GetPGCReadFabulousBean(Headermap, map)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<PgcReadFabulousBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(PgcReadFabulousBean pgcReadFabulousBean) {
+                        if (pgcReadFabulousBean != null) {
+                            Log.e("12345",serializationCatalogReadView.toString());
+                            serializationCatalogReadView.showError(pgcReadFabulousBean.getMsg());
+                            serializationCatalogReadView.showPGCReadFabulousBean(pgcReadFabulousBean);
+                            Log.e("123456",serializationCatalogReadView.toString());
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
     //得到微信支付数据
     @Override
     public void sendGetWxPayData(String orderSn) {

@@ -5,7 +5,7 @@ android {
         debug {
             keyAlias 'key0'
             keyPassword '123456'
-            storeFile file('E:/ZHEN_MAN/zhenman/app/zhenman.jks')
+            storeFile file('E:/zhenman.jks')
             storePassword '123456'
         }
     }
@@ -88,8 +88,8 @@ dependencies {
     implementation 'com.github.open-android:ViewPager:0.1.0'
     //时间地区选择器
     implementation 'com.contrarywind:Android-PickerView:4.1.6'
-//    微信
+    //    微信
     implementation files('libs/libammsdk.jar')
-//    圆形图片
+    //    圆形图片
     implementation 'de.hdodenhof:circleimageview:2.1.0'
 }

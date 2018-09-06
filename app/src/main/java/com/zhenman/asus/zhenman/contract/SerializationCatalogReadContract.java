@@ -3,6 +3,9 @@ package com.zhenman.asus.zhenman.contract;
 import com.zhenman.asus.zhenman.base.BasePresenter;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
+import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
+import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
+import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
@@ -39,11 +42,11 @@ public interface SerializationCatalogReadContract {
         void getSerializationCatalogBean(String PgcId);
 
         void getSerializationDetailsBean(String PgcId);
-        //        创建订单
+        //创建订单
         void setMakeOrderData(String productId, String type, String catalogId, String toUserId, String amount, String comment);
-        //        创建微信订单
+        //创建微信订单
         void setWxMakeOrderData(String productId, String type, String catalogId, String toUserId, String amount, String comment);
-        //        得到支付宝支付数据
+        //得到支付宝支付数据
         void sendGetPayData(String orderSn);
         //得到作品章节下页对应的评论列表
         void getPgcChapterCommentListByOffSetBean(String chapterId,String start,String end,String pageNum );
