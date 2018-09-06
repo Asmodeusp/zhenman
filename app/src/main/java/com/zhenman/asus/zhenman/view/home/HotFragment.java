@@ -55,7 +55,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
         Home_search_Img = getActivity().findViewById(R.id.HomeHot_search_Img);
         Home_headView = getActivity().findViewById(R.id.HomeHot_HeadView);
 
-        //        ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(),LinearLayoutManager.VERTICAL);
+        //ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(),LinearLayoutManager.VERTICAL);
         ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(), LinearLayoutManager.VERTICAL) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -76,8 +76,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
             @Override
             public void onPageSelected(int position, boolean isBottom) {
-                Log.e("onPageSelected",""+position);
-                Log.e("onPageSelected",""+isBottom);
+
                 if(!isBottom)
                 Home_ListView.scrollToPosition(position);
             }

@@ -122,6 +122,16 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                 }
             }
         });
+        holder.home_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initCommmentPopu();
+            }
+        });
+
+    }
+
+    private void initCommmentPopu() {
 
     }
 
@@ -192,4 +202,5 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
             AutoUtils.autoSize(itemView);
         }
     }
+
 }

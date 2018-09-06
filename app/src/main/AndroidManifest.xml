@@ -52,11 +52,7 @@
         </provider>
 
         <activity android:name=".view.login.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <!-- 微信 -->
@@ -136,7 +132,9 @@
         <activity android:name=".view.login.UserInfoActivity" />
         <activity android:name=".view.serializaion.ClassifyActivity" />
         <activity android:name=".view.serializaion.WorkDetailsActivity" />
-        <activity android:name=".view.serializaion.SerializationCatalogReadActivity" />
+        <activity
+            android:name=".view.serializaion.SerializationCatalogReadActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".view.myself.MySettingActivity" />
         <activity android:name=".view.myself.AccountManagementActivity" />
         <activity android:name=".view.myself.PersonalInformationActivity" />

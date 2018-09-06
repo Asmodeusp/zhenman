@@ -54,25 +54,31 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
         //得到连载详情Bean
         SerializationDetailsBean.DataBean data = ((WorkDetailsActivity) getActivity()).serializationDetailsBeandata;
         serializationCatalogBean = ((WorkDetailsActivity) getActivity()).serializationCatalogBean;
-        if (data.getActorList().size() == 0 && data.getActorList() == null) {
-            Actor_RecyTips.setVisibility(View.VISIBLE);
+        if (data!=null) {
+            if (data.getActorList().size() == 0 && data.getActorList() == null) {
+                Actor_RecyTips.setVisibility(View.VISIBLE);
+            }
+            //设置作品描述
+            Work_DescriptionText.setText(data.getIntroduction());
+            //设置演员列表格式
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            Actor_Recy.setLayoutManager(linearLayoutManager);
+            //设置演员列表适配器
+            Actor_Recy.setAdapter(new WorkDetailsActorRecyAdapter(data.getActorList()));
         }
-        if (serializationCatalogBean.getData() != null) {
+
+        if (serializationCatalogBean!=null) {
             pgcId = serializationCatalogBean.getData().get(0).getPgcId();
             presenter.getWorkDetailsCommentBean(pgcId, "" + 1);
         }
+
         if (result.size() == 0) {
             work_commentTips.setVisibility(View.VISIBLE);
             Work_commentRecy.setVisibility(View.GONE);
         }
-        //设置作品描述
-        Work_DescriptionText.setText(data.getIntroduction());
-        //设置演员列表格式
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        Actor_Recy.setLayoutManager(linearLayoutManager);
-        //设置演员列表适配器
-        Actor_Recy.setAdapter(new WorkDetailsActorRecyAdapter(data.getActorList()));
+
+
         //设置评论列表格式
         Work_commentRecy.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

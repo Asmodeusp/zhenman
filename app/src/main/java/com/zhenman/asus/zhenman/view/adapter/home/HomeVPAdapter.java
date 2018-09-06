@@ -9,7 +9,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 
-public class HomeVPAdapter extends FragmentPagerAdapter {
+public class
+
+
+
+
+
+HomeVPAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;
 
     public HomeVPAdapter(FragmentManager fm, List<Fragment> fragments) {

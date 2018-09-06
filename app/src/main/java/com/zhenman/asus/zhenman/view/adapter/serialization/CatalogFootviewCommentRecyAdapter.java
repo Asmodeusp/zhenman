@@ -24,12 +24,13 @@ import java.util.List;
 
 
 public class CatalogFootviewCommentRecyAdapter extends RecyclerView.Adapter<CatalogFootviewCommentRecyAdapter.Holder> implements View.OnClickListener {
-    private List<PgcChapterCommentListByOffSetBean.DataBean.ResultBean> list;
+    private List<PgcChapterCommentListByOffSetBean.DataBean.ResultBeanX> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
     String productId;
     SerializationCatalogReadPresenterImp presenter;
-    public CatalogFootviewCommentRecyAdapter(List<PgcChapterCommentListByOffSetBean.DataBean.ResultBean> list, String productId, SerializationCatalogReadPresenterImp presenter) {
+
+    public CatalogFootviewCommentRecyAdapter(List<PgcChapterCommentListByOffSetBean.DataBean.ResultBeanX> list, String productId, SerializationCatalogReadPresenterImp presenter) {
         this.list = list;
         this.productId = productId;
         this.presenter = presenter;
@@ -89,35 +90,57 @@ public class CatalogFootviewCommentRecyAdapter extends RecyclerView.Adapter<Cata
                 @Override
                 public void onClick(View v) {
                     if (holder.Work_commentRecy_Like.isChecked()) {
-                        holder. Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
-                        presenter.PGCFabulous(productId, list.get(position).getCommentId(), "0", "");
+                        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
+                        if (clickZan != null) {
+                            clickZan.zan(list.get(position).getCommentId(), "0", "");
+//                        presenter.PGCReadFabulous(productId, list.get(position).getCommentId(), "0", "");
+                        }
                         holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) - 1 + "");
                     } else {
-                        presenter.PGCFabulous(productId, list.get(position).getCommentId(), "1", "");
-                        holder. Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
-                        holder.  Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
+                        if (clickZan != null) {
+                            clickZan.zan(list.get(position).getCommentId(), "1", "");
+                        }
+//                        presenter.PGCReadFabulous(productId, list.get(position).getCommentId(), "1", "");
+                        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
+                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
                     }
                 }
             });
         } else {
-            holder.  Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
+            holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
             holder.Work_commentRecy_Like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (holder.Work_commentRecy_Like.isChecked()) {
-                        presenter.PGCFabulous(productId, list.get(position).getCommentId(), "1", "");
-                        holder. Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
-                        holder. Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
+                        if (clickZan != null) {
+                            clickZan.zan(list.get(position).getCommentId(), "1", "");
+                        }
+//                        presenter.PGCReadFabulous(productId, list.get(position).getCommentId(), "1", "");
+                        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_on);
+                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
                     } else {
-                        presenter.PGCFabulous(productId, list.get(position).getCommentId(), "0", "");
-                        holder. Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
-                        holder. Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
+//                        presenter.PGCReadFabulous(productId, list.get(position).getCommentId(), "0", "");
+                        if (clickZan != null) {
+                            clickZan.zan(list.get(position).getCommentId(), "0", "");
+                        }
+                        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.guanzhu_like_off);
+                        holder.Work_commentRecy_LikeNumber.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
                     }
                 }
             });
         }
         holder.Work_commentRecy_UserName.setText(list.get(position).getName());
         holder.itemView.setTag(position);
+    }
+
+    private ClickZan clickZan;
+
+    public void setClickZan(ClickZan clickZan) {
+        this.clickZan = clickZan;
+    }
+
+    public interface ClickZan {
+        void zan(String commentId, String status, String pgcId);
     }
 
     @Override

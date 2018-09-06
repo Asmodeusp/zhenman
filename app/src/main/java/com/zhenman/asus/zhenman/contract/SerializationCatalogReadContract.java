@@ -5,6 +5,7 @@ import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
 import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
+import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
@@ -25,7 +26,7 @@ public interface SerializationCatalogReadContract {
         //得到作品章节下页对应的评论列表
         void showPgcChapterCommentListByOffSetBean(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean);
         //Pgc点赞
-        void showPGCFabulousBean(PgcFabulousBean pgcFabulousBean);
+        void showPGCReadFabulousBean(PgcReadFabulousBean pgcReadFabulousBean);
 
     }
     //连载页阅读Presenter
@@ -40,7 +41,7 @@ public interface SerializationCatalogReadContract {
         //得到作品章节下页对应的评论列表
         void getPgcChapterCommentListByOffSetBean(String chapterId,String start,String end,String pageNum );
         //点赞  1 点赞   0 取消
-        void PGCFabulous (String productId, String commentId,String status,String pgcId);
+        void PGCReadFabulous (String productId, String commentId,String status,String pgcId);
 
     }
 }
