@@ -12,16 +12,14 @@ import java.util.List;
 public class
 
 
-
-
-
 HomeVPAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;
+    private List<String> Titles;
 
-    public HomeVPAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public HomeVPAdapter(FragmentManager fm, List<Fragment> fragments, List<String> Titles) {
         super(fm);
         this.fragments = fragments;
-
+        this.Titles = Titles;
     }
 
     @Override
@@ -34,4 +32,8 @@ HomeVPAdapter extends FragmentPagerAdapter {
         return fragments.isEmpty() ? 0 : fragments.size();
     }
 
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return Titles.get(position);
+    }
 }

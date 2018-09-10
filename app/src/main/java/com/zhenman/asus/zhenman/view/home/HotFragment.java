@@ -50,10 +50,6 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     private void initView() {
         Home_ListView = getActivity().findViewById(R.id.HomeHot_List);
-        Home_HotText = getActivity().findViewById(R.id.HomeHot_HotText);
-        HomeHot_AttentionText = getActivity().findViewById(R.id.HomeHot_AttentionText);
-        Home_search_Img = getActivity().findViewById(R.id.HomeHot_search_Img);
-        Home_headView = getActivity().findViewById(R.id.HomeHot_HeadView);
 
         //ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(),LinearLayoutManager.VERTICAL);
         ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(), LinearLayoutManager.VERTICAL) {
