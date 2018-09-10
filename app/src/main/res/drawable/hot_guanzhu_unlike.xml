@@ -3,15 +3,15 @@
     android:oneshot="true">
     <item
         android:drawable="@mipmap/unlike_01"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/unlike_02"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/unlike_03"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/unlike_04"
-        android:duration="200" />
+        android:duration="100" />
 
 </animation-list>

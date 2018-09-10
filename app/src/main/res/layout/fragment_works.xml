@@ -126,7 +126,7 @@
                 android:button="@null" />
 
             <TextView
-                android:id="@+id/HomeHot_WorksDetails_likeText"
+                android:id="@+id/HomeHot_WorksDetails_likeTextNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -215,18 +215,5 @@
                 android:textSize="24px" />
         </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoLinearLayout>
-
-
-    <!--<ProgressBar-->
-    <!--android:id="@+id/home_ProgressBar"-->
-    <!--style="?android:attr/progressBarStyleHorizontal"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="1px"-->
-
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:layout_alignParentStart="true"-->
-    <!--android:progressDrawable="@drawable/progressbar_preview" />-->
-
 
 </com.zhy.autolayout.AutoRelativeLayout>

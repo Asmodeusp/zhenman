@@ -3,15 +3,15 @@ package com.zhenman.asus.zhenman.view.home;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.HomeHotContract;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
+import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeHotVerticalVpAdapter;
 import com.zhy.autolayout.AutoLinearLayout;
@@ -54,7 +54,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     }
 
     private void initView() {
-
+        HomeHot_VerticalViewpager = getActivity().findViewById(R.id.HomeHot_VerticalViewpager);
     }
 
 
@@ -77,7 +77,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
         List<HomeHotBean.DataBean> data = homeHotBean.getData();
         for (int i = 0; i < data.size(); i++) {
 //            ArrayList<String> urls = new ArrayList<>();
-            WorksFragment addFragment = new WorksFragment(HomeHot_VerticalViewpager);
+            WorksFragment addFragment = new WorksFragment(HomeHot_VerticalViewpager,presenter);
             Bundle bundle = new Bundle();
 //            bundle.putInt("index", i);
 //            bundle.putInt("size", data.size());
@@ -89,7 +89,13 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
             addFragment.setArguments(bundle);
             fragments.add(addFragment);
         }
-        HomeHot_VerticalViewpager.setAdapter(new HomeHotVerticalVpAdapter(fragments, getActivity().getSupportFragmentManager()));
+        HomeHotVerticalVpAdapter homeHotVerticalVpAdapter = new HomeHotVerticalVpAdapter(fragments, getActivity().getSupportFragmentManager());
+        HomeHot_VerticalViewpager.setAdapter(homeHotVerticalVpAdapter);
+
+    }
+
+    @Override
+    public void showPGCReadFabulousBean(UgcFabulousBean ugcFabulousBean) {
 
     }
 

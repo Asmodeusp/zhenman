@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-import cn.youngkaaa.yviewpager.YFragmentPagerAdapter;
 
-public class HomeHotVerticalVpAdapter extends YFragmentPagerAdapter {
+
+public class HomeHotVerticalVpAdapter extends FragmentPagerAdapter {
     ArrayList<Fragment> fragments ;
     public HomeHotVerticalVpAdapter( ArrayList<Fragment> fragments,FragmentManager fm) {
         super(fm);

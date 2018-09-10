@@ -3,41 +3,41 @@
     android:oneshot="true">
     <item
         android:drawable="@mipmap/like_01"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/like_02"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/like_03"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/like_04"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/like_05"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/like_06"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/like_07"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/like_08"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/like_09"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/like_10"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/like_11"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/like_12"
-        android:duration="200" />
+        android:duration="100" />
     <item
         android:drawable="@mipmap/like_13"
-        android:duration="200" />
+        android:duration="100" />
 </animation-list>

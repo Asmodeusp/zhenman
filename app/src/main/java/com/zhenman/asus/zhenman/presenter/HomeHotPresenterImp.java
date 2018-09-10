@@ -1,8 +1,14 @@
 package com.zhenman.asus.zhenman.presenter;
 
+import android.util.Log;
+
 import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.HomeHotContract;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
+import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
+import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
+import com.zhenman.asus.zhenman.model.service.HomeHotService;
+import com.zhenman.asus.zhenman.model.service.SerializationCatalogReadService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
@@ -34,7 +40,7 @@ public class HomeHotPresenterImp implements HomeHotContract.HomeHotPresenter {
     public void getHomeHotBean(String pageNum) {
         Map<String, String> Headermap = new HashMap<>();
 //        Headermap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN,""));
-        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzU3MDY0MzMsInN1YiI6IntcInVzZXJJZFwiOjM3NCxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMjY5MjM3ODlDRjhGQzJGOUE2OUQzQkFBMTU1QUMwQTRcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4xLjVcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NzI0MjQzM30.MgRXQqZ-UXG6NyRU95PBpl2FQF84TjkU0bT-0bgXOMg");
+        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", pageNum);
         map.put("pageSize","20");
@@ -56,6 +62,44 @@ public class HomeHotPresenterImp implements HomeHotContract.HomeHotPresenter {
                     @Override
                     public void onError(Throwable e) {
                     }
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void UgcFabulous(String productId, String status) {
+        Map<String, String> Headermap = new HashMap<>();
+//        Headermap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN, ""));
+        Headermap.put("accessToken", "");
+        Map<String, String> map = new HashMap<>();
+        map.put("productId", productId);
+        map.put("status", status);
+        RetrofitUtils.getInstance()
+                .getService(HomeHotService.class)
+                .GetUgcFabulousBean(Headermap, map)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UgcFabulousBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(UgcFabulousBean ugcFabulousBean) {
+                        if (ugcFabulousBean != null) {
+                            homeHotView.showError(ugcFabulousBean.getMsg());
+                            homeHotView.showPGCReadFabulousBean(ugcFabulousBean);
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
                     @Override
                     public void onComplete() {
 

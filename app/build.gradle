@@ -85,7 +85,7 @@ dependencies {
     //蚂蚁金服   支付
     implementation files('libs/alipaySdk-20180601.jar')
     //垂直Viewpager
-    implementation 'com.github.open-android:ViewPager:0.1.0'
+    implementation 'cn.youngkaaa:yviewpager:0.4'
     //时间地区选择器
     implementation 'com.contrarywind:Android-PickerView:4.1.6'
     //    微信
