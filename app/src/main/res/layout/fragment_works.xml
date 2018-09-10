@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/home_fillView"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="#000"
+    tools:context=".view.home.WorksFragment">
 
     <ImageView
-        android:visibility="gone"
-        android:id="@+id/home_Recy_fill_RecyImg"
+        android:id="@+id/HomeHot_Works_Image"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_height="wrap_content" />
+        android:visibility="gone" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/home_Recy_fill_Recy"
+        android:id="@+id/HomeHot_WorksDetailsRecy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"></android.support.v7.widget.RecyclerView>
 
     <com.zhy.autolayout.AutoRelativeLayout
-        android:id="@+id/Home_footView"
+        android:id="@+id/HomeHot_WorksDetails_FootView"
         android:layout_width="match_parent"
         android:layout_height="680px"
         android:layout_alignParentBottom="true"
@@ -40,7 +41,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/home_ChallengeText"
+            android:id="@+id/HomeHot_WorksDetails_ChallengeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/home_text"
@@ -52,7 +53,7 @@
             android:textSize="26px" />
 
         <TextView
-            android:id="@+id/home_UserNameText"
+            android:id="@+id/HomeHot_WorksDetails_UserNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8px"
@@ -61,7 +62,7 @@
             android:textSize="32px" />
 
         <TextView
-            android:id="@+id/home_describe"
+            android:id="@+id/HomeHot_WorksDetails_DescribeText"
             android:layout_width="522px"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40px"
@@ -71,6 +72,7 @@
     </com.zhy.autolayout.AutoLinearLayout>
 
     <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/HomeHot_WorksDetails"
         android:layout_width="116px"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -90,13 +92,13 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/home_HeadImg"
+                    android:id="@+id/HomeHot_WorksDetails_HeadImg"
                     android:layout_width="100px"
                     android:layout_height="100px"
                     android:src="@mipmap/my_qiezi" />
 
                 <ImageView
-                    android:id="@+id/home_follow"
+                    android:id="@+id/HomeHot_WorksDetails_follow"
                     android:layout_width="40px"
                     android:layout_height="40px"
                     android:layout_alignParentTop="true"
@@ -108,7 +110,7 @@
 
         <com.zhy.autolayout.AutoLinearLayout
 
-            android:id="@+id/home_like"
+            android:id="@+id/HomeHot_WorksDetails_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -117,14 +119,14 @@
             android:orientation="vertical">
 
             <CheckBox
-                android:id="@+id/home_likeImg"
+                android:id="@+id/HomeHot_WorksDetails_likeImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="-24px"
                 android:button="@null" />
 
             <TextView
-                android:id="@+id/home_likeText"
+                android:id="@+id/HomeHot_WorksDetails_likeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -135,7 +137,7 @@
         </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/home_comment"
+            android:id="@+id/HomeHot_WorksDetails_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/home_share"
@@ -151,7 +153,7 @@
                 android:src="@mipmap/home_comment" />
 
             <TextView
-                android:id="@+id/home_commentText"
+                android:id="@+id/HomeHot_WorksDetails_commentText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -162,7 +164,7 @@
         </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/home_share"
+            android:id="@+id/HomeHot_WorksDetails_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/home_edit"
@@ -188,7 +190,7 @@
         </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/home_edit"
+            android:id="@+id/HomeHot_WorksDetails_ReEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -197,7 +199,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/home_edit_Image"
+                android:id="@+id/HomeHot_WorksDetails_ReEditImage"
                 android:layout_width="64px"
                 android:layout_height="64px"
                 android:layout_gravity="center"
@@ -225,5 +227,6 @@
     <!--android:layout_alignParentLeft="true"-->
     <!--android:layout_alignParentStart="true"-->
     <!--android:progressDrawable="@drawable/progressbar_preview" />-->
+
 
 </com.zhy.autolayout.AutoRelativeLayout>

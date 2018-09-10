@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.home.HotFragment">
-
-   <android.support.v7.widget.RecyclerView
-       android:id="@+id/HomeHot_List"
+   <cn.youngkaaa.yviewpager.YViewPager
+       android:id="@+id/HomeHot_VerticalViewpager"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+       android:layout_height="match_parent">
+
+   </cn.youngkaaa.yviewpager.YViewPager>
 
 
 

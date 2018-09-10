@@ -25,7 +25,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
     private AutoRelativeLayout ReleaseButton;
     private AutoRelativeLayout MessageButton;
     private AutoRelativeLayout MyselfButton;
-    private AutoLinearLayout group;
+    public AutoLinearLayout group;
     private TextView SerializationText;
     private TextView MessageText;
     private TextView MyselfText;

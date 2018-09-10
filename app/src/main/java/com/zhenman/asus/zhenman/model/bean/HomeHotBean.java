@@ -214,7 +214,7 @@ public class HomeHotBean implements Serializable {
             this.pageDtoList = pageDtoList;
         }
 
-        public static class PageDtoListBean {
+        public static class PageDtoListBean implements Serializable {
             private String imageUrl;
             private String width;
             private String height;
