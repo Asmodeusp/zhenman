@@ -14,6 +14,7 @@ import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeHotVerticalVpAdapter;
+import com.zhenman.asus.zhenman.view.ui.MyViewPager;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
@@ -29,7 +30,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     //头部视图
     private AutoRelativeLayout home_headView;
     ArrayList<Fragment> fragments = new ArrayList<>();
-    private YViewPager HomeHot_VerticalViewpager;
+    private MyViewPager HomeHot_VerticalViewpager;
 
     public HotFragment() {
         super();
@@ -76,15 +77,8 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     public void showHotBean(HomeHotBean homeHotBean) {
         List<HomeHotBean.DataBean> data = homeHotBean.getData();
         for (int i = 0; i < data.size(); i++) {
-//            ArrayList<String> urls = new ArrayList<>();
             WorksFragment addFragment = new WorksFragment(HomeHot_VerticalViewpager,presenter);
             Bundle bundle = new Bundle();
-//            bundle.putInt("index", i);
-//            bundle.putInt("size", data.size());
-//            for (HomeHotBean.DataBean.PageDtoListBean pageDtoListBean : data.get(i).getPageDtoList()) {
-//                urls.add(pageDtoListBean.getImageUrl());
-//            }
-//            bundle.putStringArrayList("url", urls);
             bundle.putSerializable("data",data.get(i));
             addFragment.setArguments(bundle);
             fragments.add(addFragment);

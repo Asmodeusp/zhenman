@@ -63,4 +63,6 @@ public class Urls {
     public static final String PURCHASE_HISTORY="userCoinAccount/getCoinAccountOutList";
     //作品章节下页对应的评论列表
     public static final String PGC_CHAPTER_COMMENT_LIST_BY_OFFSET  ="pgcChapterCommentInfo/getPgcChapterCommentListByOffSet";
+    //Ugc的评论
+    public static final String UGC_COMMENT_BYCOMICID = "ugcCommentInfo/getCommentListByComicId";
 }

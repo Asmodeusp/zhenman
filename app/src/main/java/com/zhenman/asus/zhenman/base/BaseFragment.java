@@ -32,8 +32,9 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
         if (presenter != null) {
             presenter.actualView(this);
         }
-        init();
         loadDate();
+        init();
+
     }
 
     private T getPresenter() {

@@ -66,9 +66,9 @@ public class HomeHotBean implements Serializable {
 
         private String name;
         private String id;
-        private Object catalogId;
+        private String catalogId;
         private String userId;
-        private int type;
+        private String type;
         private Object headImg;
         private String finalImg;
         private String  coverImg;
@@ -83,7 +83,7 @@ public class HomeHotBean implements Serializable {
         private boolean like;
         private boolean reCreate;
         private String subjectName;
-        private int subjectId;
+        private String subjectId;
         private List<PageDtoListBean> pageDtoList;
 
         public Object getName() {
@@ -102,11 +102,11 @@ public class HomeHotBean implements Serializable {
             this.id = id;
         }
 
-        public Object getCatalogId() {
+        public String getCatalogId() {
             return catalogId;
         }
 
-        public void setCatalogId(Object catalogId) {
+        public void setCatalogId(String catalogId) {
             this.catalogId = catalogId;
         }
 
@@ -118,11 +118,11 @@ public class HomeHotBean implements Serializable {
             this.userId = userId;
         }
 
-        public int getType() {
+        public String getType() {
             return type;
         }
 
-        public void setType(int type) {
+        public void setType(String type) {
             this.type = type;
         }
 
@@ -238,11 +238,11 @@ public class HomeHotBean implements Serializable {
             this.subjectName = subjectName;
         }
 
-        public int getSubjectId() {
+        public String getSubjectId() {
             return subjectId;
         }
 
-        public void setSubjectId(int subjectId) {
+        public void setSubjectId(String subjectId) {
             this.subjectId = subjectId;
         }
 

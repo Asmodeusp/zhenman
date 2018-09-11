@@ -30,7 +30,6 @@
             android:layout_width="98px"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="24px"
