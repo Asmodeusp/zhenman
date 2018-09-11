@@ -43,7 +43,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.MainActivity.provider"
+            android:authorities="com.zhenman.asus.zhenman.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -51,9 +51,7 @@
                 android:resource="@xml/file_provider" />
         </provider>
 
-        <activity android:name=".view.login.MainActivity">
-
-        </activity>
+        <activity android:name=".view.login.MainActivity"></activity>
 
         <!-- 微信 -->
         <activity
@@ -132,9 +130,10 @@
         <activity android:name=".view.login.UserInfoActivity" />
         <activity android:name=".view.serializaion.ClassifyActivity" />
         <activity android:name=".view.serializaion.WorkDetailsActivity" />
-        <activity android:name=".view.serializaion.SerializationCatalogReadActivity"
-            android:exported="true" android:launchMode="singleTop"
-            ></activity>
+        <activity
+            android:name=".view.serializaion.SerializationCatalogReadActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
         <activity android:name=".view.myself.MySettingActivity" />
         <activity android:name=".view.myself.AccountManagementActivity" />
         <activity android:name=".view.myself.PersonalInformationActivity" />
@@ -144,7 +143,8 @@
         <activity android:name=".view.myself.ModifyPasswordOneActivity" />
         <activity android:name=".view.myself.PurchaseHistoryActivity" />
         <activity android:name=".view.myself.MyDraftActivity" />
-        <activity android:name=".view.myself.HomepageActivity"></activity>
+        <activity android:name=".view.myself.HomepageActivity" />
+        <activity android:name=".view.myself.ShoppingActivity"></activity>
     </application>
 
 </manifest>

@@ -1,10 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/message"
+    android:orientation="vertical"
     tools:context=".view.fragment.MessageFragment">
 
+    <include layout="@layout/above_head" />
 
-</com.zhy.autolayout.AutoRelativeLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24px"
+        android:orientation="horizontal">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/message_like"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/message_like" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_8"
+                android:text="喜欢" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/message_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/message_comment" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_8"
+                android:text="评论" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/message_fans"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/message_fans" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_8"
+                android:text="粉丝" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/message_pay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/message_pay" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_8"
+                android:text="打赏" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_1"
+        android:layout_marginTop="@dimen/px_24"
+        android:background="@color/h6" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_16"
+        android:background="@color/h7" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/message_recy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</com.zhy.autolayout.AutoLinearLayout>

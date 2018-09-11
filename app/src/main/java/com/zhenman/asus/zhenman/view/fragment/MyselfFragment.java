@@ -20,10 +20,12 @@ import com.zhenman.asus.zhenman.view.myself.MyWalletActivity;
 import com.zhenman.asus.zhenman.view.myself.PersonalInformationActivity;
 import com.zhy.autolayout.AutoRelativeLayout;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MyselfFragment extends BaseFragment<MySelfPresenter> implements View.OnClickListener, MySelfContract.MySelfInView {
 
 
-    private ImageView my_Avatar;
+    private CircleImageView my_Avatar;
     private TextView my_Name;
     private ImageView my_Sex;
     private TextView my_WorksNumber;
@@ -125,14 +127,13 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
 
     @Override
     public void showGetMyData(GetMyDataBean getMyDataBean) {
-        if (getMyDataBean.getData().getHeadImg()!=null) {
+        if (getMyDataBean.getData().getHeadImg() != null) {
             Glide.with(getActivity()).load(getMyDataBean.getData().getHeadImg()).into(my_Avatar);
         }
         my_Name.setText(getMyDataBean.getData().getName());
         if ("1".equals(getMyDataBean.getData().getSex())) {
             my_Sex.setImageResource(R.mipmap.my_f);
 //            my_Sex.setImageBitmap(getResources().getDrawable((R.mipmap.my_f)));
-
         } else {
 //            my_Sex.setImageDrawable(getResources().getDrawable((R.drawable.my_m)));
             my_Sex.setImageResource(R.mipmap.my_m);
@@ -142,10 +143,10 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
 
     }
 
+    //    已经刷新页面了
     @Override
     public void onResume() {
         super.onResume();
         presenter.sendGetMyData("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzQ4MzYzOTAsInN1YiI6IntcInVzZXJJZFwiOjMwNixcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiQjUyNzI3NkIyODlFRjcyRTM5NzAxRUJDQjMyNzdFRUVcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4xLjVcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NjM3MjM5MH0.0nQECGVov3ZMpdbblKfBKThM7ogDtP-qJrOwT7bYHDs", "69");
-
     }
 }

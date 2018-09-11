@@ -35,6 +35,8 @@
     <string name="myInfo_selectBorn">选择出生年月</string>
     <string name="myInfo_finish">完成</string>
     <string name="myWallet_pay">购买茄子籽</string>
+    <string name="shopping_pay">立即购买</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

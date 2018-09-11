@@ -38,7 +38,7 @@
             android:id="@+id/homePage_Sex"
             android:layout_width="@dimen/px_32"
             android:layout_height="@dimen/px_32"
-            android:layout_alignBottom="@+id/my_Name"
+            android:layout_alignBottom="@+id/homePage_Name"
             android:layout_marginLeft="@dimen/px_16"
             android:layout_toRightOf="@id/homePage_Name"
             android:src="@mipmap/my_f" />
@@ -183,6 +183,7 @@
             android:id="@+id/homePage_other06"
             android:layout_width="138px"
             android:layout_height="4px"
+
             android:layout_below="@id/homePage_myWorks"
             android:layout_marginTop="@dimen/px_16"
             android:background="@color/c1" />
@@ -191,8 +192,8 @@
             android:id="@+id/homePage_other07"
             android:layout_width="138px"
             android:layout_height="4px"
+            android:layout_alignLeft="@id/homePage_myLike"
             android:layout_below="@id/homePage_myLike"
-            android:layout_marginLeft="128px"
             android:layout_marginTop="@dimen/px_16"
             android:layout_toRightOf="@id/homePage_other06"
             android:background="@color/c1"
@@ -212,13 +213,18 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/homePage_myWorksTab"
-            android:layout_width="match_parent"
+            android:layout_width="350px"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/px_24">
+            android:layout_marginTop="@dimen/px_24"
+            app:tabIndicatorColor="@color/c1"
+            app:tabSelectedTextColor="@color/c1"
+
+            app:tabTextColor="@color/h3">
 
         </android.support.design.widget.TabLayout>
 
-        <FrameLayout
+        <android.support.v4.view.ViewPager
             android:id="@+id/homePage_myWorkContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -231,9 +237,5 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone">
-
     </com.zhy.autolayout.AutoLinearLayout>
-
-
-
 </com.zhy.autolayout.AutoLinearLayout>

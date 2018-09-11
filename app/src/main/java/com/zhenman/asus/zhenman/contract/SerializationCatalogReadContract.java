@@ -6,6 +6,7 @@ import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
 import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
+import com.zhenman.asus.zhenman.model.bean.ProductListBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
@@ -19,6 +20,8 @@ public interface SerializationCatalogReadContract {
         void showserializationCatalogReadBean(SerializationCatalogReadBean serializationCatalogReadBean);
 
         void showSerializationCatalogBean(SerializationCatalogBean serializationCatalogBean);
+//        产品列表
+        void showProductListBean(ProductListBean productListBean);
 //        创建订单
         void getMakeOrderData(MakeOrderBean productListBean);
         //        创建微信订单
@@ -54,6 +57,8 @@ public interface SerializationCatalogReadContract {
         void PGCReadFabulous (String productId, String commentId,String status,String pgcId);
         //得到微信支付数据
         void sendGetWxPayData(String orderSn);
+//        发送产品列表数据
+        void sendProductListData();
 
     }
 }

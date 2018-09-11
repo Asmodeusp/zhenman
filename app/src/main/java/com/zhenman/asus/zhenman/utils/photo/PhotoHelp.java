@@ -234,7 +234,6 @@ public class PhotoHelp {
         if (PhotoUtils.hasSdcard()) {
             Uri newUri = Uri.parse(PhotoUtils.getPath(context, data.getData()));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-
                 newUri = FileProvider.getUriForFile(context, "com.zhenman.asus.zhenman.provider", new File(newUri.getPath()));
             Bitmap bitmap = PhotoUtils.getBitmapFromUri(newUri, context);
             if (bitmap != null) {

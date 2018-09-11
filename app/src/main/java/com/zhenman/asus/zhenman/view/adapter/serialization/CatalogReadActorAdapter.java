@@ -109,7 +109,6 @@ public class CatalogReadActorAdapter extends RecyclerView.Adapter<CatalogReadAct
             Actor_followImg = itemView.findViewById(R.id.Actor_followImg);
             Actor_Money = itemView.findViewById(R.id.Actor_Money);
             AutoUtils.autoSize(itemView);
-
         }
     }
 }

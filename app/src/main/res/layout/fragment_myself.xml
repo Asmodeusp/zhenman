@@ -24,8 +24,7 @@
         android:id="@+id/my_data"
         android:layout_width="match_parent"
         android:layout_height="240px">
-
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/my_Avatar"
             android:layout_width="148px"
             android:layout_height="148px"
@@ -35,7 +34,8 @@
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="16px"
-            android:src="@mipmap/my_qiezi" />
+            android:src="@mipmap/my_qiezi"/>
+
 
         <TextView
             android:id="@+id/my_Name"

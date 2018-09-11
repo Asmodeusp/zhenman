@@ -144,7 +144,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="32px"
             android:layout_toRightOf="@id/myWallet_other02"
-            android:text="交易记录"
+            android:text="卖茄子"
             android:textColor="@color/h3"
             android:textSize="32px" />
 

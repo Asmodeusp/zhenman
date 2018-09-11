@@ -37,12 +37,14 @@ public class Urls {
     public static final String UGCFABULOUS = "userLikesUgc/insertUserLikesUgc";
     //Pgc收藏
     public static final String PGC_COLLECTION = "userLikesPgc/insertUserLikesPgc";
+//   产品列表
+    public static final String PRODUCT_LIST="uProduct/productList";
     //创建订单
     public static final String MAKE_ORDER = "userOrder/createOrder";
     //获取支付宝支付数据
     public static final String GET_PAY_DATA = "userOrder/getPaySignByAli";
-//    得到微信支付数据
-    public static final String GET_WX_PAY_DATA="userOrder/getPaySignByWx";
+    //    得到微信支付数据
+    public static final String GET_WX_PAY_DATA = "userOrder/getPaySignByWx";
     //友盟第三方登录{QQ 微信，微博   的注册和登陆}
     public static final String UMENG_LOGIN = "userOauth/register";
     //分类标签
@@ -50,19 +52,23 @@ public class Urls {
     //分类数据
     public static final String SERIALIZATION_CLASSIFY = "userPgcInfo/getPgcListByTags";
     //Pgc作品下主评论下的列表
-    public static final String PGC_CHAPTER_COMMENT_DETAIL="pgcChapterCommentDetail/getCommentDetailListByPcciId";
+    public static final String PGC_CHAPTER_COMMENT_DETAIL = "pgcChapterCommentDetail/getCommentDetailListByPcciId";
     //    注销登陆
     public static final String CANCLE_LOGIN = "userOauth/unbindMobile";
+    //  个人主页信息
+    public static final String HEAD_DATA = "userUgcInfo/getPersonalHomepageHeader";
     //    获得个人资料信息
     public static final String GET_MYDATA = "userOauth/getPersonalData";
     //    修改个人资料
     public static final String ALART_MYDATA = "userOauth/updatePersonalData";
-//    手机号解绑
-    public static final String UNBIND_MOBILE="userOauth/unbindMobile";
-//    交易记录
-    public static final String PURCHASE_HISTORY="userCoinAccount/getCoinAccountOutList";
+    //    手机号解绑
+    public static final String UNBIND_MOBILE = "userOauth/unbindMobile";
+    //    交易记录
+    public static final String PURCHASE_HISTORY = "userCoinAccount/getCoinAccountOutList";
     //作品章节下页对应的评论列表
+
     public static final String PGC_CHAPTER_COMMENT_LIST_BY_OFFSET  ="pgcChapterCommentInfo/getPgcChapterCommentListByOffSet";
     //Ugc的评论
     public static final String UGC_COMMENT_BYCOMICID = "ugcCommentInfo/getCommentListByComicId";
+
 }

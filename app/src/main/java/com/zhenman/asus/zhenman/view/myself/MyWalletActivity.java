@@ -56,7 +56,7 @@ public class MyWalletActivity extends BaseActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.myWallet_shop:
-
+                startActivity(new Intent(MyWalletActivity.this,ShoppingActivity.class));
                 break;
             case R.id.myWallet_history:
                 startActivity(new Intent(MyWalletActivity.this,PurchaseHistoryActivity.class));

@@ -26,7 +26,7 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.AlartDataContract;
 import com.zhenman.asus.zhenman.model.bean.AlartDataBean;
 import com.zhenman.asus.zhenman.presenter.AlartDataPresenter;
-import com.zhenman.asus.zhenman.utils.UploadUtil;
+import com.zhenman.asus.zhenman.utils.photo.BitmapUtils;
 import com.zhenman.asus.zhenman.utils.photo.PhotoHelp;
 import com.zhenman.asus.zhenman.utils.photo.PhotoUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
@@ -54,7 +54,7 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
     private ImageView myInfo_boy;
     private ImageView myInfo_girl;
     private AutoRelativeLayout myInfo_finish;
-
+    //行不行
     protected static final int CHOOSE_PICTURE = 0;
     protected static final int TAKE_PICTURE = 1;
     private static final int CROP_SMALL_PICTURE = 2;
@@ -79,8 +79,10 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
     //相机请求码
     private final int CODE_CAMERA_REQUEST = 400;
     private String filePath;
-    private Map<ImageView,String> mHashMap;
+    private Map<ImageView, String> mHashMap;
     private List<String> mList;
+    private String fileName;
+
     protected int getLayoutId() {
         return R.layout.activity_personal_information;
     }
@@ -97,7 +99,7 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
         myInfo_finish = findViewById(R.id.myInfo_finish);
         myInfo_introduction = findViewById(R.id.myInfo_introduction);
         mHashMap = new HashMap<>();
-        mList=new ArrayList<>();
+        mList = new ArrayList<>();
 //        seventBug();
 //        initPopup();
 
@@ -129,7 +131,10 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
         myInfo_selectBorn.setOnClickListener(this);
         myInfo_boy.setOnClickListener(this);
         myInfo_girl.setOnClickListener(this);
-        myInfo_finish.setOnClickListener(this);
+        if (myInfo_enterNikeName.getText().toString() != null && myInfo_selectBorn.getText().toString() != null && myInfo_introduction.getText().toString() != null) {
+
+            myInfo_finish.setOnClickListener(this);
+        }
 
     }
 
@@ -142,6 +147,7 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.myInfo_skip:
+                finish();
                 break;
 //                切换头像
             case R.id.myInfo_avatar:
@@ -167,35 +173,44 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
                 myInfo_girl.setAlpha(0.5f);
                 selectSex = "1";
                 break;
+
             case R.id.myInfo_finish:
                 String accessToken = (String) SPUtils.get(PersonalInformationActivity.this, SPKey.USER_REFRESHTOKEN, "");
                 String oauthId = (String) SPUtils.get(this, SPKey.USER_OAUTHID, "");
-                Log.e("Sushine",accessToken);
-                Log.e("Sushine",oauthId);
-                presenter.sendAlartData("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzQ4MzYzOTAsInN1YiI6IntcInVzZXJJZFwiOjMwNixcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiQjUyNzI3NkIyODlFRjcyRTM5NzAxRUJDQjMyNzdFRUVcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4xLjVcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NjM3MjM5MH0.0nQECGVov3ZMpdbblKfBKThM7ogDtP-qJrOwT7bYHDs","69",selectSex,myInfo_enterNikeName.getText().toString(),myInfo_introduction.getText().toString(),bitmapString,myInfo_selectBorn.getText().toString());
+                Log.e("Sushine", accessToken);
+                Log.e("Sushine", oauthId);
+                presenter.sendAlartData("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzQ4MzYzOTAsInN1YiI6IntcInVzZXJJZFwiOjMwNixcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiQjUyNzI3NkIyODlFRjcyRTM5NzAxRUJDQjMyNzdFRUVcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4xLjVcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NjM3MjM5MH0.0nQECGVov3ZMpdbblKfBKThM7ogDtP-qJrOwT7bYHDs",
+                        "69", "1", myInfo_enterNikeName.getText().toString(),
+                        myInfo_introduction.getText().toString(), "photo",
+                        myInfo_selectBorn.getText().toString(), new File(fileName));
                 break;
+//                相册
             case R.id.selector_popup_imgLibily_line:
                 PhotoHelp.autoObtainStoragePermission(PersonalInformationActivity.this, STORAGE_PERMISSIONS_REQUEST_CODE, CODE_GALLERY_REQUEST);
                 popupWindow.dismiss();
                 break;
+//                相机
             case R.id.selector_popup_photo_line:
                 filePath = PhotoHelp.getFilePath();
                 PhotoHelp.applyForCameraPermission(PersonalInformationActivity.this, CAMERA_PERMISSIONS_REQUEST_CODE, filePath, CODE_CAMERA_REQUEST);
                 popupWindow.dismiss();
                 break;
+//                取消
             case R.id.selector_popup_dissmis_line:
                 popupWindow.dismiss();
                 break;
         }
     }
+
     //显示详情
-    private void startIntent(ImageView view){
+    private void startIntent(ImageView view) {
         Intent intent = new Intent(this, PersonalInformationActivity.class);
-        intent.putExtra("name",mHashMap.get(view));
+        intent.putExtra("name", mHashMap.get(view));
         startActivity(intent);
     }
+
     //删除图片
-    private void delete(ImageView image, RelativeLayout relativeLayout, LinearLayout linearLayout){
+    private void delete(ImageView image, RelativeLayout relativeLayout, LinearLayout linearLayout) {
         mHashMap.remove(image);
         relativeLayout.setVisibility(View.GONE);
         linearLayout.setVisibility(View.VISIBLE);
@@ -223,15 +238,15 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
             switch (requestCode) {
                 case CODE_CAMERA_REQUEST://拍照完成回调
                     Bitmap cameraBitmap = BitmapFactory.decodeFile(filePath);
-                    Log.d("xaingji", filePath);
-
+                    fileName = BitmapUtils.compressImageUpload(filePath);
                     myInfo_avatar.setImageBitmap(cameraBitmap);
+
                     break;
                 case CODE_GALLERY_REQUEST://访问相册完成回调
                     Bitmap xiangCeBitmap = PhotoHelp.xiangCeResult(this, data);
+                    //将bitmap拿到绝对路径
                     String path = PhotoUtils.getPath(PersonalInformationActivity.this, data.getData());
-                    Log.d("xiangce", path);
-//                    这个不行
+                    fileName = BitmapUtils.compressImageUpload(path);
                     myInfo_avatar.setImageBitmap(xiangCeBitmap);
                     break;
             }
@@ -268,57 +283,14 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
         popupWindow.showAtLocation(popupView1, Gravity.BOTTOM, 0, 0);
     }
 
-
-
-
-
-
-
-
-  /*  //对图片处理的回调
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) { // 如果返回码是可以用的
-            switch (requestCode) {
-                case TAKE_PICTURE:
-                    startPhotoZoom(tempUri); // 开始对图片进行裁剪处理
-                    break;
-                case CHOOSE_PICTURE:
-                    startPhotoZoom(data.getData()); // 开始对图片进行裁剪处理
-                    break;
-                case CROP_SMALL_PICTURE:
-                    if (data != null) {
-                        setImageToView(data); // 让刚才选择裁剪得到的图片显示在界面上
-                    }
-                    break;
-            }
-        }
-    }*/
-    /**
-     * 上传图片到服务器
-     */
-    private void toUploadFile() {
-
-        String fileKey = "avatarFile";
-        UploadUtil uploadUtil = UploadUtil.getInstance();
-//        uploadUtil.setOnUploadProcessListener(this); //设置监听器监听上传状态
-        Map<String, String> params = new HashMap<>();//上传map对象
-        params.put("picName", "UserIcon");
-        params.put("code", "1");
-        uploadUtil.uploadFile(file, fileKey, "http://154.8.215.210:8888/api/Public/uploadPic", params);
-        Toast.makeText(this, "上传成功", Toast.LENGTH_LONG).show();
-//        uploadPicturePresenter.loadUploadPictureData("UserIcon",1);
-    }
-
     //修改个人资料
     @Override
     public void showAlartData(AlartDataBean alartDataBean) {
-        Log.e("Sunshine",alartDataBean.getMsg());
-        if (!alartDataBean.getMsg().isEmpty()&&alartDataBean.getMsg().equals("成功")) {
+        Log.e("Sunshine", alartDataBean.getMsg());
+        if (!alartDataBean.getMsg().isEmpty() && alartDataBean.getMsg().equals("成功")) {
             Toast.makeText(this, "修改资料成功", Toast.LENGTH_SHORT).show();
             finish();
-        }else {
+        } else {
             Toast.makeText(this, "请先完成登陆", Toast.LENGTH_SHORT).show();
         }
     }
