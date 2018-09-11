@@ -19,16 +19,16 @@ import retrofit2.http.QueryMap;
 public interface SerializationDetailsService {
     //连载详情
     @GET(Urls.SERIALIZATION_DETAILS)
-    Observable<SerializationDetailsBean> GetSerializationDetailsBean(@HeaderMap Map<String, String> headers, @QueryMap Map<String, String> params);
+    Observable<SerializationDetailsBean> GetSerializationDetailsBean( @QueryMap Map<String, String> params);
 
     //连载章节
     @GET(Urls.SERIALIZATION_CATALOG)
-    Observable<SerializationCatalogBean> GetSerializationCatalogBean(@HeaderMap Map<String, String> headers, @QueryMap Map<String, String> params);
+    Observable<SerializationCatalogBean> GetSerializationCatalogBean( @QueryMap Map<String, String> params);
 
     //PGC收藏
     @FormUrlEncoded
     @POST(Urls.PGC_COLLECTION)
-    Observable<PgcCollectionBean> GetPgcCollectionBean(@HeaderMap Map<String,String > Heards, @FieldMap Map<String, String> params);
+    Observable<PgcCollectionBean> GetPgcCollectionBean( @FieldMap Map<String, String> params);
 
 
 }

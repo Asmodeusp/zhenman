@@ -12,5 +12,5 @@ import retrofit2.http.QueryMap;
 public interface WorkService {
     //主页热门
     @GET(Urls.UGC_COMMENT_BYCOMICID)
-    Observable<HomeHotUgcCommentBean> GetHomeHotUgcCommentBean(@HeaderMap Map<String, String> headers, @QueryMap Map<String,String> params);
+    Observable<HomeHotUgcCommentBean> GetHomeHotUgcCommentBean( @QueryMap Map<String,String> params);
 }

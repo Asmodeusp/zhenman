@@ -17,10 +17,10 @@ import retrofit2.http.QueryMap;
 public interface HomeHotService {
     //主页热门
     @GET(Urls.HOME_HOT)
-    Observable<HomeHotBean> GetHotBean(@HeaderMap Map<String, String> headers, @QueryMap Map<String,String> params);
+    Observable<HomeHotBean> GetHotBean( @QueryMap Map<String,String> params);
     //UGC点赞
     @FormUrlEncoded
     @POST(Urls.UGCFABULOUS)
-    Observable<UgcFabulousBean> GetUgcFabulousBean(@HeaderMap Map<String,String > Heards, @FieldMap Map<String, String> params);
+    Observable<UgcFabulousBean> GetUgcFabulousBean( @FieldMap Map<String, String> params);
 }
 

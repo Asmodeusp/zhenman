@@ -88,9 +88,9 @@ public class LoginPresenterImp implements LoginContract.LoginPresenter {
         map.put("sex", sex);
         map.put("type", type);
         map.put("openId", openId);
-        Map<String, String> headMap = new HashMap<>();
-//        headMap.put("os","Android");
-        RetrofitUtils.getInstance().getService(LoginService.class).GetThirdPartyLoginBean(headMap,map)
+
+
+        RetrofitUtils.getInstance().getService(LoginService.class).GetThirdPartyLoginBean(map)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ThirdPartyLoginBean>() {

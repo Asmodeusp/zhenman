@@ -15,6 +15,8 @@ import com.zhenman.asus.zhenman.model.service.SerializationDetailsService;
 import com.zhenman.asus.zhenman.model.service.SerializationService;
 import com.zhenman.asus.zhenman.model.service.SetPasswordService;
 import com.zhenman.asus.zhenman.model.service.WorkDetailsCommentService;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -96,6 +98,7 @@ public class RetrofitUtils {
      * 设置请求头
      */
     private static Interceptor addHeaderInterceptor() {
+
         Interceptor headerInterceptor = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -103,6 +106,7 @@ public class RetrofitUtils {
                 Request.Builder requestBuilder = originalRequest.newBuilder()
                         // Provide your custom header here
                         .header("os", "Android")
+                        .header("accessToken",((String)SPUtils.get(App.context, SPKey.USER_TOKEN, "")))
                         .header("osVersion", Build.VERSION.RELEASE)
                         .header("version", "1.0.0")
                         .header("AppType", "TPOS")

@@ -22,5 +22,5 @@ public interface LoginService {
     //第三方登陆
     @FormUrlEncoded
     @POST(Urls.THIRD_PARTY_LOGING)
-    Observable<ThirdPartyLoginBean> GetThirdPartyLoginBean(@HeaderMap Map<String,String> head,@FieldMap Map<String, String> params);
+    Observable<ThirdPartyLoginBean> GetThirdPartyLoginBean(@FieldMap Map<String, String> params);
 }

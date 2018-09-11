@@ -21,11 +21,9 @@ public class PurchaseHistoryPresenter implements PurchaseHistoryContract.Purchas
         Map<String, String> stringMap = new HashMap<>();
         stringMap.put("pageNum", pageNum);
         stringMap.put("pageSize", pageSize);
-        Map<String, String> headMap = new HashMap<>();
-        headMap.put("accessToken",accessToken);
 
         RetrofitUtils.getInstance().getService(PurchaseHistoryService.class)
-                .getPurchaseHistoryBean(headMap,stringMap)
+                .getPurchaseHistoryBean(stringMap)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<PurchaseHistoryBean>() {

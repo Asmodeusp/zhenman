@@ -30,9 +30,6 @@ public class MakeOrderPresenter implements MakeOrderContract.MakeOrderInPresente
 
     @Override
     public void setProductListData(String productId, String type, String catalogId, String toUserId, String amount) {
-        Map<String, String> headerMap = new HashMap<>();
-        headerMap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN,""));
-
         Map<String,String > maps=new HashMap<>();
         maps.put("productId",productId);
         maps.put("type",type);
@@ -40,7 +37,7 @@ public class MakeOrderPresenter implements MakeOrderContract.MakeOrderInPresente
         maps.put("toUserId",toUserId);
         maps.put("amount",amount);
         RetrofitUtils.getInstance().getService(MakeOrderService.class)
-                .getMakeOrderBean(maps,headerMap)
+                .getMakeOrderBean(maps)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<MakeOrderBean>() {

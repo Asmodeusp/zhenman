@@ -15,5 +15,5 @@ public interface MySelfService {
 
 //    得到个人资料
     @GET(Urls.GET_MYDATA)
-    Observable<GetMyDataBean> getMyDataBean(@HeaderMap Map<String,String >headMap,@Query("oauthId") String oauthId);
+    Observable<GetMyDataBean> getMyDataBean(@Query("oauthId") String oauthId);
 }

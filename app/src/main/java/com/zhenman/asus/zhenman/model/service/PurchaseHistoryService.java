@@ -13,5 +13,5 @@ import retrofit2.http.QueryMap;
 public interface PurchaseHistoryService {
 //    购买记录
     @GET(Urls.PURCHASE_HISTORY)
-    Observable<PurchaseHistoryBean> getPurchaseHistoryBean(@HeaderMap Map<String,String> headerMap,@QueryMap Map<String,String> paramMap);
+    Observable<PurchaseHistoryBean> getPurchaseHistoryBean(@QueryMap Map<String,String> paramMap);
 }

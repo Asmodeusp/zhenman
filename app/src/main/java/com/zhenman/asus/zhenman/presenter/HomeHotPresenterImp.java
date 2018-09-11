@@ -38,13 +38,10 @@ public class HomeHotPresenterImp implements HomeHotContract.HomeHotPresenter {
 
     @Override
     public void getHomeHotBean(String pageNum) {
-        Map<String, String> Headermap = new HashMap<>();
-//        Headermap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN,""));
-        Headermap.put("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzI1MDQyMTAsInN1YiI6IntcInVzZXJJZFwiOjI1NSxcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiMTNEMUE1RjUxNDM1QURBODNFMkJFNUJDNzUzOTc0OTFcIixcInVzZXJBZ2VudFwiOlwiWk1DYXJ0b29uLzEuMCAoaVBob25lOyBpT1MgMTEuMC4zOyBTY2FsZS8yLjAwKVwiLFwiaW5kZXhcIjowLFwicmVmcmVzaFRva2VuXCI6ZmFsc2V9IiwiZXhwIjoxNTY0MDQwMjEwfQ.URYD_U8GudpDBWgllZewA6wex_CN16hHHzgq1LZA3KI");
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", pageNum);
         map.put("pageSize","20");
-        RetrofitUtils.getInstance().getHomeHotService().GetHotBean(Headermap,map).subscribeOn(Schedulers.newThread())
+        RetrofitUtils.getInstance().getHomeHotService().GetHotBean(map).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HomeHotBean>() {
                     @Override
@@ -71,15 +68,12 @@ public class HomeHotPresenterImp implements HomeHotContract.HomeHotPresenter {
 
     @Override
     public void UgcFabulous(String productId, String status) {
-        Map<String, String> Headermap = new HashMap<>();
-//        Headermap.put("accessToken", (String) SPUtils.get(App.context, SPKey.USER_TOKEN, ""));
-        Headermap.put("accessToken", "");
         Map<String, String> map = new HashMap<>();
         map.put("productId", productId);
         map.put("status", status);
         RetrofitUtils.getInstance()
                 .getService(HomeHotService.class)
-                .GetUgcFabulousBean(Headermap, map)
+                .GetUgcFabulousBean(map)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<UgcFabulousBean>() {

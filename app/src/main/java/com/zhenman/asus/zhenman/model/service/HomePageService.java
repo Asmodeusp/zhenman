@@ -12,6 +12,6 @@ import retrofit2.http.QueryMap;
 
 public interface HomePageService {
     @GET(Urls.HEAD_DATA)
-    Observable<HomePageHeadBean> getHomePageHeadData(@HeaderMap Map<String,String> headMap, @QueryMap Map<String,String> paramMap);
+    Observable<HomePageHeadBean> getHomePageHeadData( @QueryMap Map<String,String> paramMap);
 
 }

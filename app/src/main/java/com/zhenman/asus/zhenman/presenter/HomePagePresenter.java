@@ -18,12 +18,10 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
 
     @Override
     public void sendHomePageHeadData(String accessToken, String userId) {
-        HashMap<String, String> headMap = new HashMap<>();
-        headMap.put("accessToken", "");
         HashMap<String, String> paramMap = new HashMap<>();
         paramMap.put("userId", userId);
         RetrofitUtils.getInstance().getService(HomePageService.class)
-                .getHomePageHeadData(headMap, paramMap)
+                .getHomePageHeadData( paramMap)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HomePageHeadBean>() {

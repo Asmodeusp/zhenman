@@ -21,6 +21,6 @@ public interface PgcChapterCommentDetailService {
     //PGC评论点赞
     @FormUrlEncoded
     @POST(Urls.PGCFABULOUS)
-    Observable<PgcFabulousBean> GetPgcFabulousBean(@HeaderMap Map<String,String > Heards, @FieldMap Map<String, String> params);
+    Observable<PgcFabulousBean> GetPgcFabulousBean( @FieldMap Map<String, String> params);
 
 }

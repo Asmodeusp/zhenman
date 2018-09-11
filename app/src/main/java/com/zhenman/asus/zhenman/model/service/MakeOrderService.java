@@ -15,5 +15,5 @@ import retrofit2.http.POST;
 public interface MakeOrderService {
     @FormUrlEncoded
     @POST(Urls.MAKE_ORDER)
-    Observable<MakeOrderBean> getMakeOrderBean(@HeaderMap Map<String ,String> headMap,@FieldMap Map<String,String > map);
+    Observable<MakeOrderBean> getMakeOrderBean(@FieldMap Map<String,String > map);
 }
