@@ -24,7 +24,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="500px"
                     android:background="@drawable/image_code"
-                    android:padding="2dp"></com.recker.flybanner.FlyBanner>
+                    ></com.recker.flybanner.FlyBanner>
 
                 <ImageView
                     android:id="@+id/Serialization_common_search"

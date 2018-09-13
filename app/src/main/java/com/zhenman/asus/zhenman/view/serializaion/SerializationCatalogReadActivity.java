@@ -6,22 +6,25 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AbsListView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -53,8 +56,9 @@ import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogFootviewCommen
 import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogReadActorAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.ProductListAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
-import com.zhenman.asus.zhenman.view.adapter.serialization.serializationCatalogReadRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogReadRecyAdapter;
 import com.zhenman.asus.zhenman.view.login.qqlogin.UMSharePlatform;
+import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
@@ -69,7 +73,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private TextView serializationCatalogReadCommentNumber;
     private LinearLayout serializationCatalogReadHeadRel;
     private RelativeLayout SerializationRelativeLayout;
-    private ListView serializationCatalogReadRecy;
+    private RecyclerView serializationCatalogReadRecy;
     private LinearLayout serializationCatalogReadCommentBtn;
     private LinearLayout serializationCatalogReadCatalogBtn;
     private RelativeLayout serializationCatalogReadFootLin;
@@ -117,7 +121,27 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private TextView ppwPay_qieziNum;
     private TextView ppwPay_num;
     private TextView ppwPay_userName;
-
+    private CatalogReadActorAdapter catalogReadActorAdapter;
+    private String orderNumber;
+    private RecyclerView commentPopu_recy;
+    private TextView CommentPopu_CommentNumber;
+    private ImageView CommentPopu_CommentCloseImg;
+    private AutoRelativeLayout TopRela;
+    private TextView CommentPopu_RecyTip;
+    private RecyclerView cataLog_footViewComment_recy;
+    private TextView cataLog_footViewComment_recyTip;
+    private CatalogFootviewCommentRecyAdapter catalogFootviewCommentRecyAdapter;
+    private List<PgcChapterCommentListByOffSetBean.DataBean.ResultBeanX> result;
+    private EditText commentPopu_editText;
+    private Button commonSend_button;
+    private EditText commonSend_edText;
+    private Button commentPopu_button;
+    private PopupWindow commentpopupWindow;
+    private View contentView;
+    private RelativeLayout commentPopu_rela;
+    private String paymentMethod;
+    private int qieziId;
+    private MyScrollView serializationMyScrollView;
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             @SuppressWarnings("unchecked")
@@ -142,26 +166,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
         ;
     };
-    private CatalogReadActorAdapter catalogReadActorAdapter;
-    private String orderNumber;
-    private RecyclerView commentPopu_recy;
-    private TextView CommentPopu_CommentNumber;
-    private ImageView CommentPopu_CommentCloseImg;
-    private AutoRelativeLayout TopRela;
-    private TextView CommentPopu_RecyTip;
-    private RecyclerView cataLog_footViewComment_recy;
-    private TextView cataLog_footViewComment_recyTip;
-    private CatalogFootviewCommentRecyAdapter catalogFootviewCommentRecyAdapter;
-    private List<PgcChapterCommentListByOffSetBean.DataBean.ResultBeanX> result;
-    private EditText commentPopu_editText;
-    private Button commonSend_button;
-    private EditText commonSend_edText;
-    private Button commentPopu_button;
-    private PopupWindow commentpopupWindow;
-    private View contentView;
-    private RelativeLayout commentPopu_rela;
-    private String paymentMethod;
-    private int qieziId;
+
 
     @Override
     protected int getLayoutId() {
@@ -173,17 +178,20 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         Intent intent = getIntent();
         StartcatalogId = intent.getStringExtra("catalogId");
         String PgcId = intent.getStringExtra("pgcId");
-
         //返回
         serializationCatalogReadReturnImg = findViewById(R.id.serializationCatalogReadReturnImg);
+        //MyScrollView
+        serializationMyScrollView = findViewById(R.id.SerializationMyScrollView);
         //整布局
         SerializationRelativeLayout = findViewById(R.id.SerializationRelativeLayout);
         //第几话
         serializationCatalogReadText = findViewById(R.id.serializationCatalogReadText);
         //头布局
         serializationCatalogReadHeadRel = findViewById(R.id.serializationCatalogReadHeadRel);
-        //ListView
+        //RecyclerView
         serializationCatalogReadRecy = findViewById(R.id.serializationCatalogReadRecy);
+        //给RecyClerView设置格式
+        serializationCatalogReadRecy.setLayoutManager(new LinearLayoutManager(this));
         //评论
         serializationCatalogReadCommentBtn = findViewById(R.id.serializationCatalogReadCommentBtn);
         //评论数量
@@ -192,6 +200,41 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         serializationCatalogReadCatalogBtn = findViewById(R.id.serializationCatalogReadCatalogBtn);
         //底布局
         serializationCatalogReadFootLin = findViewById(R.id.serializationCatalogReadFootLin);
+        //观看第一话
+        SeeFirstBtn = findViewById(R.id.SeeFirstBtn);
+        //收藏图片
+        CataLog_FootViewCollectionImg = findViewById(R.id.CataLog_FootViewCollectionImg);
+        //收藏点击按钮
+        CataLog_FootViewCollectionBtn = findViewById(R.id.CataLog_FootViewCollectionBtn);
+        //分享按钮
+        CataLog_FootViewShareBtn = findViewById(R.id.CataLog_FootViewShareBtn);
+        //上一话字体
+        CataLog_FootViewUpperText = findViewById(R.id.CataLog_FootViewUpperText);
+        CataLog_FootViewUpperLine = findViewById(R.id.CataLog_FootViewUpperLine);
+        //上一话按钮
+        CataLog_FootViewUpperBtn = findViewById(R.id.CataLog_FootViewUpperBtn);
+        //下一话字体
+        CataLog_FootViewNexterText = findViewById(R.id.CataLog_FootViewNexterText);
+        CataLog_FootViewNexterLine = findViewById(R.id.CataLog_FootViewNexterLine);
+        //下一话按钮
+        CataLog_FootViewNexterBtn = findViewById(R.id.CataLog_FootViewNexterBtn);
+        //演员列表
+        CataLog_FootViewActor_Recy = findViewById(R.id.CataLog_FootViewActor_Recy);
+        //未完待续布局
+        weiwandaixuReLa = findViewById(R.id.weiwandaixuReLa);
+        CataLog_FootViewUpperText.setText("<");
+        CataLog_FootViewUpperBtn.setOnClickListener(this);
+        CataLog_FootViewNexterBtn.setOnClickListener(this);
+        SeeFirstBtn.setOnClickListener(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        CataLog_FootViewActor_Recy.setLayoutManager(linearLayoutManager);
+        //评论列表
+        cataLog_footViewComment_recy = findViewById(R.id.CataLog_FootViewComment_Recy);
+        //评论列表提示
+        cataLog_footViewComment_recyTip = findViewById(R.id.CataLog_FootViewComment_RecyTip);
+        cataLog_footViewComment_recy.setLayoutManager(new LinearLayoutManager(this));
+
         //得到数据
         presenter.getSerializationCatalogReadBean(StartcatalogId);
         presenter.getSerializationCatalogBean(PgcId);
@@ -201,13 +244,13 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         serializationCatalogReadReturnImg.setOnClickListener(this);//返回
         serializationCatalogReadCommentBtn.setOnClickListener(this);//消息
         serializationCatalogReadCatalogBtn.setOnClickListener(this);//目录
-
-        serializationCatalogReadRecy.setOnTouchListener(new View.OnTouchListener() {
+        serializationMyScrollView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         //触摸按下时操作
+                        Log.e("ScrollView", "按下");
                         if (count == true) {
                             serializationCatalogReadHeadRel.setVisibility(View.GONE);
                             serializationCatalogReadFootLin.setVisibility(View.GONE);
@@ -219,92 +262,24 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                         }
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        // 触摸移动时的操作h
+                        Log.e("ScrollView", "移动");
+                        // 触摸移动时的操作
                         serializationCatalogReadHeadRel.setVisibility(View.GONE);
                         serializationCatalogReadFootLin.setVisibility(View.GONE);
                         count = false;
                         break;
                     case MotionEvent.ACTION_UP:
                         // 触摸抬起时的操作
-
+                        Log.e("ScrollView", "抬起");
                         break;
                 }
                 return false;
             }
         });
-        //滑动监听
-        serializationCatalogReadRecy.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView absListView, int i) {
-                switch (i) {
-                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-                        //滑动停止
-                        serializationCatalogReadHeadRel.setVisibility(View.GONE);
-                        serializationCatalogReadFootLin.setVisibility(View.GONE);
-                        count = true;
-                        break;
-                    case SCROLL_STATE_TOUCH_SCROLL:
-                        //正在滚动
-                        serializationCatalogReadHeadRel.setVisibility(View.GONE);
-                        serializationCatalogReadFootLin.setVisibility(View.GONE);
-                        break;
-                    case SCROLL_STATE_FLING:
-                        //惯性继续滚动
-                        serializationCatalogReadHeadRel.setVisibility(View.GONE);
-                        serializationCatalogReadFootLin.setVisibility(View.GONE);
-                        break;
-                }
-            }
 
-            @Override
-            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-
-            }
-        });
-        InitFootView();
-    }
-
-    //初始化底布局
-    private void InitFootView() {
-        View footView = LayoutInflater.from(this).inflate(R.layout.serializationcatalog_footview, null, false);
-        //观看第一话
-        SeeFirstBtn = footView.findViewById(R.id.SeeFirstBtn);
-        //收藏图片
-        CataLog_FootViewCollectionImg = footView.findViewById(R.id.CataLog_FootViewCollectionImg);
-        //收藏点击按钮
-        CataLog_FootViewCollectionBtn = footView.findViewById(R.id.CataLog_FootViewCollectionBtn);
-        //分享按钮
-        CataLog_FootViewShareBtn = footView.findViewById(R.id.CataLog_FootViewShareBtn);
-        //上一话字体
-        CataLog_FootViewUpperText = footView.findViewById(R.id.CataLog_FootViewUpperText);
-        CataLog_FootViewUpperLine = footView.findViewById(R.id.CataLog_FootViewUpperLine);
-        //上一话按钮
-        CataLog_FootViewUpperBtn = footView.findViewById(R.id.CataLog_FootViewUpperBtn);
-        //下一话字体
-        CataLog_FootViewNexterText = footView.findViewById(R.id.CataLog_FootViewNexterText);
-        CataLog_FootViewNexterLine = footView.findViewById(R.id.CataLog_FootViewNexterLine);
-        //下一话按钮
-        CataLog_FootViewNexterBtn = footView.findViewById(R.id.CataLog_FootViewNexterBtn);
-        //演员列表
-        CataLog_FootViewActor_Recy = footView.findViewById(R.id.CataLog_FootViewActor_Recy);
-        //未完待续布局
-        weiwandaixuReLa = footView.findViewById(R.id.weiwandaixuReLa);
-        CataLog_FootViewUpperText.setText("<");
-        //添加底布局
-        serializationCatalogReadRecy.addFooterView(footView);
-        CataLog_FootViewUpperBtn.setOnClickListener(this);
-        CataLog_FootViewNexterBtn.setOnClickListener(this);
-        SeeFirstBtn.setOnClickListener(this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        CataLog_FootViewActor_Recy.setLayoutManager(linearLayoutManager);
-        //评论列表
-        cataLog_footViewComment_recy = footView.findViewById(R.id.CataLog_FootViewComment_Recy);
-        //评论列表提示
-        cataLog_footViewComment_recyTip = footView.findViewById(R.id.CataLog_FootViewComment_RecyTip);
-        cataLog_footViewComment_recy.setLayoutManager(new LinearLayoutManager(this));
 
     }
+
 
     @Override
     protected void loadDate() {
@@ -352,10 +327,12 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             this.serializationCatalogReadBean = serializationCatalogReadBean;
         } else {
 
-            serializationCatalogReadRecyAdapter serializationCatalogReadRecyAdapter = new serializationCatalogReadRecyAdapter(this, serializationCatalogReadBean.getData().getList());
-            serializationCatalogReadRecy.setAdapter(serializationCatalogReadRecyAdapter);
+            SerializationCatalogReadRecyAdapter SerializationCatalogReadRecyAdapter = new SerializationCatalogReadRecyAdapter(serializationCatalogReadBean.getData().getList());
+            serializationCatalogReadRecy.setAdapter(SerializationCatalogReadRecyAdapter);
+            LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(SerializationCatalogReadActivity.this, R.anim.recy_item);
+            serializationCatalogReadRecy.setLayoutAnimation(animation);
             serializationCatalogReadText.setText(serializationCatalogReadBean.getData().getTitle());
-            serializationCatalogReadRecyAdapter.notifyDataSetChanged();
+            SerializationCatalogReadRecyAdapter.notifyDataSetChanged();
             serializationCatalogReadCommentNumber.setText(String.valueOf(serializationCatalogReadBean.getData().getCount()));
         }
         if (data != null) {
@@ -579,43 +556,47 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     private void SetTextColorRules() {
-        //第一话
-        if (data.get(data.size() - 1).getCatalogId().equals(StartcatalogId)) {
-            CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h2));
-            CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h2));
-            CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h4));
-            CataLog_FootViewUpperLine.setTextColor(getResources().getColor(R.color.h4));
-            CataLog_FootViewUpperBtn.setClickable(false);
-            CataLog_FootViewNexterBtn.setClickable(true);
-            weiwandaixuReLa.setVisibility(View.GONE);
-            //最后一话
-        } else if (data.get(0).getCatalogId().equals(StartcatalogId)) {
-            CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h4));
-            CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h4));
-            CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h2));
-            CataLog_FootViewUpperLine.setTextColor(getResources().getColor(R.color.h2));
-            CataLog_FootViewUpperBtn.setClickable(true);
-            CataLog_FootViewNexterBtn.setClickable(false);
-            weiwandaixuReLa.setVisibility(View.VISIBLE);
-            //其他
-        } else {
-            CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h2));
-            CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h2));
-            CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h2));
-            CataLog_FootViewUpperLine.setTextColor(getResources().getColor(R.color.h2));
-            CataLog_FootViewUpperBtn.setClickable(true);
-            CataLog_FootViewNexterBtn.setClickable(true);
-            weiwandaixuReLa.setVisibility(View.GONE);
+
+        if (data != null&&data.size()!=0) {
+            //第一话
+            if (data.get(data.size() - 1).getCatalogId().equals(StartcatalogId)) {
+                CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h2));
+                CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h2));
+                CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h4));
+                CataLog_FootViewUpperLine.setTextColor(getResources().getColor(R.color.h4));
+                CataLog_FootViewUpperBtn.setClickable(false);
+                CataLog_FootViewNexterBtn.setClickable(true);
+                weiwandaixuReLa.setVisibility(View.GONE);
+                //最后一话
+            } else if (data.get(0).getCatalogId().equals(StartcatalogId)) {
+                CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h4));
+                CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h4));
+                CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h2));
+                CataLog_FootViewUpperLine.setTextColor(getResources().getColor(R.color.h2));
+                CataLog_FootViewUpperBtn.setClickable(true);
+                CataLog_FootViewNexterBtn.setClickable(false);
+                weiwandaixuReLa.setVisibility(View.VISIBLE);
+                //其他
+            } else {
+                CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h2));
+                CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h2));
+                CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h2));
+                CataLog_FootViewUpperLine.setTextColor(getResources().getColor(R.color.h2));
+                CataLog_FootViewUpperBtn.setClickable(true);
+                CataLog_FootViewNexterBtn.setClickable(true);
+                weiwandaixuReLa.setVisibility(View.GONE);
+            }
+            if (data.size() == 1) {
+                CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h4));
+                CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h4));
+                CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h4));
+                CataLog_FootViewUpperLine.setTextColor(getResources().getColor(R.color.h4));
+                CataLog_FootViewUpperBtn.setClickable(false);
+                CataLog_FootViewNexterBtn.setClickable(false);
+                weiwandaixuReLa.setVisibility(View.GONE);
+            }
         }
-        if (data.size() == 1) {
-            CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h4));
-            CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h4));
-            CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h4));
-            CataLog_FootViewUpperLine.setTextColor(getResources().getColor(R.color.h4));
-            CataLog_FootViewUpperBtn.setClickable(false);
-            CataLog_FootViewNexterBtn.setClickable(false);
-            weiwandaixuReLa.setVisibility(View.GONE);
-        }
+
     }
 
     private void showPopueWindow() {

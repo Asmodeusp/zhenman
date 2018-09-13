@@ -89,13 +89,14 @@ public class WorksFragment extends BaseFragment<WorkPresenterImp> implements Wor
     @Override
     protected void loadDate() {
         initData();
-        presenter.getHomeHotUgcCommentBean(data.getId(),"1","20",data.getType());
+        Bundle arguments = getArguments();
+        this.data = (HomeHotBean.DataBean) arguments.getSerializable("data");
+//        presenter.getHomeHotUgcCommentBean(data.getId(),"1","20",data.getType());
 //        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
     private void initData() {
-        Bundle arguments = getArguments();
-        data = (HomeHotBean.DataBean) arguments.getSerializable("data");
+
     }
 
 
@@ -104,7 +105,7 @@ public class WorksFragment extends BaseFragment<WorkPresenterImp> implements Wor
         //RecyClerView
         HomeHot_WorksDetailsRecy = (RecyclerView) getActivity().findViewById(R.id.HomeHot_WorksDetailsRecy);
         HomeHot_WorksDetailsRecy.setOnClickListener(this);
-        //低下阴影
+        //底下阴影
         HomeHot_WorksDetails_FootView = (AutoRelativeLayout) getActivity().findViewById(R.id.HomeHot_WorksDetails_FootView);
         HomeHot_WorksDetails_FootView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -156,7 +157,8 @@ public class WorksFragment extends BaseFragment<WorkPresenterImp> implements Wor
         //单图
         homeHot_works_image = getActivity().findViewById(R.id.HomeHot_Works_Image);
         HomeHot_WorksDetails.setOnClickListener(this);
-        initLogic();
+        //逻辑方法
+//        initLogic();
         homeHot_VerticalViewpager.setAllowScroll(false);
         HomeHot_WorksDetailsRecy.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -234,10 +236,9 @@ public class WorksFragment extends BaseFragment<WorkPresenterImp> implements Wor
         HomeHot_WorksDetailsRecy.setLayoutManager(layoutManager);
         if (data.getPageDtoList().size() == 1) {
             HomeHot_WorksDetailsRecy.setVisibility(View.GONE);
-            homeHot_VerticalViewpager.setAllowScroll(false);
+            homeHot_VerticalViewpager.setAllowScroll(true);
             Glide.with(getContext()).load(data.getPageDtoList().get(0).getImageUrl()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(homeHot_works_image);
             homeHot_works_image.setVisibility(View.VISIBLE);
-
         } else {
             HomeHot_WorksDetailsRecy.setVisibility(View.VISIBLE);
             homeHot_works_image.setVisibility(View.GONE);

@@ -79,7 +79,10 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
         for (int i = 0; i < data.size(); i++) {
             WorksFragment addFragment = new WorksFragment(HomeHot_VerticalViewpager,presenter);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("data",data.get(i));
+
+            if (data.get(i).getPageDtoList().size()>3) {
+                bundle.putSerializable("data",data.get(i));
+            }
             addFragment.setArguments(bundle);
             fragments.add(addFragment);
         }

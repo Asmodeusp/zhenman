@@ -144,7 +144,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
             //观看第一话
             case R.id.Work_Detaails_LookUpText:
                 Intent intent = new Intent(this, SerializationCatalogReadActivity.class);
-                if (serializationCatalogBeandata == null) {
+                if (serializationCatalogBeandata == null&&serializationCatalogBeandata.size()==0) {
                     Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
                 } else {
                     intent.putExtra("catalogId", serializationCatalogBeandata.get(serializationCatalogBeandata.size()-1).getCatalogId());
