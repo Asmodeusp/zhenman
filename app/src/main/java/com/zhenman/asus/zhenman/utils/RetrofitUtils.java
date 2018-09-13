@@ -32,6 +32,7 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
 /**
  * Retrofit工具类
  */
@@ -41,25 +42,21 @@ public class RetrofitUtils {
 
     private RetrofitUtils() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.addInterceptor(addQueryParameterInterceptor());
         builder.addInterceptor(addHeaderInterceptor());
 
 //      设置缓存
         File cacheFile = new File("/storage/emulated/0/Android/data/com.zhenman.asus.zhenman/cache", "RetrofitCache");
-        Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
-        builder.cache(cache).addInterceptor(addCacheInterceptor());
+        Cache cache = new Cache(cacheFile, 1024 * 1024 * 10);
+//        builder.cache(cache).addNetworkInterceptor(addCacheInterceptor());
 
-        //设置超时
-        builder.connectTimeout(1500, TimeUnit.SECONDS);
-        builder.readTimeout(2000, TimeUnit.SECONDS);
-        builder.writeTimeout(2000, TimeUnit.SECONDS);
-        //错误重连
+
+//        错误重连
         builder.retryOnConnectionFailure(true);
         OkHttpClient client = builder.build();
         retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-//                .client(client)
+                .client(client)
                 .baseUrl(Urls.BASE_URL)
                 .build();
     }
@@ -75,24 +72,7 @@ public class RetrofitUtils {
         return retrofitUtils;
     }
 
-    /**
-     * 设置公共参数
-     */
-    private static Interceptor addQueryParameterInterceptor() {
-        Interceptor addQueryParameterInterceptor = new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request originalRequest = chain.request();
-                Request request;
-                HttpUrl modifiedUrl = originalRequest.url().newBuilder()
 
-                        .build();
-                request = originalRequest.newBuilder().url(modifiedUrl).build();
-                return chain.proceed(request);
-            }
-        };
-        return addQueryParameterInterceptor;
-    }
 
     /**
      * 设置请求头
@@ -124,7 +104,6 @@ public class RetrofitUtils {
      */
     private static Interceptor addCacheInterceptor() {
         Interceptor cacheInterceptor = new Interceptor() {
-
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
