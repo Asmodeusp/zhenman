@@ -20,5 +20,5 @@ public interface AlertDataService {
 
     @Multipart
     @POST(Urls.ALART_MYDATA)
-    Observable<AlartDataBean> upLoadPhoto(@HeaderMap Map<String,String> headMap,@PartMap Map<String, RequestBody> files);
+    Observable<AlartDataBean> upLoadPhoto(@PartMap Map<String, RequestBody> files);
 }

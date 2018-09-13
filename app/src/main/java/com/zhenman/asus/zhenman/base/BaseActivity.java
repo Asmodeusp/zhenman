@@ -31,6 +31,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+//        int resourceId = App.context.getResources().getIdentifier("notch_height", "dimen", "android");
+//        if (resourceId > 0) {
+//            int dimensionPixelSize = App.context.getResources().getDimensionPixelSize(resourceId);
+//        }
 //        ImmersionBar.with(this).init();
 
 //        权限配置
