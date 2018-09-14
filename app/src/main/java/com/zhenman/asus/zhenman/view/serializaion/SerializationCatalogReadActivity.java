@@ -249,13 +249,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         //评论列表提示
         cataLog_footViewComment_recyTip = findViewById(R.id.CataLog_FootViewComment_RecyTip);
         cataLog_footViewComment_recy.setLayoutManager(new LinearLayoutManager( this));
-        serializationCatalogReadSRL.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshLayout) {
-
-            }
-        });
-        if (result.size()==0) {
+        serializationCatalogReadSRL.setDragRate(0.5f);
+         if (result.size()==0) {
             cataLog_footViewComment_recy.setVisibility(View.GONE);
             cataLog_footViewComment_recyTip.setVisibility(View.VISIBLE);
         }

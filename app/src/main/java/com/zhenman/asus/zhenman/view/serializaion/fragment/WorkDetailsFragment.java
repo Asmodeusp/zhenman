@@ -12,7 +12,6 @@ import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.WorkDetailsCommentContract;
 import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
-import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
 import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
@@ -22,7 +21,6 @@ import com.zhenman.asus.zhenman.view.adapter.serialization.WorkDetailsActorRecyA
 import com.zhenman.asus.zhenman.view.serializaion.SerializaionCommentDetailsActivity;
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresenterImp> implements WorkDetailsCommentContract.WorkDetailsCommentView {
@@ -30,7 +28,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     private TextView Actor_RecyTips;
     private RecyclerView Actor_Recy;
     private RecyclerView Work_commentRecy;
-    private List<WorkDetailsCommentBean.DataBean.ResultBean> result = new ArrayList<>();
+    private List<WorkDetailsCommentBean.DataBean.ResultBean> result;
     private TextView work_commentTips;
     private String pgcId;
 
@@ -41,6 +39,8 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
 
     @Override
     protected void init() {
+        pgcId = ((String) SPUtils.get(getContext(), "pgcid", "1"));
+        presenter.getWorkDetailsCommentBean(pgcId, "" + 1);
         //作品描述
         Work_DescriptionText = getActivity().findViewById(R.id.Work_DescriptionText);
         //演员列表
@@ -54,7 +54,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
         //得到连载详情Bean
         SerializationDetailsBean.DataBean data = ((WorkDetailsActivity) getActivity()).serializationDetailsBeandata;
 
-            if (data != null) {
+        if (data != null) {
             if (data.getActorList().size() == 0 && data.getActorList() == null) {
                 Actor_RecyTips.setVisibility(View.VISIBLE);
             }
@@ -67,21 +67,15 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
             //设置演员列表适配器
             Actor_Recy.setAdapter(new WorkDetailsActorRecyAdapter(data.getActorList()));
         }
-
-
-            work_commentTips.setVisibility(View.VISIBLE);
-            Work_commentRecy.setVisibility(View.GONE);
-
+        work_commentTips.setVisibility(View.VISIBLE);
+        Work_commentRecy.setVisibility(View.GONE);
         //设置评论列表格式
         Work_commentRecy.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
     protected void loadDate() {
-        pgcId =((String)SPUtils.get(getContext(),"pgcid","1"));
-        presenter.getWorkDetailsCommentBean(pgcId, "" + 1);
     }
-
 
     @Override
     public void showError(String msg) {
@@ -93,7 +87,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     @Override
     public void showWorkDetailsCommentBean(final WorkDetailsCommentBean workDetailsCommentBean) {
 
-        result.addAll(workDetailsCommentBean.getData().getResult());
+        result = workDetailsCommentBean.getData().getResult();
         if (result.size() == 0) {
             work_commentTips.setVisibility(View.VISIBLE);
             Work_commentRecy.setVisibility(View.GONE);
