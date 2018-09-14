@@ -43,13 +43,6 @@ public class RetrofitUtils {
     private RetrofitUtils() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.addInterceptor(addHeaderInterceptor());
-
-//      设置缓存
-        File cacheFile = new File("/storage/emulated/0/Android/data/com.zhenman.asus.zhenman/cache", "RetrofitCache");
-        Cache cache = new Cache(cacheFile, 1024 * 1024 * 10);
-//        builder.cache(cache).addNetworkInterceptor(addCacheInterceptor());
-
-
 //        错误重连
         builder.retryOnConnectionFailure(true);
         OkHttpClient client = builder.build();
@@ -113,6 +106,7 @@ public class RetrofitUtils {
 
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build();
+
                 }
                 Response response = chain.proceed(request);
                 if (isNetworkAvailable(App.context)) {

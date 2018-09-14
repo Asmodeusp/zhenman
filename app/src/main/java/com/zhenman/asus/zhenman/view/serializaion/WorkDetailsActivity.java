@@ -44,6 +44,11 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
     private TextView Work_Detaails_Name;
     private TextView work_detaails_catalogText;
     private TextView work_detaails_detailsText;
+
+    public void setPgcid(String pgcid) {
+        this.pgcid = pgcid;
+    }
+
     private String pgcid;
 
     @Override

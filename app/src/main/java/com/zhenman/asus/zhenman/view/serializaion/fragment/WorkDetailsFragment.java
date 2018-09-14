@@ -16,6 +16,7 @@ import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
 import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.WorkCommentRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.WorkDetailsActorRecyAdapter;
 import com.zhenman.asus.zhenman.view.serializaion.SerializaionCommentDetailsActivity;
@@ -30,7 +31,6 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     private RecyclerView Actor_Recy;
     private RecyclerView Work_commentRecy;
     private List<WorkDetailsCommentBean.DataBean.ResultBean> result = new ArrayList<>();
-    private SerializationCatalogBean serializationCatalogBean;
     private TextView work_commentTips;
     private String pgcId;
 
@@ -53,8 +53,8 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
         work_commentTips = getActivity().findViewById(R.id.Work_commentTips);
         //得到连载详情Bean
         SerializationDetailsBean.DataBean data = ((WorkDetailsActivity) getActivity()).serializationDetailsBeandata;
-        serializationCatalogBean = ((WorkDetailsActivity) getActivity()).serializationCatalogBean;
-        if (data!=null) {
+
+            if (data != null) {
             if (data.getActorList().size() == 0 && data.getActorList() == null) {
                 Actor_RecyTips.setVisibility(View.VISIBLE);
             }
@@ -67,22 +67,19 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
             //设置演员列表适配器
             Actor_Recy.setAdapter(new WorkDetailsActorRecyAdapter(data.getActorList()));
         }
-        if (result.size() == 0) {
+
+
             work_commentTips.setVisibility(View.VISIBLE);
             Work_commentRecy.setVisibility(View.GONE);
-        }
-        if (serializationCatalogBean!=null) {
-            pgcId = serializationCatalogBean.getData().get(0).getPgcId();
-            presenter.getWorkDetailsCommentBean(pgcId, "" + 1);
-        }else{
-            Toast.makeText(getContext(), "qqweqewqwewq", Toast.LENGTH_SHORT).show();
-        }
+
         //设置评论列表格式
         Work_commentRecy.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
     protected void loadDate() {
+        pgcId =((String)SPUtils.get(getContext(),"pgcid","1"));
+        presenter.getWorkDetailsCommentBean(pgcId, "" + 1);
     }
 
 
@@ -104,14 +101,15 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
             work_commentTips.setVisibility(View.GONE);
             Work_commentRecy.setVisibility(View.VISIBLE);
             //设置评论列表适配器
-            WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, serializationCatalogBean.getData().get(0).getPgcId(), presenter);
+            WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, pgcId, presenter);
             Work_commentRecy.setAdapter(workCommentRecyAdapter);
+            workCommentRecyAdapter.notifyDataSetChanged();
             workCommentRecyAdapter.setRecyclerViewOnCLickListener(new WorkCommentRecyAdapter.RecyclerViewOnCLickListener() {
                 @Override
                 public void myClick(View view, int position) {
                     Intent intent = new Intent(getActivity(), SerializaionCommentDetailsActivity.class);
-                    intent.putExtra("CommentId",workDetailsCommentBean.getData().getResult().get(position).getCommentId());
-                    intent.putExtra("PgcId",pgcId);
+                    intent.putExtra("CommentId", workDetailsCommentBean.getData().getResult().get(position).getCommentId());
+                    intent.putExtra("PgcId", pgcId);
                     startActivity(intent);
                 }
             });
