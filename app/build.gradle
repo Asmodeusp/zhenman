@@ -92,4 +92,7 @@ dependencies {
     implementation files('libs/libammsdk.jar')
     //    圆形图片
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    //上拉加载下拉刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-4'
 }

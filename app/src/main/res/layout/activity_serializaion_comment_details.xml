@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".view.serializaion.SerializaionCommentDetailsActivity">
 
+
     <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -32,6 +33,11 @@
             android:textSize="26px" />
     </com.zhy.autolayout.AutoRelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/h1"></View>
+
     <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +51,8 @@
             android:layout_width="54px"
             android:layout_height="54px"
             android:layout_marginLeft="32px"
-            android:layout_marginTop="20px" />
+            android:layout_marginTop="20px"
+            android:background="@mipmap/my_qiezi" />
 
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="wrap_content"
@@ -110,8 +117,15 @@
         </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoRelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/SerializaionCommentDetails_CommentRecy"
+    <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:background="@color/h8">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/SerializaionCommentDetails_CommentRecy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+    </com.zhy.autolayout.AutoLinearLayout>
+
 </com.zhy.autolayout.AutoLinearLayout>

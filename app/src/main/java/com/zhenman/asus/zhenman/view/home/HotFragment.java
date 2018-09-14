@@ -63,8 +63,6 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     protected void loadDate() {
 
     }
-
-
     @Override
     public void showError(String msg) {
         if (!msg.equals("成功")) {

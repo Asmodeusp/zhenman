@@ -67,18 +67,16 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
             //设置演员列表适配器
             Actor_Recy.setAdapter(new WorkDetailsActorRecyAdapter(data.getActorList()));
         }
-
-        if (serializationCatalogBean!=null) {
-            pgcId = serializationCatalogBean.getData().get(0).getPgcId();
-            presenter.getWorkDetailsCommentBean(pgcId, "" + 1);
-        }
-
         if (result.size() == 0) {
             work_commentTips.setVisibility(View.VISIBLE);
             Work_commentRecy.setVisibility(View.GONE);
         }
-
-
+        if (serializationCatalogBean!=null) {
+            pgcId = serializationCatalogBean.getData().get(0).getPgcId();
+            presenter.getWorkDetailsCommentBean(pgcId, "" + 1);
+        }else{
+            Toast.makeText(getContext(), "qqweqewqwewq", Toast.LENGTH_SHORT).show();
+        }
         //设置评论列表格式
         Work_commentRecy.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
@@ -100,7 +98,8 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
 
         result.addAll(workDetailsCommentBean.getData().getResult());
         if (result.size() == 0) {
-
+            work_commentTips.setVisibility(View.VISIBLE);
+            Work_commentRecy.setVisibility(View.GONE);
         } else {
             work_commentTips.setVisibility(View.GONE);
             Work_commentRecy.setVisibility(View.VISIBLE);
