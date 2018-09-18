@@ -1,10 +1,12 @@
 package com.zhenman.asus.zhenman.view.home;
 
-import android.annotation.SuppressLint;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
-import android.view.View;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
@@ -13,34 +15,32 @@ import com.zhenman.asus.zhenman.contract.HomeHotContract;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
-import com.zhenman.asus.zhenman.view.adapter.home.HomeHotVerticalVpAdapter;
-import com.zhenman.asus.zhenman.view.ui.MyViewPager;
+import com.zhenman.asus.zhenman.utils.ScreenUtils;
+import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
+import com.zhenman.asus.zhenman.view.login.MainActivity;
+import com.zhenman.asus.zhenman.view.ui.NotifyDataSetChangedForRv;
+import com.zhenman.asus.zhenman.view.ui.layoutmessage.OnViewPagerListener;
+import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import cn.youngkaaa.yviewpager.YViewPager;
 
-public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView {
-
+public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView, NotifyDataSetChangedForRv {
+    private RecyclerView HomeHot_List;
+    private ViewPagerLayoutManager linearLayoutManager;
+    private HomeHotRecyAdapter homeHotRecyAdapter;
     //底部切换页面
     private AutoLinearLayout group;
     //头部视图
     private AutoRelativeLayout home_headView;
-    ArrayList<Fragment> fragments = new ArrayList<>();
-    private MyViewPager HomeHot_VerticalViewpager;
+
 
     public HotFragment() {
         super();
     }
 
-    @SuppressLint("ValidFragment")
-    public HotFragment(AutoLinearLayout group, AutoRelativeLayout home_headView) {
-        this.group = group;
-        this.home_headView = home_headView;
-    }
 
     @Override
     protected int getLayoutId() {
@@ -55,7 +55,33 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     }
 
     private void initView() {
-        HomeHot_VerticalViewpager = getActivity().findViewById(R.id.HomeHot_VerticalViewpager);
+        HomeHot_List = getActivity().findViewById(R.id.HomeHot_List);
+        linearLayoutManager = new ViewPagerLayoutManager(getContext(), LinearLayoutManager.VERTICAL) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ScreenUtils.getScreenHeight(getActivity()));
+            }
+        };
+        linearLayoutManager.setOnViewPagerListener(new OnViewPagerListener() {
+            @Override
+            public void onInitComplete() {
+
+            }
+
+            @Override
+            public void onPageRelease(boolean isNext, int position) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position, boolean isBottom) {
+
+
+            }
+        });
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        HomeHot_List.setLayoutManager(linearLayoutManager);
     }
 
 
@@ -63,6 +89,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     protected void loadDate() {
 
     }
+
     @Override
     public void showError(String msg) {
         if (!msg.equals("成功")) {
@@ -71,21 +98,15 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     }
 
+    ArrayList<HomeHotBean.DataBean> dataBeans;
+
     @Override
     public void showHotBean(HomeHotBean homeHotBean) {
-        List<HomeHotBean.DataBean> data = homeHotBean.getData();
-        for (int i = 0; i < data.size(); i++) {
-            WorksFragment addFragment = new WorksFragment(HomeHot_VerticalViewpager,presenter);
-            Bundle bundle = new Bundle();
+        dataBeans = new ArrayList<>();
 
-            if (data.get(i).getPageDtoList().size()>3) {
-                bundle.putSerializable("data",data.get(i));
-            }
-            addFragment.setArguments(bundle);
-            fragments.add(addFragment);
-        }
-        HomeHotVerticalVpAdapter homeHotVerticalVpAdapter = new HomeHotVerticalVpAdapter(fragments, getActivity().getSupportFragmentManager());
-        HomeHot_VerticalViewpager.setAdapter(homeHotVerticalVpAdapter);
+        homeHotRecyAdapter = new HomeHotRecyAdapter(dataBeans, linearLayoutManager, HomeHot_List, this);
+        HomeHot_List.setAdapter(homeHotRecyAdapter);
+
 
     }
 
@@ -94,5 +115,52 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     }
 
+    @Override
+    public void notifyDataSetChanged(final int pos, final boolean isTop) {
+
+        if (null == homeHotRecyAdapter) {
+            return;
+        }
+
+        //linearLayoutManager.setScrollEnabled(true);
+
+        //myLayoutMessage.setScrollEnabled(false);
+        //homeHotRecyAdapter.notifyDataSetChanged();
+
+        if (pos != -1 && pos < dataBeans.size()) {
+            if (isTop) {
+//                linearLayoutManager.setScrollEnabled(true);
+                HomeHot_List.scrollToPosition(pos - 1);
+                linearLayoutManager.scrollToPositionWithOffset(pos - 1, 0);
+            } else {
+                linearLayoutManager.setScrollEnabled(false);
+                HomeHot_List.scrollToPosition(pos + 1);
+                linearLayoutManager.scrollToPositionWithOffset(pos + 1, 0);
+            }
+
+        }
+
+//        new Handler().post(new Runnable() {
+//            @Override
+//            public void run() {
+//                // 刷新操作
+//                linearLayoutManager.setScrollEnabled(true);
+//
+//                //myLayoutMessage.setScrollEnabled(false);
+//                //homeHotRecyAdapter.notifyDataSetChanged();
+//
+//                if (pos != -1 && pos < dataBeans.size()) {
+//                    HomeHot_List.scrollToPosition(pos + 1);
+//                    LinearLayoutManager mLayoutManager =
+//                            (LinearLayoutManager) HomeHot_List.getLayoutManager();
+//                    mLayoutManager.scrollToPositionWithOffset(pos+1, 0);
+//                }
+//
+//
+//            }
+//        });
+
+
+    }
 
 }
