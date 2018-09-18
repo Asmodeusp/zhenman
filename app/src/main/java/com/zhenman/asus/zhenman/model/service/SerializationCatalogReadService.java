@@ -20,7 +20,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
-public interface SerializationCatalogReadService {
+interface SerializationCatalogReadService {
     //连载阅读
     @FormUrlEncoded
     @POST(Urls.SERIALIZATION_CATALOG_READ)
