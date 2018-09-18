@@ -13,11 +13,12 @@ import com.zhenman.asus.zhenman.contract.MySettingContract;
 import com.zhenman.asus.zhenman.model.bean.CancelLoginBean;
 import com.zhenman.asus.zhenman.presenter.MySettingPresenter;
 import com.zhenman.asus.zhenman.utils.DataCleanUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhy.autolayout.AutoRelativeLayout;
 
-public class MySettingActivity extends BaseActivity<MySettingPresenter> implements View.OnClickListener,MySettingContract.MySettingInView {
+public class MySettingActivity extends BaseActivity<MySettingPresenter> implements View.OnClickListener, MySettingContract.MySettingInView {
 
 
     private ImageView set_Back;
@@ -112,17 +113,23 @@ public class MySettingActivity extends BaseActivity<MySettingPresenter> implemen
             case R.id.setting_aboutZhenman:
                 break;
             case R.id.set_Cancellation:
-                presenter.sendCancelLoginData("18810611680","1","oxqjH1fxsAwFKx7M6u0N3kz59Od0");
+                if ((String) SPUtils.get(this, SPKey.USER_ID, "") == null) {
+                    Toast.makeText(this, "请先完成登陆", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MySettingActivity.this, MainActivity.class));
+                } else {
+                    presenter.sendCancelLoginData((String) SPUtils.get(this, SPKey.USER_MOBILE, ""), (String) SPUtils.get(this, SPKey.LOGIN_TYPE, ""), (String) SPUtils.get(this, SPKey.UMeng_OTHERUSERId, ""));
+                }
                 break;
         }
     }
-//注销登陆
+
+    //注销登陆
     @Override
     public void showCancelLoginData(CancelLoginBean cancelLoginBean) {
-        if (cancelLoginBean.getMsg().equals("成功")){
+        if (cancelLoginBean.getMsg().equals("成功")) {
             SPUtils.clear(this);
             startActivity(new Intent(MySettingActivity.this, MainActivity.class));
-        }else {
+        } else {
             Toast.makeText(this, "退出登陆失败", Toast.LENGTH_SHORT).show();
         }
     }

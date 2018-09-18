@@ -2,16 +2,21 @@ package com.zhenman.asus.zhenman.view.fragment;
 
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.MySelfContract;
 import com.zhenman.asus.zhenman.model.bean.GetMyDataBean;
 import com.zhenman.asus.zhenman.presenter.MySelfPresenter;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.myself.AccountManagementActivity;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhenman.asus.zhenman.view.myself.MyDraftActivity;
@@ -72,7 +77,10 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
         my_DraftPage = getActivity().findViewById(R.id.my_DraftPage);//个人草稿
         my_AccountNumberPage = getActivity().findViewById(R.id.my_AccountNumberPage);//个人账号管理
 //        accessToken   oauthId
-        presenter.sendGetMyData("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzQ4MzYzOTAsInN1YiI6IntcInVzZXJJZFwiOjMwNixcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiQjUyNzI3NkIyODlFRjcyRTM5NzAxRUJDQjMyNzdFRUVcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4xLjVcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NjM3MjM5MH0.0nQECGVov3ZMpdbblKfBKThM7ogDtP-qJrOwT7bYHDs", "69");
+        String s = (String) SPUtils.get(App.context, (String) SPUtils.get(getActivity(), SPKey.USER_OAUTHID, ""), "");
+
+
+        presenter.sendGetMyData(s);
         idListener();
 
     }
@@ -104,8 +112,12 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 startActivity(new Intent(getActivity(), PersonalInformationActivity.class));
                 break;
             case R.id.my_PersonalHomePage:
-                startActivity(new Intent(getActivity(), HomepageActivity.class));
-
+                String userID = (String) SPUtils.get(getActivity(), SPKey.USER_ID, "");
+                if (userID.isEmpty()) {
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+                } else {
+                    startActivity(new Intent(getActivity(), HomepageActivity.class));
+                }
                 break;
             case R.id.my_WalletPage:
                 startActivity(new Intent(getActivity(), MyWalletActivity.class));
@@ -115,7 +127,6 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 break;
             case R.id.my_DraftPage:
                 startActivity(new Intent(getActivity(), MyDraftActivity.class));
-
                 break;
 
             case R.id.my_AccountNumberPage://账号管理
@@ -127,11 +138,13 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
 
     @Override
     public void showGetMyData(GetMyDataBean getMyDataBean) {
+
+        Log.e("11111111111", getMyDataBean.getMsg());
         if (getMyDataBean.getData().getHeadImg() != null) {
             Glide.with(getActivity()).load(getMyDataBean.getData().getHeadImg()).into(my_Avatar);
         }
         my_Name.setText(getMyDataBean.getData().getName());
-        if ("1".equals(getMyDataBean.getData().getSex())) {
+        if ("2".equals(getMyDataBean.getData().getSex())) {
             my_Sex.setImageResource(R.mipmap.my_f);
 //            my_Sex.setImageBitmap(getResources().getDrawable((R.mipmap.my_f)));
         } else {
@@ -147,6 +160,6 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
     @Override
     public void onResume() {
         super.onResume();
-        presenter.sendGetMyData("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzQ4MzYzOTAsInN1YiI6IntcInVzZXJJZFwiOjMwNixcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiQjUyNzI3NkIyODlFRjcyRTM5NzAxRUJDQjMyNzdFRUVcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4xLjVcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NjM3MjM5MH0.0nQECGVov3ZMpdbblKfBKThM7ogDtP-qJrOwT7bYHDs", "69");
+        presenter.sendGetMyData((String) SPUtils.get(App.context, (String) SPUtils.get(getActivity(), SPKey.USER_OAUTHID, ""), ""));
     }
 }

@@ -69,7 +69,7 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
         map.put("pgcId", PgcId);
         RetrofitUtils.getInstance()
                 .getService(SerializationCatalogReadService.class)
-                .getSerializationCatalogBean( map)
+                .getSerializationCatalogBean(map)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<SerializationCatalogBean>() {

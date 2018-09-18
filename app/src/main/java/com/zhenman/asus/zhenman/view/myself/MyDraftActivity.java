@@ -23,17 +23,25 @@ public class MyDraftActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void init() {
-        app_back = (ImageView) findViewById(R.id.app_back);
-        app_title = (TextView) findViewById(R.id.app_title);
-        myDraft_recy = (RecyclerView) findViewById(R.id.myDraft_recy);
-        app_otherID = (TextView) findViewById(R.id.app_otherID);
-        app_title.setText("我的草稿");
+//        app_back = (ImageView) findViewById(R.id.app_back);
+//        app_title = (TextView) findViewById(R.id.app_title);
+//        myDraft_recy = (RecyclerView) findViewById(R.id.myDraft_recy);
+//        app_otherID = (TextView) findViewById(R.id.app_otherID);
+//        app_title.setText("我的草稿");
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+
+//        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.coll);
+//        //设置展示的文字
+//        collapsingToolbarLayout.setTitle("学习");
+//        //设置展示文字的颜色
+//        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.colorAccent));
         idListener();
     }
 
     private void idListener() {
-        app_back.setOnClickListener(this);
-        app_otherID.setOnClickListener(this);
+//        app_back.setOnClickListener(this);
+//        app_otherID.setOnClickListener(this);
     }
 
     @Override
@@ -44,12 +52,12 @@ public class MyDraftActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.app_back:
-                finish();
-                break;
-            case R.id.app_otherID:
-
-                break;
+//            case R.id.app_back:
+//                finish();
+//                break;
+//            case R.id.app_otherID:
+//
+//                break;
         }
 
     }

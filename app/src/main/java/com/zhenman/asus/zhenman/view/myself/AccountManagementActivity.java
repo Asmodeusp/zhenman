@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.view.login.BindPhotoActivity;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 public class AccountManagementActivity extends BaseActivity implements View.OnClickListener {
@@ -64,9 +68,26 @@ public class AccountManagementActivity extends BaseActivity implements View.OnCl
                 finish();
                 break;
             case R.id.account_modifyPassword:
+
                 startActivity(new Intent(this, ModifyPasswordOneActivity.class));
                 break;
             case R.id.account_bindPhoneNum:
+                String userMobile = (String) SPUtils.get(this, SPKey.USER_MOBILE, "");
+                Intent intent = new Intent(AccountManagementActivity.this, BindPhotoActivity.class);
+
+                if (userMobile.isEmpty()){
+                    Toast.makeText(this, "请先绑定手机号", Toast.LENGTH_SHORT).show();
+                    intent.putExtra("bind","未绑定手机号");
+                    startActivity(intent);
+                }else {
+//                    如果之前又手机号登陆，就绑定新的手机号
+//                    Intent intent = new Intent(AccountManagementActivity.this, BindPhotoActivity.class);
+                    intent.putExtra("bind","已有手机号，更换绑定");
+
+                    startActivity(intent);
+
+                }
+
                 break;
             case R.id.account_bindWeixin:
                 break;

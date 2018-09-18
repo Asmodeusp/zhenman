@@ -11,6 +11,8 @@ public class Urls {
     public static final String REQUES_PICTURE_VERIFICATION_CODE = "login/getImageCode";
     //请求手机验证码
     public static final String REQUEST_CELL_PHONE_VERIFICATION_CODE = "login/sendSms";
+//    账号绑定更换前的密码校验
+    public static final String CHECK_CODE = "userOauth/checkCode";
     //忘记密码
     public static final String FORGET_PASSWORD = "";
     //注册手机号和验证码
@@ -70,5 +72,14 @@ public class Urls {
     public static final String PGC_CHAPTER_COMMENT_LIST_BY_OFFSET  ="pgcChapterCommentInfo/getPgcChapterCommentListByOffSet";
     //Ugc的评论
     public static final String UGC_COMMENT_BYCOMICID = "ugcCommentInfo/getCommentListByComicId";
+//    个人主页 我的作品   短漫画
+    public static final String UGS_SHORT_COMIC="userUgcInfo/getUgcListByType";
+//    消息页面 3个的主题及对应的4个ugc作品
+    public static final String UGC_THEME_INFO="ugcSubjectUser/getNewsSubjectListByUserId";
+//    关注主题
+    public static final String ATTENTION_THEME="ugcSubjectUser/saveUserSubjectFollow";
+//    我关注的主题
+    public static final String MY_ATTENTION_THEME="ugcSubjectUser/getUserSubjectList";
+
 
 }

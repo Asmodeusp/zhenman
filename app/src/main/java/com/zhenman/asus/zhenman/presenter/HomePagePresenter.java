@@ -17,7 +17,7 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
     HomePageContract.HomePageInView homePageInView;
 
     @Override
-    public void sendHomePageHeadData(String accessToken, String userId) {
+    public void sendHomePageHeadData( String userId) {
         HashMap<String, String> paramMap = new HashMap<>();
         paramMap.put("userId", userId);
         RetrofitUtils.getInstance().getService(HomePageService.class)

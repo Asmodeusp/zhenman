@@ -13,7 +13,6 @@ import java.util.Map;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class VerificationCodePresenterImp implements VerificationCodeContract.VerificationCodePresenter {
@@ -74,10 +73,14 @@ public class VerificationCodePresenterImp implements VerificationCodeContract.Ve
         map.put("smsCode", MSMCode);
         RetrofitUtils.getInstance().getRegisterVerificationCodeService().GetRegisterLoginCodeBean(map).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<RegisterLoginCodeBean>() {
+                .subscribe(new Observer<RegisterLoginCodeBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
 
                     @Override
-                    public void accept(RegisterLoginCodeBean registerLoginCodeBean) throws Exception {
+                    public void onNext(RegisterLoginCodeBean registerLoginCodeBean) {
                         Log.e("VerificationCodePresent", registerLoginCodeBean.getMsg());
                         if (registerLoginCodeBean.getState() == 0) {
                             verificationCodeView.showError(registerLoginCodeBean.getMsg());
@@ -92,6 +95,16 @@ public class VerificationCodePresenterImp implements VerificationCodeContract.Ve
                             verificationCodeView.showError(registerLoginCodeBean.getMsg());
 
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }

@@ -8,9 +8,9 @@ public class SPKey {
     public static String UMeng_OTHERUSERId="otherUserId";
     public static String UMeng_CITYNAME="cityName";
     public static String UMeng_OPENID="openId";
-    public static String UMENG_TYPE="type";
+    public static String LOGIN_TYPE="type";
     public static String IS_LOGIN="isLogin";
-    public static String USER_TOKEN="token";
+    public static String USER_TOKEN="accessToken";
     public static String USER_BIRTHDAY="birthdate";
     public static String USER_MOBILE="mobile";
     public static String USER_AVATAR="headImg";
@@ -19,6 +19,7 @@ public class SPKey {
     public static String USER_REFRESHTOKEN="refreshToken";
     public static String USER_OAUTHID="oauthId";
     public static String USER_SEX="sex";
+
 
 
 }

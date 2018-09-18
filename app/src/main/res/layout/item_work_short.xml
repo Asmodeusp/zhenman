@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/cover_corners">
+
+    <ImageView
+        android:id="@+id/itemWorkShort_Img"
+        android:layout_width="228px"
+        android:layout_height="338px"
+        android:padding="@dimen/px_16"
+        android:scaleType="fitXY"
+        android:src="@mipmap/common_qiezi" />
+</com.zhy.autolayout.AutoLinearLayout>
+

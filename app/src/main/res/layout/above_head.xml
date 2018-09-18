@@ -32,6 +32,15 @@
         android:text="清空"
         android:visibility="gone" />
 
+    <ImageView
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/app_otherImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/my_qiezi"
+        android:visibility="gone" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"

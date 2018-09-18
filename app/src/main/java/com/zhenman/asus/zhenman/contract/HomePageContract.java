@@ -9,7 +9,7 @@ public interface HomePageContract {
         void showHomePageHead(HomePageHeadBean homePageHeadBean);
     }
     interface HomePageInPresenter extends BasePresenter<HomePageInView>{
-        void sendHomePageHeadData(String accessToken,String userId);
+        void sendHomePageHeadData(String userId);
 
     }
 }

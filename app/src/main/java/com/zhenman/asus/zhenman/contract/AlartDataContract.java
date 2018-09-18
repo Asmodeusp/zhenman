@@ -12,6 +12,6 @@ public interface AlartDataContract {
     interface AlartDataInPresenter extends BasePresenter<AlartDataInView>{
 //        void sendAlartData(String accessToken,String oauthId,String sex,String name,String introduction
 //        ,String headImg,String birthdate);
-void sendAlartData(String accessToken,String oauthId, String sex, String name, String introduction, String headImg, String birthdate, File file);
+void sendAlartData(String oauthId, String sex, String name, String introduction, String headImg, String birthdate, File file);
     }
 }

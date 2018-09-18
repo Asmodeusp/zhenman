@@ -27,7 +27,7 @@ public class AlartDataPresenter implements AlartDataContract.AlartDataInPresente
     }
     //你现在相册是不是空的直接重叠然后空指针相机那  相机那？X？相机那没有家token呢
     @Override
-    public void sendAlartData(String accessToken,String oauthId, String sex, String name, String introduction, String headImg, String birthdate, File file) {
+    public void sendAlartData(String oauthId, String sex, String name, String introduction, String headImg, String birthdate, File file) {
 
         Map<String, RequestBody> images = new HashMap<String, RequestBody>();
         RequestBody oauthIdRequestBody = toRequestBody(oauthId);

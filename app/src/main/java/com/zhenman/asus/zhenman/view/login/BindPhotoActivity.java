@@ -1,5 +1,6 @@
 package com.zhenman.asus.zhenman.view.login;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -17,6 +18,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
+import com.zhenman.asus.zhenman.contract.AlartPhoneNumContract;
+import com.zhenman.asus.zhenman.model.bean.VerificationCodeBean;
+import com.zhenman.asus.zhenman.presenter.AlartPhoneNumPresenter;
 import com.zhenman.asus.zhenman.utils.Urls;
 
 import java.io.IOException;
@@ -28,7 +32,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class BindPhotoActivity extends BaseActivity implements View.OnClickListener {
+public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> implements View.OnClickListener, AlartPhoneNumContract.AlartPhoneNumInView {
 
     private ImageView mRegisterReturn;
     private EditText mRegisterPhoneNumber;
@@ -44,6 +48,7 @@ public class BindPhotoActivity extends BaseActivity implements View.OnClickListe
     private TextView register_text;
     private EditText imageCode_ed;
     private PopupWindow window;
+    private String isBind;
 
 
     @Override
@@ -72,7 +77,16 @@ public class BindPhotoActivity extends BaseActivity implements View.OnClickListe
         mRegisterReturn.setOnClickListener(this);
         mRegisterNextBtn.setOnClickListener(this);
         mRegisterPhotoCode.setOnClickListener(this);
-
+        Intent intent = getIntent();
+        isBind = intent.getStringExtra("bind");
+        String userMobile = intent.getStringExtra("userMobile");
+        if (isBind.equals("未绑定手机号")) {
+            register_text.setText("绑定手机号");
+            mRegisterNextBtn.setText("绑定");
+        } else if (isBind.equals("已有手机号，更换绑定")) {
+            register_text.setText("更换绑定");
+            mRegisterNextBtn.setText("绑定");
+        }
     }
 
 
@@ -95,18 +109,22 @@ public class BindPhotoActivity extends BaseActivity implements View.OnClickListe
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 } else {
 //                    initpopu();
+                    presenter.sendAlartPhoneNumData(mRegisterPhoneNumber.getText().toString(), "1", "3233");
                 }
                 break;
             case R.id.Register_NextBtn:
                 if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
+
                 }
                 if (mRegisterPhotoCodeEd.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
+
 //                    presenter.getRegisterLoginCode(mRegisterPhoneNumber.getText().toString().trim(), mRegisterPhotoCodeEd.getText().toString().trim());
-                    requestPhotoCode(mRegisterPhoneNumber.getText().toString().trim());
-                    finish();
+//                    requestPhotoCode(mRegisterPhoneNumber.getText().toString().trim());
+//                    finish();
+                    presenter.sendCheckCodeData(mRegisterPhoneNumber.getText().toString(), mRegisterPhotoCode.getText().toString());
                 }
 
                 break;
@@ -160,6 +178,7 @@ public class BindPhotoActivity extends BaseActivity implements View.OnClickListe
             public void onFailure(Call call, IOException e) {
                 Log.e("请求失败", e.toString());
             }
+
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 runOnUiThread(new Runnable() {
@@ -176,4 +195,25 @@ public class BindPhotoActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
+    //    成功获取验证码
+    @Override
+    public void showAlartPhoneNumData(VerificationCodeBean verificationCodeBean) {
+        if (verificationCodeBean.getState() == 0) {
+            Toast.makeText(this, "获取验证码成功", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //下一步
+    @Override
+    public void showCheckCodeData(VerificationCodeBean verificationCodeBean) {
+        if (verificationCodeBean.getState()==0){
+            
+        }
+    }
+
+    //    获取的验证码无效
+    @Override
+    public void showError() {
+        Toast.makeText(this, "获取验证码失败", Toast.LENGTH_SHORT).show();
+    }
 }

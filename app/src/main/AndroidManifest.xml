@@ -46,6 +46,7 @@
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.zhenman.asus.zhenman.provider"
@@ -128,9 +129,7 @@
             android:exported="false"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".view.ContentActivity">
-
-        </activity>
+        <activity android:name=".view.ContentActivity"></activity>
         <activity android:name=".view.login.RegisterCodeActivity" />
         <activity android:name=".view.login.SetPasswordActivity" />
         <activity android:name=".view.login.ForgetPasswordActivity" />
@@ -151,7 +150,8 @@
         <activity android:name=".view.myself.PurchaseHistoryActivity" />
         <activity android:name=".view.myself.MyDraftActivity" />
         <activity android:name=".view.myself.HomepageActivity" />
-        <activity android:name=".view.myself.ShoppingActivity"></activity>
+        <activity android:name=".view.myself.ShoppingActivity" />
+        <activity android:name=".view.myself.AttentionThemeActivity"></activity>
     </application>
 
 </manifest>

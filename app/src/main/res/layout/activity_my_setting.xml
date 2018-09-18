@@ -49,6 +49,7 @@
             android:button="@mipmap/edit_outline_button_off"
             android:id="@+id/set_MessageNotification"
             android:layout_width="88px"
+
             android:layout_height="54px"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

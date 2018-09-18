@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/h9"
+    android:orientation="vertical"
     tools:context=".view.myself.MyDraftActivity">
 
     <include layout="@layout/above_head" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/myDraft_recy"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 </com.zhy.autolayout.AutoLinearLayout>

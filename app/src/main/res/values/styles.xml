@@ -12,7 +12,10 @@
     <style name="MainTheme" parent="AppTheme">
         <item name="android:windowIsTranslucent">false</item>
     </style>
-
+    <style name="Style24H4">
+        <item name="android:textColor">@color/h4</item>
+        <item name="android:textSize">@dimen/px_24</item>
+    </style>
     <style name="Style24H5">
         <item name="android:textColor">@color/h5</item>
         <item name="android:textSize">@dimen/px_24</item>
@@ -34,7 +37,12 @@
     </style>
 
     <style name="Style26C1">
+
         <item name="android:textColor">@color/c1</item>
+        <item name="android:textSize">@dimen/px_26</item>
+    </style>
+    <style name="Style26H9">
+        <item name="android:textColor">@color/h9</item>
         <item name="android:textSize">@dimen/px_26</item>
     </style>
 

@@ -9,7 +9,7 @@ public interface VerificationCodeContract {
         void showError(String msg);
     }
 
-    interface VerificationCodePresenter extends BasePresenter<VerificationCodeContract.VerificationCodeView> {
+    interface VerificationCodePresenter extends BasePresenter<VerificationCodeView> {
         void getVerificationCode(String phone, String ImageCode);
         void getRegisterLoginCode(String phone,String MSMCode);
     }

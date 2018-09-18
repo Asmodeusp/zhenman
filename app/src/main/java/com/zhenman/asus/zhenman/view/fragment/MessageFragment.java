@@ -1,16 +1,25 @@
 package com.zhenman.asus.zhenman.view.fragment;
 
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
+import com.zhenman.asus.zhenman.contract.TheamBeanContract;
+import com.zhenman.asus.zhenman.model.bean.TheamBean;
+import com.zhenman.asus.zhenman.model.bean.ThemeAttentionBean;
+import com.zhenman.asus.zhenman.presenter.TheamBeanPresenter;
+import com.zhenman.asus.zhenman.view.adapter.message.ThemeAdapter;
 import com.zhy.autolayout.AutoLinearLayout;
 
-public class MessageFragment extends BaseFragment implements View.OnClickListener {
+import java.util.List;
+
+public class MessageFragment extends BaseFragment<TheamBeanPresenter> implements View.OnClickListener, TheamBeanContract.TheamBeanInView, ThemeAdapter.ThemeCallback {
 
 
     private ImageView app_back;
@@ -39,6 +48,8 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         app_title.setText("消息");
         app_back.setVisibility(View.GONE);
         idListener();
+//        获取主题信息
+        presenter.sendTheamBean();
 
     }
 
@@ -69,5 +80,38 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
             case R.id.message_pay:
                 break;
         }
+    }
+
+    //    得到主题详情
+    @Override
+    public void showTheamBean(TheamBean theamBean) {
+        if (theamBean.getState() == 0) {
+            List<TheamBean.DataBean> dataBeanList = theamBean.getData();
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+            message_recy.setLayoutManager(linearLayoutManager);
+            ThemeAdapter themeAdapter = new ThemeAdapter(dataBeanList, getContext());
+            themeAdapter.ThemeCallback(this);
+            message_recy.setAdapter(themeAdapter);
+        } else {
+            Toast.makeText(getActivity(), "获取数据失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void showError(String string) {
+
+    }
+
+    @Override
+    public void showAttentionTheme(ThemeAttentionBean themeAttentionBean) {
+        if (themeAttentionBean.getState() == 0) {
+            Toast.makeText(getActivity(), themeAttentionBean.getMsg(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //    关注
+    @Override
+    public void makeAttention(String subjectId, int status) {
+        presenter.sendAttentionThemeData(subjectId, status + "");
     }
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/theme_details"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/itemTheme_headImage"
+        android:layout_width="@dimen/px_128"
+        android:layout_height="@dimen/px_128"
+        android:layout_margin="@dimen/px_24"
+        android:src="@mipmap/my_qiezi" />
+
+    <TextView
+        android:id="@+id/itemTheme_title"
+        style="@style/Style32H2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/itemTheme_headImage"
+        android:layout_toRightOf="@id/itemTheme_headImage"
+        android:text="你晒自拍我评分" />
+
+    <TextView
+        android:id="@+id/itemTheme_description"
+        style="@style/Style24H4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/itemTheme_title"
+        android:layout_below="@id/itemTheme_title"
+        android:layout_marginRight="@dimen/px_24"
+        android:layout_marginTop="@dimen/px_8"
+        android:layout_toRightOf="@id/itemTheme_headImage"
+        android:text="愿你期待的明天是你想要的" />
+
+    <Button
+        android:id="@+id/itemTheme_attention"
+        style="@style/Style32H9"
+        android:layout_width="@dimen/px_128"
+        android:layout_height="@dimen/px_56"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/px_24"
+        android:layout_marginTop="@dimen/px_32"
+        android:background="@drawable/attention_btn"
+        android:gravity="center"
+        android:text="关注" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/itemTheme_headImage"
+        android:layout_marginLeft="@dimen/px_24"
+        android:background="@drawable/cover_corners">
+
+        <ImageView
+            android:id="@+id/itemTheme_coverImage1"
+            android:layout_width="0px"
+            android:layout_height="326px"
+            android:layout_weight="1"
+            android:padding="2px"
+            android:scaleType="fitXY"
+            android:src="@mipmap/common_qiezi" />
+
+        <ImageView
+            android:id="@+id/itemTheme_coverImage2"
+            android:layout_width="0px"
+            android:layout_height="326px"
+            android:layout_weight="1"
+            android:padding="2px"
+            android:scaleType="fitXY"
+            android:src="@mipmap/common_qiezi" />
+
+        <ImageView
+            android:id="@+id/itemTheme_coverImage3"
+            android:layout_width="0px"
+            android:layout_height="326px"
+            android:layout_weight="1"
+            android:padding="2px"
+            android:scaleType="fitXY"
+            android:src="@mipmap/common_qiezi" />
+
+        <ImageView
+            android:id="@+id/itemTheme_coverImage4"
+            android:layout_width="0px"
+            android:layout_height="326px"
+            android:layout_weight="1"
+            android:padding="2px"
+            android:scaleType="fitXY"
+            android:src="@mipmap/common_qiezi" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+
+</com.zhy.autolayout.AutoRelativeLayout>

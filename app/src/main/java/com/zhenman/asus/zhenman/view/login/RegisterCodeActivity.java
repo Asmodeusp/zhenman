@@ -96,18 +96,21 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
                 } else if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    initpopu();
+//                    initpopu();
+                    presenter.getVerificationCode(mRegisterPhoneNumber.getText().toString().trim(),"3432");
+
+
                 }
                 break;
             case R.id.Register_NextBtn:
                 if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 }
-                if (mRegisterPhotoCodeEd.getText().toString().trim().isEmpty()) {
+                /*if (mRegisterPhotoCodeEd.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
-                }else {
+                }*/ else {
                     presenter.getRegisterLoginCode(mRegisterPhoneNumber.getText().toString().trim(), mRegisterPhotoCodeEd.getText().toString().trim());
-                    finish();
+
                 }
 
                 break;
@@ -117,7 +120,7 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
             case R.id.image_code_return:
                 window.dismiss();
                 break;
-            case R.id.image_code_sure_Btn:
+            case R.id.image_code_sure_Btn://获取短信验证码
                 presenter.getVerificationCode(mRegisterPhoneNumber.getText().toString().trim(), image_code_ed.getText().toString().trim());
                 window.dismiss();
                 break;
@@ -148,6 +151,7 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
         image_code_reload_btn.setOnClickListener(this);
         image_code_return.setOnClickListener(this);
         image_code_sure_btn.setOnClickListener(this);
+
     }
 
     //请求图片验证码
@@ -165,20 +169,19 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                if (response.body()!=null) {
-//                    Log.d("RegisterCodeActivity", "response.body().bytes():" + response.body().bytes());
+                if (response.body() != null) {
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             try {
-                                Glide.with(RegisterCodeActivity.this)
-                                        .load(response.body().bytes()).into(imageCode);
+                                Glide.with(RegisterCodeActivity.this).load(response.body().string()).into(imageCode);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         }
                     });
-                }else {
+                } else {
                     Toast.makeText(RegisterCodeActivity.this, "网速过慢，加载不出", Toast.LENGTH_SHORT).show();
                 }
 
@@ -193,6 +196,20 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
         intent.putExtra("msmcode", mRegisterPhotoCodeEd.getText().toString().trim());
         intent.putExtra("phone", mRegisterPhoneNumber.getText().toString().trim());
         startActivity(intent);
+
+        finish();
+        /*if (!mRegisterPhoneNumber.getText().toString().isEmpty()&&!mRegisterPhotoCodeEd.getText().toString().isEmpty()){
+            mRegisterNextBtn.setBackgroundColor(Color.parseColor("#ffffff"));
+            mRegisterNextBtn.setClickable(true);
+
+            Intent intent = new Intent(RegisterCodeActivity.this, SetPasswordActivity.class);
+            intent.putExtra("msmcode", mRegisterPhotoCodeEd.getText().toString().trim());
+            intent.putExtra("phone", mRegisterPhoneNumber.getText().toString().trim());
+            startActivity(intent);
+        }else {
+            mRegisterNextBtn.setClickable(false);
+        }*/
+
     }
 
     @Override

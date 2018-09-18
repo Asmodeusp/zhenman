@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.AlartDataContract;
@@ -166,12 +167,12 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
             case R.id.myInfo_boy:
                 myInfo_boy.setAlpha(0.5f);
                 myInfo_girl.setAlpha(1.0f);
-                selectSex = "2";
+                selectSex = "1";
                 break;
             case R.id.myInfo_girl:
                 myInfo_boy.setAlpha(1.0f);
                 myInfo_girl.setAlpha(0.5f);
-                selectSex = "1";
+                selectSex = "2";
                 break;
 
             case R.id.myInfo_finish:
@@ -179,8 +180,8 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
                 String oauthId = (String) SPUtils.get(this, SPKey.USER_OAUTHID, "");
                 Log.e("Sushine", accessToken);
                 Log.e("Sushine", oauthId);
-                presenter.sendAlartData("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MzQ4MzYzOTAsInN1YiI6IntcInVzZXJJZFwiOjMwNixcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiQjUyNzI3NkIyODlFRjcyRTM5NzAxRUJDQjMyNzdFRUVcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4xLjVcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU2NjM3MjM5MH0.0nQECGVov3ZMpdbblKfBKThM7ogDtP-qJrOwT7bYHDs",
-                        "69", "1", myInfo_enterNikeName.getText().toString(),
+                presenter.sendAlartData(
+                        (String) SPUtils.get(App.context, SPKey.USER_OAUTHID, ""), "1", myInfo_enterNikeName.getText().toString(),
                         myInfo_introduction.getText().toString(), "photo",
                         myInfo_selectBorn.getText().toString(), new File(fileName));
                 break;

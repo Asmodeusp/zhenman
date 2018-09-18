@@ -10,7 +10,7 @@ public interface MySelfContract {
     }
     interface MySelfInPresenter extends BasePresenter<MySelfInView>{
 //        得到个人资料
-        void sendGetMyData(String accessToken,String oauthId);
+        void sendGetMyData(String oauthId);
     }
 
 }

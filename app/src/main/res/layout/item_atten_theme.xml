@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="176px">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/itemMyAttenTheme_headImage"
+        android:layout_width="@dimen/px_128"
+        android:layout_height="@dimen/px_128"
+        android:layout_margin="@dimen/px_24" />
+
+    <TextView
+        android:id="@+id/itemMyAttenTheme_title"
+        style="@style/Style32H2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px_24"
+        android:layout_marginTop="@dimen/px_32"
+        android:layout_toRightOf="@id/itemMyAttenTheme_headImage"
+        android:text="每个人都不应该被亏待" />
+
+    <TextView
+        android:id="@+id/itemMyAttenTheme_decription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/itemMyAttenTheme_title"
+        android:layout_below="@id/itemMyAttenTheme_title"
+        android:layout_marginTop="@dimen/px_8"
+        android:layout_toRightOf="@id/itemMyAttenTheme_headImage"
+        android:text="只有变得优秀才会被另眼相看" />
+
+    <Button
+        android:id="@+id/itemMyAttenTheme_attention"
+        style="@style/Style26H9"
+        android:layout_width="@dimen/px_128"
+        android:layout_height="@dimen/px_56"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/px_24"
+        android:layout_marginTop="@dimen/px_32"
+        android:background="@drawable/attention_btn"
+        android:gravity="center"
+
+        android:text="关注" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

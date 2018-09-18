@@ -4,6 +4,7 @@ package com.zhenman.asus.zhenman.view.login;
 import android.content.Intent;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -67,7 +68,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     private String uMeng_name;
     private String uMeng_cityname;
     private String uMeng_sex;
-
+    private String loginType;
     UMAuthListener umAuthListener = new UMAuthListener() {
         /**
          //         * @desc 授权开始的回调
@@ -94,8 +95,8 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             } else if (platform.equals(SHARE_MEDIA.QQ)) {
                 TYPE = "3";
             }
-            Toast.makeText(MainActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
 
+            Toast.makeText(MainActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
             String gender = data.get("gender");
             String sex = "";
             if ("女".equals(gender)) {
@@ -131,6 +132,10 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 
                 }
             });*/
+            Log.e("Sunny++otherUserId",data.get("unionid"));
+            Log.e("Sunny++openId",data.get("openid"));
+
+            SPUtils.put(MainActivity.this,SPKey.UMeng_OTHERUSERId,data.get("unionid"));
             presenter.sendUMengLoginData(data.get("unionid"), data.get("name"), data.get("city"),
                     data.get("iconurl"), sex, TYPE, data.get("openid"));
 
@@ -220,6 +225,8 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 //密码正则判断
                 presenter.getLogin(mPhoneNumber.getText().toString().trim(), mInputPassword.getText().toString().trim());
                 SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, (Boolean)true);
+
+                SPUtils.put(MainActivity.this, SPKey.USER_MOBILE, mPhoneNumber.getText().toString());
                 break;
             case R.id.RegisterBtn:
                 startActivity(new Intent(this, RegisterCodeActivity.class));
@@ -272,13 +279,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 
     //    从SP中取到数据
     private void getDatafromSP() {
-//        umeng_type = (String) SPUtils.get(this, SPKey.UMENG_TYPE, "");
-//        uMeng_otheruserId = (String) SPUtils.get(this, SPKey.UMeng_OTHERUSERId, "");
-//        uMeng_openid = (String) SPUtils.get(this, SPKey.UMeng_OPENID, "");
-//        uMeng_headimage = (String) SPUtils.get(this, SPKey.UMeng_HEADIMAGE, "");
-//        uMeng_name = (String) SPUtils.get(this, SPKey.UMeng_NAME, "");
-//        uMeng_cityname = (String) SPUtils.get(this, SPKey.UMeng_CITYNAME, "");
-//        uMeng_sex = (String) SPUtils.get(this, SPKey.UMeng_SEX, "");
         Boolean is_login = (Boolean) SPUtils.get(this, SPKey.IS_LOGIN, false);
 //       判断是否登陆，如果登陆过就直接进入首页
         if (is_login) {
@@ -317,9 +317,10 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             SPUtils.put(MainActivity.this, SPKey.USER_TOKEN, uMengLoginBean.getData().getToken());
             SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, (Boolean)true);
             SPUtils.put(MainActivity.this, SPKey.USER_AVATAR, uMengLoginBean.getData().getHeadImg());
+            SPUtils.put(MainActivity.this, SPKey.LOGIN_TYPE, TYPE);
+
 
             startActivity(new Intent(MainActivity.this, ContentActivity.class));
-
         }else {
             Toast.makeText(this, "登陆失败", Toast.LENGTH_SHORT).show();
         }
