@@ -18,6 +18,7 @@ import com.zhenman.asus.zhenman.contract.SerializationContract;
 import com.zhenman.asus.zhenman.model.bean.SerializationBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationLatelyBean;
 import com.zhenman.asus.zhenman.presenter.SerializationPresenterImp;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationHotRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationLatelyRecyAdapter;
 import com.zhenman.asus.zhenman.view.serializaion.ClassifyActivity;
@@ -102,6 +103,7 @@ public class SerializationFragment extends BaseFragment<SerializationPresenterIm
                 public void myClick(View view, int position) {
                     com.zhenman.asus.zhenman.model.bean.SerializationBean.DataBean.PgcHotRecommendBean pgcHotRecommendBean = SerializationBean.getData().getPgcHotRecommend().get(position);
                     String pgcId = pgcHotRecommendBean.getPgcId();
+                    SPUtils.put(getContext(),"pgcid",pgcId);
                     Intent intent = new Intent(getActivity(), WorkDetailsActivity.class);
                     intent.putExtra("pgcid", pgcId);
                     getActivity().startActivity(intent);

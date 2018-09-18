@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="@string/Register"
+            android:text="绑定手机号"
             android:textColor="@color/h9"
             android:textSize="48px" />
     </com.zhy.autolayout.AutoLinearLayout>

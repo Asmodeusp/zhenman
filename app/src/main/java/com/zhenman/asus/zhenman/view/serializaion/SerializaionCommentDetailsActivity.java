@@ -3,6 +3,7 @@ package com.zhenman.asus.zhenman.view.serializaion;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
@@ -19,6 +20,7 @@ import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.PgcChapterCommentDetailPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.view.adapter.serialization.SerializaionCommentDetailsRecyAdapter;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ public class SerializaionCommentDetailsActivity extends BaseActivity<PgcChapterC
     private TextView SerializaionCommentDetails_LikeNumber;
     private RecyclerView SerializaionCommentDetails_CommentRecy;
     private List<PgcChapterCommentDetailBean.DataBean.ResultBeanX> result = new ArrayList<>();
+    private List<PgcChapterCommentDetailBean.DataBean.ResultBeanX.PageBeanBean.ResultBean> result1 = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -49,14 +52,14 @@ public class SerializaionCommentDetailsActivity extends BaseActivity<PgcChapterC
         Intent intent = getIntent();
         commentId = intent.getStringExtra("CommentId");
         PgcId = intent.getStringExtra("PgcId");
-        presenter.GetPgcChapterCommentDetailBean(PgcId, "1", "20", PgcId);
+        presenter.GetPgcChapterCommentDetailBean(commentId, "1", "20", PgcId);
         initView();
 
 
     }
 
     private void initLogic() {
-        GlideUtils.loadCircleImage(result.get(0).getImageUrl(),SerializaionCommentDetails_HeadView, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
+        GlideUtils.loadCircleImage(result.get(0).getImageUrl(), SerializaionCommentDetails_HeadView, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
             @Override
             public void onLoadingComplete(String uri, ImageView view, GlideDrawable resource) {
 
@@ -110,6 +113,9 @@ public class SerializaionCommentDetailsActivity extends BaseActivity<PgcChapterC
             });
         }
         SerializaionCommentDetails_UserName.setText(result.get(0).getName());
+        SerializaionCommentDetails_Comment.setText(result.get(0).getContent());
+        SerializaionCommentDetails_CommentRecy.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     @Override
@@ -145,10 +151,13 @@ public class SerializaionCommentDetailsActivity extends BaseActivity<PgcChapterC
 
     @Override
     public void showPgcChapterCommentDetailBean(PgcChapterCommentDetailBean pgcChapterCommentDetailBean) {
-        if (pgcChapterCommentDetailBean.getData().getResult()!=null) {
+        if (pgcChapterCommentDetailBean.getData().getResult() != null) {
             result.addAll(pgcChapterCommentDetailBean.getData().getResult());
+            result1.addAll(pgcChapterCommentDetailBean.getData().getResult().get(0).getPageBean().getResult());
             initLogic();
         }
+        SerializaionCommentDetailsRecyAdapter serializaionCommentDetailsRecyAdapter = new SerializaionCommentDetailsRecyAdapter(result1);
+        SerializaionCommentDetails_CommentRecy.setAdapter(serializaionCommentDetailsRecyAdapter);
 
     }
 

@@ -13,6 +13,7 @@
         android:layout_below="@+id/sView">
 
         <ImageView
+            android:background="@mipmap/my_qiezi"
             android:id="@+id/Work_commentRecy_HeadView"
             android:layout_width="54px"
             android:layout_height="54px"

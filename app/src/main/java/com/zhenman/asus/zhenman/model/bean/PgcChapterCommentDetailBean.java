@@ -408,22 +408,22 @@ public class PgcChapterCommentDetailBean {
 
                     private Object commentId;
                     private String content;
-                    private Object catalogId;
+                    private String catalogId;
                     private String userId;
-                    private Object likeNum;
+                    private int likeNum;
                     private boolean like;
-                    private Object detailNum;
+                    private String detailNum;
                     private String addTime;
                     private boolean author;
-                    private Object reUserId;
-                    private Object reContent;
-                    private Object reName;
+                    private String reUserId;
+                    private String reContent;
+                    private String reName;
                     private boolean reAuthor;
                     private String imageUrl;
                     private String name;
                     private String detailId;
-                    private Object title;
-                    private Object chapterSort;
+                    private String title;
+                    private String chapterSort;
                     private Object pageBean;
 
                     public Object getCommentId() {
@@ -442,11 +442,11 @@ public class PgcChapterCommentDetailBean {
                         this.content = content;
                     }
 
-                    public Object getCatalogId() {
+                    public String getCatalogId() {
                         return catalogId;
                     }
 
-                    public void setCatalogId(Object catalogId) {
+                    public void setCatalogId(String catalogId) {
                         this.catalogId = catalogId;
                     }
 
@@ -458,11 +458,11 @@ public class PgcChapterCommentDetailBean {
                         this.userId = userId;
                     }
 
-                    public Object getLikeNum() {
+                    public int getLikeNum() {
                         return likeNum;
                     }
 
-                    public void setLikeNum(Object likeNum) {
+                    public void setLikeNum(int likeNum) {
                         this.likeNum = likeNum;
                     }
 
@@ -474,11 +474,11 @@ public class PgcChapterCommentDetailBean {
                         this.like = like;
                     }
 
-                    public Object getDetailNum() {
+                    public String getDetailNum() {
                         return detailNum;
                     }
 
-                    public void setDetailNum(Object detailNum) {
+                    public void setDetailNum(String detailNum) {
                         this.detailNum = detailNum;
                     }
 
@@ -498,27 +498,27 @@ public class PgcChapterCommentDetailBean {
                         this.author = author;
                     }
 
-                    public Object getReUserId() {
+                    public String getReUserId() {
                         return reUserId;
                     }
 
-                    public void setReUserId(Object reUserId) {
+                    public void setReUserId(String reUserId) {
                         this.reUserId = reUserId;
                     }
 
-                    public Object getReContent() {
+                    public String getReContent() {
                         return reContent;
                     }
 
-                    public void setReContent(Object reContent) {
+                    public void setReContent(String reContent) {
                         this.reContent = reContent;
                     }
 
-                    public Object getReName() {
+                    public String getReName() {
                         return reName;
                     }
 
-                    public void setReName(Object reName) {
+                    public void setReName(String reName) {
                         this.reName = reName;
                     }
 
@@ -554,19 +554,19 @@ public class PgcChapterCommentDetailBean {
                         this.detailId = detailId;
                     }
 
-                    public Object getTitle() {
+                    public String getTitle() {
                         return title;
                     }
 
-                    public void setTitle(Object title) {
+                    public void setTitle(String title) {
                         this.title = title;
                     }
 
-                    public Object getChapterSort() {
+                    public String getChapterSort() {
                         return chapterSort;
                     }
 
-                    public void setChapterSort(Object chapterSort) {
+                    public void setChapterSort(String chapterSort) {
                         this.chapterSort = chapterSort;
                     }
 
