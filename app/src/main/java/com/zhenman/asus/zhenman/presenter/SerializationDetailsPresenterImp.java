@@ -1,14 +1,10 @@
 package com.zhenman.asus.zhenman.presenter;
 
-import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.SerializationDetailsContract;
 import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
-import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
-import com.zhenman.asus.zhenman.utils.sp.SPKey;
-import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +28,7 @@ public class SerializationDetailsPresenterImp implements SerializationDetailsCon
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
+
                     @Override
                     public void onNext(SerializationDetailsBean userBean) {
                         if (userBean.getState() == 0) {
@@ -41,9 +38,11 @@ public class SerializationDetailsPresenterImp implements SerializationDetailsCon
                             serializationDetailsView.showError(userBean.getMsg());
                         }
                     }
+
                     @Override
                     public void onError(Throwable e) {
                     }
+
                     @Override
                     public void onComplete() {
 
@@ -55,12 +54,14 @@ public class SerializationDetailsPresenterImp implements SerializationDetailsCon
     public void getSerializationCatalogBean(String PgcId) {
         Map<String, String> map = new HashMap<>();
         map.put("pgcId", PgcId);
-        RetrofitUtils.getInstance().getSerializationDetailsService().GetSerializationCatalogBean(map).subscribeOn(Schedulers.newThread())
+        RetrofitUtils.getInstance().getSerializationDetailsService().GetSerializationCatalogBean(map).
+                subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<SerializationCatalogBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
+
                     @Override
                     public void onNext(SerializationCatalogBean userBean) {
                         if (userBean.getState() == 0) {
@@ -70,9 +71,11 @@ public class SerializationDetailsPresenterImp implements SerializationDetailsCon
                             serializationDetailsView.showError(userBean.getMsg());
                         }
                     }
+
                     @Override
                     public void onError(Throwable e) {
                     }
+
                     @Override
                     public void onComplete() {
 
@@ -91,6 +94,7 @@ public class SerializationDetailsPresenterImp implements SerializationDetailsCon
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
+
                     @Override
                     public void onNext(PgcCollectionBean pgcCollectionBean) {
                         if (pgcCollectionBean.getState() == 0) {
@@ -100,16 +104,17 @@ public class SerializationDetailsPresenterImp implements SerializationDetailsCon
                             serializationDetailsView.showError(pgcCollectionBean.getMsg());
                         }
                     }
+
                     @Override
                     public void onError(Throwable e) {
                     }
+
                     @Override
                     public void onComplete() {
 
                     }
                 });
     }
-
 
 
     @Override

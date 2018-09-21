@@ -19,6 +19,10 @@ public class SPKey {
     public static String USER_REFRESHTOKEN="refreshToken";
     public static String USER_OAUTHID="oauthId";
     public static String USER_SEX="sex";
+    public static String WEIXIN_NAME="weixinName";
+    public static String SINA_NAME="weiboName";
+    public static String QQ_NAME="qqName";
+
 
 
 

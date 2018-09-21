@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.ShareAction;
@@ -48,6 +49,9 @@ public class UMengHelp {
 //        打印全局log
         UMConfigure.setLogEnabled(true);
         UMConfigure.init(context, UM_APP_KEY, "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//
+        // 将该app注册到微信
+//        api.registerApp("wx658d27e48aa3a824");
+        PayReq request = new PayReq();
         PlatformConfig.setWeixin(WEI_XIN_APP_ID, WEI_XIN_APP_KEY);
         PlatformConfig.setQQZone(QQ_APP_ID, QQ_APP_KEY);
         PlatformConfig.setSinaWeibo(WEI_BO_APP_ID, WEI_BO_APP_KEY, "https://sns.whalecloud.com/sina2/callback");

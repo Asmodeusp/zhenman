@@ -15,4 +15,5 @@ public interface SetPasswordService {
     @FormUrlEncoded
     @POST(Urls.SET_PASSWORD)
     Observable<SetPasswordBean> GetSetPassWordBean(@FieldMap Map<String, String> params);
+
 }

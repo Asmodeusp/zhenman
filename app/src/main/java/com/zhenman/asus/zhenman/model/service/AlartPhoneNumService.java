@@ -21,4 +21,10 @@ public interface AlartPhoneNumService {
     @FormUrlEncoded
     @POST(Urls.CHECK_CODE)
     Observable<VerificationCodeBean> checkCodeBean(@FieldMap Map<String, String> params);
+
+    //三方账号登陆绑定手机号
+    @FormUrlEncoded
+    @POST(Urls.THIRD_BIND_PHONE)
+    Observable<VerificationCodeBean> replacePhoneNum(@FieldMap Map<String, String> params);
+
 }
