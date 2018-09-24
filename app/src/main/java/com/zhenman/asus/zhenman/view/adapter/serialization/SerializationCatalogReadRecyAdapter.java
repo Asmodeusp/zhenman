@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import java.util.List;
-
+//阅读的RecyclerView的适配器
 public class SerializationCatalogReadRecyAdapter extends RecyclerView.Adapter<SerializationCatalogReadRecyAdapter.Holder> implements View.OnClickListener {
     private List<SerializationCatalogReadBean.DataBean.ListBean> list;
     private Context context;

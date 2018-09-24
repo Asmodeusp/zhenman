@@ -15,7 +15,7 @@ import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
 
-
+//PGC连载页面章节
 public class SerializationCatalogAdapter extends RecyclerView.Adapter<SerializationCatalogAdapter.Holder> implements View.OnClickListener {
     private List<SerializationCatalogBean.DataBean> list;
     private Context context;

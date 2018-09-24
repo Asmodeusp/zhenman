@@ -51,7 +51,7 @@ public class HomepageFragment extends BaseFragment {
         hotFragment = new HotFragment();
         //HeadView头布局
         home_headView = getActivity().findViewById(R.id.Home_HeadView);
-        //搜索
+        //,
         homeHot_search_img = getActivity().findViewById(R.id.HomeHot_search_Img);
         //TabLayout
         home_tablayout = getActivity().findViewById(R.id.Home_Tablayout);

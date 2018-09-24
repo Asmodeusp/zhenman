@@ -14,7 +14,7 @@ import com.zhenman.asus.zhenman.model.bean.ProductListBean;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.List;
-
+//茄子适配器
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.Holder> implements View.OnClickListener {
     private List<ProductListBean.DataBean> listBeanData;
     private Context context;

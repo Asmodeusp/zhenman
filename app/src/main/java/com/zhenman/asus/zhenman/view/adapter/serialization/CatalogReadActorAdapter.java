@@ -17,7 +17,7 @@ import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
-//圆形图片
+//连载页面的演员适配器
 public class CatalogReadActorAdapter extends RecyclerView.Adapter<CatalogReadActorAdapter.Holder> implements View.OnClickListener {
     private List<SerializationDetailsBean.DataBean.ActorListBean> list;
     private Context context;

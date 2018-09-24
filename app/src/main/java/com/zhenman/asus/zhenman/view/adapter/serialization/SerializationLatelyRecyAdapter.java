@@ -18,7 +18,7 @@ import com.zhy.autolayout.utils.AutoUtils;
 import java.util.List;
 
 
-
+//连载页面最近更新的Recyclerview的适配器
 public class SerializationLatelyRecyAdapter extends RecyclerView.Adapter<SerializationLatelyRecyAdapter.Holder> implements View.OnClickListener {
     private List<SerializationLatelyBean.DataBean.ResultBean> list;
     private Context context;

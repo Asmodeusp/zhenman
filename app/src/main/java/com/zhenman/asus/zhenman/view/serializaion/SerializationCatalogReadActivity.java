@@ -126,21 +126,11 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private TextView ppwPay_userName;
     private CatalogReadActorAdapter catalogReadActorAdapter;
     private String orderNumber;
-    private RecyclerView commentPopu_recy;
-    private TextView CommentPopu_CommentNumber;
-    private ImageView CommentPopu_CommentCloseImg;
-    private AutoRelativeLayout TopRela;
-    private TextView CommentPopu_RecyTip;
     private RecyclerView cataLog_footViewComment_recy;
     private TextView cataLog_footViewComment_recyTip;
     private CatalogFootviewCommentRecyAdapter catalogFootviewCommentRecyAdapter;
     private List<PgcChapterCommentListByOffSetBean.DataBean.ResultBeanX> result = new ArrayList<>();
-    private EditText commentPopu_editText;
-    private Button commonSend_button;
-    private EditText commonSend_edText;
-    private Button commentPopu_button;
     private View contentView;
-    private RelativeLayout commentPopu_rela;
     private String paymentMethod;
     private int qieziId;
     private MyScrollView serializationMyScrollView;
@@ -173,6 +163,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private SerializationCatalogReadRecyAdapter serializationCatalogReadRecyAdapter;
     private MyRefreshAnimHeader myRefreshAnimHeader;
     private BottomSheetDialog dialog;
+    private RecyclerView commentPopu_recy;
 
 
     @Override
@@ -417,34 +408,15 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         dialog = new BottomSheetDialog(this);
         contentView = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_dialog_layout, null, false);
         dialog.setContentView(contentView);
-//        //顶部Relativelayout
-//        TopRela = contentView.findViewById(R.id.TopRela);
-//        //评论关闭Img
-//        CommentPopu_CommentCloseImg = contentView.findViewById(R.id.CommentPopu_CommentCloseImg);
-//        //评论数
-//        CommentPopu_CommentNumber = contentView.findViewById(R.id.CommentPopu_CommentNumber);
-//        //全部布局
-//        commentPopu_rela = contentView.findViewById(R.id.CommentPopu_Rela);
-//        //评论列表提示
-//        CommentPopu_RecyTip = contentView.findViewById(R.id.CommentPopu_RecyTip);
-//        //评论列表
-//        commentPopu_recy = contentView.findViewById(R.id.CommentPopu_Recy);
-//        //geiRecyView设置格式
-//        commentPopu_recy.setLayoutManager(new LinearLayoutManager(this));
-//        if (result.size() != 0) {
-//            CommentPopu_RecyTip.setVisibility(View.VISIBLE);
-//            commentPopu_recy.setVisibility(View.GONE);
-//        } else {
-//            CommentPopu_RecyTip.setVisibility(View.GONE);
-//            commentPopu_recy.setVisibility(View.VISIBLE);
-//        }
-//        if (serializationCatalogReadBean != null) {
-//            CommentPopu_CommentNumber.setText(String.valueOf(serializationCatalogReadBean.getData().getCount()) + "条评论");
-//        }
-//        commentPopu_editText = contentView.findViewById(R.id.CommentPopu_EdText);
-//        commentPopu_button = contentView.findViewById(R.id.CommentPopu_Button);
-//        commentPopu_editText.setOnClickListener(this);
-//        commentPopu_button.setOnClickListener(this);
+        //评论RecyclerView
+        commentPopu_recy = contentView.findViewById(R.id.HomeHot_CommentPopu_Recy);
+        //评论输入框
+        EditText CommentPopu_EdText = contentView.findViewById(R.id.HomeHot_CommentPopu_EdText);
+        //评论发送按钮
+        Button CommentPopu_SendButton = contentView.findViewById(R.id.HomeHot_CommentPopu_SendButton);
+        //设置RecyclerView的格式
+        commentPopu_recy.setLayoutManager(new LinearLayoutManager(this));
+
         dialog.show();
     }
 

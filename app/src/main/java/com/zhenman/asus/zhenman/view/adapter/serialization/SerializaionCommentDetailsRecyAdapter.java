@@ -21,7 +21,7 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
-
+//连载页面作品详情的评论详情页面子评论RecyclerView
 public class SerializaionCommentDetailsRecyAdapter extends RecyclerView.Adapter<SerializaionCommentDetailsRecyAdapter.Holder> implements View.OnClickListener {
     private List<PgcChapterCommentDetailBean.DataBean.ResultBeanX.PageBeanBean.ResultBean> list;
     private Context context;

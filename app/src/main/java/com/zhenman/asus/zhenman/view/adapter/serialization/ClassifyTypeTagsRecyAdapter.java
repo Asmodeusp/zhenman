@@ -14,7 +14,7 @@ import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
 
-
+//连载分类种类适配器
 public class ClassifyTypeTagsRecyAdapter extends RecyclerView.Adapter<ClassifyTypeTagsRecyAdapter.Holder> implements View.OnClickListener {
     private List<ClassifyTagBean.DataBean.TypeTagsBean> list;
     private Context context;

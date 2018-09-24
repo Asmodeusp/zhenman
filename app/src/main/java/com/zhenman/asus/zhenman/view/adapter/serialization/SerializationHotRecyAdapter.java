@@ -15,6 +15,7 @@ import com.zhenman.asus.zhenman.model.bean.SerializationBean;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
+//连载页面热门三列RecyclerView的适配器
 public class SerializationHotRecyAdapter extends RecyclerView.Adapter<SerializationHotRecyAdapter.Holder> implements View.OnClickListener {
     private List<SerializationBean.DataBean.PgcHotRecommendBean> list;
     private Context context;

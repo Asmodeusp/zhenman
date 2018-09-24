@@ -16,7 +16,7 @@ import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
 
-
+////连载页面分类标签适配器
 public class ClassifyBackgroundTagsRecyAdapter extends RecyclerView.Adapter<ClassifyBackgroundTagsRecyAdapter.Holder> implements View.OnClickListener {
     private List<ClassifyTagBean.DataBean.BackgroundTagsBean> list;
     private Context context;

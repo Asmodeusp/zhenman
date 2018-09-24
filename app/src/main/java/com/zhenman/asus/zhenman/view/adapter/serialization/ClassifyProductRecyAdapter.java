@@ -16,7 +16,7 @@ import com.zhenman.asus.zhenman.model.bean.ClassifyBean;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
-
+//连载页面分类产品的适配器
 public class ClassifyProductRecyAdapter extends RecyclerView.Adapter<ClassifyProductRecyAdapter.Holder> implements View.OnClickListener {
     private List<ClassifyBean.DataBean.ResultBean> list;
     private Context context;

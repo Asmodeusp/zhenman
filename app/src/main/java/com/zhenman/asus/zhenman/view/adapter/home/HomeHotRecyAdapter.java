@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.zhenman.asus.zhenman.R;
@@ -57,21 +58,8 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         //计算填充Recycler View高度
         double i = (double) dataBean.getHeight() / dataBean.getWidth();
         double InsideHight = i * (double) ScreenUtils.getScreenWidth(context);
-
         linearLayoutManager.setScrollEnabled(false);
         myLayoutMessage.setScrollEnabled(true);
-
-
-//        if(list.get(position).isOpenSwich){
-//            linearLayoutManager.setScrollEnabled(true);
-//            myLayoutMessage.setScrollEnabled(false);
-//        }else{
-//            linearLayoutManager.setScrollEnabled(false);
-//            myLayoutMessage.setScrollEnabled(true);
-//        }
-
-
-
         //内部滑动监听
         holder.home_Recy_fill_Recy.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -142,19 +130,19 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
 
 
                 //如果两个条件都满足则说明是真正的滑动到了底部
-               if (lastChildBottom == recyclerBottom && lastPosition == recyclerView.getLayoutManager().getItemCount() - 1  && dy > 0) {
+                if (lastChildBottom == recyclerBottom && lastPosition == recyclerView.getLayoutManager().getItemCount() - 1  && dy > 0) {
 
 
-                   if(list.get(position).isOpenSwich){
+                    if(list.get(position).isOpenSwich){
 //                       list.get(position).isOpenSwich = false;
 //                       linearLayoutManager.setScrollEnabled(true);
-                      // myLayoutMessage.setScrollEnabled(true);
+                        // myLayoutMessage.setScrollEnabled(true);
 
-                       if(null != mNotifyDataSetChangedForRv){
-                           mNotifyDataSetChangedForRv.notifyDataSetChanged(position,false);
-                       }
-                      // holder.home_Recy_fill_Recy.getParent().requestDisallowInterceptTouchEvent(false);
-                   }
+                        if(null != mNotifyDataSetChangedForRv){
+                            mNotifyDataSetChangedForRv.notifyDataSetChanged(position,false);
+                        }
+                        // holder.home_Recy_fill_Recy.getParent().requestDisallowInterceptTouchEvent(false);
+                    }
 
 
                 }
@@ -162,25 +150,25 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                 //如果两个条件都满足则说明是真正的滑动到了顶部
                 else if (firstChildTop == recyclerTop && firstPosition == 0 && dy < 0) {
 //                    linearLayoutManager.setScrollEnabled(true);
-                   if(list.get(position).isOpenSwich){
-                       list.get(position).isOpenSwich = false;
+                    if(list.get(position).isOpenSwich){
+                        list.get(position).isOpenSwich = false;
 //                    list.get(position).isOpenSwich = true;
-                   if(null != mNotifyDataSetChangedForRv && position > 0){
-                       mNotifyDataSetChangedForRv.notifyDataSetChanged(position,true);
-                   }
-                      // holder.home_Recy_fill_Recy.getParent().requestDisallowInterceptTouchEvent(false);
+                        if(null != mNotifyDataSetChangedForRv && position > 0){
+                            mNotifyDataSetChangedForRv.notifyDataSetChanged(position,true);
+                        }
+                        // holder.home_Recy_fill_Recy.getParent().requestDisallowInterceptTouchEvent(false);
 //                       linearLayoutManager.setScrollEnabled(true);
 //                   linearLayoutManager.setScrollEnabled(true);
-                   //myLayoutMessage.setScrollEnabled(false);
-                   }
+                        //myLayoutMessage.setScrollEnabled(false);
+                    }
 
                 }else{
-                   if(!list.get(position).isOpenSwich){
-                       list.get(position).isOpenSwich = true;
-                       //linearLayoutManager.setScrollEnabled(false);
-                      // holder.home_Recy_fill_Recy.getParent().requestDisallowInterceptTouchEvent(true);
-                       //myLayoutMessage.setScrollEnabled(true);
-                   }
+                    if(!list.get(position).isOpenSwich){
+                        list.get(position).isOpenSwich = true;
+                        //linearLayoutManager.setScrollEnabled(false);
+                        // holder.home_Recy_fill_Recy.getParent().requestDisallowInterceptTouchEvent(true);
+                        //myLayoutMessage.setScrollEnabled(true);
+                    }
 
 //                   if( list.get(position).isOpenSwich){
 //                       list.get(position).isOpenSwich = false;
@@ -188,7 +176,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
 //                           //mNotifyDataSetChangedForRv.notifyDataSetChanged(position);
 //                       }
 //                   }
-               }
+                }
             }
         });
 

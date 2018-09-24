@@ -5,7 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-public class NoSrcollViewPage extends ViewPager{
+public class  NoSrcollViewPage extends ViewPager{
     private boolean isCanScroll = false;
 
     public NoSrcollViewPage(Context context) {

@@ -13,7 +13,7 @@ import com.zhenman.asus.zhenman.model.bean.ClassifyTagBean;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
-
+//连载页面分类标签适配器
 public class ClassifyStatusTagsRecyAdapter extends RecyclerView.Adapter<ClassifyStatusTagsRecyAdapter.Holder> implements View.OnClickListener {
     private List<ClassifyTagBean.DataBean.StatusTagsBean> list;
     private Context context;

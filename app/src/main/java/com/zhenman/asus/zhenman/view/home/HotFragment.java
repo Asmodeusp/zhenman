@@ -1,11 +1,8 @@
 package com.zhenman.asus.zhenman.view.home;
 
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -17,7 +14,6 @@ import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
-import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.ui.NotifyDataSetChangedForRv;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.OnViewPagerListener;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
@@ -52,6 +48,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
         //请求数据
         presenter.getHomeHotBean(1 + "");
         initView();
+
     }
 
     private void initView() {
@@ -103,11 +100,12 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     @Override
     public void showHotBean(HomeHotBean homeHotBean) {
         dataBeans = new ArrayList<>();
+        for (HomeHotBean.DataBean dataBean : homeHotBean.getData()) {
+            dataBeans.add(dataBean);
 
+        }
         homeHotRecyAdapter = new HomeHotRecyAdapter(dataBeans, linearLayoutManager, HomeHot_List, this);
         HomeHot_List.setAdapter(homeHotRecyAdapter);
-
-
     }
 
     @Override
@@ -122,43 +120,21 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
             return;
         }
 
-        //linearLayoutManager.setScrollEnabled(true);
 
-        //myLayoutMessage.setScrollEnabled(false);
-        //homeHotRecyAdapter.notifyDataSetChanged();
 
         if (pos != -1 && pos < dataBeans.size()) {
             if (isTop) {
-//                linearLayoutManager.setScrollEnabled(true);
-                HomeHot_List.scrollToPosition(pos - 1);
-                linearLayoutManager.scrollToPositionWithOffset(pos - 1, 0);
+                linearLayoutManager.setScrollEnabled(true);
+//                HomeHot_List.scrollToPosition(pos - 1);
+//                linearLayoutManager.scrollToPositionWithOffset(pos - 1, 0);
             } else {
                 linearLayoutManager.setScrollEnabled(false);
-                HomeHot_List.scrollToPosition(pos + 1);
-                linearLayoutManager.scrollToPositionWithOffset(pos + 1, 0);
+//                HomeHot_List.scrollToPosition(pos + 1);
+//                linearLayoutManager.scrollToPositionWithOffset(pos + 1, 0);
             }
 
         }
 
-//        new Handler().post(new Runnable() {
-//            @Override
-//            public void run() {
-//                // 刷新操作
-//                linearLayoutManager.setScrollEnabled(true);
-//
-//                //myLayoutMessage.setScrollEnabled(false);
-//                //homeHotRecyAdapter.notifyDataSetChanged();
-//
-//                if (pos != -1 && pos < dataBeans.size()) {
-//                    HomeHot_List.scrollToPosition(pos + 1);
-//                    LinearLayoutManager mLayoutManager =
-//                            (LinearLayoutManager) HomeHot_List.getLayoutManager();
-//                    mLayoutManager.scrollToPositionWithOffset(pos+1, 0);
-//                }
-//
-//
-//            }
-//        });
 
 
     }
