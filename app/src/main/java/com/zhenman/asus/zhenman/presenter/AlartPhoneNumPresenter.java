@@ -19,9 +19,9 @@ public class AlartPhoneNumPresenter implements AlartPhoneNumContract.AlartPhoneN
     @Override
     public void sendAlartPhoneNumData(String mobile, String type, String imageCode) {
         Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("mobile",mobile);
-        paramMap.put("type","1");
-        paramMap.put("imageCode","1234");
+        paramMap.put("mobile", mobile);
+        paramMap.put("type", "1");
+        paramMap.put("imageCode", "1234");
 
         RetrofitUtils.getInstance()
                 .getService(AlartPhoneNumService.class)
@@ -36,9 +36,9 @@ public class AlartPhoneNumPresenter implements AlartPhoneNumContract.AlartPhoneN
 
                     @Override
                     public void onNext(VerificationCodeBean verificationCodeBean) {
-                        if (verificationCodeBean.getState()==0){
+                        if (verificationCodeBean.getState() == 0) {
                             alartPhoneNumInView.showAlartPhoneNumData(verificationCodeBean);
-                        }else {
+                        } else {
                             alartPhoneNumInView.showError();
                         }
                     }
@@ -54,13 +54,12 @@ public class AlartPhoneNumPresenter implements AlartPhoneNumContract.AlartPhoneN
                     }
                 });
     }
-    //    账号绑定更换前的密码校验
-
+    //    账号绑定更换前的密码校验(更换的时候要用)
     @Override
     public void sendCheckCodeData(String mobile, String smsCode) {
         Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("mobile",mobile);
-        paramMap.put("smsCode",smsCode);
+        paramMap.put("mobile", mobile);
+        paramMap.put("smsCode", smsCode);
         RetrofitUtils.getInstance().getService(AlartPhoneNumService.class)
                 .checkCodeBean(paramMap)
                 .subscribeOn(Schedulers.newThread())
@@ -73,9 +72,48 @@ public class AlartPhoneNumPresenter implements AlartPhoneNumContract.AlartPhoneN
 
                     @Override
                     public void onNext(VerificationCodeBean verificationCodeBean) {
-                        if (verificationCodeBean.getState()==0){
+                        if (verificationCodeBean.getState() == 0) {
                             alartPhoneNumInView.showCheckCodeData(verificationCodeBean);
-                        }else {
+                        } else {
+                            alartPhoneNumInView.showError();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    //        三方账号绑定手机号（手机未绑定过）
+    @Override
+    public void sendThirdBindData(String mobile, String smsCode,String type,String oauthId) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("mobile",mobile);
+        paramMap.put("smsCode",smsCode);
+        paramMap.put("type",type);
+        paramMap.put("oauthId",oauthId);
+        RetrofitUtils.getInstance().getService(AlartPhoneNumService.class)
+                .replacePhoneNum(paramMap)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<VerificationCodeBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(VerificationCodeBean verificationCodeBean) {
+                        if (verificationCodeBean.getState() == 0) {
+                            alartPhoneNumInView.showThirdBindData(verificationCodeBean);
+                        } else {
                             alartPhoneNumInView.showError();
                         }
                     }

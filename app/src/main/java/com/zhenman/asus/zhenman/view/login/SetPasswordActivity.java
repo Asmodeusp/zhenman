@@ -37,7 +37,7 @@ public class SetPasswordActivity extends BaseActivity<SetPasswordPresenterImp> i
     protected void init() {
         initView();
         Intent intent = getIntent();
-        msmcode = intent.getStringExtra("msmcode");
+        msmcode = intent.getStringExtra("smsCode");
         phone = intent.getStringExtra("phone");
 
 

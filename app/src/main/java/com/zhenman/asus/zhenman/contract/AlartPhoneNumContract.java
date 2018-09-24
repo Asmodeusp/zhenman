@@ -14,13 +14,20 @@ public interface AlartPhoneNumContract {
 
         //        验证码无效
         void showError();
+
+        //        三方账号绑定手机号（手机未绑定过）
+        void showThirdBindData(VerificationCodeBean verificationCodeBean);
     }
 
     interface AlartPhoneNumInPresenter extends BasePresenter<AlartPhoneNumInView> {
         //发送图片验证码到服务器得到短信验证码
 
         void sendAlartPhoneNumData(String mobile, String type, String imageCode);
+
         //    账号绑定更换前的密码校验
-        void sendCheckCodeData(String mobile,String smsCode);
+        void sendCheckCodeData(String mobile, String smsCode);
+
+        //        三方账号绑定手机号（手机未绑定过）
+        void sendThirdBindData(String mobile, String smsCode,String type,String oauthId);
     }
 }

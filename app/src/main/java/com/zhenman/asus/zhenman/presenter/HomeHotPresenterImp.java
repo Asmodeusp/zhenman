@@ -1,16 +1,10 @@
 package com.zhenman.asus.zhenman.presenter;
 
-import android.util.Log;
-
-import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.HomeHotContract;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
-import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.model.service.HomeHotService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
-import com.zhenman.asus.zhenman.utils.sp.SPKey;
-import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 
 import java.util.HashMap;
 import java.util.Map;

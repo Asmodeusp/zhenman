@@ -107,35 +107,9 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 sex = "1";
                 SPUtils.put(MainActivity.this, SPKey.UMeng_SEX, "1");
             }
-
-
-            //微信登录
-//          presenter.sendUMengLoginData(uMeng_otheruserId, uMeng_name, uMeng_cityname, uMeng_headimage, uMeng_sex, umeng_type, uMeng_openid);
-           /* UMShareAPI.get(MainActivity.this).deleteOauth(MainActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
-                @Override
-                public void onStart(SHARE_MEDIA share_media) {
-
-                }
-
-                @Override
-                public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-
-                }
-
-                @Override
-                public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-
-                }
-
-                @Override
-                public void onCancel(SHARE_MEDIA share_media, int i) {
-
-                }
-            });*/
-            Log.e("Sunny++otherUserId",data.get("unionid"));
-            Log.e("Sunny++openId",data.get("openid"));
-
             SPUtils.put(MainActivity.this,SPKey.UMeng_OTHERUSERId,data.get("unionid"));
+            Log.e("Sunny",data.get("unionid"));
+            Log.e("Sunny",data.get("openid"));
             presenter.sendUMengLoginData(data.get("unionid"), data.get("name"), data.get("city"),
                     data.get("iconurl"), sex, TYPE, data.get("openid"));
 
@@ -235,7 +209,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 startActivity(new Intent(this, ForgetPasswordActivity.class));
                 break;
             case R.id.login_weiboImage:
-
                 //微博登录
                 UMengHelp.applySharePermission(this, SINA_LOGIN, new ShareCallBack() {
                     @Override
@@ -312,6 +285,12 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             SPUtils.put(MainActivity.this, SPKey.USER_OAUTHID, uMengLoginBean.getData().getOauthId());
             if (uMengLoginBean.getData().getBirthdate()!=null) {
                 SPUtils.put(MainActivity.this, SPKey.USER_BIRTHDAY, uMengLoginBean.getData().getBirthdate());
+            }if (uMengLoginBean.getData().getQqName()!=null){
+                SPUtils.put(MainActivity.this, SPKey.QQ_NAME, uMengLoginBean.getData().getQqName());
+            }if (uMengLoginBean.getData().getWeiboName()!=null){
+                SPUtils.put(MainActivity.this, SPKey.SINA_NAME, uMengLoginBean.getData().getWeiboName());
+            }if (uMengLoginBean.getData().getWeixinName()!=null){
+                SPUtils.put(MainActivity.this, SPKey.WEIXIN_NAME, uMengLoginBean.getData().getWeixinName());
             }
             SPUtils.put(MainActivity.this, SPKey.USER_SEX, uMengLoginBean.getData().getSex());
             SPUtils.put(MainActivity.this, SPKey.USER_TOKEN, uMengLoginBean.getData().getToken());

@@ -129,7 +129,7 @@
             android:exported="false"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".view.ContentActivity"></activity>
+        <activity android:name=".view.ContentActivity" />
         <activity android:name=".view.login.RegisterCodeActivity" />
         <activity android:name=".view.login.SetPasswordActivity" />
         <activity android:name=".view.login.ForgetPasswordActivity" />
@@ -151,7 +151,10 @@
         <activity android:name=".view.myself.MyDraftActivity" />
         <activity android:name=".view.myself.HomepageActivity" />
         <activity android:name=".view.myself.ShoppingActivity" />
-        <activity android:name=".view.myself.AttentionThemeActivity"></activity>
+        <activity android:name=".view.myself.AttentionThemeActivity" />
+        <activity android:name=".view.serializaion.BookshelfActivity" />
+        <activity android:name=".view.login.BindPhotoActivity" />
+        <activity android:name=".view.myself.BindPhoneNumActivity"></activity>
     </application>
 
 </manifest>

@@ -21,7 +21,9 @@ public class SetPasswordPresenterImp implements SetPasswordContract.SetPassWordP
         map.put("mobile", phone);
         map.put("password", password);
         map.put("smsCode", MSMCode);
-        RetrofitUtils.getInstance().getSetPasswordService().GetSetPassWordBean(map).subscribeOn(Schedulers.newThread())
+        RetrofitUtils.getInstance().getSetPasswordService()
+                .GetSetPassWordBean(map)
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<SetPasswordBean>() {
                     @Override

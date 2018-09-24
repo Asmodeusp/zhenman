@@ -2,6 +2,7 @@ package com.zhenman.asus.zhenman.view.serializaion;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
@@ -132,17 +133,24 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                     if (serializationDetailsBeandata.isCollect()) {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
                         presenter.PgcCollection(pgcid, "0");
+                        Log.e("Sunny",pgcid+""+"0000000");
                     } else {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
                         presenter.PgcCollection(pgcid, "1");
+                        Log.e("Sunny",pgcid+""+"11111");
+
                     }
                 } else {
                     if (serializationDetailsBeandata.isCollect()) {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
                         presenter.PgcCollection(pgcid, "1");
+                        Log.e("Sunny",pgcid+""+"22222");
+
                     } else {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
                         presenter.PgcCollection(pgcid, "0");
+                        Log.e("Sunny",pgcid+""+"33333333");
+
                     }
                 }
                 break;

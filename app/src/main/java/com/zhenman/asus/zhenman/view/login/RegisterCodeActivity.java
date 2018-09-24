@@ -106,9 +106,7 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
                 if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 }
-                /*if (mRegisterPhotoCodeEd.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
-                }*/ else {
+                else {
                     presenter.getRegisterLoginCode(mRegisterPhoneNumber.getText().toString().trim(), mRegisterPhotoCodeEd.getText().toString().trim());
 
                 }
@@ -193,7 +191,7 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
     @Override
     public void gotoPassword() {
         Intent intent = new Intent(RegisterCodeActivity.this, SetPasswordActivity.class);
-        intent.putExtra("msmcode", mRegisterPhotoCodeEd.getText().toString().trim());
+        intent.putExtra("smsCode", mRegisterPhotoCodeEd.getText().toString().trim());
         intent.putExtra("phone", mRegisterPhoneNumber.getText().toString().trim());
         startActivity(intent);
 

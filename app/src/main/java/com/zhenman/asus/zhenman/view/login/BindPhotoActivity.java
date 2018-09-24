@@ -21,7 +21,11 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.AlartPhoneNumContract;
 import com.zhenman.asus.zhenman.model.bean.VerificationCodeBean;
 import com.zhenman.asus.zhenman.presenter.AlartPhoneNumPresenter;
+import com.zhenman.asus.zhenman.utils.SmsCodeDownUtil;
 import com.zhenman.asus.zhenman.utils.Urls;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.view.myself.BindPhoneNumActivity;
 
 import java.io.IOException;
 
@@ -49,7 +53,7 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
     private EditText imageCode_ed;
     private PopupWindow window;
     private String isBind;
-
+    private SmsCodeDownUtil smsCodeDownUtil;
 
     @Override
     protected int getLayoutId() {
@@ -62,7 +66,6 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
         mRegisterReturn = findViewById(R.id.Register_return);
         //
         register_text = findViewById(R.id.register_text);
-        register_text.setText("绑定手机号");
         //父容器
         mRegister_Code_Lin = findViewById(R.id.Register_Code_Lin);
         //手机号输入框
@@ -73,7 +76,6 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
         mRegisterPhotoCode = findViewById(R.id.Register_PhotoCodeText);
         //下一步按钮
         mRegisterNextBtn = findViewById(R.id.Register_NextBtn);
-        mRegisterNextBtn.setText("绑定");
         mRegisterReturn.setOnClickListener(this);
         mRegisterNextBtn.setOnClickListener(this);
         mRegisterPhotoCode.setOnClickListener(this);
@@ -85,7 +87,7 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
             mRegisterNextBtn.setText("绑定");
         } else if (isBind.equals("已有手机号，更换绑定")) {
             register_text.setText("更换绑定");
-            mRegisterNextBtn.setText("绑定");
+            mRegisterNextBtn.setText("下一步");
         }
     }
 
@@ -103,28 +105,45 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
                 break;
             case R.id.Register_PhotoCodeText:
                 String telRegex = "^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\\d{8}$";// "[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-                if (!mRegisterPhoneNumber.getText().toString().trim().matches(telRegex)) {
-                    Toast.makeText(this, "请输入正确手机号", Toast.LENGTH_SHORT).show();
-                } else if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
+
+                //正则判断手机号
+                 String REGEX_MOBILE = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+                if (!mRegisterPhoneNumber.getText().toString().trim().matches(REGEX_MOBILE)) {
+                    Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                }
+                if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 } else {
 //                    initpopu();
+//               倒计时
+                    smsCodeDownUtil = new SmsCodeDownUtil(mRegisterPhotoCode, "%s", 60);
+                    smsCodeDownUtil.start();
+                    String countdownText = smsCodeDownUtil.getCountdownText();
+                    mRegisterPhotoCode.setText(countdownText);
                     presenter.sendAlartPhoneNumData(mRegisterPhoneNumber.getText().toString(), "1", "3233");
                 }
                 break;
             case R.id.Register_NextBtn:
                 if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
-
                 }
                 if (mRegisterPhotoCodeEd.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
                 } else {
+                    if (register_text.getText().toString().equals("绑定手机号")) {
+                        //        三方账号绑定手机号（手机未绑定过）
+                        presenter.sendThirdBindData(mRegisterPhoneNumber.getText().toString()
+                                , mRegisterPhotoCodeEd.getText().toString()
+                                , (String) SPUtils.get(this, SPKey.LOGIN_TYPE, "")
+                                , (String) SPUtils.get(this, SPKey.USER_OAUTHID, ""));
+                    } else {
+                        //  账号绑定前的密码校验
+                        presenter.sendCheckCodeData(mRegisterPhoneNumber.getText().toString(), mRegisterPhotoCodeEd.getText().toString());
 
+                    }
 //                    presenter.getRegisterLoginCode(mRegisterPhoneNumber.getText().toString().trim(), mRegisterPhotoCodeEd.getText().toString().trim());
 //                    requestPhotoCode(mRegisterPhoneNumber.getText().toString().trim());
 //                    finish();
-                    presenter.sendCheckCodeData(mRegisterPhoneNumber.getText().toString(), mRegisterPhotoCode.getText().toString());
                 }
 
                 break;
@@ -139,6 +158,14 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
                 break;
 
         }
+    }
+
+    public void gotoPassword() {
+        Intent intent = new Intent(BindPhotoActivity.this, BindPhoneNumActivity.class);
+        intent.putExtra("smsCode", mRegisterPhotoCodeEd.getText().toString().trim());
+        intent.putExtra("phone", mRegisterPhoneNumber.getText().toString().trim());
+        startActivity(intent);
+        finish();
     }
 
     private void initpopu() {
@@ -203,11 +230,13 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
         }
     }
 
-    //下一步
+    //下一步（绑定新的手机号，去输入密码）
     @Override
     public void showCheckCodeData(VerificationCodeBean verificationCodeBean) {
-        if (verificationCodeBean.getState()==0){
-            
+        if (verificationCodeBean.getState() == 0) {
+            gotoPassword();
+        } else {
+            Toast.makeText(this, "获取数据失败", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -215,5 +244,17 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
     @Override
     public void showError() {
         Toast.makeText(this, "获取验证码失败", Toast.LENGTH_SHORT).show();
+    }
+
+    //        三方账号绑定手机号（手机未绑定过）
+    @Override
+    public void showThirdBindData(VerificationCodeBean verificationCodeBean) {
+        if (verificationCodeBean.getState() == 0) {
+//            如果成功的话就保存手机号到SP中
+            SPUtils.put(this,SPKey.USER_MOBILE,mRegisterPhoneNumber.getText().toString());
+            finish();
+        } else {
+            Toast.makeText(this, "获取数据失败", Toast.LENGTH_SHORT).show();
+        }
     }
 }

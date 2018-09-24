@@ -21,6 +21,7 @@ import com.zhenman.asus.zhenman.presenter.SerializationPresenterImp;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationHotRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationLatelyRecyAdapter;
+import com.zhenman.asus.zhenman.view.serializaion.BookshelfActivity;
 import com.zhenman.asus.zhenman.view.serializaion.ClassifyActivity;
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 
@@ -154,9 +155,9 @@ public class SerializationFragment extends BaseFragment<SerializationPresenterIm
             case R.id.Serialization_serial_starButton:
 
                 break;
-            //收藏
+            //书架
             case R.id.Serialization_serial_collectionButton:
-
+                startActivity(new Intent(getActivity(), BookshelfActivity.class));
                 break;
         }
     }

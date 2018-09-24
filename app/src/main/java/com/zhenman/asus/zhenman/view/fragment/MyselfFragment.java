@@ -23,6 +23,7 @@ import com.zhenman.asus.zhenman.view.myself.MyDraftActivity;
 import com.zhenman.asus.zhenman.view.myself.MySettingActivity;
 import com.zhenman.asus.zhenman.view.myself.MyWalletActivity;
 import com.zhenman.asus.zhenman.view.myself.PersonalInformationActivity;
+import com.zhenman.asus.zhenman.view.serializaion.BookshelfActivity;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -123,12 +124,11 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 startActivity(new Intent(getActivity(), MyWalletActivity.class));
                 break;
             case R.id.my_ShelfPage:
-
+                startActivity(new Intent(getActivity(), BookshelfActivity.class));
                 break;
             case R.id.my_DraftPage:
                 startActivity(new Intent(getActivity(), MyDraftActivity.class));
                 break;
-
             case R.id.my_AccountNumberPage://账号管理
                 startActivity(new Intent(getActivity(), AccountManagementActivity.class));
                 break;
