@@ -16,12 +16,12 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.ThemeDetailHeadContract;
 import com.zhenman.asus.zhenman.model.bean.ThemeDetailHeadBean;
 import com.zhenman.asus.zhenman.presenter.ThemeDetailsPresenter;
-import com.zhenman.asus.zhenman.ui.NoSrcollViewPage;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.message.MessageAdapter;
 import com.zhenman.asus.zhenman.view.message.fragment.FeaturedFragment;
 import com.zhenman.asus.zhenman.view.message.fragment.SquareFragment;
+import com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
