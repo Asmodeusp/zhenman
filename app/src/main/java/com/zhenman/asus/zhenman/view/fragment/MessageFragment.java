@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.fragment;
 
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.zhenman.asus.zhenman.model.bean.TheamBean;
 import com.zhenman.asus.zhenman.model.bean.ThemeAttentionBean;
 import com.zhenman.asus.zhenman.presenter.TheamBeanPresenter;
 import com.zhenman.asus.zhenman.view.adapter.message.ThemeAdapter;
+import com.zhenman.asus.zhenman.view.message.ThemeDetailsActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 
 import java.util.List;
@@ -72,26 +74,36 @@ public class MessageFragment extends BaseFragment<TheamBeanPresenter> implements
         switch (v.getId()) {
 
             case R.id.message_like:
+
                 break;
             case R.id.message_comment:
                 break;
             case R.id.message_fans:
                 break;
             case R.id.message_pay:
+
                 break;
         }
     }
 
     //    得到主题详情
     @Override
-    public void showTheamBean(TheamBean theamBean) {
+    public void showTheamBean(final TheamBean theamBean) {
         if (theamBean.getState() == 0) {
-            List<TheamBean.DataBean> dataBeanList = theamBean.getData();
+            final List<TheamBean.DataBean> dataBeanList = theamBean.getData();
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
             message_recy.setLayoutManager(linearLayoutManager);
             ThemeAdapter themeAdapter = new ThemeAdapter(dataBeanList, getContext());
             themeAdapter.ThemeCallback(this);
             message_recy.setAdapter(themeAdapter);
+            themeAdapter.OnShortListener(new ThemeAdapter.OnShortListener() {
+                @Override
+                public void myClick(View view, int position) {
+                    Intent intent = new Intent(getContext(), ThemeDetailsActivity.class);
+                    intent.putExtra("chapterId",dataBeanList.get(position).getSubjectId()+"");
+                    startActivity(intent);
+                }
+            });
         } else {
             Toast.makeText(getActivity(), "获取数据失败", Toast.LENGTH_SHORT).show();
         }

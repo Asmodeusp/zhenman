@@ -155,7 +155,8 @@
         <activity android:name=".view.myself.AttentionThemeActivity" />
         <activity android:name=".view.serializaion.BookshelfActivity" />
         <activity android:name=".view.login.BindPhotoActivity" />
-        <activity android:name=".view.myself.BindPhoneNumActivity"></activity>
+        <activity android:name=".view.myself.BindPhoneNumActivity" />
+        <activity android:name=".view.message.ThemeDetailsActivity"></activity>
     </application>
 
 </manifest>
