@@ -234,12 +234,12 @@
                 android:orientation="vertical">
 
 
-                <com.zhenman.asus.zhenman.ui.NoSrcollViewPage
+                <com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage
                     android:id="@+id/HomePage_Viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="700px">
 
-                </com.zhenman.asus.zhenman.ui.NoSrcollViewPage>
+                </com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>

@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -26,6 +27,11 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
     protected T presenter;
     private Fragment lastFragment;
     private OnBooleanListener onPermissionListener;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

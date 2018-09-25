@@ -1,5 +1,6 @@
 package com.zhenman.asus.zhenman;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -28,10 +29,13 @@ public class App extends Application {
     //设置全局的下拉刷新样式
     static {
         SmartRefreshLayout.setDefaultRefreshHeaderCreater(new DefaultRefreshHeaderCreater() {
+            @SuppressLint("ResourceAsColor")
             @NonNull
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout refreshLayout) {
-                return new MyRefreshAnimHeader(context);
+                MyRefreshAnimHeader myRefreshAnimHeader = new MyRefreshAnimHeader(context);
+                myRefreshAnimHeader.setPrimaryColors(R.color.h1);
+                return myRefreshAnimHeader;
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.zhenman.asus.zhenman.ui;
+package com.zhenman.asus.zhenman.view.ui;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

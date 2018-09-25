@@ -387,7 +387,6 @@
             android:layout_height="wrap_content">
 
             <ImageView
-
                 android:id="@+id/serializationCatalogReadReturnImg"
                 android:layout_width="36px"
                 android:layout_height="36px"

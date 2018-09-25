@@ -16,7 +16,7 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.HomePageContract;
 import com.zhenman.asus.zhenman.model.bean.HomePageHeadBean;
 import com.zhenman.asus.zhenman.presenter.HomePagePresenter;
-import com.zhenman.asus.zhenman.ui.NoSrcollViewPage;
+import com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage;
 import com.zhenman.asus.zhenman.utils.GetData;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;

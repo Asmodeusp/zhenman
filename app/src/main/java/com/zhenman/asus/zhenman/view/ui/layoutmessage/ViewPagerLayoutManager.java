@@ -87,7 +87,6 @@ public class ViewPagerLayoutManager extends LinearLayoutManager {
 
     /**
      * 监听竖直方向的相对偏移量
-     *
      * @param dy
      * @param recycler
      * @param state
@@ -98,11 +97,8 @@ public class ViewPagerLayoutManager extends LinearLayoutManager {
         this.mDrift = dy;
         return super.scrollVerticallyBy(dy, recycler, state);
     }
-
-
     /**
      * 监听水平方向的相对偏移量
-     *
      * @param dx
      * @param recycler
      * @param state
@@ -146,11 +142,9 @@ public class ViewPagerLayoutManager extends LinearLayoutManager {
         }
     };
     private boolean isScrollEnabled = true;
-
     public boolean isScrollEnabled() {
         return isScrollEnabled;
     }
-
     public void setScrollEnabled(boolean flag) {
         this.isScrollEnabled = flag;
 

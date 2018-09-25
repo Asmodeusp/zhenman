@@ -6,14 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".view.home.HotFragment">
 
-   <android.support.v7.widget.RecyclerView
-       android:id="@+id/HomeHot_List"
-       app:orientation="vertical"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent" />
+    <!--<com.scwang.smartrefresh.layout.SmartRefreshLayout-->
+        <!--android:id="@+id/HomeHot_SmartRefresh"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+     <!---->
+    <!--</com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
 
-
-
-
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/HomeHot_List"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:orientation="vertical" />
 </com.zhy.autolayout.AutoRelativeLayout>

@@ -6,10 +6,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -60,9 +62,7 @@ import com.zhenman.asus.zhenman.view.adapter.serialization.ProductListAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogReadRecyAdapter;
 import com.zhenman.asus.zhenman.view.login.qqlogin.UMSharePlatform;
-import com.zhenman.asus.zhenman.view.ui.MyRefreshAnimHeader;
 import com.zhenman.asus.zhenman.view.ui.MyScrollView;
-import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +70,6 @@ import java.util.Map;
 
 public class SerializationCatalogReadActivity extends BaseActivity<SerializationCatalogReadPresenterImp> implements View.OnClickListener, SerializationCatalogReadContract.serializationCatalogReadView, CatalogReadActorAdapter.CatalogReadActorCallback, ProductListAdapter.ProductListCallback {
     public String StartcatalogId;
-
     private ImageView serializationCatalogReadReturnImg;
     private TextView serializationCatalogReadText;
     private TextView serializationCatalogReadCommentNumber;
@@ -103,13 +102,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private int catalogId;
     SerializationCatalogReadBean
             serializationCatalogReadBean;
-    //章节更新时间
-    private TextView ChapterDataText;
-    //章节
-    private TextView ChapterText;
-    //章节名字
-    private TextView ChapterNameText;
-
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_AUTH_FLAG = 2;
 
@@ -161,7 +153,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     };
     private SmartRefreshLayout serializationCatalogReadSRL;
     private SerializationCatalogReadRecyAdapter serializationCatalogReadRecyAdapter;
-    private MyRefreshAnimHeader myRefreshAnimHeader;
     private BottomSheetDialog dialog;
     private RecyclerView commentPopu_recy;
 
@@ -249,13 +240,35 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         serializationCatalogReadReturnImg.setOnClickListener(this);//返回
         serializationCatalogReadCommentBtn.setOnClickListener(this);//消息
         serializationCatalogReadCatalogBtn.setOnClickListener(this);//目录
-        serializationMyScrollView.setOnTouchListener(new View.OnTouchListener() {
+//        serializationMyScrollView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                return false;
+//            }
+//        });
+        serializationCatalogReadRecy.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+                return true;
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         //触摸按下时操作
-                        Log.e("ScrollView", "按下");
+                        Log.e("界面", "按下");
+
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        // 触摸移动时的操作
+                        serializationCatalogReadHeadRel.setVisibility(View.GONE);
+                        serializationCatalogReadFootLin.setVisibility(View.GONE);
+                        count = false;
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        // 触摸抬起时的操作
                         if (count == true) {
                             serializationCatalogReadHeadRel.setVisibility(View.GONE);
                             serializationCatalogReadFootLin.setVisibility(View.GONE);
@@ -266,25 +279,15 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                             count = true;
                         }
                         break;
-                    case MotionEvent.ACTION_MOVE:
-                        Log.e("ScrollView", "移动");
-                        // 触摸移动时的操作
-                        serializationCatalogReadHeadRel.setVisibility(View.GONE);
-                        serializationCatalogReadFootLin.setVisibility(View.GONE);
-                        count = false;
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        // 触摸抬起时的操作
-                        Log.e("ScrollView", "抬起");
-                        break;
                 }
-                return false;
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean b) {
+
             }
         });
 
-        myRefreshAnimHeader = new MyRefreshAnimHeader(this);
-        myRefreshAnimHeader.setPrimaryColors(R.color.h1);
-        serializationCatalogReadSRL.setRefreshHeader(myRefreshAnimHeader);
     }
 
 
@@ -312,7 +315,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         }
 
     }
-
     //章节实体类
     @Override
     public void showSerializationCatalogBean(SerializationCatalogBean
@@ -414,10 +416,20 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         EditText CommentPopu_EdText = contentView.findViewById(R.id.HomeHot_CommentPopu_EdText);
         //评论发送按钮
         Button CommentPopu_SendButton = contentView.findViewById(R.id.HomeHot_CommentPopu_SendButton);
+        //评论提示字
+        TextView CommentPopu_Tip = contentView.findViewById(R.id.HomeHot_CommentPopu_Tip);
         //设置RecyclerView的格式
         commentPopu_recy.setLayoutManager(new LinearLayoutManager(this));
-
+        //展示评论popuwindow
         dialog.show();
+        //得到评论内容
+        String comment = CommentPopu_EdText.getText().toString().trim();
+        CommentPopu_SendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
 
@@ -485,7 +497,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             case R.id.CommentPopu_Button:
 
                 break;
-                //关闭评论按钮
+            //关闭评论按钮
             case R.id.CommentPopu_CommentCloseImg:
                 dialog.dismiss();
                 break;
@@ -608,6 +620,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             presenter.sendGetPayData(orderNumber);
         }
     }
+
     //得到微信订单数据
     @Override
     public void getWxMakeOrderData(MakeOrderBean payWeChatBean) {
@@ -615,6 +628,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             presenter.sendGetWxPayData(payWeChatBean.getData().getOrderNumber());
         }
     }
+
     //    得到订单号,开始支付
     @Override
     public void showGetPayData(final GetPayDataBean getPayDataBean) {
@@ -624,6 +638,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             Toast.makeText(this, "失败", Toast.LENGTH_SHORT).show();
         }
     }
+
     //得到微信支付数据
     @Override
     public void showGetWxPayData(PayWeChatBean payWeChatBean) {
@@ -633,6 +648,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             Toast.makeText(this, "失败", Toast.LENGTH_SHORT).show();
         }
     }
+
     //微信支付
     private void payV1(PayWeChatBean.DataBean.OrderSignBean orderSign) {
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
@@ -650,6 +666,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         api.sendReq(request);
         popupWindow.dismiss();
     }
+
     @Override
     public void showPgcChapterCommentListByOffSetBean(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean) {
         if (pgcChapterCommentListByOffSetBean != null) {
