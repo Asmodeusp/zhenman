@@ -90,5 +90,9 @@ public class Urls {
     public static final String MOBILE_BIND_THIRD = "userOauth/bindOauth";
     //    三方账号绑定另外的三方账号
     public static final String THIRD_BIND_THIRD = "userOauth/otherBindOther";
+    //    主题详情头部信息
+    public static final String THEME_DETAIL_HEAD = "ugcSubjectUser/getUgcListHeaderBySubjectId";
+//    主题详情下的精选
+    public static final String THEME_FEATURED="ugcSubjectUser/getUgcListBySubjectId";
 
 }

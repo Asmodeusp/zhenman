@@ -106,17 +106,6 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
 
                     tag = false;
                 }
-               /* if (holder.itemTheme_attention.) {
-                    holder.itemTheme_attention.setBackgroundDrawable(new ColorDrawable(R.drawable.attention_no_btn));
-                    themeCallback.makeAttention(dataBeanList.get(i).getSubjectId(), 1);
-                    holder.itemTheme_attention.setText("已关注");
-                } else {
-                    holder.itemTheme_attention.setBackgroundDrawable(new ColorDrawable(R.drawable.attention_btn));
-                    holder.itemTheme_attention.setText("关注");
-                    themeCallback.makeAttention(dataBeanList.get(i).getSubjectId(), 0);
-
-                }
-*/
             }
         });
 
@@ -129,6 +118,9 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
 
     //布局监听事件
     private OnShortListener myCLick;
+    public void OnShortListener(OnShortListener onShortListener){
+        this.myCLick=onShortListener;
+    }
 
     public interface OnShortListener {
         void myClick(View view, int position);

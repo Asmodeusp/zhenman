@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.message.ThemeDetailsActivity">
+
+    <include layout="@layout/above_head" />
+    <!-- 第一部分:CoordinatorLayout -->
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/scrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+
+        <!-- 第二部分:缩放控件-->
+        <android.support.design.widget.AppBarLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/h9"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/h9"
+                app:expandedTitleMarginEnd="64dp"
+                app:expandedTitleMarginStart="48dp"
+                app:layout_scrollFlags="scroll">
+
+
+                <com.zhy.autolayout.AutoRelativeLayout
+                    android:id="@+id/themeDetail_data"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:background="@color/h9">
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/themeDetail_Avatar"
+                        android:layout_width="148px"
+                        android:layout_height="148px"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="@dimen/px_24"
+
+                        android:layout_marginTop="@dimen/px_8"
+                        android:src="@mipmap/my_qiezi" />
+
+                    <ImageView
+                        android:id="@+id/themeDetail_Common"
+                        android:layout_width="@dimen/px_56"
+                        android:layout_height="@dimen/px_56"
+                        android:layout_alignBottom="@+id/themeDetail_Name"
+                        android:layout_marginLeft="24px"
+                        android:layout_toRightOf="@id/themeDetail_Avatar"
+                        android:src="@mipmap/common_theme" />
+
+                    <TextView
+                        android:id="@+id/themeDetail_Name"
+                        style="@style/Style40H2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/px_8"
+                        android:layout_marginTop="@dimen/px_8"
+                        android:layout_toRightOf="@+id/themeDetail_Common"
+                        android:text="桃太萌"
+                        android:textColor="@color/h2"
+                        android:textSize="40px" />
+
+
+                    <TextView
+                        android:id="@+id/themeDetail_introduction"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/themeDetail_Common"
+                        android:layout_below="@+id/themeDetail_Name"
+                        android:layout_marginRight="24px"
+                        android:layout_marginTop="@dimen/px_16"
+                        android:text="本宝宝的个人简历最多两行，所以我要写两行啊么么哒~"
+                        android:textColor="@color/h4"
+                        android:textSize="26px" />
+
+                    <com.zhy.autolayout.AutoRelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/px_56"
+                        android:layout_below="@id/themeDetail_Avatar"
+                        android:layout_marginTop="@dimen/px_24"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/themeDetail_attenNum"
+                            style="@style/Style26H3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/px_24"
+
+                            android:text="7关注" />
+
+                        <Button
+                            android:id="@+id/themeDetail_attention"
+                            style="@style/Style32H9"
+                            android:layout_width="148px"
+                            android:layout_height="@dimen/px_56"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/px_24"
+                            android:background="@drawable/attention_btn"
+                            android:gravity="center"
+                            android:text="关注主题" />
+                    </com.zhy.autolayout.AutoRelativeLayout>
+
+                </com.zhy.autolayout.AutoRelativeLayout>
+
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/themeDetail_himTab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/h9"
+                app:tabIndicatorColor="@color/c1"
+                app:tabIndicatorHeight="@dimen/px_0"
+                app:tabSelectedTextColor="@color/c1"
+                app:tabTextColor="@color/h3">
+
+            </android.support.design.widget.TabLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <com.zhenman.asus.zhenman.ui.NoSrcollViewPage
+                    android:id="@+id/themeDetail_Viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="700px">
+
+                </com.zhenman.asus.zhenman.ui.NoSrcollViewPage>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+</com.zhy.autolayout.AutoLinearLayout>
