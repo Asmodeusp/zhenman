@@ -133,24 +133,17 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                     if (serializationDetailsBeandata.isCollect()) {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
                         presenter.PgcCollection(pgcid, "0");
-                        Log.e("Sunny",pgcid+""+"0000000");
                     } else {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
                         presenter.PgcCollection(pgcid, "1");
-                        Log.e("Sunny",pgcid+""+"11111");
-
                     }
                 } else {
                     if (serializationDetailsBeandata.isCollect()) {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
                         presenter.PgcCollection(pgcid, "1");
-                        Log.e("Sunny",pgcid+""+"22222");
-
                     } else {
                         Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
                         presenter.PgcCollection(pgcid, "0");
-                        Log.e("Sunny",pgcid+""+"33333333");
-
                     }
                 }
                 break;
@@ -160,8 +153,10 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                 if (serializationCatalogBeandata == null&&serializationCatalogBeandata.size()==0) {
                     Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
                 } else {
-                    intent.putExtra("catalogId", serializationCatalogBeandata.get(serializationCatalogBeandata.size()-1).getCatalogId());
-                    intent.putExtra("pgcId", serializationCatalogBeandata.get(0).getPgcId());
+                    if (serializationCatalogBeandata.size()!=0) {
+                        intent.putExtra("catalogId", serializationCatalogBeandata.get(serializationCatalogBeandata.size()-1).getCatalogId());
+                        intent.putExtra("pgcId", serializationCatalogBeandata.get(0).getPgcId());
+                    }
                 }
                 startActivity(intent);
                 break;
@@ -220,6 +215,4 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         work_detaails_catalogText.setTextColor(Color.parseColor("#333333"));
         work_detaails_detailsText.setTextColor(Color.parseColor("#b37feb"));
     }
-
-
 }
