@@ -5,6 +5,12 @@ import java.util.List;
 
 public class HomeHotBean implements Serializable {
 
+    /**
+     * state : 0
+     * msg : 成功
+     * data : [{"name":"jojoman","id":"102","catalogId":null,"userId":"256","type":1,"headImg":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6043256dcf304f509669fcc9fc5669e6_?imageMogr2/thumbnail/200x200","finalImg":"http://pa1qj1jlg.bkt.clouddn.com/UGC/38b0ac2b8b7f4157a3e12e68376ee6d8_UGCMainImg","coverImg":null,"width":1242,"height":2684,"coverWidth":0,"coverHeight":0,"description":"","likeNum":"0","commentNum":"0","shareNum":"0","shareImg":null,"follow":false,"like":false,"reCreate":true,"subjectName":"别人相机里的我","subjectId":1,"pageDtoList":[{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/UGC/38b0ac2b8b7f4157a3e12e68376ee6d8_UGCMainImg?imageMogr2/crop/!1242.0x993.6a0a0.0","width":"1242.0","height":"993.6"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/UGC/38b0ac2b8b7f4157a3e12e68376ee6d8_UGCMainImg?imageMogr2/crop/!1242.0x1690.4a0a993.6","width":"1242.0","height":"1690.4"}]},{"name":"魔盗同盟","id":"26","catalogId":null,"userId":null,"type":2,"headImg":null,"finalImg":"http://pa1qj1jlg.bkt.clouddn.com/pgc/F-1.jpg_1532410675225","coverImg":"http://pa1qj1jlg.bkt.clouddn.com/pgc/F-1.jpg_1532410675225","width":800,"height":19686,"coverWidth":0,"coverHeight":0,"description":"讲述了现代都市背景下，五个身怀绝技的侠盗匡扶正义的故事。","likeNum":"1","commentNum":"1","shareNum":"0","shareImg":null,"follow":false,"like":false,"reCreate":false,"subjectName":null,"subjectId":0,"pageDtoList":[{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (1).jpg_1532936968755?imageMogr2/crop/!800.0x640.0a0a0.0","width":"800.0","height":"640.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (1).jpg_1532936968755?imageMogr2/crop/!800.0x744.0a0a640.0","width":"800.0","height":"744.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (2).jpg_1532936970936?imageMogr2/crop/!800.0x640.0a0a0.0","width":"800.0","height":"640.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (2).jpg_1532936970936?imageMogr2/crop/!800.0x1064.0a0a640.0","width":"800.0","height":"1064.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (3).jpg_1532936974692?imageMogr2/crop/!800.0x973.0a0a0.0","width":"800.0","height":"973.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (4).jpg_1532936977865?imageMogr2/crop/!800.0x640.0a0a0.0","width":"800.0","height":"640.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (4).jpg_1532936977865?imageMogr2/crop/!800.0x1011.0a0a640.0","width":"800.0","height":"1011.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (5).jpg_1532936981560?imageMogr2/crop/!800.0x640.0a0a0.0","width":"800.0","height":"640.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (5).jpg_1532936981560?imageMogr2/crop/!800.0x808.0a0a640.0","width":"800.0","height":"808.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (6).jpg_1532936984583?imageMogr2/crop/!800.0x1274.0a0a0.0","width":"800.0","height":"1274.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (7).jpg_1532936988065?imageMogr2/crop/!800.0x640.0a0a0.0","width":"800.0","height":"640.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (7).jpg_1532936988065?imageMogr2/crop/!800.0x641.0a0a640.0","width":"800.0","height":"641.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (8).jpg_1532936991324?imageMogr2/crop/!800.0x640.0a0a0.0","width":"800.0","height":"640.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (8).jpg_1532936991324?imageMogr2/crop/!800.0x640.0a0a640.0","width":"800.0","height":"640.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (8).jpg_1532936991324?imageMogr2/crop/!800.0x720.0a0a1280.0","width":"800.0","height":"720.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (9).jpg_1532936996979?imageMogr2/crop/!800.0x640.0a0a0.0","width":"800.0","height":"640.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (9).jpg_1532936996979?imageMogr2/crop/!800.0x806.0a0a640.0","width":"800.0","height":"806.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (10).jpg_1532937001213?imageMogr2/crop/!800.0x640.0a0a0.0","width":"800.0","height":"640.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (10).jpg_1532937001213?imageMogr2/crop/!800.0x958.0a0a640.0","width":"800.0","height":"958.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (11).jpg_1532937006521?imageMogr2/crop/!800.0x640.0a0a0.0","width":"800.0","height":"640.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (11).jpg_1532937006521?imageMogr2/crop/!800.0x876.0a0a640.0","width":"800.0","height":"876.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (12).jpg_1532937010625?imageMogr2/crop/!800.0x640.0a0a0.0","width":"800.0","height":"640.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (12).jpg_1532937010625?imageMogr2/crop/!800.0x1069.0a0a640.0","width":"800.0","height":"1069.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (13).jpg_1532937015615?imageMogr2/crop/!800.0x640.0a0a0.0","width":"800.0","height":"640.0"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/catalog/p (13).jpg_1532937015615?imageMogr2/crop/!800.0x1062.0a0a640.0","width":"800.0","height":"1062.0"}]}]
+     */
+
     private int state;
     private String msg;
     private List<DataBean> data;
@@ -33,7 +39,33 @@ public class HomeHotBean implements Serializable {
         this.data = data;
     }
 
-    public static class DataBean implements Serializable{
+    public static class DataBean {
+        /**
+         * name : jojoman
+         * id : 102
+         * catalogId : null
+         * userId : 256
+         * type : 1
+         * headImg : http://pa1qj1jlg.bkt.clouddn.com/headImage/6043256dcf304f509669fcc9fc5669e6_?imageMogr2/thumbnail/200x200
+         * finalImg : http://pa1qj1jlg.bkt.clouddn.com/UGC/38b0ac2b8b7f4157a3e12e68376ee6d8_UGCMainImg
+         * coverImg : null
+         * width : 1242
+         * height : 2684
+         * coverWidth : 0
+         * coverHeight : 0
+         * description :
+         * likeNum : 0
+         * commentNum : 0
+         * shareNum : 0
+         * shareImg : null
+         * follow : false
+         * like : false
+         * reCreate : true
+         * subjectName : 别人相机里的我
+         * subjectId : 1
+         * pageDtoList : [{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/UGC/38b0ac2b8b7f4157a3e12e68376ee6d8_UGCMainImg?imageMogr2/crop/!1242.0x993.6a0a0.0","width":"1242.0","height":"993.6"},{"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/UGC/38b0ac2b8b7f4157a3e12e68376ee6d8_UGCMainImg?imageMogr2/crop/!1242.0x1690.4a0a993.6","width":"1242.0","height":"1690.4"}]
+         */
+
         private String name;
         private String id;
         private Object catalogId;
@@ -44,18 +76,19 @@ public class HomeHotBean implements Serializable {
         private Object coverImg;
         private int width;
         private int height;
+        private int coverWidth;
+        private int coverHeight;
         private String description;
         private String likeNum;
         private String commentNum;
         private String shareNum;
+        private Object shareImg;
         private boolean follow;
         private boolean like;
         private boolean reCreate;
-        private String challengeFlag;
-        private int challengeId;
+        private String subjectName;
+        private int subjectId;
         private List<PageDtoListBean> pageDtoList;
-
-        public boolean isOpenSwich;//是否打开开关
 
         public String getName() {
             return name;
@@ -137,6 +170,22 @@ public class HomeHotBean implements Serializable {
             this.height = height;
         }
 
+        public int getCoverWidth() {
+            return coverWidth;
+        }
+
+        public void setCoverWidth(int coverWidth) {
+            this.coverWidth = coverWidth;
+        }
+
+        public int getCoverHeight() {
+            return coverHeight;
+        }
+
+        public void setCoverHeight(int coverHeight) {
+            this.coverHeight = coverHeight;
+        }
+
         public String getDescription() {
             return description;
         }
@@ -169,6 +218,14 @@ public class HomeHotBean implements Serializable {
             this.shareNum = shareNum;
         }
 
+        public Object getShareImg() {
+            return shareImg;
+        }
+
+        public void setShareImg(Object shareImg) {
+            this.shareImg = shareImg;
+        }
+
         public boolean isFollow() {
             return follow;
         }
@@ -193,20 +250,20 @@ public class HomeHotBean implements Serializable {
             this.reCreate = reCreate;
         }
 
-        public String getChallengeFlag() {
-            return challengeFlag;
+        public String getSubjectName() {
+            return subjectName;
         }
 
-        public void setChallengeFlag(String challengeFlag) {
-            this.challengeFlag = challengeFlag;
+        public void setSubjectName(String subjectName) {
+            this.subjectName = subjectName;
         }
 
-        public int getChallengeId() {
-            return challengeId;
+        public int getSubjectId() {
+            return subjectId;
         }
 
-        public void setChallengeId(int challengeId) {
-            this.challengeId = challengeId;
+        public void setSubjectId(int subjectId) {
+            this.subjectId = subjectId;
         }
 
         public List<PageDtoListBean> getPageDtoList() {
@@ -218,6 +275,12 @@ public class HomeHotBean implements Serializable {
         }
 
         public static class PageDtoListBean {
+            /**
+             * imageUrl : http://pa1qj1jlg.bkt.clouddn.com/UGC/38b0ac2b8b7f4157a3e12e68376ee6d8_UGCMainImg?imageMogr2/crop/!1242.0x993.6a0a0.0
+             * width : 1242.0
+             * height : 993.6
+             */
+
             private String imageUrl;
             private String width;
             private String height;

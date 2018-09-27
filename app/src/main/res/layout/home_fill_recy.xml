@@ -11,5 +11,219 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"></android.support.v7.widget.RecyclerView>
 
+    <ImageView
+        android:id="@+id/Home_Recy_OneImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@mipmap/common_qiezi"
+        android:visibility="gone" />
+
+    <com.zhenman.asus.zhenman.view.ui.MyScrollView
+        android:id="@+id/Home_Hot_Page_turningScrollView"
+        android:layout_width="@dimen/px_116"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="98px"
+        android:layout_marginRight="16px">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="@dimen/px_116"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="98px"
+
+            android:orientation="vertical">
+
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120px">
+
+                <ImageView
+                    android:id="@+id/Home_Hot_HeadImageView"
+                    android:layout_width="100px"
+                    android:layout_height="100px"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+                <CheckBox
+                    android:id="@+id/Home_Hot_FollowCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:button="@mipmap/home_follow_on" />
+            </com.zhy.autolayout.AutoRelativeLayout>
+
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/Home_Hot_IsLikeImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="0dp"
+                    android:button="@mipmap/like_01" />
+
+                <TextView
+                    android:id="@+id/Home_Hot_IsLikeNumberText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="55.5W"
+                    android:textColor="@color/h9"
+                    android:textSize="@dimen/px_24" />
+            </com.zhy.autolayout.AutoRelativeLayout>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40px"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/Home_Hot_CommentImageView"
+                    android:layout_width="@dimen/px_64"
+                    android:layout_height="@dimen/px_64"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/home_comment" />
+
+                <TextView
+                    android:id="@+id/Home_Hot_CommentNumberText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8px"
+                    android:text="55.5W"
+                    android:textColor="@color/h9"
+                    android:textSize="@dimen/px_24" />
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40px"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/Home_Hot_ShareImageView"
+                    android:layout_width="@dimen/px_64"
+                    android:layout_height="@dimen/px_64"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/home_share" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8px"
+                    android:text="分享"
+                    android:textColor="@color/h9"
+                    android:textSize="@dimen/px_24" />
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40px"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/Home_Hot_EditImageView"
+                    android:layout_width="@dimen/px_64"
+                    android:layout_height="@dimen/px_64"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/home_edit" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8px"
+                    android:text="再创作"
+                    android:textColor="@color/h9"
+                    android:textSize="@dimen/px_24" />
+            </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhenman.asus.zhenman.view.ui.MyScrollView>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="98px"
+        android:layout_marginLeft="32px"
+        android:orientation="vertical">
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:id="@+id/Home_Hot_ThemLin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Home_Hot_ThemText"
+                android:layout_width="wrap_content"
+                android:layout_height="40px"
+                android:layout_centerVertical="true"
+                android:background="@drawable/home_text"
+                android:drawablePadding="@dimen/px_8"
+                android:gravity="center"
+                android:paddingLeft="@dimen/px_60"
+                android:paddingRight="@dimen/px_60"
+                android:text="抱歉，猜不透你的套路"
+                android:textColor="@color/h9"
+                android:textSize="24px" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/common_theme_small" />
+            <!--android:drawableLeft="@mipmap/common_theme_small"-->
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+
+        <TextView
+            android:id="@+id/Home_Hot_UserNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8px"
+            android:text="真漫123"
+            android:textColor="@color/h9"
+            android:textSize="32px" />
+
+        <TextView
+            android:id="@+id/Home_Hot_describeText"
+            android:layout_width="522px"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40px"
+            android:text="你们知道吗？这个世界上每三个人终究有一个傻B，你们知道吗？这个世界上每三个人终究有一个傻B，"
+            android:textColor="@color/h9"
+            android:textSize="30px" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
 
 </RelativeLayout>

@@ -8,17 +8,16 @@ import android.widget.Toast;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.HomeHotContract;
+import com.zhenman.asus.zhenman.model.bean.FollowBean;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
-import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.OnViewPagerListener;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
-import java.util.ArrayList;
 
 
 
@@ -92,12 +91,19 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     }
     @Override
     public void showHotBean(HomeHotBean homeHotBean) {
-        homeHotRecyAdapter = new HomeHotRecyAdapter(homeHotBean.getData(), linearLayoutManager, HomeHot_List);
-        HomeHot_List.setAdapter(homeHotRecyAdapter);
+        if (homeHotBean.getData().size()!=0) {
+            homeHotRecyAdapter = new HomeHotRecyAdapter(homeHotBean.getData(), linearLayoutManager, HomeHot_List,presenter);
+            HomeHot_List.setAdapter(homeHotRecyAdapter);
+        }
     }
 
     @Override
     public void showPGCReadFabulousBean(UgcFabulousBean ugcFabulousBean) {
+
+    }
+
+    @Override
+    public void showFollowBean(FollowBean followBean) {
 
     }
 

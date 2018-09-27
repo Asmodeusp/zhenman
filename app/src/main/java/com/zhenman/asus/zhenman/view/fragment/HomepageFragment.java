@@ -46,7 +46,7 @@ public class HomepageFragment extends BaseFragment {
         //主页Viewpager
         HomePage_Viewpager = getActivity().findViewById(R.id.HomePage_Viewpager);
         //关注fragment
-        attentionFragment = new AttentionFragment(group, home_headView);
+        attentionFragment = new AttentionFragment();
         //热门Fragment
         hotFragment = new HotFragment();
         //HeadView头布局
