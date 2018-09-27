@@ -93,7 +93,9 @@ public class Urls {
     //    主题详情头部信息
     public static final String THEME_DETAIL_HEAD = "ugcSubjectUser/getUgcListHeaderBySubjectId";
     //主题详情下的精选
-    public static final String THEME_FEATURED="ugcSubjectUser/getUgcListBySubjectId";
+    public static final String THEME_FEATURED = "ugcSubjectUser/getUgcListBySubjectId";
     //关注用户
     public static final String INSERT_USER_FOLLOW = "userFollow/insertUserFollow";
+    //关注用户下的作品列表
+    public static final String USER_FOLLOW_WORKS_LIST = "userFollow/getUserFollowWorksList";
 }

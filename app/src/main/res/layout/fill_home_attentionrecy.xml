@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/fill_Home_Attention_RecyUserMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_32">
+
+        <ImageView
+            android:id="@+id/fill_Home_Attention_RecyHeadImageView"
+            android:layout_width="@dimen/px_100"
+            android:layout_height="@dimen/px_100"
+            android:layout_marginLeft="@dimen/px_24"
+            android:layout_marginRight="@dimen/px_24" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fill_Home_Attention_RecyUserNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8px"
+                android:text="笑魔怔了"
+                android:textColor="@color/h3"
+                android:textSize="@dimen/px_32" />
+
+            <TextView
+                android:id="@+id/fill_Home_Attention_RecyTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8px"
+                android:text="2018年11月21日 12:31"
+                android:textColor="@color/h5"
+                android:textSize="@dimen/px_24" />
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/fill_Home_Attention_RecyContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fill_Home_Attention_RecyUserMessage"
+        android:layout_marginTop="@dimen/px_24"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fill_Home_Attention_RecyDescriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_24"
+            android:text="这操作太逆天了~马住！"
+            android:textColor="@color/h2"
+            android:textSize="@dimen/px_32" />
+
+        <ImageView
+            android:layout_marginLeft="@dimen/px_24"
+            android:id="@+id/fill_Home_Attention_RecyImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_16"
+            android:src="@mipmap/common_qiezi" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_marginTop="@dimen/px_16"
+        android:layout_width="match_parent"
+        android:layout_height="64px"
+        android:layout_below="@+id/fill_Home_Attention_RecyContent"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="0dp"
+            android:id="@+id/fill_Home_Attention_RecyShareButton"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/px_64"
+                android:src="@mipmap/guanzhu_zhuanfa" />
+
+            <TextView
+                android:id="@+id/fill_Home_Attention_RecyShareNumberText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/px_16"
+                android:text="0"
+                android:textColor="@color/h3"
+                android:textSize="@dimen/px_26" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/fill_Home_Attention_RecyCommentButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/px_64"
+                android:src="@mipmap/guanzhu_comment" />
+
+            <TextView
+                android:id="@+id/fill_Home_Attention_RecyCommentNumberText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/px_16"
+                android:text="0"
+                android:textColor="@color/h3"
+                android:textSize="@dimen/px_26" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/fill_Home_Attention_RecyLikeButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/px_64"
+                android:background="@mipmap/guanzhu_like_off" />
+
+            <TextView
+                android:id="@+id/fill_Home_Attention_RecyLikeNumberText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/px_16"
+                android:text="0"
+                android:textColor="@color/h3"
+                android:textSize="@dimen/px_26" />
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoRelativeLayout>

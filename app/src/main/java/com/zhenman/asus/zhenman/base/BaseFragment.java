@@ -13,15 +13,20 @@ import android.view.ViewGroup;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     protected T presenter;
     private Fragment lastFragment;
-
+    Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getLayoutId(), container, false);
+        View rootView = inflater.inflate(getLayoutId(), container, false);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
     }
 
     @Override
@@ -103,7 +108,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
+        unbinder.unbind();
         if (presenter != null) {
             presenter.unActualView();
         }

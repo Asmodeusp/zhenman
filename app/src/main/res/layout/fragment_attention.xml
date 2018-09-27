@@ -5,5 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".view.home.AttentionFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/Home_Attention_Recy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 </com.zhy.autolayout.AutoLinearLayout>
