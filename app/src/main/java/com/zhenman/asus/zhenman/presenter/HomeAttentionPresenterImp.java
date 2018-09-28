@@ -1,5 +1,7 @@
 package com.zhenman.asus.zhenman.presenter;
 
+import android.util.Log;
+
 import com.zhenman.asus.zhenman.contract.HomeAttentionContract;
 import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
@@ -31,12 +33,10 @@ public class HomeAttentionPresenterImp implements HomeAttentionContract.HomeAtte
 
                     @Override
                     public void onNext(HomeAttentionBean homeAttentionBean) {
-                        if (homeAttentionBean.getState() == 0) {
+                        Log.e("HomeAttentionPresenterI", "Tell Me Why？");
                             homeAttentionView.showError(homeAttentionBean.getMsg());
                             homeAttentionView.showHomeAttentionBean(homeAttentionBean);
-                        } else {
-                            homeAttentionView.showError(homeAttentionBean.getMsg());
-                        }
+
                     }
 
                     @Override

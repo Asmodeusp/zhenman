@@ -4,10 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.home.AttentionFragment">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/Home_Attention_Recy"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/Home_Attention_SmartRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/Home_Attention_Recy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
 
 </com.zhy.autolayout.AutoLinearLayout>

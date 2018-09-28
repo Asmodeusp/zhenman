@@ -31,6 +31,7 @@ import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.MyLayoutMessage;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
 import com.zhy.autolayout.AutoLinearLayout;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 import org.w3c.dom.Text;
 
@@ -318,7 +319,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         //作评描述
         private TextView Home_Hot_describeText;
         //主题描述
-        private AutoLinearLayout Home_Hot_ThemLin;
+        private AutoRelativeLayout Home_Hot_ThemLin;
 
         public Holder(View itemView) {
             super(itemView);

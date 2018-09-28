@@ -4,7 +4,6 @@ package com.zhenman.asus.zhenman.view.home;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
-
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.HomeHotContract;
@@ -51,11 +50,6 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     private void initView() {
         HomeHot_List = getActivity().findViewById(R.id.HomeHot_List);
         linearLayoutManager = new ViewPagerLayoutManager(getContext(), LinearLayoutManager.VERTICAL) {
-//            @Override
-//            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-//                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//                        ScreenUtils.getScreenHeight(getActivity()));
-//            }
         };
         linearLayoutManager.setOnViewPagerListener(new OnViewPagerListener() {
             @Override

@@ -1,5 +1,7 @@
 package com.zhenman.asus.zhenman.presenter;
 
+import android.util.Log;
+
 import com.zhenman.asus.zhenman.contract.HomeHotContract;
 import com.zhenman.asus.zhenman.model.bean.FollowBean;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
@@ -42,12 +44,12 @@ public class HomeHotPresenterImp implements HomeHotContract.HomeHotPresenter {
                     }
 
                     @Override
-                    public void onNext(HomeHotBean userBean) {
-                        if (userBean.getState() == 0) {
-                            homeHotView.showError(userBean.getMsg());
-                            homeHotView.showHotBean(userBean);
+                    public void onNext(HomeHotBean homeHotBean) {
+                        if (homeHotBean.getState() == 0) {
+                            homeHotView.showError(homeHotBean.getMsg());
+                            homeHotView.showHotBean(homeHotBean);
                         } else {
-                            homeHotView.showError(userBean.getMsg());
+                            homeHotView.showError(homeHotBean.getMsg());
                         }
                     }
 
