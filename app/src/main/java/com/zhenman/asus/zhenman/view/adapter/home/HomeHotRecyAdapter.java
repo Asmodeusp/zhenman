@@ -2,11 +2,8 @@ package com.zhenman.asus.zhenman.view.adapter.home;
 
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

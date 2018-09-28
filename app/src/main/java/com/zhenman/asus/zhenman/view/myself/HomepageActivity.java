@@ -16,19 +16,20 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.HomePageContract;
 import com.zhenman.asus.zhenman.model.bean.HomePageHeadBean;
 import com.zhenman.asus.zhenman.presenter.HomePagePresenter;
-import com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage;
 import com.zhenman.asus.zhenman.utils.GetData;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.myself.HomePageAdapter;
 import com.zhenman.asus.zhenman.view.myself.fragment.HomePageMyLikeFragment;
 import com.zhenman.asus.zhenman.view.myself.fragment.HomePageMyWorkFragment;
+import com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class HomepageActivity extends BaseActivity<HomePagePresenter> implements View.OnClickListener, HomePageContract.HomePageInView {
 
@@ -117,13 +118,16 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
                 finish();
                 break;
             case R.id.homePage_attentionPage:
+                startActivity(new Intent(HomepageActivity.this, MyAttentionActivity.class));
                 break;
             case R.id.homePage_fansPage:
+                startActivity(new Intent(HomepageActivity.this, MyFansActivity.class));
                 break;
             case R.id.homePage_themePage:
-                startActivity(new Intent(HomepageActivity.this,AttentionThemeActivity.class));
+                startActivity(new Intent(HomepageActivity.this, AttentionThemeActivity.class));
                 break;
             case R.id.homePage_worksPage:
+                startActivity(new Intent(HomepageActivity.this, HomepageActivity.class));
                 break;
 
         }

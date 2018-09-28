@@ -23,7 +23,8 @@
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/my_data"
         android:layout_width="match_parent"
-        android:layout_height="240px">
+        android:layout_height="270px">
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/my_Avatar"
             android:layout_width="148px"
@@ -34,7 +35,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="16px"
-            android:src="@mipmap/my_qiezi"/>
+            android:src="@mipmap/my_qiezi" />
 
 
         <TextView
@@ -55,11 +56,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/my_Name"
-            android:layout_toRightOf="@id/my_Name"
             android:layout_marginLeft="8px"
+            android:layout_toRightOf="@id/my_Name"
             android:src="@mipmap/my_f" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/my_WorksNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -128,23 +129,130 @@
             android:layout_toRightOf="@+id/my_CareNumber"
             android:text="关注"
             android:textColor="@color/h4"
-            android:textSize="26px" />
+            android:textSize="26px" />-->
 
         <TextView
             android:id="@+id/my_Resume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/my_WorksNumber"
-            android:layout_alignStart="@+id/my_WorksNumber"
-            android:layout_below="@+id/my_WorksNumber"
-
+            android:layout_alignLeft="@+id/my_Name"
+            android:layout_below="@+id/my_Name"
             android:layout_marginRight="24px"
             android:layout_marginTop="16px"
+            android:layout_toRightOf="@id/my_Avatar"
             android:text="本宝宝的个人简历最多两行，所以我要写两行啊么么哒~"
             android:textColor="@color/h4"
             android:textSize="26px" />
 
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/my_Avatar"
+            android:layout_marginTop="@dimen/px_20"
+            android:orientation="horizontal">
 
+            <com.zhy.autolayout.AutoLinearLayout
+                android:id="@+id/my_WorksNumberPage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/my_WorksNumber"
+                    style="@style/Style36H2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="6" />
+
+                <TextView
+                    android:id="@+id/my_Other01"
+                    style="@style/Style26H4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="作品" />
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:id="@+id/my_FansPage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/my_FansNumber"
+                    style="@style/Style36H2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="6.6" />
+
+                <TextView
+                    android:id="@+id/my_Other02"
+                    style="@style/Style26H4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="粉丝" />
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:id="@+id/my_CarePage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/my_CareNumber"
+                    style="@style/Style36H2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="30" />
+
+                <TextView
+                    android:id="@+id/my_Other03"
+                    style="@style/Style26H4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="关注" />
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:id="@+id/my_themePage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/my_themeNum"
+                    style="@style/Style36H2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="30" />
+
+                <TextView
+
+                    style="@style/Style26H4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="主题" />
+            </com.zhy.autolayout.AutoLinearLayout>
+
+
+        </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <View
@@ -153,7 +261,6 @@
         android:background="@color/h6">
 
     </View>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="24px"
@@ -181,6 +288,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="32px"
             android:layout_toRightOf="@id/my_Home"
+
             android:text="个人主页"
             android:textColor="@color/h3"
             android:textSize="32px" />

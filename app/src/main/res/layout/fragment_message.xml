@@ -113,7 +113,9 @@
         android:id="@+id/message_recy"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
     </android.support.v7.widget.RecyclerView>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_98"
+        android:background="@color/h9" />
 </com.zhy.autolayout.AutoLinearLayout>

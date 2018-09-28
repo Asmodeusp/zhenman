@@ -15,6 +15,8 @@ import com.zhenman.asus.zhenman.contract.TheamBeanContract;
 import com.zhenman.asus.zhenman.model.bean.TheamBean;
 import com.zhenman.asus.zhenman.model.bean.ThemeAttentionBean;
 import com.zhenman.asus.zhenman.presenter.TheamBeanPresenter;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.message.ThemeAdapter;
 import com.zhenman.asus.zhenman.view.message.ThemeDetailsActivity;
 import com.zhy.autolayout.AutoLinearLayout;
@@ -101,6 +103,8 @@ public class MessageFragment extends BaseFragment<TheamBeanPresenter> implements
                 public void myClick(View view, int position) {
                     Intent intent = new Intent(getContext(), ThemeDetailsActivity.class);
                     intent.putExtra("chapterId",dataBeanList.get(position).getSubjectId()+"");
+                    SPUtils.put(getContext(), SPKey.SUBJECT_ID,dataBeanList.get(position).getSubjectId()+"");
+
                     startActivity(intent);
                 }
             });

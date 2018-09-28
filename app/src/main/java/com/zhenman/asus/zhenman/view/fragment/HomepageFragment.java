@@ -1,16 +1,12 @@
 package com.zhenman.asus.zhenman.view.fragment;
 
-import android.graphics.Typeface;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.util.TypedValue;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
@@ -26,7 +22,7 @@ import java.util.ArrayList;
 
 public class HomepageFragment extends BaseFragment {
     ArrayList<Fragment> fragments = new ArrayList<>();
-    private ViewPager HomePage_Viewpager;
+    private ViewPager HomePage_Pager;
     private AttentionFragment attentionFragment;
     private HotFragment hotFragment;
     private FragmentManager supportFragmentManager;
@@ -44,7 +40,7 @@ public class HomepageFragment extends BaseFragment {
     @Override
     protected void init() {
         //主页Viewpager
-        HomePage_Viewpager = getActivity().findViewById(R.id.HomePage_Viewpager);
+        HomePage_Pager = getActivity().findViewById(R.id.HomePage_Pager);
         //关注fragment
         attentionFragment = new AttentionFragment(group, home_headView);
         //热门Fragment
@@ -65,8 +61,8 @@ public class HomepageFragment extends BaseFragment {
         supportFragmentManager = getActivity().getSupportFragmentManager();
         //设置适配器
         HomeVPAdapter homeVPAdapter = new HomeVPAdapter(supportFragmentManager, fragments, Titles);
-        HomePage_Viewpager.setAdapter(homeVPAdapter);
-        home_tablayout.setupWithViewPager(HomePage_Viewpager);
+        HomePage_Pager.setAdapter(homeVPAdapter);
+        home_tablayout.setupWithViewPager(HomePage_Pager);
         //设置分割线
         LinearLayout linearLayout = (LinearLayout) home_tablayout.getChildAt(0);
         linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);

@@ -22,6 +22,7 @@ public class SPKey {
     public static String WEIXIN_NAME="weixinName";
     public static String SINA_NAME="weiboName";
     public static String QQ_NAME="qqName";
+    public static String SUBJECT_ID="subject_id";
 
 
 

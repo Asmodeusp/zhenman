@@ -3,7 +3,7 @@ package com.zhenman.asus.zhenman.view.message;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,12 +16,9 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.ThemeDetailHeadContract;
 import com.zhenman.asus.zhenman.model.bean.ThemeDetailHeadBean;
 import com.zhenman.asus.zhenman.presenter.ThemeDetailsPresenter;
-import com.zhenman.asus.zhenman.utils.sp.SPKey;
-import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.message.MessageAdapter;
 import com.zhenman.asus.zhenman.view.message.fragment.FeaturedFragment;
 import com.zhenman.asus.zhenman.view.message.fragment.SquareFragment;
-import com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
@@ -43,7 +40,7 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
     private Button themeDetail_attention;
     private AutoRelativeLayout themeDetail_data;
     private TabLayout themeDetail_himTab;
-    private NoSrcollViewPage themeDetail_Viewpager;
+    private ViewPager themeDetail_Viewpager;
     private List<String> title_List;
     private List<Fragment> frag_List;
     private FeaturedFragment featuredFragment;
@@ -59,7 +56,6 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
     protected void init() {
         Intent intent = getIntent();
         chapterId = intent.getStringExtra("chapterId");
-        Log.e("Sunny", chapterId);
         app_back = (ImageView) findViewById(R.id.app_back);
         app_title = (TextView) findViewById(R.id.app_title);
         app_otherID = (TextView) findViewById(R.id.app_otherID);
@@ -72,7 +68,7 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
         themeDetail_attention = (Button) findViewById(R.id.themeDetail_attention);
         themeDetail_data = (AutoRelativeLayout) findViewById(R.id.themeDetail_data);
         themeDetail_himTab = (TabLayout) findViewById(R.id.themeDetail_himTab);
-        themeDetail_Viewpager = (NoSrcollViewPage) findViewById(R.id.themeDetail_Viewpager);
+        themeDetail_Viewpager = (ViewPager) findViewById(R.id.themeDetail_Viewpager);
         app_title.setText("");
         idListener();
         initData();
@@ -90,7 +86,7 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
         themeDetail_himTab.setupWithViewPager(themeDetail_Viewpager);
         MessageAdapter messageAdapter = new MessageAdapter(getSupportFragmentManager(), title_List, frag_List);
         themeDetail_Viewpager.setAdapter(messageAdapter);
-        presenter.sendThemeDetailHeadData((String) SPUtils.get(this, SPKey.USER_OAUTHID, ""));
+        presenter.sendThemeDetailHeadData(chapterId);
     }
 
     @Override

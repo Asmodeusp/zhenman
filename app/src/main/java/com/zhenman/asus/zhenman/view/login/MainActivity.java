@@ -107,12 +107,25 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 sex = "1";
                 SPUtils.put(MainActivity.this, SPKey.UMeng_SEX, "1");
             }
-            SPUtils.put(MainActivity.this,SPKey.UMeng_OTHERUSERId,data.get("unionid"));
-            Log.e("Sunny",data.get("unionid"));
-            Log.e("Sunny",data.get("openid"));
-            presenter.sendUMengLoginData(data.get("unionid"), data.get("name"), data.get("city"),
-                    data.get("iconurl"), sex, TYPE, data.get("openid"));
+            if (TYPE.equals("2")) {//微博
 
+                String description = data.get("description");
+                String avatarHd = data.get("avatar_hd");
+                String otherUserId = data.get("avatargj_id");
+                String openId = data.get("uid");
+                SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, otherUserId);
+                presenter.sendUMengLoginData(otherUserId, data.get("name"), data.get("location"),
+                        avatarHd, sex, TYPE, openId);
+
+            }
+            if (TYPE.equals("1")) {//微信
+                SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
+                Log.e("Sunny", data.get("unionid"));
+                Log.e("Sunny", data.get("openid"));
+                Log.e("Sunny", data.get("name"));
+                presenter.sendUMengLoginData(data.get("unionid"), data.get("name"), "",
+                        data.get("iconurl"), sex, TYPE, data.get("openid"));
+            }
         }
 
         /**
@@ -144,8 +157,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 
     @Override
     protected void init() {
-        //        判断是否登陆
-        getDatafromSP();
         //查找ID
         mFastLanding = findViewById(R.id.Fast_landing);
         mCommonCloseImage = findViewById(R.id.common_closeImage);
@@ -168,8 +179,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         mLoginWeixinImage.setOnClickListener(this);
         mLoginQqImage.setOnClickListener(this);
         mLogin_password_hide.setOnClickListener(this);
-
-
+        getDatafromSP();
     }
 
 
@@ -184,7 +194,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-
             case R.id.common_closeImage:
 //                跳转到首页
                 startActivity(new Intent(this, ContentActivity.class));
@@ -198,7 +207,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 }
                 //密码正则判断
                 presenter.getLogin(mPhoneNumber.getText().toString().trim(), mInputPassword.getText().toString().trim());
-                SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, (Boolean)true);
+                SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, (Boolean) true);
 
                 SPUtils.put(MainActivity.this, SPKey.USER_MOBILE, mPhoneNumber.getText().toString());
                 break;
@@ -206,7 +215,12 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 startActivity(new Intent(this, RegisterCodeActivity.class));
                 break;
             case R.id.ForgetPasswordBtn:
-                startActivity(new Intent(this, ForgetPasswordActivity.class));
+                String userName = (String) SPUtils.get(this, SPKey.UMeng_NAME, "");
+                if (userName.isEmpty()) {
+                    Toast.makeText(this, "请先完成登陆", Toast.LENGTH_SHORT).show();
+                } else {
+                    startActivity(new Intent(this, ForgetPasswordActivity.class));
+                }
                 break;
             case R.id.login_weiboImage:
                 //微博登录
@@ -274,33 +288,34 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 //                成功的话保存到sp中
             SPUtils.put(MainActivity.this, SPKey.UMeng_CITYNAME, uMengLoginBean.getData().getCityName());
             SPUtils.put(MainActivity.this, SPKey.UMeng_NAME, uMengLoginBean.getData().getName());
-            if (uMengLoginBean.getData().getMobile()!=null) {
+            if (uMengLoginBean.getData().getMobile() != null) {
                 SPUtils.put(MainActivity.this, SPKey.USER_MOBILE, uMengLoginBean.getData().getMobile());
             }
             SPUtils.put(MainActivity.this, SPKey.USER_ID, uMengLoginBean.getData().getId());
-            if (uMengLoginBean.getData().getIntroduction()!=null) {
+            if (uMengLoginBean.getData().getIntroduction() != null) {
                 SPUtils.put(MainActivity.this, SPKey.USER_INTRODUCTION, uMengLoginBean.getData().getIntroduction());
             }
             SPUtils.put(MainActivity.this, SPKey.USER_REFRESHTOKEN, uMengLoginBean.getData().getRefreshToken());
             SPUtils.put(MainActivity.this, SPKey.USER_OAUTHID, uMengLoginBean.getData().getOauthId());
-            if (uMengLoginBean.getData().getBirthdate()!=null) {
+            if (uMengLoginBean.getData().getBirthdate() != null) {
                 SPUtils.put(MainActivity.this, SPKey.USER_BIRTHDAY, uMengLoginBean.getData().getBirthdate());
-            }if (uMengLoginBean.getData().getQqName()!=null){
+            }
+            if (uMengLoginBean.getData().getQqName() != null) {
                 SPUtils.put(MainActivity.this, SPKey.QQ_NAME, uMengLoginBean.getData().getQqName());
-            }if (uMengLoginBean.getData().getWeiboName()!=null){
+            }
+            if (uMengLoginBean.getData().getWeiboName() != null) {
                 SPUtils.put(MainActivity.this, SPKey.SINA_NAME, uMengLoginBean.getData().getWeiboName());
-            }if (uMengLoginBean.getData().getWeixinName()!=null){
+            }
+            if (uMengLoginBean.getData().getWeixinName() != null) {
                 SPUtils.put(MainActivity.this, SPKey.WEIXIN_NAME, uMengLoginBean.getData().getWeixinName());
             }
             SPUtils.put(MainActivity.this, SPKey.USER_SEX, uMengLoginBean.getData().getSex());
             SPUtils.put(MainActivity.this, SPKey.USER_TOKEN, uMengLoginBean.getData().getToken());
-            SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, (Boolean)true);
+            SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, (Boolean) true);
             SPUtils.put(MainActivity.this, SPKey.USER_AVATAR, uMengLoginBean.getData().getHeadImg());
             SPUtils.put(MainActivity.this, SPKey.LOGIN_TYPE, TYPE);
-
-
             startActivity(new Intent(MainActivity.this, ContentActivity.class));
-        }else {
+        } else {
             Toast.makeText(this, "登陆失败", Toast.LENGTH_SHORT).show();
         }
     }

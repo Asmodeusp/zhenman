@@ -1,5 +1,7 @@
 package com.zhenman.asus.zhenman.presenter;
 
+import android.util.Log;
+
 import com.zhenman.asus.zhenman.contract.ThemeFeaturedSquareContract;
 import com.zhenman.asus.zhenman.model.bean.ThemeFeaturedBean;
 import com.zhenman.asus.zhenman.model.service.ThemeFeaturedSquareService;
@@ -44,7 +46,7 @@ public class ThemeFeaturedSquarePresenter implements ThemeFeaturedSquareContract
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e("Sunny",e.getMessage());
                     }
 
                     @Override

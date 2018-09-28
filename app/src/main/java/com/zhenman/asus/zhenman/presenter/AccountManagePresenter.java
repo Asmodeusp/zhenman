@@ -1,8 +1,10 @@
 package com.zhenman.asus.zhenman.presenter;
 
 import com.zhenman.asus.zhenman.contract.AccountManageContract;
+import com.zhenman.asus.zhenman.model.bean.CancelLoginBean;
 import com.zhenman.asus.zhenman.model.bean.VerificationCodeBean;
 import com.zhenman.asus.zhenman.model.service.AccountManagementService;
+import com.zhenman.asus.zhenman.model.service.MySettingService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 
 import java.util.HashMap;
@@ -84,6 +86,38 @@ public class AccountManagePresenter implements AccountManageContract.AccountMana
                         } else {
                             accountManageInView.showError(verificationCodeBean.getMsg());
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }//    注销登陆
+    @Override
+    public void sendCancelLoginData(String mobile, String type, String otherUserId) {
+        Map<String, String> paramsMap = new HashMap<>();
+        paramsMap.put("mobile",mobile);
+        paramsMap.put("type",type);
+        paramsMap.put("otherUserId",otherUserId);
+        RetrofitUtils.getInstance().getService(MySettingService.class)
+                .getCancleLoginData(paramsMap)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CancelLoginBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(CancelLoginBean cancelLoginBean) {
+                        accountManageInView.showCancelLoginData(cancelLoginBean);
                     }
 
                     @Override

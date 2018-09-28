@@ -15,6 +15,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.AccountManageContract;
+import com.zhenman.asus.zhenman.model.bean.CancelLoginBean;
 import com.zhenman.asus.zhenman.model.bean.VerificationCodeBean;
 import com.zhenman.asus.zhenman.presenter.AccountManagePresenter;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
@@ -44,6 +45,18 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
     private String weixin_name;
     private String qq_name;
     private Intent intentPhone;
+    //QQ分享的请求码
+    public static final int SHARE_QQ_REQUEST_CODE = 1;
+    //QQ分享不带面板的请求码
+    public static final int SHARE_QQ_UN_REQUEST_CODE = 2;
+    //微信分享的请求码
+    public static final int SHARE_WE_CAT_REQUEST_CODE = 3;
+    //微信分享不带面板的请求码
+    public static final int SHARE_WE_CAT_UN_REQUEST_CODE = 4;
+    //微博分享的请求码
+    public static final int SHARE_SINA_REQUEST_CODE = 5;
+    //微博分享不带面板的请求码
+    public static final int SHARE_SINA_UN_REQUEST_CODE = 6;
     //qq登录
     public static final int QQ_LOGIN = 7;
     //微信登录
@@ -89,21 +102,50 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
                 sex = "1";
                 SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_SEX, "1");
             }
-            SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
-            Log.e("Sunny", data.get("unionid"));
-            Log.e("Sunny", data.get("openid"));
-            Log.e("Sunny", TYPE);
+//            SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
+//            Log.e("Sunny", data.get("unionid"));
+//            Log.e("Sunny", data.get("openid"));
+//            Log.e("Sunny", TYPE);
 
             if (user_mobile.isEmpty()) {
 //               如果手机号为空就代表是第三方绑定第三方
-                presenter.sendThirdBindThirdData((String) SPUtils.get(AccountManagementActivity.this, SPKey.USER_OAUTHID, "")
-                        , data.get("unionid")
-                        , TYPE
-                        , (String) SPUtils.get(AccountManagementActivity.this, SPKey.UMeng_NAME, ""));
+                if (TYPE.equals("1")) {//微信
+                    SPUtils.put(AccountManagementActivity.this, SPKey.WEIXIN_NAME, data.get("name"));
+
+                    presenter.sendThirdBindThirdData((String) SPUtils.get(AccountManagementActivity.this, SPKey.USER_OAUTHID, "")
+                            , data.get("unionid")
+                            , TYPE
+                            , (String) SPUtils.get(AccountManagementActivity.this, SPKey.WEIXIN_NAME, ""));
+                } else if (TYPE.equals("2")) {//微博
+                    String otherUserId = data.get("avatargj_id");
+                    SPUtils.put(AccountManagementActivity.this, SPKey.SINA_NAME, data.get("name"));
+                    SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_OTHERUSERId, otherUserId);
+                    presenter.sendThirdBindThirdData((String) SPUtils.get(AccountManagementActivity.this, SPKey.USER_OAUTHID, "")
+                            , otherUserId
+                            , TYPE
+                            , (String) SPUtils.get(AccountManagementActivity.this, SPKey.SINA_NAME, ""));
+                }
             } else {
-//                手机号绑定第三方
-                presenter.sendPhoneBindThirdData(user_mobile, data.get("unionid"), TYPE, (String) SPUtils.get(AccountManagementActivity.this, SPKey.UMeng_NAME, ""), "",
-                        data.get("iconurl"), sex, data.get("openid"));
+                if (TYPE.equals("2")) {//微博
+//                  如果是微博
+                    String description = data.get("description");
+                    String avatarHd = data.get("avatar_hd");
+                    String otherUserId = data.get("avatargj_id");
+                    String openId = data.get("uid");
+                    SPUtils.put(AccountManagementActivity.this, SPKey.SINA_NAME, data.get("name"));
+                    SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_OTHERUSERId, otherUserId);
+                    presenter.sendPhoneBindThirdData(user_mobile, otherUserId, TYPE, data.get("name"), data.get("location"),
+                            avatarHd, sex, openId);
+                }
+                if (TYPE.equals("1")) {//微信
+//                    如果是微信的话
+                    SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
+                    SPUtils.put(AccountManagementActivity.this, SPKey.WEIXIN_NAME, data.get("name"));
+                    Log.e("Sunny", data.get("unionid"));
+                    Log.e("Sunny", data.get("openid"));
+                    presenter.sendPhoneBindThirdData(user_mobile, data.get("unionid"), TYPE, data.get("name"), "",
+                            data.get("iconurl"), sex, data.get("openid"));
+                }
             }
 
         }
@@ -206,7 +248,7 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
                 break;
             case R.id.account_bindPhoneNum:
                 intentPhone = new Intent(AccountManagementActivity.this, BindPhotoActivity.class);
-                if (user_mobile.isEmpty()) {
+                if (user_mobile.equals("") || user_mobile.isEmpty()) {
                     intentPhone.putExtra("bind", "未绑定手机号");
                     startActivity(intentPhone);
                 } else {
@@ -224,6 +266,8 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
                             .setPositiveButton("解除绑定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+//                                    presenter.sendCancelLoginData(user_mobile,);
+                                    presenter.sendCancelLoginData(user_mobile, (String) SPUtils.get(AccountManagementActivity.this, SPKey.LOGIN_TYPE, ""), (String) SPUtils.get(AccountManagementActivity.this, SPKey.UMeng_OTHERUSERId, ""));
 
                                 }
                             })
@@ -242,7 +286,13 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
                             .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
+                                    //微信登录
+                                    UMengHelp.applySharePermission(AccountManagementActivity.this, WE_CAT_LOGIN, new ShareCallBack() {
+                                        @Override
+                                        public void shareOrLogin() {
+                                            UMengHelp.login(AccountManagementActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);
+                                        }
+                                    });
                                 }
                             })
                             .show();
@@ -289,6 +339,8 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
                 break;
             case R.id.account_bindSina:
                 if (sina_name.isEmpty()) {
+                    Log.e("Sunny", sina_name);
+
                     new AlertDialog.Builder(this)
                             .setTitle("提示")
                             .setMessage("去绑定微博？")
@@ -307,6 +359,8 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
                             })
                             .show();
                 } else {
+                    Log.e("Sunny", sina_name);
+
                     new AlertDialog.Builder(this)
                             .setTitle("提示")
                             .setMessage("是否解除微博绑定？")
@@ -332,21 +386,130 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
     //    手机号绑定第三方
     @Override
     public void showPhoneBindThirdData(VerificationCodeBean verificationCodeBean) {
-        if (verificationCodeBean.getState()==0) {
+        if (verificationCodeBean.getState() == 0) {
             Toast.makeText(this, "绑定成功", Toast.LENGTH_SHORT).show();
+            setData();
+        }else {
+            Toast.makeText(this, "绑定失败", Toast.LENGTH_SHORT).show();
         }
     }
 
     //    第三方绑定第三方
     @Override
     public void showThirdBindThirdData(VerificationCodeBean verificationCodeBean) {
+        if (verificationCodeBean.getState()==0){
+            Toast.makeText(this, "绑定成功", Toast.LENGTH_SHORT).show();
+            setData();
+        }else {
+            Toast.makeText(this, "绑定失败", Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    //    手机号解绑
+    @Override
+    public void showCancelLoginData(CancelLoginBean cancelLoginBean) {
+        if (cancelLoginBean.getState() == 0) {
+            SPUtils.put(AccountManagementActivity.this, SPKey.USER_MOBILE, "");
+//            SPUtils.remove(this, SPKey.USER_MOBILE);
+            account_Tel.setText("未绑定");
+            Toast.makeText(this, "解绑成功", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "解绑失败", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void showError(String string) {
 
     }
+
+    /**
+     * 分享权限的回调
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case SHARE_QQ_REQUEST_CODE:
+                UMengHelp.responseSharePermission(this, grantResults, SHARE_QQ_REQUEST_CODE, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.shareWeb(AccountManagementActivity.this, "https://www.asda.com/", "分享的链接", "2432423423",
+                                "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1782685035,253150800&fm=27&gp=0.jpg", R.mipmap.guanzhu_like_off, SHARE_MEDIA.QZONE, true);
+                    }
+                });
+                break;
+            case SHARE_QQ_UN_REQUEST_CODE:
+                UMengHelp.responseSharePermission(this, grantResults, SHARE_QQ_UN_REQUEST_CODE, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.shareWeb(AccountManagementActivity.this, "https://www.asda.com/", "分享的链接", "2432423423",
+                                "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1782685035,253150800&fm=27&gp=0.jpg", R.mipmap.guanzhu_like_off, SHARE_MEDIA.QZONE, true);
+                    }
+                });
+                break;
+            case SHARE_WE_CAT_REQUEST_CODE:
+                UMengHelp.responseSharePermission(this, grantResults, SHARE_WE_CAT_REQUEST_CODE, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.shareText(AccountManagementActivity.this, SHARE_MEDIA.WEIXIN, "分享纯文本到微信", true);
+                    }
+                });
+                break;
+            case SHARE_WE_CAT_UN_REQUEST_CODE:
+                UMengHelp.responseSharePermission(this, grantResults, SHARE_WE_CAT_UN_REQUEST_CODE, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.shareText(AccountManagementActivity.this, SHARE_MEDIA.WEIXIN, "分享纯文本到微信", false);
+                    }
+                });
+                break;
+            case SHARE_SINA_REQUEST_CODE:
+                UMengHelp.responseSharePermission(this, grantResults, SHARE_SINA_REQUEST_CODE, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.shareText(AccountManagementActivity.this, SHARE_MEDIA.SINA, "分享纯文本", true);
+                    }
+                });
+                break;
+            case SHARE_SINA_UN_REQUEST_CODE:
+                UMengHelp.responseSharePermission(this, grantResults, SHARE_SINA_UN_REQUEST_CODE, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.shareText(AccountManagementActivity.this, SHARE_MEDIA.SINA, "分享纯文本", false);
+                    }
+                });
+                break;
+            case QQ_LOGIN:
+                UMengHelp.responseSharePermission(this, grantResults, QQ_LOGIN, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.login(AccountManagementActivity.this, SHARE_MEDIA.QQ, umAuthListener);
+                    }
+                });
+                break;
+            case WE_CAT_LOGIN:
+                UMengHelp.responseSharePermission(this, grantResults, WE_CAT_LOGIN, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.login(AccountManagementActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);
+                    }
+                });
+                break;
+            case SINA_LOGIN:
+                UMengHelp.responseSharePermission(this, grantResults, SINA_LOGIN, new ShareCallBack() {
+                    @Override
+                    public void shareOrLogin() {
+                        UMengHelp.login(AccountManagementActivity.this, SHARE_MEDIA.SINA, umAuthListener);
+                    }
+                });
+                break;
+        }
+    }
+
     //    新浪和QQ需要加
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

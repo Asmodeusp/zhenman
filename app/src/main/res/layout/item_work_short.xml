@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/cover_corners">
@@ -9,8 +9,11 @@
         android:id="@+id/itemWorkShort_Img"
         android:layout_width="228px"
         android:layout_height="338px"
-        android:padding="@dimen/px_16"
+        android:layout_marginBottom="@dimen/px_6"
+        android:layout_marginLeft="@dimen/px_4"
+        android:layout_marginRight="@dimen/px_4"
+        android:layout_marginTop="@dimen/px_4"
         android:scaleType="fitXY"
         android:src="@mipmap/common_qiezi" />
-</com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoRelativeLayout>
 

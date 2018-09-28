@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -15,7 +16,7 @@ import com.zhy.autolayout.config.AutoLayoutConifg;
 
 public class App extends Application {
     public static Context context;
-
+    public static Activity AppContext;
 
     @Override
     public void onCreate() {

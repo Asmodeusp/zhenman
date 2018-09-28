@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.message.fragment.FeaturedFragment">
+    tools:context=".view.myself.MyAttentionActivity">
 
-    <!-- TODO: Update blank fragment layout -->
+    <include layout="@layout/above_head" />
+
     <android.support.v7.widget.RecyclerView
-
-        android:id="@+id/featuredRecy"
+        android:id="@+id/myAttention_recy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
     <TextView
-
-        android:id="@+id/featured_none"
+        android:id="@+id/myAttention_none"
         style="@style/Style32H2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="暂时没有数据哦" />
-
+        android:text="本宝宝暂时没有关注的人哦" />
 </com.zhy.autolayout.AutoFrameLayout>

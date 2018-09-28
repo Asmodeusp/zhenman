@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.view.adapter.serialization.BookshelfAdapter;
+import com.zhenman.asus.zhenman.view.serializaion.fragment.ShelfCollectionFragment;
 import com.zhenman.asus.zhenman.view.serializaion.fragment.ShelfHistoryFragment;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class BookshelfActivity extends BaseActivity implements View.OnClickListe
     private ViewPager bookshelf_page;
     private ArrayList<String> title_List;
     private ArrayList<Fragment> frag_List;
-//    private ShelfCollectionFragment shelfCollectionFragment;
+    private ShelfCollectionFragment shelfCollectionFragment;
     private ShelfHistoryFragment shelfHistoryFragment;
 
     @Override
@@ -42,9 +43,9 @@ public class BookshelfActivity extends BaseActivity implements View.OnClickListe
         app_title.setText("书架");
         title_List.add("收藏");
         title_List.add("历史");
-//        shelfCollectionFragment = new ShelfCollectionFragment();
+        shelfCollectionFragment = new ShelfCollectionFragment();
         shelfHistoryFragment = new ShelfHistoryFragment();
-//        frag_List.add(shelfCollectionFragment);
+        frag_List.add(shelfCollectionFragment);
         frag_List.add(shelfHistoryFragment);
         initData();
 

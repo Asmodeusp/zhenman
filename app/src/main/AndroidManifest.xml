@@ -139,8 +139,8 @@
         <activity
             android:name=".view.serializaion.SerializationCatalogReadActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".view.myself.MySettingActivity" />
         <activity android:name=".view.myself.AccountManagementActivity" />
         <activity android:name=".view.myself.PersonalInformationActivity" />
@@ -156,7 +156,9 @@
         <activity android:name=".view.serializaion.BookshelfActivity" />
         <activity android:name=".view.login.BindPhotoActivity" />
         <activity android:name=".view.myself.BindPhoneNumActivity" />
-        <activity android:name=".view.message.ThemeDetailsActivity"></activity>
+        <activity android:name=".view.message.ThemeDetailsActivity" />
+        <activity android:name=".view.myself.MyAttentionActivity" />
+        <activity android:name=".view.myself.MyFansActivity"></activity>
     </application>
 
 </manifest>

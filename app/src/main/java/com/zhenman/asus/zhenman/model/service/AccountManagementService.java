@@ -1,5 +1,6 @@
 package com.zhenman.asus.zhenman.model.service;
 
+import com.zhenman.asus.zhenman.model.bean.CancelLoginBean;
 import com.zhenman.asus.zhenman.model.bean.VerificationCodeBean;
 import com.zhenman.asus.zhenman.utils.Urls;
 
@@ -19,4 +20,8 @@ public interface AccountManagementService {
     @FormUrlEncoded
     @POST(Urls.THIRD_BIND_THIRD)
     Observable<VerificationCodeBean> getThirdBindThird(@FieldMap Map<String, String> paramMap);
+    @FormUrlEncoded
+    @POST(Urls.CANCLE_LOGIN)
+    Observable<CancelLoginBean> getCancleLoginData(@FieldMap Map<String, String> paramsMap);
+
 }
