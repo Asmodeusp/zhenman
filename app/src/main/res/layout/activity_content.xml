@@ -10,8 +10,7 @@
     <com.zhy.autolayout.AutoFrameLayout
         android:id="@+id/contentview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       ></com.zhy.autolayout.AutoFrameLayout>
+        android:layout_height="match_parent"></com.zhy.autolayout.AutoFrameLayout>
 
     <com.zhy.autolayout.AutoLinearLayout
         android:id="@+id/group"
@@ -106,5 +105,19 @@
         </com.zhy.autolayout.AutoRelativeLayout>
     </com.zhy.autolayout.AutoLinearLayout>
 
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/ding"
+        android:layout_width="match_parent"
+        android:layout_height="98px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.zhy.autolayout.AutoLinearLayout>
 
 </com.zhy.autolayout.AutoRelativeLayout>

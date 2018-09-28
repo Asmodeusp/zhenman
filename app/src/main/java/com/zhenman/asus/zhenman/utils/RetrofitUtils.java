@@ -44,6 +44,9 @@ public class RetrofitUtils {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.addInterceptor(addHeaderInterceptor());
 //        错误重连
+        builder.connectTimeout(30, TimeUnit.SECONDS).
+                readTimeout(30, TimeUnit.SECONDS).
+                writeTimeout(30, TimeUnit.SECONDS);
         builder.retryOnConnectionFailure(true);
         OkHttpClient client = builder.build();
         retrofit = new Retrofit.Builder()

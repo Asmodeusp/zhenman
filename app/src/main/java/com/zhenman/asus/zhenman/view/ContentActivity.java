@@ -26,20 +26,30 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
     private AutoRelativeLayout MessageButton;
     private AutoRelativeLayout MyselfButton;
     public AutoLinearLayout group;
+    public AutoLinearLayout ding;
     private TextView SerializationText;
+
+    public AutoLinearLayout getGroup() {
+        return group;
+    }
+
     private TextView MessageText;
     private TextView MyselfText;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_content;
     }
+
     @Override
     protected void init() {
         initView();
     }
+
     private void initView() {
         HomeText = findViewById(R.id.HomeText);
         SerializationText = findViewById(R.id.SerializationText);
+        ding = findViewById(R.id.ding);
         MessageText = findViewById(R.id.MessageText);
         MyselfText = findViewById(R.id.MyselfText);
         contentview = findViewById(R.id.contentview);
@@ -57,9 +67,12 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
         setContentView(R.id.contentview, HomepageFragment.class);
         setText(36, 32, 32, 32);
     }
+
     @Override
     protected void loadDate() {
+
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -68,14 +81,14 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
                 setContentView(R.id.contentview, HomepageFragment.class);
                 setText(38, 32, 32, 32);
                 setTextColor("#ffffff");
-                setHeight(0);
+                ding.setVisibility(View.GONE);
                 break;
             case R.id.SerializationButton:
                 group.setBackgroundColor(Color.parseColor("#ffffff"));
                 setContentView(R.id.contentview, SerializationFragment.class);
                 setText(32, 38, 32, 32);
                 setTextColor("#000000");
-                setHeight(98);
+                ding.setVisibility(View.VISIBLE);
                 break;
             case R.id.ReleaseButton:
 //           setContentView(R.id.contentview, IntroducedFragment.class);
@@ -86,14 +99,14 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
                 setContentView(R.id.contentview, MessageFragment.class);
                 setText(32, 32, 38, 32);
                 setTextColor("#000000");
-                setHeight(98);
+                ding.setVisibility(View.VISIBLE);
                 break;
             case R.id.MyselfButton:
                 group.setBackgroundColor(Color.parseColor("#ffffff"));
                 setContentView(R.id.contentview, MyselfFragment.class);
                 setText(32, 32, 32, 38);
                 setTextColor("#000000");
-                setHeight(98);
+                ding.setVisibility(View.VISIBLE);
                 break;
 
         }
@@ -112,11 +125,12 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
         MessageText.setTextColor(Color.parseColor(color));
         MyselfText.setTextColor(Color.parseColor(color));
     }
+
     //设置字体大小
-    private void setText(int home, int serialization ,int message, int myself) {
-        HomeText.setTextSize(TypedValue.COMPLEX_UNIT_PX,home);
-        SerializationText.setTextSize(TypedValue.COMPLEX_UNIT_PX,serialization);
-        MessageText.setTextSize(TypedValue.COMPLEX_UNIT_PX,message);
-        MyselfText.setTextSize(TypedValue.COMPLEX_UNIT_PX,myself);
+    private void setText(int home, int serialization, int message, int myself) {
+        HomeText.setTextSize(TypedValue.COMPLEX_UNIT_PX, home);
+        SerializationText.setTextSize(TypedValue.COMPLEX_UNIT_PX, serialization);
+        MessageText.setTextSize(TypedValue.COMPLEX_UNIT_PX, message);
+        MyselfText.setTextSize(TypedValue.COMPLEX_UNIT_PX, myself);
     }
 }

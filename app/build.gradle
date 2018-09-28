@@ -5,7 +5,7 @@ android {
         debug {
             keyAlias 'key0'
             keyPassword '123456'
-            storeFile file('E:/ZHEN_MAN/zhenman/app/zhenman.jks')
+            storeFile file('E:/zhenman.jks')
             storePassword '123456'
         }
     }
@@ -98,7 +98,6 @@ dependencies {
     //butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-//    Okhttp
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'   // 网络请求 OkHttp3
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'     //Okhttp3的日志拦截器依赖
+    //图片加载器
+    implementation 'me.panpf:sketch:2.6.1'
 }
