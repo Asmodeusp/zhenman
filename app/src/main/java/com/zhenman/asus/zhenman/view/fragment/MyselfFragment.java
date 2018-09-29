@@ -126,6 +126,7 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
         switch (v.getId()) {
             case R.id.my_setting://主页
                 Intent intent = new Intent(getActivity(), MySettingActivity.class);
+                intent.putExtra("UserId","");
                 startActivity(intent);
                 break;
             case R.id.my_data://完善个人资料

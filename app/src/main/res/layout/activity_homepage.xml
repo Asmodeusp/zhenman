@@ -213,7 +213,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/px_12"
                 android:background="@color/h9"
                 app:tabIndicatorColor="@color/c1"
                 app:tabIndicatorHeight="@dimen/px_0"
@@ -237,7 +236,7 @@
                 <com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage
                     android:id="@+id/HomePage_Viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="700px">
+                    android:layout_height="1800px">
 
                 </com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage>
             </LinearLayout>

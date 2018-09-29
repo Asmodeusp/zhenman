@@ -2,7 +2,6 @@ package com.zhenman.asus.zhenman.view.myself;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -94,6 +93,17 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         homePageTab_fragment.add(homePageMyLikeFragment);
         presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
         idListener();
+        Intent intent = getIntent();
+        String userId = intent.getStringExtra("UserId");
+        if (!userId.isEmpty()) {
+            SPUtils.put(this, SPKey.HIM_ID, userId);
+            presenter.sendHomePageHeadData(userId);
+
+        } else {
+            presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
+
+        }
+
         homePage_himTab.setupWithViewPager(HomePage_Viewpager);
         HomePageAdapter homePageAdapter = new HomePageAdapter(getSupportFragmentManager(), homePageTab_title, homePageTab_fragment);
         HomePage_Viewpager.setAdapter(homePageAdapter);
@@ -127,7 +137,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
                 startActivity(new Intent(HomepageActivity.this, AttentionThemeActivity.class));
                 break;
             case R.id.homePage_worksPage:
-                startActivity(new Intent(HomepageActivity.this, HomepageActivity.class));
+//                startActivity(new Intent(HomepageActivity.this, HomepageActivity.class));
                 break;
 
         }
@@ -153,9 +163,5 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) and run LayoutCreator again
-    }
+
 }

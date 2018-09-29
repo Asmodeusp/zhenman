@@ -44,7 +44,14 @@ public class WorkShortFragment extends BaseFragment<WorkShortComicPresenter> imp
     protected void init() {
         workShort_recy = getActivity().findViewById(R.id.workShort_recy);
         workShort_noData = getActivity().findViewById(R.id.workShort_noData);
-        presenter.sendWorkShortComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""), (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
+        String himmeId = (String) SPUtils.get(getContext(), SPKey.HIM_ID, "");
+        if (himmeId.isEmpty()) {
+
+            presenter.sendWorkShortComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""), (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
+        } else {
+            presenter.sendWorkShortComic(himmeId, (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
+
+        }
 
     }
 
