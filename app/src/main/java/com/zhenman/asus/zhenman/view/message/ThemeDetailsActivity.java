@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,15 +17,22 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.ThemeDetailHeadContract;
 import com.zhenman.asus.zhenman.model.bean.ThemeDetailHeadBean;
 import com.zhenman.asus.zhenman.presenter.ThemeDetailsPresenter;
+import com.zhenman.asus.zhenman.utils.Urls;
 import com.zhenman.asus.zhenman.view.adapter.message.MessageAdapter;
 import com.zhenman.asus.zhenman.view.message.fragment.FeaturedFragment;
 import com.zhenman.asus.zhenman.view.message.fragment.SquareFragment;
 import com.zhy.autolayout.AutoRelativeLayout;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> implements View.OnClickListener, ThemeDetailHeadContract.ThemeDetailHeadInView {
 
@@ -127,4 +135,5 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
     public void showError(String string) {
 
     }
+
 }

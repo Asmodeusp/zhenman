@@ -15,9 +15,10 @@ import com.zhenman.asus.zhenman.model.bean.ShelfCollectionBean;
 
 import java.util.List;
 
-public class ShelfCollectionAdapter extends RecyclerView.Adapter<ShelfCollectionAdapter.Holder> {
+public class ShelfCollectionAdapter extends RecyclerView.Adapter<ShelfCollectionAdapter.Holder> implements View.OnClickListener {
     private List<ShelfCollectionBean.DataBean.ResultBean> resultBeanList;
     private Context context;
+    private OnShortCLickListener myCLick;
 
     public ShelfCollectionAdapter(List<ShelfCollectionBean.DataBean.ResultBean> resultBeanList, Context context) {
         this.resultBeanList = resultBeanList;
@@ -30,6 +31,7 @@ public class ShelfCollectionAdapter extends RecyclerView.Adapter<ShelfCollection
         this.context = viewGroup.getContext();
         View inflate = LayoutInflater.from(context).inflate(R.layout.item_shelf_collection, viewGroup, false);
         Holder holder = new Holder(inflate);
+        inflate.setOnClickListener(this);
         return holder;
     }
 
@@ -37,6 +39,7 @@ public class ShelfCollectionAdapter extends RecyclerView.Adapter<ShelfCollection
     public void onBindViewHolder(@NonNull Holder holder, int i) {
         Glide.with(context).load(resultBeanList.get(i).getImageUrl()).into(holder.itemShelfColl_iamge);
         holder.itemShelfColl_title.setText(resultBeanList.get(i).getTitle());
+        holder.itemView.setTag(i);
     }
 
     @Override
@@ -55,6 +58,20 @@ public class ShelfCollectionAdapter extends RecyclerView.Adapter<ShelfCollection
 
         }
     }
+    public void setOnShortCLickListener(OnShortCLickListener myCLick) {
+        this.myCLick = myCLick;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (myCLick != null) {
+            myCLick.myClick(v, (int) v.getTag());
+        }
+    }
+    public interface OnShortCLickListener {
+        void myClick(View view, int position);
+    }
+
 
 
 }

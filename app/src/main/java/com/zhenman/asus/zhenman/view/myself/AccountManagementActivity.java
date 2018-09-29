@@ -119,7 +119,7 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
                 } else if (TYPE.equals("2")) {//微博
                     String otherUserId = data.get("avatargj_id");
                     SPUtils.put(AccountManagementActivity.this, SPKey.SINA_NAME, data.get("name"));
-                    SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_OTHERUSERId, otherUserId);
+                    SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_OTHERUSERId, otherUserId+"");
                     presenter.sendThirdBindThirdData((String) SPUtils.get(AccountManagementActivity.this, SPKey.USER_OAUTHID, "")
                             , otherUserId
                             , TYPE
@@ -133,7 +133,7 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
                     String otherUserId = data.get("avatargj_id");
                     String openId = data.get("uid");
                     SPUtils.put(AccountManagementActivity.this, SPKey.SINA_NAME, data.get("name"));
-                    SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_OTHERUSERId, otherUserId);
+                    SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_OTHERUSERId, otherUserId+"");
                     presenter.sendPhoneBindThirdData(user_mobile, otherUserId, TYPE, data.get("name"), data.get("location"),
                             avatarHd, sex, openId);
                 }

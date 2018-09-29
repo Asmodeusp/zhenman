@@ -8,6 +8,7 @@
     tools:context=".view.serializaion.BookshelfActivity">
 
     <include layout="@layout/above_head" />
+
     <android.support.design.widget.TabLayout
         android:id="@+id/bookshelf_tab"
         android:layout_width="match_parent"
@@ -23,8 +24,11 @@
 
     </android.support.design.widget.TabLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/bookshelf_page"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/bookshelf_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
 </com.zhy.autolayout.AutoLinearLayout>

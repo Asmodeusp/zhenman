@@ -27,6 +27,7 @@ public class FeaturedFragment extends BaseFragment<ThemeFeaturedSquarePresenter>
 
     private RecyclerView featuredRecy;
     private TextView featured_none;
+    private String subjectId;
 
     public FeaturedFragment() {
         // Required empty public constructor
@@ -41,10 +42,9 @@ public class FeaturedFragment extends BaseFragment<ThemeFeaturedSquarePresenter>
     protected void init() {
         featuredRecy = getActivity().findViewById(R.id.featuredRecy);
         featured_none = getActivity().findViewById(R.id.featured_none);
-        String subject_id = (String) SPUtils.get(getContext(), SPKey.SUBJECT_ID, "");
-
-        presenter.sendThemeFeaturedSquareData("6", "1", "20", "1");
-
+        subjectId = (String) SPUtils.get(getContext(), SPKey.SUBJECT_ID, "");
+//      请求
+        presenter.sendThemeFeaturedSquareData(subjectId, "1", "20", "1");
     }
 
     @Override

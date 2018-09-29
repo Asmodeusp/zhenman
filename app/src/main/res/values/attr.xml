@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RectImageBorder">
+        <attr name="rectImage_border_width" format="dimension" />
+        <attr name="rectImage_border_color" format="reference"/>
+        <attr name="rectImage_background" format="reference" />
+    </declare-styleable>
+</resources>

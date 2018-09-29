@@ -10,7 +10,6 @@ import com.zhenman.asus.zhenman.model.service.LoginService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
-import com.zhenman.asus.zhenman.view.login.MainActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,7 +52,7 @@ public class LoginPresenterImp implements LoginContract.LoginPresenter {
                             SPUtils.put(App.context, "token", userBean.getData().getToken());
                             SPUtils.put(App.context, "refreshToken", userBean.getData().getRefreshToken());
                             SPUtils.put(App.context, "isBindMobile", userBean.getData().getIsBindMobile());
-                            SPUtils.put(App.context, "sex", userBean.getData().getSex());
+                            SPUtils.put(App.context, "sex", userBean.getData().getSex()+"");
                             SPUtils.put(App.context, "name", userBean.getData().getName());
                             SPUtils.put(App.context, "id", userBean.getData().getId());
                             SPUtils.put(App.context, "introduction", userBean.getData().getIntroduction());

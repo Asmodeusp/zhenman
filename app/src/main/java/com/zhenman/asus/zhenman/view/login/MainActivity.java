@@ -113,7 +113,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 String avatarHd = data.get("avatar_hd");
                 String otherUserId = data.get("avatargj_id");
                 String openId = data.get("uid");
-                SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, otherUserId);
+                SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, otherUserId+"");
                 presenter.sendUMengLoginData(otherUserId, data.get("name"), data.get("location"),
                         avatarHd, sex, TYPE, openId);
 
@@ -296,6 +296,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 SPUtils.put(MainActivity.this, SPKey.USER_INTRODUCTION, uMengLoginBean.getData().getIntroduction());
             }
             SPUtils.put(MainActivity.this, SPKey.USER_REFRESHTOKEN, uMengLoginBean.getData().getRefreshToken());
+
             SPUtils.put(MainActivity.this, SPKey.USER_OAUTHID, uMengLoginBean.getData().getOauthId());
             if (uMengLoginBean.getData().getBirthdate() != null) {
                 SPUtils.put(MainActivity.this, SPKey.USER_BIRTHDAY, uMengLoginBean.getData().getBirthdate());

@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/itemShelfColl_iamge"
-        android:layout_width="0px"
+        android:layout_width="232px"
         android:layout_height="326px"
         android:padding="2px"
         android:scaleType="fitXY"

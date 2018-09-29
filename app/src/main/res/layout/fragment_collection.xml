@@ -5,12 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".view.serializaion.fragment.ShelfCollectionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/shelfColl_recy"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/shelfColl_SmartRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <!-- TODO: Update blank fragment layout -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/shelfColl_recy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 
 </FrameLayout>

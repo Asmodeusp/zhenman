@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/cover_corners">
+    android:layout_height="wrap_content">
+
+    <!--<com.zhenman.asus.zhenman.view.ui.RectImageBorder
+        android:id="@+id/itemWorkShort_Img"
+        android:layout_width="250px"
+        android:layout_height="350px"
+        android:layout_centerInParent="true"
+        app:rectImage_background="@drawable/my_f"
+        app:rectImage_border_color="@color/c1"
+        app:rectImage_border_width="@dimen/px_4" />-->
 
     <ImageView
         android:id="@+id/itemWorkShort_Img"

@@ -137,21 +137,20 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
     protected void onResume() {
         super.onResume();
         App.context = this;
-
         presenter = getPresenter();
         if (presenter != null) {
             presenter.actualView(this);
         }
     }
-
     @Override
     protected void onPause() {
         super.onPause();
-        App.context = null;
+//        App.context = null;
         if (presenter != null) {
             presenter.unActualView();
         }
     }
+
 
     @Override
     protected void onDestroy() {
