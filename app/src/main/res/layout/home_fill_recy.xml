@@ -24,7 +24,7 @@
 
     <com.zhenman.asus.zhenman.view.ui.MyScrollView
         android:id="@+id/Home_Hot_Page_turningScrollView"
-        android:layout_width="@dimen/px_116"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
@@ -33,7 +33,7 @@
         android:layout_marginRight="16px">
 
         <com.zhy.autolayout.AutoLinearLayout
-            android:layout_width="@dimen/px_116"
+            android:layout_width="200px"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
@@ -69,11 +69,10 @@
                 <CheckBox
                     android:id="@+id/Home_Hot_IsLikeImageView"
                     android:layout_width="wrap_content"
-                    android:layout_height="56dp"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="4dp"
                     android:button="@mipmap/like_01" />
 
                 <TextView

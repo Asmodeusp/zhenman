@@ -59,11 +59,11 @@
             android:textColor="@color/h2"
             android:textSize="@dimen/px_32" />
 
-        <ImageView
+        <me.panpf.sketch.SketchImageView
             android:layout_marginLeft="@dimen/px_24"
             android:id="@+id/fill_Home_Attention_RecyImageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="320px"
             android:layout_marginTop="@dimen/px_16"
             android:src="@mipmap/common_qiezi" />
     </com.zhy.autolayout.AutoLinearLayout>

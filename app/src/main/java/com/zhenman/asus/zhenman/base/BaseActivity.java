@@ -23,6 +23,8 @@ import com.zhy.autolayout.AutoLayoutActivity;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import butterknife.ButterKnife;
+
 public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutActivity {
     protected T presenter;
     private Fragment lastFragment;
@@ -37,10 +39,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-//        int resourceId = App.context.getResources().getIdentifier("notch_height", "dimen", "android");
-//        if (resourceId > 0) {
-//            int dimensionPixelSize = App.context.getResources().getDimensionPixelSize(resourceId);
-//        }
+        ButterKnife.bind(this);
 //        ImmersionBar.with(this).init();
 
 //        权限配置
@@ -69,16 +68,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
 
     }
 
-    //    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-//    }
-//
+
     public void onPermissionRequests(String permission, OnBooleanListener onBooleanListener) {
         onPermissionListener = onBooleanListener;
-        Log.d("MainActivity", "0");
         if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-            // Should we show an explanation?
-            Log.d("MainActivity", "1");
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.READ_CONTACTS)) {
                 //权限已有
@@ -91,8 +84,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
             }
         } else {
             onPermissionListener.onClick(true);
-            Log.d("MainActivity", "2" + ContextCompat.checkSelfPermission(this,
-                    permission));
+
         }
     }
 

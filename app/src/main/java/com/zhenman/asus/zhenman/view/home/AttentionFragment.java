@@ -1,12 +1,8 @@
 package com.zhenman.asus.zhenman.view.home;
 
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -22,8 +18,6 @@ import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeAttentionRecyAdapter;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> implements HomeAttentionContract.HomeAttentionView {
     @BindView(R.id.Home_Attention_Recy)
@@ -89,6 +83,4 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
     public void showPGCReadFabulousBean(UgcFabulousBean ugcFabulousBean) {
 
     }
-
-
 }

@@ -43,7 +43,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     @Override
     protected void init() {
         //请求数据
-        presenter.getHomeHotBean(1 + "");
+
         initView();
     }
 
@@ -74,7 +74,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     @Override
     protected void loadDate() {
-
+        presenter.getHomeHotBean(1 + "");
     }
 
     @Override
@@ -100,6 +100,4 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     public void showFollowBean(FollowBean followBean) {
 
     }
-
-
 }

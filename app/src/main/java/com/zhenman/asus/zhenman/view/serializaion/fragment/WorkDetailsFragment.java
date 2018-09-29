@@ -87,28 +87,31 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     @Override
     public void showWorkDetailsCommentBean(final WorkDetailsCommentBean workDetailsCommentBean) {
 
-        result = workDetailsCommentBean.getData().getResult();
-        if (result.size() == 0) {
-            work_commentTips.setVisibility(View.VISIBLE);
-            Work_commentRecy.setVisibility(View.GONE);
-        } else {
-            work_commentTips.setVisibility(View.GONE);
-            Work_commentRecy.setVisibility(View.VISIBLE);
-            //设置评论列表适配器
-            WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, pgcId, presenter);
-            Work_commentRecy.setAdapter(workCommentRecyAdapter);
-            workCommentRecyAdapter.notifyDataSetChanged();
-            workCommentRecyAdapter.setRecyclerViewOnCLickListener(new WorkCommentRecyAdapter.RecyclerViewOnCLickListener() {
-                @Override
-                public void myClick(View view, int position) {
-                    Intent intent = new Intent(getActivity(), SerializaionCommentDetailsActivity.class);
-                    intent.putExtra("CommentId", workDetailsCommentBean.getData().getResult().get(position).getCommentId());
-                    intent.putExtra("PgcId", pgcId);
-                    startActivity(intent);
-                }
-            });
+        if (workDetailsCommentBean!=null) {
+            result = workDetailsCommentBean.getData().getResult();
+            if (result.size() == 0) {
+                work_commentTips.setVisibility(View.VISIBLE);
+                Work_commentRecy.setVisibility(View.GONE);
+            } else {
+                work_commentTips.setVisibility(View.GONE);
+                Work_commentRecy.setVisibility(View.VISIBLE);
+                //设置评论列表适配器
+                WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, pgcId, presenter);
+                Work_commentRecy.setAdapter(workCommentRecyAdapter);
+                workCommentRecyAdapter.notifyDataSetChanged();
+                workCommentRecyAdapter.setRecyclerViewOnCLickListener(new WorkCommentRecyAdapter.RecyclerViewOnCLickListener() {
+                    @Override
+                    public void myClick(View view, int position) {
+                        Intent intent = new Intent(getActivity(), SerializaionCommentDetailsActivity.class);
+                        intent.putExtra("CommentId", workDetailsCommentBean.getData().getResult().get(position).getCommentId());
+                        intent.putExtra("PgcId", pgcId);
+                        startActivity(intent);
+                    }
+                });
 
+            }
         }
+
     }
 
     @Override
