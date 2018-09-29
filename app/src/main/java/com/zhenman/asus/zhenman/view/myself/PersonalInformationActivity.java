@@ -55,7 +55,6 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
     private ImageView myInfo_boy;
     private ImageView myInfo_girl;
     private AutoRelativeLayout myInfo_finish;
-    //行不行
     protected static final int CHOOSE_PICTURE = 0;
     protected static final int TAKE_PICTURE = 1;
     private static final int CROP_SMALL_PICTURE = 2;

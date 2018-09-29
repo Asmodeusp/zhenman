@@ -25,7 +25,6 @@ public class AlartDataPresenter implements AlartDataContract.AlartDataInPresente
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), value);
         return requestBody;
     }
-    //你现在相册是不是空的直接重叠然后空指针相机那  相机那？X？相机那没有家token呢
     @Override
     public void sendAlartData(String oauthId, String sex, String name, String introduction, String headImg, String birthdate, File file) {
 
