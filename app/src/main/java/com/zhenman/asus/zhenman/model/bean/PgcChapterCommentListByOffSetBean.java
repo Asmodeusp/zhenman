@@ -8,7 +8,7 @@ public class PgcChapterCommentListByOffSetBean {
     /**
      * state : 0
      * msg : 成功
-     * data : {"pageNum":1,"pageSize":60,"startRow":0,"endRow":60,"total":3,"pages":1,"result":[{"commentId":"48","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":"92","userId":"258","likeNum":"4","like":false,"detailNum":"13","addTime":"1532661367000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":null,"chapterSort":null,"pageBean":{"pageNum":0,"pageSize":0,"startRow":0,"endRow":0,"total":1,"pages":0,"result":[{"commentId":"48","content":"Aaaaaaaaaa","catalogId":null,"userId":"259","likeNum":null,"like":false,"detailNum":null,"addTime":"1535710587000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"45ab5abb","detailId":"152","title":null,"chapterSort":null,"pageBean":null}]}},{"commentId":"49","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":"92","userId":"258","likeNum":"3","like":false,"detailNum":"8","addTime":"1532674862000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":null,"chapterSort":null,"pageBean":{"pageNum":0,"pageSize":0,"startRow":0,"endRow":0,"total":0,"pages":0,"result":[]}},{"commentId":"47","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":"92","userId":"258","likeNum":"2","like":false,"detailNum":"15","addTime":"1532661269000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":null,"chapterSort":null,"pageBean":{"pageNum":0,"pageSize":0,"startRow":0,"endRow":0,"total":2,"pages":0,"result":[{"commentId":"47","content":"啦啦啦","catalogId":null,"userId":"306","likeNum":null,"like":false,"detailNum":null,"addTime":"1535515538000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"432423","detailId":"139","title":null,"chapterSort":null,"pageBean":null},{"commentId":"47","content":"图图","catalogId":null,"userId":"306","likeNum":null,"like":false,"detailNum":null,"addTime":"1535515404000","author":false,"reUserId":"259","reContent":"33333","reName":"45ab5abb","reAuthor":false,"imageUrl":null,"name":"432423","detailId":"138","title":null,"chapterSort":null,"pageBean":null}]}}]}
+     * data : {"total":23,"commentDtoList":[{"commentId":"49","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":"92","userId":"258","likeNum":"3","like":true,"detailNum":8,"addTime":"1532674862000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"48","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":"92","userId":"258","likeNum":"2","like":false,"detailNum":13,"addTime":"1532661367000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[{"commentId":"48","content":"Aaaaaaaaaa","catalogId":null,"userId":"259","likeNum":null,"like":false,"detailNum":0,"addTime":"1535710587000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"45ab5abb","detailId":"152","title":null,"chapterSort":null,"json":null,"textDto":{"text":"45ab5abb:","textExtra":[{"start":0,"length":8,"id":"259","textType":1,"link":null}]},"commentDtoList":null},{"commentId":"48","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"260","likeNum":null,"like":false,"detailNum":0,"addTime":"1535514921000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"ଲ 猜","detailId":"136","title":null,"chapterSort":null,"json":null,"textDto":{"text":"ଲ 猜:","textExtra":[{"start":0,"length":3,"id":"260","textType":1,"link":null}]},"commentDtoList":null}]},{"commentId":"47","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":"92","userId":"258","likeNum":"1","like":false,"detailNum":15,"addTime":"1532661269000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[{"commentId":"47","content":"啦啦啦","catalogId":null,"userId":"306","likeNum":null,"like":false,"detailNum":0,"addTime":"1535515538000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"432423","detailId":"139","title":null,"chapterSort":null,"json":null,"textDto":{"text":"432423:","textExtra":[{"start":0,"length":6,"id":"306","textType":1,"link":null}]},"commentDtoList":null},{"commentId":"47","content":"图图","catalogId":null,"userId":"306","likeNum":null,"like":false,"detailNum":0,"addTime":"1535515404000","author":false,"reUserId":"259","reContent":"33333","reName":"45ab5abb","reAuthor":false,"imageUrl":null,"name":"432423","detailId":"138","title":null,"chapterSort":null,"json":null,"textDto":{"text":"45ab5abb回复432423:","textExtra":[{"start":0,"length":8,"id":"259","textType":1,"link":null},{"start":10,"length":6,"id":"306","textType":1,"link":null}]},"commentDtoList":null}]},{"commentId":"50","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"1","like":false,"detailNum":1,"addTime":"1532674995000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"66","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"1","like":false,"detailNum":0,"addTime":"1532765265000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"171","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1534219554000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"172","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1534235019000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"173","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1534841825000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"174","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1534988057000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"175","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1535080372000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"176","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1535080375000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"182","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1535444998000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"183","content":"gfdsagfdafzzzzs阿斯顿飞过","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1535445141000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"190","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1535514921000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"51","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":1,"addTime":"1532675065000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"52","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1532675100000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"54","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1532681517000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"64","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1532764962000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"146","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1533111931000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"147","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1533111933000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"148","content":"sdfsdfsdfsdfsdfsdf","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1533111939000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"156","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1533375093000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"170","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1534217155000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]}]}
      */
 
     private int state;
@@ -41,54 +41,12 @@ public class PgcChapterCommentListByOffSetBean {
 
     public static class DataBean {
         /**
-         * pageNum : 1
-         * pageSize : 60
-         * startRow : 0
-         * endRow : 60
-         * total : 3
-         * pages : 1
-         * result : [{"commentId":"48","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":"92","userId":"258","likeNum":"4","like":false,"detailNum":"13","addTime":"1532661367000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":null,"chapterSort":null,"pageBean":{"pageNum":0,"pageSize":0,"startRow":0,"endRow":0,"total":1,"pages":0,"result":[{"commentId":"48","content":"Aaaaaaaaaa","catalogId":null,"userId":"259","likeNum":null,"like":false,"detailNum":null,"addTime":"1535710587000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"45ab5abb","detailId":"152","title":null,"chapterSort":null,"pageBean":null}]}},{"commentId":"49","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":"92","userId":"258","likeNum":"3","like":false,"detailNum":"8","addTime":"1532674862000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":null,"chapterSort":null,"pageBean":{"pageNum":0,"pageSize":0,"startRow":0,"endRow":0,"total":0,"pages":0,"result":[]}},{"commentId":"47","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":"92","userId":"258","likeNum":"2","like":false,"detailNum":"15","addTime":"1532661269000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":null,"chapterSort":null,"pageBean":{"pageNum":0,"pageSize":0,"startRow":0,"endRow":0,"total":2,"pages":0,"result":[{"commentId":"47","content":"啦啦啦","catalogId":null,"userId":"306","likeNum":null,"like":false,"detailNum":null,"addTime":"1535515538000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"432423","detailId":"139","title":null,"chapterSort":null,"pageBean":null},{"commentId":"47","content":"图图","catalogId":null,"userId":"306","likeNum":null,"like":false,"detailNum":null,"addTime":"1535515404000","author":false,"reUserId":"259","reContent":"33333","reName":"45ab5abb","reAuthor":false,"imageUrl":null,"name":"432423","detailId":"138","title":null,"chapterSort":null,"pageBean":null}]}}]
+         * total : 23
+         * commentDtoList : [{"commentId":"49","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":"92","userId":"258","likeNum":"3","like":true,"detailNum":8,"addTime":"1532674862000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"48","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":"92","userId":"258","likeNum":"2","like":false,"detailNum":13,"addTime":"1532661367000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[{"commentId":"48","content":"Aaaaaaaaaa","catalogId":null,"userId":"259","likeNum":null,"like":false,"detailNum":0,"addTime":"1535710587000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"45ab5abb","detailId":"152","title":null,"chapterSort":null,"json":null,"textDto":{"text":"45ab5abb:","textExtra":[{"start":0,"length":8,"id":"259","textType":1,"link":null}]},"commentDtoList":null},{"commentId":"48","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"260","likeNum":null,"like":false,"detailNum":0,"addTime":"1535514921000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"ଲ 猜","detailId":"136","title":null,"chapterSort":null,"json":null,"textDto":{"text":"ଲ 猜:","textExtra":[{"start":0,"length":3,"id":"260","textType":1,"link":null}]},"commentDtoList":null}]},{"commentId":"47","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":"92","userId":"258","likeNum":"1","like":false,"detailNum":15,"addTime":"1532661269000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[{"commentId":"47","content":"啦啦啦","catalogId":null,"userId":"306","likeNum":null,"like":false,"detailNum":0,"addTime":"1535515538000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"432423","detailId":"139","title":null,"chapterSort":null,"json":null,"textDto":{"text":"432423:","textExtra":[{"start":0,"length":6,"id":"306","textType":1,"link":null}]},"commentDtoList":null},{"commentId":"47","content":"图图","catalogId":null,"userId":"306","likeNum":null,"like":false,"detailNum":0,"addTime":"1535515404000","author":false,"reUserId":"259","reContent":"33333","reName":"45ab5abb","reAuthor":false,"imageUrl":null,"name":"432423","detailId":"138","title":null,"chapterSort":null,"json":null,"textDto":{"text":"45ab5abb回复432423:","textExtra":[{"start":0,"length":8,"id":"259","textType":1,"link":null},{"start":10,"length":6,"id":"306","textType":1,"link":null}]},"commentDtoList":null}]},{"commentId":"50","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"1","like":false,"detailNum":1,"addTime":"1532674995000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"66","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"1","like":false,"detailNum":0,"addTime":"1532765265000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"171","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1534219554000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"172","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1534235019000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"173","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1534841825000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"174","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1534988057000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"175","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1535080372000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"176","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1535080375000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"182","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1535444998000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"183","content":"gfdsagfdafzzzzs阿斯顿飞过","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1535445141000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"190","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1535514921000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"51","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":1,"addTime":"1532675065000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"52","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1532675100000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"54","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1532681517000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"64","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1532764962000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"146","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1533111931000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"147","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1533111933000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"148","content":"sdfsdfsdfsdfsdfsdf","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1533111939000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"156","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1533375093000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]},{"commentId":"170","content":"gfdsagfdafzzzzs","catalogId":"92","userId":"260","likeNum":"0","like":false,"detailNum":0,"addTime":"1534217155000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"chapterSort":null,"json":null,"textDto":null,"commentDtoList":[]}]
          */
 
-        private int pageNum;
-        private int pageSize;
-        private int startRow;
-        private int endRow;
         private int total;
-        private int pages;
-        private List<ResultBeanX> result;
-
-        public int getPageNum() {
-            return pageNum;
-        }
-
-        public void setPageNum(int pageNum) {
-            this.pageNum = pageNum;
-        }
-
-        public int getPageSize() {
-            return pageSize;
-        }
-
-        public void setPageSize(int pageSize) {
-            this.pageSize = pageSize;
-        }
-
-        public int getStartRow() {
-            return startRow;
-        }
-
-        public void setStartRow(int startRow) {
-            this.startRow = startRow;
-        }
-
-        public int getEndRow() {
-            return endRow;
-        }
-
-        public void setEndRow(int endRow) {
-            this.endRow = endRow;
-        }
+        private List<CommentDtoListBean> commentDtoList;
 
         public int getTotal() {
             return total;
@@ -98,43 +56,37 @@ public class PgcChapterCommentListByOffSetBean {
             this.total = total;
         }
 
-        public int getPages() {
-            return pages;
+        public List<CommentDtoListBean> getCommentDtoList() {
+            return commentDtoList;
         }
 
-        public void setPages(int pages) {
-            this.pages = pages;
+        public void setCommentDtoList(List<CommentDtoListBean> commentDtoList) {
+            this.commentDtoList = commentDtoList;
         }
 
-        public List<ResultBeanX> getResult() {
-            return result;
-        }
-
-        public void setResult(List<ResultBeanX> result) {
-            this.result = result;
-        }
-
-        public static class ResultBeanX {
+        public static class CommentDtoListBean {
             /**
-             * commentId : 48
+             * commentId : 49
              * content : 沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我
              * catalogId : 92
              * userId : 258
-             * likeNum : 4
-             * like : false
-             * detailNum : 13
-             * addTime : 1532661367000
+             * likeNum : 3
+             * like : true
+             * detailNum : 8
+             * addTime : 1532674862000
              * author : false
              * reUserId : null
              * reContent : null
              * reName : null
              * reAuthor : false
-             * imageUrl : http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p
+             * imageUrl : http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100
              * name : 不知南北找东西
              * detailId : null
              * title : null
              * chapterSort : null
-             * pageBean : {"pageNum":0,"pageSize":0,"startRow":0,"endRow":0,"total":1,"pages":0,"result":[{"commentId":"48","content":"Aaaaaaaaaa","catalogId":null,"userId":"259","likeNum":null,"like":false,"detailNum":null,"addTime":"1535710587000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"45ab5abb","detailId":"152","title":null,"chapterSort":null,"pageBean":null}]}
+             * json : null
+             * textDto : null
+             * commentDtoList : []
              */
 
             private String commentId;
@@ -143,7 +95,7 @@ public class PgcChapterCommentListByOffSetBean {
             private String userId;
             private String likeNum;
             private boolean like;
-            private String detailNum;
+            private int detailNum;
             private String addTime;
             private boolean author;
             private Object reUserId;
@@ -155,7 +107,9 @@ public class PgcChapterCommentListByOffSetBean {
             private Object detailId;
             private Object title;
             private Object chapterSort;
-            private PageBeanBean pageBean;
+            private Object json;
+            private Object textDto;
+            private List<?> commentDtoList;
 
             public String getCommentId() {
                 return commentId;
@@ -205,11 +159,11 @@ public class PgcChapterCommentListByOffSetBean {
                 this.like = like;
             }
 
-            public String getDetailNum() {
+            public int getDetailNum() {
                 return detailNum;
             }
 
-            public void setDetailNum(String detailNum) {
+            public void setDetailNum(int detailNum) {
                 this.detailNum = detailNum;
             }
 
@@ -301,284 +255,28 @@ public class PgcChapterCommentListByOffSetBean {
                 this.chapterSort = chapterSort;
             }
 
-            public PageBeanBean getPageBean() {
-                return pageBean;
+            public Object getJson() {
+                return json;
             }
 
-            public void setPageBean(PageBeanBean pageBean) {
-                this.pageBean = pageBean;
+            public void setJson(Object json) {
+                this.json = json;
             }
 
-            public static class PageBeanBean {
-                /**
-                 * pageNum : 0
-                 * pageSize : 0
-                 * startRow : 0
-                 * endRow : 0
-                 * total : 1
-                 * pages : 0
-                 * result : [{"commentId":"48","content":"Aaaaaaaaaa","catalogId":null,"userId":"259","likeNum":null,"like":false,"detailNum":null,"addTime":"1535710587000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"45ab5abb","detailId":"152","title":null,"chapterSort":null,"pageBean":null}]
-                 */
+            public Object getTextDto() {
+                return textDto;
+            }
 
-                private int pageNum;
-                private int pageSize;
-                private int startRow;
-                private int endRow;
-                private int total;
-                private int pages;
-                private List<ResultBean> result;
+            public void setTextDto(Object textDto) {
+                this.textDto = textDto;
+            }
 
-                public int getPageNum() {
-                    return pageNum;
-                }
+            public List<?> getCommentDtoList() {
+                return commentDtoList;
+            }
 
-                public void setPageNum(int pageNum) {
-                    this.pageNum = pageNum;
-                }
-
-                public int getPageSize() {
-                    return pageSize;
-                }
-
-                public void setPageSize(int pageSize) {
-                    this.pageSize = pageSize;
-                }
-
-                public int getStartRow() {
-                    return startRow;
-                }
-
-                public void setStartRow(int startRow) {
-                    this.startRow = startRow;
-                }
-
-                public int getEndRow() {
-                    return endRow;
-                }
-
-                public void setEndRow(int endRow) {
-                    this.endRow = endRow;
-                }
-
-                public int getTotal() {
-                    return total;
-                }
-
-                public void setTotal(int total) {
-                    this.total = total;
-                }
-
-                public int getPages() {
-                    return pages;
-                }
-
-                public void setPages(int pages) {
-                    this.pages = pages;
-                }
-
-                public List<ResultBean> getResult() {
-                    return result;
-                }
-
-                public void setResult(List<ResultBean> result) {
-                    this.result = result;
-                }
-
-                public static class ResultBean {
-                    /**
-                     * commentId : 48
-                     * content : Aaaaaaaaaa
-                     * catalogId : null
-                     * userId : 259
-                     * likeNum : null
-                     * like : false
-                     * detailNum : null
-                     * addTime : 1535710587000
-                     * author : false
-                     * reUserId : null
-                     * reContent : null
-                     * reName : null
-                     * reAuthor : false
-                     * imageUrl : null
-                     * name : 45ab5abb
-                     * detailId : 152
-                     * title : null
-                     * chapterSort : null
-                     * pageBean : null
-                     */
-
-                    private String commentId;
-                    private String content;
-                    private Object catalogId;
-                    private String userId;
-                    private Object likeNum;
-                    private boolean like;
-                    private Object detailNum;
-                    private String addTime;
-                    private boolean author;
-                    private Object reUserId;
-                    private Object reContent;
-                    private Object reName;
-                    private boolean reAuthor;
-                    private Object imageUrl;
-                    private String name;
-                    private String detailId;
-                    private Object title;
-                    private Object chapterSort;
-                    private Object pageBean;
-
-                    public String getCommentId() {
-                        return commentId;
-                    }
-
-                    public void setCommentId(String commentId) {
-                        this.commentId = commentId;
-                    }
-
-                    public String getContent() {
-                        return content;
-                    }
-
-                    public void setContent(String content) {
-                        this.content = content;
-                    }
-
-                    public Object getCatalogId() {
-                        return catalogId;
-                    }
-
-                    public void setCatalogId(Object catalogId) {
-                        this.catalogId = catalogId;
-                    }
-
-                    public String getUserId() {
-                        return userId;
-                    }
-
-                    public void setUserId(String userId) {
-                        this.userId = userId;
-                    }
-
-                    public Object getLikeNum() {
-                        return likeNum;
-                    }
-
-                    public void setLikeNum(Object likeNum) {
-                        this.likeNum = likeNum;
-                    }
-
-                    public boolean isLike() {
-                        return like;
-                    }
-
-                    public void setLike(boolean like) {
-                        this.like = like;
-                    }
-
-                    public Object getDetailNum() {
-                        return detailNum;
-                    }
-
-                    public void setDetailNum(Object detailNum) {
-                        this.detailNum = detailNum;
-                    }
-
-                    public String getAddTime() {
-                        return addTime;
-                    }
-
-                    public void setAddTime(String addTime) {
-                        this.addTime = addTime;
-                    }
-
-                    public boolean isAuthor() {
-                        return author;
-                    }
-
-                    public void setAuthor(boolean author) {
-                        this.author = author;
-                    }
-
-                    public Object getReUserId() {
-                        return reUserId;
-                    }
-
-                    public void setReUserId(Object reUserId) {
-                        this.reUserId = reUserId;
-                    }
-
-                    public Object getReContent() {
-                        return reContent;
-                    }
-
-                    public void setReContent(Object reContent) {
-                        this.reContent = reContent;
-                    }
-
-                    public Object getReName() {
-                        return reName;
-                    }
-
-                    public void setReName(Object reName) {
-                        this.reName = reName;
-                    }
-
-                    public boolean isReAuthor() {
-                        return reAuthor;
-                    }
-
-                    public void setReAuthor(boolean reAuthor) {
-                        this.reAuthor = reAuthor;
-                    }
-
-                    public Object getImageUrl() {
-                        return imageUrl;
-                    }
-
-                    public void setImageUrl(Object imageUrl) {
-                        this.imageUrl = imageUrl;
-                    }
-
-                    public String getName() {
-                        return name;
-                    }
-
-                    public void setName(String name) {
-                        this.name = name;
-                    }
-
-                    public String getDetailId() {
-                        return detailId;
-                    }
-
-                    public void setDetailId(String detailId) {
-                        this.detailId = detailId;
-                    }
-
-                    public Object getTitle() {
-                        return title;
-                    }
-
-                    public void setTitle(Object title) {
-                        this.title = title;
-                    }
-
-                    public Object getChapterSort() {
-                        return chapterSort;
-                    }
-
-                    public void setChapterSort(Object chapterSort) {
-                        this.chapterSort = chapterSort;
-                    }
-
-                    public Object getPageBean() {
-                        return pageBean;
-                    }
-
-                    public void setPageBean(Object pageBean) {
-                        this.pageBean = pageBean;
-                    }
-                }
+            public void setCommentDtoList(List<?> commentDtoList) {
+                this.commentDtoList = commentDtoList;
             }
         }
     }

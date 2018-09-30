@@ -24,13 +24,13 @@ import java.util.List;
 
 
 public class CatalogFootviewCommentRecyAdapter extends RecyclerView.Adapter<CatalogFootviewCommentRecyAdapter.Holder> implements View.OnClickListener {
-    private List<PgcChapterCommentListByOffSetBean.DataBean.ResultBeanX> list;
+    private List<PgcChapterCommentListByOffSetBean.DataBean.CommentDtoListBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
     String productId;
     SerializationCatalogReadPresenterImp presenter;
 
-    public CatalogFootviewCommentRecyAdapter(List<PgcChapterCommentListByOffSetBean.DataBean.ResultBeanX> list, String productId, SerializationCatalogReadPresenterImp presenter) {
+    public CatalogFootviewCommentRecyAdapter(List<PgcChapterCommentListByOffSetBean.DataBean.CommentDtoListBean> list, String productId, SerializationCatalogReadPresenterImp presenter) {
         this.list = list;
         this.productId = productId;
         this.presenter = presenter;

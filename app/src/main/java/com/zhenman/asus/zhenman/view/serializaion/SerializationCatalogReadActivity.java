@@ -121,7 +121,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private RecyclerView cataLog_footViewComment_recy;
     private TextView cataLog_footViewComment_recyTip;
     private CatalogFootviewCommentRecyAdapter catalogFootviewCommentRecyAdapter;
-    private List<PgcChapterCommentListByOffSetBean.DataBean.ResultBeanX> result = new ArrayList<>();
+    private List<PgcChapterCommentListByOffSetBean.DataBean.CommentDtoListBean> result = new ArrayList<>();
     private View contentView;
     private String paymentMethod;
     private int qieziId;
@@ -670,24 +670,30 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     @Override
     public void showPgcChapterCommentListByOffSetBean(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean) {
         if (pgcChapterCommentListByOffSetBean != null) {
-            result.addAll(pgcChapterCommentListByOffSetBean.getData().getResult());
-            if (result.size() != 0) {
-                cataLog_footViewComment_recy.setVisibility(View.VISIBLE);
-                cataLog_footViewComment_recyTip.setVisibility(View.GONE);
-                catalogFootviewCommentRecyAdapter = new CatalogFootviewCommentRecyAdapter(pgcChapterCommentListByOffSetBean.getData().getResult(), StartcatalogId, presenter);
-                commentPopu_recy.setAdapter(catalogFootviewCommentRecyAdapter);
-                catalogFootviewCommentRecyAdapter.setClickZan(new CatalogFootviewCommentRecyAdapter.ClickZan() {
-                    @Override
-                    public void zan(String commentId, String status, String pgcId) {
-                        presenter.PGCReadFabulous(StartcatalogId, commentId, status, pgcId);
-                    }
-                });
-                cataLog_footViewComment_recy.setAdapter(catalogFootviewCommentRecyAdapter);
 
-            } else {
-                cataLog_footViewComment_recy.setVisibility(View.GONE);
-                cataLog_footViewComment_recyTip.setVisibility(View.VISIBLE);
+            result.addAll(pgcChapterCommentListByOffSetBean.getData().getCommentDtoList());
+            if (result!=null) {
+                if (result.size() != 0) {
+
+                    cataLog_footViewComment_recy.setVisibility(View.VISIBLE);
+                    cataLog_footViewComment_recyTip.setVisibility(View.GONE);
+                    catalogFootviewCommentRecyAdapter = new CatalogFootviewCommentRecyAdapter(pgcChapterCommentListByOffSetBean.getData().getCommentDtoList(), StartcatalogId, presenter);
+                    commentPopu_recy.setAdapter(catalogFootviewCommentRecyAdapter);
+                    catalogFootviewCommentRecyAdapter.setClickZan(new CatalogFootviewCommentRecyAdapter.ClickZan() {
+                        @Override
+                        public void zan(String commentId, String status, String pgcId) {
+                            presenter.PGCReadFabulous(StartcatalogId, commentId, status, pgcId);
+                        }
+                    });
+                    cataLog_footViewComment_recy.setAdapter(catalogFootviewCommentRecyAdapter);
+
+                } else {
+                    cataLog_footViewComment_recy.setVisibility(View.GONE);
+                    cataLog_footViewComment_recyTip.setVisibility(View.VISIBLE);
+                }
             }
+
+
         }
     }
 
