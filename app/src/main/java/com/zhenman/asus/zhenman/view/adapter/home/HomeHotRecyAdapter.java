@@ -26,6 +26,8 @@ import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.MyLayoutMessage;
@@ -171,7 +173,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, HomepageActivity.class);
-                intent.putExtra("UserId",dataBean.getUserId());
+                SPUtils.put(context, SPKey.HIM_ID,dataBean.getUserId());
                 context.startActivity(intent);
             }
         });
