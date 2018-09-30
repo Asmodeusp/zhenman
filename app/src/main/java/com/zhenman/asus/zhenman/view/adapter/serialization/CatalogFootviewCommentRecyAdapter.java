@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.adapter.serialization;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +18,9 @@ import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
 import com.zhenman.asus.zhenman.presenter.SerializationCatalogReadPresenterImp;
 import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
@@ -62,6 +65,15 @@ public class CatalogFootviewCommentRecyAdapter extends RecyclerView.Adapter<Cata
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
         holder.Work_commentRecy_Comment.setText(list.get(position).getContent());
+        //设置头像
+        holder.Work_commentRecy_HeadView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HomepageActivity.class);
+                SPUtils.put(context, SPKey.HIM_ID,list.get(position).getUserId());
+                context.startActivity(intent);
+            }
+        });
         GlideUtils.loadCircleImage(list.get(position).getImageUrl(), holder.Work_commentRecy_HeadView, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
             @Override
             public void onLoadingComplete(String uri, ImageView view, GlideDrawable resource) {
