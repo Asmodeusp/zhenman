@@ -22,12 +22,12 @@ import java.util.List;
 
 
 public class WorkCommentRecyAdapter extends RecyclerView.Adapter<WorkCommentRecyAdapter.Holder> implements View.OnClickListener {
-    private List<WorkDetailsCommentBean.DataBean.ResultBean> list;
+    private List<WorkDetailsCommentBean.DataBean.CommentDtoListBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
     String PGCID;
     WorkDetailsCommentPresenterImp presenter;
-    public WorkCommentRecyAdapter(List<WorkDetailsCommentBean.DataBean.ResultBean> list, String PGCID, WorkDetailsCommentPresenterImp presenter) {
+    public WorkCommentRecyAdapter(List<WorkDetailsCommentBean.DataBean.CommentDtoListBean> list, String PGCID, WorkDetailsCommentPresenterImp presenter) {
         this.list = list;
         this.PGCID = PGCID;
         this.presenter = presenter;

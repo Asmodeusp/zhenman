@@ -4,6 +4,7 @@ package com.zhenman.asus.zhenman.view.serializaion.fragment;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +29,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     private TextView Actor_RecyTips;
     private RecyclerView Actor_Recy;
     private RecyclerView Work_commentRecy;
-    private List<WorkDetailsCommentBean.DataBean.ResultBean> result;
+    private List<WorkDetailsCommentBean.DataBean.CommentDtoListBean> result;
     private TextView work_commentTips;
     private String pgcId;
 
@@ -86,29 +87,31 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
 
     @Override
     public void showWorkDetailsCommentBean(final WorkDetailsCommentBean workDetailsCommentBean) {
+        Log.d("WorkDetailsFragment", workDetailsCommentBean.getMsg());
+        if (workDetailsCommentBean != null) {
 
-        if (workDetailsCommentBean!=null) {
-            result = workDetailsCommentBean.getData().getResult();
-            if (result.size() == 0) {
-                work_commentTips.setVisibility(View.VISIBLE);
-                Work_commentRecy.setVisibility(View.GONE);
-            } else {
-                work_commentTips.setVisibility(View.GONE);
-                Work_commentRecy.setVisibility(View.VISIBLE);
-                //设置评论列表适配器
-                WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, pgcId, presenter);
-                Work_commentRecy.setAdapter(workCommentRecyAdapter);
-                workCommentRecyAdapter.notifyDataSetChanged();
-                workCommentRecyAdapter.setRecyclerViewOnCLickListener(new WorkCommentRecyAdapter.RecyclerViewOnCLickListener() {
-                    @Override
-                    public void myClick(View view, int position) {
-                        Intent intent = new Intent(getActivity(), SerializaionCommentDetailsActivity.class);
-                        intent.putExtra("CommentId", workDetailsCommentBean.getData().getResult().get(position).getCommentId());
-                        intent.putExtra("PgcId", pgcId);
-                        startActivity(intent);
-                    }
-                });
-
+            result = workDetailsCommentBean.getData().getCommentDtoList();
+            if (result != null) {
+                if (result.size() == 0) {
+                    work_commentTips.setVisibility(View.VISIBLE);
+                    Work_commentRecy.setVisibility(View.GONE);
+                } else {
+                    work_commentTips.setVisibility(View.GONE);
+                    Work_commentRecy.setVisibility(View.VISIBLE);
+                    //设置评论列表适配器
+                    WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, pgcId, presenter);
+                    Work_commentRecy.setAdapter(workCommentRecyAdapter);
+                    workCommentRecyAdapter.notifyDataSetChanged();
+                    workCommentRecyAdapter.setRecyclerViewOnCLickListener(new WorkCommentRecyAdapter.RecyclerViewOnCLickListener() {
+                        @Override
+                        public void myClick(View view, int position) {
+                            Intent intent = new Intent(getActivity(), SerializaionCommentDetailsActivity.class);
+                            intent.putExtra("CommentId", workDetailsCommentBean.getData().getCommentDtoList().get(position).getCommentId());
+                            intent.putExtra("PgcId", pgcId);
+                            startActivity(intent);
+                        }
+                    });
+                }
             }
         }
 

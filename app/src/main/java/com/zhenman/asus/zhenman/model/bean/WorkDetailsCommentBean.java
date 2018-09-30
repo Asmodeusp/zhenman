@@ -4,10 +4,11 @@ import java.util.List;
 
 public class WorkDetailsCommentBean {
 
+
     /**
      * state : 0
      * msg : 成功
-     * data : {"pageNum":1,"pageSize":20,"startRow":0,"endRow":20,"total":13,"pages":1,"result":[{"commentId":"53","content":"地方第三方个地方官","catalogId":null,"userId":"258","likeNum":"2","like":false,"detailNum":null,"addTime":"1532676574000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"49","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":null,"userId":"258","likeNum":"2","like":false,"detailNum":null,"addTime":"1532674862000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"61","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"1","like":false,"detailNum":null,"addTime":"1532751989000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"47","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":null,"userId":"258","likeNum":"1","like":false,"detailNum":null,"addTime":"1532661269000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"63","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532752880000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"62","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751989000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"60","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751989000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"59","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751987000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"58","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751987000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"57","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751985000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"56","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751984000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"55","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751980000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"48","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":null,"userId":"258","likeNum":"0","like":false,"detailNum":null,"addTime":"1532661367000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null}]}
+     * data : {"total":68,"commentDtoList":[{"commentId":"53","content":"地方第三方个地方官","catalogId":null,"userId":"258","likeNum":"3","like":false,"detailNum":0,"addTime":"1532676574000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"61","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"3","like":false,"detailNum":0,"addTime":"1532751989000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?imageMogr2/thumbnail/100x100","name":"885bdb48不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"49","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":null,"userId":"258","likeNum":"3","like":false,"detailNum":0,"addTime":"1532674862000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"48","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":null,"userId":"258","likeNum":"2","like":false,"detailNum":0,"addTime":"1532661367000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"63","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"2","like":false,"detailNum":0,"addTime":"1532752880000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?imageMogr2/thumbnail/100x100","name":"885bdb48不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"159","content":"LLLLLLLLLLLLAAAAAAAAASSSSS","catalogId":null,"userId":"277","likeNum":"2","like":false,"detailNum":0,"addTime":"1533547827000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/bfef1a21ac2740c4a83159d1be196683_?imageMogr2/thumbnail/100x100","name":"陈奇","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"151","content":"sdfsdfsdfsdfsdfsdf","catalogId":null,"userId":"260","likeNum":"2","like":false,"detailNum":0,"addTime":"1533111973000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"50","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"260","likeNum":"1","like":false,"detailNum":0,"addTime":"1532674995000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"58","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"1","like":false,"detailNum":0,"addTime":"1532751987000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?imageMogr2/thumbnail/100x100","name":"885bdb48不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"59","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"1","like":false,"detailNum":0,"addTime":"1532751987000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?imageMogr2/thumbnail/100x100","name":"885bdb48不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"62","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"1","like":false,"detailNum":0,"addTime":"1532751989000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?imageMogr2/thumbnail/100x100","name":"885bdb48不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"47","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":null,"userId":"258","likeNum":"1","like":false,"detailNum":0,"addTime":"1532661269000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"160","content":"123","catalogId":null,"userId":"277","likeNum":"1","like":false,"detailNum":0,"addTime":"1533550791000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/bfef1a21ac2740c4a83159d1be196683_?imageMogr2/thumbnail/100x100","name":"陈奇","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"161","content":"ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ","catalogId":null,"userId":"277","likeNum":"1","like":false,"detailNum":0,"addTime":"1533550885000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/bfef1a21ac2740c4a83159d1be196683_?imageMogr2/thumbnail/100x100","name":"陈奇","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"162","content":"4234","catalogId":null,"userId":"277","likeNum":"1","like":false,"detailNum":0,"addTime":"1533551006000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/bfef1a21ac2740c4a83159d1be196683_?imageMogr2/thumbnail/100x100","name":"陈奇","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"163","content":"234","catalogId":null,"userId":"277","likeNum":"1","like":false,"detailNum":0,"addTime":"1533551095000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/bfef1a21ac2740c4a83159d1be196683_?imageMogr2/thumbnail/100x100","name":"陈奇","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"65","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"260","likeNum":"1","like":false,"detailNum":0,"addTime":"1532765261000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"66","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"260","likeNum":"1","like":false,"detailNum":0,"addTime":"1532765265000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"79","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"260","likeNum":"1","like":false,"detailNum":0,"addTime":"1532796482000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"188","content":"33333","catalogId":null,"userId":"259","likeNum":"1","like":false,"detailNum":0,"addTime":"1535446953000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"45ab5abb","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null}]}
      */
 
     private int state;
@@ -40,54 +41,12 @@ public class WorkDetailsCommentBean {
 
     public static class DataBean {
         /**
-         * pageNum : 1
-         * pageSize : 20
-         * startRow : 0
-         * endRow : 20
-         * total : 13
-         * pages : 1
-         * result : [{"commentId":"53","content":"地方第三方个地方官","catalogId":null,"userId":"258","likeNum":"2","like":false,"detailNum":null,"addTime":"1532676574000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"49","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":null,"userId":"258","likeNum":"2","like":false,"detailNum":null,"addTime":"1532674862000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"61","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"1","like":false,"detailNum":null,"addTime":"1532751989000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"47","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":null,"userId":"258","likeNum":"1","like":false,"detailNum":null,"addTime":"1532661269000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"63","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532752880000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"62","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751989000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"60","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751989000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"59","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751987000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"58","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751987000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"57","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751985000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"56","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751984000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"55","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"0","like":false,"detailNum":null,"addTime":"1532751980000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?roundPic/radius/!50p","name":"885bdb48不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null},{"commentId":"48","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":null,"userId":"258","likeNum":"0","like":false,"detailNum":null,"addTime":"1532661367000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p","name":"不知南北找东西","detailId":null,"title":"第1话","chapterSort":"1","pageBean":null}]
+         * total : 68
+         * commentDtoList : [{"commentId":"53","content":"地方第三方个地方官","catalogId":null,"userId":"258","likeNum":"3","like":false,"detailNum":0,"addTime":"1532676574000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"61","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"3","like":false,"detailNum":0,"addTime":"1532751989000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?imageMogr2/thumbnail/100x100","name":"885bdb48不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"49","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":null,"userId":"258","likeNum":"3","like":false,"detailNum":0,"addTime":"1532674862000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"48","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":null,"userId":"258","likeNum":"2","like":false,"detailNum":0,"addTime":"1532661367000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"63","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"2","like":false,"detailNum":0,"addTime":"1532752880000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?imageMogr2/thumbnail/100x100","name":"885bdb48不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"159","content":"LLLLLLLLLLLLAAAAAAAAASSSSS","catalogId":null,"userId":"277","likeNum":"2","like":false,"detailNum":0,"addTime":"1533547827000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/bfef1a21ac2740c4a83159d1be196683_?imageMogr2/thumbnail/100x100","name":"陈奇","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"151","content":"sdfsdfsdfsdfsdfsdf","catalogId":null,"userId":"260","likeNum":"2","like":false,"detailNum":0,"addTime":"1533111973000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"50","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"260","likeNum":"1","like":false,"detailNum":0,"addTime":"1532674995000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"58","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"1","like":false,"detailNum":0,"addTime":"1532751987000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?imageMogr2/thumbnail/100x100","name":"885bdb48不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"59","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"1","like":false,"detailNum":0,"addTime":"1532751987000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?imageMogr2/thumbnail/100x100","name":"885bdb48不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"62","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"278","likeNum":"1","like":false,"detailNum":0,"addTime":"1532751989000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/6fdd99a527a348eeb55677cb22e62339_?imageMogr2/thumbnail/100x100","name":"885bdb48不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"47","content":"沃尔沃二翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁绕弯儿翁让我","catalogId":null,"userId":"258","likeNum":"1","like":false,"detailNum":0,"addTime":"1532661269000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100","name":"不知南北找东西","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"160","content":"123","catalogId":null,"userId":"277","likeNum":"1","like":false,"detailNum":0,"addTime":"1533550791000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/bfef1a21ac2740c4a83159d1be196683_?imageMogr2/thumbnail/100x100","name":"陈奇","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"161","content":"ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ","catalogId":null,"userId":"277","likeNum":"1","like":false,"detailNum":0,"addTime":"1533550885000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/bfef1a21ac2740c4a83159d1be196683_?imageMogr2/thumbnail/100x100","name":"陈奇","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"162","content":"4234","catalogId":null,"userId":"277","likeNum":"1","like":false,"detailNum":0,"addTime":"1533551006000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/bfef1a21ac2740c4a83159d1be196683_?imageMogr2/thumbnail/100x100","name":"陈奇","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"163","content":"234","catalogId":null,"userId":"277","likeNum":"1","like":false,"detailNum":0,"addTime":"1533551095000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/bfef1a21ac2740c4a83159d1be196683_?imageMogr2/thumbnail/100x100","name":"陈奇","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"65","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"260","likeNum":"1","like":false,"detailNum":0,"addTime":"1532765261000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"66","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"260","likeNum":"1","like":false,"detailNum":0,"addTime":"1532765265000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"79","content":"gfdsagfdafzzzzs","catalogId":null,"userId":"260","likeNum":"1","like":false,"detailNum":0,"addTime":"1532796482000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null},{"commentId":"188","content":"33333","catalogId":null,"userId":"259","likeNum":"1","like":false,"detailNum":0,"addTime":"1535446953000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"45ab5abb","detailId":null,"title":"无证之罪","chapterSort":null,"json":null,"textDto":null,"commentDtoList":null}]
          */
 
-        private int pageNum;
-        private int pageSize;
-        private int startRow;
-        private int endRow;
         private int total;
-        private int pages;
-        private List<ResultBean> result;
-
-        public int getPageNum() {
-            return pageNum;
-        }
-
-        public void setPageNum(int pageNum) {
-            this.pageNum = pageNum;
-        }
-
-        public int getPageSize() {
-            return pageSize;
-        }
-
-        public void setPageSize(int pageSize) {
-            this.pageSize = pageSize;
-        }
-
-        public int getStartRow() {
-            return startRow;
-        }
-
-        public void setStartRow(int startRow) {
-            this.startRow = startRow;
-        }
-
-        public int getEndRow() {
-            return endRow;
-        }
-
-        public void setEndRow(int endRow) {
-            this.endRow = endRow;
-        }
+        private List<CommentDtoListBean> commentDtoList;
 
         public int getTotal() {
             return total;
@@ -97,43 +56,37 @@ public class WorkDetailsCommentBean {
             this.total = total;
         }
 
-        public int getPages() {
-            return pages;
+        public List<CommentDtoListBean> getCommentDtoList() {
+            return commentDtoList;
         }
 
-        public void setPages(int pages) {
-            this.pages = pages;
+        public void setCommentDtoList(List<CommentDtoListBean> commentDtoList) {
+            this.commentDtoList = commentDtoList;
         }
 
-        public List<ResultBean> getResult() {
-            return result;
-        }
-
-        public void setResult(List<ResultBean> result) {
-            this.result = result;
-        }
-
-        public static class ResultBean {
+        public static class CommentDtoListBean {
             /**
              * commentId : 53
              * content : 地方第三方个地方官
              * catalogId : null
              * userId : 258
-             * likeNum : 2
+             * likeNum : 3
              * like : false
-             * detailNum : null
+             * detailNum : 0
              * addTime : 1532676574000
              * author : false
              * reUserId : null
              * reContent : null
              * reName : null
              * reAuthor : false
-             * imageUrl : http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?roundPic/radius/!50p
+             * imageUrl : http://pa1qj1jlg.bkt.clouddn.com/headImage/57522467e21a4e3aa04e3d8e06a3ef15_?imageMogr2/thumbnail/100x100
              * name : 不知南北找东西
              * detailId : null
-             * title : 第1话
-             * chapterSort : 1
-             * pageBean : null
+             * title : 无证之罪
+             * chapterSort : null
+             * json : null
+             * textDto : null
+             * commentDtoList : null
              */
 
             private String commentId;
@@ -142,7 +95,7 @@ public class WorkDetailsCommentBean {
             private String userId;
             private String likeNum;
             private boolean like;
-            private Object detailNum;
+            private int detailNum;
             private String addTime;
             private boolean author;
             private Object reUserId;
@@ -153,8 +106,10 @@ public class WorkDetailsCommentBean {
             private String name;
             private Object detailId;
             private String title;
-            private String chapterSort;
-            private Object pageBean;
+            private Object chapterSort;
+            private Object json;
+            private Object textDto;
+            private Object commentDtoList;
 
             public String getCommentId() {
                 return commentId;
@@ -204,11 +159,11 @@ public class WorkDetailsCommentBean {
                 this.like = like;
             }
 
-            public Object getDetailNum() {
+            public int getDetailNum() {
                 return detailNum;
             }
 
-            public void setDetailNum(Object detailNum) {
+            public void setDetailNum(int detailNum) {
                 this.detailNum = detailNum;
             }
 
@@ -292,20 +247,36 @@ public class WorkDetailsCommentBean {
                 this.title = title;
             }
 
-            public String getChapterSort() {
+            public Object getChapterSort() {
                 return chapterSort;
             }
 
-            public void setChapterSort(String chapterSort) {
+            public void setChapterSort(Object chapterSort) {
                 this.chapterSort = chapterSort;
             }
 
-            public Object getPageBean() {
-                return pageBean;
+            public Object getJson() {
+                return json;
             }
 
-            public void setPageBean(Object pageBean) {
-                this.pageBean = pageBean;
+            public void setJson(Object json) {
+                this.json = json;
+            }
+
+            public Object getTextDto() {
+                return textDto;
+            }
+
+            public void setTextDto(Object textDto) {
+                this.textDto = textDto;
+            }
+
+            public Object getCommentDtoList() {
+                return commentDtoList;
+            }
+
+            public void setCommentDtoList(Object commentDtoList) {
+                this.commentDtoList = commentDtoList;
             }
         }
     }

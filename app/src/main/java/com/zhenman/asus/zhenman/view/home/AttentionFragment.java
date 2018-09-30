@@ -38,17 +38,17 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
 
     @Override
     protected void init() {
-        //设置RecyclerView的格式
+//        //设置RecyclerView的格式
         HomeAttentionRecy.setLayoutManager(new LinearLayoutManager(getActivity()));
-        HomeAttentionSmartRefreshLayout.autoRefresh(2000);
-        HomeAttentionSmartRefreshLayout.finishRefresh();
-        HomeAttentionSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshLayout) {
+//        HomeAttentionSmartRefreshLayout.autoRefresh(2000);
+//        HomeAttentionSmartRefreshLayout.finishRefresh();
+//        HomeAttentionSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+//            @Override
+//            public void onRefresh(RefreshLayout refreshLayout) {
                 presenter.getHomeAttentionBean("1");
-                HomeAttentionSmartRefreshLayout.finishRefresh();
-            }
-        });
+//                HomeAttentionSmartRefreshLayout.finishRefresh();
+//            }
+//        });
     }
 
     @Override

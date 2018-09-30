@@ -134,10 +134,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
 
     @Override
     public int getItemCount() {
-        if (list!=null) {
-            return /*list.isEmpty() ? 0 :*/ list.size();
-        }
-        return /*list.isEmpty() ? 0 :*/ list.size();
+            return list.isEmpty() ? 0 : list.size();
     }
 
     public class Holder extends RecyclerView.ViewHolder {

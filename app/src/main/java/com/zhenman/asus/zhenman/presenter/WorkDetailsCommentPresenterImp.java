@@ -1,6 +1,8 @@
 package com.zhenman.asus.zhenman.presenter;
 
 
+import android.util.Log;
+
 import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.WorkDetailsCommentContract;
 import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
@@ -16,6 +18,17 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+/**
+ *            曰:
+ *                   写字楼里写字间，写字间里程序员；
+ *                   程序人员写程序，又拿程序换酒钱。
+ *                   酒醒只在网上坐，酒醉还来网下眠；
+ *                   酒醉酒醒日复日，网上网下年复年。
+ *                   但愿老死电脑间，不愿鞠躬老板前；
+ *                   奔驰宝马贵者趣，公交自行程序员。
+ *                   别人笑我忒疯癫，我笑自己命太贱；
+ *                   不见满街漂亮妹，哪个归得程序员？
+*/
 
 public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContract.WorkDetailsCommentPresenter {
     WorkDetailsCommentContract.WorkDetailsCommentView commentView;
@@ -45,12 +58,13 @@ public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContrac
                     }
 
                     @Override
-                    public void onNext(WorkDetailsCommentBean userBean) {
-                        if (userBean.getState() == 0) {
-                            commentView.showError(userBean.getMsg());
-                            commentView.showWorkDetailsCommentBean(userBean);
+                    public void onNext(WorkDetailsCommentBean workDetailsCommentBean) {
+                        Log.d("WorkDetailsFragment", workDetailsCommentBean.getMsg());
+                        if (workDetailsCommentBean.getState() == 0) {
+                            commentView.showError(workDetailsCommentBean.getMsg());
+                            commentView.showWorkDetailsCommentBean(workDetailsCommentBean);
                         } else {
-                            commentView.showError(userBean.getMsg());
+                            commentView.showError(workDetailsCommentBean.getMsg());
                         }
                     }
 
