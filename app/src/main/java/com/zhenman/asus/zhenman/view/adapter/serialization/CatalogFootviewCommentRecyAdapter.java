@@ -82,7 +82,6 @@ public class CatalogFootviewCommentRecyAdapter extends RecyclerView.Adapter<Cata
 
             @Override
             public void onLoadingError(String source, Exception e) {
-//                Toast.makeText(context, source, Toast.LENGTH_SHORT).show();
             }
         });
 

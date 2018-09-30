@@ -102,10 +102,6 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
                 sex = "1";
                 SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_SEX, "1");
             }
-//            SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
-//            Log.e("Sunny", data.get("unionid"));
-//            Log.e("Sunny", data.get("openid"));
-//            Log.e("Sunny", TYPE);
 
             if (user_mobile.isEmpty()) {
 //               如果手机号为空就代表是第三方绑定第三方
@@ -141,8 +137,6 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
 //                    如果是微信的话
                     SPUtils.put(AccountManagementActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
                     SPUtils.put(AccountManagementActivity.this, SPKey.WEIXIN_NAME, data.get("name"));
-                    Log.e("Sunny", data.get("unionid"));
-                    Log.e("Sunny", data.get("openid"));
                     presenter.sendPhoneBindThirdData(user_mobile, data.get("unionid"), TYPE, data.get("name"), "",
                             data.get("iconurl"), sex, data.get("openid"));
                 }
@@ -339,7 +333,6 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
                 break;
             case R.id.account_bindSina:
                 if (sina_name.isEmpty()) {
-                    Log.e("Sunny", sina_name);
 
                     new AlertDialog.Builder(this)
                             .setTitle("提示")
@@ -359,7 +352,6 @@ public class AccountManagementActivity extends BaseActivity<AccountManagePresent
                             })
                             .show();
                 } else {
-                    Log.e("Sunny", sina_name);
 
                     new AlertDialog.Builder(this)
                             .setTitle("提示")

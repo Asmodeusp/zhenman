@@ -30,7 +30,6 @@ public class BookshelfAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-//        return super.getPageTitle(position);
         return homePageTab_title.get(position);
     }
 }

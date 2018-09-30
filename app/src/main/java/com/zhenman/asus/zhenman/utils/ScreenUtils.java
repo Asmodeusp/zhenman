@@ -13,10 +13,6 @@ import java.lang.reflect.Method;
 
 public class ScreenUtils {
 
-    private ScreenUtils() {
-        throw new UnsupportedOperationException("本屏幕工具类不能被实例化,直接调用静态方法就好");
-    }
-
     /**
      * 横竖屏
      *

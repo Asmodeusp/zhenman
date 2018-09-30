@@ -85,18 +85,7 @@ public class ModifyPasswordOneActivity extends BaseActivity implements View.OnCl
             case R.id.app_back:
                 finish();
                 break;
-           /* case R.id.modifyPsOne_lookPs:
-                if (modifyPsOne_lookPs.isChecked()) {
-                    modifyPsOne_lookPs.setButtonDrawable(R.mipmap.my_password_show);
 
-                    modifyPsOne_enterPs.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    modifyPsOne_enterPs.setSelection(modifyPsOne_enterPs.getText().length());        //把光标设置到当前文本末尾
-                } else {
-                    modifyPsOne_lookPs.setButtonDrawable(R.mipmap.my_password_hide);
-                    modifyPsOne_enterPs.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    modifyPsOne_enterPs.setSelection(modifyPsOne_enterPs.getText().length());        //把光标设置到当前文本末尾
-                }
-                break;*/
             case R.id.modifyPsOne_getCode:
                 String telRegex = "^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\\d{8}$";// "[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
                 if (!modifyPsOne_enterPhone.getText().toString().trim().matches(telRegex)) {
@@ -116,7 +105,6 @@ public class ModifyPasswordOneActivity extends BaseActivity implements View.OnCl
                 window.dismiss();
                 break;
             case R.id.image_code_sure_Btn:
-//                presenter.getVerificationCode(mRegisterPhoneNumber.getText().toString().trim(), image_code_ed.getText().toString().trim());
                 window.dismiss();
                 break;
         }

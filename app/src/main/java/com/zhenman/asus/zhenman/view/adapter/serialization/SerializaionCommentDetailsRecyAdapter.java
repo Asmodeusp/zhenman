@@ -58,7 +58,6 @@ public class SerializaionCommentDetailsRecyAdapter extends RecyclerView.Adapter<
 
             @Override
             public void onLoadingError(String source, Exception e) {
-//                Toast.makeText(context, source, Toast.LENGTH_SHORT).show();
             }
         });
         holder.fill_Serializaion_commentDetails_Comment.setText(list.get(position).getContent());

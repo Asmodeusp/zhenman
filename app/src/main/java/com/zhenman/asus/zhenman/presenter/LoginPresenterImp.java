@@ -95,26 +95,20 @@ public class LoginPresenterImp implements LoginContract.LoginPresenter {
                 .subscribe(new Observer<ThirdPartyLoginBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Log.e("onComple", d.toString());
                     }
 
                     @Override
                     public void onNext(ThirdPartyLoginBean uMengLoginBean) {
-                        Log.e("onNext", uMengLoginBean.getMsg());
-                        Log.e("onNext", uMengLoginBean.getState() + "");
-
                         loginView.showUMengLoginData(uMengLoginBean);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("onError", e.getMessage());
 
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.e("onComple", "8956");
 
                     }
                 });

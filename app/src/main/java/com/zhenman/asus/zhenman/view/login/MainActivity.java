@@ -120,9 +120,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             }
             if (TYPE.equals("1")) {//微信
                 SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
-                Log.e("Sunny", data.get("unionid"));
-                Log.e("Sunny", data.get("openid"));
-                Log.e("Sunny", data.get("name"));
                 presenter.sendUMengLoginData(data.get("unionid"), data.get("name"), "",
                         data.get("iconurl"), sex, TYPE, data.get("openid"));
             }

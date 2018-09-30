@@ -59,7 +59,6 @@ public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContrac
 
                     @Override
                     public void onNext(WorkDetailsCommentBean workDetailsCommentBean) {
-                        Log.d("WorkDetailsFragment", workDetailsCommentBean.getMsg());
                         if (workDetailsCommentBean.getState() == 0) {
                             commentView.showError(workDetailsCommentBean.getMsg());
                             commentView.showWorkDetailsCommentBean(workDetailsCommentBean);

@@ -80,7 +80,6 @@ public class RetrofitUtils {
             public Response intercept(Chain chain) throws IOException {
                 Request originalRequest = chain.request();
                 Request.Builder requestBuilder = originalRequest.newBuilder()
-                        // Provide your custom header here
                         .header("os", "Android")
                         .header("accessToken",((String)SPUtils.get(App.context, SPKey.USER_TOKEN, "")))
                         .header("osVersion", Build.VERSION.RELEASE)

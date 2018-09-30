@@ -239,7 +239,7 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
     }
 
     @Override
-    public void getPgcChapterCommentListByOffSetBean(String chapterId, String start, String end, String pageNum) {
+    public void getPgcChapterCommentListByOffSetBean(String chapterId, String start, String end, final String pageNum) {
         Map<String, String> map = new HashMap<>();
         map.put("chapterId", chapterId);
         map.put("start", start);
@@ -258,6 +258,7 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
 
                     @Override
                     public void onNext(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean) {
+                        Log.d("SerializationCatalogRea", pgcChapterCommentListByOffSetBean.getMsg());
                         if (pgcChapterCommentListByOffSetBean.getState() == 0) {
                             serializationCatalogReadView.showError(pgcChapterCommentListByOffSetBean.getMsg());
                             serializationCatalogReadView.showPgcChapterCommentListByOffSetBean(pgcChapterCommentListByOffSetBean);

@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.home.AttentionFragment">
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/Home_Attention_SmartRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/Home_Attention_Recy"
+        <com.zhy.autolayout.AutoRelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/Home_Attention_Recy_Tip"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="你还没有关注任何用户噢！"
+                android:textColor="@color/h2"
+                android:textSize="@dimen/px_24"
+                android:visibility="gone" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/Home_Attention_Recy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        </com.zhy.autolayout.AutoRelativeLayout>
+
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 
-
-</com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoRelativeLayout>

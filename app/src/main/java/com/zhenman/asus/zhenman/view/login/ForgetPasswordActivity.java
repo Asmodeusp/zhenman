@@ -75,7 +75,6 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         mRegisterPhotoCode.setOnClickListener(this);
 
 
-//        mRegisterPhotoCode
     }
 
 
@@ -107,7 +106,6 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                 if (mRegisterPhotoCodeEd.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
                 }else {
-//                    presenter.getRegisterLoginCode(mRegisterPhoneNumber.getText().toString().trim(), mRegisterPhotoCodeEd.getText().toString().trim());
                     finish();
                 }
 
@@ -119,7 +117,6 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                 window.dismiss();
                 break;
             case R.id.image_code_sure_Btn:
-//                presenter.getVerificationCode(mRegisterPhoneNumber.getText().toString().trim(), image_code_ed.getText().toString().trim());
                 window.dismiss();
                 break;
 

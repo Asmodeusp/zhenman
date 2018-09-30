@@ -315,6 +315,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         }
 
     }
+
     //章节实体类
     @Override
     public void showSerializationCatalogBean(SerializationCatalogBean
@@ -442,7 +443,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 break;
             //弹出评论
             case R.id.serializationCatalogReadCommentBtn:
-                initCommentpopu();
+//                initCommentpopu();
                 break;
             //弹出章节目录
             case R.id.serializationCatalogReadCatalogBtn:
@@ -501,14 +502,13 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             case R.id.CommentPopu_CommentCloseImg:
                 dialog.dismiss();
                 break;
-            //                分享
+            //分享
             case R.id.CataLog_FootViewShareBtn:
                 UMSharePlatform.getImstance().shareImage(SerializationCatalogReadActivity.this);
                 break;
             case R.id.ppwPay_payBtn:
                 if (paymentMethod.equals("1")) {
                     presenter.setWxMakeOrderData(qieziId + "", "1", StartcatalogId, "262", "0.1", "支付");
-
                 } else if (paymentMethod.equals("2")) {
                     presenter.setMakeOrderData(qieziId + "", "1", StartcatalogId, "262", "1", "支付");
                 } else {
@@ -672,9 +672,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         if (pgcChapterCommentListByOffSetBean != null) {
 
             result.addAll(pgcChapterCommentListByOffSetBean.getData().getCommentDtoList());
-            if (result!=null) {
+            if (result != null) {
                 if (result.size() != 0) {
-
                     cataLog_footViewComment_recy.setVisibility(View.VISIBLE);
                     cataLog_footViewComment_recyTip.setVisibility(View.GONE);
                     catalogFootviewCommentRecyAdapter = new CatalogFootviewCommentRecyAdapter(pgcChapterCommentListByOffSetBean.getData().getCommentDtoList(), StartcatalogId, presenter);

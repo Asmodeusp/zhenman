@@ -74,7 +74,6 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
         mRegisterPhotoCode.setOnClickListener(this);
 
 
-//        mRegisterPhotoCode
     }
 
 
@@ -96,7 +95,6 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
                 } else if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-//                    initpopu();
                     presenter.getVerificationCode(mRegisterPhoneNumber.getText().toString().trim(),"3432");
 
 
@@ -196,17 +194,7 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
         startActivity(intent);
 
         finish();
-        /*if (!mRegisterPhoneNumber.getText().toString().isEmpty()&&!mRegisterPhotoCodeEd.getText().toString().isEmpty()){
-            mRegisterNextBtn.setBackgroundColor(Color.parseColor("#ffffff"));
-            mRegisterNextBtn.setClickable(true);
 
-            Intent intent = new Intent(RegisterCodeActivity.this, SetPasswordActivity.class);
-            intent.putExtra("msmcode", mRegisterPhotoCodeEd.getText().toString().trim());
-            intent.putExtra("phone", mRegisterPhoneNumber.getText().toString().trim());
-            startActivity(intent);
-        }else {
-            mRegisterNextBtn.setClickable(false);
-        }*/
 
     }
 

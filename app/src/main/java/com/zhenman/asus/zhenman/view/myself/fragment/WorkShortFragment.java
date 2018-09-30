@@ -30,7 +30,6 @@ public class WorkShortFragment extends BaseFragment<WorkShortComicPresenter> imp
     private TextView workShort_noData;
 
     public WorkShortFragment() {
-        // Required empty public constructor
     }
 
 

@@ -67,7 +67,6 @@ public class BindPhoneNumActivity extends BaseActivity<BindNewPhoneNumPresenter>
     }
 
     private void submit() {
-        // validate
         String PhoneNumberEd = alartBind_PhoneNumberEd.getText().toString().trim();
         if (TextUtils.isEmpty(PhoneNumberEd)) {
             Toast.makeText(this, "PhoneNumberEd不能为空", Toast.LENGTH_SHORT).show();
@@ -87,7 +86,6 @@ public class BindPhoneNumActivity extends BaseActivity<BindNewPhoneNumPresenter>
         }
 
 
-        // TODO validate success, do something
 
 
     }

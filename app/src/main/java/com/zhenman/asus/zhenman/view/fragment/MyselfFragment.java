@@ -208,7 +208,6 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
     @Override
     public void onResume() {
         super.onResume();
-//        presenter.sendGetMyData((String) SPUtils.get(App.context, (String) SPUtils.get(getActivity(), SPKey.USER_OAUTHID, ""), ""));
         presenter.sendMyselfHeadData((String) SPUtils.get(getActivity(), SPKey.USER_ID, ""));
 
     }

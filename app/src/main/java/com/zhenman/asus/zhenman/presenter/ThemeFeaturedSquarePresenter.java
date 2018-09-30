@@ -46,7 +46,6 @@ public class ThemeFeaturedSquarePresenter implements ThemeFeaturedSquareContract
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("Sunny",e.getMessage());
                     }
 
                     @Override

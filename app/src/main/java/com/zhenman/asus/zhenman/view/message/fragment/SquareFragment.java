@@ -29,7 +29,6 @@ public class SquareFragment extends BaseFragment<ThemeFeaturedSquarePresenter> i
     private TextView square_none;
 
     public SquareFragment() {
-        // Required empty public constructor
     }
 
     @Override

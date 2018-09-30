@@ -33,7 +33,6 @@ public class HomeAttentionPresenterImp implements HomeAttentionContract.HomeAtte
 
                     @Override
                     public void onNext(HomeAttentionBean homeAttentionBean) {
-                        Log.e("HomeAttentionPresenterI", "Tell Me Why？");
                             homeAttentionView.showError(homeAttentionBean.getMsg());
                             homeAttentionView.showHomeAttentionBean(homeAttentionBean);
 

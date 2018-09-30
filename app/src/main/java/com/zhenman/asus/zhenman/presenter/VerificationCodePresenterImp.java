@@ -56,7 +56,6 @@ public class VerificationCodePresenterImp implements VerificationCodeContract.Ve
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("Sunny",e.getMessage());
                     }
 
                     @Override

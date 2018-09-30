@@ -44,7 +44,6 @@ public class AlipayUtils {
                 }
             };
         } catch (Exception _e) {
-            Log.e("2322", _e.getMessage());
         }
     }
 }

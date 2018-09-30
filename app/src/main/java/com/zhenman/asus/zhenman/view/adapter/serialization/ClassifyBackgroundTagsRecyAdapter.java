@@ -52,22 +52,6 @@ public class ClassifyBackgroundTagsRecyAdapter extends RecyclerView.Adapter<Clas
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
         holder.fill_classifyTags_Recy.setText(list.get(position).getTagName());
-//        holder.fill_classifyTags_Recy.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CheckBox lastview =null;
-//                if (holder.fill_classifyTags_Recy.isChecked()) {
-//                    lastview =holder.fill_classifyTags_Recy;
-//
-//                    holder.fill_classifyTags_Recy.setTextColor(Color.parseColor("#333333"));
-//                    classify_backgroundTagsAll.setTextColor(Color.parseColor("#666666"));
-//                }else{
-//                    holder.fill_classifyTags_Recy.setTextColor(Color.parseColor("#666666"));
-//                    classify_backgroundTagsAll.setTextColor(Color.parseColor("#333333"));
-//                }
-//                 lastview.setTextColor(Color.parseColor("#333333"));
-//            }
-//        });
         classify_backgroundTagsAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

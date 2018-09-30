@@ -39,7 +39,6 @@ public class PgcChapterCommentDetailPresenterImp  implements PgcChapterCommentDe
                     @Override
                     public void onNext(PgcChapterCommentDetailBean pgcChapterCommentDetailBean) {
                         if (pgcChapterCommentDetailBean.getState() == 0) {
-                            Log.e("qqqqqqqqqqqq",pgcChapterCommentDetailBean.getMsg());
                             pgcChapterCommentDetailView.showError(pgcChapterCommentDetailBean.getMsg());
                             pgcChapterCommentDetailView.showPgcChapterCommentDetailBean(pgcChapterCommentDetailBean);
                         } else {

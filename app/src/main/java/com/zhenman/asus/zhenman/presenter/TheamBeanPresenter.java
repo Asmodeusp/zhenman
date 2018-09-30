@@ -69,9 +69,6 @@ public class TheamBeanPresenter implements TheamBeanContract.TheamBeanInPresente
 
                     @Override
                     public void onNext(ThemeAttentionBean themeAttentionBean) {
-
-                        Log.e("9999999999",themeAttentionBean.getMsg());
-
                         if (themeAttentionBean.getData() == null) {
                             theamBeanInView.showError("取消关注成功");
                         } else {

@@ -141,9 +141,7 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
                         presenter.sendCheckCodeData(mRegisterPhoneNumber.getText().toString(), mRegisterPhotoCodeEd.getText().toString());
 
                     }
-//                    presenter.getRegisterLoginCode(mRegisterPhoneNumber.getText().toString().trim(), mRegisterPhotoCodeEd.getText().toString().trim());
-//                    requestPhotoCode(mRegisterPhoneNumber.getText().toString().trim());
-//                    finish();
+               finish();
                 }
 
                 break;
@@ -153,7 +151,6 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
                 window.dismiss();
                 break;
             case R.id.image_code_sure_Btn:
-//                presenter.getVerificationCode(mRegisterPhoneNumber.getText().toString().trim(), image_code_ed.getText().toString().trim());
                 window.dismiss();
                 break;
 

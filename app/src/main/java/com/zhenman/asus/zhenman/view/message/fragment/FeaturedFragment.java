@@ -30,7 +30,6 @@ public class FeaturedFragment extends BaseFragment<ThemeFeaturedSquarePresenter>
     private String subjectId;
 
     public FeaturedFragment() {
-        // Required empty public constructor
     }
 
     @Override
