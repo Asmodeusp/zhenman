@@ -1,8 +1,9 @@
 package com.zhenman.asus.zhenman.model.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class HomeAttentionBean {
+public class HomeAttentionBean  implements Serializable {
 
     /**
      * state : 0
@@ -38,7 +39,7 @@ public class HomeAttentionBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * pageNum : 1
          * pageSize : 20
@@ -113,7 +114,7 @@ public class HomeAttentionBean {
             this.result = result;
         }
 
-        public static class ResultBean {
+        public static class ResultBean implements Serializable {
             /**
              * name : jojoman
              * userId : 256
@@ -298,7 +299,7 @@ public class HomeAttentionBean {
                 this.imgList = imgList;
             }
 
-            public static class PgcDynamicDtoBean {
+            public static class PgcDynamicDtoBean implements Serializable{
                 /**
                  * pgcId :
                  * dynamicId : null
@@ -354,7 +355,7 @@ public class HomeAttentionBean {
                 }
             }
 
-            public static class UgcDynamicDtoBean {
+            public static class UgcDynamicDtoBean implements Serializable  {
                 /**
                  * ugcId : 112
                  * reCreate : true
@@ -400,7 +401,7 @@ public class HomeAttentionBean {
                 }
             }
 
-            public static class ImgListBean {
+            public static class ImgListBean implements Serializable {
                 /**
                  * shareImg : http://pa1qj1jlg.bkt.clouddn.com/UGC/0c62ec6676f142348cb227a82743d1c7_UGCMainImg?watermark/3/image/aHR0cDovL3BhMXFqMWpsZy5ia3QuY2xvdWRkbi5jb20vbG9nb19ib3R0b20ucG5nP2ltYWdlTW9ncjIvdGh1bWJuYWlsLzYyeA==/gravity/SouthEast/dx/264/dy/50/text/QGpvam9tYW4=/font/5b6u6L2v6ZuF6buR/fontsize/794/fill/I0ZGRkZGRg==/gravity/SouthEast/dx/60/dy/60
                  * finalImg : http://pa1qj1jlg.bkt.clouddn.com/UGC/0c62ec6676f142348cb227a82743d1c7_UGCMainImg

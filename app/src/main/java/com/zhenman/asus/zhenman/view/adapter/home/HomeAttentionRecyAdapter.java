@@ -1,10 +1,12 @@
 package com.zhenman.asus.zhenman.view.adapter.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.view.home.ShowPhotoActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.utils.AutoUtils;
 import java.util.List;
@@ -43,10 +46,17 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         Holder holder = new Holder(inflate);
         return holder;
     }
+    private ClickShow clickShow;
 
+    public void setClickShow(ClickShow clickShow) {
+        this.clickShow = clickShow;
+    }
+    public interface ClickShow {
+        void show(HomeAttentionBean.DataBean.ResultBean resultBean);
+    }
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void onBindViewHolder(@NonNull final Holder holder, int position) {
+    public void onBindViewHolder(@NonNull final Holder holder, final int position) {
         HomeAttentionBean.DataBean.ResultBean dataBean = list.get(position);
         //加载头像圆形图片
         GlideUtils.loadCircleImage(dataBean.getHeadImg(), holder.fill_Home_Attention_RecyHeadIew, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
@@ -63,37 +73,37 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         int MaxWidth = ScreenUtils.getScreenWidth(context) * 2 / 3;
         //图片加载最大高度
         int MaxHeight = MaxWidth;
-//        //超过一屏长图
-//        if (dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()<=216/332) {
-//            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxHeight*216/332,MaxHeight));
-////            holder.fill_Home_Attention_RecyImageView.setScaleType(ImageView.ScaleType.FIT_START);
-//            Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
-//            //超过一屏宽图
-//        }else if (dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()>=332/216) {
-//            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,dataBean.getThumbnailWidth()*332/216));
-//            Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
-//            //大于216/332的长图
-//        }else  if(dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()<1){
-//            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(((int) (dataBean.getThumbnailHeight()*dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight())),MaxHeight));
-//            Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
-//            //小于332/216的图
-//        }else if(dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()>1){
-//            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,((int)(dataBean.getThumbnailWidth()/dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()))));
-//            Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
-//        }else{
-//
-//            if (dataBean.getThumbnailWidth()<MaxWidth*0.65) {
-//                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams((int)(MaxWidth*0.65),(int)(MaxHeight*0.65)));
-//                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,((int)(dataBean.getThumbnailWidth()/dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()))));
-//            }else {
-//                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,MaxHeight));
-//                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,((int)(dataBean.getThumbnailWidth()/dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()))));
-//            }
-//        }
-//        holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxHeight*216/332,MaxHeight));
+        //超过一屏长图
+        if (dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()<=216/332) {
+            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxHeight*216/332,MaxHeight));
+            Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
+            //超过一屏宽图
+        }else if (dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()>=332/216) {
+            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,dataBean.getThumbnailWidth()*332/216));
+            Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
+            //大于216/332的长图
+        }else  if(dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()<1){
+            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(((int) (dataBean.getThumbnailHeight()*dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight())),MaxHeight));
+            holder.fill_Home_Attention_RecyImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
+            //小于332/216的图
+        }else if(dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()>1){
+            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,((int)(dataBean.getThumbnailWidth()/dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()))));
+            Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
+        }else{
 
-        //居中不缩放
-//        holder.fill_Home_Attention_RecyImageViewImageView.setScaleType(ImageView.ScaleType.CENTER);
+            if (dataBean.getThumbnailWidth()<MaxWidth*0.65) {
+                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams((int)(MaxWidth*0.65),(int)(MaxHeight*0.65)));
+                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,((int)(dataBean.getThumbnailWidth()/dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()))));
+                Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
+            }else {
+
+                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,MaxHeight));
+                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,((int)(dataBean.getThumbnailWidth()/dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()))));
+                Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
+            }
+        }
+
         //设置用户名
         holder.fill_Home_Attention_RecyUserNameText.setText(dataBean.getName());
         //设置发布时间
@@ -115,6 +125,12 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         });
 //        //加载作品图片
 //        holder.fill_Home_Attention_RecyImageView.displayImage(dataBean.getImgList().get(0).getThumbnailImg());
+        holder.fill_Home_Attention_RecyImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               clickShow.show(list.get(position));
+            }
+        });
         //消息点击事件
         holder.fill_Home_Attention_RecyCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,7 +163,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         //描述
         private TextView fill_Home_Attention_RecyDescriptionText;
         //作评图片
-        private SketchImageView fill_Home_Attention_RecyImageView;
+        private ImageView fill_Home_Attention_RecyImageView;
         //分享按钮
         private AutoLinearLayout fill_Home_Attention_RecyShareButton;
         //评论按钮

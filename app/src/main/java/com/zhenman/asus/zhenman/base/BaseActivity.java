@@ -14,7 +14,6 @@ import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.gyf.barlibrary.ImmersionBar;
 import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.utils.NetUtils;
 import com.zhenman.asus.zhenman.utils.OnBooleanListener;
@@ -40,7 +39,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
-//        ImmersionBar.with(this).init();
 
 //        权限配置
         if (Build.VERSION.SDK_INT >= 23) {
@@ -147,7 +145,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ImmersionBar.with(this).destroy(); //必须调用该方法，防止内存泄漏
     }
 
     /**

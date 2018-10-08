@@ -158,7 +158,8 @@
         <activity android:name=".view.myself.BindPhoneNumActivity" />
         <activity android:name=".view.message.ThemeDetailsActivity" />
         <activity android:name=".view.myself.MyAttentionActivity" />
-        <activity android:name=".view.myself.MyFansActivity"></activity>
+        <activity android:name=".view.myself.MyFansActivity" />
+        <activity android:name=".view.home.ShowPhotoActivity"></activity>
     </application>
 
 </manifest>

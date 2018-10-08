@@ -14,7 +14,7 @@
             android:layout_width="@dimen/px_100"
             android:src="@mipmap/my_qiezi"
             android:layout_height="@dimen/px_100"
-            android:layout_marginLeft="@dimen/px_24"
+
             android:layout_marginRight="@dimen/px_24" />
 
         <com.zhy.autolayout.AutoLinearLayout
@@ -54,13 +54,11 @@
             android:id="@+id/fill_Home_Attention_RecyDescriptionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/px_24"
             android:text="这操作太逆天了~马住！"
             android:textColor="@color/h2"
             android:textSize="@dimen/px_32" />
 
-        <me.panpf.sketch.SketchImageView
-            android:layout_marginLeft="@dimen/px_24"
+        <ImageView
             android:id="@+id/fill_Home_Attention_RecyImageView"
             android:layout_width="wrap_content"
             android:layout_height="320px"

@@ -84,6 +84,14 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
             if (homeAttentionBean.getData().getResult()!=null) {
                 HomeAttentionRecyAdapter homeAttentionRecyAdapter = new HomeAttentionRecyAdapter(homeAttentionBean.getData().getResult());
                 HomeAttentionRecy.setAdapter(homeAttentionRecyAdapter);
+                homeAttentionRecyAdapter.setClickShow(new HomeAttentionRecyAdapter.ClickShow() {
+                    @Override
+                    public void show(HomeAttentionBean.DataBean.ResultBean resultBean) {
+                        Intent intent = new Intent(getActivity(), ShowPhotoActivity.class);
+                        intent.putExtra("ResultBean",resultBean);
+                        startActivity(intent);
+                    }
+                });
             }
             if (homeAttentionBean.getData().getResult().size()==0) {
                 HomeAttentionRecy.setVisibility(View.GONE);
