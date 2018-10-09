@@ -5,10 +5,19 @@
     android:layout_height="match_parent"
     android:background="@color/h1"
     tools:context=".view.home.ShowPhotoFragment">
-<me.panpf.sketch.SketchImageView
-    android:id="@+id/show_photo_ImageView"
-    android:background="@mipmap/common_qiezi"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/h1" />
+
+    <me.panpf.sketch.SketchImageView
+        android:id="@+id/show_photo_ImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="@mipmap/common_qiezi"
+        android:backgroundTint="@color/h1" />
 
 </com.zhy.autolayout.AutoRelativeLayout>

@@ -93,6 +93,9 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     @Override
     public void showPGCReadFabulousBean(UgcFabulousBean ugcFabulousBean) {
+        if (ugcFabulousBean.getMsg().equals("未登录")) {
+
+        }
 
     }
 

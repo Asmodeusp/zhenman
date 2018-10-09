@@ -90,6 +90,7 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
                         Intent intent = new Intent(getActivity(), ShowPhotoActivity.class);
                         intent.putExtra("ResultBean",resultBean);
                         startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.activity_open,R.anim.activity_close);
                     }
                 });
             }
