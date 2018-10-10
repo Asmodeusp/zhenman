@@ -4,8 +4,11 @@ import android.util.Log;
 
 import com.zhenman.asus.zhenman.contract.HomeAttentionContract;
 import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
+import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
+import com.zhenman.asus.zhenman.model.bean.ThemeAttentionBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.model.service.HomeAttentionService;
+import com.zhenman.asus.zhenman.model.service.ThemeService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 
 import java.util.HashMap;
@@ -65,7 +68,7 @@ public class HomeAttentionPresenterImp implements HomeAttentionContract.HomeAtte
                     public void onNext(UgcFabulousBean ugcFabulousBean) {
                         if (ugcFabulousBean.getState() == 0) {
                             homeAttentionView.showError(ugcFabulousBean.getMsg());
-                            homeAttentionView.showPGCReadFabulousBean(ugcFabulousBean);
+                            homeAttentionView.showUgcFabulousBean(ugcFabulousBean);
                         } else {
                             homeAttentionView.showError(ugcFabulousBean.getMsg());
                         }
@@ -73,6 +76,77 @@ public class HomeAttentionPresenterImp implements HomeAttentionContract.HomeAtte
 
                     @Override
                     public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void PgcCollection(String productId, String status) {
+        Map<String, String> map = new HashMap<>();
+        map.put("productId", productId);
+        map.put("status", status);
+        RetrofitUtils.getInstance().getService(HomeAttentionService.class).GetPgcCollectionBean(map).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<PgcCollectionBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(PgcCollectionBean pgcCollectionBean) {
+                        if (pgcCollectionBean.getState() == 0) {
+                            homeAttentionView.showError(pgcCollectionBean.getMsg());
+                            homeAttentionView.showPgcCollectionBean(pgcCollectionBean);
+                        } else {
+                            homeAttentionView.showError(pgcCollectionBean.getMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void GetAttentionThemeData(String subjectId, String status) {
+        HashMap<String, String> parmaMap = new HashMap<>();
+        parmaMap.put("subjectId", subjectId);
+        parmaMap.put("status", status);
+        RetrofitUtils.getInstance().getService(HomeAttentionService.class)
+                .GetThemeAttentionBean(parmaMap)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ThemeAttentionBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(ThemeAttentionBean themeAttentionBean) {
+
+
+                        if (themeAttentionBean.getData() == null) {
+                            homeAttentionView.showError("取消关注成功");
+                        } else {
+                            homeAttentionView.showAttentionTheme(themeAttentionBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
                     }
 
                     @Override

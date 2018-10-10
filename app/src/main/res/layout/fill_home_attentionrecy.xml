@@ -14,7 +14,6 @@
             android:layout_width="@dimen/px_100"
             android:layout_height="@dimen/px_100"
             android:layout_marginRight="@dimen/px_24"
-
             android:src="@mipmap/my_qiezi" />
 
         <com.zhy.autolayout.AutoLinearLayout
@@ -60,8 +59,8 @@
 
         <ImageView
             android:id="@+id/fill_Home_Attention_RecyImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="320px"
+            android:layout_width="346px"
+            android:layout_height="516px"
             android:layout_marginTop="@dimen/px_16"
             android:src="@mipmap/common_qiezi" />
     </com.zhy.autolayout.AutoLinearLayout>
@@ -138,6 +137,7 @@
             android:layout_weight="1">
 
             <ImageView
+                android:id="@+id/fill_Home_Attention_RecyLikeImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

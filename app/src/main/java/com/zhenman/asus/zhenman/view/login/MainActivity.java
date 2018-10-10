@@ -27,6 +27,7 @@ import com.zhenman.asus.zhenman.utils.umeng.ShareCallBack;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
 import com.zhenman.asus.zhenman.view.ContentActivity;
 
+import java.nio.file.FileStore;
 import java.util.Map;
 
 
@@ -194,6 +195,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             case R.id.common_closeImage:
 //                跳转到首页
                 startActivity(new Intent(this, ContentActivity.class));
+                finish();
                 break;
             case R.id.loginbtn:
                 //手机号正则判断
@@ -276,6 +278,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     @Override
     public void gotoContent() {
         startActivity(new Intent(MainActivity.this, ContentActivity.class));
+        finish();
     }
 
     //    得到友盟返回的数据

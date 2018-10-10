@@ -2,6 +2,7 @@ package com.zhenman.asus.zhenman.view.adapter.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -17,14 +18,18 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
+import com.zhenman.asus.zhenman.presenter.HomeAttentionPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.home.ShowPhotoActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.utils.AutoUtils;
+
 import java.util.List;
 
 import me.panpf.sketch.SketchImageView;
@@ -33,9 +38,12 @@ import me.panpf.sketch.SketchImageView;
 public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttentionRecyAdapter.Holder> {
     private List<HomeAttentionBean.DataBean.ResultBean> list;
     private Context context;
+    private boolean count = true;
+    private HomeAttentionPresenterImp presenter;
 
-    public HomeAttentionRecyAdapter(List<HomeAttentionBean.DataBean.ResultBean> list) {
+    public HomeAttentionRecyAdapter(List<HomeAttentionBean.DataBean.ResultBean> list, HomeAttentionPresenterImp presenter) {
         this.list = list;
+        this.presenter = presenter;
     }
 
     @NonNull
@@ -46,18 +54,21 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         Holder holder = new Holder(inflate);
         return holder;
     }
+
     private ClickShow clickShow;
 
     public void setClickShow(ClickShow clickShow) {
         this.clickShow = clickShow;
     }
+
     public interface ClickShow {
         void show(HomeAttentionBean.DataBean.ResultBean resultBean);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
-        HomeAttentionBean.DataBean.ResultBean dataBean = list.get(position);
+        final HomeAttentionBean.DataBean.ResultBean dataBean = list.get(position);
         //加载头像圆形图片
         GlideUtils.loadCircleImage(dataBean.getHeadImg(), holder.fill_Home_Attention_RecyHeadIew, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
             @Override
@@ -74,32 +85,32 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         //图片加载最大高度
         int MaxHeight = MaxWidth;
         //超过一屏长图
-        if (dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()<=216/332) {
-            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxHeight*216/332,MaxHeight));
+        if (dataBean.getThumbnailWidth() / dataBean.getThumbnailHeight() <= 216 / 332) {
+            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxHeight * 216 / 332, MaxHeight));
             Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
             //超过一屏宽图
-        }else if (dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()>=332/216) {
-            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,dataBean.getThumbnailWidth()*332/216));
+        } else if (dataBean.getThumbnailWidth() / dataBean.getThumbnailHeight() >= 332 / 216) {
+            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth, dataBean.getThumbnailWidth() * 332 / 216));
             Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
             //大于216/332的长图
-        }else  if(dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()<1){
-            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(((int) (dataBean.getThumbnailHeight()*dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight())),MaxHeight));
+        } else if (dataBean.getThumbnailWidth() / dataBean.getThumbnailHeight() < 1) {
+            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(((int) (dataBean.getThumbnailHeight() * dataBean.getThumbnailWidth() / dataBean.getThumbnailHeight())), MaxHeight));
             holder.fill_Home_Attention_RecyImageView.setScaleType(ImageView.ScaleType.FIT_XY);
             Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
             //小于332/216的图
-        }else if(dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()>1){
-            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,((int)(dataBean.getThumbnailWidth()/dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()))));
+        } else if (dataBean.getThumbnailWidth() / dataBean.getThumbnailHeight() > 1) {
+            holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth, ((int) (dataBean.getThumbnailWidth() / dataBean.getThumbnailWidth() / dataBean.getThumbnailHeight()))));
             Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
-        }else{
+        } else {
 
-            if (dataBean.getThumbnailWidth()<MaxWidth*0.65) {
-                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams((int)(MaxWidth*0.65),(int)(MaxHeight*0.65)));
-                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,((int)(dataBean.getThumbnailWidth()/dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()))));
+            if (dataBean.getThumbnailWidth() < MaxWidth * 0.65) {
+                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams((int) (MaxWidth * 0.65), (int) (MaxHeight * 0.65)));
+                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth, ((int) (dataBean.getThumbnailWidth() / dataBean.getThumbnailWidth() / dataBean.getThumbnailHeight()))));
                 Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
-            }else {
+            } else {
 
-                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,MaxHeight));
-                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth,((int)(dataBean.getThumbnailWidth()/dataBean.getThumbnailWidth()/dataBean.getThumbnailHeight()))));
+                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth, MaxHeight));
+                holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth, ((int) (dataBean.getThumbnailWidth() / dataBean.getThumbnailWidth() / dataBean.getThumbnailHeight()))));
                 Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
             }
         }
@@ -111,11 +122,11 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         //设置描述
         holder.fill_Home_Attention_RecyDescriptionText.setText(dataBean.getDescription());
         //设置分享数量
-        holder.fill_Home_Attention_RecyShareNumberText.setText(dataBean.getShareNum()+"");
+        holder.fill_Home_Attention_RecyShareNumberText.setText(dataBean.getShareNum() + "");
         //设置评论数量
-        holder.fill_Home_Attention_RecyCommentNumberText.setText(dataBean.getCommentNum()+"");
+        holder.fill_Home_Attention_RecyCommentNumberText.setText(dataBean.getCommentNum() + "");
         //设置喜欢数量
-        holder.fill_Home_Attention_RecyLikeNumberText.setText(dataBean.getLikeNum()+"");
+        holder.fill_Home_Attention_RecyLikeNumberText.setText(dataBean.getLikeNum() + "");
         //分享点击事件
         holder.fill_Home_Attention_RecyShareButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +139,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         holder.fill_Home_Attention_RecyImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               clickShow.show(list.get(position));
+                clickShow.show(list.get(position));
             }
         });
         //消息点击事件
@@ -138,19 +149,111 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
 
             }
         });
-        //喜欢点击事件
-        holder.fill_Home_Attention_RecyLikeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        holder.Home_Hot_IsLikeImageView.setOnClickListener(new View.OnClickListener() {
+//            @RequiresApi(api = Build.VERSION_CODES.M)
+//            @Override
+//            public void onClick(View v) {
+//                if (dataBean.isLike()) {
+//                    if (holder.Home_Hot_IsLikeImageView.isChecked()) {
+//                        holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_unlike);
+//                        AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
+//                        animationDrawable.start();
+//                        presenter.UgcFabulous(dataBean.getId(),"0");
+//                        holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) - 1 + "");
+//                    } else {
+//                        holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_like);
+//                        AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
+//                        animationDrawable.start();
+//                        holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
+//                    }
+//
+//                } else {
+//                    if (holder.Home_Hot_IsLikeImageView.isChecked()) {
+//                        holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_like);
+//                        AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
+//                        animationDrawable.start();
+//                        presenter.UgcFabulous(dataBean.getId(),"1");
+//                        holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
+//                    } else {
+//                        holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_unlike);
+//                        AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
+//                        animationDrawable.start();
+//                        holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
+//                    }
+//
+//                }
+//            }
+//        });
+        //设置喜欢图片
+        if (list.get(position).isLike()) {
+            holder.fill_Home_Attention_RecyLikeImageView.setImageResource(R.mipmap.guanzhu_like_on);
+            //喜欢点击事件
+            holder.fill_Home_Attention_RecyLikeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (count) {
+                        holder.fill_Home_Attention_RecyLikeImageView.setImageResource(R.mipmap.guanzhu_like_off);
+                        holder.fill_Home_Attention_RecyLikeNumberText.setText(dataBean.getLikeNum()-1 + "");
+                        if (list.get(position).getType()==1) {
+                            presenter.UgcFabulous(list.get(position).getUgcDynamicDto().getUgcId(),"0");
+                        }
+                        if (list.get(position).getType()==2) {
+                            presenter.PgcCollection(list.get(position).getPgcDynamicDto().getCatalogId(),"0");
+                        }
+                        count = false;
+                    } else {
+                        holder.fill_Home_Attention_RecyLikeImageView.setImageResource(R.mipmap.guanzhu_like_on);
+                        holder.fill_Home_Attention_RecyLikeNumberText.setText(dataBean.getLikeNum()+ "");
+                        if (list.get(position).getType()==1) {
+                            presenter.UgcFabulous(list.get(position).getUgcDynamicDto().getUgcId(),"1");
+                        }
+                        if (list.get(position).getType()==2) {
+                            presenter.PgcCollection(list.get(position).getPgcDynamicDto().getCatalogId(),"1");
+                        }
+                        count = true;
+                    }
 
-            }
-        });
+                }
+            });
+        } else {
+            holder.fill_Home_Attention_RecyLikeImageView.setImageResource(R.mipmap.guanzhu_like_off);
+            //喜欢点击事件
+            holder.fill_Home_Attention_RecyLikeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (count) {
+                        holder.fill_Home_Attention_RecyLikeImageView.setImageResource(R.mipmap.guanzhu_like_on);
+                        holder.fill_Home_Attention_RecyLikeNumberText.setText(dataBean.getLikeNum()+1 + "");
+                        if (list.get(position).getType()==1) {
+                            presenter.UgcFabulous(list.get(position).getUgcDynamicDto().getUgcId(),"1");
+                        }
+                        if (list.get(position).getType()==2) {
+                            presenter.PgcCollection(list.get(position).getPgcDynamicDto().getCatalogId(),"1");
+                        }
+                        count = false;
+                    } else {
+                        holder.fill_Home_Attention_RecyLikeImageView.setImageResource(R.mipmap.guanzhu_like_off);
+                        holder.fill_Home_Attention_RecyLikeNumberText.setText(dataBean.getLikeNum() + "");
+                        if (list.get(position).getType()==1) {
+                            presenter.UgcFabulous(list.get(position).getUgcDynamicDto().getUgcId(),"0");
+                        }
+                        if (list.get(position).getType()==2) {
+                            presenter.PgcCollection(list.get(position).getPgcDynamicDto().getCatalogId(),"0");
+                        }
+                        count = true;
+                    }
+
+                }
+            });
+        }
+
+
     }
 
 
     @Override
     public int getItemCount() {
-            return list.isEmpty() ? 0 : list.size();
+        return list.isEmpty() ? 0 : list.size();
     }
 
     public class Holder extends RecyclerView.ViewHolder {
@@ -176,6 +279,8 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         private TextView fill_Home_Attention_RecyCommentNumberText;
         //喜欢数量
         private TextView fill_Home_Attention_RecyLikeNumberText;
+        //喜欢图片
+        private ImageView fill_Home_Attention_RecyLikeImageView;
 
         public Holder(View itemView) {
             super(itemView);
@@ -201,6 +306,8 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             fill_Home_Attention_RecyCommentNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyCommentNumberText);
             //喜欢数量
             fill_Home_Attention_RecyLikeNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeNumberText);
+            //喜欢图片
+            fill_Home_Attention_RecyLikeImageView = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeImageView);
             AutoUtils.autoSize(itemView);
         }
     }

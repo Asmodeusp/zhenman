@@ -1,6 +1,9 @@
 package com.zhenman.asus.zhenman.model.service;
 
 import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
+import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
+import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
+import com.zhenman.asus.zhenman.model.bean.ThemeAttentionBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.utils.Urls;
 
@@ -21,4 +24,12 @@ public interface HomeAttentionService {
     @FormUrlEncoded
     @POST(Urls.UGCFABULOUS)
     Observable<UgcFabulousBean> GetUgcFabulousBean(@FieldMap Map<String, String> params);
+    //Pgc点赞(收藏)
+    @FormUrlEncoded
+    @POST(Urls.PGC_COLLECTION)
+    Observable<PgcCollectionBean> GetPgcCollectionBean(@FieldMap Map<String, String> params);
+    //关注主题
+    @FormUrlEncoded
+    @POST(Urls.ATTENTION_THEME)
+    Observable<ThemeAttentionBean> GetThemeAttentionBean(@FieldMap Map<String ,String > parmaMap);
 }

@@ -15,6 +15,8 @@ import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.HomeAttentionContract;
 import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
+import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
+import com.zhenman.asus.zhenman.model.bean.ThemeAttentionBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.HomeAttentionPresenterImp;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
@@ -73,6 +75,7 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
             Boolean ISlogin = (Boolean) SPUtils.get(getContext(), SPKey.IS_LOGIN, false);
             if (!ISlogin) {
                 startActivity(new Intent(getContext(), MainActivity.class));
+                getActivity().finish();
             }
         }
     }
@@ -82,7 +85,7 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
             HomeAttentionRecy.setVisibility(View.VISIBLE);
             Home_Attention_Recy_Tip.setVisibility(View.GONE);
             if (homeAttentionBean.getData().getResult()!=null) {
-                HomeAttentionRecyAdapter homeAttentionRecyAdapter = new HomeAttentionRecyAdapter(homeAttentionBean.getData().getResult());
+                HomeAttentionRecyAdapter homeAttentionRecyAdapter = new HomeAttentionRecyAdapter(homeAttentionBean.getData().getResult(),presenter);
                 HomeAttentionRecy.setAdapter(homeAttentionRecyAdapter);
                 homeAttentionRecyAdapter.setClickShow(new HomeAttentionRecyAdapter.ClickShow() {
                     @Override
@@ -105,7 +108,18 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
     }
 
     @Override
-    public void showPGCReadFabulousBean(UgcFabulousBean ugcFabulousBean) {
+    public void showUgcFabulousBean(UgcFabulousBean ugcFabulousBean) {
+
+    }
+
+
+    @Override
+    public void showPgcCollectionBean(PgcCollectionBean pgcCollectionBean) {
+
+    }
+
+    @Override
+    public void showAttentionTheme(ThemeAttentionBean themeAttentionBean) {
 
     }
 }
