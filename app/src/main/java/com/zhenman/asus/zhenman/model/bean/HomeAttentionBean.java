@@ -365,8 +365,8 @@ public class HomeAttentionBean  implements Serializable {
 
                 private String ugcId;
                 private boolean reCreate;
-                private Object subjectName;
-                private Object subjectId;
+                private String subjectName;
+                private String subjectId;
 
                 public String getUgcId() {
                     return ugcId;
@@ -384,19 +384,19 @@ public class HomeAttentionBean  implements Serializable {
                     this.reCreate = reCreate;
                 }
 
-                public Object getSubjectName() {
+                public String getSubjectName() {
                     return subjectName;
                 }
 
-                public void setSubjectName(Object subjectName) {
+                public void setSubjectName(String subjectName) {
                     this.subjectName = subjectName;
                 }
 
-                public Object getSubjectId() {
+                public String getSubjectId() {
                     return subjectId;
                 }
 
-                public void setSubjectId(Object subjectId) {
+                public void setSubjectId(String subjectId) {
                     this.subjectId = subjectId;
                 }
             }
