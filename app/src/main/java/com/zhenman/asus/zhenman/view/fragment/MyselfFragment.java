@@ -126,7 +126,7 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
         switch (v.getId()) {
             case R.id.my_setting://主页
                 Intent intent = new Intent(getActivity(), MySettingActivity.class);
-                intent.putExtra("UserId","");
+                intent.putExtra("UserId", "");
                 startActivity(intent);
                 break;
             case R.id.my_data://完善个人资料
@@ -146,7 +146,15 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 break;
             case R.id.my_WorksNumberPage:
 //                主页
-                startActivity(new Intent(getActivity(), HomepageActivity.class));
+                Intent intent1 = new Intent(getActivity(), HomepageActivity.class);
+               /* String himeId = (String) SPUtils.get(getActivity(), SPKey.HIM_ID, "");
+                if (himeId.isEmpty()) {
+                    intent1.putExtra("UserId", himeId);
+                } else {
+                    intent1.putExtra("UserId", "");
+                }*/
+                intent1.putExtra("from", "myself");
+                startActivity(intent1);
                 break;
             case R.id.my_FansPage:
 //                粉丝
@@ -177,6 +185,7 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
     //    头部信息
     @Override
     public void showMySelfHead(HomePageHeadBean homePageHeadBean) {
+
         if (homePageHeadBean.getState() == 0) {
             my_FansNumber.setText(homePageHeadBean.getData().getFans() + "");
             my_CareNumber.setText(homePageHeadBean.getData().getFollows() + "");
@@ -204,13 +213,18 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
         }
     }
 
-    //    已经刷新页面了
+    @Override
+    public void showError(String string) {
+        Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
+    }
+
+   /* //    已经刷新页面了
     @Override
     public void onResume() {
         super.onResume();
         presenter.sendMyselfHeadData((String) SPUtils.get(getActivity(), SPKey.USER_ID, ""));
 
-    }
+    }*/
 
 
 }

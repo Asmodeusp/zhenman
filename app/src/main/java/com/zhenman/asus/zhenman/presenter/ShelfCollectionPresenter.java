@@ -1,11 +1,16 @@
 package com.zhenman.asus.zhenman.presenter;
 
+import android.util.Log;
+
 import com.zhenman.asus.zhenman.contract.ShelfCollectionContract;
 import com.zhenman.asus.zhenman.model.bean.ShelfCollectionBean;
+import com.zhenman.asus.zhenman.model.bean.VerificationCodeBean;
 import com.zhenman.asus.zhenman.model.service.ShelfCollectionService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Map;
 
 import io.reactivex.Observer;
@@ -19,8 +24,8 @@ public class ShelfCollectionPresenter implements ShelfCollectionContract.ShelfCo
     @Override
     public void sendShelfCollectionData(String pageNum, String pageSize) {
         Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("pageNum",pageNum);
-        paramMap.put("pageSize",pageSize);
+        paramMap.put("pageNum", pageNum);
+        paramMap.put("pageSize", pageSize);
 
         RetrofitUtils.getInstance().getService(ShelfCollectionService.class)
                 .getShelfCollection(paramMap)
@@ -34,9 +39,9 @@ public class ShelfCollectionPresenter implements ShelfCollectionContract.ShelfCo
 
                     @Override
                     public void onNext(ShelfCollectionBean shelfCollectionBean) {
-                        if (shelfCollectionBean.getState()==0){
+                        if (shelfCollectionBean.getState() == 0) {
                             shelfCollectionInView.showShelfCollection(shelfCollectionBean);
-                        }else {
+                        } else {
                             shelfCollectionInView.showError("获取数据失败");
                         }
                     }
@@ -51,6 +56,55 @@ public class ShelfCollectionPresenter implements ShelfCollectionContract.ShelfCo
 
                     }
                 });
+    }
+
+    //    批量删除
+    @Override
+    public void sendDeleteCollection(ArrayList<String> lidList) {
+//        Map<String, String> paramMap = new HashMap<>();
+//        paramMap.put("lid",lid);
+        Map<String, String> paramMap = new IdentityHashMap<>();
+        for (String s : lidList) {
+            String Key = new String("lid");
+            paramMap.put(Key, s);
+            Log.e("Sunny", Key+"------"+s);
+
+
+        }
+
+        Log.e("Sunny", lidList.get(0).toString());
+        Log.e("Sunny", lidList.size()+"");
+        Log.e("Sunny", paramMap.size()+"");
+        RetrofitUtils.getInstance().getService(ShelfCollectionService.class)
+                .deleteCollection(paramMap)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<VerificationCodeBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(VerificationCodeBean verificationCodeBean) {
+                        if (verificationCodeBean.getState() == 0) {
+                            shelfCollectionInView.showDeleteCollection(verificationCodeBean);
+                        } else {
+                            shelfCollectionInView.showError(verificationCodeBean.getMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
     @Override

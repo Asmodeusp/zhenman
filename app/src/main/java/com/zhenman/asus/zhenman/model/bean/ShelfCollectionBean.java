@@ -131,7 +131,26 @@ public class ShelfCollectionBean {
             private String title;
             private int currentChapter;
             private int pgcId;
+            private boolean isDisplay;
 
+            public boolean isDisplay() {
+                return isDisplay;
+            }
+
+            public void setDisplay(Boolean display) {
+                isDisplay = display;
+            }
+
+            public boolean isCheck() {
+
+                return isCheck;
+            }
+
+            public void setCheck(boolean check) {
+                isCheck = check;
+            }
+
+            private  boolean isCheck;
             public int getLid() {
                 return lid;
             }

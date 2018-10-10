@@ -1,7 +1,7 @@
 package com.zhenman.asus.zhenman.view.adapter.myself;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,6 +22,7 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
     private List<MyAttenThemeBean.DataBean.ResultBean> dataBeanList;
     private Context context;
     private MyAttenThemeCallback myAttenThemeCallback;
+    boolean tag = false;
 
     public MyAttenThemeAdapter(List<MyAttenThemeBean.DataBean.ResultBean> dataBeanList, Context context) {
         this.dataBeanList = dataBeanList;
@@ -54,19 +55,17 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
         holder.itemMyAttenTheme_attention.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Button but = new Button(context);
-                boolean tag = false;
+                //                关注的时候要发送网络请求，状态参数   0去关注   1取消关注
                 if (tag == false) {
-                    myAttenThemeCallback.makeAttention(dataBeanList.get(i).getSubjectId(), 1);
-                    holder.itemMyAttenTheme_attention.setText("已关注");
-                    holder.itemMyAttenTheme_attention.setBackgroundDrawable(new ColorDrawable(R.drawable.attention_no_btn));
-
                     tag = true;
+                    holder.itemMyAttenTheme_attention.setText("已关注");
+                    holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#40a9ff"));
+                    holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.yiguanzhu);
                 } else {
-                    holder.itemMyAttenTheme_attention.setText("关注");
-                    myAttenThemeCallback.makeAttention(dataBeanList.get(i).getSubjectId(), 0);
-                    holder.itemMyAttenTheme_attention.setBackgroundDrawable(new ColorDrawable(R.drawable.attention_btn));
                     tag = false;
+                    holder.itemMyAttenTheme_attention.setText("关注");
+                    holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#ffffff"));
+                    holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.guanzhuzhuti);
                 }
             }
         });

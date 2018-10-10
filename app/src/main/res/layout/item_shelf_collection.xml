@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
@@ -12,9 +12,45 @@
         android:scaleType="fitXY"
         android:src="@mipmap/common_qiezi" />
 
+    <ImageView
+        android:id="@+id/itemShelfColl_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/px_20"
+        android:src="@mipmap/serial_shelf_off"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/itemShelfColl_on"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/px_20"
+        android:src="@mipmap/serial_shelf_on"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/itemShelfColl_mask"
+        android:layout_width="232px"
+        android:layout_height="326px"
+        android:padding="2px"
+        android:scaleType="fitXY"
+        android:src="@mipmap/home_mask_bottom"
+        />
+
+    <CheckBox
+        android:id="@+id/itemShelfColl_check"
+        android:layout_width="@dimen/px_44"
+        android:layout_height="@dimen/px_44"
+        android:layout_marginLeft="180px"
+        android:layout_marginTop="@dimen/px_8"
+        android:button="@mipmap/home_follow_on" />
+
     <TextView
         android:id="@+id/itemShelfColl_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/itemShelfColl_iamge"
         android:text="Sunny" />
-</com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoRelativeLayout>

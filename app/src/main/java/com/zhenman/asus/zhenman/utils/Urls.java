@@ -86,6 +86,9 @@ public class Urls {
     public static final String MY_ATTENTION_THEME = "ugcSubjectUser/getUserSubjectList";
     //    书架中我的收藏
     public static final String SHELF_COLLECTION = "userLikesPgc/getLikesPgcList";
+//   批量删除收藏作品
+    public static final String DELETE_COLLECTION = "userLikesPgc/deleteUserLikesPgc";
+
     //    手机号登录 手机号绑定三方账号
     public static final String MOBILE_BIND_THIRD = "userOauth/bindOauth";
     //    三方账号绑定另外的三方账号

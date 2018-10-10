@@ -1,5 +1,7 @@
 package com.zhenman.asus.zhenman.presenter;
 
+import android.util.Log;
+
 import com.zhenman.asus.zhenman.contract.HomePageContract;
 import com.zhenman.asus.zhenman.model.bean.HomePageHeadBean;
 import com.zhenman.asus.zhenman.model.service.HomePageService;
@@ -39,7 +41,7 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e("Sunny",e.getMessage());
                     }
 
                     @Override

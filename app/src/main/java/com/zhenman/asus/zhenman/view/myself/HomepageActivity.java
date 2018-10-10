@@ -2,10 +2,20 @@ package com.zhenman.asus.zhenman.view.myself;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,8 +66,24 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
     private AutoLinearLayout homePage_fansPage;
     private AutoLinearLayout homePage_attentionPage;
     private AutoLinearLayout homePage_themePage;
+    private String fromMyself = "myself";
+    private String fromHome = "home";
+    private TextView homePage_rewardHe;
+    private TextView homePage_attentionHe;
+    private View popupView1;
+    private RecyclerView ppwPay_productList;
+    private RadioButton ppwPay_zhifubaoBtn;
+    private RadioButton ppwPay_weixinBtn;
+    private Button ppwPay_payBtn;
+    private TextView ppwPay_payMoney;
+    private TextView ppwPay_qieziNum;
+    private RadioGroup ppwPay_radioGroup;
+    private TextView ppwPay_num;
+    private TextView ppwPay_userName;
+    private PopupWindow popupWindow;
+    private String paymentMethod;
+    private boolean tag = false;
 
-    @Override
     protected int getLayoutId() {
         return R.layout.activity_homepage;
     }
@@ -82,6 +108,8 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         my_data = (AutoRelativeLayout) findViewById(R.id.my_data);
         homePage_himTab = (TabLayout) findViewById(R.id.homePage_himTab);
         HomePage_Viewpager = (NoSrcollViewPage) findViewById(R.id.HomePage_Viewpager);
+        homePage_rewardHe = (TextView) findViewById(R.id.homePage_rewardHe);
+        homePage_attentionHe = (TextView) findViewById(R.id.homePage_attentionHe);
         app_title.setVisibility(View.GONE);
         homePageTab_title = new ArrayList<>();
         homePageTab_fragment = new ArrayList<>();
@@ -94,14 +122,24 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
         idListener();
         Intent intent = getIntent();
-        String userId = intent.getStringExtra("UserId");
-        if (!userId.isEmpty()) {
-            SPUtils.put(this, SPKey.HIM_ID, userId);
-            presenter.sendHomePageHeadData(userId);
+        String from = intent.getStringExtra("from");
+        if (fromHome.equals(from)) {
+            String himeId = (String) SPUtils.get(this, SPKey.HIM_ID, "");
+//        从Sp中获取他人ID，如果有的话就证明是从他人ID那里跳转过来的，如果没有的话证明是请求个人主页
+            if (himeId.isEmpty()) {
+                presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
+            } else {
+                presenter.sendHomePageHeadData(himeId);
+            }
 
-        } else {
-            presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
-
+        } else if (fromMyself.equals(from)) {//证明是从个人页面跳转过来的
+            String himeId = (String) SPUtils.get(this, SPKey.HIM_ID, "");
+//        从Sp中获取他人ID，如果有的话就证明是从他人ID那里跳转过来的，如果没有的话证明是请求个人主页
+            if (himeId.isEmpty()) {
+                presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
+            } else {
+                presenter.sendHomePageHeadData(himeId);
+            }
         }
 
         homePage_himTab.setupWithViewPager(HomePage_Viewpager);
@@ -115,6 +153,8 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         homePage_attentionPage.setOnClickListener(this);
         homePage_fansPage.setOnClickListener(this);
         homePage_worksPage.setOnClickListener(this);
+        homePage_rewardHe.setOnClickListener(this);
+        homePage_attentionHe.setOnClickListener(this);
     }
 
     @Override
@@ -139,8 +179,74 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
             case R.id.homePage_worksPage:
 //                startActivity(new Intent(HomepageActivity.this, HomepageActivity.class));
                 break;
+            case R.id.homePage_rewardHe:
+                showPopueWindow();
+                break;
+            case R.id.homePage_attentionHe:
+                //                关注的时候要发送网络请求，状态参数   0去关注   1取消关注
+                if (tag == false) {
+                    tag = true;
+                    homePage_attentionHe.setText("已关注");
+                    homePage_attentionHe.setTextColor(Color.parseColor("#AAAAAA"));
+                    homePage_attentionHe.setBackgroundResource(R.drawable.comment_popubackgound);
+                } else {
+                    tag = false;
+                    homePage_attentionHe.setText("关注");
+                    homePage_attentionHe.setTextColor(Color.parseColor("#b37feb"));
+
+                    homePage_attentionHe.setBackgroundResource(R.drawable.actor_shape);
+                }
+                break;
 
         }
+    }
+
+    private void showPopueWindow() {
+        popupView1 = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
+
+        ppwPay_productList = popupView1.findViewById(R.id.ppwPay_productList);
+        ppwPay_radioGroup = popupView1.findViewById(R.id.ppwPay_radioGroup);
+        ppwPay_zhifubaoBtn = popupView1.findViewById(R.id.ppwPay_zhifubaoBtn);
+        ppwPay_weixinBtn = popupView1.findViewById(R.id.ppwPay_weixinBtn);
+        ppwPay_payBtn = popupView1.findViewById(R.id.ppwPay_payBtn);
+        ppwPay_payMoney = popupView1.findViewById(R.id.ppwPay_payMoney);
+        ppwPay_qieziNum = popupView1.findViewById(R.id.ppwPay_qieziNum);
+        ppwPay_num = popupView1.findViewById(R.id.ppwPay_num);
+        ppwPay_userName = popupView1.findViewById(R.id.ppwPay_userName);
+
+        //获取屏幕宽高
+        int weight = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels * 1 / 2;
+
+        popupWindow = new PopupWindow(popupView1, weight, height);
+        // popupWindow.setAnimationStyle(R.style.anim_popup_dir);
+        popupWindow.setFocusable(true);
+        //点击外部popueWindow消失
+        popupWindow.setOutsideTouchable(true);
+        ppwPay_payBtn.setOnClickListener(this);
+        ppwPay_radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.ppwPay_weixinBtn:
+                        paymentMethod = "1";
+                        break;
+                    case R.id.ppwPay_zhifubaoBtn:
+                        paymentMethod = "2";
+                        break;
+                }
+            }
+        });
+        //popupWindow消失屏幕变为不透明
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1.0f;
+                getWindow().setAttributes(lp);
+            }
+        });
+        popupWindow.showAtLocation(popupView1, Gravity.BOTTOM, 0, 0);
     }
 
     @Override
@@ -164,4 +270,9 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) and run LayoutCreator again
+    }
 }

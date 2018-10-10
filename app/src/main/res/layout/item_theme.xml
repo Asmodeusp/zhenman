@@ -33,15 +33,15 @@
         android:layout_toRightOf="@id/itemTheme_headImage"
         android:text="愿你期待的明天是你想要的" />
 
-    <Button
+    <TextView
         android:id="@+id/itemTheme_attention"
         style="@style/Style32H9"
         android:layout_width="@dimen/px_128"
-        android:layout_height="@dimen/px_56"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/px_24"
         android:layout_marginTop="@dimen/px_32"
-        android:background="@drawable/attention_btn"
+        android:background="@drawable/guanzhuzhuti"
         android:gravity="center"
         android:text="关注" />
 

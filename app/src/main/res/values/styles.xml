@@ -63,6 +63,10 @@
         <item name="android:textColor">@color/c1</item>
         <item name="android:textSize">@dimen/px_32</item>
     </style>
+    <style name="Style32H4">
+        <item name="android:textColor">@color/h4</item>
+        <item name="android:textSize">@dimen/px_32</item>
+    </style>
     <style name="Style32H9">
         <item name="android:textColor">@color/h9</item>
         <item name="android:textSize">@dimen/px_32</item>

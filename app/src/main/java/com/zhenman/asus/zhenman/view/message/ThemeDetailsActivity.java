@@ -1,12 +1,11 @@
 package com.zhenman.asus.zhenman.view.message;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,22 +16,17 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.ThemeDetailHeadContract;
 import com.zhenman.asus.zhenman.model.bean.ThemeDetailHeadBean;
 import com.zhenman.asus.zhenman.presenter.ThemeDetailsPresenter;
-import com.zhenman.asus.zhenman.utils.Urls;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.message.MessageAdapter;
 import com.zhenman.asus.zhenman.view.message.fragment.FeaturedFragment;
 import com.zhenman.asus.zhenman.view.message.fragment.SquareFragment;
 import com.zhy.autolayout.AutoRelativeLayout;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> implements View.OnClickListener, ThemeDetailHeadContract.ThemeDetailHeadInView {
 
@@ -45,7 +39,7 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
     private TextView themeDetail_Name;
     private TextView themeDetail_introduction;
     private TextView themeDetail_attenNum;
-    private Button themeDetail_attention;
+    private TextView themeDetail_attention;
     private AutoRelativeLayout themeDetail_data;
     private TabLayout themeDetail_himTab;
     private ViewPager themeDetail_Viewpager;
@@ -73,11 +67,21 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
         themeDetail_Name = (TextView) findViewById(R.id.themeDetail_Name);
         themeDetail_introduction = (TextView) findViewById(R.id.themeDetail_introduction);
         themeDetail_attenNum = (TextView) findViewById(R.id.themeDetail_attenNum);
-        themeDetail_attention = (Button) findViewById(R.id.themeDetail_attention);
+        themeDetail_attention = (TextView) findViewById(R.id.themeDetail_attention);
         themeDetail_data = (AutoRelativeLayout) findViewById(R.id.themeDetail_data);
         themeDetail_himTab = (TabLayout) findViewById(R.id.themeDetail_himTab);
         themeDetail_Viewpager = (ViewPager) findViewById(R.id.themeDetail_Viewpager);
         app_title.setText("");
+        Boolean isAttention = (Boolean) SPUtils.get(this, SPKey.ATTENTION_THEME, false);
+        if (isAttention){
+            themeDetail_attention.setText("已关注");
+            themeDetail_attention.setTextColor(Color.parseColor("#40a9ff"));
+            themeDetail_attention.setBackgroundResource(R.drawable.yiguanzhu);
+        }else {
+            themeDetail_attention.setText("关注主题");
+            themeDetail_attention.setTextColor(Color.parseColor("#ffffff"));
+            themeDetail_attention.setBackgroundResource(R.drawable.guanzhuzhuti);
+        }
         idListener();
         initData();
     }

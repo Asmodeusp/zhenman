@@ -44,6 +44,7 @@ public class FeaturedFragment extends BaseFragment<ThemeFeaturedSquarePresenter>
         subjectId = (String) SPUtils.get(getContext(), SPKey.SUBJECT_ID, "");
 //      请求
         presenter.sendThemeFeaturedSquareData(subjectId, "1", "20", "1");
+
     }
 
     @Override

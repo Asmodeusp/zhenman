@@ -155,6 +155,8 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 
     @Override
     protected void init() {
+        getDatafromSP();
+
         //查找ID
         mFastLanding = findViewById(R.id.Fast_landing);
         mCommonCloseImage = findViewById(R.id.common_closeImage);
@@ -177,7 +179,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         mLoginWeixinImage.setOnClickListener(this);
         mLoginQqImage.setOnClickListener(this);
         mLogin_password_hide.setOnClickListener(this);
-        getDatafromSP();
     }
 
 

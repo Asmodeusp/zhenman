@@ -88,11 +88,46 @@
                             android:text="本宝宝的个人简历最多两行，所以我要写两行啊么么哒~"
                             android:textColor="@color/h4"
                             android:textSize="26px" />
-                        <com.zhy.autolayout.AutoLinearLayout
-                            android:layout_below="@id/homePage_Avatar"
-                            android:layout_marginTop="@dimen/px_24"
+
+                        <com.zhy.autolayout.AutoRelativeLayout
+                            android:id="@+id/homePage_aboutHim"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_below="@id/homePage_Avatar"
+                            android:layout_marginTop="@dimen/px_24">
+
+                            <TextView
+                                android:id="@+id/homePage_rewardHe"
+                                style="@style/Style26C1"
+                                android:layout_width="128px"
+                                android:layout_height="56px"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="29dp"
+                                android:layout_marginRight="29dp"
+                                android:background="@drawable/actor_shape"
+                                android:gravity="center"
+                                android:text="打赏TA" />
+
+                            <TextView
+                                android:id="@+id/homePage_attentionHe"
+                                style="@style/Style26C1"
+                                android:layout_width="128px"
+                                android:layout_height="56px"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="29px"
+                                android:layout_toLeftOf="@id/homePage_rewardHe"
+                                android:background="@drawable/actor_shape"
+                                android:gravity="center"
+                                android:text="关注他" />
+                        </com.zhy.autolayout.AutoRelativeLayout>
+
+                        <com.zhy.autolayout.AutoLinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/homePage_aboutHim"
+                            android:layout_marginTop="@dimen/px_40"
                             android:orientation="horizontal">
 
                             <com.zhy.autolayout.AutoLinearLayout

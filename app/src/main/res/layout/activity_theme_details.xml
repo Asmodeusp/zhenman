@@ -104,14 +104,14 @@
 
                             android:text="7关注" />
 
-                        <Button
+                        <TextView
                             android:id="@+id/themeDetail_attention"
                             style="@style/Style32H9"
                             android:layout_width="148px"
-                            android:layout_height="@dimen/px_56"
+                            android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="@dimen/px_24"
-                            android:background="@drawable/attention_btn"
+                            android:background="@drawable/guanzhuzhuti"
                             android:gravity="center"
                             android:text="关注主题" />
                     </com.zhy.autolayout.AutoRelativeLayout>

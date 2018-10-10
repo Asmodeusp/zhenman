@@ -19,6 +19,7 @@ public class BookshelfActivity extends BaseActivity implements View.OnClickListe
 
     private ImageView app_back;
     private TextView app_title;
+    public static TextView app_otherID;
     private TabLayout bookshelf_tab;
     private ViewPager bookshelf_page;
 
@@ -38,6 +39,7 @@ public class BookshelfActivity extends BaseActivity implements View.OnClickListe
         app_title = (TextView) findViewById(R.id.app_title);
         bookshelf_tab = (TabLayout) findViewById(R.id.bookshelf_tab);
         bookshelf_page = (ViewPager) findViewById(R.id.bookshelf_page);
+        app_otherID = (TextView) findViewById(R.id.app_otherID);
 
         title_List = new ArrayList<>();
         frag_List = new ArrayList<>();

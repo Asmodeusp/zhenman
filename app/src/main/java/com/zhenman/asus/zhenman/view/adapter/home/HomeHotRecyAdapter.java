@@ -7,9 +7,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +30,7 @@ import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.MyLayoutMessage;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
-import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -173,7 +168,8 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, HomepageActivity.class);
-                SPUtils.put(context, SPKey.HIM_ID,dataBean.getUserId());
+                SPUtils.put(context, SPKey.HIM_ID,dataBean.getUserId()+"");
+                intent.putExtra("from","home");
                 context.startActivity(intent);
             }
         });

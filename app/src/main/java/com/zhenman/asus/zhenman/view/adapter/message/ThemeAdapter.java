@@ -1,7 +1,7 @@
 package com.zhenman.asus.zhenman.view.adapter.message;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.TheamBean;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.List;
@@ -24,6 +26,9 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
     private List<TheamBean.DataBean> dataBeanList;
     private Context context;
     private ThemeCallback themeCallback;
+    private ThemeAttentionCallback themeAttentionCallback;
+    private boolean tag = false;
+    ;
 
     public ThemeAdapter(List<TheamBean.DataBean> dataBeanList, Context context) {
         this.dataBeanList = dataBeanList;
@@ -33,6 +38,10 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
     public interface ThemeCallback {
         void makeAttention(String subjectId, int status);
 
+    }
+
+    public interface ThemeAttentionCallback {
+        void themeAttentionCallback(String subjectId, int status);
     }
 
     public void ThemeCallback(ThemeCallback themeCallback) {
@@ -87,24 +96,28 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
             Glide.with(context).load(dataBeanList.get(i).getList().get(2)).into(holder.itemTheme_coverImage3);
             Glide.with(context).load(dataBeanList.get(i).getList().get(3)).into(holder.itemTheme_coverImage4);
         }
+
         holder.itemView.setTag(i);
         holder.itemTheme_attention.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Button but = new Button(context);
-                boolean tag = false;
+//                关注的时候要发送网络请求，状态参数   0去关注   1取消关注
                 if (tag == false) {
+                    tag = true;
                     themeCallback.makeAttention(dataBeanList.get(i).getSubjectId(), 1);
                     holder.itemTheme_attention.setText("已关注");
-                    holder.itemTheme_attention.setBackgroundDrawable(new ColorDrawable(R.drawable.attention_no_btn));
-
-                    tag = true;
+                    holder.itemTheme_attention.setTextColor(Color.parseColor("#40a9ff"));
+                    holder.itemTheme_attention.setBackgroundResource(R.drawable.yiguanzhu);
+                    SPUtils.put(context, SPKey.ATTENTION_THEME,true);
                 } else {
-                    holder.itemTheme_attention.setText("关注");
-                    themeCallback.makeAttention(dataBeanList.get(i).getSubjectId(), 0);
-                    holder.itemTheme_attention.setBackgroundDrawable(new ColorDrawable(R.drawable.attention_btn));
-
                     tag = false;
+                    holder.itemTheme_attention.setText("关注");
+                    holder.itemTheme_attention.setTextColor(Color.parseColor("#ffffff"));
+                    themeCallback.makeAttention(dataBeanList.get(i).getSubjectId(), 0);
+                    holder.itemTheme_attention.setBackgroundResource(R.drawable.guanzhuzhuti);
+                    SPUtils.put(context, SPKey.ATTENTION_THEME,false);
+
                 }
             }
         });
@@ -118,8 +131,9 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
 
     //布局监听事件
     private OnShortListener myCLick;
-    public void OnShortListener(OnShortListener onShortListener){
-        this.myCLick=onShortListener;
+
+    public void OnShortListener(OnShortListener onShortListener) {
+        this.myCLick = onShortListener;
     }
 
     public interface OnShortListener {
@@ -137,7 +151,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
         public CircleImageView itemTheme_headImage;
         public TextView itemTheme_title;
         public TextView itemTheme_description;
-        public Button itemTheme_attention;
+        public TextView itemTheme_attention;
         public ImageView itemTheme_coverImage1;
         public ImageView itemTheme_coverImage2;
         public ImageView itemTheme_coverImage3;
@@ -149,7 +163,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
             this.itemTheme_headImage = (CircleImageView) rootView.findViewById(R.id.itemTheme_headImage);
             this.itemTheme_title = (TextView) rootView.findViewById(R.id.itemTheme_title);
             this.itemTheme_description = (TextView) rootView.findViewById(R.id.itemTheme_description);
-            this.itemTheme_attention = (Button) rootView.findViewById(R.id.itemTheme_attention);
+            this.itemTheme_attention = (TextView) rootView.findViewById(R.id.itemTheme_attention);
             this.itemTheme_coverImage1 = (ImageView) rootView.findViewById(R.id.itemTheme_coverImage1);
             this.itemTheme_coverImage2 = (ImageView) rootView.findViewById(R.id.itemTheme_coverImage2);
             this.itemTheme_coverImage3 = (ImageView) rootView.findViewById(R.id.itemTheme_coverImage3);

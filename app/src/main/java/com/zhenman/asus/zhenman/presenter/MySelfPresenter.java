@@ -65,6 +65,8 @@ public class MySelfPresenter implements MySelfContract.MySelfInPresenter {
                     public void onNext(HomePageHeadBean homePageHeadBean) {
                         if (homePageHeadBean.getMsg().equals(GetData.MSG_SUCCESS)) {
                             mySelfInView.showMySelfHead(homePageHeadBean);
+                        }else{
+                            mySelfInView.showError(homePageHeadBean.getMsg());
                         }
                     }
 
