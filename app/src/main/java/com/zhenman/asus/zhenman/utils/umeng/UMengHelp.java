@@ -212,7 +212,7 @@ public class UMengHelp {
                     }
                 });
         if (isPanel) {
-            shareAction.setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN);//分享平台
+            shareAction.setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN_FAVORITE);//分享平台
             //带面板
             shareAction.open();
         }
