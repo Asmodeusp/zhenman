@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.adapter.home;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -21,6 +22,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.editorpage.ShareActivity;
+import com.umeng.socialize.media.UMImage;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
@@ -28,6 +33,8 @@ import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
+import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.MyLayoutMessage;
@@ -166,7 +173,6 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
 
             @Override
             public void onLoadingError(String source, Exception e) {
-//                Toast.makeText(context, source, Toast.LENGTH_SHORT).show();
             }
         });
         holder.Home_Hot_HeadImageView.setOnClickListener(new View.OnClickListener() {
@@ -204,7 +210,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         if (dataBean.isReCreate()) {
             holder.Home_Hot_EditImageView.setImageResource(R.mipmap.edit_pen_off);
         } else {
-            holder.Home_Hot_EditImageView.setImageResource(R.mipmap.edit_pen_on);
+            holder.Home_Hot_EditImageView.setImageResource(R.mipmap.edit_color_off);
         }
         //喜欢点赞
         if (dataBean.isLike()) {
@@ -281,6 +287,13 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
             });
 
         }
+        //分享
+        holder.Home_Hot_ShareImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UMengHelp.shareImg((Activity) context,dataBean.getShareImg(),true);
+            }
+        });
 
     }
 

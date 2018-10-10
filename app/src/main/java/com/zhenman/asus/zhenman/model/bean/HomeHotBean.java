@@ -82,7 +82,7 @@ public class HomeHotBean implements Serializable {
         private String likeNum;
         private String commentNum;
         private String shareNum;
-        private Object shareImg;
+        private String shareImg;
         private boolean follow;
         private boolean like;
         private boolean reCreate;
@@ -218,11 +218,11 @@ public class HomeHotBean implements Serializable {
             this.shareNum = shareNum;
         }
 
-        public Object getShareImg() {
+        public String getShareImg() {
             return shareImg;
         }
 
-        public void setShareImg(Object shareImg) {
+        public void setShareImg(String shareImg) {
             this.shareImg = shareImg;
         }
 

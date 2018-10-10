@@ -167,7 +167,7 @@ public class UMengHelp {
      * @param activity
      * @param imageUrl 图片的url地址
      */
-    public static void shareImg(final Activity activity, SHARE_MEDIA platform, String imageUrl, boolean isPanel) {
+    public static void shareImg(final Activity activity, String imageUrl, boolean isPanel) {
 
         UMImage image = new UMImage(activity, imageUrl);//网络图片
         ShareAction shareAction = new ShareAction(activity)
@@ -212,13 +212,9 @@ public class UMengHelp {
                     }
                 });
         if (isPanel) {
-            shareAction.setDisplayList(platform);//分享平台
+            shareAction.setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN);//分享平台
             //带面板
             shareAction.open();
-        } else {
-            shareAction.setPlatform(platform);//分享平台
-            //不带面板
-            shareAction.share();
         }
     }
 
