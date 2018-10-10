@@ -2,12 +2,10 @@ package com.zhenman.asus.zhenman.view.adapter.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,23 +16,18 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
 import com.zhenman.asus.zhenman.presenter.HomeAttentionPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
-import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
-import com.zhenman.asus.zhenman.view.home.ShowPhotoActivity;
 import com.zhenman.asus.zhenman.view.message.ThemeDetailsActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
-
-import me.panpf.sketch.SketchImageView;
 
 
 public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttentionRecyAdapter.Holder> {
@@ -137,8 +130,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
 
             }
         });
-//        //加载作品图片
-//        holder.fill_Home_Attention_RecyImageView.displayImage(dataBean.getImgList().get(0).getThumbnailImg());
+        //加载作品图片
         holder.fill_Home_Attention_RecyImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -218,10 +210,9 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         }
 
         //设置主题是否显示
-        if (list.get(position).getUgcDynamicDto().getSubjectId()==null) {
+        if (list.get(position).getUgcDynamicDto().getSubjectId() == null) {
             holder.fill_Home_Attention_RecyThemLin.setVisibility(View.GONE);
-        }else
-        {
+        } else {
             holder.fill_Home_Attention_RecyThemLin.setVisibility(View.VISIBLE);
             holder.fill_Home_Attention_RecyThemText.setText(list.get(position).getUgcDynamicDto().getSubjectName());
         }
