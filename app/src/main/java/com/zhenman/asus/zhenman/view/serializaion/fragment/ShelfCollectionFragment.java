@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -108,6 +109,7 @@ public class ShelfCollectionFragment extends BaseFragment<ShelfCollectionPresent
             shelfCollectionAdapter.setOnShortCLickListener(new ShelfCollectionAdapter.OnShortCLickListener() {
                 @Override
                 public void myClick(View view, int position) {
+
                     if (ShelfCollectionAdapter.isDisplay.equals("显示")) {
 //                        如果蒙板再的话就设置
                         shelfCollectionAdapter.setupAllChecked(position);
@@ -136,6 +138,13 @@ public class ShelfCollectionFragment extends BaseFragment<ShelfCollectionPresent
                     noto(shelfCollectionAdapter, true, resultBeanList);
 //                    不全选
                     setCheck(shelfCollectionAdapter, false, resultBeanList);
+
+                    int pgcId = shelfCollectionBean.getData().getResult().get(position).getPgcId();
+                    SPUtils.put(getContext(), "pgcid", pgcId + "");
+                    Intent intent = new Intent(getActivity(), WorkDetailsActivity.class);
+                    Log.d("ShelfCollectionFragment", "pgcId:" + pgcId);
+                    intent.putExtra("pgcid", pgcId);
+                    startActivity(intent);
 
                 }
             });

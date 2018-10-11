@@ -3,6 +3,8 @@ package com.zhenman.asus.zhenman.view;
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +28,6 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
     private AutoRelativeLayout MessageButton;
     private AutoRelativeLayout MyselfButton;
     public AutoLinearLayout group;
-    public AutoLinearLayout ding;
     private TextView SerializationText;
 
     public AutoLinearLayout getGroup() {
@@ -49,10 +50,8 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
     private void initView() {
         HomeText = findViewById(R.id.HomeText);
         SerializationText = findViewById(R.id.SerializationText);
-        ding = findViewById(R.id.ding);
         MessageText = findViewById(R.id.MessageText);
         MyselfText = findViewById(R.id.MyselfText);
-        contentview = findViewById(R.id.contentview);
         HomeButton = findViewById(R.id.HomeButton);
         SerializationButton = findViewById(R.id.SerializationButton);
         ReleaseButton = findViewById(R.id.ReleaseButton);
@@ -64,7 +63,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
         ReleaseButton.setOnClickListener(this);
         MessageButton.setOnClickListener(this);
         MyselfButton.setOnClickListener(this);
-        setContentView(R.id.contentview, HomepageFragment.class);
+        setContentView(R.id.Homecontentview, HomepageFragment.class);
         setText(36, 32, 32, 32);
     }
 
@@ -78,17 +77,16 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
         switch (view.getId()) {
             case R.id.HomeButton:
                 group.setBackgroundColor(this.getResources().getColor(R.color.touming));
-                setContentView(R.id.contentview, HomepageFragment.class);
+                setContentView(R.id.Homecontentview, HomepageFragment.class);
                 setText(38, 32, 32, 32);
                 setTextColor("#ffffff");
-                ding.setVisibility(View.GONE);
+
                 break;
             case R.id.SerializationButton:
                 group.setBackgroundColor(Color.parseColor("#ffffff"));
-                setContentView(R.id.contentview, SerializationFragment.class);
+                setContentView(R.id.Othercontentview, SerializationFragment.class);
                 setText(32, 38, 32, 32);
                 setTextColor("#000000");
-                ding.setVisibility(View.VISIBLE);
                 break;
             case R.id.ReleaseButton:
 //           setContentView(R.id.contentview, IntroducedFragment.class);
@@ -96,26 +94,19 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.MessageButton:
                 group.setBackgroundColor(Color.parseColor("#ffffff"));
-                setContentView(R.id.contentview, MessageFragment.class);
+                setContentView(R.id.Othercontentview, MessageFragment.class);
                 setText(32, 32, 38, 32);
                 setTextColor("#000000");
-                ding.setVisibility(View.VISIBLE);
+
                 break;
             case R.id.MyselfButton:
                 group.setBackgroundColor(Color.parseColor("#ffffff"));
-                setContentView(R.id.contentview, MyselfFragment.class);
+                setContentView(R.id.Othercontentview, MyselfFragment.class);
                 setText(32, 32, 32, 38);
                 setTextColor("#000000");
-                ding.setVisibility(View.VISIBLE);
                 break;
 
         }
-    }
-
-    private void setHeight(int height) {
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(contentview.getLayoutParams());
-        lp.setMargins(0, 0, 0, height);
-        contentview.setLayoutParams(lp);
     }
 
     //设置字体颜色
