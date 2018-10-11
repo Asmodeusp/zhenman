@@ -109,12 +109,6 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    private void setHeight(int height) {
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(contentview.getLayoutParams());
-        lp.setMargins(0, 0, 0, height);
-        contentview.setLayoutParams(lp);
-    }
-
     //设置字体颜色
     private void setTextColor(String color) {
         HomeText.setTextColor(Color.parseColor(color));
