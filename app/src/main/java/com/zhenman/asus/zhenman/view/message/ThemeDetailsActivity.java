@@ -58,6 +58,7 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
     protected void init() {
         Intent intent = getIntent();
         chapterId = intent.getStringExtra("chapterId");
+        intent.getBooleanExtra("isAttention",false);
         app_back = (ImageView) findViewById(R.id.app_back);
         app_title = (TextView) findViewById(R.id.app_title);
         app_otherID = (TextView) findViewById(R.id.app_otherID);

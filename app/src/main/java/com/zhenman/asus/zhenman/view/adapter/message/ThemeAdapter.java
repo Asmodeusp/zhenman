@@ -28,7 +28,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
     private ThemeCallback themeCallback;
     private ThemeAttentionCallback themeAttentionCallback;
     private boolean tag = false;
-    ;
+    public static boolean isAttention;
 
     public ThemeAdapter(List<TheamBean.DataBean> dataBeanList, Context context) {
         this.dataBeanList = dataBeanList;
@@ -107,16 +107,18 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
                     tag = true;
                     themeCallback.makeAttention(dataBeanList.get(i).getSubjectId(), 1);
                     holder.itemTheme_attention.setText("已关注");
+                    isAttention = true;
                     holder.itemTheme_attention.setTextColor(Color.parseColor("#40a9ff"));
                     holder.itemTheme_attention.setBackgroundResource(R.drawable.yiguanzhu);
-                    SPUtils.put(context, SPKey.ATTENTION_THEME,true);
+                    SPUtils.put(context, SPKey.ATTENTION_THEME, true);
                 } else {
                     tag = false;
                     holder.itemTheme_attention.setText("关注");
+                    isAttention = false;
                     holder.itemTheme_attention.setTextColor(Color.parseColor("#ffffff"));
                     themeCallback.makeAttention(dataBeanList.get(i).getSubjectId(), 0);
                     holder.itemTheme_attention.setBackgroundResource(R.drawable.guanzhuzhuti);
-                    SPUtils.put(context, SPKey.ATTENTION_THEME,false);
+                    SPUtils.put(context, SPKey.ATTENTION_THEME, false);
 
                 }
             }
