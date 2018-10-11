@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -78,8 +79,9 @@ public class ShelfCollectionFragment extends BaseFragment<ShelfCollectionPresent
                     int pgcId = shelfCollectionBean.getData().getResult().get(position).getPgcId();
                     SPUtils.put(getContext(), "pgcid", pgcId + "");
                     Intent intent = new Intent(getActivity(), WorkDetailsActivity.class);
+                    Log.d("ShelfCollectionFragment", "pgcId:" + pgcId);
                     intent.putExtra("pgcid", pgcId);
-                    getActivity().startActivity(intent);
+                    startActivity(intent);
                 }
             });
         } else {

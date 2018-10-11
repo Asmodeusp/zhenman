@@ -99,7 +99,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
                 setContentView(R.id.contentview, MessageFragment.class);
                 setText(32, 32, 38, 32);
                 setTextColor("#000000");
-                ding.setVisibility(View.VISIBLE);
+
                 break;
             case R.id.MyselfButton:
                 group.setBackgroundColor(Color.parseColor("#ffffff"));

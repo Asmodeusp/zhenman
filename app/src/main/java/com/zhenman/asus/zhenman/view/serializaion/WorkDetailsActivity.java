@@ -59,7 +59,6 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
 
     @Override
     protected void init() {
-
         initView();
     }
 
