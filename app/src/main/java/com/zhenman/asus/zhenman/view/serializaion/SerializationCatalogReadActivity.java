@@ -56,6 +56,7 @@ import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.presenter.SerializationCatalogReadPresenterImp;
 import com.zhenman.asus.zhenman.utils.GetData;
+import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.utils.alipay.AuthResult;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogFootviewCommentRecyAdapter;
@@ -71,8 +72,11 @@ import java.util.List;
 import java.util.Map;
 
 public class SerializationCatalogReadActivity extends BaseActivity<SerializationCatalogReadPresenterImp> implements View.OnClickListener, SerializationCatalogReadContract.serializationCatalogReadView, CatalogReadActorAdapter.CatalogReadActorCallback, ProductListAdapter.ProductListCallback {
+
     public String StartcatalogId;
+    //返回按钮
     private ImageView serializationCatalogReadReturnImg;
+    //
     private TextView serializationCatalogReadText;
     private TextView serializationCatalogReadCommentNumber;
     private LinearLayout serializationCatalogReadHeadRel;
@@ -81,7 +85,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private LinearLayout serializationCatalogReadCommentBtn;
     private LinearLayout serializationCatalogReadCatalogBtn;
     private RelativeLayout serializationCatalogReadFootLin;
-    private boolean count = false;
+    private boolean Touch = true;
     private LinearLayout SeeFirstBtn;
     private ImageView CataLog_FootViewCollectionImg;
     private LinearLayout CataLog_FootViewCollectionBtn;
@@ -108,7 +112,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private static final int SDK_AUTH_FLAG = 2;
 
     private PopupWindow popupWindow;
-    private View popupView1;
+    private View PaypopupView;
     private RecyclerView ppwPay_productList;
     private RadioGroup ppwPay_radioGroup;
     private RadioButton ppwPay_zhifubaoBtn;
@@ -243,23 +247,12 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         serializationCatalogReadReturnImg.setOnClickListener(this);//返回
         serializationCatalogReadCommentBtn.setOnClickListener(this);//消息
         serializationCatalogReadCatalogBtn.setOnClickListener(this);//目录
-        serializationMyScrollView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-
-                }
-                return false;
-            }
-        });
     }
-
 
     @Override
     protected void loadDate() {
 
     }
-
 
     @Override
     public void showError(String msg) {
@@ -317,6 +310,20 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             serializationCatalogReadText.setText(serializationCatalogReadBean.getData().getTitle());
             serializationCatalogReadRecyAdapter.notifyDataSetChanged();
             serializationCatalogReadCommentNumber.setText(String.valueOf(serializationCatalogReadBean.getData().getCount()));
+            serializationCatalogReadRecyAdapter.setRecyclerViewOnCLickListener(new SerializationCatalogReadRecyAdapter.RecyclerViewOnCLickListener() {
+                @Override
+                public void myClick(View view, int position) {
+                    if (Touch) {
+                        serializationCatalogReadHeadRel.setVisibility(View.VISIBLE);
+                        serializationCatalogReadFootLin.setVisibility(View.VISIBLE);
+                        Touch=false;
+                    }else{
+                        serializationCatalogReadHeadRel.setVisibility(View.GONE);
+                        serializationCatalogReadFootLin.setVisibility(View.GONE);
+                        Touch=true;
+                    }
+                }
+            });
         }
         if (data != null) {
             SetTextColorRules();
@@ -352,7 +359,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         // 创建PopupWindow对象，其中：
         // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
         // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
-        PopupWindow popupWindow = new PopupWindow(contentView, 560, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        PopupWindow popupWindow = new PopupWindow(contentView, ScreenUtils.getScreenWidth(this)/3*2, ViewGroup.LayoutParams.MATCH_PARENT, true);
         // 设置PopupWindow的背景
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         // 设置PopupWindow是否能响应外部点击事件
@@ -527,24 +534,24 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     }
 
-    private void showPopueWindow() {
-        popupView1 = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
+    private void ShowPaypopupView() {
+        PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
 
-        ppwPay_productList = popupView1.findViewById(R.id.ppwPay_productList);
-        ppwPay_radioGroup = popupView1.findViewById(R.id.ppwPay_radioGroup);
-        ppwPay_zhifubaoBtn = popupView1.findViewById(R.id.ppwPay_zhifubaoBtn);
-        ppwPay_weixinBtn = popupView1.findViewById(R.id.ppwPay_weixinBtn);
-        ppwPay_payBtn = popupView1.findViewById(R.id.ppwPay_payBtn);
-        ppwPay_payMoney = popupView1.findViewById(R.id.ppwPay_payMoney);
-        ppwPay_qieziNum = popupView1.findViewById(R.id.ppwPay_qieziNum);
-        ppwPay_num = popupView1.findViewById(R.id.ppwPay_num);
-        ppwPay_userName = popupView1.findViewById(R.id.ppwPay_userName);
+        ppwPay_productList = PaypopupView.findViewById(R.id.ppwPay_productList);
+        ppwPay_radioGroup = PaypopupView.findViewById(R.id.ppwPay_radioGroup);
+        ppwPay_zhifubaoBtn = PaypopupView.findViewById(R.id.ppwPay_zhifubaoBtn);
+        ppwPay_weixinBtn = PaypopupView.findViewById(R.id.ppwPay_weixinBtn);
+        ppwPay_payBtn = PaypopupView.findViewById(R.id.ppwPay_payBtn);
+        ppwPay_payMoney = PaypopupView.findViewById(R.id.ppwPay_payMoney);
+        ppwPay_qieziNum = PaypopupView.findViewById(R.id.ppwPay_qieziNum);
+        ppwPay_num = PaypopupView.findViewById(R.id.ppwPay_num);
+        ppwPay_userName = PaypopupView.findViewById(R.id.ppwPay_userName);
 
         //获取屏幕宽高
         int weight = getResources().getDisplayMetrics().widthPixels;
         int height = getResources().getDisplayMetrics().heightPixels * 1 / 2;
 
-        popupWindow = new PopupWindow(popupView1, weight, height);
+        popupWindow = new PopupWindow(PaypopupView, weight, height);
         // popupWindow.setAnimationStyle(R.style.anim_popup_dir);
         popupWindow.setFocusable(true);
         //点击外部popueWindow消失
@@ -572,7 +579,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 getWindow().setAttributes(lp);
             }
         });
-        popupWindow.showAtLocation(popupView1, Gravity.BOTTOM, 0, 0);
+        popupWindow.showAtLocation(PaypopupView, Gravity.BOTTOM, 0, 0);
     }
 
 
@@ -696,7 +703,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         catalogId = position;
 //       获取产品列表数据
         presenter.sendProductListData();
-        showPopueWindow();
+        ShowPaypopupView();
     }
 
     @Override
