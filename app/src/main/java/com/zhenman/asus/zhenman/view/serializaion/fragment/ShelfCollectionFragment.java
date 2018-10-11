@@ -146,6 +146,7 @@ public class ShelfCollectionFragment extends BaseFragment<ShelfCollectionPresent
                     intent.putExtra("pgcid", pgcId);
                     startActivity(intent);
 
+
                 }
             });
         } else {
