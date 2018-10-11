@@ -20,6 +20,7 @@ import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.presenter.SerializationDetailsPresenterImp;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.serializaion.fragment.WorkCatalogFragment;
 import com.zhenman.asus.zhenman.view.serializaion.fragment.WorkDetailsFragment;
@@ -64,10 +65,10 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
 
     @Override
     protected void loadDate() {
-        Intent intent = getIntent();
-        pgcid = intent.getStringExtra("pgcid");
-        presenter.getSerializationDetailsBean(pgcid);
-        presenter.getSerializationCatalogBean(pgcid);
+        String pgcid = (String) SPUtils.get(this, "pgcid", "1");
+        this.pgcid =pgcid;
+        presenter.getSerializationDetailsBean(this.pgcid);
+        presenter.getSerializationCatalogBean(this.pgcid);
     }
 
     private void initView() {

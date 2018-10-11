@@ -109,7 +109,6 @@ public class ShelfCollectionFragment extends BaseFragment<ShelfCollectionPresent
             shelfCollectionAdapter.setOnShortCLickListener(new ShelfCollectionAdapter.OnShortCLickListener() {
                 @Override
                 public void myClick(View view, int position) {
-
                     if (ShelfCollectionAdapter.isDisplay.equals("显示")) {
 //                        如果蒙板再的话就设置
                         shelfCollectionAdapter.setupAllChecked(position);
@@ -142,8 +141,7 @@ public class ShelfCollectionFragment extends BaseFragment<ShelfCollectionPresent
                     int pgcId = shelfCollectionBean.getData().getResult().get(position).getPgcId();
                     SPUtils.put(getContext(), "pgcid", pgcId + "");
                     Intent intent = new Intent(getActivity(), WorkDetailsActivity.class);
-                    Log.d("ShelfCollectionFragment", "pgcId:" + pgcId);
-                    intent.putExtra("pgcid", pgcId);
+
                     startActivity(intent);
 
 
