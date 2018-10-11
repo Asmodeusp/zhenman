@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -162,6 +164,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         return R.layout.activity_serialization_catalog_read;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("ResourceAsColor")
     @Override
     protected void init() {
@@ -240,54 +243,15 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         serializationCatalogReadReturnImg.setOnClickListener(this);//返回
         serializationCatalogReadCommentBtn.setOnClickListener(this);//消息
         serializationCatalogReadCatalogBtn.setOnClickListener(this);//目录
-//        serializationMyScrollView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//                return false;
-//            }
-//        });
-        serializationCatalogReadRecy.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+        serializationMyScrollView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-                return true;
-            }
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
 
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        //触摸按下时操作
-                        Log.e("界面", "按下");
-
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        // 触摸移动时的操作
-                        serializationCatalogReadHeadRel.setVisibility(View.GONE);
-                        serializationCatalogReadFootLin.setVisibility(View.GONE);
-                        count = false;
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        // 触摸抬起时的操作
-                        if (count == true) {
-                            serializationCatalogReadHeadRel.setVisibility(View.GONE);
-                            serializationCatalogReadFootLin.setVisibility(View.GONE);
-                            count = false;
-                        } else {
-                            serializationCatalogReadHeadRel.setVisibility(View.VISIBLE);
-                            serializationCatalogReadFootLin.setVisibility(View.VISIBLE);
-                            count = true;
-                        }
-                        break;
                 }
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean b) {
-
+                return false;
             }
         });
-
     }
 
 
