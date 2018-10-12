@@ -43,6 +43,7 @@
         android:layout_marginTop="@dimen/px_32"
         android:background="@drawable/guanzhuzhuti"
         android:gravity="center"
+        android:button="@null"
         android:text="关注" />
 
     <com.zhy.autolayout.AutoLinearLayout

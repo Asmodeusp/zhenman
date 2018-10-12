@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="176px">
+    android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/itemMyAttenTheme_headImage"
@@ -29,17 +29,17 @@
         android:layout_toRightOf="@id/itemMyAttenTheme_headImage"
         android:text="只有变得优秀才会被另眼相看" />
 
-    <Button
+    <TextView
         android:id="@+id/itemMyAttenTheme_attention"
-        style="@style/Style26H9"
+        style="@style/Style26C5"
         android:layout_width="@dimen/px_128"
         android:layout_height="@dimen/px_56"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/px_24"
         android:layout_marginTop="@dimen/px_32"
-        android:background="@drawable/attention_btn"
+        android:background="@drawable/yiguanzhu"
         android:gravity="center"
 
-        android:text="关注" />
+        android:text="已关注" />
 
 </com.zhy.autolayout.AutoRelativeLayout>

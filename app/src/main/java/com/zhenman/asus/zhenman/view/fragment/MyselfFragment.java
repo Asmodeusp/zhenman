@@ -98,6 +98,11 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
         String s = (String) SPUtils.get(App.context, (String) SPUtils.get(getActivity(), SPKey.USER_OAUTHID, ""), "");
 //        presenter.sendGetMyData(s);
         idListener();
+//        判断用户是否登陆了
+        String s1 = (String) SPUtils.get(getActivity(), SPKey.USER_ID, "");
+        if (s1.isEmpty()) {
+            startActivity(new Intent(getActivity(), MainActivity.class));
+        }
 
     }
 
@@ -137,7 +142,10 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 if (userID.isEmpty()) {
                     startActivity(new Intent(getActivity(), MainActivity.class));
                 } else {
-                    startActivity(new Intent(getActivity(), HomepageActivity.class));
+                    //  跳转到个人主页
+                    Intent intentHomepage = new Intent(getActivity(), HomepageActivity.class);
+                    intentHomepage.putExtra("HIM_ID", "myself");
+                    startActivity(intentHomepage);
                 }
                 break;
             case R.id.my_WalletPage:
@@ -146,15 +154,15 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 break;
             case R.id.my_WorksNumberPage:
 //                主页
-                Intent intent1 = new Intent(getActivity(), HomepageActivity.class);
-               /* String himeId = (String) SPUtils.get(getActivity(), SPKey.HIM_ID, "");
-                if (himeId.isEmpty()) {
-                    intent1.putExtra("UserId", himeId);
+                String userId = (String) SPUtils.get(getActivity(), SPKey.USER_ID, "");
+                if (userId.isEmpty()) {
+                    startActivity(new Intent(getActivity(), MainActivity.class));
                 } else {
-                    intent1.putExtra("UserId", "");
-                }*/
-                intent1.putExtra("from", "myself");
-                startActivity(intent1);
+//                   跳转到个人主页
+                    Intent intentHomepage = new Intent(getActivity(), HomepageActivity.class);
+                    intentHomepage.putExtra("HIM_ID", "myself");
+                    startActivity(intentHomepage);
+                }
                 break;
             case R.id.my_FansPage:
 //                粉丝
@@ -172,7 +180,7 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
 //                书架
                 startActivity(new Intent(getActivity(), BookshelfActivity.class));
                 break;
-            case R.id.my_DraftPage:
+            case R.id.my_DraftPage://我的草稿
                 startActivity(new Intent(getActivity(), MyDraftActivity.class));
                 break;
             case R.id.my_AccountNumberPage://账号管理
@@ -181,14 +189,13 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
         }
     }
 
-
     //    头部信息
     @Override
     public void showMySelfHead(HomePageHeadBean homePageHeadBean) {
 
         if (homePageHeadBean.getState() == 0) {
             my_FansNumber.setText(homePageHeadBean.getData().getFans() + "");
-            my_CareNumber.setText(homePageHeadBean.getData().getFollows() + "");
+            my_CareNumber.setText(homePageHeadBean.getData().getFollows() - 1 + "");
             my_WorksNumber.setText(homePageHeadBean.getData().getWorks() + "");
             my_themeNum.setText(homePageHeadBean.getData().getFollowSubject() + "");
             if ("2".equals(homePageHeadBean.getData().getSex())) {
@@ -202,7 +209,6 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
             my_Name.setText(homePageHeadBean.getData().getName());
             if (homePageHeadBean.getData().getIntroduction() != null) {
                 my_Resume.setText(homePageHeadBean.getData().getIntroduction());
-
             } else {
                 my_Resume.setText("本宝宝暂时没有介绍哦");
 
@@ -218,13 +224,10 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
         Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
     }
 
-   /* //    已经刷新页面了
+    //    已经刷新页面了
     @Override
     public void onResume() {
         super.onResume();
         presenter.sendMyselfHeadData((String) SPUtils.get(getActivity(), SPKey.USER_ID, ""));
-
-    }*/
-
-
+    }
 }

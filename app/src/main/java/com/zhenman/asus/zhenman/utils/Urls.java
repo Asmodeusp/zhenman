@@ -101,4 +101,11 @@ public class Urls {
     public static final String INSERT_USER_FOLLOW = "userFollow/insertUserFollow";
     //关注用户下的作品列表
     public static final String USER_FOLLOW_WORKS_LIST = "userFollow/getUserFollowWorksList";
+//    用户的粉丝
+    public static final String USER_FANS = "userFans/getUserFansList";
+//    用户的关注
+    public static final String USER_ATTENTION = "userFollow/getUserFollowList";
+//    关注用户
+    public static final String ATTENTION_USER = "userFollow/insertUserFollow";
+
 }

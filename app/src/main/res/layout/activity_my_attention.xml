@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.myself.MyAttentionActivity">
 
     <include layout="@layout/above_head" />
@@ -14,10 +15,11 @@
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/myAttention_none"
         style="@style/Style32H2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="本宝宝暂时没有关注的人哦" />
-</com.zhy.autolayout.AutoFrameLayout>
+</com.zhy.autolayout.AutoLinearLayout>

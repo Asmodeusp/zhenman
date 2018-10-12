@@ -17,6 +17,7 @@ import com.zhenman.asus.zhenman.utils.GetData;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.myself.WorkShortAdapter;
+import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 
 import java.util.List;
 
@@ -43,13 +44,20 @@ public class WorkShortFragment extends BaseFragment<WorkShortComicPresenter> imp
     protected void init() {
         workShort_recy = getActivity().findViewById(R.id.workShort_recy);
         workShort_noData = getActivity().findViewById(R.id.workShort_noData);
-        String himmeId = (String) SPUtils.get(getContext(), SPKey.HIM_ID, "");
+        if (HomepageActivity.him_id.equals("myself")) {
+            presenter.sendWorkShortComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""), (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
+
+        } else {
+            presenter.sendWorkShortComic(HomepageActivity.him_id, (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
+
+        }
+        /*String himmeId = (String) SPUtils.get(getContext(), SPKey.HIM_ID, "");
         if (himmeId.isEmpty()) {
             presenter.sendWorkShortComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""), (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
         } else {
             presenter.sendWorkShortComic(himmeId, (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
 
-        }
+        }*/
 
     }
 

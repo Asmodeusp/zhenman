@@ -15,7 +15,10 @@ import com.zhenman.asus.zhenman.contract.TheamBeanContract;
 import com.zhenman.asus.zhenman.model.bean.TheamBean;
 import com.zhenman.asus.zhenman.model.bean.ThemeAttentionBean;
 import com.zhenman.asus.zhenman.presenter.TheamBeanPresenter;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.message.ThemeAdapter;
+import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.message.ThemeDetailsActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 
@@ -50,8 +53,14 @@ public class MessageFragment extends BaseFragment<TheamBeanPresenter> implements
         app_title.setText("消息");
         app_back.setVisibility(View.GONE);
         idListener();
+        //        判断用户是否登陆了
+        String s1 = (String) SPUtils.get(getActivity(), SPKey.USER_ID, "");
+        if (s1.isEmpty()) {
+            startActivity(new Intent(getActivity(), MainActivity.class));
+        }
 //        获取主题信息
         presenter.sendTheamBean();
+
 
     }
 
@@ -101,8 +110,8 @@ public class MessageFragment extends BaseFragment<TheamBeanPresenter> implements
                 public void myClick(View view, int position) {
                     Intent intent = new Intent(getContext(), ThemeDetailsActivity.class);
                     intent.putExtra("chapterId",dataBeanList.get(position).getSubjectId()+"");
-//                    SPUtils.put(getContext(), SPKey.SUBJECT_ID,dataBeanList.get(position).getSubjectId()+"");
-                    intent.putExtra("isAttention",ThemeAdapter.isAttention);
+                    SPUtils.put(getContext(), SPKey.SUBJECT_ID,dataBeanList.get(position).getSubjectId()+"");
+                    intent.putExtra("isAttention", ThemeAdapter.isAttention);
                     startActivity(intent);
                 }
             });
@@ -127,5 +136,12 @@ public class MessageFragment extends BaseFragment<TheamBeanPresenter> implements
     @Override
     public void makeAttention(String subjectId, int status) {
         presenter.sendAttentionThemeData(subjectId, status + "");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //        获取主题信息
+        presenter.sendTheamBean();
     }
 }

@@ -1,9 +1,13 @@
 package com.zhenman.asus.zhenman.presenter;
 
 import com.zhenman.asus.zhenman.contract.ThemeDetailHeadContract;
+import com.zhenman.asus.zhenman.model.bean.ThemeAttentionBean;
 import com.zhenman.asus.zhenman.model.bean.ThemeDetailHeadBean;
 import com.zhenman.asus.zhenman.model.service.ThemeDetailsHeadService;
+import com.zhenman.asus.zhenman.model.service.ThemeService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
+
+import java.util.HashMap;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,6 +35,42 @@ public class ThemeDetailsPresenter implements ThemeDetailHeadContract.ThemeDetai
                             themeDetailHeadInView.showThemeDetailHeadData(themeDetailHeadBean);
                         } else {
                             themeDetailHeadInView.showError(themeDetailHeadBean.getMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void sendAttentionThemeData(String subjectId, String status) {
+        HashMap<String, String> parmaMap = new HashMap<>();
+        parmaMap.put("subjectId", subjectId);
+        parmaMap.put("status", status);
+        RetrofitUtils.getInstance().getService(ThemeService.class)
+                .AttentionThemeData(parmaMap)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ThemeAttentionBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(ThemeAttentionBean themeAttentionBean) {
+                        if (themeAttentionBean.getData() == null) {
+                            themeDetailHeadInView.showError("取消关注成功");
+                        } else {
+                            themeDetailHeadInView.showAttentionTheme(themeAttentionBean);
                         }
                     }
 

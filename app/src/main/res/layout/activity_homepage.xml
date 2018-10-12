@@ -90,6 +90,7 @@
                             android:textSize="26px" />
 
                         <com.zhy.autolayout.AutoRelativeLayout
+                            android:visibility="gone"
                             android:id="@+id/homePage_aboutHim"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -271,8 +272,7 @@
                 <com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage
                     android:id="@+id/HomePage_Viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="1800px">
-
+                    android:layout_height="980px">
                 </com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
