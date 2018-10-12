@@ -31,6 +31,7 @@ public class SerializationCatalogReadRecyAdapter extends RecyclerView.Adapter<Se
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
         SerializationCatalogReadBean.DataBean.ListBean dataBean = list.get(position);
+
         Glide.with(context).load(dataBean.getImageUrl()).into(holder.home_Recy_recy_Image);
         holder.itemView.setTag(position);
     }

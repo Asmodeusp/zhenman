@@ -174,8 +174,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, HomepageActivity.class);
-                SPUtils.put(context, SPKey.HIM_ID,dataBean.getUserId()+"");
-                intent.putExtra("from","home");
+                intent.putExtra( SPKey.HIM_ID,dataBean.getUserId()+"");
                 context.startActivity(intent);
             }
         });

@@ -128,7 +128,7 @@ public class SerializationFragment extends BaseFragment<SerializationPresenterIm
                     SerializationLatelyBean.DataBean.ResultBean resultBean = serializationLatelyBean.getData().getResult().get(position);
                     String pgcId = resultBean.getPgcId();
                     Intent intent = new Intent(getActivity(), WorkDetailsActivity.class);
-                    intent.putExtra("pgcid", pgcId);
+                    SPUtils.put(getContext(),"pgcid",pgcId+"");
                     getActivity().startActivity(intent);
                 }
             });

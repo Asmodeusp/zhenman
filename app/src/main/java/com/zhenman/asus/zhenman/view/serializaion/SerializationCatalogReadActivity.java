@@ -2,36 +2,30 @@ package com.zhenman.asus.zhenman.view.serializaion;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,75 +58,117 @@ import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogReadActorAdapt
 import com.zhenman.asus.zhenman.view.adapter.serialization.ProductListAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogReadRecyAdapter;
-import com.zhenman.asus.zhenman.view.login.qqlogin.UMSharePlatform;
-import com.zhenman.asus.zhenman.view.ui.MyScrollView;
+import com.zhy.autolayout.AutoLinearLayout;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SerializationCatalogReadActivity extends BaseActivity<SerializationCatalogReadPresenterImp> implements View.OnClickListener, SerializationCatalogReadContract.serializationCatalogReadView, CatalogReadActorAdapter.CatalogReadActorCallback, ProductListAdapter.ProductListCallback {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-    public String StartcatalogId;
+public class SerializationCatalogReadActivity extends BaseActivity<SerializationCatalogReadPresenterImp> implements SerializationCatalogReadContract.serializationCatalogReadView, CatalogReadActorAdapter.CatalogReadActorCallback, ProductListAdapter.ProductListCallback {
+    //整个章节阅读图的RecyclerView
+    @BindView(R.id.serializationCatalogReadRecy)
+    RecyclerView serializationCatalogReadRecy;
+    //从第一话开始观看
+    @BindView(R.id.SeeFirstBtn)
+    AutoLinearLayout SeeFirstBtn;
+    //未完待续
+    @BindView(R.id.weiwandaixuReLa)
+    AutoRelativeLayout weiwandaixuReLa;
+    //收藏图片
+    @BindView(R.id.CataLog_FootViewCollectionImg)
+    ImageView CataLogFootViewCollectionImg;
+    //收藏按钮
+    @BindView(R.id.CataLog_FootViewCollectionBtn)
+    AutoLinearLayout CataLogFootViewCollectionBtn;
+    //分享按钮
+    @BindView(R.id.CataLog_FootViewShareBtn)
+    AutoLinearLayout CataLogFootViewShareBtn;
+    //上一章字体
+    @BindView(R.id.CataLog_FootViewUpperText)
+    TextView CataLogFootViewUpperText;
+    //上一章线
+    @BindView(R.id.CataLog_FootViewUpperLine)
+    TextView CataLogFootViewUpperLine;
+    //上一章按钮
+    @BindView(R.id.CataLog_FootViewUpperBtn)
+    AutoLinearLayout CataLogFootViewUpperBtn;
+    //下一章字体
+    @BindView(R.id.CataLog_FootViewNexterText)
+    TextView CataLogFootViewNexterText;
+    //下一章线
+    @BindView(R.id.CataLog_FootViewNexterLine)
+    TextView CataLogFootViewNexterLine;
+    //下一章按钮
+    @BindView(R.id.CataLog_FootViewNexterBtn)
+    AutoLinearLayout CataLogFootViewNexterBtn;
+    //演员RecyclerView
+    @BindView(R.id.CataLog_FootViewActor_Recy)
+    RecyclerView CataLogFootViewActorRecy;
+    //底部评论的RecyclerView
+    @BindView(R.id.CataLog_FootViewComment_Recy)
+    RecyclerView CataLogFootViewCommentRecy;
+    //底部评论的提示
+    @BindView(R.id.CataLog_FootViewComment_RecyTip)
+    TextView CataLogFootViewCommentRecyTip;
+    //刷新控件
+    @BindView(R.id.serializationCatalogReadSRL)
+    SmartRefreshLayout serializationCatalogReadSRL;
+    //评论数量
+    @BindView(R.id.serializationCatalogReadCommentNumber)
+    TextView serializationCatalogReadCommentNumber;
+    //评论按钮
+    @BindView(R.id.serializationCatalogReadCommentBtn)
+    AutoLinearLayout serializationCatalogReadCommentBtn;
+    // 章节按钮
+    @BindView(R.id.serializationCatalogReadCatalogBtn)
+    AutoLinearLayout serializationCatalogReadCatalogBtn;
+    //底部布局
+    @BindView(R.id.serializationCatalogReadFootLin)
+    AutoRelativeLayout serializationCatalogReadFootLin;
     //返回按钮
-    private ImageView serializationCatalogReadReturnImg;
-    //
-    private TextView serializationCatalogReadText;
-    private TextView serializationCatalogReadCommentNumber;
-    private LinearLayout serializationCatalogReadHeadRel;
-    private RelativeLayout SerializationRelativeLayout;
-    private RecyclerView serializationCatalogReadRecy;
-    private LinearLayout serializationCatalogReadCommentBtn;
-    private LinearLayout serializationCatalogReadCatalogBtn;
-    private RelativeLayout serializationCatalogReadFootLin;
-    private boolean Touch = true;
-    private LinearLayout SeeFirstBtn;
-    private ImageView CataLog_FootViewCollectionImg;
-    private LinearLayout CataLog_FootViewCollectionBtn;
-    private LinearLayout CataLog_FootViewShareBtn;
-    private TextView CataLog_FootViewUpperText;
-    private TextView CataLog_FootViewUpperLine;
-    private LinearLayout CataLog_FootViewUpperBtn;
-    private TextView CataLog_FootViewNexterText;
-    private TextView CataLog_FootViewNexterLine;
-    private LinearLayout CataLog_FootViewNexterBtn;
-    private RecyclerView CataLog_FootViewActor_Recy;
-    private TextView CataLog_PopuTitle;
-    private ImageView CataLog_PopuPosition;
-    private ImageView CataLog_PopuBottom;
-    private RecyclerView CataLog_PopuRecy;
-    private List<SerializationCatalogBean.DataBean> data = new ArrayList<>();
-    private SerializationCatalogAdapter serializationCatalogAdapter;
-    private RelativeLayout weiwandaixuReLa;
-    private int i;
-    private int catalogId;
-    SerializationCatalogReadBean
-            serializationCatalogReadBean;
-    private static final int SDK_PAY_FLAG = 1;
-    private static final int SDK_AUTH_FLAG = 2;
-
-    private PopupWindow popupWindow;
-    private View PaypopupView;
-    private RecyclerView ppwPay_productList;
-    private RadioGroup ppwPay_radioGroup;
-    private RadioButton ppwPay_zhifubaoBtn;
-    private RadioButton ppwPay_weixinBtn;
-    private Button ppwPay_payBtn;
-    private TextView ppwPay_payMoney;
-    private TextView ppwPay_qieziNum;
-    private TextView ppwPay_num;
-    private TextView ppwPay_userName;
-    private CatalogReadActorAdapter catalogReadActorAdapter;
-    private String orderNumber;
-    private RecyclerView cataLog_footViewComment_recy;
-    private TextView cataLog_footViewComment_recyTip;
-    private CatalogFootviewCommentRecyAdapter catalogFootviewCommentRecyAdapter;
-    private List<PgcChapterCommentListByOffSetBean.DataBean.CommentDtoListBean> result = new ArrayList<>();
-    private View contentView;
-    private String paymentMethod;
-    private int qieziId;
-    private MyScrollView serializationMyScrollView;
-    int PageNum = 1;
+    @BindView(R.id.serializationCatalogReadReturnImg)
+    ImageView serializationCatalogReadReturnImg;
+    //第几话
+    @BindView(R.id.serializationCatalogReadText)
+    TextView serializationCatalogReadText;
+    //头布局
+    @BindView(R.id.serializationCatalogReadHeadRel)
+    AutoLinearLayout serializationCatalogReadHeadRel;
+    //章节的标题（作评名字）
+    @BindView(R.id.CataLog_PopuTitle)
+    TextView CataLogPopuTitle;
+    //章节的RecyclerView
+    @BindView(R.id.CataLog_PopuRecy)
+    RecyclerView CataLogPopuRecy;
+    //章节的定位
+    @BindView(R.id.CataLog_PopuPosition)
+    ImageView CataLogPopuPosition;
+    //章节的置底
+    @BindView(R.id.CataLog_PopuDownload)
+    ImageView CataLog_PopuDownload;
+    //drawer_layout 章节的弹出View
+    @BindView(R.id.mserializationCatalogReadCatalog_drawer_layout)
+    AutoRelativeLayout mserializationCatalogReadCatalogDrawerLayout;
+    //DrawerLayout
+    @BindView(R.id.SerializationDrawerLayout)
+    DrawerLayout SerializationDrawerLayout;
+    TextView ppwPayUserName;
+    TextView ppwPayNum;
+    ImageView ppwPayQiezi;
+    RecyclerView ppwPayProductList;
+    RadioButton ppwPayZhifubaoBtn;
+    RadioButton ppwPayWeixinBtn;
+    RadioGroup ppwPayRadioGroup;
+    Button ppwPayPayBtn;
+    TextView ppwPayPayMoney;
+    TextView ppwPayOther01;
+    TextView ppwPayQieziNum;
+    AutoRelativeLayout ppwPayCancel;
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             @SuppressWarnings("unchecked")
@@ -157,101 +193,120 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
         ;
     };
-    private SmartRefreshLayout serializationCatalogReadSRL;
+    //抽屉菜单对象
+    private ActionBarDrawerToggle drawerbar;
+    //章节ID
+    public String StartcatalogId;
+    //支付popuwindow
+    private PopupWindow paypopupWindow;
+    private String paymentMethod;
+    //章节演员的适配器
+    private CatalogReadActorAdapter catalogReadActorAdapter;
+    //章节Id
+    private int catalogId;
+    //支付产品Id
+    private int qieziId;
+    //章节实体类集合
+    private List<SerializationCatalogBean.DataBean> data = new ArrayList<>();
+    //章节列表适配器
+    private SerializationCatalogAdapter serializationCatalogAdapter;
+    //评论列表
+    private List<PgcChapterCommentListByOffSetBean.DataBean.CommentDtoListBean> result = new ArrayList<>();
+    //阅读图片适配器
     private SerializationCatalogReadRecyAdapter serializationCatalogReadRecyAdapter;
+    //点击屏幕标记
+    boolean Touch = true;
+    //阅读图片的实体类
+    SerializationCatalogReadBean serializationCatalogReadBean;
+    //底部弹出消息框
     private BottomSheetDialog dialog;
+    //填充布局
+    private View contentView;
+    //弹出评论的RecyclerView
     private RecyclerView commentPopu_recy;
-
+    //标记章节索引
+    private int i;
+    //订单数量
+    private String orderNumber;
+    //支付标记
+    private static final int SDK_PAY_FLAG = 1;
+    //底部评论适配器
+    private CatalogFootviewCommentRecyAdapter catalogFootviewCommentRecyAdapter;
 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_serialization_catalog_read;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @SuppressLint("ResourceAsColor")
     @Override
     protected void init() {
-        Intent intent = getIntent();
-        StartcatalogId = intent.getStringExtra("catalogId");
-        String PgcId = intent.getStringExtra("pgcId");
-        //得到数据
-        presenter.getSerializationCatalogReadBean(StartcatalogId);
-        presenter.getSerializationCatalogBean(PgcId);
-        presenter.getSerializationDetailsBean(PgcId);
-        presenter.getPgcChapterCommentListByOffSetBean(StartcatalogId, "0", "300", "1");
-        //返回
-        serializationCatalogReadReturnImg = findViewById(R.id.serializationCatalogReadReturnImg);
-        //刷新控件
-        serializationCatalogReadSRL = findViewById(R.id.serializationCatalogReadSRL);
-        //MyScrollView
-        serializationMyScrollView = findViewById(R.id.SerializationMyScrollView);
-        //整布局
-        SerializationRelativeLayout = findViewById(R.id.SerializationRelativeLayout);
-        //第几话
-        serializationCatalogReadText = findViewById(R.id.serializationCatalogReadText);
-        //头布局
-        serializationCatalogReadHeadRel = findViewById(R.id.serializationCatalogReadHeadRel);
-        //RecyclerView
-        serializationCatalogReadRecy = findViewById(R.id.serializationCatalogReadRecy);
-        //给RecyClerView设置格式
         serializationCatalogReadRecy.setLayoutManager(new LinearLayoutManager(this));
-        //评论
-        serializationCatalogReadCommentBtn = findViewById(R.id.serializationCatalogReadCommentBtn);
-        //评论数量
-        serializationCatalogReadCommentNumber = findViewById(R.id.CatalogReadCommentNumber);
-        //目录
-        serializationCatalogReadCatalogBtn = findViewById(R.id.serializationCatalogReadCatalogBtn);
-        //底布局
-        serializationCatalogReadFootLin = findViewById(R.id.serializationCatalogReadFootLin);
-        //观看第一话
-        SeeFirstBtn = findViewById(R.id.SeeFirstBtn);
-        //收藏图片
-        CataLog_FootViewCollectionImg = findViewById(R.id.CataLog_FootViewCollectionImg);
-        //收藏点击按钮
-        CataLog_FootViewCollectionBtn = findViewById(R.id.CataLog_FootViewCollectionBtn);
-        //分享按钮
-        CataLog_FootViewShareBtn = findViewById(R.id.CataLog_FootViewShareBtn);
-        //上一话字体
-        CataLog_FootViewUpperText = findViewById(R.id.CataLog_FootViewUpperText);
-        CataLog_FootViewUpperLine = findViewById(R.id.CataLog_FootViewUpperLine);
-        //上一话按钮
-        CataLog_FootViewUpperBtn = findViewById(R.id.CataLog_FootViewUpperBtn);
-        //下一话字体
-        CataLog_FootViewNexterText = findViewById(R.id.CataLog_FootViewNexterText);
-        CataLog_FootViewNexterLine = findViewById(R.id.CataLog_FootViewNexterLine);
-        //下一话按钮
-        CataLog_FootViewNexterBtn = findViewById(R.id.CataLog_FootViewNexterBtn);
-        //演员列表
-        CataLog_FootViewActor_Recy = findViewById(R.id.CataLog_FootViewActor_Recy);
-        //未完待续布局
-        weiwandaixuReLa = findViewById(R.id.weiwandaixuReLa);
-        CataLog_FootViewUpperText.setText("<");
-        CataLog_FootViewUpperBtn.setOnClickListener(this);
-        CataLog_FootViewNexterBtn.setOnClickListener(this);
-        SeeFirstBtn.setOnClickListener(this);
+        CataLogFootViewUpperText.setText("<");
+        //设置演员列表
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        CataLog_FootViewActor_Recy.setLayoutManager(linearLayoutManager);
-        //评论列表
-        cataLog_footViewComment_recy = findViewById(R.id.CataLog_FootViewComment_Recy);
-        //评论列表提示
-        cataLog_footViewComment_recyTip = findViewById(R.id.CataLog_FootViewComment_RecyTip);
-        cataLog_footViewComment_recy.setLayoutManager(new LinearLayoutManager(this));
+        CataLogFootViewActorRecy.setLayoutManager(linearLayoutManager);
         serializationCatalogReadSRL.setDragRate(0.5f);
         if (result.size() == 0) {
-            cataLog_footViewComment_recy.setVisibility(View.GONE);
-            cataLog_footViewComment_recyTip.setVisibility(View.VISIBLE);
+            CataLogFootViewCommentRecy.setVisibility(View.GONE);
+            CataLogFootViewCommentRecyTip.setVisibility(View.VISIBLE);
         }
-        //设置点击事件
-        serializationCatalogReadReturnImg.setOnClickListener(this);//返回
-        serializationCatalogReadCommentBtn.setOnClickListener(this);//消息
-        serializationCatalogReadCatalogBtn.setOnClickListener(this);//目录
+
+        initEvent();
+        initCatalog();
+    }
+
+    private void initCatalog() {
+        CataLogPopuTitle.setText((CharSequence) SPUtils.get(this, "DetaailsName", "海贼"));
+        CataLogPopuPosition.setVisibility(View.GONE);
+        CataLog_PopuDownload.setVisibility(View.GONE);
+        CataLogPopuRecy.setLayoutManager(new LinearLayoutManager(this));
+        serializationCatalogAdapter = new SerializationCatalogAdapter(data);
+        CataLogPopuRecy.setAdapter(serializationCatalogAdapter);
+        serializationCatalogAdapter.notifyDataSetChanged();
+        serializationCatalogAdapter.setRecyclerViewOnCLickListener(new SerializationCatalogAdapter.RecyclerViewOnCLickListener() {
+            @Override
+            public void myClick(View view, int position) {
+                StartcatalogId = data.get(position).getCatalogId();
+                presenter.getSerializationCatalogReadBean(StartcatalogId);
+
+            }
+        });
+
     }
 
     @Override
     protected void loadDate() {
+        Intent intent = getIntent();
+        StartcatalogId = intent.getStringExtra("catalogId");
+        String PgcId = intent.getStringExtra("pgcId");
+        //得到数据
+        //作品图片集合
+        presenter.getSerializationCatalogReadBean(StartcatalogId);
+        //作品章节集合
+        presenter.getSerializationCatalogBean(PgcId);
+        //作品详情集合
+        presenter.getSerializationDetailsBean(PgcId);
+        //作品评论集合
+        presenter.getPgcChapterCommentListByOffSetBean(StartcatalogId, "0", "300", "1");
+    }
 
+    //设置开关监听
+    private void initEvent() {
+        drawerbar = new ActionBarDrawerToggle(this, SerializationDrawerLayout, null, R.string.open, R.string.close) {
+            //菜单打开
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+            // 菜单关闭
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+        SerializationDrawerLayout.setDrawerListener(drawerbar);
     }
 
     @Override
@@ -261,16 +316,23 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         }
     }
 
+    // 右边菜单开关事件
+    public void openRightLayout(View view) {
+        if (SerializationDrawerLayout.isDrawerOpen(mserializationCatalogReadCatalogDrawerLayout)) {
+            SerializationDrawerLayout.closeDrawer(mserializationCatalogReadCatalogDrawerLayout);
+        } else {
+            SerializationDrawerLayout.openDrawer(mserializationCatalogReadCatalogDrawerLayout);
+        }
+    }
+
     //获取详情
     @Override
     public void showSerializationDetailsBean(SerializationDetailsBean serializationDetailsBean) {
         if (serializationDetailsBean != null) {
             catalogReadActorAdapter = new CatalogReadActorAdapter(serializationDetailsBean.getData().getActorList());
             catalogReadActorAdapter.CatalogReadActorCallback(this);
-            CataLog_FootViewActor_Recy.setAdapter(catalogReadActorAdapter);
-
+            CataLogFootViewActorRecy.setAdapter(catalogReadActorAdapter);
         }
-
     }
 
     //章节实体类
@@ -280,10 +342,13 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         if (serializationCatalogBean.getData() == null) {
             Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
         } else {
+            for (SerializationCatalogBean.DataBean dataBean : serializationCatalogBean.getData()) {
+                Log.d("SerializationCatalogRea", dataBean.getTitle());
+
+            }
             data.addAll(serializationCatalogBean.getData());
         }
     }
-
 
     //阅读实体类
     @Override
@@ -294,7 +359,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             public void onRefresh(RefreshLayout refreshLayout) {
                 presenter.getSerializationCatalogReadBean(StartcatalogId);
                 serializationCatalogReadRecyAdapter.notifyDataSetChanged();
-                refreshLayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+                refreshLayout.finishRefresh(1000/*,false*/);//传入false表示刷新失败
 
             }
         });
@@ -314,13 +379,17 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 @Override
                 public void myClick(View view, int position) {
                     if (Touch) {
+                        TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, ScreenUtils.getScreenHeight(SerializationCatalogReadActivity.this), ScreenUtils.getScreenHeight(SerializationCatalogReadActivity.this) - 128);
+                        translateAnimation.setDuration(5000);
+                        translateAnimation.setFillAfter(true);
+                        serializationCatalogReadFootLin.startAnimation(translateAnimation);
                         serializationCatalogReadHeadRel.setVisibility(View.VISIBLE);
                         serializationCatalogReadFootLin.setVisibility(View.VISIBLE);
-                        Touch=false;
-                    }else{
+                        Touch = false;
+                    } else {
                         serializationCatalogReadHeadRel.setVisibility(View.GONE);
                         serializationCatalogReadFootLin.setVisibility(View.GONE);
-                        Touch=true;
+                        Touch = true;
                     }
                 }
             });
@@ -328,52 +397,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         if (data != null) {
             SetTextColorRules();
         }
-    }
-
-    //章节弹出popuWindow
-    private void initCataLogpopu() {
-        View contentView = LayoutInflater.from(this).inflate(R.layout.fill_catalog_popu, null, false);
-        //书名
-        CataLog_PopuTitle = contentView.findViewById(R.id.CataLog_PopuTitle);
-        CataLog_PopuTitle.setText((CharSequence) SPUtils.get(this, "DetaailsName", "海贼"));
-        //定位
-        CataLog_PopuPosition = contentView.findViewById(R.id.CataLog_PopuPosition);
-        CataLog_PopuPosition.setVisibility(View.GONE);
-        //下载
-        CataLog_PopuBottom = contentView.findViewById(R.id.CataLog_PopuBottom);
-        CataLog_PopuBottom.setVisibility(View.GONE);
-        //节目列表RecyView
-        CataLog_PopuRecy = contentView.findViewById(R.id.CataLog_PopuRecy);
-        CataLog_PopuRecy.setLayoutManager(new LinearLayoutManager(this));
-        serializationCatalogAdapter = new SerializationCatalogAdapter(data);
-        CataLog_PopuRecy.setAdapter(serializationCatalogAdapter);
-        serializationCatalogAdapter.notifyDataSetChanged();
-        serializationCatalogAdapter.setRecyclerViewOnCLickListener(new SerializationCatalogAdapter.RecyclerViewOnCLickListener() {
-            @Override
-            public void myClick(View view, int position) {
-                String catalogId = data.get(position).getCatalogId();
-                presenter.getSerializationCatalogReadBean(catalogId);
-
-            }
-        });
-        // 创建PopupWindow对象，其中：
-        // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
-        // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
-        PopupWindow popupWindow = new PopupWindow(contentView, ScreenUtils.getScreenWidth(this)/3*2, ViewGroup.LayoutParams.MATCH_PARENT, true);
-        // 设置PopupWindow的背景
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        // 设置PopupWindow是否能响应外部点击事件
-        popupWindow.setOutsideTouchable(true);
-        // 设置PopupWindow是否能响应点击事件
-        popupWindow.setTouchable(true);
-        popupWindow.showAtLocation(SerializationRelativeLayout, Gravity.BOTTOM | Gravity.RIGHT, 0, 0);
-        //设置PopupWindow中View的点击事件
-        //定位
-        CataLog_PopuPosition.setOnClickListener(this);
-        //下载
-        CataLog_PopuBottom.setOnClickListener(this);
-//        分享
-        CataLog_FootViewShareBtn.setOnClickListener(this);
     }
 
     //消息弹出BottomSheetDialog
@@ -404,37 +427,30 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         });
     }
 
-
-    @Override
-    public void onClick(View view) {
+    @OnClick({R.id.SeeFirstBtn,
+            R.id.CataLog_FootViewCollectionBtn,
+            R.id.CataLog_FootViewShareBtn,
+            R.id.CataLog_FootViewUpperBtn,
+            R.id.CataLog_FootViewNexterBtn,
+            R.id.CataLog_PopuPosition,
+            R.id.serializationCatalogReadCatalogBtn,
+            R.id.CataLog_PopuDownload,
+            R.id.serializationCatalogReadReturnImg})
+    public void onViewClicked(View view) {
         switch (view.getId()) {
-            //返回
-            case R.id.serializationCatalogReadReturnImg:
-                finish();
-                break;
-            //弹出评论
-            case R.id.serializationCatalogReadCommentBtn:
-//                initCommentpopu();
-                break;
-            //弹出章节目录
-            case R.id.serializationCatalogReadCatalogBtn:
-                initCataLogpopu();
-                break;
-            //POPUWindow定位
-            case R.id.CataLog_PopuPosition:
-
-                break;
-            //POPUWindow下载
-            case R.id.CataLog_PopuBottom:
-
-                break;
-            //第一话
+            //观看第一话
             case R.id.SeeFirstBtn:
                 StartcatalogId = data.get(data.size() - 1).getCatalogId();
                 presenter.getSerializationCatalogReadBean(StartcatalogId);
                 SetTextColorRules();
                 break;
-            //上一话
+            //收藏
+            case R.id.CataLog_FootViewCollectionBtn:
+                break;
+            //分享
+            case R.id.CataLog_FootViewShareBtn:
+                break;
+            //上一章
             case R.id.CataLog_FootViewUpperBtn:
                 //得到现在章节的索引
                 for (SerializationCatalogBean.DataBean datum : data) {
@@ -451,7 +467,10 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 //填充底布局
                 serializationCatalogReadFootLin.setVisibility(View.GONE);
                 break;
-            //下一话
+            //评论
+            case R.id.serializationCatalogReadCommentBtn:
+                break;
+            //下一章
             case R.id.CataLog_FootViewNexterBtn:
                 //得到现在章节的索引
                 for (SerializationCatalogBean.DataBean datum : data) {
@@ -465,99 +484,104 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 serializationCatalogReadFootLin.setVisibility(View.GONE);
                 SetTextColorRules();
                 break;
-            //发送评论
-            case R.id.CommentPopu_Button:
+            //返回
+            case R.id.serializationCatalogReadReturnImg:
+                finish();
+                break;
+            //定位
+            case R.id.CataLog_PopuPosition:
+                break;
+            //下载
+            case R.id.CataLog_PopuDownload:
+                break;
+                //目录
+            case R.id.serializationCatalogReadCatalogBtn:
+                openRightLayout(mserializationCatalogReadCatalogDrawerLayout);
+                break;
 
-                break;
-            //关闭评论按钮
-            case R.id.CommentPopu_CommentCloseImg:
-                dialog.dismiss();
-                break;
-            //分享
-            case R.id.CataLog_FootViewShareBtn:
-                UMSharePlatform.getImstance().shareImage(SerializationCatalogReadActivity.this);
-                break;
-            case R.id.ppwPay_payBtn:
-                if (paymentMethod.equals("1")) {
-                    presenter.setWxMakeOrderData(qieziId + "", "1", StartcatalogId, "262", "0.1", "支付");
-                } else if (paymentMethod.equals("2")) {
-                    presenter.setMakeOrderData(qieziId + "", "1", StartcatalogId, "262", "1", "支付");
-                } else {
-                    Toast.makeText(this, "请选择支付方式", Toast.LENGTH_SHORT).show();
-                }
-                break;
 
         }
     }
 
     private void SetTextColorRules() {
-
         if (data != null && data.size() != 0) {
             //第一话
             if (data.get(data.size() - 1).getCatalogId().equals(StartcatalogId)) {
-                CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h2));
-                CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h2));
-                CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h4));
-                CataLog_FootViewUpperLine.setTextColor(getResources().getColor(R.color.h4));
-                CataLog_FootViewUpperBtn.setClickable(false);
-                CataLog_FootViewNexterBtn.setClickable(true);
+                CataLogFootViewNexterText.setTextColor(getResources().getColor(R.color.h2));
+                CataLogFootViewNexterLine.setTextColor(getResources().getColor(R.color.h2));
+                CataLogFootViewUpperText.setTextColor(getResources().getColor(R.color.h4));
+                CataLogFootViewUpperLine.setTextColor(getResources().getColor(R.color.h4));
+                CataLogFootViewUpperBtn.setClickable(false);
+                CataLogFootViewNexterBtn.setClickable(true);
                 weiwandaixuReLa.setVisibility(View.GONE);
                 //最后一话
             } else if (data.get(0).getCatalogId().equals(StartcatalogId)) {
-                CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h4));
-                CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h4));
-                CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h2));
-                CataLog_FootViewUpperLine.setTextColor(getResources().getColor(R.color.h2));
-                CataLog_FootViewUpperBtn.setClickable(true);
-                CataLog_FootViewNexterBtn.setClickable(false);
+                CataLogFootViewNexterText.setTextColor(getResources().getColor(R.color.h4));
+                CataLogFootViewNexterLine.setTextColor(getResources().getColor(R.color.h4));
+                CataLogFootViewUpperText.setTextColor(getResources().getColor(R.color.h2));
+                CataLogFootViewUpperLine.setTextColor(getResources().getColor(R.color.h2));
+                CataLogFootViewUpperBtn.setClickable(true);
+                CataLogFootViewNexterBtn.setClickable(false);
                 weiwandaixuReLa.setVisibility(View.VISIBLE);
                 //其他
             } else {
-                CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h2));
-                CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h2));
-                CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h2));
-                CataLog_FootViewUpperLine.setTextColor(getResources().getColor(R.color.h2));
-                CataLog_FootViewUpperBtn.setClickable(true);
-                CataLog_FootViewNexterBtn.setClickable(true);
+                CataLogFootViewNexterText.setTextColor(getResources().getColor(R.color.h2));
+                CataLogFootViewNexterLine.setTextColor(getResources().getColor(R.color.h2));
+                CataLogFootViewUpperText.setTextColor(getResources().getColor(R.color.h2));
+                CataLogFootViewUpperLine.setTextColor(getResources().getColor(R.color.h2));
+                CataLogFootViewUpperBtn.setClickable(true);
+                CataLogFootViewNexterBtn.setClickable(true);
                 weiwandaixuReLa.setVisibility(View.GONE);
             }
             if (data.size() == 1) {
-                CataLog_FootViewNexterText.setTextColor(getResources().getColor(R.color.h4));
-                CataLog_FootViewNexterLine.setTextColor(getResources().getColor(R.color.h4));
-                CataLog_FootViewUpperText.setTextColor(getResources().getColor(R.color.h4));
-                CataLog_FootViewUpperLine.setTextColor(getResources().getColor(R.color.h4));
-                CataLog_FootViewUpperBtn.setClickable(false);
-                CataLog_FootViewNexterBtn.setClickable(false);
+                CataLogFootViewNexterText.setTextColor(getResources().getColor(R.color.h4));
+                CataLogFootViewNexterLine.setTextColor(getResources().getColor(R.color.h4));
+                CataLogFootViewUpperText.setTextColor(getResources().getColor(R.color.h4));
+                CataLogFootViewUpperLine.setTextColor(getResources().getColor(R.color.h4));
+                CataLogFootViewUpperBtn.setClickable(false);
+                CataLogFootViewNexterBtn.setClickable(false);
                 weiwandaixuReLa.setVisibility(View.GONE);
             }
         }
 
     }
 
+    //支付popuwindow
     private void ShowPaypopupView() {
-        PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
+        View PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
 
-        ppwPay_productList = PaypopupView.findViewById(R.id.ppwPay_productList);
-        ppwPay_radioGroup = PaypopupView.findViewById(R.id.ppwPay_radioGroup);
-        ppwPay_zhifubaoBtn = PaypopupView.findViewById(R.id.ppwPay_zhifubaoBtn);
-        ppwPay_weixinBtn = PaypopupView.findViewById(R.id.ppwPay_weixinBtn);
-        ppwPay_payBtn = PaypopupView.findViewById(R.id.ppwPay_payBtn);
-        ppwPay_payMoney = PaypopupView.findViewById(R.id.ppwPay_payMoney);
-        ppwPay_qieziNum = PaypopupView.findViewById(R.id.ppwPay_qieziNum);
-        ppwPay_num = PaypopupView.findViewById(R.id.ppwPay_num);
-        ppwPay_userName = PaypopupView.findViewById(R.id.ppwPay_userName);
-
+        ppwPayProductList = PaypopupView.findViewById(R.id.ppwPay_productList);
+        ppwPayRadioGroup = PaypopupView.findViewById(R.id.ppwPay_radioGroup);
+        ppwPayZhifubaoBtn = PaypopupView.findViewById(R.id.ppwPay_zhifubaoBtn);
+        ppwPayWeixinBtn = PaypopupView.findViewById(R.id.ppwPay_weixinBtn);
+        ppwPayPayBtn = PaypopupView.findViewById(R.id.ppwPay_payBtn);
+        ppwPayPayMoney = PaypopupView.findViewById(R.id.ppwPay_payMoney);
+        ppwPayQieziNum = PaypopupView.findViewById(R.id.ppwPay_qieziNum);
+        ppwPayNum = PaypopupView.findViewById(R.id.ppwPay_num);
+        ppwPayUserName = PaypopupView.findViewById(R.id.ppwPay_userName);
+        ppwPayPayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (paymentMethod.equals("1")) {
+                    presenter.setWxMakeOrderData(qieziId + "", "1", StartcatalogId, "262", "0.1", "支付");
+                } else if (paymentMethod.equals("2")) {
+                    presenter.setMakeOrderData(qieziId + "", "1", StartcatalogId, "262", "1", "支付");
+                } else {
+                    Toast.makeText(SerializationCatalogReadActivity.this, "请选择支付方式", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         //获取屏幕宽高
         int weight = getResources().getDisplayMetrics().widthPixels;
         int height = getResources().getDisplayMetrics().heightPixels * 1 / 2;
 
-        popupWindow = new PopupWindow(PaypopupView, weight, height);
+        paypopupWindow = new PopupWindow(PaypopupView, weight, height);
         // popupWindow.setAnimationStyle(R.style.anim_popup_dir);
-        popupWindow.setFocusable(true);
+        paypopupWindow.setFocusable(true);
         //点击外部popueWindow消失
-        popupWindow.setOutsideTouchable(true);
-        ppwPay_payBtn.setOnClickListener(this);
-        ppwPay_radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        paypopupWindow.setOutsideTouchable(true);
+
+        ppwPayRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
@@ -571,7 +595,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             }
         });
         //popupWindow消失屏幕变为不透明
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+        paypopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 WindowManager.LayoutParams lp = getWindow().getAttributes();
@@ -579,9 +603,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 getWindow().setAttributes(lp);
             }
         });
-        popupWindow.showAtLocation(PaypopupView, Gravity.BOTTOM, 0, 0);
+        paypopupWindow.showAtLocation(PaypopupView, Gravity.BOTTOM, 0, 0);
     }
-
 
     //得到订单数据
     @Override
@@ -604,7 +627,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     @Override
     public void showGetPayData(final GetPayDataBean getPayDataBean) {
         if (getPayDataBean.getData().getOrderSign() != null) {
-            payV2(getPayDataBean.getData().getOrderSign());
+            AliPay(getPayDataBean.getData().getOrderSign());
         } else {
             Toast.makeText(this, "失败", Toast.LENGTH_SHORT).show();
         }
@@ -614,14 +637,14 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     @Override
     public void showGetWxPayData(PayWeChatBean payWeChatBean) {
         if (payWeChatBean.getData().getOrderSign() != null) {
-            payV1(payWeChatBean.getData().getOrderSign());
+            WeChatPay(payWeChatBean.getData().getOrderSign());
         } else {
             Toast.makeText(this, "失败", Toast.LENGTH_SHORT).show();
         }
     }
 
     //微信支付
-    private void payV1(PayWeChatBean.DataBean.OrderSignBean orderSign) {
+    private void WeChatPay(PayWeChatBean.DataBean.OrderSignBean orderSign) {
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
         IWXAPI api = WXAPIFactory.createWXAPI(this, "wx658d27e48aa3a824");
         // 将该app注册到微信
@@ -635,9 +658,10 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         request.timeStamp = orderSign.getTimestamp() + "";
         request.sign = orderSign.getSign();
         api.sendReq(request);
-        popupWindow.dismiss();
+        paypopupWindow.dismiss();
     }
 
+    //评论列表
     @Override
     public void showPgcChapterCommentListByOffSetBean(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean) {
         if (pgcChapterCommentListByOffSetBean != null) {
@@ -645,8 +669,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             result.addAll(pgcChapterCommentListByOffSetBean.getData().getCommentDtoList());
             if (result != null) {
                 if (result.size() != 0) {
-                    cataLog_footViewComment_recy.setVisibility(View.VISIBLE);
-                    cataLog_footViewComment_recyTip.setVisibility(View.GONE);
+                    CataLogFootViewCommentRecy.setVisibility(View.VISIBLE);
+                    CataLogFootViewCommentRecyTip.setVisibility(View.GONE);
                     catalogFootviewCommentRecyAdapter = new CatalogFootviewCommentRecyAdapter(pgcChapterCommentListByOffSetBean.getData().getCommentDtoList(), StartcatalogId, presenter);
                     commentPopu_recy.setAdapter(catalogFootviewCommentRecyAdapter);
                     catalogFootviewCommentRecyAdapter.setClickZan(new CatalogFootviewCommentRecyAdapter.ClickZan() {
@@ -655,11 +679,11 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                             presenter.PGCReadFabulous(StartcatalogId, commentId, status, pgcId);
                         }
                     });
-                    cataLog_footViewComment_recy.setAdapter(catalogFootviewCommentRecyAdapter);
+                    CataLogFootViewCommentRecy.setAdapter(catalogFootviewCommentRecyAdapter);
 
                 } else {
-                    cataLog_footViewComment_recy.setVisibility(View.GONE);
-                    cataLog_footViewComment_recyTip.setVisibility(View.VISIBLE);
+                    CataLogFootViewCommentRecy.setVisibility(View.GONE);
+                    CataLogFootViewCommentRecyTip.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -677,7 +701,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
      *
      * @param
      */
-    public void payV2(final String orderSign) {
+    public void AliPay(final String orderSign) {
         Runnable authRunnable = new Runnable() {
 
             @Override
@@ -711,18 +735,18 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         if (productListBean.getMsg().equals(GetData.MSG_SUCCESS)) {
             List<ProductListBean.DataBean> listBeanData = productListBean.getData();
             GridLayoutManager linearLayoutManager = new GridLayoutManager(this, 3);
-            ppwPay_productList.setLayoutManager(linearLayoutManager);
+            ppwPayProductList.setLayoutManager(linearLayoutManager);
             ProductListAdapter productListAdapter = new ProductListAdapter(listBeanData, this);
-            ppwPay_productList.setAdapter(productListAdapter);
+            ppwPayProductList.setAdapter(productListAdapter);
             productListAdapter.ProductListCallback(this);
         }
-
     }
 
-    //子条目Ite m
+
     @Override
     public void showProductList(int position) {
-//        赋值得到产品ID
         qieziId = position;
     }
+
+
 }

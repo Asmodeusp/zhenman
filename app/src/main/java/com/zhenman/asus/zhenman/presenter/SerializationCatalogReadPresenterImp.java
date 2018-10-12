@@ -258,7 +258,6 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
 
                     @Override
                     public void onNext(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean) {
-                        Log.d("SerializationCatalogRea", pgcChapterCommentListByOffSetBean.getMsg());
                         if (pgcChapterCommentListByOffSetBean.getState() == 0) {
                             serializationCatalogReadView.showError(pgcChapterCommentListByOffSetBean.getMsg());
                             serializationCatalogReadView.showPgcChapterCommentListByOffSetBean(pgcChapterCommentListByOffSetBean);
