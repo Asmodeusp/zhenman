@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.home;
 
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
@@ -11,7 +12,11 @@ import com.zhenman.asus.zhenman.model.bean.FollowBean;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
+import com.zhenman.asus.zhenman.view.login.MainActivity;
+import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.OnViewPagerListener;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
 import com.zhy.autolayout.AutoLinearLayout;
@@ -88,6 +93,21 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
         if (homeHotBean.getData().size()!=0) {
             homeHotRecyAdapter = new HomeHotRecyAdapter(homeHotBean.getData(), linearLayoutManager, HomeHot_List,presenter);
             HomeHot_List.setAdapter(homeHotRecyAdapter);
+            homeHotRecyAdapter.setgoUserInfo(new HomeHotRecyAdapter.goUserInfo() {
+                @Override
+                public void go(String UserId) {
+                    Boolean ISlogin = (Boolean) SPUtils.get(getContext(), SPKey.IS_LOGIN, false);
+                    if (ISlogin) {
+                        Intent intent = new Intent(getContext(), HomepageActivity.class);
+                        intent.putExtra( SPKey.HIM_ID,UserId);
+                        getActivity().startActivity(intent);
+                    }else{
+                        getContext().startActivity(new Intent(getContext(), MainActivity.class));
+                        getActivity().finish();
+                    }
+
+                }
+            });
         }
     }
 

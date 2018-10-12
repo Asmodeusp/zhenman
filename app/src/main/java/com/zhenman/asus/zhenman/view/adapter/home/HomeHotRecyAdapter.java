@@ -32,6 +32,7 @@ import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
+import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogFootviewCommentRecyAdapter;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhenman.asus.zhenman.view.ui.MyScrollView;
@@ -63,7 +64,15 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         Holder holder = new Holder(inflate);
         return holder;
     }
+    private goUserInfo clickZan;
 
+    public void setgoUserInfo( goUserInfo clickZan) {
+        this.clickZan = clickZan;
+    }
+
+    public interface goUserInfo {
+        void go(String UserId);
+    }
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
@@ -173,9 +182,8 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         holder.Home_Hot_HeadImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, HomepageActivity.class);
-                intent.putExtra( SPKey.HIM_ID,dataBean.getUserId()+"");
-                context.startActivity(intent);
+
+               clickZan.go(dataBean.getUserId()+"");
             }
         });
         //设置喜欢点赞数量
