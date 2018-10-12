@@ -3,7 +3,6 @@ package com.zhenman.asus.zhenman.view.myself;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.HomePageContract;
+import com.zhenman.asus.zhenman.model.bean.AttentionMyFansBean;
 import com.zhenman.asus.zhenman.model.bean.HomePageHeadBean;
 import com.zhenman.asus.zhenman.presenter.HomePagePresenter;
 import com.zhenman.asus.zhenman.utils.GetData;
@@ -54,7 +54,6 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
     private TextView homePage_attention;
     private TextView homePage_theme;
     private AutoLinearLayout homePage_other01;
-
     private AutoRelativeLayout my_data;
     private TabLayout homePage_himTab;
     private NoSrcollViewPage HomePage_Viewpager;
@@ -83,6 +82,8 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
     private PopupWindow popupWindow;
     private String paymentMethod;
     private boolean tag = false;
+    private AutoRelativeLayout homePage_aboutHim;
+    public static String him_id;
 
     protected int getLayoutId() {
         return R.layout.activity_homepage;
@@ -90,6 +91,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
 
     @Override
     protected void init() {
+
         app_back = (ImageView) findViewById(R.id.app_back);
         app_title = (TextView) findViewById(R.id.app_title);
         app_otherID = (TextView) findViewById(R.id.app_otherID);
@@ -110,6 +112,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         HomePage_Viewpager = (NoSrcollViewPage) findViewById(R.id.HomePage_Viewpager);
         homePage_rewardHe = (TextView) findViewById(R.id.homePage_rewardHe);
         homePage_attentionHe = (TextView) findViewById(R.id.homePage_attentionHe);
+        homePage_aboutHim = (AutoRelativeLayout) findViewById(R.id.homePage_aboutHim);
         app_title.setVisibility(View.GONE);
         homePageTab_title = new ArrayList<>();
         homePageTab_fragment = new ArrayList<>();
@@ -122,29 +125,28 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
         idListener();
         Intent intent = getIntent();
-        String from = intent.getStringExtra("from");
-        if (fromHome.equals(from)) {
-            String himeId = (String) SPUtils.get(this, SPKey.HIM_ID, "");
-//        从Sp中获取他人ID，如果有的话就证明是从他人ID那里跳转过来的，如果没有的话证明是请求个人主页
-            if (himeId.isEmpty()) {
-                presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
-            } else {
-                presenter.sendHomePageHeadData(himeId);
-            }
-
-        } else if (fromMyself.equals(from)) {//证明是从个人页面跳转过来的
-            String himeId = (String) SPUtils.get(this, SPKey.HIM_ID, "");
-//        从Sp中获取他人ID，如果有的话就证明是从他人ID那里跳转过来的，如果没有的话证明是请求个人主页
-            if (himeId.isEmpty()) {
-                presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
-            } else {
-                presenter.sendHomePageHeadData(himeId);
-            }
+        him_id = intent.getStringExtra("HIM_ID");
+        if (him_id.equals("myself")){
+            homePage_aboutHim.setVisibility(View.GONE);
+            presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
+        }else {
+            homePage_aboutHim.setVisibility(View.VISIBLE);
+            presenter.sendHomePageHeadData(him_id);
         }
-
+        /*String userId = (String) SPUtils.get(this, SPKey.USER_ID, "");
+        String himeId = (String) SPUtils.get(this, SPKey.HIM_ID, "");
+//        从Sp中获取他人ID，如果有的话就证明是从他人ID那里跳转过来的，如果没有的话证明是请求个人主页
+        if (himeId.isEmpty()) {
+            homePage_aboutHim.setVisibility(View.GONE);
+            presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
+        } else {
+            homePage_aboutHim.setVisibility(View.VISIBLE);
+            presenter.sendHomePageHeadData(himeId);
+        }*/
         homePage_himTab.setupWithViewPager(HomePage_Viewpager);
         HomePageAdapter homePageAdapter = new HomePageAdapter(getSupportFragmentManager(), homePageTab_title, homePageTab_fragment);
         HomePage_Viewpager.setAdapter(homePageAdapter);
+
     }
 
     private void idListener() {
@@ -189,12 +191,26 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
                     homePage_attentionHe.setText("已关注");
                     homePage_attentionHe.setTextColor(Color.parseColor("#AAAAAA"));
                     homePage_attentionHe.setBackgroundResource(R.drawable.comment_popubackgound);
+                    if (him_id.equals("myself")){
+                        homePage_aboutHim.setVisibility(View.GONE);
+                        presenter.sendAttentionUserData((String) SPUtils.get(this, SPKey.USER_ID, ""),1+"");
+                    }else {
+                        homePage_aboutHim.setVisibility(View.VISIBLE);
+                        presenter.sendAttentionUserData(him_id,1+"");
+                    }
                 } else {
                     tag = false;
                     homePage_attentionHe.setText("关注");
                     homePage_attentionHe.setTextColor(Color.parseColor("#b37feb"));
 
                     homePage_attentionHe.setBackgroundResource(R.drawable.actor_shape);
+                    if (him_id.equals("myself")){
+                        homePage_aboutHim.setVisibility(View.GONE);
+                        presenter.sendAttentionUserData((String) SPUtils.get(this, SPKey.USER_ID, ""),0+"");
+                    }else {
+                        homePage_aboutHim.setVisibility(View.VISIBLE);
+                        presenter.sendAttentionUserData(him_id,0+"");
+                    }
                 }
                 break;
 
@@ -247,6 +263,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
             }
         });
         popupWindow.showAtLocation(popupView1, Gravity.BOTTOM, 0, 0);
+
     }
 
     @Override
@@ -262,17 +279,30 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
             my_Resume.setText(homePageHeadBean.getData().getIntroduction());
             homePage_works.setText(homePageHeadBean.getData().getWorks() + "");
             homePage_fans.setText(homePageHeadBean.getData().getFans() + "");
-            homePage_attention.setText(homePageHeadBean.getData().getFollows() + "");
+            homePage_attention.setText(homePageHeadBean.getData().getFollows() - 1 + "");
             homePage_theme.setText(homePageHeadBean.getData().getFollowSubject() + "");
+            if (homePageHeadBean.getData().getFollow() == 2) {
+                homePage_attentionHe.setText("+关注");
+                homePage_attentionHe.setTextColor(Color.parseColor("#ffffff"));
+                homePage_attentionHe.setBackgroundResource(R.drawable.fans_attention_btn);
+            } else if (homePageHeadBean.getData().getFollow() == 1) {
+                homePage_attentionHe.setText("已关注");
+                homePage_attentionHe.setTextColor(Color.parseColor("#aaaaaa"));
+                homePage_attentionHe.setBackgroundResource(R.drawable.comment_popubackgound);
+            }
         } else {
             Toast.makeText(this, "未获取到数据", Toast.LENGTH_SHORT).show();
         }
     }
 
+    @Override
+    public void showAttentionUser(AttentionMyFansBean verificationCodeBean) {
+        Toast.makeText(this, verificationCodeBean.getMsg(), Toast.LENGTH_SHORT).show();
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) and run LayoutCreator again
+    public void showError(String string) {
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
+
     }
 }

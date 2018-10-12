@@ -2,12 +2,10 @@ package com.zhenman.asus.zhenman.presenter;
 
 import android.util.Log;
 
-import com.zhenman.asus.zhenman.contract.HomePageContract;
+import com.zhenman.asus.zhenman.contract.MyFansContract;
 import com.zhenman.asus.zhenman.model.bean.AttentionMyFansBean;
-import com.zhenman.asus.zhenman.model.bean.HomePageHeadBean;
-import com.zhenman.asus.zhenman.model.service.HomePageService;
+import com.zhenman.asus.zhenman.model.bean.MyFansBean;
 import com.zhenman.asus.zhenman.model.service.MyFansService;
-import com.zhenman.asus.zhenman.utils.GetData;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 
 import java.util.HashMap;
@@ -18,27 +16,30 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
-    HomePageContract.HomePageInView homePageInView;
+public class MyFansPresenter implements MyFansContract.MyFansInPresenter {
+    MyFansContract.MyFansInView myFansInView;
 
     @Override
-    public void sendHomePageHeadData(String userId) {
-        HashMap<String, String> paramMap = new HashMap<>();
-        paramMap.put("userId", userId);
-        RetrofitUtils.getInstance().getService(HomePageService.class)
-                .getHomePageHeadData(paramMap)
+    public void sendMyFansData(String pageNum, String pageSize) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("pageNum", pageNum);
+        paramMap.put("pageSize", pageSize);
+        RetrofitUtils.getInstance().getService(MyFansService.class)
+                .getMyFansData(paramMap)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HomePageHeadBean>() {
+                .subscribe(new Observer<MyFansBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(HomePageHeadBean homePageHeadBean) {
-                        if (homePageHeadBean.getMsg().equals(GetData.MSG_SUCCESS)) {
-                            homePageInView.showHomePageHead(homePageHeadBean);
+                    public void onNext(MyFansBean myFansBean) {
+                        if (myFansBean.getState() == 0) {
+                            myFansInView.showMyFansData(myFansBean);
+                        } else {
+                            myFansInView.showError(myFansBean.getMsg());
                         }
                     }
 
@@ -52,10 +53,9 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
 
                     }
                 });
-
     }
 
-    //关注用户
+    //    关注用户
     @Override
     public void sendAttentionUserData(String followedUserId, String status) {
         Map<String, String> paramMap = new HashMap<>();
@@ -74,9 +74,9 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
                     @Override
                     public void onNext(AttentionMyFansBean verificationCodeBean) {
                         if (verificationCodeBean.getState() == 0) {
-                            homePageInView.showAttentionUser(verificationCodeBean);
+                            myFansInView.showAttentionUser(verificationCodeBean);
                         }else {
-                            homePageInView.showError(verificationCodeBean.getMsg());
+                            myFansInView.showError(verificationCodeBean.getMsg());
                         }
                     }
 
@@ -93,12 +93,13 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
     }
 
     @Override
-    public void actualView(HomePageContract.HomePageInView homePageInView) {
-        this.homePageInView = homePageInView;
+    public void actualView(MyFansContract.MyFansInView myFansInView) {
+        this.myFansInView = myFansInView;
     }
 
     @Override
     public void unActualView() {
-        this.homePageInView = null;
+        this.myFansInView = null;
     }
 }
+

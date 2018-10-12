@@ -2,12 +2,11 @@ package com.zhenman.asus.zhenman.presenter;
 
 import android.util.Log;
 
-import com.zhenman.asus.zhenman.contract.HomePageContract;
+import com.zhenman.asus.zhenman.contract.MyAttentionUserContract;
 import com.zhenman.asus.zhenman.model.bean.AttentionMyFansBean;
-import com.zhenman.asus.zhenman.model.bean.HomePageHeadBean;
-import com.zhenman.asus.zhenman.model.service.HomePageService;
+import com.zhenman.asus.zhenman.model.bean.MyAttentionUserBean;
+import com.zhenman.asus.zhenman.model.service.MyAttentionUserService;
 import com.zhenman.asus.zhenman.model.service.MyFansService;
-import com.zhenman.asus.zhenman.utils.GetData;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 
 import java.util.HashMap;
@@ -18,27 +17,31 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
-    HomePageContract.HomePageInView homePageInView;
+public class MyAttentionUserPresenter implements MyAttentionUserContract.MyAttentionUserInPresenter {
+    MyAttentionUserContract.MyAttentionUserInView myAttentionUserInView;
 
     @Override
-    public void sendHomePageHeadData(String userId) {
-        HashMap<String, String> paramMap = new HashMap<>();
-        paramMap.put("userId", userId);
-        RetrofitUtils.getInstance().getService(HomePageService.class)
-                .getHomePageHeadData(paramMap)
+    public void sendMyAttentionUserData(String pageNum, String pageSize) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("pageNum", pageNum);
+        paramMap.put("pageSize", pageSize);
+
+        RetrofitUtils.getInstance().getService(MyAttentionUserService.class)
+                .getMyAttentionUser(paramMap)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HomePageHeadBean>() {
+                .subscribe(new Observer<MyAttentionUserBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(HomePageHeadBean homePageHeadBean) {
-                        if (homePageHeadBean.getMsg().equals(GetData.MSG_SUCCESS)) {
-                            homePageInView.showHomePageHead(homePageHeadBean);
+                    public void onNext(MyAttentionUserBean attentionUserBean) {
+                        if (attentionUserBean.getState() == 0) {
+                            myAttentionUserInView.showMyAttentionUserData(attentionUserBean);
+                        } else {
+                            myAttentionUserInView.showError(attentionUserBean.getMsg());
                         }
                     }
 
@@ -52,10 +55,8 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
 
                     }
                 });
-
     }
-
-    //关注用户
+//关注用户
     @Override
     public void sendAttentionUserData(String followedUserId, String status) {
         Map<String, String> paramMap = new HashMap<>();
@@ -74,9 +75,9 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
                     @Override
                     public void onNext(AttentionMyFansBean verificationCodeBean) {
                         if (verificationCodeBean.getState() == 0) {
-                            homePageInView.showAttentionUser(verificationCodeBean);
+                            myAttentionUserInView.showAttentionUser(verificationCodeBean);
                         }else {
-                            homePageInView.showError(verificationCodeBean.getMsg());
+                            myAttentionUserInView.showError(verificationCodeBean.getMsg());
                         }
                     }
 
@@ -93,12 +94,12 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
     }
 
     @Override
-    public void actualView(HomePageContract.HomePageInView homePageInView) {
-        this.homePageInView = homePageInView;
+    public void actualView(MyAttentionUserContract.MyAttentionUserInView myAttentionUserInView) {
+        this.myAttentionUserInView = myAttentionUserInView;
     }
 
     @Override
     public void unActualView() {
-        this.homePageInView = null;
+        this.myAttentionUserInView = null;
     }
 }

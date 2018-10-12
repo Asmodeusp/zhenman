@@ -4,7 +4,6 @@ package com.zhenman.asus.zhenman.view.login;
 import android.content.Intent;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,7 +26,6 @@ import com.zhenman.asus.zhenman.utils.umeng.ShareCallBack;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
 import com.zhenman.asus.zhenman.view.ContentActivity;
 
-import java.nio.file.FileStore;
 import java.util.Map;
 
 
@@ -123,6 +121,9 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
                 presenter.sendUMengLoginData(data.get("unionid"), data.get("name"), "",
                         data.get("iconurl"), sex, TYPE, data.get("openid"));
+//                Log.e("Sunny",data.get("unionid"));
+//                Log.e("Sunny",data.get("openid"));
+
             }
         }
 

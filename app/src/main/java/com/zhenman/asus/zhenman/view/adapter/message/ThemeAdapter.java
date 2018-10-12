@@ -7,15 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.TheamBean;
-import com.zhenman.asus.zhenman.utils.sp.SPKey;
-import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.List;
@@ -28,7 +25,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
     private ThemeCallback themeCallback;
     private ThemeAttentionCallback themeAttentionCallback;
     private boolean tag = false;
-    public static boolean isAttention;
+    public static boolean isAttention=false;
 
     public ThemeAdapter(List<TheamBean.DataBean> dataBeanList, Context context) {
         this.dataBeanList = dataBeanList;
@@ -96,30 +93,34 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
             Glide.with(context).load(dataBeanList.get(i).getList().get(2)).into(holder.itemTheme_coverImage3);
             Glide.with(context).load(dataBeanList.get(i).getList().get(3)).into(holder.itemTheme_coverImage4);
         }
-
+        if (dataBeanList.get(i).getFollowSubject()==1){
+            tag = true;
+            holder.itemTheme_attention.setText("已关注");
+            holder.itemTheme_attention.setTextColor(Color.parseColor("#40a9ff"));
+            holder.itemTheme_attention.setBackgroundResource(R.drawable.yiguanzhu);
+        }else {
+            tag = false;
+            holder.itemTheme_attention.setText("关注");
+            holder.itemTheme_attention.setTextColor(Color.parseColor("#ffffff"));
+            holder.itemTheme_attention.setBackgroundResource(R.drawable.guanzhuzhuti);
+        }
         holder.itemView.setTag(i);
         holder.itemTheme_attention.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Button but = new Button(context);
 //                关注的时候要发送网络请求，状态参数   0去关注   1取消关注
                 if (tag == false) {
                     tag = true;
                     themeCallback.makeAttention(dataBeanList.get(i).getSubjectId(), 1);
                     holder.itemTheme_attention.setText("已关注");
-                    isAttention = true;
                     holder.itemTheme_attention.setTextColor(Color.parseColor("#40a9ff"));
                     holder.itemTheme_attention.setBackgroundResource(R.drawable.yiguanzhu);
-                    SPUtils.put(context, SPKey.ATTENTION_THEME, true);
                 } else {
                     tag = false;
                     holder.itemTheme_attention.setText("关注");
-                    isAttention = false;
                     holder.itemTheme_attention.setTextColor(Color.parseColor("#ffffff"));
                     themeCallback.makeAttention(dataBeanList.get(i).getSubjectId(), 0);
                     holder.itemTheme_attention.setBackgroundResource(R.drawable.guanzhuzhuti);
-                    SPUtils.put(context, SPKey.ATTENTION_THEME, false);
-
                 }
             }
         });

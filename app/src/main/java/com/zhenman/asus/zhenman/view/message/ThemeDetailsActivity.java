@@ -14,10 +14,9 @@ import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.ThemeDetailHeadContract;
+import com.zhenman.asus.zhenman.model.bean.ThemeAttentionBean;
 import com.zhenman.asus.zhenman.model.bean.ThemeDetailHeadBean;
 import com.zhenman.asus.zhenman.presenter.ThemeDetailsPresenter;
-import com.zhenman.asus.zhenman.utils.sp.SPKey;
-import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.message.MessageAdapter;
 import com.zhenman.asus.zhenman.view.message.fragment.FeaturedFragment;
 import com.zhenman.asus.zhenman.view.message.fragment.SquareFragment;
@@ -48,6 +47,8 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
     private FeaturedFragment featuredFragment;
     private SquareFragment squareFragment;
     private String chapterId;
+    private int followSubject;//是否关注
+    private boolean tag = false;
 
     @Override
     protected int getLayoutId() {
@@ -58,7 +59,6 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
     protected void init() {
         Intent intent = getIntent();
         chapterId = intent.getStringExtra("chapterId");
-        intent.getBooleanExtra("isAttention",false);
         app_back = (ImageView) findViewById(R.id.app_back);
         app_title = (TextView) findViewById(R.id.app_title);
         app_otherID = (TextView) findViewById(R.id.app_otherID);
@@ -73,16 +73,6 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
         themeDetail_himTab = (TabLayout) findViewById(R.id.themeDetail_himTab);
         themeDetail_Viewpager = (ViewPager) findViewById(R.id.themeDetail_Viewpager);
         app_title.setText("");
-        Boolean isAttention = (Boolean) SPUtils.get(this, SPKey.ATTENTION_THEME, false);
-        if (isAttention){
-            themeDetail_attention.setText("已关注");
-            themeDetail_attention.setTextColor(Color.parseColor("#40a9ff"));
-            themeDetail_attention.setBackgroundResource(R.drawable.yiguanzhu);
-        }else {
-            themeDetail_attention.setText("关注主题");
-            themeDetail_attention.setTextColor(Color.parseColor("#ffffff"));
-            themeDetail_attention.setBackgroundResource(R.drawable.guanzhuzhuti);
-        }
         idListener();
         initData();
     }
@@ -116,7 +106,22 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.themeDetail_attention:
-
+                if (tag == false) {
+                    tag = true;
+                    themeDetail_attention.setText("已关注");
+                    themeDetail_attention.setTextColor(Color.parseColor("#40a9ff"));
+                    themeDetail_attention.setBackgroundResource(R.drawable.yiguanzhu);
+                    presenter.sendAttentionThemeData(chapterId, "1");//取消关注
+                } else {
+                    tag = false;
+                    themeDetail_attention.setText("关注");
+                    themeDetail_attention.setTextColor(Color.parseColor("#ffffff"));
+                    themeDetail_attention.setBackgroundResource(R.drawable.guanzhuzhuti);
+                    presenter.sendAttentionThemeData(chapterId, "0");//关注
+                }
+                break;
+            case R.id.app_back:
+                finish();
                 break;
         }
     }
@@ -129,6 +134,17 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
             themeDetail_Name.setText(themeDetailHeadBean.getData().getName());
             themeDetail_introduction.setText(themeDetailHeadBean.getData().getDescription());
             themeDetail_attenNum.setText(themeDetailHeadBean.getData().getFollowNum() + "人关注");
+            followSubject = themeDetailHeadBean.getData().getFollowSubject();
+            if (followSubject == 2) {
+                themeDetail_attention.setText("关注");
+                themeDetail_attention.setTextColor(Color.parseColor("#ffffff"));
+                themeDetail_attention.setBackgroundResource(R.drawable.guanzhuzhuti);
+
+            } else {
+                themeDetail_attention.setText("已关注");
+                themeDetail_attention.setTextColor(Color.parseColor("#40a9ff"));
+                themeDetail_attention.setBackgroundResource(R.drawable.yiguanzhu);
+            }
         } else if (themeDetailHeadBean.getData().getName().isEmpty()) {
             Toast.makeText(this, "获取数据失败", Toast.LENGTH_SHORT).show();
         } else {
@@ -141,4 +157,18 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
 
     }
 
+    @Override
+    public void showAttentionTheme(ThemeAttentionBean themeAttentionBean) {
+        if (themeAttentionBean.getState() == 0) {
+            Toast.makeText(this, themeAttentionBean.getMsg(), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, themeAttentionBean.getMsg(), Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+    }
 }
