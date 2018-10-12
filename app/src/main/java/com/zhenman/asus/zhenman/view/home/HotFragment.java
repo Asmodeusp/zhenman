@@ -117,6 +117,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
         }
 
+
     }
 
     @Override
