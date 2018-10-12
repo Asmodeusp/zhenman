@@ -182,7 +182,6 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         holder.Home_Hot_HeadImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                clickZan.go(dataBean.getUserId()+"");
             }
         });
