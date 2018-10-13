@@ -232,6 +232,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private static final int SDK_PAY_FLAG = 1;
     //底部评论适配器
     private CatalogFootviewCommentRecyAdapter catalogFootviewCommentRecyAdapter;
+    private String pgcId;
 
     @Override
     protected int getLayoutId() {
@@ -279,14 +280,16 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     protected void loadDate() {
         Intent intent = getIntent();
         StartcatalogId = intent.getStringExtra("catalogId");
-        String PgcId = intent.getStringExtra("pgcId");
+        StartcatalogId = (String) SPUtils.get(this,"catalogId","");
+        pgcId = (String) SPUtils.get(this,"pgcId","");
+        pgcId = intent.getStringExtra("pgcId");
         //得到数据
         //作品图片集合
         presenter.getSerializationCatalogReadBean(StartcatalogId);
         //作品章节集合
-        presenter.getSerializationCatalogBean(PgcId);
+        presenter.getSerializationCatalogBean(pgcId);
         //作品详情集合
-        presenter.getSerializationDetailsBean(PgcId);
+        presenter.getSerializationDetailsBean(pgcId);
         //作品评论集合
         presenter.getPgcChapterCommentListByOffSetBean(StartcatalogId, "0", "300", "1");
     }
