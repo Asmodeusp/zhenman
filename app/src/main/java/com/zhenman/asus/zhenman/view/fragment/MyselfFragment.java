@@ -144,7 +144,7 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 } else {
                     //  跳转到个人主页
                     Intent intentHomepage = new Intent(getActivity(), HomepageActivity.class);
-                    intentHomepage.putExtra("HIM_ID", "myself");
+                    intentHomepage.putExtra("him_id", "myself");
                     startActivity(intentHomepage);
                 }
                 break;
@@ -160,7 +160,7 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 } else {
 //                   跳转到个人主页
                     Intent intentHomepage = new Intent(getActivity(), HomepageActivity.class);
-                    intentHomepage.putExtra("HIM_ID", "myself");
+                    intentHomepage.putExtra("him_id", "myself");
                     startActivity(intentHomepage);
                 }
                 break;

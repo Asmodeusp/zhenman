@@ -17,7 +17,7 @@ public class PurchaseHistoryPresenter implements PurchaseHistoryContract.Purchas
     PurchaseHistoryContract.PurchaseHistoryInView purchaseHistoryInView;
 
     @Override
-    public void sendPurchaseHistory(String accessToken,String pageNum, String pageSize) {
+    public void sendPurchaseHistory(String pageNum, String pageSize) {
         Map<String, String> stringMap = new HashMap<>();
         stringMap.put("pageNum", pageNum);
         stringMap.put("pageSize", pageSize);

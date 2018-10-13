@@ -23,7 +23,7 @@ public class SPKey {
     public static String SINA_NAME="weiboName";
     public static String QQ_NAME="qqName";
     public static String SUBJECT_ID="subject_id";
-    public static String HIM_ID="subject_id";
+    public static String HIM_ID="him_id";
     public static String ATTENTION_THEME="attention_theme";
 
 

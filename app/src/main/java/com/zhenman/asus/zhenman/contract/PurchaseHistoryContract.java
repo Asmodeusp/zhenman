@@ -8,6 +8,6 @@ public interface PurchaseHistoryContract {
         void showPurchaseHistory(PurchaseHistoryBean purchaseHistoryBean);
     }
     interface PurchaseHistoryInPresenter extends BasePresenter<PurchaseHistoryInView>{
-        void sendPurchaseHistory(String accessToken,String pageNum,String pageSize);
+        void sendPurchaseHistory(String pageNum,String pageSize);
     }
 }

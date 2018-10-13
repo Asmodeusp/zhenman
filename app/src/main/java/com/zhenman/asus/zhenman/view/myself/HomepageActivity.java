@@ -125,7 +125,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
         idListener();
         Intent intent = getIntent();
-        him_id = intent.getStringExtra("HIM_ID");
+        him_id = intent.getStringExtra("him_id");
         if (him_id.equals("myself")){
             homePage_aboutHim.setVisibility(View.GONE);
             presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
@@ -133,16 +133,6 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
             homePage_aboutHim.setVisibility(View.VISIBLE);
             presenter.sendHomePageHeadData(him_id);
         }
-        /*String userId = (String) SPUtils.get(this, SPKey.USER_ID, "");
-        String himeId = (String) SPUtils.get(this, SPKey.HIM_ID, "");
-//        从Sp中获取他人ID，如果有的话就证明是从他人ID那里跳转过来的，如果没有的话证明是请求个人主页
-        if (himeId.isEmpty()) {
-            homePage_aboutHim.setVisibility(View.GONE);
-            presenter.sendHomePageHeadData((String) SPUtils.get(this, SPKey.USER_ID, ""));
-        } else {
-            homePage_aboutHim.setVisibility(View.VISIBLE);
-            presenter.sendHomePageHeadData(himeId);
-        }*/
         homePage_himTab.setupWithViewPager(HomePage_Viewpager);
         HomePageAdapter homePageAdapter = new HomePageAdapter(getSupportFragmentManager(), homePageTab_title, homePageTab_fragment);
         HomePage_Viewpager.setAdapter(homePageAdapter);
@@ -281,11 +271,11 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
             homePage_fans.setText(homePageHeadBean.getData().getFans() + "");
             homePage_attention.setText(homePageHeadBean.getData().getFollows() - 1 + "");
             homePage_theme.setText(homePageHeadBean.getData().getFollowSubject() + "");
-            if (homePageHeadBean.getData().getFollow() == 2) {
+            if (homePageHeadBean.getData().getFollow() == 1) {
                 homePage_attentionHe.setText("+关注");
                 homePage_attentionHe.setTextColor(Color.parseColor("#ffffff"));
                 homePage_attentionHe.setBackgroundResource(R.drawable.fans_attention_btn);
-            } else if (homePageHeadBean.getData().getFollow() == 1) {
+            } else if (homePageHeadBean.getData().getFollow() == 2) {
                 homePage_attentionHe.setText("已关注");
                 homePage_attentionHe.setTextColor(Color.parseColor("#aaaaaa"));
                 homePage_attentionHe.setBackgroundResource(R.drawable.comment_popubackgound);
