@@ -155,12 +155,13 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                 } else {
                     if (serializationCatalogBeandata.size()!=0) {
                         String catalogId = serializationCatalogBeandata.get(serializationCatalogBeandata.size() - 1).getCatalogId();
-                        Log.d("WorkDetailsActivity",catalogId) ;
+
                         SPUtils.put(WorkDetailsActivity.this,"catalogId", serializationCatalogBeandata.get(serializationCatalogBeandata.size()-1).getCatalogId());
                         SPUtils.put(WorkDetailsActivity.this,"pgcId", serializationCatalogBeandata.get(0).getPgcId());
+                        startActivity(intent);
                     }
                 }
-                startActivity(intent);
+
                 break;
         }
     }
