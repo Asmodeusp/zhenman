@@ -79,12 +79,13 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                     }
 
                     @Override
-                    public void onNext(SerializationCatalogBean userBean) {
-                        if (userBean.getState() == 0) {
-                            serializationCatalogReadView.showError(userBean.getMsg());
-                            serializationCatalogReadView.showSerializationCatalogBean(userBean);
+                    public void onNext(SerializationCatalogBean serializationCatalogBean) {
+                        if (serializationCatalogBean.getState() == 0) {
+
+                            serializationCatalogReadView.showError(serializationCatalogBean.getMsg());
+                            serializationCatalogReadView.showSerializationCatalogBean(serializationCatalogBean);
                         } else {
-                            serializationCatalogReadView.showError(userBean.getMsg());
+                            serializationCatalogReadView.showError(serializationCatalogBean.getMsg());
                         }
                     }
 

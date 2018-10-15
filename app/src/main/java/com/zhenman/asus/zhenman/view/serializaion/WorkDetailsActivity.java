@@ -66,7 +66,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
     @Override
     protected void loadDate() {
         String pgcid = (String) SPUtils.get(this, "pgcid", "");
-        this.pgcid =pgcid;
+        this.pgcid = pgcid;
         presenter.getSerializationDetailsBean(this.pgcid);
         presenter.getSerializationCatalogBean(this.pgcid);
     }
@@ -105,6 +105,8 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         Work_Detaails_LookUpBtn.setOnClickListener(this);
         //收藏
         Work_Detaails_collectionImg.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -150,14 +152,12 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
             //观看第一话
             case R.id.Work_Detaails_LookUpText:
                 Intent intent = new Intent(this, SerializationCatalogReadActivity.class);
-                if (serializationCatalogBeandata == null&&serializationCatalogBeandata.size()==0) {
+                if (serializationCatalogBeandata == null && serializationCatalogBeandata.size() == 0) {
                     Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (serializationCatalogBeandata.size()!=0) {
-                        String catalogId = serializationCatalogBeandata.get(serializationCatalogBeandata.size() - 1).getCatalogId();
-
-                        SPUtils.put(WorkDetailsActivity.this,"catalogId", serializationCatalogBeandata.get(serializationCatalogBeandata.size()-1).getCatalogId());
-                        SPUtils.put(WorkDetailsActivity.this,"pgcId", serializationCatalogBeandata.get(0).getPgcId());
+                    if (serializationCatalogBeandata.size() != 0) {
+                        SPUtils.put(WorkDetailsActivity.this, "catalogId", serializationCatalogBeandata.get(serializationCatalogBeandata.size() - 1).getCatalogId());
+                        SPUtils.put(WorkDetailsActivity.this, "pgcId", serializationCatalogBeandata.get(0).getPgcId());
                         startActivity(intent);
                     }
                 }

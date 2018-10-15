@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
 import com.zhenman.asus.zhenman.view.serializaion.SerializationCatalogReadActivity;
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
@@ -74,8 +75,8 @@ public class WorkCatalogFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void myClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), SerializationCatalogReadActivity.class);
-                intent.putExtra("catalogId",ReverseDataBeans.get(position).getCatalogId() );
-                intent.putExtra("pgcId",PositiveDataBeans.get(position).getPgcId());
+                SPUtils.put(getContext(),"catalogId",ReverseDataBeans.get(position).getCatalogId() );
+                SPUtils.put(getContext(),"pgcId",PositiveDataBeans.get(position).getPgcId());
                 startActivity(intent);
             }
         });
