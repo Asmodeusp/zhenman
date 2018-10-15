@@ -517,8 +517,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             case R.id.serializationCatalogReadCatalogBtn:
                 openRightLayout(mserializationCatalogReadCatalogDrawerLayout);
                 break;
-
-
         }
     }
 

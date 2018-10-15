@@ -156,7 +156,8 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                     Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
                 } else {
                     if (serializationCatalogBeandata.size() != 0) {
-                        SPUtils.put(WorkDetailsActivity.this, SPKey.CATALOGID_ID, serializationCatalogBeandata.get(serializationCatalogBeandata.size() - 1).getCatalogId());
+
+                        SPUtils.put(WorkDetailsActivity.this, SPKey.CATALOGID_ID,SPUtils.get(this,"FirstCatalogId",""));
                         SPUtils.put(WorkDetailsActivity.this, SPKey.PGC_ID, serializationCatalogBeandata.get(0).getPgcId());
                         startActivity(intent);
                     }
@@ -197,7 +198,10 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
             Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
         } else {
             this.serializationCatalogBean = serializationCatalogBean;
+
             serializationCatalogBeandata.addAll(serializationCatalogBean.getData());
+            String catalogId = serializationCatalogBeandata.get(serializationCatalogBeandata.size()-1).getCatalogId();
+            SPUtils.put(this,"FirstCatalogId",catalogId);
         }
     }
 
