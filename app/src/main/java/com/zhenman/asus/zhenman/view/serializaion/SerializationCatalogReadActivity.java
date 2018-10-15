@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +50,7 @@ import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.presenter.SerializationCatalogReadPresenterImp;
 import com.zhenman.asus.zhenman.utils.GetData;
+import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.utils.alipay.AuthResult;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
@@ -56,6 +59,7 @@ import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogReadActorAdapt
 import com.zhenman.asus.zhenman.view.adapter.serialization.ProductListAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogReadRecyAdapter;
+import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
@@ -70,6 +74,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     //整个章节阅读图的RecyclerView
     @BindView(R.id.serializationCatalogReadRecy)
     RecyclerView serializationCatalogReadRecy;
+    @BindView(R.id.SerializationMyScrollView)
+    MyScrollView SerializationMyScrollView;
     //从第一话开始观看
     @BindView(R.id.SeeFirstBtn)
     AutoLinearLayout SeeFirstBtn;
@@ -385,6 +391,9 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         } else {
 
             serializationCatalogReadRecyAdapter = new SerializationCatalogReadRecyAdapter(serializationCatalogReadBean.getData().getList());
+            double i = (double) serializationCatalogReadBean.getData().getTotalHeight() / 800;
+            double InsideHight = i * (double) ScreenUtils.getScreenWidth(this);
+            serializationCatalogReadRecy.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) InsideHight));
             serializationCatalogReadRecy.setAdapter(serializationCatalogReadRecyAdapter);
             LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(SerializationCatalogReadActivity.this, R.anim.recy_item);
             serializationCatalogReadRecy.setLayoutAnimation(animation);
@@ -465,6 +474,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 }
                 if (data.size() != 0 && data != null) {
                     StartcatalogId = data.get(i + 1).getCatalogId();
+                    SerializationDrawerLayout.setX(0);
                     presenter.getSerializationCatalogReadBean(StartcatalogId);
                 }
                 SetTextColorRules();
@@ -485,6 +495,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                             i = data.indexOf(datum);
                         }
                     }
+                    serializationCatalogReadRecy.scrollToPosition(0);
                     StartcatalogId = data.get(i - 1).getCatalogId();
                     presenter.getSerializationCatalogReadBean(StartcatalogId);
                     serializationCatalogReadHeadRel.setVisibility(View.GONE);
@@ -584,7 +595,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         int height = getResources().getDisplayMetrics().heightPixels * 1 / 2;
 
         paypopupWindow = new PopupWindow(PaypopupView, weight, height);
-        // popupWindow.setAnimationStyle(R.style.anim_popup_dir);
         paypopupWindow.setFocusable(true);
         //点击外部popueWindow消失
         paypopupWindow.setOutsideTouchable(true);

@@ -25,12 +25,13 @@
 
                 <com.zhy.autolayout.AutoRelativeLayout
                     android:layout_width="match_parent"
+                    android:descendantFocusability="blocksDescendants"
                     android:layout_height="match_parent">
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/serializationCatalogReadRecy"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:nestedScrollingEnabled="false"></android.support.v7.widget.RecyclerView>
 
                     <com.zhy.autolayout.AutoRelativeLayout
