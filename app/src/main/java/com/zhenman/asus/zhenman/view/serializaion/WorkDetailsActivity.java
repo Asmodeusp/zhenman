@@ -65,7 +65,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
 
     @Override
     protected void loadDate() {
-        String pgcid = (String) SPUtils.get(this, "pgcid", "");
+        String pgcid = (String) SPUtils.get(this, SPKey.PGC_ID, "");
         this.pgcid = pgcid;
         presenter.getSerializationDetailsBean(this.pgcid);
         presenter.getSerializationCatalogBean(this.pgcid);
@@ -156,8 +156,8 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                     Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
                 } else {
                     if (serializationCatalogBeandata.size() != 0) {
-                        SPUtils.put(WorkDetailsActivity.this, "catalogId", serializationCatalogBeandata.get(serializationCatalogBeandata.size() - 1).getCatalogId());
-                        SPUtils.put(WorkDetailsActivity.this, "pgcId", serializationCatalogBeandata.get(0).getPgcId());
+                        SPUtils.put(WorkDetailsActivity.this, SPKey.CATALOGID_ID, serializationCatalogBeandata.get(serializationCatalogBeandata.size() - 1).getCatalogId());
+                        SPUtils.put(WorkDetailsActivity.this, SPKey.PGC_ID, serializationCatalogBeandata.get(0).getPgcId());
                         startActivity(intent);
                     }
                 }

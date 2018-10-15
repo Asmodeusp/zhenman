@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
 import com.zhenman.asus.zhenman.view.serializaion.SerializationCatalogReadActivity;
@@ -75,8 +76,8 @@ public class WorkCatalogFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void myClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), SerializationCatalogReadActivity.class);
-                SPUtils.put(getContext(),"catalogId",ReverseDataBeans.get(position).getCatalogId() );
-                SPUtils.put(getContext(),"pgcId",PositiveDataBeans.get(position).getPgcId());
+                SPUtils.put(getContext(),SPKey.CATALOGID_ID,ReverseDataBeans.get(position).getCatalogId() );
+                SPUtils.put(getContext(),SPKey.PGC_ID,PositiveDataBeans.get(position).getPgcId());
                 startActivity(intent);
             }
         });
@@ -92,8 +93,8 @@ public class WorkCatalogFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void myClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), SerializationCatalogReadActivity.class);
-                intent.putExtra("catalogId",PositiveDataBeans.get(position).getCatalogId() );
-                intent.putExtra("pgcId",PositiveDataBeans.get(position).getPgcId());
+                SPUtils.put(getActivity(),SPKey.CATALOGID_ID,PositiveDataBeans.get(position).getCatalogId() );
+                SPUtils.put(getActivity(),SPKey.PGC_ID,PositiveDataBeans.get(position).getPgcId());
                 startActivity(intent);
             }
         });

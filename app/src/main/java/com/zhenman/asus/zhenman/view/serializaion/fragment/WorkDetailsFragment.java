@@ -16,6 +16,7 @@ import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
 import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.WorkCommentRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.WorkDetailsActorRecyAdapter;
@@ -51,7 +52,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
 
     @Override
     protected void init() {
-        pgcId = ((String) SPUtils.get(getContext(), "pgcid", "1"));
+        pgcId = ((String) SPUtils.get(getContext(), SPKey.PGC_ID, "1"));
         presenter.getWorkDetailsCommentBean(pgcId, "" + 1);
         //作品描述
         Work_DescriptionText = getActivity().findViewById(R.id.Work_DescriptionText);
@@ -98,33 +99,33 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
 
     @Override
     public void showWorkDetailsCommentBean(final WorkDetailsCommentBean workDetailsCommentBean) {
-        Log.d("WorkDetailsFragment", workDetailsCommentBean.getMsg());
-        if (workDetailsCommentBean != null) {
-
-            result = workDetailsCommentBean.getData().getCommentDtoList();
-            if (result != null) {
-                if (result.size() == 0) {
-                    work_commentTips.setVisibility(View.VISIBLE);
-                    Work_commentRecy.setVisibility(View.GONE);
-                } else {
-                    work_commentTips.setVisibility(View.GONE);
-                    Work_commentRecy.setVisibility(View.VISIBLE);
-                    //设置评论列表适配器
-                    WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, pgcId, presenter);
-                    Work_commentRecy.setAdapter(workCommentRecyAdapter);
-                    workCommentRecyAdapter.notifyDataSetChanged();
-                    workCommentRecyAdapter.setRecyclerViewOnCLickListener(new WorkCommentRecyAdapter.RecyclerViewOnCLickListener() {
-                        @Override
-                        public void myClick(View view, int position) {
-                            Intent intent = new Intent(getActivity(), SerializaionCommentDetailsActivity.class);
-                            intent.putExtra("CommentId", workDetailsCommentBean.getData().getCommentDtoList().get(position).getCommentId());
-                            intent.putExtra("PgcId", pgcId);
-                            startActivity(intent);
-                        }
-                    });
-                }
-            }
-        }
+//        if (workDetailsCommentBean != null) {
+//
+//            result = workDetailsCommentBean.getData().getCommentDtoList();
+//            if (result != null) {
+//                if (result.size() == 0) {
+//                    work_commentTips.setVisibility(View.VISIBLE);
+//                    Work_commentRecy.setVisibility(View.GONE);
+//                } else {
+//                    work_commentTips.setVisibility(View.GONE);
+//                    Work_commentRecy.setVisibility(View.VISIBLE);
+//                    //设置评论列表适配器
+//                    WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, pgcId, presenter);
+//                    Work_commentRecy.setAdapter(workCommentRecyAdapter);
+//
+//                    workCommentRecyAdapter.notifyDataSetChanged();
+//                    workCommentRecyAdapter.setRecyclerViewOnCLickListener(new WorkCommentRecyAdapter.RecyclerViewOnCLickListener() {
+//                        @Override
+//                        public void myClick(View view, int position) {
+//                            Intent intent = new Intent(getActivity(), SerializaionCommentDetailsActivity.class);
+//                            intent.putExtra("CommentId", workDetailsCommentBean.getData().getCommentDtoList().get(position).getCommentId());
+//                            SPUtils.put(getActivity(),SPKey.PGC_ID, pgcId);
+//                            startActivity(intent);
+//                        }
+//                    });
+//                }
+//            }
+//        }
 
     }
 

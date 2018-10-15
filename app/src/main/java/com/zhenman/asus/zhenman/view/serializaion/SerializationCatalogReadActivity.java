@@ -250,7 +250,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         }
 
         initEvent();
-        initCatalog();
+
     }
 
     private void initCatalog() {
@@ -274,10 +274,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     @Override
     protected void loadDate() {
-        Intent intent = getIntent();
-        StartcatalogId = intent.getStringExtra("catalogId");
         StartcatalogId = (String) SPUtils.get(this, SPKey.CATALOGID_ID, "");
-        pgcId = (String) SPUtils.get(this, "pgcId", "");
+        pgcId = (String) SPUtils.get(this, SPKey.PGC_ID, "");
 
         //得到数据
         //作品图片集合
@@ -342,6 +340,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
         } else {
             data.addAll(serializationCatalogBean.getData());
+            initCatalog();
         }
     }
 

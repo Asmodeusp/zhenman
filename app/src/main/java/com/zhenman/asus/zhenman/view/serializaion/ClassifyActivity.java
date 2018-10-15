@@ -18,6 +18,8 @@ import com.zhenman.asus.zhenman.contract.SerializationClassifyContract;
 import com.zhenman.asus.zhenman.model.bean.ClassifyBean;
 import com.zhenman.asus.zhenman.model.bean.ClassifyTagBean;
 import com.zhenman.asus.zhenman.presenter.SerializationClassifyPresenterImp;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifyBackgroundTagsRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifyProductRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifyStatusTagsRecyAdapter;
@@ -141,8 +143,8 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
                 @Override
                 public void myClick(View view, int position) {
                     Intent intent = new Intent(ClassifyActivity.this,SerializationCatalogReadActivity.class);
-                    intent.putExtra("catalogId",result.get(position).getCatalogId());
-                    intent.putExtra("pgcId", result.get(position).getPgcId());
+                    SPUtils.put(ClassifyActivity.this,SPKey.CATALOGID_ID,result.get(position).getCatalogId());
+                    SPUtils.put(ClassifyActivity.this,SPKey.PGC_ID, result.get(position).getPgcId());
                     startActivity(intent);
 
                 }

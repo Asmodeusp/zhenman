@@ -98,7 +98,7 @@
     </com.zhy.autolayout.AutoLinearLayout>
 
     <TextView
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/Work_commentTips"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -108,6 +108,7 @@
     <android.support.v7.widget.RecyclerView
         android:nestedScrollingEnabled="false"
         android:layout_marginTop="16px"
+        android:visibility="gone"
         android:id="@+id/Work_commentRecy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
