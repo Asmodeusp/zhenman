@@ -161,7 +161,6 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                         startActivity(intent);
                     }
                 }
-
                 break;
         }
     }

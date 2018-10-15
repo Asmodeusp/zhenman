@@ -40,6 +40,7 @@ import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
 import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
+import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
@@ -229,6 +230,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     //底部评论适配器
     private CatalogFootviewCommentRecyAdapter catalogFootviewCommentRecyAdapter;
     private String pgcId;
+    private boolean isCollect;
 
     @Override
     protected int getLayoutId() {
@@ -329,6 +331,26 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             catalogReadActorAdapter = new CatalogReadActorAdapter(serializationDetailsBean.getData().getActorList());
             catalogReadActorAdapter.CatalogReadActorCallback(this);
             CataLogFootViewActorRecy.setAdapter(catalogReadActorAdapter);
+            isCollect = serializationDetailsBean.getData().isCollect();
+            if (serializationDetailsBean.getData().isCollect()) {
+                CataLogFootViewCollectionImg.setImageResource(R.mipmap.common_collection_on);
+            } else {
+                CataLogFootViewCollectionImg.setImageResource(R.mipmap.common_collection_off);
+            }
+            CataLogFootViewCollectionBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isCollect) {
+                        CataLogFootViewCollectionImg.setImageResource(R.mipmap.common_collection_off);
+                        isCollect = false;
+                        presenter.PgcCollection(pgcId, "0");
+                    } else {
+                        CataLogFootViewCollectionImg.setImageResource(R.mipmap.common_collection_on);
+                        isCollect = true;
+                        presenter.PgcCollection(pgcId, "1");
+                    }
+                }
+            });
         }
     }
 
@@ -387,7 +409,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 }
             });
         }
-            SetTextColorRules();
+        SetTextColorRules();
     }
 
     //消息弹出BottomSheetDialog
@@ -419,8 +441,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     @OnClick({R.id.SeeFirstBtn,
-            R.id.CataLog_FootViewCollectionBtn,
-            R.id.CataLog_FootViewShareBtn,
             R.id.CataLog_FootViewUpperBtn,
             R.id.CataLog_FootViewNexterBtn,
             R.id.CataLog_PopuPosition,
@@ -431,16 +451,9 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         switch (view.getId()) {
             //观看第一话
             case R.id.SeeFirstBtn:
-                StartcatalogId = data.get(data.size()-1).getCatalogId();
+                StartcatalogId = data.get(data.size() - 1).getCatalogId();
                 presenter.getSerializationCatalogReadBean(StartcatalogId);
                 SetTextColorRules();
-                break;
-            //收藏
-            case R.id.CataLog_FootViewCollectionBtn:
-
-                break;
-            //分享
-            case R.id.CataLog_FootViewShareBtn:
                 break;
             //上一章
             case R.id.CataLog_FootViewUpperBtn:
@@ -636,6 +649,11 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         } else {
             Toast.makeText(this, "失败", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void showPgcCollectionBean(PgcCollectionBean collectionBean) {
+
     }
 
     //微信支付

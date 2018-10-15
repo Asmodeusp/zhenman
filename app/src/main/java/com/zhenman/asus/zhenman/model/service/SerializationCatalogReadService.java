@@ -4,6 +4,7 @@ import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
 import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
+import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
@@ -52,7 +53,6 @@ public interface SerializationCatalogReadService {
     @FormUrlEncoded
     @POST(Urls.MAKE_ORDER)
     Observable<MakeOrderBean> getWxMakeOrderBean( @FieldMap Map<String,String > map);
-
     //得到支付宝订单号
     //    GET_PAY_DATA="userOrder/getPaySignByAli?orderSn=ZM991535076014567";
     @GET(Urls.GET_PAY_DATA)
@@ -60,5 +60,9 @@ public interface SerializationCatalogReadService {
     //    得到微信数据
     @GET(Urls.GET_WX_PAY_DATA)
     Observable<PayWeChatBean> getWXPayData(@Query("orderSn") String orderSn);
+    //PGC收藏
+    @FormUrlEncoded
+    @POST(Urls.PGC_COLLECTION)
+    Observable<PgcCollectionBean> GetPgcCollectionBean(@FieldMap Map<String, String> params);
 }
 
