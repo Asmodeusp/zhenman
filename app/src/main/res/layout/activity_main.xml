@@ -32,7 +32,6 @@
     android:layout_alignParentRight="true"
     android:layout_height="150px">
     <ImageView
-
         android:layout_width="36px"
         android:layout_height="36px"
         android:layout_margin="@dimen/px_24"

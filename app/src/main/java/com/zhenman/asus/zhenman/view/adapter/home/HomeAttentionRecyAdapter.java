@@ -69,9 +69,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         GlideUtils.loadCircleImage(dataBean.getHeadImg(), holder.fill_Home_Attention_RecyHeadIew, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
             @Override
             public void onLoadingComplete(String uri, ImageView view, GlideDrawable resource) {
-
             }
-
             @Override
             public void onLoadingError(String source, Exception e) {
             }
@@ -98,13 +96,11 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth, ((int) (dataBean.getThumbnailWidth() / dataBean.getThumbnailWidth() / dataBean.getThumbnailHeight()))));
             Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
         } else {
-
             if (dataBean.getThumbnailWidth() < MaxWidth * 0.65) {
                 holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams((int) (MaxWidth * 0.65), (int) (MaxHeight * 0.65)));
                 holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth, ((int) (dataBean.getThumbnailWidth() / dataBean.getThumbnailWidth() / dataBean.getThumbnailHeight()))));
                 Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
             } else {
-
                 holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth, MaxHeight));
                 holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxWidth, ((int) (dataBean.getThumbnailWidth() / dataBean.getThumbnailWidth() / dataBean.getThumbnailHeight()))));
                 Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
