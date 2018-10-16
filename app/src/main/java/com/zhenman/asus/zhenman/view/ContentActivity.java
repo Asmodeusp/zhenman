@@ -1,5 +1,6 @@
 package com.zhenman.asus.zhenman.view;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.View;
@@ -12,11 +13,14 @@ import android.widget.Toast;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeAttentionRecyAdapter;
 import com.zhenman.asus.zhenman.view.fragment.HomepageFragment;
 import com.zhenman.asus.zhenman.view.fragment.MessageFragment;
 import com.zhenman.asus.zhenman.view.fragment.MyselfFragment;
 import com.zhenman.asus.zhenman.view.fragment.SerializationFragment;
+import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhy.autolayout.AutoFrameLayout;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -31,6 +35,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
     private AutoRelativeLayout MyselfButton;
     public AutoLinearLayout group;
     private TextView SerializationText;
+    private Boolean iSlogin;
 
     public AutoLinearLayout getGroup() {
         return group;
@@ -71,7 +76,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void loadDate() {
-
+        iSlogin = (Boolean) SPUtils.get(this, SPKey.IS_LOGIN, false);
     }
 
     @Override
@@ -82,7 +87,6 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
                 setContentView(R.id.Homecontentview, HomepageFragment.class);
                 setText(38, 32, 32, 32);
                 setTextColor("#ffffff");
-
                 break;
             case R.id.SerializationButton:
                 group.setBackgroundColor(Color.parseColor("#ffffff"));
@@ -95,6 +99,9 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
                 Toast.makeText(this, "该功能暂未开放", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.MessageButton:
+                if (!iSlogin) {
+                    startActivity(new Intent(this, MainActivity.class));
+                }
                 group.setBackgroundColor(Color.parseColor("#ffffff"));
                 setContentView(R.id.Othercontentview, MessageFragment.class);
                 setText(32, 32, 38, 32);
@@ -102,6 +109,10 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
 
                 break;
             case R.id.MyselfButton:
+                if (!iSlogin) {
+                    startActivity(new Intent(this, MainActivity.class));
+
+                }
                 group.setBackgroundColor(Color.parseColor("#ffffff"));
                 setContentView(R.id.Othercontentview, MyselfFragment.class);
                 setText(32, 32, 32, 38);
@@ -110,6 +121,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
 
         }
     }
+
     private SetTextColor setTextColor;
 
     public void setHomeText(SetTextColor setTextColor) {
@@ -119,6 +131,7 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
     public interface SetTextColor {
         void show(String color);
     }
+
     //设置字体颜色
     private void setTextColor(String color) {
 

@@ -24,6 +24,7 @@ import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.serializaion.fragment.WorkCatalogFragment;
 import com.zhenman.asus.zhenman.view.serializaion.fragment.WorkDetailsFragment;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
     public SerializationDetailsBean.DataBean serializationDetailsBeandata;
     public List<SerializationCatalogBean.DataBean> serializationCatalogBeandata = new ArrayList<>();
     public SerializationCatalogBean serializationCatalogBean;
-    private ImageView Work_Detaails_ReturnImg;
+    private AutoRelativeLayout Work_Detaails_ReturnImg;
     private ImageView Work_Detaails_CoverImg;
     private TextView Work_Detaails_Tag;
     private CheckBox Work_Detaails_collectionImg;

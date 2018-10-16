@@ -121,12 +121,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
     }
 
     private void install(String filePath) {
-        Log.i("Sunny", "开始执行安装: " + filePath);
         File apkFile = new File(filePath);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Log.w("Sunny", "版本大于 N ，开始使用 fileProvider 进行安装");
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             Uri contentUri = FileProvider.getUriForFile(
                     App.context
@@ -134,29 +132,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
                     , apkFile);
             intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
         } else {
-            Log.w("Sunny", "正常进行安装");
             intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
         }
         startActivity(intent);
-    }
-
-    public void onPermissionRequests(String permission, OnBooleanListener onBooleanListener) {
-        onPermissionListener = onBooleanListener;
-        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_CONTACTS)) {
-                //权限已有
-                onPermissionListener.onClick(true);
-            } else {
-                //没有权限，申请一下
-                ActivityCompat.requestPermissions(this,
-                        new String[]{permission},
-                        1);
-            }
-        } else {
-            onPermissionListener.onClick(true);
-
-        }
     }
 
     @Override

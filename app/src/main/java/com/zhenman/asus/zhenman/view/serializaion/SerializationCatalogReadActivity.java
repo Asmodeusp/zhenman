@@ -136,7 +136,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     AutoRelativeLayout serializationCatalogReadFootLin;
     //返回按钮
     @BindView(R.id.serializationCatalogReadReturnImg)
-    ImageView serializationCatalogReadReturnImg;
+    AutoRelativeLayout serializationCatalogReadReturnImg;
     //第几话
     @BindView(R.id.serializationCatalogReadText)
     TextView serializationCatalogReadText;

@@ -77,7 +77,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             }
         });
         //图片加载最大宽度
-        int MaxWidth = ScreenUtils.getScreenWidth(context) * 2 / 3;
+        int MaxWidth = ScreenUtils.getScreenWidth(context) * 3 / 5;
         //图片加载最大高度
         int MaxHeight = MaxWidth;
         //超过一屏长图
@@ -110,7 +110,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
                 Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
             }
         }
-
+//        Glide.with(context).load(dataBean.getImgList().get(0).getThumbnailImg()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.fill_Home_Attention_RecyImageView);
         //设置用户名
         holder.fill_Home_Attention_RecyUserNameText.setText(dataBean.getName());
         //设置发布时间

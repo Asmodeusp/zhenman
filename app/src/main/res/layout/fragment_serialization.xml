@@ -22,7 +22,7 @@
                 <com.recker.flybanner.FlyBanner
                     android:id="@+id/Serialization_FlyBanner"
                     android:layout_width="match_parent"
-                    android:layout_height="500px"
+                    android:layout_height="440px"
                     android:background="@drawable/image_code"
                     ></com.recker.flybanner.FlyBanner>
 

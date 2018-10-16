@@ -24,19 +24,25 @@
             android:text="@string/Fast_landing"
             android:textColor="@color/h9"
             android:textSize="20sp" />
+<com.zhy.autolayout.AutoRelativeLayout
+    android:id="@+id/common_closeImage"
+    android:layout_width="150px"
+    android:layout_alignBottom="@+id/Fast_landing"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_height="150px">
+    <ImageView
 
-        <ImageView
-            android:id="@+id/common_closeImage"
-            android:layout_width="36px"
-            android:layout_height="36px"
-            android:layout_alignBottom="@+id/Fast_landing"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="33dp"
-            android:layout_marginRight="33dp"
-            android:textColor="@color/h9"
-            android:textSize="20sp"
-            app:srcCompat="@mipmap/common_close_small" />
+        android:layout_width="36px"
+        android:layout_height="36px"
+        android:layout_margin="@dimen/px_24"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/h9"
+        android:textSize="20sp"
+        app:srcCompat="@mipmap/common_close_small"
+        android:layout_alignParentRight="true" />
+</com.zhy.autolayout.AutoRelativeLayout>
+
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <com.zhy.autolayout.AutoLinearLayout
