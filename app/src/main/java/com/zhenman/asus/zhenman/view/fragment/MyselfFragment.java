@@ -92,9 +92,7 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
         my_themePage = getActivity().findViewById(R.id.my_themePage);//主题
 
         my_AccountNumberPage = getActivity().findViewById(R.id.my_AccountNumberPage);//个人账号管理
-//        accessToken   oauthId
-//        获取头部信息
-        presenter.sendMyselfHeadData((String) SPUtils.get(getActivity(), SPKey.USER_ID, ""));
+
         String s = (String) SPUtils.get(App.context, (String) SPUtils.get(getActivity(), SPKey.USER_OAUTHID, ""), "");
 //        presenter.sendGetMyData(s);
         idListener();
@@ -102,6 +100,9 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
         String s1 = (String) SPUtils.get(getActivity(), SPKey.USER_ID, "");
         if (s1.isEmpty()) {
             startActivity(new Intent(getActivity(), MainActivity.class));
+        }else {
+            //        获取头部信息
+            presenter.sendMyselfHeadData((String) SPUtils.get(getActivity(), SPKey.USER_ID, ""));
         }
 
     }

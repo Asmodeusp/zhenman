@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.adapter.serialization;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.List;
+
 //茄子适配器
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.Holder> implements View.OnClickListener {
     private List<ProductListBean.DataBean> listBeanData;
@@ -50,16 +54,20 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public void onBindViewHolder(@NonNull final Holder holder, final int i) {
         holder.itemProductList_num.setText("  X " + listBeanData.get(i).getShowPrice() + "");
         holder.itemView.setTag(i);
+        holder.itemProductList_money.setText("￥"+listBeanData.get(i).getPrice()+".00");
         holder.itemProductList_num.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (lastBox == null) {
                     lastBox = holder.itemProductList_num;
+                    holder.itemProductList_moneyBg.setBackgroundColor(Color.parseColor("#666666"));
                 } else {
                     lastBox.setChecked(false);
+                    holder.itemProductList_moneyBg.setBackgroundColor(Color.parseColor("#b37feb"));
                     lastBox = holder.itemProductList_num;
                 }
                 croductListCallback.showProductList(i);
+
             }
         });
     }
@@ -89,11 +97,15 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public class Holder extends RecyclerView.ViewHolder {
         public CheckBox itemProductList_num;
         public AutoRelativeLayout itemProductList;
+        public ImageView itemProductList_moneyBg;
+        public TextView itemProductList_money;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
             this.itemProductList = itemView.findViewById(R.id.itemProductList);
             this.itemProductList_num = (CheckBox) itemView.findViewById(R.id.itemProductList_num);
+            this.itemProductList_moneyBg = (ImageView) itemView.findViewById(R.id.itemProductList_moneyBg);
+            this.itemProductList_money = (TextView) itemView.findViewById(R.id.itemProductList_money);
 
         }
     }

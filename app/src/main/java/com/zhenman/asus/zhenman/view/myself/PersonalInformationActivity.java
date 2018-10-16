@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -100,6 +102,9 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
         myInfo_introduction = findViewById(R.id.myInfo_introduction);
         mHashMap = new HashMap<>();
         mList = new ArrayList<>();
+        //设置EditText文本框输入监听事件
+        myInfo_enterNikeName.addTextChangedListener(textWatcher);
+        myInfo_introduction.addTextChangedListener(textWatcher);
 //        seventBug();
 //        initPopup();
 
@@ -175,14 +180,14 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
                 break;
 
             case R.id.myInfo_finish:
-                String accessToken = (String) SPUtils.get(PersonalInformationActivity.this, SPKey.USER_REFRESHTOKEN, "");
-                String oauthId = (String) SPUtils.get(this, SPKey.USER_OAUTHID, "");
-                Log.e("Sushine", accessToken);
-                Log.e("Sushine", oauthId);
-                presenter.sendAlartData(
-                        (String) SPUtils.get(App.context, SPKey.USER_OAUTHID, ""), "1", myInfo_enterNikeName.getText().toString(),
-                        myInfo_introduction.getText().toString(), "photo",
-                        myInfo_selectBorn.getText().toString(), new File(fileName));
+                if (selectSex.isEmpty()){
+                    Toast.makeText(this, "请选择您的性别", Toast.LENGTH_SHORT).show();
+                }else {
+                    presenter.sendAlartData(
+                            (String) SPUtils.get(App.context, SPKey.USER_OAUTHID, ""), selectSex, myInfo_enterNikeName.getText().toString(),
+                            myInfo_introduction.getText().toString(), "photo",
+                            myInfo_selectBorn.getText().toString(), new File(fileName));
+                }
                 break;
 //                相册
             case R.id.selector_popup_imgLibily_line:
@@ -294,4 +299,30 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
             Toast.makeText(this, "请先完成登陆", Toast.LENGTH_SHORT).show();
         }
     }
+    //输入框的监听
+    TextWatcher textWatcher = new TextWatcher() {
+        // 输入文本之前的状态
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        // 输入文本中的状态
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+        }
+
+        // 输入文本之后的状态
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (myInfo_enterNikeName.getText().toString().isEmpty() || myInfo_introduction.getText().toString().isEmpty()) {
+                myInfo_finish.setAlpha(0.5f);
+            } else {
+                myInfo_finish.setAlpha(1.0f);
+            }
+        }
+    };
+
 }

@@ -2,7 +2,6 @@ package com.zhenman.asus.zhenman.view.myself;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,7 +46,6 @@ public class PurchaseHistoryActivity extends BaseActivity<PurchaseHistoryPresent
 
     @Override
     public void showPurchaseHistory(PurchaseHistoryBean purchaseHistoryBean) {
-        Log.e("Sunny", purchaseHistoryBean.getMsg() + purchaseHistoryBean.getData().getPageSize());
         if (purchaseHistoryBean.getMsg().equals(GetData.MSG_SUCCESS)) {
             if (purchaseHistoryBean.getData().getResult().size() == 0) {
                 purchaseHistory_none.setVisibility(View.VISIBLE);

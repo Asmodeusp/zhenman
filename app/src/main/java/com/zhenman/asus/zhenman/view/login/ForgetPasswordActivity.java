@@ -2,6 +2,8 @@ package com.zhenman.asus.zhenman.view.login;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -69,7 +71,9 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         mRegisterPhotoCode = findViewById(R.id.Register_PhotoCodeText);
         //下一步按钮
         mRegisterNextBtn = findViewById(R.id.Register_NextBtn);
-
+//设置EditText文本框输入监听事件
+        mRegisterPhoneNumber.addTextChangedListener(textWatcher);
+        mRegisterPhotoCodeEd.addTextChangedListener(textWatcher);
         mRegisterReturn.setOnClickListener(this);
         mRegisterNextBtn.setOnClickListener(this);
         mRegisterPhotoCode.setOnClickListener(this);
@@ -176,5 +180,33 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         });
     }
 
+    //输入框的监听
+    TextWatcher textWatcher = new TextWatcher() {
+        // 输入文本之前的状态
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+        }
+
+        // 输入文本中的状态
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+        }
+
+        // 输入文本之后的状态
+        @Override
+        public void afterTextChanged(Editable s) {
+
+            if (mRegisterPhoneNumber.getText().toString().isEmpty() || mRegisterPhotoCodeEd.getText().toString().isEmpty()) {
+                mRegisterNextBtn.setAlpha(0.5f);
+            } else {
+                mRegisterNextBtn.setAlpha(1.0f);
+            }
+        }
+    };
 }
+
+
+

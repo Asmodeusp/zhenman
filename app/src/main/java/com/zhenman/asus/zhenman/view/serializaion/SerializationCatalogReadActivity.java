@@ -707,7 +707,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                         }
                     });
                     CataLogFootViewCommentRecy.setAdapter(catalogFootviewCommentRecyAdapter);
-
                 } else {
                     CataLogFootViewCommentRecy.setVisibility(View.GONE);
                     CataLogFootViewCommentRecyTip.setVisibility(View.VISIBLE);

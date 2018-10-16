@@ -43,18 +43,6 @@
             android:background="@drawable/my_information_bg"
 
             />
-
-       <!-- <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/myInfo_avatar"
-            android:layout_width="192px"
-            android:layout_height="192px"
-            android:layout_below="@id/myInfo_other01"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="48px"
-            android:src="@mipmap/common_portrait_m"
-            app:civ_border_color="@color/h9"
-            app:civ_border_width="1dp" />-->
-
          <de.hdodenhof.circleimageview.CircleImageView
              android:id="@+id/myInfo_avatar"
              android:layout_width="192px"
@@ -167,7 +155,8 @@
             android:layout_below="@id/myInfo_other04"
             android:layout_marginTop="16px"
             android:background="@null"
-            android:text="wrwerwerqwrew"
+            android:hint="简单介绍一下自己~"
+            android:textColorHint="@color/h9"
             android:textColor="@color/h9"
             android:textSize="26px" />
     </RelativeLayout>

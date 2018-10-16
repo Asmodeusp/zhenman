@@ -2,6 +2,8 @@ package com.zhenman.asus.zhenman.view.login;
 
 
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -15,10 +17,12 @@ import android.widget.Toast;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.LoginContract;
 import com.zhenman.asus.zhenman.model.bean.ThirdPartyLoginBean;
+import com.zhenman.asus.zhenman.model.bean.UserBean;
 import com.zhenman.asus.zhenman.presenter.LoginPresenterImp;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
@@ -29,7 +33,7 @@ import com.zhenman.asus.zhenman.view.ContentActivity;
 import java.util.Map;
 
 
-public class MainActivity extends BaseActivity<LoginPresenterImp> implements View.OnClickListener, LoginContract.LoginView {
+public class MainActivity extends BaseActivity<LoginPresenterImp> implements View.OnClickListener, LoginContract.LoginView{
 
     private TextView mFastLanding;
     private ImageView mCommonCloseImage;
@@ -112,7 +116,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 String avatarHd = data.get("avatar_hd");
                 String otherUserId = data.get("avatargj_id");
                 String openId = data.get("uid");
-                SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, otherUserId+"");
+                SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, otherUserId + "");
                 presenter.sendUMengLoginData(otherUserId, data.get("name"), data.get("location"),
                         avatarHd, sex, TYPE, openId);
 
@@ -148,6 +152,8 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             Toast.makeText(MainActivity.this, "取消了", Toast.LENGTH_LONG).show();
         }
     };
+    private EditText PhoneNumber;
+    private EditText InputPassword;
 
     @Override
     protected int getLayoutId() {
@@ -157,7 +163,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     @Override
     protected void init() {
         getDatafromSP();
-
         //查找ID
         mFastLanding = findViewById(R.id.Fast_landing);
         mCommonCloseImage = findViewById(R.id.common_closeImage);
@@ -170,6 +175,9 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         mLoginWeixinImage = findViewById(R.id.login_weixinImage);
         mLoginQqImage = findViewById(R.id.login_qqImage);
         mLogin_password_hide = findViewById(R.id.login_password_hide);
+        //设置EditText文本框输入监听事件
+        mPhoneNumber.addTextChangedListener(textWatcher);
+        mInputPassword.addTextChangedListener(textWatcher);
         //设置点击事件
         mFastLanding.setOnClickListener(this);
         mCommonCloseImage.setOnClickListener(this);
@@ -180,6 +188,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         mLoginWeixinImage.setOnClickListener(this);
         mLoginQqImage.setOnClickListener(this);
         mLogin_password_hide.setOnClickListener(this);
+
     }
 
 
@@ -200,20 +209,25 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 finish();
                 break;
             case R.id.loginbtn:
-                //手机号正则判断
-                String telRegex = "^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\\d{8}$";
-                // "[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-                if (!mPhoneNumber.getText().toString().trim().matches(telRegex)) {
-                    Toast.makeText(this, "请输入正确手机号", Toast.LENGTH_SHORT).show();
+                if (mPhoneNumber.getText().toString().isEmpty() || mInputPassword.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "请检查您的手机号或密码是否输入", Toast.LENGTH_SHORT).show();
+                } else {
+                    //手机号正则判断
+                    String telRegex = "^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\\d{8}$";
+                    // "[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
+                    if (!mPhoneNumber.getText().toString().trim().matches(telRegex)) {
+                        Toast.makeText(this, "请输入正确手机号", Toast.LENGTH_SHORT).show();
+                    }
+                    //密码正则判断
+                    presenter.getLogin(mPhoneNumber.getText().toString().trim(), mInputPassword.getText().toString().trim());
+                    SPUtils.put(this, SPKey.USER_MOBILE, mPhoneNumber.getText().toString());
                 }
-                //密码正则判断
-                presenter.getLogin(mPhoneNumber.getText().toString().trim(), mInputPassword.getText().toString().trim());
-                SPUtils.put(MainActivity.this, SPKey.IS_LOGIN, (Boolean) true);
 
-                SPUtils.put(MainActivity.this, SPKey.USER_MOBILE, mPhoneNumber.getText().toString());
                 break;
             case R.id.RegisterBtn:
-                startActivity(new Intent(this, RegisterCodeActivity.class));
+                Intent intent = new Intent(this, RegisterCodeActivity.class);
+                intent.putExtra("bind", "注册");
+                startActivity(intent);
                 break;
             case R.id.ForgetPasswordBtn:
                 String userName = (String) SPUtils.get(this, SPKey.UMeng_NAME, "");
@@ -278,11 +292,36 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
     }
 
     @Override
-    public void gotoContent() {
+    public void gotoContent(UserBean userBean) {
+
+        //如果登陆成功就利用SP储存用户信息
+        if (userBean.getData().getToken()!=null){
+            SPUtils.put(App.context, SPKey.USER_TOKEN, userBean.getData().getToken());
+
+        }if (userBean.getData().getRefreshToken()!=null){
+            SPUtils.put(App.context, SPKey.USER_REFRESHTOKEN, userBean.getData().getRefreshToken());
+
+        }
+        if ((String)userBean.getData().getSex()!=null) {
+            SPUtils.put(App.context, SPKey.USER_SEX, userBean.getData().getSex() + "");
+        }else {
+            SPUtils.put(App.context, SPKey.USER_SEX, 1 + "");
+
+        }
+        SPUtils.put(App.context, SPKey.UMeng_NAME, userBean.getData().getName());
+
+        if (userBean.getData().getIntroduction() != null) {
+            SPUtils.put(App.context, SPKey.USER_INTRODUCTION, userBean.getData().getIntroduction());
+        }else {
+            SPUtils.put(App.context, SPKey.USER_INTRODUCTION,"本宝宝暂时没有介绍呢~");
+
+        }
+        SPUtils.put(App.context, SPKey.USER_ID, userBean.getData().getId()+"");
+//                            保存登陆成功
+        SPUtils.put(App.context, SPKey.IS_LOGIN, true);
         startActivity(new Intent(MainActivity.this, ContentActivity.class));
         finish();
     }
-
     //    得到友盟返回的数据
     @Override
     public void showUMengLoginData(ThirdPartyLoginBean uMengLoginBean) {
@@ -436,4 +475,31 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             Toast.makeText(this, "请登陆", Toast.LENGTH_SHORT).show();
         }
     }
-}
+
+//输入框的监听
+        TextWatcher textWatcher = new TextWatcher() {
+            // 输入文本之前的状态
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            // 输入文本中的状态
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            // 输入文本之后的状态
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (mPhoneNumber.getText().toString().isEmpty() || mInputPassword.getText().toString().isEmpty()) {
+                    mLoginbtn.setAlpha(0.5f);
+                } else {
+                    mLoginbtn.setAlpha(1.0f);
+                }
+            }
+        };
+    }
+
