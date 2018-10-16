@@ -25,7 +25,6 @@ public class ShowPhotoFragment extends BaseFragment {
     SketchImageView showPhotoImageView;
 
     public ShowPhotoFragment() {
-        // Required empty public constructor
     }
 
 

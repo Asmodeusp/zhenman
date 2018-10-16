@@ -20,9 +20,10 @@ public class SerializationCatalogAdapter extends RecyclerView.Adapter<Serializat
     private List<SerializationCatalogBean.DataBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
-
-    public SerializationCatalogAdapter(List<SerializationCatalogBean.DataBean> list) {
+    private String CatalogId;
+    public SerializationCatalogAdapter(List<SerializationCatalogBean.DataBean> list,String CatalogId) {
         this.list = list;
+        this.CatalogId = CatalogId;
     }
 
     @NonNull
@@ -52,6 +53,9 @@ public class SerializationCatalogAdapter extends RecyclerView.Adapter<Serializat
         //转换时间
         String s = SPUtils.transferLongToDate(Long.valueOf(listBean.getAddTime()));
         holder.ChapterDataText.setText(s);
+        if (listBean.getCatalogId().equals(CatalogId)) {
+            holder.ChapterText.setTextColor(context.getResources().getColor(R.color.c1) );
+        }
         holder.ChapterText.setText(listBean.getTitle());
         if ((listBean.getCoinAmount() + "").equals("null")) {
             holder.ChapterNameText.setText("");

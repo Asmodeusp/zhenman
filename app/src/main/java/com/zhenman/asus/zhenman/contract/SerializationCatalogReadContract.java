@@ -5,6 +5,7 @@ import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
 import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
+import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
@@ -15,10 +16,11 @@ public interface SerializationCatalogReadContract {
     //连载页阅读View
     interface serializationCatalogReadView {
         void showError(String msg);
+        //PGC详情
         void showSerializationDetailsBean(SerializationDetailsBean serializationDetailsBean);
-
+        //PGC观看
         void showserializationCatalogReadBean(SerializationCatalogReadBean serializationCatalogReadBean);
-
+        //PGC章节
         void showSerializationCatalogBean(SerializationCatalogBean serializationCatalogBean);
 //        产品列表
         void showProductListBean(ProductListBean productListBean);
@@ -34,16 +36,18 @@ public interface SerializationCatalogReadContract {
         void showPGCReadFabulousBean(PgcReadFabulousBean pgcReadFabulousBean);
         //        得到微信支付数据
         void showGetWxPayData(PayWeChatBean payWeChatBean);
-
+        //PGC收藏
+        void showPgcCollectionBean (PgcCollectionBean collectionBean);
 
     }
 
     //连载页阅读Presenter
     interface serializationCatalogReadPresenter extends BasePresenter<SerializationCatalogReadContract.serializationCatalogReadView> {
+        //PGC阅读
         void getSerializationCatalogReadBean(String catalogId);
-
+        //PGC章节
         void getSerializationCatalogBean(String PgcId);
-
+        //PGC详情
         void getSerializationDetailsBean(String PgcId);
         //创建订单
         void setMakeOrderData(String productId, String type, String catalogId, String toUserId, String amount, String comment);
@@ -59,6 +63,8 @@ public interface SerializationCatalogReadContract {
         void sendGetWxPayData(String orderSn);
 //        发送产品列表数据
         void sendProductListData();
+        //收藏  1 收藏   0 取消
+        void PgcCollection (String productId,String status);
 
     }
 }

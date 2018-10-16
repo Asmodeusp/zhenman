@@ -16,9 +16,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
 import com.zhenman.asus.zhenman.presenter.HomeAttentionPresenterImp;
@@ -32,7 +29,6 @@ import com.zhy.autolayout.AutoRelativeLayout;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
-import java.util.TreeMap;
 
 
 public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttentionRecyAdapter.Holder> {
@@ -69,7 +65,6 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
         final HomeAttentionBean.DataBean.ResultBean dataBean = list.get(position);
-
         //加载头像圆形图片
         GlideUtils.loadCircleImage(dataBean.getHeadImg(), holder.fill_Home_Attention_RecyHeadIew, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
             @Override
@@ -121,6 +116,11 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         //设置发布时间
         holder.fill_Home_Attention_RecyTimeText.setText(SPUtils.transferLongToDate(Long.parseLong(dataBean.getAddTime())));
         //设置描述
+        if (dataBean.getDescription()==null) {
+            holder.fill_Home_Attention_RecyDescriptionText.setVisibility(View.GONE);
+        }else {
+            holder.fill_Home_Attention_RecyDescriptionText.setVisibility(View.VISIBLE);
+        }
         holder.fill_Home_Attention_RecyDescriptionText.setText(dataBean.getDescription());
         //设置分享数量
         holder.fill_Home_Attention_RecyShareNumberText.setText(dataBean.getShareNum() + "");

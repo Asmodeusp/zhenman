@@ -8,6 +8,7 @@ import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
 import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
+import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
@@ -79,12 +80,13 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                     }
 
                     @Override
-                    public void onNext(SerializationCatalogBean userBean) {
-                        if (userBean.getState() == 0) {
-                            serializationCatalogReadView.showError(userBean.getMsg());
-                            serializationCatalogReadView.showSerializationCatalogBean(userBean);
+                    public void onNext(SerializationCatalogBean serializationCatalogBean) {
+                        if (serializationCatalogBean.getState() == 0) {
+
+                            serializationCatalogReadView.showError(serializationCatalogBean.getMsg());
+                            serializationCatalogReadView.showSerializationCatalogBean(serializationCatalogBean);
                         } else {
-                            serializationCatalogReadView.showError(userBean.getMsg());
+                            serializationCatalogReadView.showError(serializationCatalogBean.getMsg());
                         }
                     }
 
@@ -369,6 +371,39 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                     @Override
                     public void onError(Throwable e) {
 
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void PgcCollection(String productId, String status) {
+        Map<String, String> map = new HashMap<>();
+        map.put("productId", productId);
+        map.put("status", status);
+        RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class).GetPgcCollectionBean(map).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<PgcCollectionBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(PgcCollectionBean pgcCollectionBean) {
+                        if (pgcCollectionBean.getState() == 0) {
+                            serializationCatalogReadView.showError(pgcCollectionBean.getMsg());
+                            serializationCatalogReadView.showPgcCollectionBean(pgcCollectionBean);
+                        } else {
+                            serializationCatalogReadView.showError(pgcCollectionBean.getMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
                     }
 
                     @Override

@@ -25,7 +25,9 @@ public class SPKey {
     public static String SUBJECT_ID="subject_id";
     public static String HIM_ID="him_id";
     public static String ATTENTION_THEME="attention_theme";
-
+    //章节ID
+    public static  String CATALOGID_ID = "catalogId";
+    public static  String PGC_ID = "pgcId";
 
 
 

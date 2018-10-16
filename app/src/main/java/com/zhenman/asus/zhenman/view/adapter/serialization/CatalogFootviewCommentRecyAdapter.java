@@ -70,7 +70,7 @@ public class CatalogFootviewCommentRecyAdapter extends RecyclerView.Adapter<Cata
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, HomepageActivity.class);
-                SPUtils.put(context, SPKey.HIM_ID,list.get(position).getUserId());
+                intent.putExtra(SPKey.HIM_ID, list.get(position).getUserId());
                 context.startActivity(intent);
             }
         });

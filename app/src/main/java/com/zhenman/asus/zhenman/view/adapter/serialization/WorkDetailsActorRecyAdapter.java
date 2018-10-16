@@ -13,7 +13,9 @@ import android.widget.Toast;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
+import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
+import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
 
 import java.util.List;
 
@@ -22,9 +24,11 @@ public class WorkDetailsActorRecyAdapter extends RecyclerView.Adapter<WorkDetail
     private List<SerializationDetailsBean.DataBean.ActorListBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
-
-    public WorkDetailsActorRecyAdapter(List<SerializationDetailsBean.DataBean.ActorListBean> list) {
+    private boolean followCount = true;
+   private WorkDetailsCommentPresenterImp presenter;
+    public WorkDetailsActorRecyAdapter(List<SerializationDetailsBean.DataBean.ActorListBean> list, WorkDetailsCommentPresenterImp presenter) {
         this.list = list;
+        this.presenter =presenter;
     }
 
     @NonNull
@@ -36,7 +40,15 @@ public class WorkDetailsActorRecyAdapter extends RecyclerView.Adapter<WorkDetail
         inflate.setOnClickListener(this);
         return holder;
     }
+    private goUserInfo clickGoUserInfo;
 
+    public void setgoUserInfo( goUserInfo clickGoUserInfo) {
+        this.clickGoUserInfo = clickGoUserInfo;
+    }
+
+    public interface goUserInfo {
+        void go(String UserId);
+    }
     @Override
     public void onClick(View v) {
         if (myCLick != null) {
@@ -50,7 +62,7 @@ public class WorkDetailsActorRecyAdapter extends RecyclerView.Adapter<WorkDetail
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
-        SerializationDetailsBean.DataBean.ActorListBean listBean = list.get(position);
+        final SerializationDetailsBean.DataBean.ActorListBean listBean = list.get(position);
         holder.Actor_Position.setText(listBean.getTagName());
         holder.Actor_Name.setText(listBean.getName());
         holder.itemView.setTag(position);
@@ -64,6 +76,33 @@ public class WorkDetailsActorRecyAdapter extends RecyclerView.Adapter<WorkDetail
             @Override
             public void onLoadingError(String source, Exception e) {
                 Toast.makeText(context, source, Toast.LENGTH_SHORT).show();
+            }
+        });
+        followCount = listBean.isFollow();
+        if (followCount) {
+            holder.Actor_followImg.setImageResource(R.mipmap.home_follow_on);
+        }else{
+            holder.Actor_followImg.setImageResource(R.mipmap.home_follow_off);
+        }
+        holder.Actor_followImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (followCount) {
+                    holder.Actor_followImg.setImageResource(R.mipmap.home_follow_off);
+                    presenter.FollowUser(listBean.getUserId(),"0");
+                    followCount = false;
+                }else{
+                    holder.Actor_followImg.setImageResource(R.mipmap.home_follow_on);
+                    presenter.FollowUser(listBean.getUserId(),"1");
+                    followCount =true;
+                }
+            }
+        });
+        //头像点击事件
+        holder.Actor_HeadImgdImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickGoUserInfo.go(listBean.getUserId());
             }
         });
     }

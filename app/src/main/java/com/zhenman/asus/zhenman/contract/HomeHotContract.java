@@ -13,6 +13,7 @@ public interface HomeHotContract {
         void showHotBean(HomeHotBean homeHotBean);
         //Ugc点赞
         void showPGCReadFabulousBean(UgcFabulousBean ugcFabulousBean);
+        //PGC关注
         void showFollowBean(FollowBean followBean);
     }
     //首页热门Presenter

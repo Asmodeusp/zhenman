@@ -57,9 +57,11 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider" />
-        </provider>4
+        </provider>
 
-        <activity android:name=".view.login.MainActivity">
+        <activity
+            android:name=".view.login.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -79,15 +81,18 @@
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
@@ -99,7 +104,8 @@
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -112,11 +118,13 @@
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- 分享编辑页 -->
         <activity
             android:name="com.umeng.socialize.editorpage.ShareActivity"
             android:excludeFromRecents="true"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
         <!-- 支付宝支付 -->
         <activity
@@ -131,36 +139,90 @@
             android:exported="false"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".view.ContentActivity" />
-        <activity android:name=".view.login.RegisterCodeActivity" />
-        <activity android:name=".view.login.SetPasswordActivity" />
-        <activity android:name=".view.login.ForgetPasswordActivity" />
-        <activity android:name=".view.serializaion.ClassifyActivity" />
-        <activity android:name=".view.serializaion.WorkDetailsActivity" />
+        <activity
+            android:name=".view.ContentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.login.RegisterCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.login.SetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.login.ForgetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.login.UserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.serializaion.ClassifyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.serializaion.WorkDetailsActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.serializaion.SerializationCatalogReadActivity"
             android:exported="true"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".view.myself.MySettingActivity" />
-        <activity android:name=".view.myself.AccountManagementActivity" />
-        <activity android:name=".view.myself.PersonalInformationActivity" />
-        <activity android:name=".view.myself.MyWalletActivity" />
-        <activity android:name=".view.myself.MyselfPageActivity" />
-        <activity android:name=".view.serializaion.SerializaionCommentDetailsActivity" />
-        <activity android:name=".view.myself.ModifyPasswordOneActivity" />
-        <activity android:name=".view.myself.PurchaseHistoryActivity" />
-        <activity android:name=".view.myself.MyDraftActivity" />
-        <activity android:name=".view.myself.HomepageActivity" />
-        <activity android:name=".view.myself.ShoppingActivity" />
-        <activity android:name=".view.myself.AttentionThemeActivity" />
-        <activity android:name=".view.serializaion.BookshelfActivity" />
-        <activity android:name=".view.login.BindPhotoActivity" />
-        <activity android:name=".view.myself.BindPhoneNumActivity" />
-        <activity android:name=".view.message.ThemeDetailsActivity" />
-        <activity android:name=".view.myself.MyAttentionActivity" />
-        <activity android:name=".view.myself.MyFansActivity" />
-        <activity android:name=".view.home.ShowPhotoActivity"></activity>
+        <activity
+            android:name=".view.myself.MySettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.AccountManagementActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.PersonalInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.MyWalletActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.MyselfPageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.serializaion.SerializaionCommentDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.ModifyPasswordOneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.PurchaseHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.MyDraftActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.HomepageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.ShoppingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.AttentionThemeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.serializaion.BookshelfActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.login.BindPhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.BindPhoneNumActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.message.ThemeDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.MyAttentionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myself.MyFansActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.home.ShowPhotoActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -19,6 +19,7 @@ import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentDetailBean;
 import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.PgcChapterCommentDetailPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializaionCommentDetailsRecyAdapter;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -51,7 +52,7 @@ public class SerializaionCommentDetailsActivity extends BaseActivity<PgcChapterC
     protected void init() {
         Intent intent = getIntent();
         commentId = intent.getStringExtra("CommentId");
-        PgcId = intent.getStringExtra("PgcId");
+        PgcId = intent.getStringExtra(SPKey.PGC_ID);
         presenter.GetPgcChapterCommentDetailBean(commentId, "1", "20", PgcId);
         initView();
 
