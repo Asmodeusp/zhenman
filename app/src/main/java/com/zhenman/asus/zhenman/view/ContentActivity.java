@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
+import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
+import com.zhenman.asus.zhenman.view.adapter.home.HomeAttentionRecyAdapter;
 import com.zhenman.asus.zhenman.view.fragment.HomepageFragment;
 import com.zhenman.asus.zhenman.view.fragment.MessageFragment;
 import com.zhenman.asus.zhenman.view.fragment.MyselfFragment;
@@ -108,13 +110,23 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
 
         }
     }
+    private SetTextColor setTextColor;
 
+    public void setHomeText(SetTextColor setTextColor) {
+        this.setTextColor = setTextColor;
+    }
+
+    public interface SetTextColor {
+        void show(String color);
+    }
     //设置字体颜色
     private void setTextColor(String color) {
+
         HomeText.setTextColor(Color.parseColor(color));
         SerializationText.setTextColor(Color.parseColor(color));
         MessageText.setTextColor(Color.parseColor(color));
         MyselfText.setTextColor(Color.parseColor(color));
+
     }
 
     //设置字体大小

@@ -48,6 +48,7 @@ import com.zhenman.asus.zhenman.model.bean.ProductListBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
+import com.zhenman.asus.zhenman.model.service.SerializationCatalogReadService;
 import com.zhenman.asus.zhenman.presenter.SerializationCatalogReadPresenterImp;
 import com.zhenman.asus.zhenman.utils.GetData;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
@@ -264,15 +265,15 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         CataLogPopuPosition.setVisibility(View.GONE);
         CataLog_PopuDownload.setVisibility(View.GONE);
         CataLogPopuRecy.setLayoutManager(new LinearLayoutManager(this));
-        serializationCatalogAdapter = new SerializationCatalogAdapter(data,StartcatalogId);
+        serializationCatalogAdapter = new SerializationCatalogAdapter(data, StartcatalogId);
         CataLogPopuRecy.setAdapter(serializationCatalogAdapter);
         serializationCatalogAdapter.notifyDataSetChanged();
         serializationCatalogAdapter.setRecyclerViewOnCLickListener(new SerializationCatalogAdapter.RecyclerViewOnCLickListener() {
             @Override
             public void myClick(View view, int position) {
                 StartcatalogId = data.get(position).getCatalogId();
-                presenter.getSerializationCatalogReadBean(StartcatalogId);
-
+                SPUtils.put(SerializationCatalogReadActivity.this,SPKey.CATALOGID_ID,StartcatalogId);
+                refresh();
             }
         });
 
@@ -356,6 +357,11 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 }
             });
         }
+    }
+
+    private void refresh() {
+        finish();
+        startActivity(getIntent());
     }
 
     //章节实体类
@@ -456,8 +462,10 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             //观看第一话
             case R.id.SeeFirstBtn:
                 StartcatalogId = data.get(data.size() - 1).getCatalogId();
-                presenter.getSerializationCatalogReadBean(StartcatalogId);
-                SetTextColorRules();
+                SPUtils.put(this,SPKey.CATALOGID_ID,StartcatalogId);
+//                presenter.getSerializationCatalogReadBean(StartcatalogId);
+//                SetTextColorRules();
+                refresh();
                 break;
             //上一章
             case R.id.CataLog_FootViewUpperBtn:
@@ -466,16 +474,20 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                     if (datum.getCatalogId().equals(StartcatalogId)) {
                         i = data.indexOf(datum);
                     }
+
                 }
                 if (data.size() != 0 && data != null) {
                     StartcatalogId = data.get(i + 1).getCatalogId();
-                    presenter.getSerializationCatalogReadBean(StartcatalogId);
+//                    presenter.getSerializationCatalogReadBean(StartcatalogId);
+                    SPUtils.put(this,SPKey.CATALOGID_ID,StartcatalogId);
                 }
-                SetTextColorRules();
+
+//                SetTextColorRules();
                 //填充头布局
                 serializationCatalogReadHeadRel.setVisibility(View.GONE);
                 //填充底布局
                 serializationCatalogReadFootLin.setVisibility(View.GONE);
+                refresh();
                 break;
             //评论
             case R.id.serializationCatalogReadCommentBtn:
@@ -489,12 +501,13 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                             i = data.indexOf(datum);
                         }
                     }
-                    serializationCatalogReadRecy.scrollToPosition(0);
                     StartcatalogId = data.get(i - 1).getCatalogId();
-                    presenter.getSerializationCatalogReadBean(StartcatalogId);
-                    serializationCatalogReadHeadRel.setVisibility(View.GONE);
-                    serializationCatalogReadFootLin.setVisibility(View.GONE);
-                    SetTextColorRules();
+                    SPUtils.put(this,SPKey.CATALOGID_ID,StartcatalogId);
+//                    serializationCatalogReadRecy.scrollToPosition(0);
+//                    serializationCatalogReadHeadRel.setVisibility(View.GONE);
+//                    serializationCatalogReadFootLin.setVisibility(View.GONE);
+//                    SetTextColorRules();
+                    refresh();
                 }
                 break;
             //返回

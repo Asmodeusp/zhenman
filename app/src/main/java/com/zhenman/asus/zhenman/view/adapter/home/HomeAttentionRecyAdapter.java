@@ -116,7 +116,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         //设置发布时间
         holder.fill_Home_Attention_RecyTimeText.setText(SPUtils.transferLongToDate(Long.parseLong(dataBean.getAddTime())));
         //设置描述
-        if (dataBean.getDescription()==null) {
+        if (dataBean.getDescription().equals("")) {
             holder.fill_Home_Attention_RecyDescriptionText.setVisibility(View.GONE);
         }else {
             holder.fill_Home_Attention_RecyDescriptionText.setVisibility(View.VISIBLE);
@@ -129,12 +129,6 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         //设置喜欢数量
         holder.fill_Home_Attention_RecyLikeNumberText.setText(dataBean.getLikeNum() + "");
         //分享点击事件
-        holder.fill_Home_Attention_RecyShareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         holder.fill_Home_Attention_RecyShareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,12 +215,15 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         }
 
         //设置主题是否显示
-        if (list.get(position).getUgcDynamicDto().getSubjectId() == null) {
-            holder.fill_Home_Attention_RecyThemLin.setVisibility(View.GONE);
-        } else {
-            holder.fill_Home_Attention_RecyThemLin.setVisibility(View.VISIBLE);
-            holder.fill_Home_Attention_RecyThemText.setText(list.get(position).getUgcDynamicDto().getSubjectName());
+        if (list.get(position).getUgcDynamicDto().getSubjectName()!=null) {
+            if (list.get(position).getUgcDynamicDto().getSubjectName().equals("")) {
+                holder.fill_Home_Attention_RecyThemLin.setVisibility(View.GONE);
+            } else {
+                holder.fill_Home_Attention_RecyThemLin.setVisibility(View.VISIBLE);
+                holder.fill_Home_Attention_RecyThemText.setText(list.get(position).getUgcDynamicDto().getSubjectName());
+            }
         }
+
         //点击主题跳转主题页
         holder.fill_Home_Attention_RecyThemLin.setOnClickListener(new View.OnClickListener() {
             @Override
