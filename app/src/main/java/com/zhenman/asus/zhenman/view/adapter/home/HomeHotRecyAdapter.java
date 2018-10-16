@@ -280,7 +280,6 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
             holder.Home_Hot_FollowCheckBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     if (holder.Home_Hot_FollowCheckBox.isChecked()) {
                         presenter.FollowUser(dataBean.getUserId(),"1");
                         holder.Home_Hot_FollowCheckBox.setVisibility(View.GONE);
@@ -296,7 +295,6 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                 UMengHelp.shareImg((Activity) context,dataBean.getShareImg(),true);
             }
         });
-
     }
 
     @Override

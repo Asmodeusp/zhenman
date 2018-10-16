@@ -15,6 +15,7 @@ import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
+import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
 
 import java.util.List;
 
@@ -39,7 +40,15 @@ public class WorkDetailsActorRecyAdapter extends RecyclerView.Adapter<WorkDetail
         inflate.setOnClickListener(this);
         return holder;
     }
+    private goUserInfo clickGoUserInfo;
 
+    public void setgoUserInfo( goUserInfo clickGoUserInfo) {
+        this.clickGoUserInfo = clickGoUserInfo;
+    }
+
+    public interface goUserInfo {
+        void go(String UserId);
+    }
     @Override
     public void onClick(View v) {
         if (myCLick != null) {
@@ -87,6 +96,13 @@ public class WorkDetailsActorRecyAdapter extends RecyclerView.Adapter<WorkDetail
                     presenter.FollowUser(listBean.getUserId(),"1");
                     followCount =true;
                 }
+            }
+        });
+        //头像点击事件
+        holder.Actor_HeadImgdImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickGoUserInfo.go(listBean.getUserId());
             }
         });
     }

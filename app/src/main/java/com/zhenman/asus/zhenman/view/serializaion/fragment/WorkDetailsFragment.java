@@ -21,6 +21,8 @@ import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.WorkCommentRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.WorkDetailsActorRecyAdapter;
+import com.zhenman.asus.zhenman.view.login.MainActivity;
+import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhenman.asus.zhenman.view.serializaion.SerializaionCommentDetailsActivity;
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 
@@ -78,8 +80,23 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             Actor_Recy.setLayoutManager(linearLayoutManager);
+            WorkDetailsActorRecyAdapter workDetailsActorRecyAdapter = new WorkDetailsActorRecyAdapter(data.getActorList(), presenter);
             //设置演员列表适配器
-            Actor_Recy.setAdapter(new WorkDetailsActorRecyAdapter(data.getActorList(),presenter));
+            Actor_Recy.setAdapter(workDetailsActorRecyAdapter);
+            workDetailsActorRecyAdapter.setgoUserInfo(new WorkDetailsActorRecyAdapter.goUserInfo() {
+                @Override
+                public void go(String UserId) {
+                    Boolean ISlogin = (Boolean) SPUtils.get(getContext(), SPKey.IS_LOGIN, false);
+                    if (ISlogin) {
+                        Intent intent = new Intent(getContext(), HomepageActivity.class);
+                        intent.putExtra( SPKey.HIM_ID,UserId);
+                        getActivity().startActivity(intent);
+                    }else{
+                        getContext().startActivity(new Intent(getContext(), MainActivity.class));
+                        getActivity().finish();
+                    }
+                }
+            });
         }
         work_commentTips.setVisibility(View.VISIBLE);
         Work_commentRecy.setVisibility(View.GONE);

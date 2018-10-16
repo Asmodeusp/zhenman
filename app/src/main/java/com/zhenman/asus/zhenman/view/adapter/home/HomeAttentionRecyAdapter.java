@@ -16,9 +16,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
 import com.zhenman.asus.zhenman.presenter.HomeAttentionPresenterImp;
@@ -32,7 +29,6 @@ import com.zhy.autolayout.AutoRelativeLayout;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
-import java.util.TreeMap;
 
 
 public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttentionRecyAdapter.Holder> {
