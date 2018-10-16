@@ -2,12 +2,12 @@ package com.zhenman.asus.zhenman.contract;
 
 import com.zhenman.asus.zhenman.base.BasePresenter;
 import com.zhenman.asus.zhenman.model.bean.ThirdPartyLoginBean;
-import com.zhenman.asus.zhenman.model.bean.UMengLoginBean;
+import com.zhenman.asus.zhenman.model.bean.UserBean;
 
 public interface LoginContract {
     //登陆View
     interface LoginView {
-        void gotoContent();
+        void gotoContent(UserBean userBean);
 //        展示用户友盟登陆的数据
         void showUMengLoginData(ThirdPartyLoginBean uMengLoginBean);
 

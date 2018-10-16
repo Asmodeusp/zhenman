@@ -1,15 +1,10 @@
 package com.zhenman.asus.zhenman.presenter;
 
-import android.util.Log;
-
-import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.LoginContract;
 import com.zhenman.asus.zhenman.model.bean.ThirdPartyLoginBean;
 import com.zhenman.asus.zhenman.model.bean.UserBean;
 import com.zhenman.asus.zhenman.model.service.LoginService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
-import com.zhenman.asus.zhenman.utils.sp.SPKey;
-import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,19 +43,9 @@ public class LoginPresenterImp implements LoginContract.LoginPresenter {
                     @Override
                     public void onNext(UserBean userBean) {
                         if (userBean.getState() == 0) {
-                            //利用SP储存用户信息
-                            SPUtils.put(App.context, "token", userBean.getData().getToken());
-                            SPUtils.put(App.context, "refreshToken", userBean.getData().getRefreshToken());
-                            SPUtils.put(App.context, "isBindMobile", userBean.getData().getIsBindMobile());
-                            SPUtils.put(App.context, "sex", userBean.getData().getSex()+"");
-                            SPUtils.put(App.context, "name", userBean.getData().getName());
-                            SPUtils.put(App.context, "id", userBean.getData().getId());
-                            SPUtils.put(App.context, "introduction", userBean.getData().getIntroduction());
-//                            保存登陆成功
-                            SPUtils.put(App.context, SPKey.IS_LOGIN, true);
 
                             loginView.showError(userBean.getMsg());
-                            loginView.gotoContent();
+                            loginView.gotoContent(userBean);
                         } else {
                             loginView.showError(userBean.getMsg());
                         }
@@ -112,11 +97,5 @@ public class LoginPresenterImp implements LoginContract.LoginPresenter {
 
                     }
                 });
-                /*.subscribe(new Consumer<UMengLoginBean>() {
-                    @Override
-                    public void accept(UMengLoginBean uMengLoginBean) throws Exception {
-                        loginView.showUMengLoginData(uMengLoginBean);
-                    }
-                });*/
     }
 }

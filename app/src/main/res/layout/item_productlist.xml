@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/itemProductList"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/px_128"
+    android:layout_width="226px"
+    android:layout_height="226px"
+    android:layout_margin="@dimen/px_16"
     android:layout_marginRight="@dimen/px_16"
-    android:layout_marginTop="@dimen/px_16">
+    android:background="@drawable/product_selector">
 
     <CheckBox
         android:id="@+id/itemProductList_num"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/px_24"
-
-        android:background="@drawable/product_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:button="@null"
-        android:checked="false"
         android:drawableLeft="@mipmap/my_qiezi_bite"
         android:text="X" />
 
-    <!--<ImageView
-        android:id="@+id/itemProductList_image"
-        android:layout_width="88px"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/px_12"
-        android:src="@mipmap/my_qiezi_bite" />
+    <ImageView
+        android:id="@+id/itemProductList_moneyBg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_80"
+        android:layout_alignParentBottom="true"
+        android:background="@color/c1" />
 
     <TextView
-        android:id="@+id/itemProductList_num"
-        style="@style/Style32H2"
+        android:id="@+id/itemProductList_money"
+        style="@style/Style32H9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/itemProductList_image"
-        android:text="X" />-->
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/px_24"
+        android:text="￥1.00" />
 </com.zhy.autolayout.AutoRelativeLayout>

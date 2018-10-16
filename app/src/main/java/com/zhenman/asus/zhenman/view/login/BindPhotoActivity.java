@@ -3,6 +3,8 @@ package com.zhenman.asus.zhenman.view.login;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -72,6 +74,7 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
         mRegisterPhoneNumber = findViewById(R.id.Register_PhoneNumberEd);
         //手机验证码输入框
         mRegisterPhotoCodeEd = findViewById(R.id.Register_PhoneCodeEd);
+
         //手机获取验证码text
         mRegisterPhotoCode = findViewById(R.id.Register_PhotoCodeText);
         //下一步按钮
@@ -81,12 +84,17 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
         mRegisterPhotoCode.setOnClickListener(this);
         Intent intent = getIntent();
         isBind = intent.getStringExtra("bind");
-        String userMobile = intent.getStringExtra("userMobile");
+        //设置EditText文本框输入监听事件
+        mRegisterPhoneNumber.addTextChangedListener(textWatcher);
+        mRegisterPhotoCodeEd.addTextChangedListener(textWatcher);
         if (isBind.equals("未绑定手机号")) {
             register_text.setText("绑定手机号");
             mRegisterNextBtn.setText("绑定");
         } else if (isBind.equals("已有手机号，更换绑定")) {
             register_text.setText("更换绑定");
+            mRegisterNextBtn.setText("下一步");
+        }else {//注册
+            register_text.setText("绑定手机号");
             mRegisterNextBtn.setText("下一步");
         }
     }
@@ -105,7 +113,6 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
                 break;
             case R.id.Register_PhotoCodeText:
                 String telRegex = "^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\\d{8}$";// "[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-
                 //正则判断手机号
                  String REGEX_MOBILE = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
                 if (!mRegisterPhoneNumber.getText().toString().trim().matches(REGEX_MOBILE)) {
@@ -114,7 +121,6 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
                 if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-//                    initpopu();
 //               倒计时
                     smsCodeDownUtil = new SmsCodeDownUtil(mRegisterPhotoCode, "%s", 60);
                     smsCodeDownUtil.start();
@@ -249,9 +255,38 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
         if (verificationCodeBean.getState() == 0) {
 //            如果成功的话就保存手机号到SP中
             SPUtils.put(this,SPKey.USER_MOBILE,mRegisterPhoneNumber.getText().toString());
+
             finish();
         } else {
             Toast.makeText(this, "获取数据失败", Toast.LENGTH_SHORT).show();
         }
     }
+    //输入框的监听
+    TextWatcher textWatcher = new TextWatcher() {
+        // 输入文本之前的状态
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        // 输入文本中的状态
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+        }
+
+        // 输入文本之后的状态
+        @Override
+        public void afterTextChanged(Editable s) {
+
+            if (mRegisterPhoneNumber.getText().toString().isEmpty() || mRegisterPhotoCodeEd.getText().toString().isEmpty()) {
+                mRegisterNextBtn.setAlpha(0.5f);
+            } else {
+                mRegisterNextBtn.setAlpha(1.0f);
+            }
+        }
+    };
+
+
 }

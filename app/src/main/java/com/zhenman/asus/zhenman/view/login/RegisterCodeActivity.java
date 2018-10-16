@@ -4,6 +4,8 @@ package com.zhenman.asus.zhenman.view.login;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.VerificationCodeContract;
 import com.zhenman.asus.zhenman.presenter.VerificationCodePresenterImp;
+import com.zhenman.asus.zhenman.utils.SmsCodeDownUtil;
 import com.zhenman.asus.zhenman.utils.Urls;
 
 import java.io.IOException;
@@ -47,7 +50,7 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
     private TextView image_code_sure_btn;
     private EditText imageCode_ed;
     private PopupWindow window;
-
+    private SmsCodeDownUtil smsCodeDownUtil;//倒计时工具类
 
     @Override
     protected int getLayoutId() {
@@ -68,7 +71,9 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
         mRegisterPhotoCode = findViewById(R.id.Register_PhotoCodeText);
         //下一步按钮
         mRegisterNextBtn = findViewById(R.id.Register_NextBtn);
-
+//设置EditText文本框输入监听事件
+        mRegisterPhoneNumber.addTextChangedListener(textWatcher);
+        mRegisterPhotoCodeEd.addTextChangedListener(textWatcher);
         mRegisterReturn.setOnClickListener(this);
         mRegisterNextBtn.setOnClickListener(this);
         mRegisterPhotoCode.setOnClickListener(this);
@@ -95,7 +100,12 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
                 } else if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    presenter.getVerificationCode(mRegisterPhoneNumber.getText().toString().trim(),"3432");
+                    //               倒计时
+                    smsCodeDownUtil = new SmsCodeDownUtil(mRegisterPhotoCode, "%s", 60);
+                    smsCodeDownUtil.start();
+                    String countdownText = smsCodeDownUtil.getCountdownText();
+                    mRegisterPhotoCode.setText(countdownText);
+                    presenter.getVerificationCode(mRegisterPhoneNumber.getText().toString().trim(), "3432");
 
 
                 }
@@ -103,10 +113,8 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
             case R.id.Register_NextBtn:
                 if (mRegisterPhoneNumber.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     presenter.getRegisterLoginCode(mRegisterPhoneNumber.getText().toString().trim(), mRegisterPhotoCodeEd.getText().toString().trim());
-
                 }
 
                 break;
@@ -210,4 +218,29 @@ public class RegisterCodeActivity extends BaseActivity<VerificationCodePresenter
         }
     }
 
+    //输入框的监听
+    TextWatcher textWatcher = new TextWatcher() {
+        // 输入文本之前的状态
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        // 输入文本中的状态
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+        }
+
+        // 输入文本之后的状态
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (mRegisterPhoneNumber.getText().toString().isEmpty() || mRegisterPhotoCodeEd.getText().toString().isEmpty()) {
+                mRegisterNextBtn.setAlpha(0.5f);
+            } else {
+                mRegisterNextBtn.setAlpha(1.0f);
+            }
+        }
+    };
 }

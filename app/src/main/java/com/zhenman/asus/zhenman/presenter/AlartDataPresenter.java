@@ -1,5 +1,8 @@
 package com.zhenman.asus.zhenman.presenter;
 
+import android.widget.Toast;
+
+import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.AlartDataContract;
 import com.zhenman.asus.zhenman.model.bean.AlartDataBean;
 import com.zhenman.asus.zhenman.model.service.AlertDataService;
@@ -56,6 +59,8 @@ public class AlartDataPresenter implements AlartDataContract.AlartDataInPresente
                     public void onNext(AlartDataBean alartDataBean) {
                         if (alartDataBean.getMsg().equals(GetData.MSG_SUCCESS)) {
                             alartDataInView.showAlartData(alartDataBean);
+                        }else {
+                            Toast.makeText(App.context, alartDataBean.getMsg(), Toast.LENGTH_SHORT).show();
                         }
                     }
 

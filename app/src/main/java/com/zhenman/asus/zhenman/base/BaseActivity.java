@@ -1,14 +1,19 @@
 package com.zhenman.asus.zhenman.base;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.WindowManager;
@@ -19,6 +24,7 @@ import com.zhenman.asus.zhenman.utils.NetUtils;
 import com.zhenman.asus.zhenman.utils.OnBooleanListener;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import java.io.File;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -39,7 +45,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
-
+        setInstallPermission();//8.0权限
 //        权限配置
         if (Build.VERSION.SDK_INT >= 23) {
             String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_APN_SETTINGS};
@@ -64,8 +70,75 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
         loadDate();
         init();
 
+
     }
 
+    /**
+     * 8.0以上系统设置安装未知来源权限
+     */
+    public void setInstallPermission() {
+        boolean haveInstallPermission;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //先判断是否有安装未知来源应用的权限
+            haveInstallPermission = getPackageManager().canRequestPackageInstalls();
+            if (!haveInstallPermission) {
+//                //弹框提示用户手动打开
+//                MessageDialog.showAlert(this, "安装权限", "需要打开允许来自此来源，请去设置中开启此权限", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    //此方法需要API>=26才能使用
+                    toInstallPermissionSettingIntent();
+                }
+//                    }
+//                });
+                return;
+            }
+        }
+    }
+
+
+    /**
+     * 开启安装未知来源权限
+     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void toInstallPermissionSettingIntent() {
+        Uri packageURI = Uri.parse("package:" + getPackageName());
+        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI);
+        startActivityForResult(intent, 27);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == 27) {
+
+//            Toast.makeText(this, "安装应用", Toast.LENGTH_SHORT).show();
+//            开始下载应用
+            install(App.context.getPackageResourcePath());
+        }
+    }
+
+    private void install(String filePath) {
+        Log.i("Sunny", "开始执行安装: " + filePath);
+        File apkFile = new File(filePath);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Log.w("Sunny", "版本大于 N ，开始使用 fileProvider 进行安装");
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(
+                    App.context
+                    , "com.zhenman.asus.zhenman.fileprovider"
+                    , apkFile);
+            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+        } else {
+            Log.w("Sunny", "正常进行安装");
+            intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+        }
+        startActivity(intent);
+    }
 
     public void onPermissionRequests(String permission, OnBooleanListener onBooleanListener) {
         onPermissionListener = onBooleanListener;
@@ -132,6 +205,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
             presenter.actualView(this);
         }
     }
+
     @Override
     protected void onPause() {
         super.onPause();

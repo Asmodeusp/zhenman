@@ -15,6 +15,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 相机相册 -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!--8.0权限-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:name=".App"
@@ -55,7 +57,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider" />
-        </provider>
+        </provider>4
 
         <activity android:name=".view.login.MainActivity">
             <intent-filter>
@@ -133,7 +135,6 @@
         <activity android:name=".view.login.RegisterCodeActivity" />
         <activity android:name=".view.login.SetPasswordActivity" />
         <activity android:name=".view.login.ForgetPasswordActivity" />
-        <activity android:name=".view.login.UserInfoActivity" />
         <activity android:name=".view.serializaion.ClassifyActivity" />
         <activity android:name=".view.serializaion.WorkDetailsActivity" />
         <activity

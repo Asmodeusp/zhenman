@@ -2,7 +2,6 @@ package com.zhenman.asus.zhenman.view.serializaion;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.BottomSheetDialog;
@@ -66,7 +65,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SerializationCatalogReadActivity extends BaseActivity<SerializationCatalogReadPresenterImp> implements SerializationCatalogReadContract.serializationCatalogReadView, CatalogReadActorAdapter.CatalogReadActorCallback, ProductListAdapter.ProductListCallback {
@@ -683,7 +681,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                         }
                     });
                     CataLogFootViewCommentRecy.setAdapter(catalogFootviewCommentRecyAdapter);
-
                 } else {
                     CataLogFootViewCommentRecy.setVisibility(View.GONE);
                     CataLogFootViewCommentRecyTip.setVisibility(View.VISIBLE);
