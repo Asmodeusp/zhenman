@@ -293,8 +293,8 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 
     @Override
     public void gotoContent(UserBean userBean) {
-        
-        //利用SP储存用户信息
+
+        //如果登陆成功就利用SP储存用户信息
         if (userBean.getData().getToken()!=null){
             SPUtils.put(App.context, SPKey.USER_TOKEN, userBean.getData().getToken());
 
