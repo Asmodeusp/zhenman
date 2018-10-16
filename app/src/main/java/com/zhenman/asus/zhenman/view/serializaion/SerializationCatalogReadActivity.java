@@ -169,9 +169,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     RadioGroup ppwPayRadioGroup;
     Button ppwPayPayBtn;
     TextView ppwPayPayMoney;
-    TextView ppwPayOther01;
     TextView ppwPayQieziNum;
-    AutoRelativeLayout ppwPayCancel;
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             @SuppressWarnings("unchecked")
@@ -266,7 +264,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         CataLogPopuPosition.setVisibility(View.GONE);
         CataLog_PopuDownload.setVisibility(View.GONE);
         CataLogPopuRecy.setLayoutManager(new LinearLayoutManager(this));
-        serializationCatalogAdapter = new SerializationCatalogAdapter(data);
+        serializationCatalogAdapter = new SerializationCatalogAdapter(data,StartcatalogId);
         CataLogPopuRecy.setAdapter(serializationCatalogAdapter);
         serializationCatalogAdapter.notifyDataSetChanged();
         serializationCatalogAdapter.setRecyclerViewOnCLickListener(new SerializationCatalogAdapter.RecyclerViewOnCLickListener() {
@@ -404,9 +402,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 @Override
                 public void myClick(View view, int position) {
                     if (Touch) {
-//                        TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, ScreenUtils.getScreenHeight(SerializationCatalogReadActivity.this), ScreenUtils.getScreenHeight(SerializationCatalogReadActivity.this) - 128);
-//                        translateAnimation.setDuration(5000);
-//                        translateAnimation.setFillAfter(true);
                         serializationCatalogReadHeadRel.setVisibility(View.VISIBLE);
                         serializationCatalogReadFootLin.setVisibility(View.VISIBLE);
                         Touch = false;
@@ -474,7 +469,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 }
                 if (data.size() != 0 && data != null) {
                     StartcatalogId = data.get(i + 1).getCatalogId();
-                    SerializationDrawerLayout.setX(0);
                     presenter.getSerializationCatalogReadBean(StartcatalogId);
                 }
                 SetTextColorRules();
@@ -566,7 +560,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     //支付popuwindow
     private void ShowPaypopupView() {
         View PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
-
         ppwPayProductList = PaypopupView.findViewById(R.id.ppwPay_productList);
         ppwPayRadioGroup = PaypopupView.findViewById(R.id.ppwPay_radioGroup);
         ppwPayZhifubaoBtn = PaypopupView.findViewById(R.id.ppwPay_zhifubaoBtn);

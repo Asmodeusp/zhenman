@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.WorkDetailsCommentContract;
+import com.zhenman.asus.zhenman.model.bean.FollowBean;
 import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
@@ -78,7 +79,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
             linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             Actor_Recy.setLayoutManager(linearLayoutManager);
             //设置演员列表适配器
-            Actor_Recy.setAdapter(new WorkDetailsActorRecyAdapter(data.getActorList()));
+            Actor_Recy.setAdapter(new WorkDetailsActorRecyAdapter(data.getActorList(),presenter));
         }
         work_commentTips.setVisibility(View.VISIBLE);
         Work_commentRecy.setVisibility(View.GONE);
@@ -92,9 +93,9 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
 
     @Override
     public void showError(String msg) {
-        if (!msg.equals("成功")) {
-            Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-        }
+//        if (!msg.equals("成功")) {
+//            Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Override
@@ -132,6 +133,11 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     @Override
     public void showPGCFabulousBean(PgcFabulousBean pgcFabulousBean) {
         Toast.makeText(getContext(), pgcFabulousBean.getMsg(), Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void showFollowBean(FollowBean followBean) {
 
     }
 }

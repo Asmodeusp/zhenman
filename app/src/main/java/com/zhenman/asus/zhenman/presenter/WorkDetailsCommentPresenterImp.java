@@ -5,8 +5,10 @@ import android.util.Log;
 
 import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.WorkDetailsCommentContract;
+import com.zhenman.asus.zhenman.model.bean.FollowBean;
 import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
+import com.zhenman.asus.zhenman.model.service.HomeHotService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
@@ -101,6 +103,41 @@ public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContrac
                         } else {
                             commentView.showError(pgcFabulousBean.getMsg());
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void FollowUser(String followedUserId, String status) {
+        Map<String, String> map = new HashMap<>();
+        map.put("followedUserId", followedUserId);
+        map.put("status", status);
+        RetrofitUtils.getInstance()
+                .getWorkDetailsCommentService()
+                .GetFollowBean(map)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<FollowBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(FollowBean followBean) {
+                        if (followBean != null) {
+                            commentView.showError(followBean.getMsg());
+                            commentView.showFollowBean(followBean);
+                        }
+
                     }
 
                     @Override

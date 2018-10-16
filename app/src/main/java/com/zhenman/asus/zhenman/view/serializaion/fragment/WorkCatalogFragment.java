@@ -68,7 +68,7 @@ public class WorkCatalogFragment extends BaseFragment implements View.OnClickLis
 
     private void InitReverseAdapter() {
         Detaails_CatalogRecy.setLayoutManager(new LinearLayoutManager(getActivity()));
-        SerializationCatalogAdapter serializationCatalogAdapter = new SerializationCatalogAdapter(ReverseDataBeans);
+        SerializationCatalogAdapter serializationCatalogAdapter = new SerializationCatalogAdapter(ReverseDataBeans,"");
         Detaails_CatalogRecy.setAdapter(serializationCatalogAdapter);
         All_chaptersText.setText("全部章节("+serializationCatalogBeandata.size()+")");
         serializationCatalogAdapter.notifyDataSetChanged();
@@ -85,7 +85,7 @@ public class WorkCatalogFragment extends BaseFragment implements View.OnClickLis
 
     private void InitPositiveAdapter() {
         Detaails_CatalogRecy.setLayoutManager(new LinearLayoutManager(getActivity()));
-        SerializationCatalogAdapter serializationCatalogAdapter = new SerializationCatalogAdapter(PositiveDataBeans);
+        SerializationCatalogAdapter serializationCatalogAdapter = new SerializationCatalogAdapter(PositiveDataBeans,"");
         Detaails_CatalogRecy.setAdapter(serializationCatalogAdapter);
         All_chaptersText.setText("全部章节("+serializationCatalogBeandata.size()+")");
         serializationCatalogAdapter.notifyDataSetChanged();
