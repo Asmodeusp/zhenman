@@ -87,7 +87,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         double i = (double) dataBean.getHeight() / dataBean.getWidth();
         double InsideHight = i * (double) ScreenUtils.getScreenWidth(context);
         linearLayoutManager.setScrollEnabled(false);
-        //内部滑动监听
+//        //内部滑动监听
 //        holder.home_Recy_fill_Recy.addOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override
 //            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
