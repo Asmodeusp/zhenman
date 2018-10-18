@@ -45,12 +45,13 @@ import java.util.List;
 public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.Holder> {
     private List<HomeHotBean.DataBean> list;
     private Context context;
-    ViewPagerLayoutManager linearLayoutManager;
+    ViewPagerLayoutManager ViewLayoutManager;
     RecyclerView homeHot_list;
     HomeHotPresenterImp presenter;
+
     public HomeHotRecyAdapter(List<HomeHotBean.DataBean> list, ViewPagerLayoutManager linearLayoutManager, RecyclerView homeHot_list, HomeHotPresenterImp presenter) {
         this.list = list;
-        this.linearLayoutManager = linearLayoutManager;
+        this.ViewLayoutManager = linearLayoutManager;
         this.homeHot_list = homeHot_list;
         this.presenter = presenter;
     }
@@ -64,15 +65,17 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         Holder holder = new Holder(inflate);
         return holder;
     }
+
     private goUserInfo clickZan;
 
-    public void setgoUserInfo( goUserInfo clickZan) {
+    public void setgoUserInfo(goUserInfo clickZan) {
         this.clickZan = clickZan;
     }
 
     public interface goUserInfo {
         void go(String UserId);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
@@ -86,8 +89,11 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         //计算填充Recycler View高度
         double i = (double) dataBean.getHeight() / dataBean.getWidth();
         double InsideHight = i * (double) ScreenUtils.getScreenWidth(context);
-        linearLayoutManager.setScrollEnabled(false);
-//        //内部滑动监听
+        ViewLayoutManager.setScrollEnabled(false);
+        if (list.get(position).getPageDtoList().size()<2) {
+            ViewLayoutManager.setScrollEnabled(true);
+        }
+        //内部滑动监听
 //        holder.home_Recy_fill_Recy.addOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override
 //            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -104,13 +110,6 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
 //                int recyclerTop = recyclerView.getTop() - recyclerView.getPaddingTop();
 //                //通过这个firstChildView得到这个view当前的position值
 //                int firstPosition = recyclerView.getLayoutManager().getPosition(firstChildView);
-//                /*
-//                 * home_Recy_fill_Recy(里面填充的RecyclerView)
-//                 * 向下滑动
-//                 *
-//                 * **/
-//                if (dy > 0) {
-//                }
 //                //得到当前显示的最后一个item的view
 //                View lastChildView = recyclerView.getLayoutManager().getChildAt(recyclerView.getLayoutManager().getChildCount() - 1);
 //                //得到lastChildView的bottom坐标值
@@ -119,10 +118,17 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
 //                int recyclerBottom = recyclerView.getBottom() - recyclerView.getPaddingBottom();
 //                //通过这个lastChildView得到这个view当前的position值
 //                int lastPosition = recyclerView.getLayoutManager().getPosition(lastChildView);
-//                if (lastChildBottom != recyclerBottom && lastPosition != recyclerView.getLayoutManager().getItemCount() - 1) {
-//                    linearLayoutManager.setScrollEnabled(false);
+//                //如果两个条件都满足则说明是真正的滑动到了底部
+//                if (lastChildBottom == recyclerBottom && lastPosition == recyclerView.getLayoutManager().getItemCount() - 1 && dy > 0) {
+//                    ViewLayoutManager.setScrollEnabled(true);
 //                }
-//
+//                /*
+//                 * home_Recy_fill_Recy(里面填充的RecyclerView)
+//                 * 向下滑动
+//                 *
+//                 * **/
+//                if (dy > 0) {
+//                }
 //
 //                /*
 //                 *   当里面向上滑动时
@@ -130,41 +136,17 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
 //                 *       关闭外层滑动
 //                 * **/
 //                if (dy < 0) {
-//                    linearLayoutManager.setScrollEnabled(false);
-//                }
-////
-////                    /*
-////                     *   当里面向下滑动时
-////                     *       开启里面滑动
-////                     *       关闭外层滑动
-////                     * **/
-//                if (dy > 0) {
-//                    linearLayoutManager.setScrollEnabled(false);
 //                }
 //
+//                /*
+//                 *   当里面向下滑动时
+//                 *       开启里面滑动
+//                 *       关闭外层滑动
+//                 * **/
 //
-//                if(dy == 0){
-//                }
-//
-//
-//                //如果两个条件都满足则说明是真正的滑动到了底部
-//                if (lastChildBottom == recyclerBottom && lastPosition == recyclerView.getLayoutManager().getItemCount() - 1  && dy > 0) {
-//
-//
-//
-//
-//
-//                }
 //
 //                //如果两个条件都满足则说明是真正的滑动到了顶部
 //                else if (firstChildTop == recyclerTop && firstPosition == 0 && dy < 0) {
-//
-//
-//                }else{
-//                    if(!list.get(position).isOpenSwich){
-//                        list.get(position).isOpenSwich = true;
-//                    }
-//
 //                }
 //            }
 //        });
@@ -182,7 +164,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         holder.Home_Hot_HeadImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               clickZan.go(dataBean.getUserId()+"");
+                clickZan.go(dataBean.getUserId() + "");
             }
         });
         //设置喜欢点赞数量
@@ -210,9 +192,9 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         holder.Home_Hot_UserNameText.setText("@ " + dataBean.getName());
         //在创作
         if (dataBean.isReCreate()) {
-            holder.Home_Hot_EditImageView.setImageResource(R.mipmap.edit_pen_off);
+            holder.Home_Hot_EditImageView.setImageResource(R.mipmap.home_edit);
         } else {
-            holder.Home_Hot_EditImageView.setImageResource(R.mipmap.edit_color_off);
+            holder.Home_Hot_EditImageView.setImageResource(R.mipmap.edit_filter_beautyoff);
         }
         //喜欢点赞
         if (dataBean.isLike()) {
@@ -230,7 +212,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                         holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_unlike);
                         AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
                         animationDrawable.start();
-                        presenter.UgcFabulous(dataBean.getId(),"0");
+                        presenter.UgcFabulous(dataBean.getId(), "0");
                         holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) - 1 + "");
                     } else {
                         holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_like);
@@ -244,7 +226,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                         holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_like);
                         AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
                         animationDrawable.start();
-                        presenter.UgcFabulous(dataBean.getId(),"1");
+                        presenter.UgcFabulous(dataBean.getId(), "1");
                         holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
                     } else {
                         holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_unlike);
@@ -275,13 +257,13 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
 
         if (dataBean.isFollow()) {
             holder.Home_Hot_FollowCheckBox.setVisibility(View.GONE);
-        }else{
+        } else {
             holder.Home_Hot_FollowCheckBox.setVisibility(View.VISIBLE);
             holder.Home_Hot_FollowCheckBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (holder.Home_Hot_FollowCheckBox.isChecked()) {
-                        presenter.FollowUser(dataBean.getUserId(),"1");
+                        presenter.FollowUser(dataBean.getUserId(), "1");
                         holder.Home_Hot_FollowCheckBox.setVisibility(View.GONE);
                     }
                 }
@@ -292,7 +274,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         holder.Home_Hot_ShareImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UMengHelp.shareImg((Activity) context,dataBean.getShareImg(),true);
+                UMengHelp.shareImg((Activity) context, dataBean.getShareImg(), true);
             }
         });
     }
