@@ -175,7 +175,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="105px"
         android:layout_marginLeft="32px"
         android:orientation="vertical">
 
@@ -220,7 +219,7 @@
             android:id="@+id/Home_Hot_describeText"
             android:layout_width="522px"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40px"
+            android:layout_marginBottom="@dimen/px_130"
             android:text="你们知道吗？这个世界上每三个人终究有一个傻B，你们知道吗？这个世界上每三个人终究有一个傻B，"
             android:textColor="@color/h9"
             android:textSize="30px" />

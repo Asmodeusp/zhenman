@@ -132,23 +132,26 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                 break;
             //收藏
             case R.id.Work_Detaails_collectionImg:
-                if (Work_Detaails_collectionImg.isChecked()) {
-                    if (serializationDetailsBeandata.isCollect()) {
-                        Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
-                        presenter.PgcCollection(pgcid, "0");
+                if (serializationDetailsBeandata!=null) {
+                    if (Work_Detaails_collectionImg.isChecked()) {
+                        if (serializationDetailsBeandata.isCollect()) {
+                            Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
+                            presenter.PgcCollection(pgcid, "0");
+                        } else {
+                            Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
+                            presenter.PgcCollection(pgcid, "1");
+                        }
                     } else {
-                        Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
-                        presenter.PgcCollection(pgcid, "1");
-                    }
-                } else {
-                    if (serializationDetailsBeandata.isCollect()) {
-                        Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
-                        presenter.PgcCollection(pgcid, "1");
-                    } else {
-                        Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
-                        presenter.PgcCollection(pgcid, "0");
+                        if (serializationDetailsBeandata.isCollect()) {
+                            Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
+                            presenter.PgcCollection(pgcid, "1");
+                        } else {
+                            Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
+                            presenter.PgcCollection(pgcid, "0");
+                        }
                     }
                 }
+
                 break;
             //观看第一话
             case R.id.Work_Detaails_LookUpText:
@@ -157,7 +160,6 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                     Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
                 } else {
                     if (serializationCatalogBeandata.size() != 0) {
-
                         SPUtils.put(WorkDetailsActivity.this, SPKey.CATALOGID_ID,SPUtils.get(this,"FirstCatalogId",""));
                         SPUtils.put(WorkDetailsActivity.this, SPKey.PGC_ID, serializationCatalogBeandata.get(0).getPgcId());
                         startActivity(intent);
@@ -199,7 +201,6 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
             Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
         } else {
             this.serializationCatalogBean = serializationCatalogBean;
-
             serializationCatalogBeandata.addAll(serializationCatalogBean.getData());
             String catalogId = serializationCatalogBeandata.get(serializationCatalogBeandata.size()-1).getCatalogId();
             SPUtils.put(this,"FirstCatalogId",catalogId);
@@ -208,8 +209,6 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
 
     @Override
     public void showPgcCollectionBean(PgcCollectionBean pgcCollectionBean) {
-
-
     }
 
 

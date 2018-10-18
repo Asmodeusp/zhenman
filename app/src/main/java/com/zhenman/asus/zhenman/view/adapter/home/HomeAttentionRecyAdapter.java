@@ -27,9 +27,12 @@ import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
 import com.zhenman.asus.zhenman.presenter.HomeAttentionPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
+import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.message.ThemeDetailsActivity;
+import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -43,6 +46,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
     private boolean isLike = true;
     private HomeAttentionPresenterImp presenter;
     private int ShareCount = 1;
+
     public HomeAttentionRecyAdapter(List<HomeAttentionBean.DataBean.ResultBean> list, HomeAttentionPresenterImp presenter) {
         this.list = list;
         this.presenter = presenter;
@@ -76,8 +80,18 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             @Override
             public void onLoadingComplete(String uri, ImageView view, GlideDrawable resource) {
             }
+
             @Override
             public void onLoadingError(String source, Exception e) {
+            }
+        });
+        holder.fill_Home_Attention_RecyHeadIew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HomepageActivity.class);
+                intent.putExtra(SPKey.HIM_ID, list.get(position).getUserId());
+                context.startActivity(intent);
+
             }
         });
         //图片加载最大宽度
@@ -123,7 +137,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         //设置描述
         if (dataBean.getDescription().equals("")) {
             holder.fill_Home_Attention_RecyDescriptionText.setVisibility(View.GONE);
-        }else {
+        } else {
             holder.fill_Home_Attention_RecyDescriptionText.setVisibility(View.VISIBLE);
         }
         holder.fill_Home_Attention_RecyDescriptionText.setText(dataBean.getDescription());
@@ -156,7 +170,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
                              */
                             @Override
                             public void onResult(SHARE_MEDIA platform) {
-                                holder.fill_Home_Attention_RecyShareNumberText.setText(dataBean.getShareNum()+ShareCount + "");
+                                holder.fill_Home_Attention_RecyShareNumberText.setText(dataBean.getShareNum() + ShareCount + "");
                                 Toast.makeText(context, "分享成功", Toast.LENGTH_LONG).show();
                                 ShareCount++;
                             }
@@ -181,10 +195,10 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
 
                             }
                         });
-                shareAction.setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN_FAVORITE);//分享平台
+                shareAction.setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE);//分享平台
                 //带面板
                 shareAction.open();
-          
+
             }
         });
         //加载作品图片
@@ -267,7 +281,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         }
 
         //设置主题是否显示
-        if (list.get(position).getUgcDynamicDto().getSubjectName()!=null) {
+        if (list.get(position).getUgcDynamicDto().getSubjectName() != null) {
             if (list.get(position).getUgcDynamicDto().getSubjectName().equals("")) {
                 holder.fill_Home_Attention_RecyThemLin.setVisibility(View.GONE);
             } else {
