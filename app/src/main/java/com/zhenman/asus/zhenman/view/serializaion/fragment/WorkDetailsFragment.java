@@ -27,17 +27,18 @@ import com.zhenman.asus.zhenman.view.serializaion.SerializaionCommentDetailsActi
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 
 import java.util.List;
+
 /**
- *            曰:
- *                   写字楼里写字间，写字间里程序员；
- *                   程序人员写程序，又拿程序换酒钱。
- *                   酒醒只在网上坐，酒醉还来网下眠；
- *                   酒醉酒醒日复日，网上网下年复年。
- *                   但愿老死电脑间，不愿鞠躬老板前；
- *                   奔驰宝马贵者趣，公交自行程序员。
- *                   别人笑我忒疯癫，我笑自己命太贱；
- *                   不见满街漂亮妹，哪个归得程序员？
-*/
+ * 曰:
+ * 写字楼里写字间，写字间里程序员；
+ * 程序人员写程序，又拿程序换酒钱。
+ * 酒醒只在网上坐，酒醉还来网下眠；
+ * 酒醉酒醒日复日，网上网下年复年。
+ * 但愿老死电脑间，不愿鞠躬老板前；
+ * 奔驰宝马贵者趣，公交自行程序员。
+ * 别人笑我忒疯癫，我笑自己命太贱；
+ * 不见满街漂亮妹，哪个归得程序员？
+ */
 
 public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresenterImp> implements WorkDetailsCommentContract.WorkDetailsCommentView {
     private TextView Work_DescriptionText;
@@ -86,15 +87,8 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
             workDetailsActorRecyAdapter.setgoUserInfo(new WorkDetailsActorRecyAdapter.goUserInfo() {
                 @Override
                 public void go(String UserId) {
-                    Boolean ISlogin = (Boolean) SPUtils.get(getContext(), SPKey.IS_LOGIN, false);
-                    if (ISlogin) {
-                        Intent intent = new Intent(getContext(), HomepageActivity.class);
-                        intent.putExtra( SPKey.HIM_ID,UserId);
-                        getActivity().startActivity(intent);
-                    }else{
-                        getContext().startActivity(new Intent(getContext(), MainActivity.class));
-                        getActivity().finish();
-                    }
+                    getContext().startActivity(new Intent(getContext(), MainActivity.class));
+                    getActivity().finish();
                 }
             });
         }

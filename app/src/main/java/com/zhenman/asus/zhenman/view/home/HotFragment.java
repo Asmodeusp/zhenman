@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
+
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.HomeHotContract;
@@ -23,9 +24,7 @@ import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 
-
-
-public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView{
+public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView {
     private RecyclerView HomeHot_List;
     private ViewPagerLayoutManager linearLayoutManager;
     private HomeHotRecyAdapter homeHotRecyAdapter;
@@ -88,23 +87,18 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
             Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
     public void showHotBean(HomeHotBean homeHotBean) {
-        if (homeHotBean.getData().size()!=0) {
-            homeHotRecyAdapter = new HomeHotRecyAdapter(homeHotBean.getData(), linearLayoutManager, HomeHot_List,presenter);
+        if (homeHotBean.getData().size() != 0) {
+            homeHotRecyAdapter = new HomeHotRecyAdapter(homeHotBean.getData(), linearLayoutManager, HomeHot_List, presenter);
             HomeHot_List.setAdapter(homeHotRecyAdapter);
             homeHotRecyAdapter.setgoUserInfo(new HomeHotRecyAdapter.goUserInfo() {
                 @Override
                 public void go(String UserId) {
-                    Boolean ISlogin = (Boolean) SPUtils.get(getContext(), SPKey.IS_LOGIN, false);
-                    if (ISlogin) {
-                        Intent intent = new Intent(getContext(), HomepageActivity.class);
-                        intent.putExtra( SPKey.HIM_ID,UserId);
-                        getActivity().startActivity(intent);
-                    }else{
-                        getContext().startActivity(new Intent(getContext(), MainActivity.class));
-                        getActivity().finish();
-                    }
+                    Intent intent = new Intent(getContext(), HomepageActivity.class);
+                    intent.putExtra(SPKey.HIM_ID, UserId);
+                    getActivity().startActivity(intent);
 
                 }
             });
