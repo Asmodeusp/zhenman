@@ -50,6 +50,7 @@ import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.model.service.SerializationCatalogReadService;
 import com.zhenman.asus.zhenman.presenter.SerializationCatalogReadPresenterImp;
+import com.zhenman.asus.zhenman.utils.ButtonUtils;
 import com.zhenman.asus.zhenman.utils.GetData;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.utils.alipay.AuthResult;
@@ -236,6 +237,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private CatalogFootviewCommentRecyAdapter catalogFootviewCommentRecyAdapter;
     private String pgcId;
     private boolean isCollect;
+    int sign = 0;
 
     @Override
     protected int getLayoutId() {
@@ -272,7 +274,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             @Override
             public void myClick(View view, int position) {
                 StartcatalogId = data.get(position).getCatalogId();
-                SPUtils.put(SerializationCatalogReadActivity.this,SPKey.CATALOGID_ID,StartcatalogId);
+                SPUtils.put(SerializationCatalogReadActivity.this, SPKey.CATALOGID_ID, StartcatalogId);
                 refresh();
             }
         });
@@ -345,6 +347,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             CataLogFootViewCollectionBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     if (isCollect) {
                         CataLogFootViewCollectionImg.setImageResource(R.mipmap.common_collection_off);
                         isCollect = false;
@@ -461,14 +464,42 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         switch (view.getId()) {
             //观看第一话
             case R.id.SeeFirstBtn:
-                StartcatalogId = data.get(data.size() - 1).getCatalogId();
-                SPUtils.put(this,SPKey.CATALOGID_ID,StartcatalogId);
+                if (ButtonUtils.isFastDoubleClick(R.id.SeeFirstBtn)) {
+                    StartcatalogId = data.get(data.size() - 1).getCatalogId();
+                    SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
+                    refresh();
+                }
+
 //                presenter.getSerializationCatalogReadBean(StartcatalogId);
-//                SetTextColorRules();
+                SetTextColorRules();
+                StartcatalogId = data.get(data.size() - 1).getCatalogId();
+                SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
                 refresh();
                 break;
             //上一章
             case R.id.CataLog_FootViewUpperBtn:
+                if (ButtonUtils.isFastDoubleClick(R.id.SeeFirstBtn)) {
+                    //得到现在章节的索引
+                    for (SerializationCatalogBean.DataBean datum : data) {
+                        if (datum.getCatalogId().equals(StartcatalogId)) {
+                            i = data.indexOf(datum);
+                        }
+
+                    }
+                    if (data.size() != 0 && data != null) {
+                        StartcatalogId = data.get(i + 1).getCatalogId();
+//                    presenter.getSerializationCatalogReadBean(StartcatalogId);
+                        SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
+                    }
+
+//                    SetTextColorRules();
+                    //填充头布局
+                    serializationCatalogReadHeadRel.setVisibility(View.GONE);
+                    //填充底布局
+                    serializationCatalogReadFootLin.setVisibility(View.GONE);
+
+                    refresh();
+                }
                 //得到现在章节的索引
                 for (SerializationCatalogBean.DataBean datum : data) {
                     if (datum.getCatalogId().equals(StartcatalogId)) {
@@ -479,14 +510,15 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 if (data.size() != 0 && data != null) {
                     StartcatalogId = data.get(i + 1).getCatalogId();
 //                    presenter.getSerializationCatalogReadBean(StartcatalogId);
-                    SPUtils.put(this,SPKey.CATALOGID_ID,StartcatalogId);
+                    SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
                 }
 
-//                SetTextColorRules();
+                SetTextColorRules();
                 //填充头布局
                 serializationCatalogReadHeadRel.setVisibility(View.GONE);
                 //填充底布局
                 serializationCatalogReadFootLin.setVisibility(View.GONE);
+
                 refresh();
                 break;
             //评论
@@ -494,6 +526,23 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 break;
             //下一章
             case R.id.CataLog_FootViewNexterBtn:
+                if (ButtonUtils.isFastDoubleClick(R.id.SeeFirstBtn)) {
+                    if (data.size() != 0 && data != null) {
+                        //得到现在章节的索引
+                        for (SerializationCatalogBean.DataBean datum : data) {
+                            if (datum.getCatalogId().equals(StartcatalogId)) {
+                                i = data.indexOf(datum);
+                            }
+                        }
+                        StartcatalogId = data.get(i - 1).getCatalogId();
+                        SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
+//                    serializationCatalogReadRecy.scrollToPosition(0);
+//                    serializationCatalogReadHeadRel.setVisibility(View.GONE);
+//                    serializationCatalogReadFootLin.setVisibility(View.GONE);
+//                    SetTextColorRules();
+                        refresh();
+                    }
+                }
                 if (data.size() != 0 && data != null) {
                     //得到现在章节的索引
                     for (SerializationCatalogBean.DataBean datum : data) {
@@ -502,7 +551,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                         }
                     }
                     StartcatalogId = data.get(i - 1).getCatalogId();
-                    SPUtils.put(this,SPKey.CATALOGID_ID,StartcatalogId);
+                    SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
 //                    serializationCatalogReadRecy.scrollToPosition(0);
 //                    serializationCatalogReadHeadRel.setVisibility(View.GONE);
 //                    serializationCatalogReadFootLin.setVisibility(View.GONE);
