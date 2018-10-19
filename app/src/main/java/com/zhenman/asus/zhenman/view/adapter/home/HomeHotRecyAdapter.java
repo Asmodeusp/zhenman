@@ -21,10 +21,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.editorpage.ShareActivity;
-import com.umeng.socialize.media.UMImage;
+
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
@@ -33,9 +30,7 @@ import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
-import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogFootviewCommentRecyAdapter;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
-import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.MyLayoutMessage;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
@@ -90,6 +85,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         //计算填充Recycler View高度
         double i = (double) dataBean.getHeight() / dataBean.getWidth();
         double InsideHight = i * (double) ScreenUtils.getScreenWidth(context);
+        Log.e("HomeHotRecyAdapter", "InsideHight:" + InsideHight);
         ViewLayoutManager.setScrollEnabled(false);
         if (list.get(position).getPageDtoList().size() < 2) {
             ViewLayoutManager.setScrollEnabled(true);
@@ -138,6 +134,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                  *
                  * **/
                 if (dy > 0) {
+                    Log.d("HomeHotRecyAdapter", "dy:" + dy);
                 }
 
                 /*
@@ -362,7 +359,6 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
             Home_Hot_UserNameText = itemView.findViewById(R.id.Home_Hot_UserNameText);
             Home_Hot_describeText = itemView.findViewById(R.id.Home_Hot_describeText);
             Home_Hot_ThemLin = itemView.findViewById(R.id.Home_Hot_ThemLin);
-
         }
     }
 }

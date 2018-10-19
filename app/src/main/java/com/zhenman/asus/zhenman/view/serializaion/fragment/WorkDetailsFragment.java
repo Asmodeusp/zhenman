@@ -19,11 +19,8 @@ import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
 import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
-import com.zhenman.asus.zhenman.view.adapter.serialization.WorkCommentRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.WorkDetailsActorRecyAdapter;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
-import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
-import com.zhenman.asus.zhenman.view.serializaion.SerializaionCommentDetailsActivity;
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 
 import java.util.List;
@@ -111,33 +108,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
 
     @Override
     public void showWorkDetailsCommentBean(final WorkDetailsCommentBean workDetailsCommentBean) {
-//        if (workDetailsCommentBean != null) {
-//
-//            result = workDetailsCommentBean.getData().getCommentDtoList();
-//            if (result != null) {
-//                if (result.size() == 0) {
-//                    work_commentTips.setVisibility(View.VISIBLE);
-//                    Work_commentRecy.setVisibility(View.GONE);
-//                } else {
-//                    work_commentTips.setVisibility(View.GONE);
-//                    Work_commentRecy.setVisibility(View.VISIBLE);
-//                    //设置评论列表适配器
-//                    WorkCommentRecyAdapter workCommentRecyAdapter = new WorkCommentRecyAdapter(result, pgcId, presenter);
-//                    Work_commentRecy.setAdapter(workCommentRecyAdapter);
-//
-//                    workCommentRecyAdapter.notifyDataSetChanged();
-//                    workCommentRecyAdapter.setRecyclerViewOnCLickListener(new WorkCommentRecyAdapter.RecyclerViewOnCLickListener() {
-//                        @Override
-//                        public void myClick(View view, int position) {
-//                            Intent intent = new Intent(getActivity(), SerializaionCommentDetailsActivity.class);
-//                            intent.putExtra("CommentId", workDetailsCommentBean.getData().getCommentDtoList().get(position).getCommentId());
-//                            SPUtils.put(getActivity(),SPKey.PGC_ID, pgcId);
-//                            startActivity(intent);
-//                        }
-//                    });
-//                }
-//            }
-//        }
+
 
     }
 

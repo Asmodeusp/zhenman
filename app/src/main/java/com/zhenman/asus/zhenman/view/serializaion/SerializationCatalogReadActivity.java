@@ -215,8 +215,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private List<SerializationCatalogBean.DataBean> data = new ArrayList<>();
     //章节列表适配器
     private SerializationCatalogAdapter serializationCatalogAdapter;
-    //评论列表
-    private List<PgcChapterCommentListByOffSetBean.DataBean.CommentDtoListBean> result = new ArrayList<>();
     //阅读图片适配器
     private SerializationCatalogReadRecyAdapter serializationCatalogReadRecyAdapter;
     //点击屏幕标记
@@ -235,8 +233,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private String orderNumber;
     //支付标记
     private static final int SDK_PAY_FLAG = 1;
-    //底部评论适配器
-    private CatalogFootviewCommentRecyAdapter catalogFootviewCommentRecyAdapter;
     private String pgcId;
     private boolean isCollect;
 
@@ -254,13 +250,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         CataLogFootViewActorRecy.setLayoutManager(linearLayoutManager);
         serializationCatalogReadSRL.setDragRate(0.5f);
-        if (result.size() == 0) {
-            CataLogFootViewCommentRecy.setVisibility(View.GONE);
-            CataLogFootViewCommentRecyTip.setVisibility(View.VISIBLE);
-        }
-
         initEvent();
-
     }
 
     private void initCatalog() {
@@ -281,13 +271,12 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         });
 
     }
-
+    //得到数据
     @Override
     protected void loadDate() {
         StartcatalogId = (String) SPUtils.get(this, SPKey.CATALOGID_ID, "");
         pgcId = (String) SPUtils.get(this, SPKey.PGC_ID, "");
 
-        //得到数据
         //作品图片集合
         presenter.getSerializationCatalogReadBean(StartcatalogId);
         //作品章节集合
@@ -524,7 +513,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                                 i = data.indexOf(datum);
                             }
                         }
-
                     }
                     StartcatalogId = data.get(i - 1).getCatalogId();
                     SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
@@ -599,7 +587,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 weiwandaixuReLa.setVisibility(View.GONE);
             }
         }
-
     }
 
     //支付popuwindow
@@ -724,28 +711,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     //评论列表
     @Override
     public void showPgcChapterCommentListByOffSetBean(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean) {
-        if (pgcChapterCommentListByOffSetBean != null) {
 
-            result.addAll(pgcChapterCommentListByOffSetBean.getData().getCommentDtoList());
-            if (result != null) {
-                if (result.size() != 0) {
-                    CataLogFootViewCommentRecy.setVisibility(View.VISIBLE);
-                    CataLogFootViewCommentRecyTip.setVisibility(View.GONE);
-                    catalogFootviewCommentRecyAdapter = new CatalogFootviewCommentRecyAdapter(pgcChapterCommentListByOffSetBean.getData().getCommentDtoList(), StartcatalogId, presenter);
-                    commentPopu_recy.setAdapter(catalogFootviewCommentRecyAdapter);
-                    catalogFootviewCommentRecyAdapter.setClickZan(new CatalogFootviewCommentRecyAdapter.ClickZan() {
-                        @Override
-                        public void zan(String commentId, String status, String pgcId) {
-                            presenter.PGCReadFabulous(StartcatalogId, commentId, status, pgcId);
-                        }
-                    });
-                    CataLogFootViewCommentRecy.setAdapter(catalogFootviewCommentRecyAdapter);
-                } else {
-                    CataLogFootViewCommentRecy.setVisibility(View.GONE);
-                    CataLogFootViewCommentRecyTip.setVisibility(View.VISIBLE);
-                }
-            }
-        }
     }
 
     @Override

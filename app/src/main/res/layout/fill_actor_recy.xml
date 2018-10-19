@@ -13,7 +13,7 @@
             android:layout_width="128px"
             android:layout_height="128px"
             android:layout_marginRight="16px"
-            android:layout_marginTop="24px"
+            android:layout_marginTop="14px"
             />
 
         <ImageView

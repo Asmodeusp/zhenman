@@ -22,7 +22,7 @@
                 <com.recker.flybanner.FlyBanner
                     android:id="@+id/Serialization_FlyBanner"
                     android:layout_width="match_parent"
-                    android:layout_height="440px"
+                    android:layout_height="420px"
                     android:background="@drawable/image_code"
                     ></com.recker.flybanner.FlyBanner>
 
@@ -48,7 +48,7 @@
                     android:id="@+id/Serialization_serial_classButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="48px"
+                    android:layout_marginTop="28px"
                     android:layout_weight="1">
 
                     <ImageView
@@ -74,7 +74,7 @@
                     android:id="@+id/Serialization_serial_rankButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="48px"
+                    android:layout_marginTop="28px"
                     android:layout_weight="1">
 
                     <ImageView
@@ -100,7 +100,7 @@
                     android:id="@+id/Serialization_serial_starButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="48px"
+                    android:layout_marginTop="28px"
                     android:layout_weight="1">
 
                     <ImageView
@@ -127,7 +127,7 @@
                     android:id="@+id/Serialization_serial_collectionButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="48px"
+                    android:layout_marginTop="28px"
                     android:layout_weight="1">
 
                     <ImageView
@@ -159,7 +159,7 @@
             <com.zhy.autolayout.AutoRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24px"
+                android:layout_marginTop="14px"
                 android:orientation="horizontal">
 
                 <com.zhy.autolayout.AutoLinearLayout
@@ -204,7 +204,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/Serialization_HotRecy"
                 android:layout_width="match_parent"
-                android:layout_height="840px"
+                android:layout_height="790px"
                 android:layout_marginTop="24px"
                 android:nestedScrollingEnabled="false"></android.support.v7.widget.RecyclerView>
 
