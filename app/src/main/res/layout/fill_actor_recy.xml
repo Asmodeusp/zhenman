@@ -14,7 +14,6 @@
             android:layout_height="128px"
             android:layout_marginRight="16px"
             android:layout_marginTop="24px"
-            android:background="@drawable/round_layers"
             />
 
         <ImageView
@@ -38,9 +37,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="刘德华"
+            android:layout_marginTop="0dp"
+            android:lines="1"
+            android:text="不知道东南西北"
+            android:singleLine="true"
             android:textColor="@color/h2"
-            android:textSize="24px" />
+            android:textSize="17px" />
 
         <TextView
             android:id="@+id/Actor_Position"
@@ -50,7 +52,7 @@
             android:layout_centerHorizontal="true"
             android:text="导演"
             android:textColor="@color/h3"
-            android:textSize="22px" />
+            android:textSize="15px" />
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <com.zhy.autolayout.AutoRelativeLayout

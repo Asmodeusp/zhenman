@@ -2,8 +2,10 @@ package com.zhenman.asus.zhenman.view.serializaion;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -237,7 +239,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private CatalogFootviewCommentRecyAdapter catalogFootviewCommentRecyAdapter;
     private String pgcId;
     private boolean isCollect;
-    int sign = 0;
 
     @Override
     protected int getLayoutId() {
@@ -347,7 +348,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             CataLogFootViewCollectionBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     if (isCollect) {
                         CataLogFootViewCollectionImg.setImageResource(R.mipmap.common_collection_off);
                         isCollect = false;
@@ -469,8 +469,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                     SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
                     refresh();
                 }
-
-//                presenter.getSerializationCatalogReadBean(StartcatalogId);
                 SetTextColorRules();
                 StartcatalogId = data.get(data.size() - 1).getCatalogId();
                 SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
@@ -488,16 +486,13 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                     }
                     if (data.size() != 0 && data != null) {
                         StartcatalogId = data.get(i + 1).getCatalogId();
-//                    presenter.getSerializationCatalogReadBean(StartcatalogId);
                         SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
                     }
 
-//                    SetTextColorRules();
                     //填充头布局
                     serializationCatalogReadHeadRel.setVisibility(View.GONE);
                     //填充底布局
                     serializationCatalogReadFootLin.setVisibility(View.GONE);
-
                     refresh();
                 }
                 //得到现在章节的索引
@@ -505,20 +500,15 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                     if (datum.getCatalogId().equals(StartcatalogId)) {
                         i = data.indexOf(datum);
                     }
-
                 }
                 if (data.size() != 0 && data != null) {
                     StartcatalogId = data.get(i + 1).getCatalogId();
-//                    presenter.getSerializationCatalogReadBean(StartcatalogId);
                     SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
                 }
-
-                SetTextColorRules();
                 //填充头布局
                 serializationCatalogReadHeadRel.setVisibility(View.GONE);
                 //填充底布局
                 serializationCatalogReadFootLin.setVisibility(View.GONE);
-
                 refresh();
                 break;
             //评论
@@ -534,14 +524,11 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                                 i = data.indexOf(datum);
                             }
                         }
-                        StartcatalogId = data.get(i - 1).getCatalogId();
-                        SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
-//                    serializationCatalogReadRecy.scrollToPosition(0);
-//                    serializationCatalogReadHeadRel.setVisibility(View.GONE);
-//                    serializationCatalogReadFootLin.setVisibility(View.GONE);
-//                    SetTextColorRules();
-                        refresh();
+
                     }
+                    StartcatalogId = data.get(i - 1).getCatalogId();
+                    SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
+                    refresh();
                 }
                 if (data.size() != 0 && data != null) {
                     //得到现在章节的索引
@@ -552,10 +539,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                     }
                     StartcatalogId = data.get(i - 1).getCatalogId();
                     SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
-//                    serializationCatalogReadRecy.scrollToPosition(0);
-//                    serializationCatalogReadHeadRel.setVisibility(View.GONE);
-//                    serializationCatalogReadFootLin.setVisibility(View.GONE);
-//                    SetTextColorRules();
                     refresh();
                 }
                 break;
@@ -620,6 +603,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     //支付popuwindow
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     private void ShowPaypopupView() {
         View PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
         ppwPayProductList = PaypopupView.findViewById(R.id.ppwPay_productList);
@@ -794,6 +778,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         authThread.start();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     @Override
     public void makeOrder(int position) {
 //        章节ID

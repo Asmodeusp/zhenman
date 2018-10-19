@@ -22,6 +22,7 @@ import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.presenter.SerializationDetailsPresenterImp;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.serializaion.fragment.WorkCatalogFragment;
 import com.zhenman.asus.zhenman.view.serializaion.fragment.WorkDetailsFragment;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -106,8 +107,6 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         Work_Detaails_LookUpBtn.setOnClickListener(this);
         //收藏
         Work_Detaails_collectionImg.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -133,6 +132,11 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
             //收藏
             case R.id.Work_Detaails_collectionImg:
                 if (serializationDetailsBeandata!=null) {
+                    Boolean ISlogin = (Boolean) SPUtils.get(this, SPKey.IS_LOGIN, false);
+                    if (!ISlogin) {
+                        startActivity(new Intent(this, MainActivity.class));
+                        finish();
+                    }
                     if (Work_Detaails_collectionImg.isChecked()) {
                         if (serializationDetailsBeandata.isCollect()) {
                             Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
@@ -151,7 +155,6 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                         }
                     }
                 }
-
                 break;
             //观看第一话
             case R.id.Work_Detaails_LookUpText:
@@ -206,17 +209,13 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
             SPUtils.put(this,"FirstCatalogId",catalogId);
         }
     }
-
     @Override
     public void showPgcCollectionBean(PgcCollectionBean pgcCollectionBean) {
     }
-
-
     private void setCatalogText() {
         work_detaails_catalogText.setTextColor(Color.parseColor("#b37feb"));
         work_detaails_detailsText.setTextColor(Color.parseColor("#333333"));
     }
-
     private void setDetaailsText() {
         work_detaails_catalogText.setTextColor(Color.parseColor("#333333"));
         work_detaails_detailsText.setTextColor(Color.parseColor("#b37feb"));
