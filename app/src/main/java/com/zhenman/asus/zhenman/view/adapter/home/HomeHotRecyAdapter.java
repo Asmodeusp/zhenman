@@ -72,6 +72,15 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         void go(String UserId);
     }
 
+    private BouncingComment bouncingComment;
+
+    public void setBouncingComment(BouncingComment comment) {
+        this.bouncingComment = comment;
+    }
+
+    public interface BouncingComment {
+        void getComment(String UgcId);
+    }
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
@@ -259,7 +268,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         holder.Home_Hot_CommentImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                bouncingComment.getComment(dataBean.getId());
             }
         });
 
@@ -271,7 +280,6 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
             }
         });
         //关注的按钮
-
         if (dataBean.isFollow()) {
             holder.Home_Hot_FollowCheckBox.setVisibility(View.GONE);
         } else {

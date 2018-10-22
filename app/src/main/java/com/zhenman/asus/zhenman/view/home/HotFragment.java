@@ -24,7 +24,7 @@ import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 
-public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView {
+public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView, HomeHotRecyAdapter.BouncingComment {
     private RecyclerView HomeHot_List;
     private ViewPagerLayoutManager linearLayoutManager;
     private HomeHotRecyAdapter homeHotRecyAdapter;
@@ -102,6 +102,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
                 }
             });
+            homeHotRecyAdapter.setBouncingComment(this);
         }
     }
 
@@ -116,6 +117,11 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     @Override
     public void showFollowBean(FollowBean followBean) {
+
+    }
+
+    @Override
+    public void getComment(String UgcId) {
 
     }
 }

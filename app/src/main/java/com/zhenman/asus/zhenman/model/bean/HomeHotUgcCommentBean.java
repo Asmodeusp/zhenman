@@ -4,10 +4,11 @@ import java.util.List;
 
 public class HomeHotUgcCommentBean {
 
+
     /**
      * state : 0
      * msg : 成功
-     * data : {"pageNum":1,"pageSize":50,"startRow":0,"endRow":50,"total":8,"pages":1,"result":[{"commentId":"968","content":"123","catalogId":null,"userId":"259","likeNum":"0","like":false,"detailNum":null,"addTime":"1535445827000","author":false,"reUserId":"299","reContent":"立京臭**","reName":"dsaf","reAuthor":false,"imageUrl":null,"name":"45ab5abb","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"967","content":"立京臭**","catalogId":null,"userId":"299","likeNum":"0","like":false,"detailNum":null,"addTime":"1533796950000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/dedd9c65a9f64d039cccbc9adacfd8ef_809476-20170525194948388-774343317.png?roundPic/radius/!50p","name":"dsaf","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"966","content":"**","catalogId":null,"userId":"299","likeNum":"0","like":false,"detailNum":null,"addTime":"1533796833000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/dedd9c65a9f64d039cccbc9adacfd8ef_809476-20170525194948388-774343317.png?roundPic/radius/!50p","name":"dsaf","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"962","content":"呃呃呃","catalogId":null,"userId":"287","likeNum":"0","like":false,"detailNum":null,"addTime":"1533557376000","author":true,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/990ca3b1f9a54e4d90bf8b213ceb55aa_?roundPic/radius/!50p","name":"文","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"961","content":"不是","catalogId":null,"userId":"286","likeNum":"0","like":false,"detailNum":null,"addTime":"1533557007000","author":false,"reUserId":"287","reContent":"不是作者吗","reName":"文","reAuthor":true,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/5a804a2825c54e0fa25431b2a983ee63_?roundPic/radius/!50p","name":"f6c8ce11jojoman","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"960","content":"不是呢","catalogId":null,"userId":"286","likeNum":"0","like":false,"detailNum":null,"addTime":"1533557000000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/5a804a2825c54e0fa25431b2a983ee63_?roundPic/radius/!50p","name":"f6c8ce11jojoman","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"959","content":"不是作者吗","catalogId":null,"userId":"287","likeNum":"0","like":false,"detailNum":null,"addTime":"1533556758000","author":true,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/990ca3b1f9a54e4d90bf8b213ceb55aa_?roundPic/radius/!50p","name":"文","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"958","content":"呃呃呃","catalogId":null,"userId":"287","likeNum":"0","like":false,"detailNum":null,"addTime":"1533556750000","author":true,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/990ca3b1f9a54e4d90bf8b213ceb55aa_?roundPic/radius/!50p","name":"文","detailId":null,"title":null,"chapterSort":null,"pageBean":null}]}
+     * data : {"total":5,"commentDtoList":[{"commentId":"1011","content":"今天，@奇总 ，@xx","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1539854398000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"今天，@奇总 ，@xx","textExtra":[{"start":3,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":[]},{"commentId":"1005","content":"今天，@奇总 ，@xx","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1539336069000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"今天，@奇总 ，@xx","textExtra":[{"start":3,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":[]},{"commentId":"1004","content":"今天，@奇总 ，@xx","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1539335868000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"今天，@奇总 ，@xx","textExtra":[{"start":3,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":[]},{"commentId":"998","content":"今天，@奇总 ，@xx","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":5,"addTime":"1539080471000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"今天，@奇总 ，@xx","textExtra":[{"start":3,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":[{"commentId":"998","content":"@沈浩文 有人喊你","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1539166009000","author":false,"reUserId":"260","reContent":"今天，@赵总 ，@xx","reName":"ଲ 猜","reAuthor":false,"imageUrl":null,"name":"ଲ 猜","detailId":"41","title":null,"roleNameList":null,"chapterSort":null,"json":"{\n\"text\":\"@沈浩文 有人喊你\",\n\"textExtra\": [\n{\n\"start\":0 ,\n\"length\":4,\n\"id\":\"\",\n\"textType\":0,\n\"link\":\"zmcartoon://message?userId=\"\n}\n]\n}","textDto":{"text":"ଲ 猜回复ଲ 猜:@沈浩文 有人喊你","textExtra":[{"start":0,"length":3,"id":"260","text":"ଲ 猜","textType":1,"link":null},{"start":5,"length":3,"id":"260","text":"ଲ 猜","textType":1,"link":null},{"start":8,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":null},{"commentId":"998","content":"@沈浩文 有人喊你","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1539165709000","author":false,"reUserId":"260","reContent":"今天，@赵总 ，@xx","reName":"ଲ 猜","reAuthor":false,"imageUrl":null,"name":"ଲ 猜","detailId":"40","title":null,"roleNameList":null,"chapterSort":null,"json":"{\n\"text\":\"@赵总 我去你大爷的@xx\",\n\"textExtra\": [\n{\n\"start\":0 ,\n\"length\":4,\n\"id\":\"\",\n\"textType\":0,\n\"link\":\"zmcartoon://message?userId=\"\n}\n]\n}","textDto":{"text":"ଲ 猜回复ଲ 猜:@赵总 我去你大爷的@xx","textExtra":[{"start":0,"length":3,"id":"260","text":"ଲ 猜","textType":1,"link":null},{"start":5,"length":3,"id":"260","text":"ଲ 猜","textType":1,"link":null},{"start":8,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":null}]},{"commentId":"997","content":"今天，@奇总 ，@xx","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1539080447000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"今天，@奇总 ，@xx","textExtra":[{"start":3,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":[]}]}
      */
 
     private int state;
@@ -40,54 +41,12 @@ public class HomeHotUgcCommentBean {
 
     public static class DataBean {
         /**
-         * pageNum : 1
-         * pageSize : 50
-         * startRow : 0
-         * endRow : 50
-         * total : 8
-         * pages : 1
-         * result : [{"commentId":"968","content":"123","catalogId":null,"userId":"259","likeNum":"0","like":false,"detailNum":null,"addTime":"1535445827000","author":false,"reUserId":"299","reContent":"立京臭**","reName":"dsaf","reAuthor":false,"imageUrl":null,"name":"45ab5abb","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"967","content":"立京臭**","catalogId":null,"userId":"299","likeNum":"0","like":false,"detailNum":null,"addTime":"1533796950000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/dedd9c65a9f64d039cccbc9adacfd8ef_809476-20170525194948388-774343317.png?roundPic/radius/!50p","name":"dsaf","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"966","content":"**","catalogId":null,"userId":"299","likeNum":"0","like":false,"detailNum":null,"addTime":"1533796833000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/dedd9c65a9f64d039cccbc9adacfd8ef_809476-20170525194948388-774343317.png?roundPic/radius/!50p","name":"dsaf","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"962","content":"呃呃呃","catalogId":null,"userId":"287","likeNum":"0","like":false,"detailNum":null,"addTime":"1533557376000","author":true,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/990ca3b1f9a54e4d90bf8b213ceb55aa_?roundPic/radius/!50p","name":"文","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"961","content":"不是","catalogId":null,"userId":"286","likeNum":"0","like":false,"detailNum":null,"addTime":"1533557007000","author":false,"reUserId":"287","reContent":"不是作者吗","reName":"文","reAuthor":true,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/5a804a2825c54e0fa25431b2a983ee63_?roundPic/radius/!50p","name":"f6c8ce11jojoman","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"960","content":"不是呢","catalogId":null,"userId":"286","likeNum":"0","like":false,"detailNum":null,"addTime":"1533557000000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/5a804a2825c54e0fa25431b2a983ee63_?roundPic/radius/!50p","name":"f6c8ce11jojoman","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"959","content":"不是作者吗","catalogId":null,"userId":"287","likeNum":"0","like":false,"detailNum":null,"addTime":"1533556758000","author":true,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/990ca3b1f9a54e4d90bf8b213ceb55aa_?roundPic/radius/!50p","name":"文","detailId":null,"title":null,"chapterSort":null,"pageBean":null},{"commentId":"958","content":"呃呃呃","catalogId":null,"userId":"287","likeNum":"0","like":false,"detailNum":null,"addTime":"1533556750000","author":true,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/990ca3b1f9a54e4d90bf8b213ceb55aa_?roundPic/radius/!50p","name":"文","detailId":null,"title":null,"chapterSort":null,"pageBean":null}]
+         * total : 5
+         * commentDtoList : [{"commentId":"1011","content":"今天，@奇总 ，@xx","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1539854398000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"今天，@奇总 ，@xx","textExtra":[{"start":3,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":[]},{"commentId":"1005","content":"今天，@奇总 ，@xx","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1539336069000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"今天，@奇总 ，@xx","textExtra":[{"start":3,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":[]},{"commentId":"1004","content":"今天，@奇总 ，@xx","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1539335868000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"今天，@奇总 ，@xx","textExtra":[{"start":3,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":[]},{"commentId":"998","content":"今天，@奇总 ，@xx","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":5,"addTime":"1539080471000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"今天，@奇总 ，@xx","textExtra":[{"start":3,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":[{"commentId":"998","content":"@沈浩文 有人喊你","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1539166009000","author":false,"reUserId":"260","reContent":"今天，@赵总 ，@xx","reName":"ଲ 猜","reAuthor":false,"imageUrl":null,"name":"ଲ 猜","detailId":"41","title":null,"roleNameList":null,"chapterSort":null,"json":"{\n\"text\":\"@沈浩文 有人喊你\",\n\"textExtra\": [\n{\n\"start\":0 ,\n\"length\":4,\n\"id\":\"\",\n\"textType\":0,\n\"link\":\"zmcartoon://message?userId=\"\n}\n]\n}","textDto":{"text":"ଲ 猜回复ଲ 猜:@沈浩文 有人喊你","textExtra":[{"start":0,"length":3,"id":"260","text":"ଲ 猜","textType":1,"link":null},{"start":5,"length":3,"id":"260","text":"ଲ 猜","textType":1,"link":null},{"start":8,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":null},{"commentId":"998","content":"@沈浩文 有人喊你","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1539165709000","author":false,"reUserId":"260","reContent":"今天，@赵总 ，@xx","reName":"ଲ 猜","reAuthor":false,"imageUrl":null,"name":"ଲ 猜","detailId":"40","title":null,"roleNameList":null,"chapterSort":null,"json":"{\n\"text\":\"@赵总 我去你大爷的@xx\",\n\"textExtra\": [\n{\n\"start\":0 ,\n\"length\":4,\n\"id\":\"\",\n\"textType\":0,\n\"link\":\"zmcartoon://message?userId=\"\n}\n]\n}","textDto":{"text":"ଲ 猜回复ଲ 猜:@赵总 我去你大爷的@xx","textExtra":[{"start":0,"length":3,"id":"260","text":"ଲ 猜","textType":1,"link":null},{"start":5,"length":3,"id":"260","text":"ଲ 猜","textType":1,"link":null},{"start":8,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":null}]},{"commentId":"997","content":"今天，@奇总 ，@xx","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1539080447000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"今天，@奇总 ，@xx","textExtra":[{"start":3,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]},"commentDtoList":[]}]
          */
 
-        private int pageNum;
-        private int pageSize;
-        private int startRow;
-        private int endRow;
         private int total;
-        private int pages;
-        private List<ResultBean> result;
-
-        public int getPageNum() {
-            return pageNum;
-        }
-
-        public void setPageNum(int pageNum) {
-            this.pageNum = pageNum;
-        }
-
-        public int getPageSize() {
-            return pageSize;
-        }
-
-        public void setPageSize(int pageSize) {
-            this.pageSize = pageSize;
-        }
-
-        public int getStartRow() {
-            return startRow;
-        }
-
-        public void setStartRow(int startRow) {
-            this.startRow = startRow;
-        }
-
-        public int getEndRow() {
-            return endRow;
-        }
-
-        public void setEndRow(int endRow) {
-            this.endRow = endRow;
-        }
+        private List<CommentDtoListBean> commentDtoList;
 
         public int getTotal() {
             return total;
@@ -97,64 +56,62 @@ public class HomeHotUgcCommentBean {
             this.total = total;
         }
 
-        public int getPages() {
-            return pages;
+        public List<CommentDtoListBean> getCommentDtoList() {
+            return commentDtoList;
         }
 
-        public void setPages(int pages) {
-            this.pages = pages;
+        public void setCommentDtoList(List<CommentDtoListBean> commentDtoList) {
+            this.commentDtoList = commentDtoList;
         }
 
-        public List<ResultBean> getResult() {
-            return result;
-        }
-
-        public void setResult(List<ResultBean> result) {
-            this.result = result;
-        }
-
-        public static class ResultBean {
+        public static class CommentDtoListBean {
             /**
-             * commentId : 968
-             * content : 123
+             * commentId : 1011
+             * content : 今天，@奇总 ，@xx
              * catalogId : null
-             * userId : 259
+             * userId : 260
              * likeNum : 0
              * like : false
-             * detailNum : null
-             * addTime : 1535445827000
+             * detailNum : 0
+             * addTime : 1539854398000
              * author : false
-             * reUserId : 299
-             * reContent : 立京臭**
-             * reName : dsaf
+             * reUserId : null
+             * reContent : null
+             * reName : null
              * reAuthor : false
-             * imageUrl : null
-             * name : 45ab5abb
+             * imageUrl : http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100
+             * name : ଲ 猜
              * detailId : null
              * title : null
+             * roleNameList : null
              * chapterSort : null
-             * pageBean : null
+             * json : null
+             * textDto : {"text":"今天，@奇总 ，@xx","textExtra":[{"start":3,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]}
+             * commentDtoList : []
              */
 
             private String commentId;
             private String content;
             private Object catalogId;
             private String userId;
-            private String likeNum;
+            private int likeNum;
             private boolean like;
-            private Object detailNum;
+            private int detailNum;
             private String addTime;
             private boolean author;
-            private String reUserId;
-            private String reContent;
-            private String reName;
+            private Object reUserId;
+            private Object reContent;
+            private Object reName;
             private boolean reAuthor;
-            private Object imageUrl;
+            private String imageUrl;
             private String name;
             private Object detailId;
             private Object title;
+            private Object roleNameList;
             private Object chapterSort;
-            private Object pageBean;
+            private Object json;
+            private TextDtoBean textDto;
+            private List<?> commentDtoList;
 
             public String getCommentId() {
                 return commentId;
@@ -188,11 +145,11 @@ public class HomeHotUgcCommentBean {
                 this.userId = userId;
             }
 
-            public String getLikeNum() {
+            public int getLikeNum() {
                 return likeNum;
             }
 
-            public void setLikeNum(String likeNum) {
+            public void setLikeNum(int likeNum) {
                 this.likeNum = likeNum;
             }
 
@@ -204,11 +161,11 @@ public class HomeHotUgcCommentBean {
                 this.like = like;
             }
 
-            public Object getDetailNum() {
+            public int getDetailNum() {
                 return detailNum;
             }
 
-            public void setDetailNum(Object detailNum) {
+            public void setDetailNum(int detailNum) {
                 this.detailNum = detailNum;
             }
 
@@ -228,27 +185,27 @@ public class HomeHotUgcCommentBean {
                 this.author = author;
             }
 
-            public String getReUserId() {
+            public Object getReUserId() {
                 return reUserId;
             }
 
-            public void setReUserId(String reUserId) {
+            public void setReUserId(Object reUserId) {
                 this.reUserId = reUserId;
             }
 
-            public String getReContent() {
+            public Object getReContent() {
                 return reContent;
             }
 
-            public void setReContent(String reContent) {
+            public void setReContent(Object reContent) {
                 this.reContent = reContent;
             }
 
-            public String getReName() {
+            public Object getReName() {
                 return reName;
             }
 
-            public void setReName(String reName) {
+            public void setReName(Object reName) {
                 this.reName = reName;
             }
 
@@ -260,11 +217,11 @@ public class HomeHotUgcCommentBean {
                 this.reAuthor = reAuthor;
             }
 
-            public Object getImageUrl() {
+            public String getImageUrl() {
                 return imageUrl;
             }
 
-            public void setImageUrl(Object imageUrl) {
+            public void setImageUrl(String imageUrl) {
                 this.imageUrl = imageUrl;
             }
 
@@ -292,6 +249,14 @@ public class HomeHotUgcCommentBean {
                 this.title = title;
             }
 
+            public Object getRoleNameList() {
+                return roleNameList;
+            }
+
+            public void setRoleNameList(Object roleNameList) {
+                this.roleNameList = roleNameList;
+            }
+
             public Object getChapterSort() {
                 return chapterSort;
             }
@@ -300,12 +265,120 @@ public class HomeHotUgcCommentBean {
                 this.chapterSort = chapterSort;
             }
 
-            public Object getPageBean() {
-                return pageBean;
+            public Object getJson() {
+                return json;
             }
 
-            public void setPageBean(Object pageBean) {
-                this.pageBean = pageBean;
+            public void setJson(Object json) {
+                this.json = json;
+            }
+
+            public TextDtoBean getTextDto() {
+                return textDto;
+            }
+
+            public void setTextDto(TextDtoBean textDto) {
+                this.textDto = textDto;
+            }
+
+            public List<?> getCommentDtoList() {
+                return commentDtoList;
+            }
+
+            public void setCommentDtoList(List<?> commentDtoList) {
+                this.commentDtoList = commentDtoList;
+            }
+
+            public static class TextDtoBean {
+                /**
+                 * text : 今天，@奇总 ，@xx
+                 * textExtra : [{"start":3,"length":4,"id":"","text":null,"textType":0,"link":"zmcartoon://message?userId="}]
+                 */
+
+                private String text;
+                private List<TextExtraBean> textExtra;
+
+                public String getText() {
+                    return text;
+                }
+
+                public void setText(String text) {
+                    this.text = text;
+                }
+
+                public List<TextExtraBean> getTextExtra() {
+                    return textExtra;
+                }
+
+                public void setTextExtra(List<TextExtraBean> textExtra) {
+                    this.textExtra = textExtra;
+                }
+
+                public static class TextExtraBean {
+                    /**
+                     * start : 3
+                     * length : 4
+                     * id :
+                     * text : null
+                     * textType : 0
+                     * link : zmcartoon://message?userId=
+                     */
+
+                    private int start;
+                    private int length;
+                    private String id;
+                    private Object text;
+                    private int textType;
+                    private String link;
+
+                    public int getStart() {
+                        return start;
+                    }
+
+                    public void setStart(int start) {
+                        this.start = start;
+                    }
+
+                    public int getLength() {
+                        return length;
+                    }
+
+                    public void setLength(int length) {
+                        this.length = length;
+                    }
+
+                    public String getId() {
+                        return id;
+                    }
+
+                    public void setId(String id) {
+                        this.id = id;
+                    }
+
+                    public Object getText() {
+                        return text;
+                    }
+
+                    public void setText(Object text) {
+                        this.text = text;
+                    }
+
+                    public int getTextType() {
+                        return textType;
+                    }
+
+                    public void setTextType(int textType) {
+                        this.textType = textType;
+                    }
+
+                    public String getLink() {
+                        return link;
+                    }
+
+                    public void setLink(String link) {
+                        this.link = link;
+                    }
+                }
             }
         }
     }

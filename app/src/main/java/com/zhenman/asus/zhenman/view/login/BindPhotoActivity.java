@@ -74,7 +74,6 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
         mRegisterPhoneNumber = findViewById(R.id.Register_PhoneNumberEd);
         //手机验证码输入框
         mRegisterPhotoCodeEd = findViewById(R.id.Register_PhoneCodeEd);
-
         //手机获取验证码text
         mRegisterPhotoCode = findViewById(R.id.Register_PhotoCodeText);
         //下一步按钮
