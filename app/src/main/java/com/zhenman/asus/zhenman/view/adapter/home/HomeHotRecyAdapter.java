@@ -79,8 +79,9 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
     }
 
     public interface BouncingComment {
-        void getComment(String UgcId);
+        void getComment(String UgcId, int Type);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
@@ -235,13 +236,11 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                             animationDrawable.start();
                             presenter.UgcFabulous(dataBean.getId(), "0");
                             holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) - 1 + "");
-                            clickZan.go(dataBean.getUserId() + "");
                         } else {
                             holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_like);
                             AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
                             animationDrawable.start();
                             holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
-                            clickZan.go(dataBean.getUserId() + "");
                         }
 
                     } else {
@@ -251,13 +250,11 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                             animationDrawable.start();
                             presenter.UgcFabulous(dataBean.getId(), "1");
                             holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
-                            clickZan.go(dataBean.getUserId() + "");
                         } else {
                             holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_unlike);
                             AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
                             animationDrawable.start();
                             holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
-                            clickZan.go(dataBean.getUserId() + "");
                         }
                     }
                 }
@@ -268,7 +265,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         holder.Home_Hot_CommentImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bouncingComment.getComment(dataBean.getId());
+                bouncingComment.getComment(dataBean.getId(), dataBean.getType());
             }
         });
 

@@ -1,12 +1,9 @@
 package com.zhenman.asus.zhenman.view.serializaion;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
@@ -21,7 +18,6 @@ import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
@@ -50,7 +46,6 @@ import com.zhenman.asus.zhenman.model.bean.ProductListBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
-import com.zhenman.asus.zhenman.model.service.SerializationCatalogReadService;
 import com.zhenman.asus.zhenman.presenter.SerializationCatalogReadPresenterImp;
 import com.zhenman.asus.zhenman.utils.ButtonUtils;
 import com.zhenman.asus.zhenman.utils.GetData;
@@ -58,11 +53,11 @@ import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.utils.alipay.AuthResult;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
-import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogFootviewCommentRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogReadActorAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.ProductListAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogReadRecyAdapter;
+import com.zhenman.asus.zhenman.view.comment.FullFragment;
 import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -221,12 +216,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     boolean Touch = true;
     //阅读图片的实体类
     SerializationCatalogReadBean serializationCatalogReadBean;
-    //底部弹出消息框
-    private BottomSheetDialog dialog;
-    //填充布局
-    private View contentView;
-    //弹出评论的RecyclerView
-    private RecyclerView commentPopu_recy;
     //标记章节索引
     private int i;
     //订单数量
@@ -415,31 +404,9 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     //消息弹出BottomSheetDialog
-    @SuppressLint("WrongConstant")
     private void initCommentpopu() {
-        dialog = new BottomSheetDialog(this);
-        contentView = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_dialog_layout, null, false);
-        dialog.setContentView(contentView);
-        //评论RecyclerView
-        commentPopu_recy = contentView.findViewById(R.id.HomeHot_CommentPopu_Recy);
-        //评论输入框
-        EditText CommentPopu_EdText = contentView.findViewById(R.id.HomeHot_CommentPopu_EdText);
-        //评论发送按钮
-        Button CommentPopu_SendButton = contentView.findViewById(R.id.HomeHot_CommentPopu_SendButton);
-        //评论提示字
-        TextView CommentPopu_Tip = contentView.findViewById(R.id.HomeHot_CommentPopu_Tip);
-        //设置RecyclerView的格式
-        commentPopu_recy.setLayoutManager(new LinearLayoutManager(this));
-        //展示评论popuwindow
-        dialog.show();
-        //得到评论内容
-        String comment = CommentPopu_EdText.getText().toString().trim();
-        CommentPopu_SendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        FullFragment fullFragment = new FullFragment();
+        fullFragment.show(getSupportFragmentManager(), "dialog");
     }
 
     @OnClick({R.id.SeeFirstBtn,
@@ -448,6 +415,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             R.id.CataLog_PopuPosition,
             R.id.serializationCatalogReadCatalogBtn,
             R.id.CataLog_PopuDownload,
+            R.id.serializationCatalogReadCommentBtn,
             R.id.serializationCatalogReadReturnImg})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -502,6 +470,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 break;
             //评论
             case R.id.serializationCatalogReadCommentBtn:
+                initCommentpopu();
                 break;
             //下一章
             case R.id.CataLog_FootViewNexterBtn:

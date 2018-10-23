@@ -14,24 +14,19 @@ import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
-import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
-import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.OnViewPagerListener;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
-import com.zhy.autolayout.AutoLinearLayout;
-import com.zhy.autolayout.AutoRelativeLayout;
+
+import java.util.List;
 
 
 public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView, HomeHotRecyAdapter.BouncingComment {
     private RecyclerView HomeHot_List;
     private ViewPagerLayoutManager linearLayoutManager;
     private HomeHotRecyAdapter homeHotRecyAdapter;
-    //底部切换页面
-    private AutoLinearLayout group;
-    //头部视图
-    private AutoRelativeLayout home_headView;
+    private List<HomeHotBean.DataBean> data;
 
 
     public HotFragment() {
@@ -91,7 +86,8 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     @Override
     public void showHotBean(HomeHotBean homeHotBean) {
         if (homeHotBean.getData().size() != 0) {
-            homeHotRecyAdapter = new HomeHotRecyAdapter(homeHotBean.getData(), linearLayoutManager, HomeHot_List, presenter);
+            data = homeHotBean.getData();
+            homeHotRecyAdapter = new HomeHotRecyAdapter(data, linearLayoutManager, HomeHot_List, presenter);
             HomeHot_List.setAdapter(homeHotRecyAdapter);
             homeHotRecyAdapter.setgoUserInfo(new HomeHotRecyAdapter.goUserInfo() {
                 @Override
@@ -121,7 +117,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     }
 
     @Override
-    public void getComment(String UgcId) {
+    public void getComment(String UgcId,int Type) {
 
     }
 }

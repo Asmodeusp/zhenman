@@ -79,7 +79,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/"
+            android:id="@+id/Comment_fill_FirstItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16px"
@@ -87,6 +87,7 @@
             android:textSize="26px" />
 
         <TextView
+            android:id="@+id/Comment_fill_SecondItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/px_16"
