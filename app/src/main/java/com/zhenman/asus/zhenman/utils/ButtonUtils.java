@@ -35,7 +35,6 @@ public class ButtonUtils {
         long time = System.currentTimeMillis();
         long timeD = time - lastClickTime;
         if (lastButtonId == buttonId && lastClickTime > 0 && timeD < diff) {
-            Log.v("isFastDoubleClick", "短时间内按钮多次触发");
             return true;
         }
         lastClickTime = time;

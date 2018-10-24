@@ -267,7 +267,6 @@ public class UMengHelp {
                     @Override
                     public void onError(final SHARE_MEDIA share_media, final Throwable throwable) {
                         if (throwable != null) {
-                            Log.d("throw", "throw:" + throwable.getMessage());
                         }
                         activity.runOnUiThread(new Runnable() {
                             @Override

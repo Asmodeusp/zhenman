@@ -205,7 +205,6 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.e("请求失败", e.toString());
             }
 
             @Override

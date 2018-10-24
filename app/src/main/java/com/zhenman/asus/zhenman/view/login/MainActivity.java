@@ -126,8 +126,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
                 presenter.sendUMengLoginData(data.get("unionid"), data.get("name"), "",
                         data.get("iconurl"), sex, TYPE, data.get("openid"));
-//                Log.e("Sunny",data.get("unionid"));
-//                Log.e("Sunny",data.get("openid"));
 
             }
         }

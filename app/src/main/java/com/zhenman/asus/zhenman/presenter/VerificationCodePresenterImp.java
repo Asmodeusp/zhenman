@@ -80,7 +80,6 @@ public class VerificationCodePresenterImp implements VerificationCodeContract.Ve
 
                     @Override
                     public void onNext(RegisterLoginCodeBean registerLoginCodeBean) {
-                        Log.e("VerificationCodePresent", registerLoginCodeBean.getMsg());
                         if (registerLoginCodeBean.getState() == 0) {
                             verificationCodeView.showError(registerLoginCodeBean.getMsg());
                             verificationCodeView.gotoPassword();

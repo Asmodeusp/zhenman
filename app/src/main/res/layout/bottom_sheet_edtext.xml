@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<com.zhy.autolayout.AutoRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <com.zhy.autolayout.AutoRelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="98px"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:background="@drawable/image_code_ed"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/CommentPopu_TextView"
+        <EditText
+            android:id="@+id/CommentPopu_edit_EditText"
             android:layout_width="574px"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
@@ -40,7 +40,7 @@
             tools:ignore="RtlCompat">
 
             <com.zhy.autolayout.AutoRelativeLayout
-                android:id="@+id/CommentPopu_Common_at"
+                android:id="@+id/CommentPopu_edit_Common_at"
                 android:layout_width="@dimen/px_64"
                 android:layout_height="@dimen/px_64"
                 android:layout_gravity="center"
@@ -56,13 +56,13 @@
             </com.zhy.autolayout.AutoRelativeLayout>
 
             <com.zhy.autolayout.AutoRelativeLayout
-                android:id="@+id/CommentPopu_SendButton"
+                android:id="@+id/CommentPopu_edit_SendButton"
                 android:layout_width="@dimen/px_64"
                 android:layout_height="@dimen/px_64"
                 android:layout_gravity="center">
 
                 <ImageView
-                    android:id="@+id/CommentPopu_SendImage"
+                    android:id="@+id/CommentPopu_edit_SendImage"
                     android:layout_width="50px"
                     android:layout_height="50px"
                     android:layout_alignParentStart="true"
@@ -75,4 +75,4 @@
             </com.zhy.autolayout.AutoRelativeLayout>
         </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoRelativeLayout>
-</android.support.constraint.ConstraintLayout>
+</com.zhy.autolayout.AutoRelativeLayout>

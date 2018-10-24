@@ -7,8 +7,13 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +28,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
-public class FullFragment extends BottomSheetDialogFragment  {
+public class FullFragment extends BottomSheetDialogFragment {
     //无评论时的提示字
     @BindView(R.id.CommentPopu_Tip)
     TextView CommentPopuTip;
@@ -91,9 +96,30 @@ public class FullFragment extends BottomSheetDialogFragment  {
     private void Pull_upEdText() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
         View view = LayoutInflater.from(getContext()).inflate(R.layout.bottom_sheet_edtext, null, false);
+        EditText CommentPopu_edit_EditText = view.findViewById(R.id.CommentPopu_edit_EditText);
+        bottomSheetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        CommentPopu_edit_EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString() .equals("@")) {
+                    BouncingAtUser();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         bottomSheetDialog.setContentView(view);
-//        view.findViewById(R.id.)
+        bottomSheetDialog.show();
     }
 
+    private void BouncingAtUser() {
 
+    }
 }

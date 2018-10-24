@@ -82,16 +82,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
             //先判断是否有安装未知来源应用的权限
             haveInstallPermission = getPackageManager().canRequestPackageInstalls();
             if (!haveInstallPermission) {
-//                //弹框提示用户手动打开
-//                MessageDialog.showAlert(this, "安装权限", "需要打开允许来自此来源，请去设置中开启此权限", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    //此方法需要API>=26才能使用
                     toInstallPermissionSettingIntent();
                 }
-//                    }
-//                });
                 return;
             }
         }

@@ -75,7 +75,6 @@ public class MyFansActivity extends BaseActivity<MyFansPresenter> implements MyF
             } else {
                 for (int i = 0; i < result.size(); i++) {
 
-                    Log.e("Sunny",result.get(i).getFollow()+"");
                 }
                 myFansNone.setVisibility(View.GONE);
                 myFansRecy.setVisibility(View.VISIBLE);

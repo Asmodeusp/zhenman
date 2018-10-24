@@ -44,7 +44,6 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("Sunny", e.getMessage());
                     }
 
                     @Override
@@ -82,7 +81,6 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("Sunny",e.getMessage());
                     }
 
                     @Override

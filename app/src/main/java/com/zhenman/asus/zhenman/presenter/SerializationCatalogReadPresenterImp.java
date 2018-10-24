@@ -160,7 +160,6 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("Sunny", e.getMessage());
 
                     }
 
