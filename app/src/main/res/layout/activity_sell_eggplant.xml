@@ -7,19 +7,21 @@
     android:orientation="vertical"
     tools:context=".view.myself.SellEggplantActivity">
 
+
+    <include
+        android:id="@+id/above_head"
+        layout="@layout/above_head" />
+
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="8.5"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/above_head"
-            layout="@layout/above_head" />
-
-
         <com.zhy.autolayout.AutoRelativeLayout
+            android:id="@+id/sellEggplant_item01"
             android:layout_width="match_parent"
+
             android:layout_height="@dimen/px_128"
             android:layout_below="@+id/above_head">
 
@@ -39,8 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/px_24"
-                android:layout_toLeftOf="@id/sellEggplant_img01"
-                />
+                android:layout_toLeftOf="@id/sellEggplant_img01" />
 
             <TextView
                 android:id="@+id/sellEggplant_kind01"
@@ -63,15 +64,17 @@
         </com.zhy.autolayout.AutoRelativeLayout>
 
         <View
+            android:id="@+id/sellEggplant_other04"
             android:layout_width="match_parent"
             android:layout_height="2px"
+            android:layout_below="@+id/sellEggplant_item01"
             android:background="@color/h6" />
 
         <com.zhy.autolayout.AutoRelativeLayout
             android:id="@+id/sellEggplant_item02"
             android:layout_width="match_parent"
             android:layout_height="@dimen/px_128"
-            android:layout_below="@+id/above_head">
+            android:layout_below="@+id/sellEggplant_other04">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/sellEggplant_img02"
@@ -89,8 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/px_24"
-                android:layout_toLeftOf="@id/sellEggplant_img02"
-                 />
+                android:layout_toLeftOf="@id/sellEggplant_img02" />
 
             <TextView
                 android:id="@+id/sellEggplant_kind02"
@@ -112,15 +114,17 @@
         </com.zhy.autolayout.AutoRelativeLayout>
 
         <View
+            android:id="@+id/sellEggplant_other05"
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:layout_below="@id/sellEggplantItem_img"
+            android:layout_below="@id/sellEggplant_item02"
             android:background="@color/h6" />
 
         <com.zhy.autolayout.AutoRelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="@dimen/px_128"
-            android:layout_below="@+id/above_head">
+            android:layout_below="@+id/sellEggplant_other05">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/sellEggplant_img03"
@@ -138,8 +142,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/px_24"
-                android:layout_toLeftOf="@id/sellEggplant_img03"
-                />
+                android:layout_toLeftOf="@id/sellEggplant_img03" />
 
             <TextView
                 android:id="@+id/sellEggplant_kind03"
@@ -160,17 +163,25 @@
 
 
         </com.zhy.autolayout.AutoRelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="@color/h6" />
     </com.zhy.autolayout.AutoLinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/h6" />
+
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_2"
         android:background="@color/h7" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/h7"></View>
 
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/sellEggplant_footView"

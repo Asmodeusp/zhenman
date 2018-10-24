@@ -1,11 +1,16 @@
 package com.zhenman.asus.zhenman.view.myself;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +75,15 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
     TextView sellEggplantKind03;
     @BindView(R.id.sellEggplant_isSelect03)
     CheckBox sellEggplantIsSelect03;
+    //支付popuwindow
+    private PopupWindow paypopupWindow;
+    TextView ppwPayUserName;
+    RecyclerView ppwPayProductList;
+    CheckBox ppwPayZhifubaoBtn;
+    CheckBox ppwPayWeixinBtn;
+    Button ppwPayPayBtn;
+    ImageView ppwQuestion;
+    private String paymentMethod = "2";
 
     @Override
     protected int getLayoutId() {
@@ -83,25 +97,7 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
         appOtherID.setText("茄子明细");
         //卖茄子
         presenter.sendSellEggplant();
-       /* AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", "app_id", "your private_key", "json", "GBK", "alipay_public_key", "RSA2");
-        AlipayFundTransToaccountTransferRequest request = new AlipayFundTransToaccountTransferRequest();
-        Map map = new HashMap();
-        map.put("out_biz_no", "3142321423432");
-        map.put("payee_type", "ALIPAY_LOGONID");
-        map.put("payee_account", "abc@sina.com");
-        map.put("amount", "12.23");
-        map.put("payer_show_name", "茄子提现");
-        map.put("payee_real_name", "Sunny");
-        map.put("remark", "真漫提现");
-        //org.json.JSONObject 将Map转换为JSON方法
-        JSONObject json = new JSONObject(map);
-        request.setBizContent(json);
-        AlipayFundTransToaccountTransferResponse response = alipayClient.execute(request);
-        if (response.isSuccess()) {
-            System.out.println("调用成功");
-        } else {
-            System.out.println("调用失败");
-        }*/
+
     }
 
     @Override
@@ -120,8 +116,95 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
             case R.id.sellEggplant_question:
                 break;
             case R.id.sellEggplant_sellBtn:
+
+                showPaypopupView();
                 break;
         }
+    }
+
+    //支付popuwindow
+    private void showPaypopupView() {
+        View PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
+        ppwPayProductList = PaypopupView.findViewById(R.id.ppwPay_productList);
+        ppwPayZhifubaoBtn = PaypopupView.findViewById(R.id.ppwPay_zhifubaoBtn);
+        ppwPayWeixinBtn = PaypopupView.findViewById(R.id.ppwPay_weixinBtn);
+        ppwPayPayBtn = PaypopupView.findViewById(R.id.ppwPay_payBtn);
+        ppwQuestion = PaypopupView.findViewById(R.id.ppw_question);
+
+        ppwPayUserName = PaypopupView.findViewById(R.id.ppwPay_userName);
+        ppwPayProductList.setVisibility(View.GONE);
+        ppwPayPayBtn.setVisibility(View.GONE);
+        //获取屏幕宽高
+        int weight = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels * 2 / 5;
+
+        paypopupWindow = new PopupWindow(PaypopupView, weight, height);
+        paypopupWindow.setFocusable(true);
+        //点击外部popueWindow消失
+        paypopupWindow.setOutsideTouchable(true);
+        paypopupWindow.showAtLocation(findViewById(R.id.sellEggplant_footView),Gravity.TOP,0,0);
+//        支付宝
+        ppwPayZhifubaoBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (ppwPayZhifubaoBtn.isChecked()) {
+                   /* AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", "app_id", "your private_key", "json", "GBK", "alipay_public_key", "RSA2");
+                    AlipayFundTransToaccountTransferRequest request = new AlipayFundTransToaccountTransferRequest();
+                    request.setBizContent("{" +
+                            "    \"out_biz_no\":\"3142321423432\"," +
+                            "    \"payee_type\":\"ALIPAY_LOGONID\"," +
+                            "    \"payee_account\":\"abc@sina.com\"," +
+                            "    \"amount\":\"12.23\"," +
+                            "    \"payer_show_name\":\"上海交通卡退款\"," +
+                            "    \"payee_real_name\":\"张三\"," +
+                            "    \"remark\":\"转账备注\"," +
+                            "  }");
+                    Map map = new HashMap();
+                    map.put("out_biz_no", "3142321423432");//生成订单号
+                    map.put("payee_type", "ALIPAY_LOGONID");//固定值
+                    map.put("payee_account", "abc@sina.com");//转账收款账户
+                    map.put("amount", sellEggplantEggplantNum.getText().toString());//多少钱
+                    map.put("payer_show_name", "账户提现");
+                    map.put("payee_real_name", "Sunny");
+                    map.put("remark", "真漫提现");
+                    //org.json.JSONObject 将Map转换为JSON方法
+                    JSONObject json = new JSONObject(map);
+                    request.setBizContent(json);
+                    AlipayFundTransToaccountTransferResponse response = alipayClient.execute(request);
+                    if (response.isSuccess()) {
+                        System.out.println("调用成功");
+                    } else {
+                        System.out.println("调用失败");
+                    }*/
+                    paymentMethod = "2";
+                    ppwPayWeixinBtn.setChecked(false);
+                } else {
+                    ppwPayWeixinBtn.setChecked(true);
+                }
+            }
+        });
+//        微信
+        ppwPayWeixinBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (ppwPayWeixinBtn.isChecked()) {
+                    paymentMethod = "1";
+                    ppwPayZhifubaoBtn.setChecked(false);
+                } else {
+                    ppwPayZhifubaoBtn.setChecked(true);
+                }
+            }
+        });
+        //popupWindow消失屏幕变为不透明
+        paypopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1.0f;
+                getWindow().setAttributes(lp);
+            }
+        });
+        paypopupWindow.showAtLocation(PaypopupView, Gravity.BOTTOM, 0, 0);
     }
 
 
