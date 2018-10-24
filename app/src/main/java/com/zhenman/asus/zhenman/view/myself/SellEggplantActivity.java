@@ -148,6 +148,9 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (ppwPayZhifubaoBtn.isChecked()) {
+
+
+
                    /* AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", "app_id", "your private_key", "json", "GBK", "alipay_public_key", "RSA2");
                     AlipayFundTransToaccountTransferRequest request = new AlipayFundTransToaccountTransferRequest();
                     request.setBizContent("{" +
