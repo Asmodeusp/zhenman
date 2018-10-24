@@ -218,8 +218,10 @@
         <activity
             android:name=".view.home.ShowPhotoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.myself.BuyEggplantActivity" />
-        <activity android:name=".view.myself.SellEggplantActivity"></activity>
+        <activity android:name=".view.myself.BuyEggplantActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.myself.SellEggplantActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
