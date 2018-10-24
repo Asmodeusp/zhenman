@@ -14,7 +14,7 @@ public interface MyFansContract {
     }
     interface MyFansInPresenter extends BasePresenter<MyFansInView>{
         //        展示用户列表
-        void sendMyFansData(String pageNum,String pageSize);
+        void sendMyFansData(String pageNum,String pageSize,String userId);
 //        关注用户
         void sendAttentionUserData(String followedUserId,String status);
     }

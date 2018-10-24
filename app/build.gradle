@@ -100,4 +100,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //图片加载器
     implementation 'me.panpf:sketch:2.6.1'
+
 }

@@ -171,7 +171,10 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 break;
             case R.id.my_CarePage:
 //                我的关注
-                startActivity(new Intent(getActivity(), MyAttentionActivity.class));
+                Intent intentMyAttention = new Intent(getActivity(), MyAttentionActivity.class);
+                intentMyAttention.putExtra("him_id", "myself");
+
+                startActivity(intentMyAttention);
                 break;
             case R.id.my_themePage:
 //                关注的主题

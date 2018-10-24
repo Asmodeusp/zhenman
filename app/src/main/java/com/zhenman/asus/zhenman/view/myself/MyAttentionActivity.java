@@ -14,6 +14,7 @@ import com.zhenman.asus.zhenman.model.bean.AttentionMyFansBean;
 import com.zhenman.asus.zhenman.model.bean.MyAttentionUserBean;
 import com.zhenman.asus.zhenman.presenter.MyAttentionUserPresenter;
 import com.zhenman.asus.zhenman.view.adapter.myself.MyAttenThemeAdapter;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ import butterknife.OnClick;
 public class MyAttentionActivity extends BaseActivity<MyAttentionUserPresenter> implements MyAttentionUserContract.MyAttentionUserInView, MyAttenThemeAdapter.MyAttenThemeCallback {
 
     @BindView(R.id.app_back)
-    ImageView appBack;
+    AutoRelativeLayout appBack;
     @BindView(R.id.app_title)
     TextView appTitle;
     @BindView(R.id.app_otherID)
@@ -44,8 +45,15 @@ public class MyAttentionActivity extends BaseActivity<MyAttentionUserPresenter> 
 
     @Override
     protected void init() {
-        appTitle.setText("我的关注");
-        presenter.sendMyAttentionUserData("1", "20");
+        if (HomepageActivity.him_id.equals("myself")) {
+            appTitle.setText("我的关注");
+            presenter.sendMyAttentionUserData("1", "20", "");
+        } else {
+            appTitle.setText("TA的关注");
+            presenter.sendMyAttentionUserData("1", "20", HomepageActivity.him_id);
+
+        }
+
     }
 
     @Override

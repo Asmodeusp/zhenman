@@ -86,7 +86,7 @@ public class Urls {
     public static final String MY_ATTENTION_THEME = "ugcSubjectUser/getUserSubjectList";
     //    书架中我的收藏
     public static final String SHELF_COLLECTION = "userLikesPgc/getLikesPgcList";
-//   批量删除收藏作品
+    //   批量删除收藏作品
     public static final String DELETE_COLLECTION = "userLikesPgc/deleteUserLikesPgc";
 
     //    手机号登录 手机号绑定三方账号
@@ -101,11 +101,15 @@ public class Urls {
     public static final String INSERT_USER_FOLLOW = "userFollow/insertUserFollow";
     //关注用户下的作品列表
     public static final String USER_FOLLOW_WORKS_LIST = "userFollow/getUserFollowWorksList";
-//    用户的粉丝
+    //    用户的粉丝
     public static final String USER_FANS = "userFans/getUserFansList";
-//    用户的关注
+    //    用户的关注
     public static final String USER_ATTENTION = "userFollow/getUserFollowList";
-//    关注用户
+    //    关注用户
     public static final String ATTENTION_USER = "userFollow/insertUserFollow";
+    //    卖茄子
+    public static final String SELL_EGGPLANT = "userCoinAccount/getUserCoinAccount";
+//    茄子明细
+    public static final String EGGPLANT_DETAILS="userCoinAccount/getCoinAccountIncomeList";
 
 }

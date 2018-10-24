@@ -25,41 +25,45 @@ public interface SerializationCatalogReadService {
     //连载阅读
     @FormUrlEncoded
     @POST(Urls.SERIALIZATION_CATALOG_READ)
-    Observable<SerializationCatalogReadBean> getSerializationCatalogReadBean( @FieldMap Map<String, String> params);
+    Observable<SerializationCatalogReadBean> getSerializationCatalogReadBean(@FieldMap Map<String, String> params);
 
     //连载章节
     @GET(Urls.SERIALIZATION_CATALOG)
-    Observable<SerializationCatalogBean> getSerializationCatalogBean( @QueryMap Map<String, String> params);  //连载章节
+    Observable<SerializationCatalogBean> getSerializationCatalogBean(@QueryMap Map<String, String> params);  //连载章节
 
     //作品章节下页对应的评论列表
     @GET(Urls.PGC_CHAPTER_COMMENT_LIST_BY_OFFSET)
-    Observable<PgcChapterCommentListByOffSetBean> getPgcChapterCommentListByOffSetBean( @QueryMap Map<String, String> params);
+    Observable<PgcChapterCommentListByOffSetBean> getPgcChapterCommentListByOffSetBean(@QueryMap Map<String, String> params);
 
     //PGC评论点赞
     @FormUrlEncoded
     @POST(Urls.PGCFABULOUS)
-    Observable<PgcReadFabulousBean> GetPGCReadFabulousBean( @FieldMap Map<String, String> params);
+    Observable<PgcReadFabulousBean> GetPGCReadFabulousBean(@FieldMap Map<String, String> params);
 
 
-
+    //产品列表
     @GET(Urls.PRODUCT_LIST)
-    Observable<ProductListBean> getProductList();
+    Observable<ProductListBean> getProductList(@QueryMap Map<String, String> paramMap);
 
     //创建订单
     @FormUrlEncoded
     @POST(Urls.MAKE_ORDER)
-    Observable<MakeOrderBean> getMakeOrderBean( @FieldMap Map<String,String > map);
+    Observable<MakeOrderBean> getMakeOrderBean(@FieldMap Map<String, String> map);
+
     //创建微信订单
     @FormUrlEncoded
     @POST(Urls.MAKE_ORDER)
-    Observable<MakeOrderBean> getWxMakeOrderBean( @FieldMap Map<String,String > map);
+    Observable<MakeOrderBean> getWxMakeOrderBean(@FieldMap Map<String, String> map);
+
     //得到支付宝订单号
     //    GET_PAY_DATA="userOrder/getPaySignByAli?orderSn=ZM991535076014567";
     @GET(Urls.GET_PAY_DATA)
-    Observable <GetPayDataBean> getPayData(@Query("orderSn") String orderSn);
+    Observable<GetPayDataBean> getPayData(@Query("orderSn") String orderSn);
+
     //    得到微信数据
     @GET(Urls.GET_WX_PAY_DATA)
     Observable<PayWeChatBean> getWXPayData(@Query("orderSn") String orderSn);
+
     //PGC收藏
     @FormUrlEncoded
     @POST(Urls.PGC_COLLECTION)

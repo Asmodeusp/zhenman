@@ -4,6 +4,7 @@ package com.zhenman.asus.zhenman.view.myself.fragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,10 +46,13 @@ public class WorkShortFragment extends BaseFragment<WorkShortComicPresenter> imp
         workShort_recy = getActivity().findViewById(R.id.workShort_recy);
         workShort_noData = getActivity().findViewById(R.id.workShort_noData);
         if (HomepageActivity.him_id.equals("myself")) {
-            presenter.sendWorkShortComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""), (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
+//            type  //1 作品  2 喜欢
+            Log.e("Sunny",HomepageActivity.tabSelect);
+            presenter.sendWorkShortComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""), HomepageActivity.tabSelect, "1", "20");
 
         } else {
-            presenter.sendWorkShortComic(HomepageActivity.him_id, (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
+            presenter.sendWorkShortComic(HomepageActivity.him_id,HomepageActivity.tabSelect, "1", "20");
+            Log.e("Sunny",HomepageActivity.him_id+"");
 
         }
 
@@ -81,5 +85,10 @@ public class WorkShortFragment extends BaseFragment<WorkShortComicPresenter> imp
         } else {
             Toast.makeText(getContext(), "加载数据失败", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void showError(String string) {
+        Toast.makeText(getContext(), string, Toast.LENGTH_SHORT).show();
     }
 }

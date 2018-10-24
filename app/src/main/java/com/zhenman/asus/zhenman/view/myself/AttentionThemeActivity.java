@@ -16,6 +16,7 @@ import com.zhenman.asus.zhenman.presenter.MyAttenThemePresenter;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.myself.MyAttenThemeAdapter;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class AttentionThemeActivity extends BaseActivity<MyAttenThemePresenter> 
 
     @BindView(R.id.attentionTheme_none)
     TextView attentionThemeNone;
-    private ImageView app_back;
+    private AutoRelativeLayout app_back;
     private TextView app_title;
     private TextView app_otherID;
     private ImageView app_otherImage;
@@ -39,7 +40,7 @@ public class AttentionThemeActivity extends BaseActivity<MyAttenThemePresenter> 
 
     @Override
     protected void init() {
-        app_back = (ImageView) findViewById(R.id.app_back);
+        app_back = (AutoRelativeLayout) findViewById(R.id.app_back);
         app_title = (TextView) findViewById(R.id.app_title);
         app_otherID = (TextView) findViewById(R.id.app_otherID);
         app_otherImage = (ImageView) findViewById(R.id.app_otherImage);

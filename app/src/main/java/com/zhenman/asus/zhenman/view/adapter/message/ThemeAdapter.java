@@ -23,7 +23,6 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
     private List<TheamBean.DataBean> dataBeanList;
     private Context context;
     private ThemeCallback themeCallback;
-    private ThemeAttentionCallback themeAttentionCallback;
     private boolean tag = false;
     public static boolean isAttention=false;
 
@@ -36,11 +35,6 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
         void makeAttention(String subjectId, int status);
 
     }
-
-    public interface ThemeAttentionCallback {
-        void themeAttentionCallback(String subjectId, int status);
-    }
-
     public void ThemeCallback(ThemeCallback themeCallback) {
         this.themeCallback = themeCallback;
     }

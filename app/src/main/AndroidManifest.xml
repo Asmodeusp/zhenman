@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 相机相册 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <!--8.0权限-->
+    <!-- 8.0权限 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
@@ -197,9 +197,6 @@
             android:name=".view.myself.HomepageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.myself.ShoppingActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".view.myself.AttentionThemeActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -222,7 +219,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.home.ShowPhotoActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".view.myself.BuyEggplantActivity" />
+        <activity android:name=".view.myself.SellEggplantActivity"></activity>
     </application>
 
 </manifest>

@@ -3,7 +3,6 @@ package com.zhenman.asus.zhenman.presenter;
 import com.zhenman.asus.zhenman.contract.WorkShortComicContract;
 import com.zhenman.asus.zhenman.model.bean.WorkShortComicBean;
 import com.zhenman.asus.zhenman.model.service.WorkShortComicService;
-import com.zhenman.asus.zhenman.utils.GetData;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 
 import java.util.HashMap;
@@ -35,8 +34,10 @@ public class WorkShortComicPresenter implements WorkShortComicContract.WorkShort
 
                     @Override
                     public void onNext(WorkShortComicBean workShortComicBean) {
-                        if (workShortComicBean.getMsg().equals(GetData.MSG_SUCCESS)){
+                        if (workShortComicBean.getState()==0){
                             workShortComicInView.showWorkShortComic(workShortComicBean);
+                        }else {
+                            workShortComicInView.showError(workShortComicBean.getMsg());
                         }
                     }
 

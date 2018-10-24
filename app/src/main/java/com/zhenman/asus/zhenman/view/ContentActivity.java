@@ -81,11 +81,10 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
                 setContentView(R.id.Homecontentview, HomepageFragment.class);
                 setText(38, 32, 32, 32);
                 setTextColor("#ffffff");
-
                 break;
             case R.id.SerializationButton:
                 group.setBackgroundColor(Color.parseColor("#ffffff"));
-                    setContentView(R.id.Othercontentview, SerializationFragment.class);
+                setContentView(R.id.Othercontentview, SerializationFragment.class);
 //                setContentView(R.id.Othercontentview, SerializationFragment.class);
                 setText(32, 38, 32, 32);
                 setTextColor("#000000");
@@ -101,7 +100,6 @@ public class ContentActivity extends BaseActivity implements View.OnClickListene
                     startActivity(new Intent(this, MainActivity.class));
                 } else {
                     setContentView(R.id.Othercontentview, MessageFragment.class);
-
                 }
                 group.setBackgroundColor(Color.parseColor("#ffffff"));
 //                setContentView(R.id.Othercontentview, MessageFragment.class);

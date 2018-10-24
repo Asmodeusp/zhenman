@@ -7,8 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +21,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     private List<ProductListBean.DataBean> listBeanData;
     private Context context;
     private ProductListCallback croductListCallback;
-    private CheckBox lastBox;
+    private AutoRelativeLayout lastBox;
 
     public ProductListAdapter(List<ProductListBean.DataBean> listBeanData, Context context) {
         this.listBeanData = listBeanData;
@@ -36,7 +34,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
 
     public interface ProductListCallback {
-        void showProductList(int position);
+        void showProductList(int position, int amount);
 
     }
 
@@ -52,15 +50,38 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int i) {
+        int productType = listBeanData.get(i).getProductType();
+        if (productType == 1) {
+            holder.itemProductList_bite.setImageResource(R.mipmap.my_qiezi_bite);
+        } else {
+            holder.itemProductList_bite.setImageResource(R.mipmap.my_coin_small);
+
+        }
         holder.itemProductList_num.setText("  X " + listBeanData.get(i).getShowPrice() + "");
         holder.itemView.setTag(i);
-        holder.itemProductList_money.setText("￥"+listBeanData.get(i).getPrice()+".00");
-        holder.itemProductList_num.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.itemProductList_money.setText("￥" + listBeanData.get(i).getPrice() + ".00");
+        holder.itemProductList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (lastBox == null) {
+                    lastBox = holder.itemProductList;
+                    lastBox.setBackgroundResource(R.drawable.actor_shape);
+                    holder.itemProductList_moneyBg.setBackgroundColor(Color.parseColor("#cccccc"));
+                } else {
+                    lastBox.setBackgroundResource(R.drawable.comment_popubackgound);
+                    holder.itemProductList_moneyBg.setBackgroundColor(Color.parseColor("#b37feb"));
+                    lastBox = holder.itemProductList;
+                }
+
+                croductListCallback.showProductList(listBeanData.get(i).getId(), listBeanData.get(i).getPrice());
+            }
+        });
+        /*holder.itemProductList_num.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (lastBox == null) {
                     lastBox = holder.itemProductList_num;
-                    holder.itemProductList_moneyBg.setBackgroundColor(Color.parseColor("#666666"));
+                    holder.itemProductList_moneyBg.setBackgroundColor(Color.parseColor("#cccccc"));
                 } else {
                     lastBox.setChecked(false);
                     holder.itemProductList_moneyBg.setBackgroundColor(Color.parseColor("#b37feb"));
@@ -69,7 +90,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                 croductListCallback.showProductList(i);
 
             }
-        });
+        });*/
     }
 
     @Override
@@ -95,16 +116,18 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     public class Holder extends RecyclerView.ViewHolder {
-        public CheckBox itemProductList_num;
+        public TextView itemProductList_num;
         public AutoRelativeLayout itemProductList;
         public ImageView itemProductList_moneyBg;
+        public ImageView itemProductList_bite;
         public TextView itemProductList_money;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
             this.itemProductList = itemView.findViewById(R.id.itemProductList);
-            this.itemProductList_num = (CheckBox) itemView.findViewById(R.id.itemProductList_num);
+            this.itemProductList_num = (TextView) itemView.findViewById(R.id.itemProductList_num);
             this.itemProductList_moneyBg = (ImageView) itemView.findViewById(R.id.itemProductList_moneyBg);
+            this.itemProductList_bite = (ImageView) itemView.findViewById(R.id.itemProductList_bite);
             this.itemProductList_money = (TextView) itemView.findViewById(R.id.itemProductList_money);
 
         }

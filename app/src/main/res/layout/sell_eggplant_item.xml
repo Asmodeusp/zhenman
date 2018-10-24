@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/px_128">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/sellEggplantItem_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/px_24"
+        android:src="@mipmap/my_qiezi" />
+
+    <TextView
+        android:id="@+id/sellEggplantItem_num"
+        style="@style/Style32H2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/px_24"
+        android:layout_toLeftOf="@id/sellEggplantItem_img"
+        android:text="34" />
+
+    <TextView
+        android:id="@+id/sellEggplantItem_kind"
+        style="@style/Style32H2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/sellEggplantItem_num"
+        android:text="茄子：" />
+
+    <CheckBox
+        android:id="@+id/sellEggplantItem_isSelect"
+        android:layout_width="@dimen/px_44"
+        android:layout_height="@dimen/px_44"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/px_24"
+        android:button="@drawable/selector_check_bg" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_below="@id/sellEggplantItem_img"
+        android:background="@color/h6"
+        android:layout_marginTop="@dimen/px_15"
+        />
+</com.zhy.autolayout.AutoRelativeLayout>
