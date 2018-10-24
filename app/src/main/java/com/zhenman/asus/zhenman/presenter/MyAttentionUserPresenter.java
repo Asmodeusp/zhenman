@@ -1,6 +1,6 @@
 package com.zhenman.asus.zhenman.presenter;
 
-import android.util.Log;
+
 
 import com.zhenman.asus.zhenman.contract.MyAttentionUserContract;
 import com.zhenman.asus.zhenman.model.bean.AttentionMyFansBean;
