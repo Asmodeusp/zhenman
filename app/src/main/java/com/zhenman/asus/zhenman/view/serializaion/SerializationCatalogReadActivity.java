@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
@@ -206,6 +207,9 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private int catalogId;
     //支付产品Id
     private int qieziId;
+    ImageView ppwQuestion;
+    //    打赏价格
+    private int qieziMoney;
     //章节实体类集合
     private List<SerializationCatalogBean.DataBean> data = new ArrayList<>();
     //章节列表适配器
@@ -559,18 +563,16 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     //支付popuwindow
-    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     private void ShowPaypopupView() {
         View PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
         ppwPayProductList = PaypopupView.findViewById(R.id.ppwPay_productList);
-        ppwPayRadioGroup = PaypopupView.findViewById(R.id.ppwPay_radioGroup);
         ppwPayZhifubaoBtn = PaypopupView.findViewById(R.id.ppwPay_zhifubaoBtn);
         ppwPayWeixinBtn = PaypopupView.findViewById(R.id.ppwPay_weixinBtn);
         ppwPayPayBtn = PaypopupView.findViewById(R.id.ppwPay_payBtn);
-        ppwPayPayMoney = PaypopupView.findViewById(R.id.ppwPay_payMoney);
-        ppwPayQieziNum = PaypopupView.findViewById(R.id.ppwPay_qieziNum);
-        ppwPayNum = PaypopupView.findViewById(R.id.ppwPay_num);
+        ppwQuestion = PaypopupView.findViewById(R.id.ppw_question);
+
         ppwPayUserName = PaypopupView.findViewById(R.id.ppwPay_userName);
+        ppwPayUserName.setText("Hi, "+(String)SPUtils.get(this,SPKey.UMeng_NAME,""));
         ppwPayPayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -585,23 +587,33 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         });
         //获取屏幕宽高
         int weight = getResources().getDisplayMetrics().widthPixels;
-        int height = getResources().getDisplayMetrics().heightPixels * 1 / 2;
+        int height = getResources().getDisplayMetrics().heightPixels * 3/5;
 
         paypopupWindow = new PopupWindow(PaypopupView, weight, height);
         paypopupWindow.setFocusable(true);
         //点击外部popueWindow消失
         paypopupWindow.setOutsideTouchable(true);
-
-        ppwPayRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//        支付宝
+        ppwPayZhifubaoBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.ppwPay_weixinBtn:
-                        paymentMethod = "1";
-                        break;
-                    case R.id.ppwPay_zhifubaoBtn:
-                        paymentMethod = "2";
-                        break;
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (ppwPayZhifubaoBtn.isChecked()){
+                    paymentMethod = "2";
+                    ppwPayWeixinBtn.setChecked(false);
+                }else {
+                    ppwPayWeixinBtn.setChecked(true);
+                }
+            }
+        });
+//        微信
+        ppwPayWeixinBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (ppwPayWeixinBtn.isChecked()){
+                    paymentMethod = "1";
+                    ppwPayZhifubaoBtn.setChecked(false);
+                }else {
+                    ppwPayZhifubaoBtn.setChecked(true);
                 }
             }
         });
@@ -719,7 +731,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 //        章节ID
         catalogId = position;
 //       获取产品列表数据
-        presenter.sendProductListData();
+        presenter.sendProductListData("1");
         ShowPaypopupView();
     }
 
@@ -737,8 +749,9 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
 
     @Override
-    public void showProductList(int position) {
+    public void showProductList(int position,int amount) {
         qieziId = position;
+        qieziMoney=amount;
     }
 
 

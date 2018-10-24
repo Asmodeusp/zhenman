@@ -416,4 +416,5 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
 
 //        ShowPaypopupView();
     }
+
 }
