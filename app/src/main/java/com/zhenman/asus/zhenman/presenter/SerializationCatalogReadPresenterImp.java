@@ -349,9 +349,11 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
 
     //    产品列表
     @Override
-    public void sendProductListData() {
+    public void sendProductListData(String type) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("type",type);//项目购买的有两种，茄子和茄子籽，两个产品列表都是这一个接口，区别就是type=1是请求茄子，type=2是请求茄子籽
         RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
-                .getProductList()
+                .getProductList(paramMap)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ProductListBean>() {

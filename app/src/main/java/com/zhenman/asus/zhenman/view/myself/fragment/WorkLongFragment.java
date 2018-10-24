@@ -4,6 +4,7 @@ package com.zhenman.asus.zhenman.view.myself.fragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,19 +47,12 @@ public class WorkLongFragment extends BaseFragment<WorkShortComicPresenter> impl
     @Override
     protected void init() {
         if (HomepageActivity.him_id.equals("myself")) {
-            presenter.sendWorkShortComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""), (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
-
+            Log.e("Sunny",HomepageActivity.tabSelect);
+            presenter.sendWorkShortComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""),HomepageActivity.tabSelect, "1", "20");
         } else {
-            presenter.sendWorkShortComic(HomepageActivity.him_id, (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
+            presenter.sendWorkShortComic(HomepageActivity.him_id,HomepageActivity.tabSelect, "1", "20");
 
         }
-        /*String himmeId = (String) SPUtils.get(getContext(), SPKey.HIM_ID, "");
-        if (himmeId.isEmpty()) {
-            presenter.sendWorkShortComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""), (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
-        } else {
-            presenter.sendWorkShortComic(himmeId, (String) SPUtils.get(getContext(), SPKey.LOGIN_TYPE, ""), "1", "20");
-
-        }*/
     }
 
     @Override
@@ -73,6 +67,7 @@ public class WorkLongFragment extends BaseFragment<WorkShortComicPresenter> impl
                 workLongNoData.setVisibility(View.VISIBLE);
                 workLongRecy.setVisibility(View.GONE);
             } else {
+                Toast.makeText(getContext(), workShortComicBean.getData().getResult().size()+"", Toast.LENGTH_SHORT).show();
                 workLongRecy.setVisibility(View.VISIBLE);
                 workLongNoData.setVisibility(View.GONE);
                 WorkShortComicBean.DataBean data = workShortComicBean.getData();
@@ -87,5 +82,10 @@ public class WorkLongFragment extends BaseFragment<WorkShortComicPresenter> impl
         } else {
             Toast.makeText(getContext(), "加载数据失败", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void showError(String string) {
+        Toast.makeText(getContext(), string, Toast.LENGTH_SHORT).show();
     }
 }

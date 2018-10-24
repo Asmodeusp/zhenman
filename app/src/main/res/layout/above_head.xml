@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="horizontal"
     android:layout_height="100px">
-
-    <ImageView
+    <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/app_back"
-        android:layout_width="wrap_content"
-        android:layout_height="32px"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="24px"
-        android:layout_marginTop="24px"
-        android:src="@mipmap/common_return_black" />
+        android:layout_width="200px"
+        android:layout_height="100px">
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="32px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="24px"
+            android:layout_marginTop="24px"
+            android:src="@mipmap/common_return_black" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+
 
     <TextView
         android:id="@+id/app_title"
+        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -32,18 +40,18 @@
         android:visibility="gone" />
 
     <ImageView
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
         android:id="@+id/app_otherImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:src="@mipmap/my_qiezi"
         android:visibility="gone" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
-        android:layout_marginTop="87px"
+        android:layout_marginTop="@dimen/px_98"
         android:background="@color/h7"></View>
 
 </com.zhy.autolayout.AutoRelativeLayout>

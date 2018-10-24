@@ -299,21 +299,17 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
 
         }if (userBean.getData().getRefreshToken()!=null){
             SPUtils.put(App.context, SPKey.USER_REFRESHTOKEN, userBean.getData().getRefreshToken());
-
         }
         if ((String)userBean.getData().getSex()!=null) {
             SPUtils.put(App.context, SPKey.USER_SEX, userBean.getData().getSex() + "");
         }else {
             SPUtils.put(App.context, SPKey.USER_SEX, 1 + "");
-
         }
         SPUtils.put(App.context, SPKey.UMeng_NAME, userBean.getData().getName());
-
         if (userBean.getData().getIntroduction() != null) {
             SPUtils.put(App.context, SPKey.USER_INTRODUCTION, userBean.getData().getIntroduction());
         }else {
             SPUtils.put(App.context, SPKey.USER_INTRODUCTION,"本宝宝暂时没有介绍呢~");
-
         }
         SPUtils.put(App.context, SPKey.USER_ID, userBean.getData().getId()+"");
 //                            保存登陆成功
@@ -336,7 +332,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 SPUtils.put(MainActivity.this, SPKey.USER_INTRODUCTION, uMengLoginBean.getData().getIntroduction());
             }
             SPUtils.put(MainActivity.this, SPKey.USER_REFRESHTOKEN, uMengLoginBean.getData().getRefreshToken());
-
             SPUtils.put(MainActivity.this, SPKey.USER_OAUTHID, uMengLoginBean.getData().getOauthId());
             if (uMengLoginBean.getData().getBirthdate() != null) {
                 SPUtils.put(MainActivity.this, SPKey.USER_BIRTHDAY, uMengLoginBean.getData().getBirthdate());

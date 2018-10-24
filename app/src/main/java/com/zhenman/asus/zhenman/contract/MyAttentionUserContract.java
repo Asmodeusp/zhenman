@@ -15,7 +15,7 @@ public interface MyAttentionUserContract {
     }
     interface MyAttentionUserInPresenter extends BasePresenter<MyAttentionUserInView>{
 //        用户的关注
-        void sendMyAttentionUserData(String pageNum,String pageSize);
+        void sendMyAttentionUserData(String pageNum,String pageSize,String userId);
         //        关注用户
         void sendAttentionUserData(String followedUserId,String status);
     }

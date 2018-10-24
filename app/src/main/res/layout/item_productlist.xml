@@ -4,24 +4,41 @@
     android:layout_width="226px"
     android:layout_height="226px"
     android:layout_margin="@dimen/px_16"
-    android:layout_marginRight="@dimen/px_16"
     android:background="@drawable/product_selector">
 
-    <CheckBox
+    <ImageView
+        android:id="@+id/itemProductList_bite"
+        android:layout_width="@dimen/px_80"
+        android:layout_height="@dimen/px_80"
+        android:layout_marginLeft="@dimen/px_32"
+        android:layout_marginTop="@dimen/px_32"
+        android:src="@mipmap/my_qiezi_bite" />
+
+    <TextView
+        android:id="@+id/itemProductList_num"
+        style="@style/Style32H2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px_16"
+        android:layout_marginTop="@dimen/px_48"
+        android:layout_toRightOf="@id/itemProductList_bite"
+        android:text="X 2" />
+
+    <!--<CheckBox
         android:id="@+id/itemProductList_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:button="@null"
         android:drawableLeft="@mipmap/my_qiezi_bite"
-        android:text="X" />
+        android:text="X" />-->
 
     <ImageView
         android:id="@+id/itemProductList_moneyBg"
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_80"
         android:layout_alignParentBottom="true"
-        android:background="@color/c1" />
+        android:background="@color/h6" />
 
     <TextView
         android:id="@+id/itemProductList_money"

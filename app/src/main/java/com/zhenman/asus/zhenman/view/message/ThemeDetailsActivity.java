@@ -29,7 +29,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> implements View.OnClickListener, ThemeDetailHeadContract.ThemeDetailHeadInView {
 
-    private ImageView app_back;
+    private AutoRelativeLayout app_back;
     private TextView app_title;
     private TextView app_otherID;
     private ImageView app_otherImage;
@@ -59,7 +59,7 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
     protected void init() {
         Intent intent = getIntent();
         chapterId = intent.getStringExtra("chapterId");
-        app_back = (ImageView) findViewById(R.id.app_back);
+        app_back = (AutoRelativeLayout) findViewById(R.id.app_back);
         app_title = (TextView) findViewById(R.id.app_title);
         app_otherID = (TextView) findViewById(R.id.app_otherID);
         app_otherImage = (ImageView) findViewById(R.id.app_otherImage);

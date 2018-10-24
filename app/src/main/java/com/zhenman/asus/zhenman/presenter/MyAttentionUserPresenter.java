@@ -21,11 +21,11 @@ public class MyAttentionUserPresenter implements MyAttentionUserContract.MyAtten
     MyAttentionUserContract.MyAttentionUserInView myAttentionUserInView;
 
     @Override
-    public void sendMyAttentionUserData(String pageNum, String pageSize) {
+    public void sendMyAttentionUserData(String pageNum, String pageSize,String userId) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("pageNum", pageNum);
         paramMap.put("pageSize", pageSize);
-
+        paramMap.put("userId", userId);
         RetrofitUtils.getInstance().getService(MyAttentionUserService.class)
                 .getMyAttentionUser(paramMap)
                 .subscribeOn(Schedulers.newThread())

@@ -1,11 +1,8 @@
 package com.zhenman.asus.zhenman.utils.alipay;
 
 import android.app.Activity;
-import android.os.Message;
-import android.util.Log;
 
 import com.alipay.sdk.app.AuthTask;
-import com.zhenman.asus.zhenman.view.serializaion.SerializationCatalogReadActivity;
 
 import java.util.Map;
 
@@ -46,4 +43,5 @@ public class AlipayUtils {
         } catch (Exception _e) {
         }
     }
+
 }

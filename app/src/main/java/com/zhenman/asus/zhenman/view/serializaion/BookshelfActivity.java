@@ -4,7 +4,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.R;
@@ -12,12 +11,13 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.view.adapter.serialization.BookshelfAdapter;
 import com.zhenman.asus.zhenman.view.serializaion.fragment.ShelfCollectionFragment;
 import com.zhenman.asus.zhenman.view.serializaion.fragment.ShelfHistoryFragment;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
 
 public class BookshelfActivity extends BaseActivity implements View.OnClickListener {
 
-    private ImageView app_back;
+    private AutoRelativeLayout app_back;
     private TextView app_title;
     public static TextView app_otherID;
     private TabLayout bookshelf_tab;
@@ -35,7 +35,7 @@ public class BookshelfActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void init() {
-        app_back = (ImageView) findViewById(R.id.app_back);
+        app_back = (AutoRelativeLayout) findViewById(R.id.app_back);
         app_title = (TextView) findViewById(R.id.app_title);
         bookshelf_tab = (TabLayout) findViewById(R.id.bookshelf_tab);
         bookshelf_page = (ViewPager) findViewById(R.id.bookshelf_page);

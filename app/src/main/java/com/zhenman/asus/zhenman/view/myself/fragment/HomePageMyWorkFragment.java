@@ -17,8 +17,8 @@ public class HomePageMyWorkFragment extends BaseFragment {
     private ViewPager myWork_ComicViewPage;
     private ArrayList<String> ComicTab_title;
     private ArrayList<Fragment> ComicViewPage_fragment;
-    private WorkShortFragment workShortFragment;
-    private WorkLongFragment workLongFragment;
+    private WorkShortFragment workShortFragment;//短漫画
+    private WorkLongFragment workLongFragment;//长漫画
 
     @Override
     protected int getLayoutId() {

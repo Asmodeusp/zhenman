@@ -151,6 +151,7 @@
         <activity
             android:name=".view.login.ForgetPasswordActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".view.serializaion.ClassifyActivity"
             android:screenOrientation="portrait" />
@@ -194,9 +195,6 @@
             android:name=".view.myself.HomepageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.myself.ShoppingActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".view.myself.AttentionThemeActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -221,6 +219,8 @@
             android:name=".view.home.ShowPhotoActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".view.comment.Comment_At_UeserlistActivity"></activity>
+        <activity android:name=".view.myself.BuyEggplantActivity" />
+        <activity android:name=".view.myself.SellEggplantActivity"></activity>
     </application>
 
 </manifest>

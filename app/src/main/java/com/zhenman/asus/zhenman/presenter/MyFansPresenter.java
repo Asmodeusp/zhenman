@@ -20,10 +20,11 @@ public class MyFansPresenter implements MyFansContract.MyFansInPresenter {
     MyFansContract.MyFansInView myFansInView;
 
     @Override
-    public void sendMyFansData(String pageNum, String pageSize) {
+    public void sendMyFansData(String pageNum, String pageSize,String userId) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("pageNum", pageNum);
         paramMap.put("pageSize", pageSize);
+        paramMap.put("userId", userId);
         RetrofitUtils.getInstance().getService(MyFansService.class)
                 .getMyFansData(paramMap)
                 .subscribeOn(Schedulers.newThread())

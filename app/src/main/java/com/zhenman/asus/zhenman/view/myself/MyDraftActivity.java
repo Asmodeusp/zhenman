@@ -2,15 +2,15 @@ package com.zhenman.asus.zhenman.view.myself;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 public class MyDraftActivity extends BaseActivity implements View.OnClickListener {
 
-    private ImageView app_back;
+    private AutoRelativeLayout app_back;
     private TextView app_title;
     private RecyclerView myDraft_recy;
     private TextView app_otherID;
@@ -23,10 +23,10 @@ public class MyDraftActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void init() {
-//        app_back = (ImageView) findViewById(R.id.app_back);
-//        app_title = (TextView) findViewById(R.id.app_title);
+        app_back = (AutoRelativeLayout) findViewById(R.id.app_back);
+        app_title = (TextView) findViewById(R.id.app_title);
 //        myDraft_recy = (RecyclerView) findViewById(R.id.myDraft_recy);
-//        app_otherID = (TextView) findViewById(R.id.app_otherID);
+        app_otherID = (TextView) findViewById(R.id.app_otherID);
 //        app_title.setText("我的草稿");
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -40,8 +40,8 @@ public class MyDraftActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void idListener() {
-//        app_back.setOnClickListener(this);
-//        app_otherID.setOnClickListener(this);
+        app_back.setOnClickListener(this);
+        app_otherID.setOnClickListener(this);
     }
 
     @Override
@@ -52,9 +52,9 @@ public class MyDraftActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.app_back:
-//                finish();
-//                break;
+            case R.id.app_back:
+                finish();
+                break;
 //            case R.id.app_otherID:
 //
 //                break;

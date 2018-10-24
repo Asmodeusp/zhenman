@@ -62,7 +62,7 @@ public interface SerializationCatalogReadContract {
         //得到微信支付数据
         void sendGetWxPayData(String orderSn);
 //        发送产品列表数据
-        void sendProductListData();
+        void sendProductListData(String type);
         //收藏  1 收藏   0 取消
         void PgcCollection (String productId,String status);
 
