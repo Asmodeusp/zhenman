@@ -2,6 +2,7 @@ package com.zhenman.asus.zhenman.view.comment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.R;
@@ -103,9 +105,10 @@ public class FullFragment extends BottomSheetDialogFragment {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString() .equals("@")) {
+                if (s.toString().equals("@")) {
                     BouncingAtUser();
                 }
             }

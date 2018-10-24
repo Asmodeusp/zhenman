@@ -218,6 +218,8 @@
         <activity
             android:name=".view.home.ShowPhotoActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".view.comment.Comment_At_UeserlistActivity"></activity>
+
         <activity android:name=".view.myself.BuyEggplantActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".view.myself.SellEggplantActivity"
