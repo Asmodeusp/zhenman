@@ -9,5 +9,8 @@ import retrofit2.http.GET;
 public interface MyWalletService {
     //    茄子数量
     @GET(Urls.SELL_EGGPLANT)
+
+
+
     Observable<SellEggplantBean> getSellEggplant();
 }
