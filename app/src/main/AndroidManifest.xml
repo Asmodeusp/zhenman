@@ -151,9 +151,7 @@
         <activity
             android:name=".view.login.ForgetPasswordActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.login.UserInfoActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".view.serializaion.ClassifyActivity"
             android:screenOrientation="portrait" />

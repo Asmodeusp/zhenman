@@ -46,7 +46,6 @@ public class MyFansPresenter implements MyFansContract.MyFansInPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("Sunny", e.getMessage());
                     }
 
                     @Override
@@ -83,7 +82,6 @@ public class MyFansPresenter implements MyFansContract.MyFansInPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("Sunny",e.getMessage());
                     }
 
                     @Override

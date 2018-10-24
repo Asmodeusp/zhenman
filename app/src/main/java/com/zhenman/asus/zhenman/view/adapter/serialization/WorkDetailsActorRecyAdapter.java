@@ -1,6 +1,8 @@
 package com.zhenman.asus.zhenman.view.adapter.serialization;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +17,10 @@ import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
+import com.zhenman.asus.zhenman.view.login.MainActivity;
 
 import java.util.List;
 
@@ -25,10 +30,11 @@ public class WorkDetailsActorRecyAdapter extends RecyclerView.Adapter<WorkDetail
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
     private boolean followCount = true;
-   private WorkDetailsCommentPresenterImp presenter;
+    private WorkDetailsCommentPresenterImp presenter;
+
     public WorkDetailsActorRecyAdapter(List<SerializationDetailsBean.DataBean.ActorListBean> list, WorkDetailsCommentPresenterImp presenter) {
         this.list = list;
-        this.presenter =presenter;
+        this.presenter = presenter;
     }
 
     @NonNull
@@ -40,15 +46,17 @@ public class WorkDetailsActorRecyAdapter extends RecyclerView.Adapter<WorkDetail
         inflate.setOnClickListener(this);
         return holder;
     }
+
     private goUserInfo clickGoUserInfo;
 
-    public void setgoUserInfo( goUserInfo clickGoUserInfo) {
+    public void setgoUserInfo(goUserInfo clickGoUserInfo) {
         this.clickGoUserInfo = clickGoUserInfo;
     }
 
     public interface goUserInfo {
         void go(String UserId);
     }
+
     @Override
     public void onClick(View v) {
         if (myCLick != null) {
@@ -81,21 +89,28 @@ public class WorkDetailsActorRecyAdapter extends RecyclerView.Adapter<WorkDetail
         followCount = listBean.isFollow();
         if (followCount) {
             holder.Actor_followImg.setImageResource(R.mipmap.home_follow_on);
-        }else{
+        } else {
             holder.Actor_followImg.setImageResource(R.mipmap.home_follow_off);
         }
         holder.Actor_followImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (followCount) {
-                    holder.Actor_followImg.setImageResource(R.mipmap.home_follow_off);
-                    presenter.FollowUser(listBean.getUserId(),"0");
-                    followCount = false;
-                }else{
-                    holder.Actor_followImg.setImageResource(R.mipmap.home_follow_on);
-                    presenter.FollowUser(listBean.getUserId(),"1");
-                    followCount =true;
+                Boolean ISlogin = (Boolean) SPUtils.get(context, SPKey.IS_LOGIN, false);
+                if (!ISlogin) {
+                    context.startActivity(new Intent(context, MainActivity.class));
+                    ((Activity) context).finish();
+                } else {
+                    if (followCount) {
+                        holder.Actor_followImg.setImageResource(R.mipmap.home_follow_off);
+                        presenter.FollowUser(listBean.getUserId(), "0");
+                        followCount = false;
+                    } else {
+                        holder.Actor_followImg.setImageResource(R.mipmap.home_follow_on);
+                        presenter.FollowUser(listBean.getUserId(), "1");
+                        followCount = true;
+                    }
                 }
+
             }
         });
         //头像点击事件

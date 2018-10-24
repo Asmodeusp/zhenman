@@ -82,7 +82,6 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
         }
         if (object instanceof MyFansBean.DataBean.ResultBean) {//粉丝列表
             final MyFansBean.DataBean.ResultBean resultBean = (MyFansBean.DataBean.ResultBean) object;
-            Log.e("Sunny", resultBean.getAddTime() + "");
             Glide.with(context).load(resultBean.getImageUrl()).into(holder.itemMyAttenTheme_headImage);
             holder.itemMyAttenTheme_title.setText("@" + resultBean.getName());
             if (resultBean.getFollow() == 1) {

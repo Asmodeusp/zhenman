@@ -21,16 +21,16 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="24px"
         android:layout_marginTop="8px"
-        android:text="小三"
+        android:text="浩文"
         android:textColor="@color/h4"
         android:textSize="24px" />
 
     <ImageView
         android:id="@+id/Serialization_LatelyRecyImage"
         android:layout_width="match_parent"
-        android:layout_height="320px"
+        android:layout_height="280px"
         android:layout_margin="2px"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@mipmap/common_qiezi" />
 
     <TextView

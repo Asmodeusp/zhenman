@@ -29,6 +29,7 @@ import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.utils.umeng.ShareCallBack;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
 import com.zhenman.asus.zhenman.view.ContentActivity;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.Map;
 
@@ -36,7 +37,7 @@ import java.util.Map;
 public class MainActivity extends BaseActivity<LoginPresenterImp> implements View.OnClickListener, LoginContract.LoginView{
 
     private TextView mFastLanding;
-    private ImageView mCommonCloseImage;
+    private AutoRelativeLayout mCommonCloseImage;
     private EditText mPhoneNumber;
     private EditText mInputPassword;
     private Button mLoginbtn;
@@ -125,8 +126,6 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
                 SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
                 presenter.sendUMengLoginData(data.get("unionid"), data.get("name"), "",
                         data.get("iconurl"), sex, TYPE, data.get("openid"));
-//                Log.e("Sunny",data.get("unionid"));
-//                Log.e("Sunny",data.get("openid"));
 
             }
         }

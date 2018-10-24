@@ -77,7 +77,6 @@ public class ShelfCollectionAdapter extends RecyclerView.Adapter<ShelfCollection
             holder.itemShelfColl_on.setVisibility(View.VISIBLE);
 
         }
-        Log.e("12345", holder.itemShelfColl_check.isChecked() + "");
         if (holder.itemShelfColl_check.isChecked()) {
             holder.itemShelfColl_check.setButtonDrawable(R.mipmap.home_follow_on);
         } else {

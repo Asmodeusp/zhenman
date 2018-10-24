@@ -72,7 +72,7 @@ public class SerializationFragment extends BaseFragment<SerializationPresenterIm
         Serialization_serial_starButton.setOnClickListener(this);
         //收藏
         Serialization_serial_collectionButton.setOnClickListener(this);
-//        Serialization_FlyBanner.
+        Serialization_common_search.setVisibility(View.GONE);
     }
 
     @Override

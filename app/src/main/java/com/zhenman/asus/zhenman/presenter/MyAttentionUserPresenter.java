@@ -47,7 +47,6 @@ public class MyAttentionUserPresenter implements MyAttentionUserContract.MyAtten
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("Sunny", e.getMessage());
                     }
 
                     @Override
@@ -83,7 +82,6 @@ public class MyAttentionUserPresenter implements MyAttentionUserContract.MyAtten
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("Sunny",e.getMessage());
                     }
 
                     @Override

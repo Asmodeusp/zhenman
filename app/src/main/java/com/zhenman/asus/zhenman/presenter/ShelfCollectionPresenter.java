@@ -61,20 +61,13 @@ public class ShelfCollectionPresenter implements ShelfCollectionContract.ShelfCo
     //    批量删除
     @Override
     public void sendDeleteCollection(ArrayList<String> lidList) {
-//        Map<String, String> paramMap = new HashMap<>();
-//        paramMap.put("lid",lid);
         Map<String, String> paramMap = new IdentityHashMap<>();
         for (String s : lidList) {
             String Key = new String("lid");
             paramMap.put(Key, s);
-            Log.e("Sunny", Key+"------"+s);
 
 
         }
-
-        Log.e("Sunny", lidList.get(0).toString());
-        Log.e("Sunny", lidList.size()+"");
-        Log.e("Sunny", paramMap.size()+"");
         RetrofitUtils.getInstance().getService(ShelfCollectionService.class)
                 .deleteCollection(paramMap)
                 .subscribeOn(Schedulers.newThread())

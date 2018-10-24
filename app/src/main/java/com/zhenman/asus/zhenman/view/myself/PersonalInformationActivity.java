@@ -291,7 +291,6 @@ public class PersonalInformationActivity extends BaseActivity<AlartDataPresenter
     //修改个人资料
     @Override
     public void showAlartData(AlartDataBean alartDataBean) {
-        Log.e("Sunshine", alartDataBean.getMsg());
         if (!alartDataBean.getMsg().isEmpty() && alartDataBean.getMsg().equals("成功")) {
             Toast.makeText(this, "修改资料成功", Toast.LENGTH_SHORT).show();
             finish();
