@@ -208,10 +208,8 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
                     @Override
                     public void onError(Throwable e) {
                     }
-
                     @Override
                     public void onComplete() {
-
                     }
                 });
     }
@@ -219,7 +217,6 @@ public class HomePagePresenter implements HomePageContract.HomePageInPresenter {
     //得到微信支付数据
     @Override
     public void sendGetWxPayData(String orderSn) {
-
         RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
                 .getWXPayData(orderSn)
                 .subscribeOn(Schedulers.newThread())
