@@ -166,7 +166,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     RecyclerView ppwPayProductList;
     RadioButton ppwPayZhifubaoBtn;
     RadioButton ppwPayWeixinBtn;
-    RadioGroup ppwPayRadioGroup;
     Button ppwPayPayBtn;
     TextView ppwPayPayMoney;
     TextView ppwPayQieziNum;
@@ -563,6 +562,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     //支付popuwindow
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     private void ShowPaypopupView() {
         View PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
         ppwPayProductList = PaypopupView.findViewById(R.id.ppwPay_productList);
