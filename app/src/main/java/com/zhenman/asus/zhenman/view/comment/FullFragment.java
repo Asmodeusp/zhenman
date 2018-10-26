@@ -86,7 +86,7 @@ public class FullFragment extends BottomSheetDialogFragment {
                 break;
             //@按钮
             case R.id.CommentPopu_Common_at:
-
+                startActivity(new Intent(getActivity(), CommentAtUeserlistActivity.class));
                 break;
             //发送按钮
             case R.id.CommentPopu_SendButton:
@@ -123,6 +123,6 @@ public class FullFragment extends BottomSheetDialogFragment {
     }
 
     private void BouncingAtUser() {
-
+        startActivity(new Intent(getActivity(), CommentAtUeserlistActivity.class));
     }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.comment.Comment_At_UeserlistActivity">
+    tools:context=".view.comment.CommentAtUeserlistActivity">
 
     <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -27,13 +27,59 @@
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/Comment_At_ActoText"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_24"
+            android:textSize="@dimen/px_28"
+            android:textColor="@color/h1"
+            android:text="演员列表" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="18px"
             android:id="@+id/Comment_At_ActorRecycler"
             android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/px_18"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/Comment_At_FollowUserText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_24"
+            android:textSize="@dimen/px_28"
+            android:textColor="@color/h1"
+            android:text="关注列表" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="18px"
+            android:id="@+id/Comment_At_FollowUserRecycler"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/px_18"
             android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
     </com.zhy.autolayout.AutoLinearLayout>
 </com.zhy.autolayout.AutoLinearLayout>

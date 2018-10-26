@@ -262,7 +262,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         });
 
     }
-
     //得到数据
     @Override
     protected void loadDate() {
