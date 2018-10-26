@@ -93,6 +93,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         }
     }
 
+
+
+
+
     public class Holder extends RecyclerView.ViewHolder {
         public TextView itemProductList_num;
         public AutoRelativeLayout itemProductList;
