@@ -14,11 +14,22 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
         android:orientation="vertical">
-        <com.zhy.autolayout.AutoLinearLayout
+        <com.zhy.autolayout.AutoRelativeLayout
             android:id="@+id/head"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/px_50"></com.zhy.autolayout.AutoLinearLayout>
+            android:layout_height="@dimen/px_50">
+
+            <TextView
+                android:id="@+id/CommentPopu_Number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/h1"
+                android:text="asdasfsaf" />
+
+
+        </com.zhy.autolayout.AutoRelativeLayout>
         <TextView
             android:id="@+id/CommentPopu_Tip"
             android:layout_width="match_parent"

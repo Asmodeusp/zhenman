@@ -11,16 +11,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.R;
-
 import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.view.adapter.comment.CommentRecyclerAdapter;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -56,6 +55,9 @@ public class FullFragment extends BottomSheetDialogFragment {
     @BindView(R.id.CommentPopu_SendButton)
     AutoRelativeLayout CommentPopuSendButton;
     Unbinder unbinder;
+    //评论数
+    @BindView(R.id.CommentPopu_Number)
+    TextView CommentPopuNumber;
 
     private BottomSheetBehavior mBehavior;
 
@@ -63,8 +65,9 @@ public class FullFragment extends BottomSheetDialogFragment {
     private AutoRelativeLayout commentPopu_edit_common_at;
     private String name;
     CommentListBean commentListBean;
+
     public FullFragment(CommentListBean commentListBean) {
-        this.commentListBean =commentListBean;
+        this.commentListBean = commentListBean;
     }
 
     @Override
@@ -82,14 +85,15 @@ public class FullFragment extends BottomSheetDialogFragment {
 
     private void initData() {
         CommentPopuRecy.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if (commentListBean!=null) {
+        if (commentListBean != null) {
             CommentPopuRecy.setVisibility(View.VISIBLE);
             CommentPopuTip.setVisibility(View.GONE);
-            if (commentListBean.getData().getCommentDtoList().size()!=0) {
+            if (commentListBean.getData().getCommentDtoList().size() != 0) {
+                CommentPopuNumber.setText(commentListBean.getData().getCommentDtoList().size()+"条评论");
                 CommentRecyclerAdapter commentRecyclerAdapter = new CommentRecyclerAdapter(commentListBean.getData().getCommentDtoList());
                 CommentPopuRecy.setAdapter(commentRecyclerAdapter);
             }
-        }else {
+        } else {
             CommentPopuTip.setVisibility(View.VISIBLE);
             CommentPopuRecy.setVisibility(View.GONE);
         }
@@ -144,10 +148,7 @@ public class FullFragment extends BottomSheetDialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (name!=null) {
-                    commentPopu_edit_editText.setText("@" + name);
-                    commentPopu_edit_editText.setSelection(("@" + name).length());
-                }
+
             }
 
             @Override
@@ -169,7 +170,8 @@ public class FullFragment extends BottomSheetDialogFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 200 && resultCode == 500) {
             name = data.getStringExtra("name");
-
+            commentPopu_edit_editText.setText("@" + name);
+            commentPopu_edit_editText.setSelection(("@" + name).length());
         }
     }
 

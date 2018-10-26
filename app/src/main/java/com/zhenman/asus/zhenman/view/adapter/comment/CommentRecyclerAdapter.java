@@ -73,67 +73,71 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
         //加载富文本
         holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
         ArrayList<String> list = new ArrayList<>();
-        for (CommentListBean.DataBean.CommentDtoListBeanX.TextDtoBean.TextExtraBean textExtraBean : listBean.getTextDto().getTextExtra()) {
-            list.add(textExtraBean.getText());
+        if (listBean.getTextDto()!=null) {
+            for (CommentListBean.DataBean.CommentDtoListBeanX.TextDtoBean.TextExtraBean textExtraBean : listBean.getTextDto().getTextExtra()) {
+                list.add(textExtraBean.getText());
+            }
+            String[] strings = new String[list.size()];
+            list.toArray(strings);
+            MyClickSpan.setTextHighLightWithClick(holder.comment_fill_conent, listBean.getTextDto().getText(), strings, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
-        String[] strings = new String[list.size()];
-        list.toArray(strings);
-        MyClickSpan.setTextHighLightWithClick(holder.comment_fill_conent, listBean.getTextDto().getText(), strings, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        if (listBean.getCommentDtoList() != null) {
-            if (listBean.getCommentDtoList().size() == 2) {
-                holder.comment_fill_SeeMoreText.setVisibility(View.GONE);
-                ArrayList<String> oneTextExtralist = new ArrayList<>();
-                for (CommentListBean.DataBean.CommentDtoListBeanX.CommentDtoListBean.TextDtoBeanX.TextExtraBeanX textExtraBeanX : listBean.getCommentDtoList().get(0).getTextDto().getTextExtra()) {
-                    oneTextExtralist.add(textExtraBeanX.getText());
-                }
-                String[] Onestring = new String[oneTextExtralist.size()];
-                list.toArray(Onestring);
-                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getTextDto().getText(), Onestring, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-                ArrayList<String> TwoTextExtralist = new ArrayList<>();
-                for (CommentListBean.DataBean.CommentDtoListBeanX.CommentDtoListBean.TextDtoBeanX.TextExtraBeanX textExtraBeanX : listBean.getCommentDtoList().get(1).getTextDto().getTextExtra()) {
-                    TwoTextExtralist.add(textExtraBeanX.getText());
-                }
-                String[] Twostring = new String[TwoTextExtralist.size()];
-                list.toArray(Twostring);
-                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getTextDto().getText(), Twostring, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } else {
-                holder.comment_fill_SeeMoreText.setVisibility(View.VISIBLE);
-            }
-            if (listBean.getCommentDtoList().size() == 1) {
-                holder.Comment_fill_SecondItem.setVisibility(View.GONE);
-                ArrayList<String> oneTextExtralist = new ArrayList<>();
-                for (CommentListBean.DataBean.CommentDtoListBeanX.CommentDtoListBean.TextDtoBeanX.TextExtraBeanX textExtraBeanX : listBean.getCommentDtoList().get(0).getTextDto().getTextExtra()) {
-                    oneTextExtralist.add(textExtraBeanX.getText());
-                }
-                String[] Onestring = new String[oneTextExtralist.size()];
-                list.toArray(Onestring);
-                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getTextDto().getText(), Onestring, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } else {
-                holder.Comment_fill_SecondItem.setVisibility(View.VISIBLE);
-            }
-        } else {
-            holder.comment_Two_ItemLinearLayout.setVisibility(View.GONE);
-        }
+
+
+//        if (listBean.getCommentDtoList() != null) {
+//            if (listBean.getCommentDtoList().size() == 2) {
+//                holder.comment_fill_SeeMoreText.setVisibility(View.GONE);
+//                ArrayList<String> oneTextExtralist = new ArrayList<>();
+//                for (CommentListBean.DataBean.CommentDtoListBeanX.CommentDtoListBean.TextDtoBeanX.TextExtraBeanX textExtraBeanX : listBean.getCommentDtoList().get(0).getTextDto().getTextExtra()) {
+//                    oneTextExtralist.add(textExtraBeanX.getText());
+//                }
+//                String[] Onestring = new String[oneTextExtralist.size()];
+//                list.toArray(Onestring);
+//                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getCommentDtoList().get(0).getTextDto().getText(), Onestring, new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//                ArrayList<String> TwoTextExtralist = new ArrayList<>();
+//                for (CommentListBean.DataBean.CommentDtoListBeanX.CommentDtoListBean.TextDtoBeanX.TextExtraBeanX textExtraBeanX : listBean.getCommentDtoList().get(1).getTextDto().getTextExtra()) {
+//                    TwoTextExtralist.add(textExtraBeanX.getText());
+//                }
+//                String[] Twostring = new String[TwoTextExtralist.size()];
+//                list.toArray(Twostring);
+//                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getCommentDtoList().get(1).getTextDto().getText(), Twostring, new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            } else {
+//                holder.comment_fill_SeeMoreText.setVisibility(View.VISIBLE);
+//            }
+//            if (listBean.getCommentDtoList().size() == 1) {
+//                holder.Comment_fill_SecondItem.setVisibility(View.GONE);
+//                ArrayList<String> oneTextExtralist = new ArrayList<>();
+//                for (CommentListBean.DataBean.CommentDtoListBeanX.CommentDtoListBean.TextDtoBeanX.TextExtraBeanX textExtraBeanX : listBean.getCommentDtoList().get(0).getTextDto().getTextExtra()) {
+//                    oneTextExtralist.add(textExtraBeanX.getText());
+//                }
+//                String[] Onestring = new String[oneTextExtralist.size()];
+//                list.toArray(Onestring);
+//                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getTextDto().getTextExtra().get(0).getText(), Onestring, new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            } else {
+//                holder.Comment_fill_SecondItem.setVisibility(View.VISIBLE);
+//            }
+//        } else {
+//            holder.comment_Two_ItemLinearLayout.setVisibility(View.GONE);
+//        }
         //加载用户名
         holder.comment_fill_UserName.setText(listBean.getName());
         //加载喜欢个数
