@@ -3,15 +3,13 @@ package com.zhenman.asus.zhenman.presenter;
 
 import android.util.Log;
 
-import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.contract.WorkDetailsCommentContract;
+import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.model.bean.FollowBean;
 import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
-import com.zhenman.asus.zhenman.model.bean.WorkDetailsCommentBean;
-import com.zhenman.asus.zhenman.model.service.HomeHotService;
+import com.zhenman.asus.zhenman.model.service.SerializationCatalogReadService;
+import com.zhenman.asus.zhenman.model.service.WorkDetailsCommentService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
-import com.zhenman.asus.zhenman.utils.sp.SPKey;
-import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,41 +41,6 @@ public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContrac
     @Override
     public void unActualView() {
         this.commentView = null;
-    }
-
-    @Override
-    public void getWorkDetailsCommentBean(String pgcId, String pageNum) {
-
-        Map<String, String> map = new HashMap<>();
-        map.put("pgcId", pgcId);
-        map.put("pageNum", pageNum);
-        map.put("pageSize", "20");
-        RetrofitUtils.getInstance().getWorkDetailsCommentService().GetWorkDetailsCommentBean(map).subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<WorkDetailsCommentBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                    }
-
-                    @Override
-                    public void onNext(WorkDetailsCommentBean workDetailsCommentBean) {
-                        if (workDetailsCommentBean.getState() == 0) {
-                            commentView.showError(workDetailsCommentBean.getMsg());
-                            commentView.showWorkDetailsCommentBean(workDetailsCommentBean);
-                        } else {
-                            commentView.showError(workDetailsCommentBean.getMsg());
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
     }
 
     @Override
@@ -138,6 +101,43 @@ public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContrac
                             commentView.showFollowBean(followBean);
                         }
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void getCommentList(String id, String pageNum, String pageSize, String commentType, String commentSubType) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", pageSize);
+        map.put("commentType", commentType);
+        map.put("commentSubType", commentSubType);
+        RetrofitUtils.getInstance().getService(WorkDetailsCommentService.class).getCommentListBean(map).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CommentListBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(CommentListBean commentListBean) {
+                        Log.e("123456", commentListBean.getMsg());
+                        if (commentListBean.getState() == 0) {
+                            commentView.showError(commentListBean.getMsg());
+                            commentView.showCommentListBean(commentListBean);
+                        } else {
+                            commentView.showError(commentListBean.getMsg());
+                        }
                     }
 
                     @Override

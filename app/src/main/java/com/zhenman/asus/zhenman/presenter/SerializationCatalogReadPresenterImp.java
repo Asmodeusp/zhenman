@@ -1,13 +1,11 @@
 package com.zhenman.asus.zhenman.presenter;
 
-import android.util.Log;
-
 
 import com.zhenman.asus.zhenman.contract.SerializationCatalogReadContract;
+import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
-import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
 import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
@@ -240,43 +238,10 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
     }
 
     @Override
-    public void getPgcChapterCommentListByOffSetBean(String chapterId, String start, String end, final String pageNum) {
-        Map<String, String> map = new HashMap<>();
-        map.put("chapterId", chapterId);
-        map.put("start", start);
-        map.put("end", end);
-        map.put("pageNum", pageNum);
-        map.put("pageSize", "60");
-        RetrofitUtils.getInstance()
-                .getService(SerializationCatalogReadService.class)
-                .getPgcChapterCommentListByOffSetBean( map)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<PgcChapterCommentListByOffSetBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                    }
+    public void getCommentListBean(String chapterId, String start, String end, String pageNum) {
 
-                    @Override
-                    public void onNext(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean) {
-                        if (pgcChapterCommentListByOffSetBean.getState() == 0) {
-                            serializationCatalogReadView.showError(pgcChapterCommentListByOffSetBean.getMsg());
-                            serializationCatalogReadView.showPgcChapterCommentListByOffSetBean(pgcChapterCommentListByOffSetBean);
-                        } else {
-                            serializationCatalogReadView.showError(pgcChapterCommentListByOffSetBean.getMsg());
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
     }
+
 
     @Override
     public void PGCReadFabulous(String productId, String commentId, String status, String pgcId) {
@@ -400,6 +365,42 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                             serializationCatalogReadView.showPgcCollectionBean(pgcCollectionBean);
                         } else {
                             serializationCatalogReadView.showError(pgcCollectionBean.getMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void getCommentList(String id, String pageNum, String pageSize, String commentType, String commentSubType) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", pageSize);
+        map.put("commentType", commentType);
+        map.put("commentSubType", commentSubType);
+        RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class).getCommentListBean(map).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CommentListBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(CommentListBean commentListBean) {
+                        if (commentListBean.getState() == 0) {
+                            serializationCatalogReadView.showError(commentListBean.getMsg());
+                            serializationCatalogReadView.showCommentListBean(commentListBean);
+                        } else {
+                            serializationCatalogReadView.showError(commentListBean.getMsg());
                         }
                     }
 

@@ -22,7 +22,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,10 +36,10 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.SerializationCatalogReadContract;
+import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
-import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
 import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
@@ -276,7 +275,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         //作品详情集合
         presenter.getSerializationDetailsBean(pgcId);
         //作品评论集合
-        presenter.getPgcChapterCommentListByOffSetBean(StartcatalogId, "0", "300", "1");
     }
 
     //设置开关监听
@@ -656,6 +654,11 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         }
     }
 
+    @Override
+    public void showCommentListBean(CommentListBean commentListBean) {
+
+    }
+
     //得到微信支付数据
     @Override
     public void showGetWxPayData(PayWeChatBean payWeChatBean) {
@@ -689,11 +692,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         paypopupWindow.dismiss();
     }
 
-    //评论列表
-    @Override
-    public void showPgcChapterCommentListByOffSetBean(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean) {
-
-    }
 
     @Override
     public void showPGCReadFabulousBean(PgcReadFabulousBean pgcReadFabulousBean) {

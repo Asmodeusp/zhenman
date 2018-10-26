@@ -1,9 +1,9 @@
 package com.zhenman.asus.zhenman.model.service;
 
+import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
-import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
 import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
@@ -31,9 +31,9 @@ public interface SerializationCatalogReadService {
     @GET(Urls.SERIALIZATION_CATALOG)
     Observable<SerializationCatalogBean> getSerializationCatalogBean(@QueryMap Map<String, String> params);  //连载章节
 
-    //作品章节下页对应的评论列表
-    @GET(Urls.PGC_CHAPTER_COMMENT_LIST_BY_OFFSET)
-    Observable<PgcChapterCommentListByOffSetBean> getPgcChapterCommentListByOffSetBean(@QueryMap Map<String, String> params);
+    //评论列表
+    @GET(Urls.COMMENT_LIST)
+    Observable<CommentListBean> getCommentListBean(@QueryMap Map<String, String> paramMap);
 
     //PGC评论点赞
     @FormUrlEncoded

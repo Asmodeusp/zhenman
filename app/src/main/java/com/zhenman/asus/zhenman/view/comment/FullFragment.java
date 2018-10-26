@@ -1,6 +1,5 @@
 package com.zhenman.asus.zhenman.view.comment;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,18 +9,15 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.R;
 
-import com.zhenman.asus.zhenman.contract.WorkContract;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import butterknife.BindView;
@@ -52,7 +48,10 @@ public class FullFragment extends BottomSheetDialogFragment {
     Unbinder unbinder;
 
     private BottomSheetBehavior mBehavior;
-    private WorkContract.WorkPresenter presenter;
+
+    private EditText commentPopu_edit_editText;
+    private AutoRelativeLayout commentPopu_edit_common_at;
+    private String name;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -98,19 +97,29 @@ public class FullFragment extends BottomSheetDialogFragment {
     private void Pull_upEdText() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
         View view = LayoutInflater.from(getContext()).inflate(R.layout.bottom_sheet_edtext, null, false);
-        EditText CommentPopu_edit_EditText = view.findViewById(R.id.CommentPopu_edit_EditText);
+        commentPopu_edit_editText = view.findViewById(R.id.CommentPopu_edit_EditText);
+        AutoRelativeLayout commentPopu_edit_common_at = view.findViewById(R.id.CommentPopu_edit_Common_at);
+        commentPopu_edit_common_at.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BouncingAtUser();
+            }
+        });
         bottomSheetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        CommentPopu_edit_EditText.addTextChangedListener(new TextWatcher() {
+        commentPopu_edit_editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().equals("@")) {
-                    BouncingAtUser();
+                if (name!=null) {
+                    commentPopu_edit_editText.setText("@" + name);
+                    commentPopu_edit_editText.setSelection(("@" + name).length());
                 }
+
             }
 
             @Override
@@ -123,6 +132,16 @@ public class FullFragment extends BottomSheetDialogFragment {
     }
 
     private void BouncingAtUser() {
-        startActivity(new Intent(getActivity(), CommentAtUeserlistActivity.class));
+        Intent intent = new Intent(getActivity(), CommentAtUeserlistActivity.class);
+        startActivityForResult(intent, 200);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 200 && resultCode == 500) {
+            name = data.getStringExtra("name");
+
+        }
     }
 }

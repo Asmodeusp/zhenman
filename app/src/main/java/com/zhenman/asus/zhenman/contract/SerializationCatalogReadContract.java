@@ -1,10 +1,10 @@
 package com.zhenman.asus.zhenman.contract;
 
 import com.zhenman.asus.zhenman.base.BasePresenter;
+import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
-import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
 import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
@@ -31,7 +31,7 @@ public interface SerializationCatalogReadContract {
         //        得到支付宝支付数据
         void showGetPayData(GetPayDataBean getPayDataBean);
         //得到作品章节下页对应的评论列表
-        void showPgcChapterCommentListByOffSetBean(PgcChapterCommentListByOffSetBean pgcChapterCommentListByOffSetBean);
+        void showCommentListBean(CommentListBean commentListBean);
         //Pgc点赞
         void showPGCReadFabulousBean(PgcReadFabulousBean pgcReadFabulousBean);
         //        得到微信支付数据
@@ -56,7 +56,7 @@ public interface SerializationCatalogReadContract {
         //得到支付宝支付数据
         void sendGetPayData(String orderSn);
         //得到作品章节下页对应的评论列表
-        void getPgcChapterCommentListByOffSetBean(String chapterId,String start,String end,String pageNum );
+        void getCommentListBean(String chapterId,String start,String end,String pageNum );
         //点赞  1 点赞   0 取消
         void PGCReadFabulous (String productId, String commentId,String status,String pgcId);
         //得到微信支付数据
@@ -65,7 +65,15 @@ public interface SerializationCatalogReadContract {
         void sendProductListData(String type);
         //收藏  1 收藏   0 取消
         void PgcCollection (String productId,String status);
-
+        /**
+         *
+         * @param id  所有ID
+         * @param pageNum
+         * @param pageSize
+         * @param commentType  1，UGCId 2.PGCID 3.章节ID 4.动态ID
+         * @param commentSubType
+         */
+        void getCommentList(String id,String pageNum,String pageSize,String commentType, String commentSubType );
     }
 }
 

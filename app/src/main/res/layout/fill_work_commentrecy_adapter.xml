@@ -15,8 +15,8 @@
         <ImageView
             android:background="@mipmap/my_qiezi"
             android:id="@+id/Work_commentRecy_HeadView"
-            android:layout_width="54px"
-            android:layout_height="54px"
+            android:layout_width="64px"
+            android:layout_height="64px"
             android:layout_marginLeft="32px"
             android:layout_marginTop="20px" />
 
@@ -42,7 +42,7 @@
                 android:maxEms="14"
                 android:text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
                 android:textColor="@color/h2"
-                android:textSize="30px" />
+                android:textSize="24px" />
 
             <TextView
                 android:id="@+id/Work_commentRecy_Time"

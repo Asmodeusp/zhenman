@@ -1,7 +1,7 @@
 package com.zhenman.asus.zhenman.view.comment;
 
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,8 +19,8 @@ import com.zhenman.asus.zhenman.view.adapter.comment.CommentAtFollowRecyAdapter;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CommentAtUeserlistActivity extends BaseActivity<CommentAtPresenterImp> implements CommentAtContract.CommentAtView {
@@ -56,20 +56,32 @@ public class CommentAtUeserlistActivity extends BaseActivity<CommentAtPresenterI
     }
 
     @Override
-    public void showMyAttentionUserData(MyAttentionUserBean attentionUserBean) {
+    public void showMyAttentionUserData(final MyAttentionUserBean attentionUserBean) {
         if (attentionUserBean != null) {
             CommentAtFollowUserRecycler.setLayoutManager(new LinearLayoutManager(this));
-            if (attentionUserBean.getData().getResult().size()!=0) {
+            if (attentionUserBean.getData().getResult().size() != 0) {
                 CommentAtFollowUserRecycler.setVisibility(View.VISIBLE);
                 CommentAtFollowUserText.setVisibility(View.VISIBLE);
                 CommentAtFollowRecyAdapter commentAtFollowRecyAdapter = new CommentAtFollowRecyAdapter(attentionUserBean.getData().getResult());
                 CommentAtFollowUserRecycler.setAdapter(commentAtFollowRecyAdapter);
-            }else{
+                commentAtFollowRecyAdapter.setRecyclerViewOnCLickListener(new CommentAtFollowRecyAdapter.RecyclerViewOnCLickListener() {
+                    @Override
+                    public void myClick(View view, int position) {
+                        String name = attentionUserBean.getData().getResult().get(position).getName();
+                        Intent intent = new Intent();
+                        intent.putExtra("name", name);
+                        CommentAtUeserlistActivity.this.setResult(500, intent);
+                        finish();
+
+                    }
+                });
+            } else {
                 CommentAtFollowUserRecycler.setVisibility(View.GONE);
                 CommentAtFollowUserText.setVisibility(View.GONE);
             }
         }
     }
+
 
     @Override
     public void showError(String string) {
@@ -77,15 +89,25 @@ public class CommentAtUeserlistActivity extends BaseActivity<CommentAtPresenterI
     }
 
     @Override
-    public void showSerializationDetailsBean(SerializationDetailsBean serializationDetailsBean) {
-        if (serializationDetailsBean!=null) {
+    public void showSerializationDetailsBean(final SerializationDetailsBean serializationDetailsBean) {
+        if (serializationDetailsBean != null) {
             CommentAtActorRecycler.setLayoutManager(new LinearLayoutManager(this));
-            if (serializationDetailsBean.getData().getActorList().size()!=0) {
+            if (serializationDetailsBean.getData().getActorList().size() != 0) {
                 CommentAtActorRecycler.setVisibility(View.VISIBLE);
                 CommentAtActoText.setVisibility(View.VISIBLE);
                 CommentAtActorRecyAdapter commentAtActorRecyAdapter = new CommentAtActorRecyAdapter(serializationDetailsBean.getData().getActorList());
                 CommentAtActorRecycler.setAdapter(commentAtActorRecyAdapter);
-            }else{
+                commentAtActorRecyAdapter.setRecyclerViewOnCLickListener(new CommentAtActorRecyAdapter.RecyclerViewOnCLickListener() {
+                    @Override
+                    public void myClick(View view, int position) {
+                        String name = serializationDetailsBean.getData().getActorList().get(position).getName();
+                        Intent intent = new Intent();
+                        intent.putExtra("name", name);
+                        setResult(500, intent);
+                        finish();
+                    }
+                });
+            } else {
                 CommentAtActorRecycler.setVisibility(View.GONE);
                 CommentAtActoText.setVisibility(View.GONE);
             }
@@ -93,9 +115,12 @@ public class CommentAtUeserlistActivity extends BaseActivity<CommentAtPresenterI
 
     }
 
-
-    @OnClick(R.id.Comment_At_BackButton)
-    public void onViewClicked() {
-        finish();
+    @OnClick({R.id.Comment_At_BackButton})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.Comment_At_BackButton:
+                finish();
+                break;
+        }
     }
 }

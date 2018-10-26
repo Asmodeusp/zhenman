@@ -38,8 +38,8 @@ public class Urls {
     public static final String SERIALIZATION_CATALOG = "userPgcInfo/getPgcCatalogInfo";
     //连载页阅读
     public static final String SERIALIZATION_CATALOG_READ = "pgcCatalogPage/getPgcImageShowByCatalog";
-    //作品下的评论列表
-    public static final String WORKS_COMMENT = "pgcChapterCommentInfo/getPgcCommentListByPgcId";
+    //评论列表
+    public static final String COMMENT_LIST="ugcCommentInfo/getCommentList";
     //Pgc点赞
     public static final String PGCFABULOUS = "likesPgcCommentInfo/insertLikesPgcCommentInfo";
     //主页Ugc点赞
@@ -52,17 +52,15 @@ public class Urls {
     public static final String MAKE_ORDER = "userOrder/createOrder";
     //获取支付宝支付数据
     public static final String GET_PAY_DATA = "userOrder/getPaySignByAli";
-    //    得到微信支付数据
+    //得到微信支付数据
     public static final String GET_WX_PAY_DATA = "userOrder/getPaySignByWx";
     //分类标签
     public static final String SERIALIZATION_CLASSIFY_TAG = "pgcTag/getPgcTag";
     //分类数据
     public static final String SERIALIZATION_CLASSIFY = "userPgcInfo/getPgcListByTags";
-    //Pgc作品下主评论下的列表
-    public static final String PGC_CHAPTER_COMMENT_DETAIL = "pgcChapterCommentDetail/getCommentDetailListByPcciId";
-    //    注销登陆
+    //注销登陆
     public static final String CANCLE_LOGIN = "userOauth/unbindMobile";
-    //    个人主页信息
+    //个人主页信息
     public static final String HEAD_DATA = "userUgcInfo/getPersonalHomepageHeader";
     //    获得个人资料信息
     public static final String GET_MYDATA = "userOauth/getPersonalData";
@@ -72,10 +70,7 @@ public class Urls {
     public static final String UNBIND_MOBILE = "userOauth/unbindMobile";
     //    交易记录
     public static final String PURCHASE_HISTORY = "userCoinAccount/getCoinAccountOutList";
-    //    作品章节下页对应的评论列表
-    public static final String PGC_CHAPTER_COMMENT_LIST_BY_OFFSET = "pgcChapterCommentInfo/getPgcChapterCommentListByOffSet";
-    //    Ugc的评论
-    public static final String UGC_COMMENT_BYCOMICID = "ugcCommentInfo/getCommentListByComicId";
+
     //    个人主页 我的作品   短漫画
     public static final String UGS_SHORT_COMIC = "userUgcInfo/getUgcListByType";
     //    消息页面 3个的主题及对应的4个ugc作品
@@ -88,7 +83,6 @@ public class Urls {
     public static final String SHELF_COLLECTION = "userLikesPgc/getLikesPgcList";
     //   批量删除收藏作品
     public static final String DELETE_COLLECTION = "userLikesPgc/deleteUserLikesPgc";
-
     //    手机号登录 手机号绑定三方账号
     public static final String MOBILE_BIND_THIRD = "userOauth/bindOauth";
     //    三方账号绑定另外的三方账号
