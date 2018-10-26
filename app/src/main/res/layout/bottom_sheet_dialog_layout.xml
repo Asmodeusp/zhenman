@@ -14,20 +14,26 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
         android:orientation="vertical">
-
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/head"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_50"></com.zhy.autolayout.AutoLinearLayout>
         <TextView
             android:id="@+id/CommentPopu_Tip"
             android:layout_width="match_parent"
-            android:layout_height="772px"
+            android:layout_height="722px"
+            android:visibility="gone"
             android:gravity="center"
             android:text="暂无评论"
             android:textSize="@dimen/px_26" />
 
         <android.support.v7.widget.RecyclerView
+              android:layout_marginTop="8px"
             android:id="@+id/CommentPopu_Recy"
             android:layout_width="match_parent"
-            android:layout_height="772px"
-            android:visibility="gone"></android.support.v7.widget.RecyclerView>
+            android:layout_height="722px"
+            ></android.support.v7.widget.RecyclerView>
 
 
         <com.zhy.autolayout.AutoRelativeLayout

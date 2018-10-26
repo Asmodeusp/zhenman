@@ -1,14 +1,17 @@
 package com.zhenman.asus.zhenman.view.comment;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,7 +21,13 @@ import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.R;
 
+import com.zhenman.asus.zhenman.model.bean.CommentListBean;
+import com.zhenman.asus.zhenman.view.adapter.comment.CommentRecyclerAdapter;
 import com.zhy.autolayout.AutoRelativeLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +35,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
+@SuppressLint("ValidFragment")
 public class FullFragment extends BottomSheetDialogFragment {
     //无评论时的提示字
     @BindView(R.id.CommentPopu_Tip)
@@ -52,27 +62,46 @@ public class FullFragment extends BottomSheetDialogFragment {
     private EditText commentPopu_edit_editText;
     private AutoRelativeLayout commentPopu_edit_common_at;
     private String name;
+    CommentListBean commentListBean;
+    public FullFragment(CommentListBean commentListBean) {
+        this.commentListBean =commentListBean;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
         View view = View.inflate(getContext(), R.layout.bottom_sheet_dialog_layout, null);
         unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         initData();
         dialog.setContentView(view);
+
         mBehavior = BottomSheetBehavior.from((View) view.getParent());
         return dialog;
     }
 
     private void initData() {
+        CommentPopuRecy.setLayoutManager(new LinearLayoutManager(getActivity()));
+        if (commentListBean!=null) {
+            CommentPopuRecy.setVisibility(View.VISIBLE);
+            CommentPopuTip.setVisibility(View.GONE);
+            if (commentListBean.getData().getCommentDtoList().size()!=0) {
+                CommentRecyclerAdapter commentRecyclerAdapter = new CommentRecyclerAdapter(commentListBean.getData().getCommentDtoList());
+                CommentPopuRecy.setAdapter(commentRecyclerAdapter);
+            }
+        }else {
+            CommentPopuTip.setVisibility(View.VISIBLE);
+            CommentPopuRecy.setVisibility(View.GONE);
+        }
+
 
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void CommentListBean(CommentListBean commentListBean) {
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+//        CommentRecyclerAdapter commentRecyclerAdapter = new CommentRecyclerAdapter(commentListBean.getData().getCommentDtoList());
+//        CommentPopuRecy.setAdapter(commentRecyclerAdapter);
     }
 
 
@@ -119,7 +148,6 @@ public class FullFragment extends BottomSheetDialogFragment {
                     commentPopu_edit_editText.setText("@" + name);
                     commentPopu_edit_editText.setSelection(("@" + name).length());
                 }
-
             }
 
             @Override
@@ -143,5 +171,12 @@ public class FullFragment extends BottomSheetDialogFragment {
             name = data.getStringExtra("name");
 
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 }

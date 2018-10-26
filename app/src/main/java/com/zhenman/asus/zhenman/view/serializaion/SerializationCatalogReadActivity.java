@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,8 @@ import com.zhenman.asus.zhenman.view.comment.FullFragment;
 import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -226,6 +229,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private static final int SDK_PAY_FLAG = 1;
     private String pgcId;
     private boolean isCollect;
+    private CommentListBean commentListBean;
 
     @Override
     protected int getLayoutId() {
@@ -234,6 +238,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     @Override
     protected void init() {
+
         serializationCatalogReadRecy.setLayoutManager(new LinearLayoutManager(this));
         CataLogFootViewUpperText.setText("<");
         //设置演员列表
@@ -267,7 +272,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     protected void loadDate() {
         StartcatalogId = (String) SPUtils.get(this, SPKey.CATALOGID_ID, "");
         pgcId = (String) SPUtils.get(this, SPKey.PGC_ID, "");
-
         //作品图片集合
         presenter.getSerializationCatalogReadBean(StartcatalogId);
         //作品章节集合
@@ -275,6 +279,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         //作品详情集合
         presenter.getSerializationDetailsBean(pgcId);
         //作品评论集合
+        presenter.getCommentList("56","1","50","3", "1");
     }
 
     //设置开关监听
@@ -406,8 +411,9 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     //消息弹出BottomSheetDialog
     private void initCommentpopu() {
-        FullFragment fullFragment = new FullFragment();
+        FullFragment fullFragment = new FullFragment(commentListBean);
         fullFragment.show(getSupportFragmentManager(), "dialog");
+
     }
 
     @OnClick({R.id.SeeFirstBtn,
@@ -559,6 +565,12 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
     //支付popuwindow
     @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     private void ShowPaypopupView() {
@@ -656,7 +668,11 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     @Override
     public void showCommentListBean(CommentListBean commentListBean) {
+        if (commentListBean!=null) {
+            this.commentListBean = commentListBean;
 
+            EventBus.getDefault().post(commentListBean);
+        }
     }
 
     //得到微信支付数据

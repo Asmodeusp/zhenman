@@ -100,6 +100,7 @@ public class WorkDetailsCommentAdapter extends RecyclerView.Adapter<WorkDetailsC
         holder.Work_commentRecy_UserName.setText(listBean.getName());
         holder.Work_commentRecy_LikeNumber.setText(listBean.getLikeNum()+"");
         holder.Work_commentRecy_Time.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
+        holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.home_like_off);
     }
 
     @Override

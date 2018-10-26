@@ -131,7 +131,6 @@ public class WorkDetailsCommentPresenterImp implements WorkDetailsCommentContrac
 
                     @Override
                     public void onNext(CommentListBean commentListBean) {
-                        Log.e("123456", commentListBean.getMsg());
                         if (commentListBean.getState() == 0) {
                             commentView.showError(commentListBean.getMsg());
                             commentView.showCommentListBean(commentListBean);

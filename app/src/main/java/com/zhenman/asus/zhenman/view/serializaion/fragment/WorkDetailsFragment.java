@@ -122,7 +122,6 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     @Override
     public void showCommentListBean(CommentListBean commentListBean) {
         if (commentListBean!=null) {
-            Log.e("123456", commentListBean.getMsg());
             if (commentListBean.getData().getCommentDtoList().size()==0) {
                 work_commentTips.setVisibility(View.VISIBLE);
                 Work_commentRecy.setVisibility(View.GONE);
