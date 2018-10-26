@@ -6,7 +6,6 @@ import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
-import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
 import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
@@ -235,6 +234,7 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                     }
                 });
     }
+
 
 
 

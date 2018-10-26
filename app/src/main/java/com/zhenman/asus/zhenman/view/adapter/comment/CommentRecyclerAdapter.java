@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.CommentListBean;
-import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.MyClickSpan;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;

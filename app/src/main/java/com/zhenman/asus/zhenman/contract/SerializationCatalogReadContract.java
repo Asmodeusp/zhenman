@@ -55,8 +55,7 @@ public interface SerializationCatalogReadContract {
         void setWxMakeOrderData(String productId, String type, String catalogId, String amount, String comment);
         //得到支付宝支付数据
         void sendGetPayData(String orderSn);
-        //得到作品章节下页对应的评论列表
-        void getCommentListBean(String chapterId,String start,String end,String pageNum );
+
         //点赞  1 点赞   0 取消
         void PGCReadFabulous (String productId, String commentId,String status,String pgcId);
         //得到微信支付数据
