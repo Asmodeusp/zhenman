@@ -21,23 +21,20 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     private List<ProductListBean.DataBean> listBeanData;
     private Context context;
     private ProductListCallback croductListCallback;
-    private AutoRelativeLayout lastBox;
+    private View lastView;
+    private View lastBg;
 
     public ProductListAdapter(List<ProductListBean.DataBean> listBeanData, Context context) {
         this.listBeanData = listBeanData;
         this.context = context;
     }
-
-    public void ProductListCallback(ProductListCallback croductListCallback) {
-        this.croductListCallback = croductListCallback;
-    }
-
-
     public interface ProductListCallback {
         void showProductList(int position, int amount);
 
     }
-
+    public void ProductListCallback(ProductListCallback croductListCallback) {
+        this.croductListCallback = croductListCallback;
+    }
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -55,7 +52,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             holder.itemProductList_bite.setImageResource(R.mipmap.my_qiezi_bite);
         } else {
             holder.itemProductList_bite.setImageResource(R.mipmap.my_coin_small);
-
         }
         holder.itemProductList_num.setText("  X " + listBeanData.get(i).getShowPrice() + "");
         holder.itemView.setTag(i);
@@ -63,43 +59,25 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.itemProductList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (lastBox == null) {
-                    lastBox = holder.itemProductList;
-                    lastBox.setBackgroundResource(R.drawable.actor_shape);
-                    holder.itemProductList_moneyBg.setBackgroundColor(Color.parseColor("#cccccc"));
-                } else {
-                    lastBox.setBackgroundResource(R.drawable.comment_popubackgound);
-                    holder.itemProductList_moneyBg.setBackgroundColor(Color.parseColor("#b37feb"));
-                    lastBox = holder.itemProductList;
+                if (lastView != null&&lastBg!= null) {
+                    lastBg.setBackgroundColor(Color.parseColor("#cccccc"));
+                    lastView.setBackgroundResource(R.drawable.comment_popubackgound);
                 }
-
+                holder.itemProductList_moneyBg.setBackgroundColor(Color.parseColor("#b37feb"));
+                holder.itemProductList.setBackgroundResource(R.drawable.actor_shape);
+                lastView = holder.itemProductList;
+                lastBg=holder.itemProductList_moneyBg;
                 croductListCallback.showProductList(listBeanData.get(i).getId(), listBeanData.get(i).getPrice());
             }
         });
-        /*holder.itemProductList_num.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (lastBox == null) {
-                    lastBox = holder.itemProductList_num;
-                    holder.itemProductList_moneyBg.setBackgroundColor(Color.parseColor("#cccccc"));
-                } else {
-                    lastBox.setChecked(false);
-                    holder.itemProductList_moneyBg.setBackgroundColor(Color.parseColor("#b37feb"));
-                    lastBox = holder.itemProductList_num;
-                }
-                croductListCallback.showProductList(i);
 
-            }
-        });*/
     }
 
     @Override
     public int getItemCount() {
         return listBeanData.isEmpty() ? 0 : listBeanData.size();
     }
-
     private OnItemShortListener myCLick;
-
     public interface OnItemShortListener {
         void myClick(View view, int position);
     }
@@ -114,6 +92,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             myCLick.myClick(v, (int) v.getTag());
         }
     }
+
+
+
+
 
     public class Holder extends RecyclerView.ViewHolder {
         public TextView itemProductList_num;
@@ -132,5 +114,4 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         }
     }
-
 }

@@ -141,7 +141,6 @@ public class PayUtils {
                 AuthTask authTask = new AuthTask(activity);
                 // 调用授权接口，获取授权结果
                 Map<String, String> result = authTask.authV2(orderSign, true);
-
                 Message msg = new Message();
                 msg.what = SDK_AUTH_FLAG;
                 msg.obj = result;
@@ -153,4 +152,35 @@ public class PayUtils {
         Thread authThread = new Thread(authRunnable);
         authThread.start();
     }
+
+
+
+                   /* AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", "app_id", "your private_key", "json", "GBK", "alipay_public_key", "RSA2");
+                    AlipayFundTransToaccountTransferRequest request = new AlipayFundTransToaccountTransferRequest();
+                    request.setBizContent("{" +
+                            "    \"out_biz_no\":\"3142321423432\"," +
+                            "    \"payee_type\":\"ALIPAY_LOGONID\"," +
+                            "    \"payee_account\":\"abc@sina.com\"," +
+                            "    \"amount\":\"12.23\"," +
+                            "    \"payer_show_name\":\"上海交通卡退款\"," +
+                            "    \"payee_real_name\":\"张三\"," +
+                            "    \"remark\":\"转账备注\"," +
+                            "  }");
+                    Map map = new HashMap();
+                    map.put("out_biz_no", "3142321423432");//生成订单号
+                    map.put("payee_type", "ALIPAY_LOGONID");//固定值
+                    map.put("payee_account", "abc@sina.com");//转账收款账户
+                    map.put("amount", sellEggplantEggplantNum.getText().toString());//多少钱
+                    map.put("payer_show_name", "账户提现");
+                    map.put("payee_real_name", "Sunny");
+                    map.put("remark", "真漫提现");
+                    //org.json.JSONObject 将Map转换为JSON方法
+                    JSONObject json = new JSONObject(map);
+                    request.setBizContent(json);
+                    AlipayFundTransToaccountTransferResponse response = alipayClient.execute(request);
+                    if (response.isSuccess()) {
+                        System.out.println("调用成功");
+                    } else {
+                        System.out.println("调用失败");
+                    }*/
 }

@@ -173,7 +173,6 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
 //                我的关注
                 Intent intentMyAttention = new Intent(getActivity(), MyAttentionActivity.class);
                 intentMyAttention.putExtra("him_id", "myself");
-
                 startActivity(intentMyAttention);
                 break;
             case R.id.my_themePage:

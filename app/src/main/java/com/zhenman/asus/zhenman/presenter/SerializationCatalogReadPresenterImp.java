@@ -6,6 +6,7 @@ import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
 import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
+import com.zhenman.asus.zhenman.model.bean.PgcChapterCommentListByOffSetBean;
 import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
@@ -133,14 +134,13 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
 
     //    创建订单
     @Override
-    public void setMakeOrderData(String productId, String type, String catalogId, String toUserId, String amount, String comment) {
+    public void setMakeOrderData(String productId, String type, String catalogId, String amount, String comment) {
         Map<String, String> maps = new HashMap<>();
         maps.put("productId", productId);
         maps.put("type", type);
         maps.put("catalogId", catalogId);
-        maps.put("toUserId", toUserId);
         maps.put("amount", amount);
-        maps.put("comment", "充值");
+        maps.put("comment", "打赏");
         RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
                 .getMakeOrderBean( maps)
                 .subscribeOn(Schedulers.newThread())
@@ -170,14 +170,13 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
 
     //创建微信订单
     @Override
-    public void setWxMakeOrderData(String productId, String type, String catalogId, String toUserId, String amount, String comment) {
+    public void setWxMakeOrderData(String productId, String type, String catalogId, String amount, String comment) {
         Map<String, String> maps = new HashMap<>();
         maps.put("productId", productId);
         maps.put("type", type);
         maps.put("catalogId", catalogId);
-        maps.put("toUserId", toUserId);
         maps.put("amount", amount);
-        maps.put("comment", "充值");
+        maps.put("comment", "打赏");
         RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
                 .getWxMakeOrderBean( maps)
                 .subscribeOn(Schedulers.newThread())
@@ -237,10 +236,6 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                 });
     }
 
-    @Override
-    public void getCommentListBean(String chapterId, String start, String end, String pageNum) {
-
-    }
 
 
     @Override

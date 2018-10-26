@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -124,6 +125,8 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             }
             if (TYPE.equals("1")) {//微信
                 SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
+Log.e("Sunny",data.get("unionid"));
+Log.e("Sunny",data.get("openid"));
                 presenter.sendUMengLoginData(data.get("unionid"), data.get("name"), "",
                         data.get("iconurl"), sex, TYPE, data.get("openid"));
 
@@ -296,6 +299,7 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
         //如果登陆成功就利用SP储存用户信息
         if (userBean.getData().getToken()!=null){
             SPUtils.put(App.context, SPKey.USER_TOKEN, userBean.getData().getToken());
+            Log.e("Sunny",userBean.getData().getToken());
 
         }if (userBean.getData().getRefreshToken()!=null){
             SPUtils.put(App.context, SPKey.USER_REFRESHTOKEN, userBean.getData().getRefreshToken());

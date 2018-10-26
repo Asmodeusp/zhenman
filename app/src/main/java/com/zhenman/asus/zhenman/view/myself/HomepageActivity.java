@@ -190,7 +190,9 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
                 finish();
                 break;
             case R.id.homePage_attentionPage:
-                startActivity(new Intent(HomepageActivity.this, MyAttentionActivity.class));
+                Intent intent = new Intent(HomepageActivity.this, MyAttentionActivity.class);
+                intent.putExtra("him_id",him_id);
+                startActivity(intent);
                 break;
             case R.id.homePage_fansPage:
                 startActivity(new Intent(HomepageActivity.this, MyFansActivity.class));
@@ -247,7 +249,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         ppwQuestion = PaypopupView.findViewById(R.id.ppw_question);
 
         ppwPayUserName = PaypopupView.findViewById(R.id.ppwPay_userName);
-        ppwPayUserName.setText("Hi, " + him_id);
+        ppwPayUserName.setText("Hi, " + homePage_Name.getText().toString());
         //       获取产品列表数据
         presenter.sendProductListData("1");
         ppwPayPayBtn.setOnClickListener(new View.OnClickListener() {
