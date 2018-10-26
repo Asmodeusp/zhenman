@@ -18,11 +18,10 @@ import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -164,9 +163,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     TextView ppwPayNum;
     ImageView ppwPayQiezi;
     RecyclerView ppwPayProductList;
-    RadioButton ppwPayZhifubaoBtn;
-    RadioButton ppwPayWeixinBtn;
-    RadioGroup ppwPayRadioGroup;
+    CheckBox ppwPayZhifubaoBtn;
+    CheckBox ppwPayWeixinBtn;
     Button ppwPayPayBtn;
     TextView ppwPayPayMoney;
     TextView ppwPayQieziNum;
@@ -200,7 +198,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     public String StartcatalogId;
     //支付popuwindow
     private PopupWindow paypopupWindow;
-    private String paymentMethod;
+    private String paymentMethod = "2";
     //章节演员的适配器
     private CatalogReadActorAdapter catalogReadActorAdapter;
     //章节Id
@@ -247,7 +245,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     }
 
     private void initCatalog() {
-        CataLogPopuTitle.setText((CharSequence) SPUtils.get(this, "DetaailsName", "海贼"));
+        CataLogPopuTitle.setText((CharSequence) SPUtils.get(this, "DetailsName", "海贼"));
         CataLogPopuPosition.setVisibility(View.GONE);
         CataLog_PopuDownload.setVisibility(View.GONE);
         CataLogPopuRecy.setLayoutManager(new LinearLayoutManager(this));
@@ -264,6 +262,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         });
 
     }
+
     //得到数据
     @Override
     protected void loadDate() {
@@ -564,7 +563,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     //支付popuwindow
     private void ShowPaypopupView() {
-        View PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
+        View PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null,true);
         ppwPayProductList = PaypopupView.findViewById(R.id.ppwPay_productList);
         ppwPayZhifubaoBtn = PaypopupView.findViewById(R.id.ppwPay_zhifubaoBtn);
         ppwPayWeixinBtn = PaypopupView.findViewById(R.id.ppwPay_weixinBtn);
@@ -572,14 +571,14 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         ppwQuestion = PaypopupView.findViewById(R.id.ppw_question);
 
         ppwPayUserName = PaypopupView.findViewById(R.id.ppwPay_userName);
-        ppwPayUserName.setText("Hi, "+(String)SPUtils.get(this,SPKey.UMeng_NAME,""));
+        ppwPayUserName.setText("Hi, " + (String) SPUtils.get(this, SPKey.UMeng_NAME, ""));
         ppwPayPayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (paymentMethod.equals("1")) {
-                    presenter.setWxMakeOrderData(qieziId + "", "1", StartcatalogId, "262", "0.1", "支付");
+                    presenter.setWxMakeOrderData(qieziId + "", "2", StartcatalogId, "3", "支付");
                 } else if (paymentMethod.equals("2")) {
-                    presenter.setMakeOrderData(qieziId + "", "1", StartcatalogId, "262", "1", "支付");
+                    presenter.setMakeOrderData(qieziId + "", "2", StartcatalogId, "1", "支付");
                 } else {
                     Toast.makeText(SerializationCatalogReadActivity.this, "请选择支付方式", Toast.LENGTH_SHORT).show();
                 }
@@ -587,7 +586,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         });
         //获取屏幕宽高
         int weight = getResources().getDisplayMetrics().widthPixels;
-        int height = getResources().getDisplayMetrics().heightPixels * 3/5;
+        int height = getResources().getDisplayMetrics().heightPixels * 3 / 4;
 
         paypopupWindow = new PopupWindow(PaypopupView, weight, height);
         paypopupWindow.setFocusable(true);
@@ -597,10 +596,10 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         ppwPayZhifubaoBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (ppwPayZhifubaoBtn.isChecked()){
+                if (ppwPayZhifubaoBtn.isChecked()) {
                     paymentMethod = "2";
                     ppwPayWeixinBtn.setChecked(false);
-                }else {
+                } else {
                     ppwPayWeixinBtn.setChecked(true);
                 }
             }
@@ -609,10 +608,10 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         ppwPayWeixinBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (ppwPayWeixinBtn.isChecked()){
+                if (ppwPayWeixinBtn.isChecked()) {
                     paymentMethod = "1";
                     ppwPayZhifubaoBtn.setChecked(false);
-                }else {
+                } else {
                     ppwPayZhifubaoBtn.setChecked(true);
                 }
             }
@@ -749,9 +748,9 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
 
     @Override
-    public void showProductList(int position,int amount) {
+    public void showProductList(int position, int amount) {
         qieziId = position;
-        qieziMoney=amount;
+        qieziMoney = amount;
     }
 
 

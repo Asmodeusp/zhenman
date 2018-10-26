@@ -2,7 +2,7 @@ package com.zhenman.asus.zhenman.presenter;
 
 import com.zhenman.asus.zhenman.contract.MyWalletContract;
 import com.zhenman.asus.zhenman.model.bean.SellEggplantBean;
-import com.zhenman.asus.zhenman.model.service.EggplantDetailsService;
+import com.zhenman.asus.zhenman.model.service.SellEggplantService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 
 import io.reactivex.Observer;
@@ -17,7 +17,7 @@ public class MyWalletPresenter implements MyWalletContract.SellEggplantInPresent
 
     @Override
     public void sendSellEggplant() {
-        RetrofitUtils.getInstance().getService(EggplantDetailsService.class)
+        RetrofitUtils.getInstance().getService(SellEggplantService.class)
                 .getSellEggplant()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

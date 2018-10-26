@@ -111,5 +111,7 @@ public class Urls {
     public static final String SELL_EGGPLANT = "userCoinAccount/getUserCoinAccount";
 //    茄子明细
     public static final String EGGPLANT_DETAILS="userCoinAccount/getCoinAccountIncomeList";
+//   微信提现
+    public static final String WEIXIN_TIXIAN="userOrder/withdraw";
 
 }

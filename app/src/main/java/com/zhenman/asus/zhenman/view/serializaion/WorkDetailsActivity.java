@@ -2,7 +2,6 @@ package com.zhenman.asus.zhenman.view.serializaion;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
@@ -186,7 +185,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         } else {
             Glide.with(this).load(serializationDetailsBean.getData().getImageUrl()).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(Work_Detaails_CoverImg);
             Work_Detaails_Name.setText(serializationDetailsBean.getData().getTitle());
-            SPUtils.put(this, "DetaailsName", serializationDetailsBean.getData().getTitle());
+            SPUtils.put(this, "DetailsName", serializationDetailsBean.getData().getTitle());
             Work_Detaails_Tag.setText(serializationDetailsBean.getData().getTag());
             serializationDetailsBeandata = serializationDetailsBean.getData();
             setContentView(R.id.Work_Detaails_FrameLayout, WorkDetailsFragment.class);

@@ -45,7 +45,7 @@ public class MyAttentionActivity extends BaseActivity<MyAttentionUserPresenter> 
 
     @Override
     protected void init() {
-        if (HomepageActivity.him_id.equals("myself")) {
+        if (getIntent().getStringExtra("him_id").equals("myself")) {
             appTitle.setText("我的关注");
             presenter.sendMyAttentionUserData("1", "20", "");
         } else {

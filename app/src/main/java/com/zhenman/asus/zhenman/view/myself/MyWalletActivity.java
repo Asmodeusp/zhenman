@@ -71,9 +71,6 @@ public class MyWalletActivity extends BaseActivity<MyWalletPresenter> implements
                 break;
             case R.id.myWallet_sell:
                 Intent intent = new Intent(MyWalletActivity.this, SellEggplantActivity.class);
-                intent.putExtra("biteEgg", eggplantDetsBeanData.getBiteEggplantAmount());
-                intent.putExtra("Egg", eggplantDetsBeanData.getEggplantAmount());
-                intent.putExtra("unripeEgg", eggplantDetsBeanData.getUnripeEggplantAmount());
                 startActivity(intent);
                 break;
             case R.id.myWallet_question:
