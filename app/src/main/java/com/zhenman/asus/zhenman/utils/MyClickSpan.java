@@ -13,11 +13,7 @@ import android.widget.TextView;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author Samuel
- * @time 2018/9/8 11:41
- * @describe 这是字体变量的字体
- */
+
 public class MyClickSpan extends ClickableSpan {
     private int mHighLightColor = Color.parseColor("#b37feb");
     private boolean mUnderLine = false;
@@ -68,21 +64,6 @@ public class MyClickSpan extends ClickableSpan {
         tv.setText(s);
     }
 
-    public static void setTextHighLightWithClick(TextView tv, String text, String keyWord, View.OnClickListener listener) {
-        tv.setClickable(true);
-        tv.setHighlightColor(Color.TRANSPARENT);
-        tv.setMovementMethod(LinkMovementMethod.getInstance());
-        SpannableString s = new SpannableString(text);
-        Pattern p = Pattern.compile(keyWord);
-        Matcher m = p.matcher(s);
-        while (m.find()) {
-            int start = m.start();
-            int end = m.end();
-            s.setSpan(new MyClickSpan(listener), start, end,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-        tv.setText(s);
-    }
 
     /**
      * 关键字高亮变色

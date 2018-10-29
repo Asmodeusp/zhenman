@@ -13,7 +13,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -92,6 +91,13 @@ public class FullFragment extends BottomSheetDialogFragment {
                 CommentPopuNumber.setText(commentListBean.getData().getCommentDtoList().size()+"条评论");
                 CommentRecyclerAdapter commentRecyclerAdapter = new CommentRecyclerAdapter(commentListBean.getData().getCommentDtoList());
                 CommentPopuRecy.setAdapter(commentRecyclerAdapter);
+                commentRecyclerAdapter.setRecyclerViewOnCLickListener(new CommentRecyclerAdapter.RecyclerViewOnCLickListener() {
+                    @Override
+                    public void myClick(View view, int position) {
+                        ItemFullFragment fullFragment = new ItemFullFragment(commentListBean.getData().getCommentDtoList().get(position).getCommentId());
+                        fullFragment.show(getActivity().getSupportFragmentManager(), "dialog");
+                    }
+                });
             }
         } else {
             CommentPopuTip.setVisibility(View.VISIBLE);

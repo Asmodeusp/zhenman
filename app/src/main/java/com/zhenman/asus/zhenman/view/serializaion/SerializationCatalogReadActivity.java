@@ -38,6 +38,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.SerializationCatalogReadContract;
+import com.zhenman.asus.zhenman.model.bean.CommentItemListBean;
 import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.model.bean.GetPayDataBean;
 import com.zhenman.asus.zhenman.model.bean.MakeOrderBean;
@@ -690,6 +691,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     public void showPgcCollectionBean(PgcCollectionBean collectionBean) {
 
     }
+
 
     //微信支付
     private void WeChatPay(PayWeChatBean.DataBean.OrderSignBean orderSign) {
