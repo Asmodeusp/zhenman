@@ -50,11 +50,11 @@
         android:orientation="horizontal">
 
         <android.support.v7.widget.RecyclerView
-            android:nestedScrollingEnabled="false"
             android:id="@+id/Actor_Recy"
             android:layout_width="wrap_content"
             android:layout_height="258px"
             android:layout_marginLeft="24px"
+            android:nestedScrollingEnabled="false"
             android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
 
         <TextView
@@ -98,19 +98,17 @@
     </com.zhy.autolayout.AutoLinearLayout>
 
     <TextView
-        android:visibility="visible"
         android:id="@+id/Work_commentTips"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:gravity="center"
-        android:text="暂时没有评论，快来抢沙发" />
+        android:text="暂时没有评论，快来抢沙发"
+        android:visibility="gone" />
 
     <android.support.v7.widget.RecyclerView
-        android:nestedScrollingEnabled="false"
-        android:layout_marginTop="16px"
-        android:visibility="gone"
         android:id="@+id/Work_commentRecy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ></android.support.v7.widget.RecyclerView>
+        android:layout_marginTop="16px"
+        android:nestedScrollingEnabled="false"></android.support.v7.widget.RecyclerView>
 </com.zhy.autolayout.AutoLinearLayout>

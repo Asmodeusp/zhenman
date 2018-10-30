@@ -60,6 +60,7 @@ import com.zhenman.asus.zhenman.view.adapter.serialization.CatalogReadActorAdapt
 import com.zhenman.asus.zhenman.view.adapter.serialization.ProductListAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogReadRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.serialization.WorkDetailsCommentAdapter;
 import com.zhenman.asus.zhenman.view.comment.FullFragment;
 import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhy.autolayout.AutoLinearLayout;
@@ -672,8 +673,15 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     public void showCommentListBean(CommentListBean commentListBean) {
         if (commentListBean!=null) {
             this.commentListBean = commentListBean;
-
             EventBus.getDefault().post(commentListBean);
+            CataLogFootViewCommentRecyTip.setVisibility(View.GONE);
+            CataLogFootViewCommentRecy.setVisibility(View.VISIBLE);
+            CataLogFootViewCommentRecy.setLayoutManager(new LinearLayoutManager(this));
+            WorkDetailsCommentAdapter workDetailsCommentAdapter = new WorkDetailsCommentAdapter(commentListBean.getData().getCommentDtoList());
+            CataLogFootViewCommentRecy.setAdapter(workDetailsCommentAdapter);
+        }else{
+            CataLogFootViewCommentRecyTip.setVisibility(View.VISIBLE);
+            CataLogFootViewCommentRecy.setVisibility(View.GONE);
         }
     }
 
