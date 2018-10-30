@@ -55,6 +55,7 @@ public class MyClickSpan extends ClickableSpan {
             Matcher m = p.matcher(s);
             while (m.find()) {
                     int start = m.start();
+
                     int end = m.end();
                 s.setSpan(new MyClickSpan(listener), start, end,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
