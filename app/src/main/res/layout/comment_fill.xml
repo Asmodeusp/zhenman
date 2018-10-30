@@ -42,7 +42,7 @@
 
                 <TextView
                     android:id="@+id/comment_fill_conent"
-                    android:layout_width="wrap_content"
+                    android:layout_width="560px"
                     android:layout_height="wrap_content"
                     android:text="刀工了得，看饿了。"
                     android:textColor="@color/h2"

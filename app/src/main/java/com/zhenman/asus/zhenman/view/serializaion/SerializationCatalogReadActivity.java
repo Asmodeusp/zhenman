@@ -415,7 +415,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     //消息弹出BottomSheetDialog
     private void initCommentpopu() {
-        FullFragment fullFragment = new FullFragment(commentListBean);
+        FullFragment fullFragment = new FullFragment(commentListBean,"3");
         fullFragment.show(getSupportFragmentManager(), "dialog");
 
     }

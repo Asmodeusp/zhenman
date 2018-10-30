@@ -78,9 +78,10 @@ public class ItemFullFragment extends BottomSheetDialogFragment {
     private BottomSheetBehavior mBehavior;
     private String commentId;
     private CommentItemListBean commentItemListBean;
-
-    public ItemFullFragment(String commentId) {
+    private String Type;
+    public ItemFullFragment(String commentId,String Type) {
         this.commentId = commentId;
+        this.Type = Type;
     }
 
     @Override
@@ -98,7 +99,7 @@ public class ItemFullFragment extends BottomSheetDialogFragment {
 
         OkHttpClient client = new OkHttpClient();
         final Request request = new Request.Builder()
-                .url(Urls.BASE_URL + Urls.COMMENT_LIST + "?id=" + commentId + "&pageNum=1&pageSize=50&commentType=3&commentSubType=2")
+                .url(Urls.BASE_URL + Urls.COMMENT_LIST + "?id=" + commentId + "&pageNum=1&pageSize=50&commentType="+Type+"&commentSubType=2")
                 .get()
                 .build();
         client.newCall(request).enqueue(new Callback() {
@@ -155,7 +156,11 @@ public class ItemFullFragment extends BottomSheetDialogFragment {
         //加载添加时间
         ItemCommentAddTime.setText(SPUtils.transferLongToDate(Long.parseLong(commentItemListBean.getData().getAddTime())));
         //设置评论来自位置
-        ItemCommentFromUserText.setText(commentItemListBean.getData().getTitleDto().getText());
+        if (Type.equals("1")) {
+            ItemCommentFromUserText.setVisibility(View.GONE);
+        }else{
+            ItemCommentFromUserText.setText(commentItemListBean.getData().getTitleDto().getText());
+        }
         //设置共几条评论
         Item_comment_CommentNumber.setText("共" + commentItemListBean.getData().getCommentDtoList().size() + "条评论");
         //设置子评论样式
