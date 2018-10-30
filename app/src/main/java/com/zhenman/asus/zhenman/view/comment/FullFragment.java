@@ -3,6 +3,7 @@ package com.zhenman.asus.zhenman.view.comment;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
@@ -10,7 +11,11 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +27,7 @@ import android.widget.TextView;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.view.adapter.comment.CommentRecyclerAdapter;
+import com.zhenman.asus.zhenman.view.ui.AtEditText;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -61,7 +67,7 @@ public class FullFragment extends BottomSheetDialogFragment {
 
     private BottomSheetBehavior mBehavior;
 
-    private EditText commentPopu_edit_editText;
+    private AtEditText commentPopu_edit_editText;
     private AutoRelativeLayout commentPopu_edit_common_at;
     private String name;
     CommentListBean commentListBean;
@@ -98,12 +104,13 @@ public class FullFragment extends BottomSheetDialogFragment {
                 commentRecyclerAdapter.setRecyclerViewOnCLickListener(new CommentRecyclerAdapter.RecyclerViewOnCLickListener() {
                     @Override
                     public void myClick(View view, int position) {
-                        ItemFullFragment fullFragment = new ItemFullFragment(commentListBean.getData().getCommentDtoList().get(position).getCommentId(),Type);
+                        ItemFullFragment fullFragment = new ItemFullFragment(commentListBean.getData().getCommentDtoList().get(position).getCommentId(), Type);
                         fullFragment.show(getActivity().getSupportFragmentManager(), "dialog");
                     }
                 });
             }
         } else {
+            CommentPopuNumber.setText("0条评论");
             CommentPopuTip.setVisibility(View.VISIBLE);
             CommentPopuRecy.setVisibility(View.GONE);
         }
@@ -128,11 +135,11 @@ public class FullFragment extends BottomSheetDialogFragment {
                 break;
             //@按钮
             case R.id.CommentPopu_Common_at:
-                startActivity(new Intent(getActivity(), CommentAtUeserlistActivity.class));
+                Pull_upEdText();
                 break;
             //发送按钮
             case R.id.CommentPopu_SendButton:
-
+                Pull_upEdText();
                 break;
         }
     }
@@ -150,22 +157,22 @@ public class FullFragment extends BottomSheetDialogFragment {
         });
         bottomSheetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        commentPopu_edit_editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+//        commentPopu_edit_editText.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
         bottomSheetDialog.setContentView(view);
         bottomSheetDialog.show();
     }
@@ -180,8 +187,7 @@ public class FullFragment extends BottomSheetDialogFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 200 && resultCode == 500) {
             name = data.getStringExtra("name");
-            commentPopu_edit_editText.setText("@" + name);
-            commentPopu_edit_editText.setSelection(("@" + name).length());
+            commentPopu_edit_editText.addAtContent("",name);
         }
     }
 

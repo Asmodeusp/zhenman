@@ -227,7 +227,7 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
                 break;
             case R.id.Classify_TypeTagsAll: 
                 typeTag="";
-                presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
+                presenter.getClassifyBean("1", "20",statusTag,subjectTag,backgroundTag,typeTag);
                 break;
 
         }

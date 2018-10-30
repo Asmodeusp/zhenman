@@ -39,7 +39,6 @@ public class MyClickSpan extends ClickableSpan {
 
 
     @Override
-
     public void updateDrawState(TextPaint ds) {
         ds.setColor(mHighLightColor);
         ds.setUnderlineText(mUnderLine);
@@ -55,8 +54,8 @@ public class MyClickSpan extends ClickableSpan {
             Pattern p = Pattern.compile(keyWord[i]);
             Matcher m = p.matcher(s);
             while (m.find()) {
-                int start = m.start();
-                int end = m.end();
+                    int start = m.start();
+                    int end = m.end();
                 s.setSpan(new MyClickSpan(listener), start, end,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }

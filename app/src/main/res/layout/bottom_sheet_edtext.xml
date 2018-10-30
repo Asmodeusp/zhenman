@@ -15,7 +15,7 @@
         tools:layout_editor_absoluteY="0dp"
         tools:ignore="MissingConstraints">
 
-        <EditText
+        <com.zhenman.asus.zhenman.view.ui.AtEditText
             android:id="@+id/CommentPopu_edit_EditText"
             android:layout_width="574px"
             android:layout_height="match_parent"
