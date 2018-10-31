@@ -25,9 +25,10 @@ import java.util.List;
 
 
 public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecyAdapter.Holder> implements View.OnClickListener {
-    private List<CommentItemListBean.DataBean.CommentDtoListBean> list ;
+    private List<CommentItemListBean.DataBean.CommentDtoListBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
+
     public CommentItemRecyAdapter(List<CommentItemListBean.DataBean.CommentDtoListBean> list) {
         this.list = list;
     }
@@ -79,7 +80,6 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
                 }
             });
         }
-
 
 
         //加载用户名

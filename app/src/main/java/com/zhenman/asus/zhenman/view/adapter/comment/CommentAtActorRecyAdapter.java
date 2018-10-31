@@ -41,6 +41,7 @@ public class CommentAtActorRecyAdapter extends RecyclerView.Adapter<CommentAtAct
         inflate.setOnClickListener(this);
         return holder;
     }
+
     @Override
     public void onClick(View v) {
         if (myCLick != null) {

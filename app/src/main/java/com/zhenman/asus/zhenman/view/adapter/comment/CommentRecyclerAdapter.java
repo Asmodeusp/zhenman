@@ -112,13 +112,13 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
                 MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getCommentDtoList().get(0).getTextDto().getText(), oneTextExtralist, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
                     }
                 });
                 ArrayList<TextExtraBean> TwoTextExtralist = new ArrayList<>();
                 List<TextExtraBean> textExtra1 = listBean.getCommentDtoList().get(1).getTextDto().getTextExtra();
                 for (TextExtraBean textExtraBean : textExtra1) {
-                    TwoTextExtralist.add(textExtraBean)  ;
+                    TwoTextExtralist.add(textExtraBean);
                 }
                 MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_SecondItem, listBean.getCommentDtoList().get(1).getTextDto().getText(), TwoTextExtralist, new View.OnClickListener() {
                     @Override
