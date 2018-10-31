@@ -1,5 +1,6 @@
 package com.zhenman.asus.zhenman.model.service;
 
+import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.model.bean.FollowBean;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
@@ -32,6 +33,9 @@ public interface HomeHotService {
     @FormUrlEncoded
     @POST(Urls.PGC_COLLECTION)
     Observable<PgcCollectionBean> GetPgcCollectionBean(@FieldMap Map<String, String> params);
+    //得到评论列表
+    @GET(Urls.COMMENT_LIST)
+    Observable<CommentListBean> getCommentListBean(@QueryMap Map<String, String> paramMap);
 
 }
 

@@ -9,7 +9,7 @@
     <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/h8">
+        android:background="@color/h9">
 
         <com.zhy.autolayout.AutoLinearLayout
             android:id="@+id/UserLinearLayout"
@@ -32,17 +32,17 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_marginTop="8px"
                     android:id="@+id/comment_fill_UserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8px"
                     android:text="肥源"
                     android:textColor="@color/h3"
                     android:textSize="@dimen/px_24" />
 
                 <TextView
                     android:id="@+id/comment_fill_conent"
-                    android:layout_width="wrap_content"
+                    android:layout_width="560px"
                     android:layout_height="wrap_content"
                     android:text="刀工了得，看饿了。"
                     android:textColor="@color/h2"
@@ -62,11 +62,11 @@
             android:layout_margin="@dimen/px_24"
             android:orientation="vertical">
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/comment_fill_likeImg"
                 android:layout_width="40px"
                 android:layout_height="40px"
-                android:src="@mipmap/my_like_on" />
+                android:button="@mipmap/my_like_off" />
 
             <TextView
                 android:id="@+id/comment_fill_likeNumberText"
@@ -86,7 +86,7 @@
             android:layout_below="@+id/UserLinearLayout"
             android:layout_marginLeft="@dimen/px_106"
             android:layout_marginTop="8px"
-            android:background="@color/h7"
+            android:background="@color/h9"
             android:orientation="vertical">
 
             <TextView

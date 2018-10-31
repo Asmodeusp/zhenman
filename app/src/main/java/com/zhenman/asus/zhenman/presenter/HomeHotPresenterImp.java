@@ -3,10 +3,12 @@ package com.zhenman.asus.zhenman.presenter;
 import android.util.Log;
 
 import com.zhenman.asus.zhenman.contract.HomeHotContract;
+import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.model.bean.FollowBean;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.model.service.HomeHotService;
+import com.zhenman.asus.zhenman.model.service.SerializationCatalogReadService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 
 import java.util.HashMap;
@@ -47,7 +49,6 @@ public class HomeHotPresenterImp implements HomeHotContract.HomeHotPresenter {
                     public void onNext(HomeHotBean homeHotBean) {
 
                         if (homeHotBean.getState() == 0) {
-//                            homeHotView.showError(homeHotBean.getMsg());
                             if (homeHotBean!=null) {
                                 homeHotView.showHotBean(homeHotBean);
                             }
@@ -125,6 +126,42 @@ public class HomeHotPresenterImp implements HomeHotContract.HomeHotPresenter {
                             homeHotView.showFollowBean(followBean);
                         }
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void getCommentList(String id, String pageNum, String pageSize, String commentType, String commentSubType) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", pageSize);
+        map.put("commentType", commentType);
+        map.put("commentSubType", commentSubType);
+        RetrofitUtils.getInstance().getService(HomeHotService.class).getCommentListBean(map).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CommentListBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(CommentListBean commentListBean) {
+                        if (commentListBean.getState() == 0) {
+                            homeHotView.showError(commentListBean.getMsg());
+                            homeHotView.showCommentList(commentListBean);
+                        } else {
+                            homeHotView.showError(commentListBean.getMsg());
+                        }
                     }
 
                     @Override

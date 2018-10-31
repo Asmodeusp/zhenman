@@ -103,7 +103,7 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
     public void getSerializationDetailsBean(String PgcId) {
         Map<String, String> map = new HashMap<>();
         map.put("pgcId", PgcId);
-        RetrofitUtils.getInstance().getSerializationDetailsService().GetSerializationDetailsBean( map).subscribeOn(Schedulers.newThread())
+        RetrofitUtils.getInstance().getSerializationDetailsService().GetSerializationDetailsBean(map).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<SerializationDetailsBean>() {
                     @Override
@@ -141,7 +141,7 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
         maps.put("amount", amount);
         maps.put("comment", "打赏");
         RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
-                .getMakeOrderBean( maps)
+                .getMakeOrderBean(maps)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MakeOrderBean>() {
@@ -177,7 +177,7 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
         maps.put("amount", amount);
         maps.put("comment", "打赏");
         RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
-                .getWxMakeOrderBean( maps)
+                .getWxMakeOrderBean(maps)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MakeOrderBean>() {
@@ -234,10 +234,6 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                     }
                 });
     }
-
-
-
-
     @Override
     public void PGCReadFabulous(String productId, String commentId, String status, String pgcId) {
         Map<String, String> map = new HashMap<>();
@@ -247,7 +243,7 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
         map.put("pgcId", pgcId);
         RetrofitUtils.getInstance()
                 .getService(SerializationCatalogReadService.class)
-                .GetPGCReadFabulousBean( map)
+                .GetPGCReadFabulousBean(map)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<PgcReadFabulousBean>() {
@@ -311,7 +307,7 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
     @Override
     public void sendProductListData(String type) {
         Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("type",type);//项目购买的有两种，茄子和茄子籽，两个产品列表都是这一个接口，区别就是type=1是请求茄子，type=2是请求茄子籽
+        paramMap.put("type", type);//项目购买的有两种，茄子和茄子籽，两个产品列表都是这一个接口，区别就是type=1是请求茄子，type=2是请求茄子籽
         RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
                 .getProductList(paramMap)
                 .subscribeOn(Schedulers.newThread())

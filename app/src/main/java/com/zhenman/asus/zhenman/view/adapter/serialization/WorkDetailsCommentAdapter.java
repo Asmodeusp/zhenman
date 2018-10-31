@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ import android.widget.Toast;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.CommentListBean;
-import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.MyClickSpan;
@@ -33,11 +33,11 @@ public class WorkDetailsCommentAdapter extends RecyclerView.Adapter<WorkDetailsC
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
     private boolean followCount = true;
-    private WorkDetailsCommentPresenterImp presenter;
 
-    public WorkDetailsCommentAdapter(List<CommentListBean.DataBean.CommentDtoListBeanX> list, WorkDetailsCommentPresenterImp presenter) {
+
+    public WorkDetailsCommentAdapter(List<CommentListBean.DataBean.CommentDtoListBeanX> list) {
         this.list = list;
-        this.presenter = presenter;
+
     }
 
     @NonNull
@@ -73,6 +73,7 @@ public class WorkDetailsCommentAdapter extends RecyclerView.Adapter<WorkDetailsC
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
+        holder.itemView.setTag(position);
         final CommentListBean.DataBean.CommentDtoListBeanX listBean = list.get(position);
         GlideUtils.loadCircleImage(listBean.getImageUrl(), holder.work_commentRecy_headView, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
             @Override
@@ -85,13 +86,10 @@ public class WorkDetailsCommentAdapter extends RecyclerView.Adapter<WorkDetailsC
 
             }
         },R.mipmap.my_qiezi);
-        ArrayList<String> list = new ArrayList<>();
-        for (CommentListBean.DataBean.CommentDtoListBeanX.TextDtoBean.TextExtraBean textExtraBean : listBean.getTextDto().getTextExtra()) {
-          list.add(textExtraBean.getText());
-        }
-        String[] strings = new String[list.size()];
-        list.toArray(strings);
-        MyClickSpan.setTextHighLightWithClick(holder.Work_commentRecy_Comment, listBean.getTextDto().getText(), strings, new View.OnClickListener() {
+
+        Log.d("WorkDetailsCommentAdapt", listBean.getTextDto().getText());
+        Log.d("WorkDetailsCommentAdapt", "listBean.getTextDto().getTextExtra().size():" + listBean.getTextDto().getTextExtra().size());
+        MyClickSpan.setTextHighLightWithClick(holder.Work_commentRecy_Comment, listBean.getTextDto().getText(), listBean.getTextDto().getTextExtra(), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
@@ -101,6 +99,19 @@ public class WorkDetailsCommentAdapter extends RecyclerView.Adapter<WorkDetailsC
         holder.Work_commentRecy_LikeNumber.setText(listBean.getLikeNum()+"");
         holder.Work_commentRecy_Time.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
         holder.Work_commentRecy_Like.setButtonDrawable(R.mipmap.home_like_off);
+        holder.work_commentRecy_headView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean ISlogin = (Boolean) SPUtils.get(context, SPKey.IS_LOGIN, false);
+                if (!ISlogin) {
+                    context.startActivity(new Intent(context, MainActivity.class));
+                    ((Activity) context).finish();
+                }else {
+                    clickGoUserInfo.go(listBean.getUserId());
+                }
+
+            }
+        });
     }
 
     @Override

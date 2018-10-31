@@ -22,6 +22,8 @@ import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.WorkDetailsActorRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.WorkDetailsCommentAdapter;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
+import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
+import com.zhenman.asus.zhenman.view.serializaion.SerializaionCommentDetailsActivity;
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 
 import java.util.List;
@@ -120,7 +122,7 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
     }
 
     @Override
-    public void showCommentListBean(CommentListBean commentListBean) {
+    public void showCommentListBean(final CommentListBean commentListBean) {
         if (commentListBean!=null) {
             if (commentListBean.getData().getCommentDtoList().size()==0) {
                 work_commentTips.setVisibility(View.VISIBLE);
@@ -128,8 +130,25 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
             }else{
                 work_commentTips.setVisibility(View.GONE);
                 Work_commentRecy.setVisibility(View.VISIBLE);
-                Work_commentRecy.setAdapter(new WorkDetailsCommentAdapter(commentListBean.getData().getCommentDtoList(),presenter));
+                WorkDetailsCommentAdapter workDetailsCommentAdapter = new WorkDetailsCommentAdapter(commentListBean.getData().getCommentDtoList());
 
+                Work_commentRecy.setAdapter(workDetailsCommentAdapter);
+                workDetailsCommentAdapter.setRecyclerViewOnCLickListener(new WorkDetailsCommentAdapter.RecyclerViewOnCLickListener() {
+                    @Override
+                    public void myClick(View view, int position) {
+                        Intent intent = new Intent(getContext(), SerializaionCommentDetailsActivity.class);
+                        intent.putExtra("CommentId",commentListBean.getData().getCommentDtoList().get(position).getCommentId());
+                        startActivity(intent);
+                    }
+                });
+                workDetailsCommentAdapter.setgoUserInfo(new WorkDetailsCommentAdapter.goUserInfo() {
+                    @Override
+                    public void go(String UserId) {
+                        Intent intent = new Intent(getContext(), HomepageActivity.class);
+                        intent.putExtra(SPKey.HIM_ID, UserId);
+                        getActivity().startActivity(intent);
+                    }
+                });
             }
         }
     }

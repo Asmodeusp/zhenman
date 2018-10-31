@@ -3,7 +3,6 @@ package com.zhenman.asus.zhenman.view.adapter.comment;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
+import com.zhenman.asus.zhenman.model.bean.CommentItemListBean;
 import com.zhenman.asus.zhenman.model.bean.CommentListBean;
-import com.zhenman.asus.zhenman.model.bean.TextExtraBean;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.MyClickSpan;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
@@ -25,15 +24,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecyclerAdapter.Holder> implements View.OnClickListener {
-    private List<CommentListBean.DataBean.CommentDtoListBeanX> list;
+public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecyAdapter.Holder> implements View.OnClickListener {
+    private List<CommentItemListBean.DataBean.CommentDtoListBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
 
-
-    public CommentRecyclerAdapter(List<CommentListBean.DataBean.CommentDtoListBeanX> list) {
+    public CommentItemRecyAdapter(List<CommentItemListBean.DataBean.CommentDtoListBean> list) {
         this.list = list;
-
     }
 
     @NonNull
@@ -59,7 +56,7 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
-        final CommentListBean.DataBean.CommentDtoListBeanX listBean = list.get(position);
+        final CommentItemListBean.DataBean.CommentDtoListBean listBean = list.get(position);
         holder.itemView.setTag(position);
         //加载头像
         GlideUtils.loadCircleImage(listBean.getImageUrl(), holder.comment_fill_HeadView, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
@@ -79,68 +76,19 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
             MyClickSpan.setTextHighLightWithClick(holder.comment_fill_conent, listBean.getTextDto().getText(), listBean.getTextDto().getTextExtra(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
-        if (listBean.getCommentDtoList() != null && listBean.getCommentDtoList().size() != 0) {
-            if (listBean.getCommentDtoList().size() == 1) {
-                holder.comment_fill_SeeMoreText.setVisibility(View.GONE);
-                holder.Comment_fill_SecondItem.setVisibility(View.GONE);
-                ArrayList<TextExtraBean> oneTextExtralist = new ArrayList<>();
-                List<TextExtraBean> textExtra = listBean.getCommentDtoList().get(0).getTextDto().getTextExtra();
-                for (TextExtraBean textExtraBean : textExtra) {
-                    oneTextExtralist.add(textExtraBean);
-                }
-                Log.d("CommentRecyclerAdapter", listBean.getTextDto().getTextExtra().get(0).getText());
-                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getCommentDtoList().get(0).getTextDto().getText(), oneTextExtralist, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } else {
-                holder.comment_fill_SeeMoreText.setVisibility(View.VISIBLE);
-                holder.Comment_fill_SecondItem.setVisibility(View.VISIBLE);
-            }
-            if (listBean.getCommentDtoList().size() == 2) {
-                ArrayList<TextExtraBean> oneTextExtralist = new ArrayList<>();
-                List<TextExtraBean> textExtra = listBean.getCommentDtoList().get(0).getTextDto().getTextExtra();
-                for (TextExtraBean textExtraBean : textExtra) {
-                    oneTextExtralist.add(textExtraBean);
-                }
-                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getCommentDtoList().get(0).getTextDto().getText(), oneTextExtralist, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-                ArrayList<TextExtraBean> TwoTextExtralist = new ArrayList<>();
-                List<TextExtraBean> textExtra1 = listBean.getCommentDtoList().get(1).getTextDto().getTextExtra();
-                for (TextExtraBean textExtraBean : textExtra1) {
-                    TwoTextExtralist.add(textExtraBean);
-                }
-                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_SecondItem, listBean.getCommentDtoList().get(1).getTextDto().getText(), TwoTextExtralist, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } else {
-                holder.comment_fill_SeeMoreText.setVisibility(View.VISIBLE);
-            }
 
-        } else {
-            holder.comment_Two_ItemLinearLayout.setVisibility(View.GONE);
-        }
+
         //加载用户名
         holder.comment_fill_UserName.setText(listBean.getName());
         //加载喜欢个数
         holder.comment_fill_likeNumberText.setText(listBean.getLikeNum() + "");
         //加载添加时间
         holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
-        //设置共多少评论
-        holder.comment_fill_SeeMoreText.setText("共" + listBean.getCommentDtoList().size() + "条评论");
+        holder.comment_Two_ItemLinearLayout.setVisibility(View.GONE);
         holder.comment_fill_fromUserText.setVisibility(View.GONE);
 
     }
