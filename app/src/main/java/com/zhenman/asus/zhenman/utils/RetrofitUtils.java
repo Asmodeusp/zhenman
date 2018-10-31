@@ -15,16 +15,11 @@ import com.zhenman.asus.zhenman.model.service.SerializationDetailsService;
 import com.zhenman.asus.zhenman.model.service.SerializationService;
 import com.zhenman.asus.zhenman.model.service.SetPasswordService;
 import com.zhenman.asus.zhenman.model.service.WorkDetailsCommentService;
-import com.zhenman.asus.zhenman.utils.sp.SPKey;
-import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
 import okhttp3.CacheControl;
-import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -81,7 +76,8 @@ public class RetrofitUtils {
                 Request originalRequest = chain.request();
                 Request.Builder requestBuilder = originalRequest.newBuilder()
                         .header("os", "Android")
-                        .header("accessToken",((String)SPUtils.get(App.context, SPKey.USER_TOKEN, "")))
+//                        .header("accessToken",((String)SPUtils.get(App.context, SPKey.USER_TOKEN, "")))
+                        .header("accessToken","eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1NDA4ODMzMzIsInN1YiI6IntcInVzZXJJZFwiOjQwNixcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiRTk1NjlENkRCMDREQUJFNzc0NjE0RkI1OTFBQTkxMjRcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4zLjBcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU3MjQxOTMzMn0.jJT8sOS4JtOJQ9W0RFYGf-zNIfeGUKzv_fUUc78JqqA")
                         .header("osVersion", Build.VERSION.RELEASE)
                         .header("version", "1.0.0")
                         .header("AppType", "TPOS")

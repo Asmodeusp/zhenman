@@ -2,16 +2,16 @@
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/itemProductList"
     android:layout_width="match_parent"
-    android:layout_height="400px"
+    android:layout_height="420px"
     android:layout_margin="@dimen/px_16"
     android:background="@drawable/product_selector">
 
     <ImageView
         android:id="@+id/itemProductList_bite"
-        android:layout_width="@dimen/px_80"
-        android:layout_height="@dimen/px_80"
-        android:layout_marginLeft="@dimen/px_32"
-        android:layout_marginTop="@dimen/px_32"
+        android:layout_width="@dimen/px_64"
+        android:layout_height="@dimen/px_64"
+        android:layout_marginLeft="@dimen/px_40"
+        android:layout_marginTop="@dimen/px_38"
         android:src="@mipmap/my_qiezi_bite" />
 
     <TextView
@@ -19,10 +19,9 @@
         style="@style/Style32H2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/px_16"
         android:layout_marginTop="@dimen/px_48"
         android:layout_toRightOf="@id/itemProductList_bite"
-        android:text="X 2" />
+        android:text="X2" />
 
     <!--<CheckBox
         android:id="@+id/itemProductList_num"

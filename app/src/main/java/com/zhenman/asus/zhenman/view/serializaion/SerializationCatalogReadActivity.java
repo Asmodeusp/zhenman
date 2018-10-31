@@ -1,5 +1,6 @@
 package com.zhenman.asus.zhenman.view.serializaion;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -10,20 +11,18 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -268,6 +267,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         });
 
     }
+
     //得到数据
     @Override
     protected void loadDate() {
@@ -281,7 +281,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         //作品详情集合
         presenter.getSerializationDetailsBean(pgcId);
         //作品评论集合
-        presenter.getCommentList(StartcatalogId,"1","50","3", "1");
+        presenter.getCommentList(StartcatalogId, "1", "50", "3", "1");
     }
 
     //设置开关监听
@@ -575,7 +575,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     //支付popuwindow
     private void ShowPaypopupView() {
-        View PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null,true);
+
+        View PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
         ppwPayProductList = PaypopupView.findViewById(R.id.ppwPay_productList);
         ppwPayZhifubaoBtn = PaypopupView.findViewById(R.id.ppwPay_zhifubaoBtn);
         ppwPayWeixinBtn = PaypopupView.findViewById(R.id.ppwPay_weixinBtn);
@@ -584,27 +585,30 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
         ppwPayUserName = PaypopupView.findViewById(R.id.ppwPay_userName);
         ppwPayUserName.setText("Hi, " + (String) SPUtils.get(this, SPKey.UMeng_NAME, ""));
+//        PopUpwindowLayout popUpwindowLayout = (PopUpwindowLayout) view.findViewById(R.id.llayout_popupwindow);
+//        popUpwindowLayout.initViews(mContext, titles, false);
+        final PopupWindow popupWindow = new PopupWindow(PaypopupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        PaypopupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        int popupWidth = PaypopupView.getMeasuredWidth();
+        int popupHeight = PaypopupView.getMeasuredHeight();
+//        int[] location = new int[2];
+// 允许点击外部消失
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
         ppwPayPayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (paymentMethod.equals("1")) {
-                    presenter.setWxMakeOrderData(qieziId + "", "2", StartcatalogId, "3", "支付");
+                    presenter.setWxMakeOrderData(qieziId + "", "2", StartcatalogId, qieziMoney + "", "打赏");
                 } else if (paymentMethod.equals("2")) {
-                    presenter.setMakeOrderData(qieziId + "", "2", StartcatalogId, "1", "支付");
+                    presenter.setMakeOrderData(qieziId + "", "2", StartcatalogId, qieziMoney + "", "打赏");
                 } else {
                     Toast.makeText(SerializationCatalogReadActivity.this, "请选择支付方式", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        //获取屏幕宽高
-        int weight = getResources().getDisplayMetrics().widthPixels;
-        int height = getResources().getDisplayMetrics().heightPixels * 3 / 4;
-
-        paypopupWindow = new PopupWindow(PaypopupView, weight, height);
-        paypopupWindow.setFocusable(true);
-        //点击外部popueWindow消失
-        paypopupWindow.setOutsideTouchable(true);
-//        支付宝
+        //        支付宝
         ppwPayZhifubaoBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -628,16 +632,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 }
             }
         });
-        //popupWindow消失屏幕变为不透明
-        paypopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                WindowManager.LayoutParams lp = getWindow().getAttributes();
-                lp.alpha = 1.0f;
-                getWindow().setAttributes(lp);
-            }
-        });
-        paypopupWindow.showAtLocation(PaypopupView, Gravity.BOTTOM, 0, 0);
+        popupWindow.showAtLocation(PaypopupView, Gravity.BOTTOM, 0, 0);
+
     }
 
     //得到订单数据
@@ -669,9 +665,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     @Override
     public void showCommentListBean(CommentListBean commentListBean) {
-        if (commentListBean!=null) {
+        if (commentListBean != null) {
             this.commentListBean = commentListBean;
-
             EventBus.getDefault().post(commentListBean);
         }
     }
@@ -756,6 +751,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             List<ProductListBean.DataBean> listBeanData = productListBean.getData();
             GridLayoutManager linearLayoutManager = new GridLayoutManager(this, 3);
             ppwPayProductList.setLayoutManager(linearLayoutManager);
+            ppwPayProductList.setNestedScrollingEnabled(false);//禁止滑动
             ProductListAdapter productListAdapter = new ProductListAdapter(listBeanData, this);
             ppwPayProductList.setAdapter(productListAdapter);
             productListAdapter.ProductListCallback(this);

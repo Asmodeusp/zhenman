@@ -21,14 +21,7 @@
         android:src="@mipmap/serial_shelf_off"
         android:visibility="gone" />
 
-    <ImageView
-        android:id="@+id/itemShelfColl_on"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/px_20"
-        android:src="@mipmap/serial_shelf_on"
-        android:visibility="gone" />
+
 
     <ImageView
         android:id="@+id/itemShelfColl_mask"
@@ -45,7 +38,8 @@
         android:layout_height="@dimen/px_44"
         android:layout_marginLeft="180px"
         android:layout_marginTop="@dimen/px_8"
-        android:button="@mipmap/home_follow_on" />
+        android:checked="false"
+        android:button="@drawable/pay_selector" />
 
     <TextView
         android:id="@+id/itemShelfColl_title"

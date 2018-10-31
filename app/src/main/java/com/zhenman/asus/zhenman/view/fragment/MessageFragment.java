@@ -18,6 +18,9 @@ import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.message.ThemeAdapter;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
+import com.zhenman.asus.zhenman.view.message.ByCommentActivity;
+import com.zhenman.asus.zhenman.view.message.ByFansActivity;
+import com.zhenman.asus.zhenman.view.message.ByRewardedActivity;
 import com.zhenman.asus.zhenman.view.message.ThemeDetailsActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -86,11 +89,13 @@ public class MessageFragment extends BaseFragment<TheamBeanPresenter> implements
 
                 break;
             case R.id.message_comment:
+                startActivity(new Intent(getActivity(), ByCommentActivity.class));
                 break;
             case R.id.message_fans:
+                startActivity(new Intent(getContext(), ByFansActivity.class));
                 break;
             case R.id.message_pay:
-
+                startActivity(new Intent(getContext(), ByRewardedActivity.class));
                 break;
         }
     }
