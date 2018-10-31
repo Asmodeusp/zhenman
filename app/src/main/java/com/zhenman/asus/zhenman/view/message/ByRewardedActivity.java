@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
@@ -62,7 +63,7 @@ public class ByRewardedActivity extends BaseActivity<ByRewardedPresenter> implem
     public void showByRewardedData(ByRewardedBean byRewardedBean) {
         Log.e("Sunny",byRewardedBean.getData().size()+"");
         if (byRewardedBean.getData().size()==0){
-
+            Toast.makeText(this, "暂时没有数据", Toast.LENGTH_SHORT).show();
         }else {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
             byRewardedList.setLayoutManager(linearLayoutManager);
