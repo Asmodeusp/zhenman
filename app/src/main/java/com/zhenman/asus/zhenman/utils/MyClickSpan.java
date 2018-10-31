@@ -7,9 +7,14 @@ import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.zhenman.asus.zhenman.model.bean.TextExtraBean;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,21 +50,23 @@ public class MyClickSpan extends ClickableSpan {
     }
 
 
-    public static void setTextHighLightWithClick(TextView tv, String text, String[] keyWord, View.OnClickListener listener) {
+    public static void setTextHighLightWithClick(TextView tv, String text, List<TextExtraBean> textExtraBeans, View.OnClickListener listener) {
         tv.setClickable(true);
         tv.setHighlightColor(Color.TRANSPARENT);
         tv.setMovementMethod(LinkMovementMethod.getInstance());
         SpannableString s = new SpannableString(text);
-        for (int i = 0; i < keyWord.length; i++) {
-            Pattern p = Pattern.compile(keyWord[i]);
-            Matcher m = p.matcher(s);
-            while (m.find()) {
-                    int start = m.start();
-
-                    int end = m.end();
-                s.setSpan(new MyClickSpan(listener), start, end,
-                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
+//        for (int i = 0; i < textExtraBeans.size(); i++) {
+//            Pattern p = Pattern.compile(keyWord[i]);
+//            Matcher m = p.matcher(s);
+//            while (m.find()) {
+//                    int start = m.start();
+//                    int end = m.end();
+//                s.setSpan(new MyClickSpan(listener), start, end,
+//                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//            }
+//        }
+        for (TextExtraBean textExtraBean : textExtraBeans) {
+            s.setSpan(new MyClickSpan(listener),textExtraBean.getStart(),(textExtraBean.getStart()+textExtraBean.getLength()),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         tv.setText(s);
     }

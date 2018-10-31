@@ -4,10 +4,11 @@ import java.util.List;
 
 public class CommentListBean {
 
+
     /**
      * state : 0
      * msg : 成功
-     * data : {"total":7,"commentDtoList":[{"commentId":"1026","content":"@ଲ 猜 放假放假","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":4,"addTime":"1540459591000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"@ଲ 猜 放假放假","textExtra":[{"start":0,"length":4,"id":"260","text":"@ଲ 猜","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[{"commentId":"1026","content":"Sdfsdfsd","catalogId":null,"userId":"378","likeNum":0,"like":false,"detailNum":0,"addTime":"1540528932000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"用户377","detailId":"88","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"Sdfsdfsd\",\"textExtra\":[]}","textDto":{"text":"用户377:Sdfsdfsd","textExtra":[{"start":0,"length":5,"id":"378","text":"用户377","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null},{"commentId":"1026","content":"Sdfsdf","catalogId":null,"userId":"378","likeNum":0,"like":false,"detailNum":0,"addTime":"1540528925000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"用户377","detailId":"87","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"Sdfsdf\",\"textExtra\":[]}","textDto":{"text":"用户377:Sdfsdf","textExtra":[{"start":0,"length":5,"id":"378","text":"用户377","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null}]},{"commentId":"1025","content":"The new version was great for my kids but it was fun for them h**sqwthemforfunwasitbutkid**yforgreatwasversionnewThe@哈哈哈哈哈哈 ","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":2,"addTime":"1540457843000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"The new version was great for my kids but it was fun for them hsbsqwthemforfunwasitbutkidsmyforgreatwasversionnewThe@哈哈哈哈哈哈 ","textExtra":[{"start":116,"length":7,"id":"398","text":"@哈哈哈哈哈哈","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[{"commentId":"1025","content":"Sdfsdfsdfsdfs","catalogId":null,"userId":"378","likeNum":0,"like":false,"detailNum":0,"addTime":"1540526761000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"用户377","detailId":"80","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"Sdfsdfsdfsdfs\",\"textExtra\":[]}","textDto":{"text":"用户377:Sdfsdfsdfsdfs","textExtra":[{"start":0,"length":5,"id":"378","text":"用户377","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null},{"commentId":"1025","content":"@袁信 sdfsdf ","catalogId":null,"userId":"378","likeNum":0,"like":false,"detailNum":0,"addTime":"1540526714000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"用户377","detailId":"79","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"@袁信 sdfsdf \",\"textExtra\":[{\"id\":\"385\",\"start\":0,\"length\":3,\"text\":\"@袁信\",\"textType\":1}]}","textDto":{"text":"用户377:@袁信 sdfsdf ","textExtra":[{"start":0,"length":5,"id":"378","text":"用户377","textType":1,"link":null},{"start":5,"length":3,"id":"385","text":"@袁信","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null}]},{"commentId":"1024","content":"多久时间@jojoman 订单","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540457713000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"多久时间@jojoman 订单","textExtra":[{"start":4,"length":8,"id":"256","text":"@jojoman","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[]},{"commentId":"1023","content":"笑口常开开心@绝版青春 ","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540457215000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"笑口常开开心@绝版青春 ","textExtra":[{"start":6,"length":5,"id":"255","text":"@绝版青春","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[]},{"commentId":"1021","content":"➏➐➏➑➏➐@不知南北找东西 ","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540457086000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"➏➐➏➑➏➐@不知南北找东西 ","textExtra":[{"start":6,"length":8,"id":"258","text":"@不知南北找东西","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[]},{"commentId":"1020","content":"发VB不会vVB那边@jojoman ","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1540457007000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"发VB不会vVB那边@jojoman ","textExtra":[{"start":10,"length":8,"id":"256","text":"@jojoman","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[]},{"commentId":"1019","content":"发VB不会vVB那边@jojoman ","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1540456993000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"发VB不会vVB那边@jojoman ","textExtra":[{"start":10,"length":8,"id":"256","text":"@jojoman","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[]}]}
+     * data : {"total":3,"commentDtoList":[{"commentId":"249","content":"@绝版青春 sdf","catalogId":"56","userId":"260","likeNum":1,"like":false,"detailNum":4,"addTime":"1540364757000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"@绝版青春 sdf","textExtra":[{"start":0,"length":5,"id":"255","text":"@绝版青春","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[{"commentId":"249","content":"@ଲ 猜 这➏➐➏➐➏➑","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540553625000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"432423","detailId":"173","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"@ଲ 猜 这➏➐➏➐➏➑\",\"textExtra\":[{\"id\":\"260\",\"start\":0,\"length\":4,\"text\":\"@ଲ 猜\",\"textType\":1}]}","textDto":{"text":"432423:@ଲ 猜 这➏➐➏➐➏➑","textExtra":[{"start":0,"length":6,"id":"306","text":"432423","textType":1,"link":null},{"start":6,"length":4,"id":"260","text":"@ଲ 猜","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null},{"commentId":"249","content":"➍➎➏➑➎➎➏➒➏","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540549256000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"432423","detailId":"172","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"➍➎➏➑➎➎➏➒➏\",\"textExtra\":[]}","textDto":{"text":"432423:➍➎➏➑➎➎➏➒➏","textExtra":[{"start":0,"length":6,"id":"306","text":"432423","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null}]},{"commentId":"256","content":"➐➏➏➑","catalogId":"56","userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540548073000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"➐➏➏➑","textExtra":[]},"titleDto":null,"commentDtoList":[]},{"commentId":"258","content":"➒➏➑➏","catalogId":"56","userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540552950000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"➒➏➑➏","textExtra":[]},"titleDto":null,"commentDtoList":[]}]}
      */
 
     private int state;
@@ -40,8 +41,8 @@ public class CommentListBean {
 
     public static class DataBean {
         /**
-         * total : 7
-         * commentDtoList : [{"commentId":"1026","content":"@ଲ 猜 放假放假","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":4,"addTime":"1540459591000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"@ଲ 猜 放假放假","textExtra":[{"start":0,"length":4,"id":"260","text":"@ଲ 猜","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[{"commentId":"1026","content":"Sdfsdfsd","catalogId":null,"userId":"378","likeNum":0,"like":false,"detailNum":0,"addTime":"1540528932000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"用户377","detailId":"88","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"Sdfsdfsd\",\"textExtra\":[]}","textDto":{"text":"用户377:Sdfsdfsd","textExtra":[{"start":0,"length":5,"id":"378","text":"用户377","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null},{"commentId":"1026","content":"Sdfsdf","catalogId":null,"userId":"378","likeNum":0,"like":false,"detailNum":0,"addTime":"1540528925000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"用户377","detailId":"87","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"Sdfsdf\",\"textExtra\":[]}","textDto":{"text":"用户377:Sdfsdf","textExtra":[{"start":0,"length":5,"id":"378","text":"用户377","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null}]},{"commentId":"1025","content":"The new version was great for my kids but it was fun for them h**sqwthemforfunwasitbutkid**yforgreatwasversionnewThe@哈哈哈哈哈哈 ","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":2,"addTime":"1540457843000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"The new version was great for my kids but it was fun for them hsbsqwthemforfunwasitbutkidsmyforgreatwasversionnewThe@哈哈哈哈哈哈 ","textExtra":[{"start":116,"length":7,"id":"398","text":"@哈哈哈哈哈哈","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[{"commentId":"1025","content":"Sdfsdfsdfsdfs","catalogId":null,"userId":"378","likeNum":0,"like":false,"detailNum":0,"addTime":"1540526761000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"用户377","detailId":"80","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"Sdfsdfsdfsdfs\",\"textExtra\":[]}","textDto":{"text":"用户377:Sdfsdfsdfsdfs","textExtra":[{"start":0,"length":5,"id":"378","text":"用户377","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null},{"commentId":"1025","content":"@袁信 sdfsdf ","catalogId":null,"userId":"378","likeNum":0,"like":false,"detailNum":0,"addTime":"1540526714000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"用户377","detailId":"79","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"@袁信 sdfsdf \",\"textExtra\":[{\"id\":\"385\",\"start\":0,\"length\":3,\"text\":\"@袁信\",\"textType\":1}]}","textDto":{"text":"用户377:@袁信 sdfsdf ","textExtra":[{"start":0,"length":5,"id":"378","text":"用户377","textType":1,"link":null},{"start":5,"length":3,"id":"385","text":"@袁信","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null}]},{"commentId":"1024","content":"多久时间@jojoman 订单","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540457713000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"多久时间@jojoman 订单","textExtra":[{"start":4,"length":8,"id":"256","text":"@jojoman","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[]},{"commentId":"1023","content":"笑口常开开心@绝版青春 ","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540457215000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"笑口常开开心@绝版青春 ","textExtra":[{"start":6,"length":5,"id":"255","text":"@绝版青春","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[]},{"commentId":"1021","content":"➏➐➏➑➏➐@不知南北找东西 ","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540457086000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"➏➐➏➑➏➐@不知南北找东西 ","textExtra":[{"start":6,"length":8,"id":"258","text":"@不知南北找东西","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[]},{"commentId":"1020","content":"发VB不会vVB那边@jojoman ","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1540457007000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"发VB不会vVB那边@jojoman ","textExtra":[{"start":10,"length":8,"id":"256","text":"@jojoman","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[]},{"commentId":"1019","content":"发VB不会vVB那边@jojoman ","catalogId":null,"userId":"260","likeNum":0,"like":false,"detailNum":0,"addTime":"1540456993000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"发VB不会vVB那边@jojoman ","textExtra":[{"start":10,"length":8,"id":"256","text":"@jojoman","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[]}]
+         * total : 3
+         * commentDtoList : [{"commentId":"249","content":"@绝版青春 sdf","catalogId":"56","userId":"260","likeNum":1,"like":false,"detailNum":4,"addTime":"1540364757000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100","name":"ଲ 猜","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"@绝版青春 sdf","textExtra":[{"start":0,"length":5,"id":"255","text":"@绝版青春","textType":1,"link":null}]},"titleDto":null,"commentDtoList":[{"commentId":"249","content":"@ଲ 猜 这➏➐➏➐➏➑","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540553625000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"432423","detailId":"173","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"@ଲ 猜 这➏➐➏➐➏➑\",\"textExtra\":[{\"id\":\"260\",\"start\":0,\"length\":4,\"text\":\"@ଲ 猜\",\"textType\":1}]}","textDto":{"text":"432423:@ଲ 猜 这➏➐➏➐➏➑","textExtra":[{"start":0,"length":6,"id":"306","text":"432423","textType":1,"link":null},{"start":6,"length":4,"id":"260","text":"@ଲ 猜","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null},{"commentId":"249","content":"➍➎➏➑➎➎➏➒➏","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540549256000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"432423","detailId":"172","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"➍➎➏➑➎➎➏➒➏\",\"textExtra\":[]}","textDto":{"text":"432423:➍➎➏➑➎➎➏➒➏","textExtra":[{"start":0,"length":6,"id":"306","text":"432423","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null}]},{"commentId":"256","content":"➐➏➏➑","catalogId":"56","userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540548073000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"➐➏➏➑","textExtra":[]},"titleDto":null,"commentDtoList":[]},{"commentId":"258","content":"➒➏➑➏","catalogId":"56","userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540552950000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":"http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100","name":"432423","detailId":null,"title":null,"roleNameList":null,"chapterSort":null,"json":null,"textDto":{"text":"➒➏➑➏","textExtra":[]},"titleDto":null,"commentDtoList":[]}]
          */
 
         private int total;
@@ -65,34 +66,34 @@ public class CommentListBean {
 
         public static class CommentDtoListBeanX {
             /**
-             * commentId : 1026
-             * content : @ଲ 猜 放假放假
-             * catalogId : null
-             * userId : 306
-             * likeNum : 0
+             * commentId : 249
+             * content : @绝版青春 sdf
+             * catalogId : 56
+             * userId : 260
+             * likeNum : 1
              * like : false
              * detailNum : 4
-             * addTime : 1540459591000
+             * addTime : 1540364757000
              * author : false
              * reUserId : null
              * reContent : null
              * reName : null
              * reAuthor : false
-             * imageUrl : http://pa1qj1jlg.bkt.clouddn.com/headImage/94d8936576be447db4af912580b48987_?imageMogr2/thumbnail/100x100
-             * name : 432423
+             * imageUrl : http://pa1qj1jlg.bkt.clouddn.com/headImage/7e55b65f5fee47ccb66a8f2f209e5f67_?imageMogr2/thumbnail/100x100
+             * name : ଲ 猜
              * detailId : null
              * title : null
              * roleNameList : null
              * chapterSort : null
              * json : null
-             * textDto : {"text":"@ଲ 猜 放假放假","textExtra":[{"start":0,"length":4,"id":"260","text":"@ଲ 猜","textType":1,"link":null}]}
+             * textDto : {"text":"@绝版青春 sdf","textExtra":[{"start":0,"length":5,"id":"255","text":"@绝版青春","textType":1,"link":null}]}
              * titleDto : null
-             * commentDtoList : [{"commentId":"1026","content":"Sdfsdfsd","catalogId":null,"userId":"378","likeNum":0,"like":false,"detailNum":0,"addTime":"1540528932000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"用户377","detailId":"88","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"Sdfsdfsd\",\"textExtra\":[]}","textDto":{"text":"用户377:Sdfsdfsd","textExtra":[{"start":0,"length":5,"id":"378","text":"用户377","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null},{"commentId":"1026","content":"Sdfsdf","catalogId":null,"userId":"378","likeNum":0,"like":false,"detailNum":0,"addTime":"1540528925000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"用户377","detailId":"87","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"Sdfsdf\",\"textExtra\":[]}","textDto":{"text":"用户377:Sdfsdf","textExtra":[{"start":0,"length":5,"id":"378","text":"用户377","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null}]
+             * commentDtoList : [{"commentId":"249","content":"@ଲ 猜 这➏➐➏➐➏➑","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540553625000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"432423","detailId":"173","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"@ଲ 猜 这➏➐➏➐➏➑\",\"textExtra\":[{\"id\":\"260\",\"start\":0,\"length\":4,\"text\":\"@ଲ 猜\",\"textType\":1}]}","textDto":{"text":"432423:@ଲ 猜 这➏➐➏➐➏➑","textExtra":[{"start":0,"length":6,"id":"306","text":"432423","textType":1,"link":null},{"start":6,"length":4,"id":"260","text":"@ଲ 猜","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null},{"commentId":"249","content":"➍➎➏➑➎➎➏➒➏","catalogId":null,"userId":"306","likeNum":0,"like":false,"detailNum":0,"addTime":"1540549256000","author":false,"reUserId":null,"reContent":null,"reName":null,"reAuthor":false,"imageUrl":null,"name":"432423","detailId":"172","title":null,"roleNameList":null,"chapterSort":null,"json":"{\"text\":\"➍➎➏➑➎➎➏➒➏\",\"textExtra\":[]}","textDto":{"text":"432423:➍➎➏➑➎➎➏➒➏","textExtra":[{"start":0,"length":6,"id":"306","text":"432423","textType":1,"link":null}]},"titleDto":null,"commentDtoList":null}]
              */
 
             private String commentId;
             private String content;
-            private Object catalogId;
+            private String catalogId;
             private String userId;
             private int likeNum;
             private boolean like;
@@ -130,11 +131,11 @@ public class CommentListBean {
                 this.content = content;
             }
 
-            public Object getCatalogId() {
+            public String getCatalogId() {
                 return catalogId;
             }
 
-            public void setCatalogId(Object catalogId) {
+            public void setCatalogId(String catalogId) {
                 this.catalogId = catalogId;
             }
 
@@ -300,8 +301,8 @@ public class CommentListBean {
 
             public static class TextDtoBean {
                 /**
-                 * text : @ଲ 猜 放假放假
-                 * textExtra : [{"start":0,"length":4,"id":"260","text":"@ଲ 猜","textType":1,"link":null}]
+                 * text : @绝版青春 sdf
+                 * textExtra : [{"start":0,"length":5,"id":"255","text":"@绝版青春","textType":1,"link":null}]
                  */
 
                 private String text;
@@ -323,96 +324,32 @@ public class CommentListBean {
                     this.textExtra = textExtra;
                 }
 
-                public static class TextExtraBean {
-                    /**
-                     * start : 0
-                     * length : 4
-                     * id : 260
-                     * text : @ଲ 猜
-                     * textType : 1
-                     * link : null
-                     */
 
-                    private int start;
-                    private int length;
-                    private String id;
-                    private String text;
-                    private int textType;
-                    private Object link;
-
-                    public int getStart() {
-                        return start;
-                    }
-
-                    public void setStart(int start) {
-                        this.start = start;
-                    }
-
-                    public int getLength() {
-                        return length;
-                    }
-
-                    public void setLength(int length) {
-                        this.length = length;
-                    }
-
-                    public String getId() {
-                        return id;
-                    }
-
-                    public void setId(String id) {
-                        this.id = id;
-                    }
-
-                    public String getText() {
-                        return text;
-                    }
-
-                    public void setText(String text) {
-                        this.text = text;
-                    }
-
-                    public int getTextType() {
-                        return textType;
-                    }
-
-                    public void setTextType(int textType) {
-                        this.textType = textType;
-                    }
-
-                    public Object getLink() {
-                        return link;
-                    }
-
-                    public void setLink(Object link) {
-                        this.link = link;
-                    }
-                }
             }
 
             public static class CommentDtoListBean {
                 /**
-                 * commentId : 1026
-                 * content : Sdfsdfsd
+                 * commentId : 249
+                 * content : @ଲ 猜 这➏➐➏➐➏➑
                  * catalogId : null
-                 * userId : 378
+                 * userId : 306
                  * likeNum : 0
                  * like : false
                  * detailNum : 0
-                 * addTime : 1540528932000
+                 * addTime : 1540553625000
                  * author : false
                  * reUserId : null
                  * reContent : null
                  * reName : null
                  * reAuthor : false
                  * imageUrl : null
-                 * name : 用户377
-                 * detailId : 88
+                 * name : 432423
+                 * detailId : 173
                  * title : null
                  * roleNameList : null
                  * chapterSort : null
-                 * json : {"text":"Sdfsdfsd","textExtra":[]}
-                 * textDto : {"text":"用户377:Sdfsdfsd","textExtra":[{"start":0,"length":5,"id":"378","text":"用户377","textType":1,"link":null}]}
+                 * json : {"text":"@ଲ 猜 这➏➐➏➐➏➑","textExtra":[{"id":"260","start":0,"length":4,"text":"@ଲ 猜","textType":1}]}
+                 * textDto : {"text":"432423:@ଲ 猜 这➏➐➏➐➏➑","textExtra":[{"start":0,"length":6,"id":"306","text":"432423","textType":1,"link":null},{"start":6,"length":4,"id":"260","text":"@ଲ 猜","textType":1,"link":null}]}
                  * titleDto : null
                  * commentDtoList : null
                  */
@@ -627,12 +564,12 @@ public class CommentListBean {
 
                 public static class TextDtoBeanX {
                     /**
-                     * text : 用户377:Sdfsdfsd
-                     * textExtra : [{"start":0,"length":5,"id":"378","text":"用户377","textType":1,"link":null}]
+                     * text : 432423:@ଲ 猜 这➏➐➏➐➏➑
+                     * textExtra : [{"start":0,"length":6,"id":"306","text":"432423","textType":1,"link":null},{"start":6,"length":4,"id":"260","text":"@ଲ 猜","textType":1,"link":null}]
                      */
 
                     private String text;
-                    private List<TextExtraBeanX> textExtra;
+                    private List<TextExtraBean> textExtra;
 
                     public String getText() {
                         return text;
@@ -642,81 +579,18 @@ public class CommentListBean {
                         this.text = text;
                     }
 
-                    public List<TextExtraBeanX> getTextExtra() {
+                    public List<TextExtraBean> getTextExtra() {
                         return textExtra;
                     }
 
-                    public void setTextExtra(List<TextExtraBeanX> textExtra) {
+                    public void setTextExtra(List<TextExtraBean> textExtra) {
                         this.textExtra = textExtra;
                     }
 
-                    public static class TextExtraBeanX {
-                        /**
-                         * start : 0
-                         * length : 5
-                         * id : 378
-                         * text : 用户377
-                         * textType : 1
-                         * link : null
-                         */
 
-                        private int start;
-                        private int length;
-                        private String id;
-                        private String text;
-                        private int textType;
-                        private Object link;
-
-                        public int getStart() {
-                            return start;
-                        }
-
-                        public void setStart(int start) {
-                            this.start = start;
-                        }
-
-                        public int getLength() {
-                            return length;
-                        }
-
-                        public void setLength(int length) {
-                            this.length = length;
-                        }
-
-                        public String getId() {
-                            return id;
-                        }
-
-                        public void setId(String id) {
-                            this.id = id;
-                        }
-
-                        public String getText() {
-                            return text;
-                        }
-
-                        public void setText(String text) {
-                            this.text = text;
-                        }
-
-                        public int getTextType() {
-                            return textType;
-                        }
-
-                        public void setTextType(int textType) {
-                            this.textType = textType;
-                        }
-
-                        public Object getLink() {
-                            return link;
-                        }
-
-                        public void setLink(Object link) {
-                            this.link = link;
-                        }
-                    }
                 }
             }
         }
     }
 }
+

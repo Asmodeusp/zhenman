@@ -71,14 +71,8 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
         }, R.mipmap.my_qiezi);
         //加载富文本
         holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
-        ArrayList<String> list = new ArrayList<>();
         if (listBean.getTextDto() != null) {
-            for (CommentItemListBean.DataBean.CommentDtoListBean.TextDtoBeanX.TextExtraBeanXX textExtraBeanXX : listBean.getTextDto().getTextExtra()) {
-                list.add(textExtraBeanXX.getText());
-            }
-            String[] strings = new String[list.size()];
-            list.toArray(strings);
-            MyClickSpan.setTextHighLightWithClick(holder.comment_fill_conent, listBean.getTextDto().getText(), strings, new View.OnClickListener() {
+            MyClickSpan.setTextHighLightWithClick(holder.comment_fill_conent, listBean.getTextDto().getText(), listBean.getTextDto().getTextExtra(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();

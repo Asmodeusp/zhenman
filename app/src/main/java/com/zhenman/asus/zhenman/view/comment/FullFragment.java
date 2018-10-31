@@ -76,7 +76,6 @@ public class FullFragment extends BottomSheetDialogFragment {
     public FullFragment(CommentListBean commentListBean, String Type) {
         this.commentListBean = commentListBean;
         this.Type = Type;
-        Log.d("FullFragment", Type);
     }
 
     @Override
@@ -99,7 +98,7 @@ public class FullFragment extends BottomSheetDialogFragment {
             CommentPopuTip.setVisibility(View.GONE);
             if (commentListBean.getData().getCommentDtoList().size() != 0) {
                 CommentPopuNumber.setText(commentListBean.getData().getCommentDtoList().size() + "条评论");
-                CommentRecyclerAdapter commentRecyclerAdapter = new CommentRecyclerAdapter(commentListBean.getData().getCommentDtoList());
+                 CommentRecyclerAdapter commentRecyclerAdapter = new CommentRecyclerAdapter(commentListBean.getData().getCommentDtoList());
                 CommentPopuRecy.setAdapter(commentRecyclerAdapter);
                 commentRecyclerAdapter.setRecyclerViewOnCLickListener(new CommentRecyclerAdapter.RecyclerViewOnCLickListener() {
                     @Override

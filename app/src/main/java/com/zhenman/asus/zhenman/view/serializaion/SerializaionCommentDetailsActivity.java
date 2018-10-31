@@ -118,12 +118,7 @@ public class SerializaionCommentDetailsActivity extends BaseActivity<Serializaio
         ArrayList<String> list = new ArrayList<>();
         if (commentItemListBean.getData().getTextDto() != null) {
 
-            for (CommentItemListBean.DataBean.TextDtoBean.TextExtraBean textExtraBean : commentItemListBean.getData().getTextDto().getTextExtra()) {
-                list.add(textExtraBean.getText());
-            }
-            String[] strings = new String[list.size()];
-            list.toArray(strings);
-            MyClickSpan.setTextHighLightWithClick(SerializaionCommentDetails_Comment, commentItemListBean.getData().getTextDto().getText(), strings, new View.OnClickListener() {
+            MyClickSpan.setTextHighLightWithClick(SerializaionCommentDetails_Comment, commentItemListBean.getData().getTextDto().getText(), commentItemListBean.getData().getTextDto().getTextExtra(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();

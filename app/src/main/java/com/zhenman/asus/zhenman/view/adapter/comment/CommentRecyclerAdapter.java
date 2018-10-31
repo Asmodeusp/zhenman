@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.CommentListBean;
+import com.zhenman.asus.zhenman.model.bean.TextExtraBean;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.MyClickSpan;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
@@ -74,14 +75,8 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
         }, R.mipmap.my_qiezi);
         //加载富文本
         holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
-        ArrayList<String> list = new ArrayList<>();
         if (listBean.getTextDto() != null) {
-            for (CommentListBean.DataBean.CommentDtoListBeanX.TextDtoBean.TextExtraBean textExtraBean : listBean.getTextDto().getTextExtra()) {
-                list.add(textExtraBean.getText());
-            }
-            String[] strings = new String[list.size()];
-            list.toArray(strings);
-            MyClickSpan.setTextHighLightWithClick(holder.comment_fill_conent, listBean.getTextDto().getText(), strings, new View.OnClickListener() {
+            MyClickSpan.setTextHighLightWithClick(holder.comment_fill_conent, listBean.getTextDto().getText(), listBean.getTextDto().getTextExtra(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
@@ -92,13 +87,13 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
             if (listBean.getCommentDtoList().size() == 1) {
                 holder.comment_fill_SeeMoreText.setVisibility(View.GONE);
                 holder.Comment_fill_SecondItem.setVisibility(View.GONE);
-                ArrayList<String> oneTextExtralist = new ArrayList<>();
-                for (CommentListBean.DataBean.CommentDtoListBeanX.CommentDtoListBean.TextDtoBeanX.TextExtraBeanX textExtraBeanX : listBean.getCommentDtoList().get(0).getTextDto().getTextExtra()) {
-                    oneTextExtralist.add(textExtraBeanX.getText());
+                ArrayList<TextExtraBean> oneTextExtralist = new ArrayList<>();
+                List<TextExtraBean> textExtra = listBean.getCommentDtoList().get(0).getTextDto().getTextExtra();
+                for (TextExtraBean textExtraBean : textExtra) {
+                    oneTextExtralist.add(textExtraBean);
                 }
-                String[] Onestring = new String[oneTextExtralist.size()];
-                list.toArray(Onestring);
-                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getTextDto().getTextExtra().get(0).getText(), Onestring, new View.OnClickListener() {
+                Log.d("CommentRecyclerAdapter", listBean.getTextDto().getTextExtra().get(0).getText());
+                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getCommentDtoList().get(0).getTextDto().getText(), oneTextExtralist, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
@@ -109,26 +104,23 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
                 holder.Comment_fill_SecondItem.setVisibility(View.VISIBLE);
             }
             if (listBean.getCommentDtoList().size() == 2) {
-                holder.comment_fill_SeeMoreText.setVisibility(View.GONE);
-                ArrayList<String> oneTextExtralist = new ArrayList<>();
-                for (CommentListBean.DataBean.CommentDtoListBeanX.CommentDtoListBean.TextDtoBeanX.TextExtraBeanX textExtraBeanX : listBean.getCommentDtoList().get(0).getTextDto().getTextExtra()) {
-                    oneTextExtralist.add(textExtraBeanX.getText());
+                ArrayList<TextExtraBean> oneTextExtralist = new ArrayList<>();
+                List<TextExtraBean> textExtra = listBean.getCommentDtoList().get(0).getTextDto().getTextExtra();
+                for (TextExtraBean textExtraBean : textExtra) {
+                    oneTextExtralist.add(textExtraBean);
                 }
-                String[] Onestring = new String[oneTextExtralist.size()];
-                oneTextExtralist.toArray(Onestring);
-                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getCommentDtoList().get(0).getTextDto().getText(), Onestring, new View.OnClickListener() {
+                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getCommentDtoList().get(0).getTextDto().getText(), oneTextExtralist, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+                       Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
                     }
                 });
-                ArrayList<String> TwoTextExtralist = new ArrayList<>();
-                for (CommentListBean.DataBean.CommentDtoListBeanX.CommentDtoListBean.TextDtoBeanX.TextExtraBeanX textExtraBeanX : listBean.getCommentDtoList().get(1).getTextDto().getTextExtra()) {
-                    TwoTextExtralist.add(textExtraBeanX.getText());
+                ArrayList<TextExtraBean> TwoTextExtralist = new ArrayList<>();
+                List<TextExtraBean> textExtra1 = listBean.getCommentDtoList().get(1).getTextDto().getTextExtra();
+                for (TextExtraBean textExtraBean : textExtra1) {
+                    TwoTextExtralist.add(textExtraBean)  ;
                 }
-                String[] Twostring = new String[TwoTextExtralist.size()];
-                TwoTextExtralist.toArray(Twostring);
-                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_SecondItem, listBean.getCommentDtoList().get(1).getTextDto().getText(), Twostring, new View.OnClickListener() {
+                MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_SecondItem, listBean.getCommentDtoList().get(1).getTextDto().getText(), TwoTextExtralist, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();

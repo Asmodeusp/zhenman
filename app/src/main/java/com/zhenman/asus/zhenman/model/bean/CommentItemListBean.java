@@ -3,6 +3,8 @@ package com.zhenman.asus.zhenman.model.bean;
 import java.util.List;
 
 public class CommentItemListBean {
+
+
     /**
      * state : 0
      * msg : 成功
@@ -297,71 +299,6 @@ public class CommentItemListBean {
                 this.textExtra = textExtra;
             }
 
-            public static class TextExtraBean {
-                /**
-                 * start : 0
-                 * length : 5
-                 * id : 255
-                 * text : @绝版青春
-                 * textType : 1
-                 * link : null
-                 */
-
-                private int start;
-                private int length;
-                private String id;
-                private String text;
-                private int textType;
-                private Object link;
-
-                public int getStart() {
-                    return start;
-                }
-
-                public void setStart(int start) {
-                    this.start = start;
-                }
-
-                public int getLength() {
-                    return length;
-                }
-
-                public void setLength(int length) {
-                    this.length = length;
-                }
-
-                public String getId() {
-                    return id;
-                }
-
-                public void setId(String id) {
-                    this.id = id;
-                }
-
-                public String getText() {
-                    return text;
-                }
-
-                public void setText(String text) {
-                    this.text = text;
-                }
-
-                public int getTextType() {
-                    return textType;
-                }
-
-                public void setTextType(int textType) {
-                    this.textType = textType;
-                }
-
-                public Object getLink() {
-                    return link;
-                }
-
-                public void setLink(Object link) {
-                    this.link = link;
-                }
-            }
         }
 
         public static class TitleDtoBean {
@@ -371,7 +308,7 @@ public class CommentItemListBean {
              */
 
             private String text;
-            private List<TextExtraBeanX> textExtra;
+            private List<TextExtraBean> textExtra;
 
             public String getText() {
                 return text;
@@ -381,79 +318,15 @@ public class CommentItemListBean {
                 this.text = text;
             }
 
-            public List<TextExtraBeanX> getTextExtra() {
+            public List<TextExtraBean> getTextExtra() {
                 return textExtra;
             }
 
-            public void setTextExtra(List<TextExtraBeanX> textExtra) {
+            public void setTextExtra(List<TextExtraBean> textExtra) {
                 this.textExtra = textExtra;
             }
 
-            public static class TextExtraBeanX {
-                /**
-                 * start : 0
-                 * length : 12
-                 * id : null
-                 * text : 来自章节:#1-第1话#
-                 * textType : 2
-                 * link : null
-                 */
 
-                private int start;
-                private int length;
-                private Object id;
-                private String text;
-                private int textType;
-                private Object link;
-
-                public int getStart() {
-                    return start;
-                }
-
-                public void setStart(int start) {
-                    this.start = start;
-                }
-
-                public int getLength() {
-                    return length;
-                }
-
-                public void setLength(int length) {
-                    this.length = length;
-                }
-
-                public Object getId() {
-                    return id;
-                }
-
-                public void setId(Object id) {
-                    this.id = id;
-                }
-
-                public String getText() {
-                    return text;
-                }
-
-                public void setText(String text) {
-                    this.text = text;
-                }
-
-                public int getTextType() {
-                    return textType;
-                }
-
-                public void setTextType(int textType) {
-                    this.textType = textType;
-                }
-
-                public Object getLink() {
-                    return link;
-                }
-
-                public void setLink(Object link) {
-                    this.link = link;
-                }
-            }
         }
 
         public static class CommentDtoListBean {
@@ -698,7 +571,7 @@ public class CommentItemListBean {
                  */
 
                 private String text;
-                private List<TextExtraBeanXX> textExtra;
+                private List<TextExtraBean> textExtra;
 
                 public String getText() {
                     return text;
@@ -708,78 +581,12 @@ public class CommentItemListBean {
                     this.text = text;
                 }
 
-                public List<TextExtraBeanXX> getTextExtra() {
+                public List<TextExtraBean> getTextExtra() {
                     return textExtra;
                 }
 
-                public void setTextExtra(List<TextExtraBeanXX> textExtra) {
+                public void setTextExtra(List<TextExtraBean> textExtra) {
                     this.textExtra = textExtra;
-                }
-
-                public static class TextExtraBeanXX {
-                    /**
-                     * start : 0
-                     * length : 4
-                     * id : 260
-                     * text : @ଲ 猜
-                     * textType : 1
-                     * link : null
-                     */
-
-                    private int start;
-                    private int length;
-                    private String id;
-                    private String text;
-                    private int textType;
-                    private Object link;
-
-                    public int getStart() {
-                        return start;
-                    }
-
-                    public void setStart(int start) {
-                        this.start = start;
-                    }
-
-                    public int getLength() {
-                        return length;
-                    }
-
-                    public void setLength(int length) {
-                        this.length = length;
-                    }
-
-                    public String getId() {
-                        return id;
-                    }
-
-                    public void setId(String id) {
-                        this.id = id;
-                    }
-
-                    public String getText() {
-                        return text;
-                    }
-
-                    public void setText(String text) {
-                        this.text = text;
-                    }
-
-                    public int getTextType() {
-                        return textType;
-                    }
-
-                    public void setTextType(int textType) {
-                        this.textType = textType;
-                    }
-
-                    public Object getLink() {
-                        return link;
-                    }
-
-                    public void setLink(Object link) {
-                        this.link = link;
-                    }
                 }
             }
         }
