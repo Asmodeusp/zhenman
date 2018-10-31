@@ -150,7 +150,8 @@ public class ShelfCollectionBean {
                 isCheck = check;
             }
 
-            private  boolean isCheck;
+            private boolean isCheck;
+
             public int getLid() {
                 return lid;
             }
