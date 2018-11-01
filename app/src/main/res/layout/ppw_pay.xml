@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="1111px"
+    android:layout_height="1331px"
     android:background="@drawable/image_code"
     android:orientation="vertical">
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/h7"/>
     <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +36,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/ppwPay_productList"
         android:layout_width="match_parent"
-        android:layout_height="400px"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/px_8">
     </android.support.v7.widget.RecyclerView>
 
@@ -43,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/px_24"
-        android:layout_marginTop="@dimen/px_32"
+        android:layout_marginTop="@dimen/px_12"
         android:text="支付方式" />
 
     <View
@@ -127,12 +130,92 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/h7"></View>
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:visibility="gone"
+        android:id="@+id/ppwPay_footView"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/px_128"
+        android:orientation="horizontal"
+        >
 
+        <TextView
+            style="@style/Style26H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/ppwPay_eggplantNum"
+            android:text="共计" />
+
+        <TextView
+            android:id="@+id/ppwPay_eggplantNum"
+            style="@style/Style32C1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/ppwPay_other03"
+            android:text="48" />
+
+        <TextView
+            android:id="@+id/ppwPay_other03"
+            style="@style/Style26H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/ppwPay_other02"
+            android:text="个茄子" />
+
+        <TextView
+            android:id="@+id/ppwPay_other02"
+            style="@style/Style26H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/ppwPay_money"
+            android:text=", 价值" />
+
+        <TextView
+            android:id="@+id/ppwPay_money"
+            style="@style/Style32C1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/ppwPay_other001"
+            android:text="2.2" />
+
+        <TextView
+            android:id="@+id/ppwPay_other001"
+            style="@style/Style26H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/px_8"
+            android:layout_toLeftOf="@id/ppwPay_question"
+            android:text="元" />
+
+        <ImageView
+            android:id="@+id/ppwPay_question"
+            android:layout_width="@dimen/px_32"
+            android:layout_height="@dimen/px_32"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/px_32"
+            android:layout_toLeftOf="@id/ppwPay_sellBtn"
+            android:src="@mipmap/my_question" />
+
+        <Button
+            android:id="@+id/ppwPay_sellBtn"
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/c1"
+            android:text="卖出"
+            android:textColor="@color/h9"
+            android:textSize="32px" />
+    </com.zhy.autolayout.AutoRelativeLayout>
     <com.zhy.autolayout.AutoLinearLayout
         android:id="@+id/ppwPay_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72px"
+        android:layout_marginTop="@dimen/px_18"
         android:gravity="center_horizontal">
 
         <Button

@@ -1,5 +1,6 @@
 package com.zhenman.asus.zhenman.view.myself;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -97,6 +98,11 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
     private int eggplantAmount = 0;
     private int biteEggplantAmount;
     private int unripeEggplantAmount;
+    AutoRelativeLayout ppwPay_footView;
+    TextView ppwPay_eggplantNum;
+    TextView ppwPay_money;
+    ImageView ppwPay_question;
+    Button ppwPay_sellBtn;
 
     @Override
     protected int getLayoutId() {
@@ -124,26 +130,14 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
             case R.id.app_back:
                 finish();
                 break;
-            case R.id.app_otherID:
-                sellEggplantFootView.setVisibility(View.VISIBLE);
+            case R.id.app_otherID://收支明细
+                startActivity(new Intent(SellEggplantActivity.this, EggplantDetailsActivity.class));
                 break;
             case R.id.sellEggplant_question:
                 break;
             case R.id.sellEggplant_sellBtn:
-                if (tag == false) {
-                    tag = true;
-                    showPaypopupView();
-                } else {
-                    tag = false;
-                    if (paymentMethod.equals("1")) {
-//                        提现到微信
-//                        presenter.sendWeixinTixian(eggplantAmount + "", biteEggplantAmount + "", unripeEggplantAmount + "", sellEggplantMoney.getText().toString());
-                        presenter.sendWeixinTixian(0+ "", 5 + "", 0 + "",3+"");
-
-                    } else {
-//                        提现到支付宝
-                    }
-                }
+                showPaypopupView();
+                sellEggplantFootView.setVisibility(View.GONE);
                 break;
         }
 
@@ -151,8 +145,6 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
 
     //支付popuwindow
     private void showPaypopupView() {
-
-
         View PaypopupView = LayoutInflater.from(this).inflate(R.layout.ppw_pay, null);
         ppwPayProductList = PaypopupView.findViewById(R.id.ppwPay_productList);
         ppwPayZhifubaoBtn = PaypopupView.findViewById(R.id.ppwPay_zhifubaoBtn);
@@ -160,11 +152,20 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
         ppwQuestion = PaypopupView.findViewById(R.id.ppw_question);
         ppwPayBottom = PaypopupView.findViewById(R.id.ppwPay_bottom);
         ppwPayOther01 = PaypopupView.findViewById(R.id.ppwPay_other01);
+        ppwPay_footView = PaypopupView.findViewById(R.id.ppwPay_footView);
+        ppwPay_eggplantNum = PaypopupView.findViewById(R.id.ppwPay_eggplantNum);
+        ppwPay_money = PaypopupView.findViewById(R.id.ppwPay_money);
+        ppwPay_question = PaypopupView.findViewById(R.id.ppwPay_question);
+        ppwPay_sellBtn = PaypopupView.findViewById(R.id.ppwPay_sellBtn);
         ppwPayBottom.setVisibility(View.GONE);
         ppwPayUserName = PaypopupView.findViewById(R.id.ppwPay_userName);
+        ppwPay_footView.setVisibility(View.VISIBLE);
         ppwPayUserName.setText("卖出到：");
         ppwPayProductList.setVisibility(View.GONE);
         ppwPayOther01.setVisibility(View.GONE);
+        ppwPay_eggplantNum.setText(sellEggplantEggplantNum.getText().toString());
+        ppwPay_money.setText(sellEggplantMoney.getText().toString());
+
 //        PopUpwindowLayout popUpwindowLayout = (PopUpwindowLayout) view.findViewById(R.id.llayout_popupwindow);
 //        popUpwindowLayout.initViews(mContext, titles, false);
         final PopupWindow popupWindow = new PopupWindow(PaypopupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -175,11 +176,14 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
 // 允许点击外部消失
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         popupWindow.setOutsideTouchable(true);
+
         popupWindow.setFocusable(true);
 // 获得位置
-        sellEggplantFootView.getLocationOnScreen(location);
-//        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
-        popupWindow.showAtLocation(sellEggplantFootView, Gravity.NO_GRAVITY, (location[0] + sellEggplantFootView.getWidth() / 2) - popupWidth / 2, location[1] - popupHeight);
+//        sellEggplantFootView.getLocationOnScreen(location);
+////        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        popupWindow.showAtLocation(sellEggplantFootView, Gravity.NO_GRAVITY, (location[0] + sellEggplantFootView.getWidth() / 2) - popupWidth / 2, location[1] - popupHeight);
+        popupWindow.showAtLocation(PaypopupView, Gravity.BOTTOM, 0, 0);
+
 //        支付宝
         ppwPayZhifubaoBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -201,6 +205,20 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
                     ppwPayZhifubaoBtn.setChecked(false);
                 } else {
                     ppwPayZhifubaoBtn.setChecked(true);
+                }
+            }
+        });
+        ppwPay_sellBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                if (paymentMethod.equals("1")) {
+//                        提现到微信
+//                        presenter.sendWeixinTixian(eggplantAmount + "", biteEggplantAmount + "", unripeEggplantAmount + "", sellEggplantMoney.getText().toString());
+                    presenter.sendWeixinTixian(0 + "", 5 + "", 0 + "", 3 + "");
+
+                } else {
+//                        提现到支付宝
                 }
             }
         });
@@ -236,7 +254,7 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
             sellEggplantImg01.setImageResource(R.mipmap.my_qiezi_small);
             sellEggplantImg02.setImageResource(R.mipmap.my_qiezi_bite);
             sellEggplantImg03.setImageResource(R.mipmap.my_qiezi_green);
-            sellEggplantKind01.setText("茄子"+eggplantDetailsBean.getData().getEggplantAmount());
+            sellEggplantKind01.setText("茄子" + eggplantDetailsBean.getData().getEggplantAmount());
             sellEggplantKind02.setText("被咬一口的茄子" + eggplantDetailsBean.getData().getBiteEggplantAmount());
             sellEggplantKind03.setText("未成熟的茄子" + eggplantDetailsBean.getData().getUnripeEggplantAmount());
             sellEggplantIsSelect01.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

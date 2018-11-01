@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +64,30 @@ public class BuyEggplantActivity extends BaseActivity<BuyEggplantPresenter> impl
         appOtherImage.setVisibility(View.VISIBLE);
         appOtherImage.setImageResource(R.mipmap.common_service);
         presenter.sendProductListData("2");
+        //        支付宝
+        buyEggplantZhifubaoBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buyEggplantZhifubaoBtn.isChecked()) {
+                    paymentMethod = "2";
+                    buyEggplantWeixinBtn.setChecked(false);
+                } else {
+                    buyEggplantWeixinBtn.setChecked(true);
+                }
+            }
+        });
+//        微信
+        buyEggplantWeixinBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buyEggplantWeixinBtn.isChecked()) {
+                    paymentMethod = "1";
+                    buyEggplantZhifubaoBtn.setChecked(false);
+                } else {
+                    buyEggplantZhifubaoBtn.setChecked(true);
+                }
+            }
+        });
     }
 
     @Override
@@ -81,9 +106,9 @@ public class BuyEggplantActivity extends BaseActivity<BuyEggplantPresenter> impl
                 break;
             case R.id.buyEggplant_payBtn:
                 if (paymentMethod.equals("1")) {
-                    presenter.setWxMakeOrderData(qieziId + "", "1", "0.1", "充值");
+                    presenter.setWxMakeOrderData(qieziId + "", "1", qieziMoney+"", "充值");
                 } else if (paymentMethod.equals("2")) {
-                    presenter.setMakeOrderData(qieziId + "", "1", "0.1", "充值");
+                    presenter.setMakeOrderData(qieziId + "", "1", qieziMoney+"", "充值");
                 } else {
                     Toast.makeText(BuyEggplantActivity.this, "请选择支付方式", Toast.LENGTH_SHORT).show();
                 }

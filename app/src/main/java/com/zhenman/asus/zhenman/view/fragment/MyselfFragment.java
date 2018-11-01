@@ -198,7 +198,7 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
 
         if (homePageHeadBean.getState() == 0) {
             my_FansNumber.setText(homePageHeadBean.getData().getFans() + "");
-            my_CareNumber.setText(homePageHeadBean.getData().getFollows() - 1 + "");
+            my_CareNumber.setText(homePageHeadBean.getData().getFollows() + "");
             my_WorksNumber.setText(homePageHeadBean.getData().getWorks() + "");
             my_themeNum.setText(homePageHeadBean.getData().getFollowSubject() + "");
             if ("2".equals(homePageHeadBean.getData().getSex())) {
