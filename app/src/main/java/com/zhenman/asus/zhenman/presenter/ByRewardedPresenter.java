@@ -17,15 +17,13 @@ public class ByRewardedPresenter implements ByRewardedContract.ByRewardedInPrese
     ByRewardedContract.ByRewardedInView byRewardedInView;
 
     @Override
-    public void sendByRewardedData(String accessToken,String pageNum, String pageSize) {
+    public void sendByRewardedData(String pageNum, String pageSize) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("pageNum", pageNum);
         paramMap.put("pageSize", pageSize);
-        Map<String, String> headMap = new HashMap<>();
-        headMap.put("accessToken", accessToken);
 
         RetrofitUtils.getInstance().getService(ByRewardedService.class)
-                .getByRewarded(headMap,paramMap)
+                .getByRewarded(paramMap)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ByRewardedBean>() {

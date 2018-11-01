@@ -2,6 +2,7 @@
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="horizontal"
+    android:background="@color/h9"
     android:layout_height="100px">
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/app_back"

@@ -128,6 +128,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/px_24"
                 android:src="@mipmap/my_qiezi" />
+
             <TextView
                 android:id="@+id/sellEggplant_num03"
                 style="@style/Style32H2"
@@ -136,6 +137,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/px_24"
                 android:layout_toLeftOf="@id/sellEggplant_img03" />
+
             <TextView
                 android:id="@+id/sellEggplant_kind03"
                 style="@style/Style32H2"
@@ -144,6 +146,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/sellEggplant_num03"
                 android:text="茄子：" />
+
             <CheckBox
                 android:id="@+id/sellEggplant_isSelect03"
                 android:layout_width="@dimen/px_44"
@@ -152,6 +155,10 @@
                 android:layout_marginLeft="@dimen/px_24"
                 android:button="@drawable/pay_selector" />
         </com.zhy.autolayout.AutoRelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/h6" />
         <TextView
             android:id="@+id/sellEggplant_none"
             android:layout_width="wrap_content"
@@ -159,25 +166,23 @@
             android:layout_gravity="center_horizontal"
             android:text="暂时没有数据哦~" />
     </com.zhy.autolayout.AutoLinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/h6" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_2"
         android:background="@color/h7" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/h7"></View>
+
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/sellEggplant_footView"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:orientation="horizontal">
 
         <TextView
             style="@style/Style26H3"
@@ -194,7 +199,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/sellEggplant_other03"
-            android:text="48" />
+            android:text="0" />
 
         <TextView
             android:id="@+id/sellEggplant_other03"
@@ -221,7 +226,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/sellEggplant_other01"
-            android:text="2.2" />
+            android:text="0" />
 
         <TextView
             android:id="@+id/sellEggplant_other01"
@@ -253,5 +258,10 @@
             android:textSize="32px" />
     </com.zhy.autolayout.AutoRelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_2"
+
+        android:background="@color/h7" />
 
 </com.zhy.autolayout.AutoLinearLayout>

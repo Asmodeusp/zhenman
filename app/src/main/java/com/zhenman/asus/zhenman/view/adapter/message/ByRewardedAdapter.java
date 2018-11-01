@@ -1,8 +1,10 @@
 package com.zhenman.asus.zhenman.view.adapter.message;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.ByRewardedBean;
+import com.zhenman.asus.zhenman.utils.MyClickSpan;
 
 import java.util.List;
 
@@ -19,6 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ByRewardedAdapter extends RecyclerView.Adapter<ByRewardedAdapter.Holder> implements View.OnClickListener {
     List<ByRewardedBean.DataBean> dataBeanList;
+    ByRewardedBean byRewardedBean;
     Context context;
     private OnShortCLickListener myCLick;
     private ByRewardedCallback byRewardedCallback;
@@ -38,27 +42,46 @@ public class ByRewardedAdapter extends RecyclerView.Adapter<ByRewardedAdapter.Ho
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View inflate = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_by_rewarded, viewGroup, false);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.item_by_rewarded, viewGroup, false);
         Holder holder = new Holder(inflate);
         inflate.setOnClickListener(this);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Holder holder, final int i) {
+    public void onBindViewHolder(@NonNull final Holder holder, final int i) {
         Glide.with(context).load(dataBeanList.get(i).getHeadImg()).into(holder.itemByRewarded_avatar);
-        holder.itemByRewarded_name.setText("@"+dataBeanList.get(i).getName());
         if (dataBeanList.get(i).getType() == 2) {//章节打赏
-            Glide.with(context).load(dataBeanList.get(i).getFinalImg()).into(holder.itemByRewarded_chapter);
-            if (dataBeanList.get(i).getEggplantType().equals("1")) {//1代表完整茄子
-                holder.itemByRewarded_eggplantNum.setText(dataBeanList.get(i).getCoinAmount() + "个茄子");
-            } else if (dataBeanList.get(i).getEggplantType().equals("2")) {//2是被咬了一口的茄子
-                holder.itemByRewarded_eggplantNum.setText(dataBeanList.get(i).getCoinAmount() + "个被咬了一口的茄子");
-            } else {//3是未成熟的茄子
-                holder.itemByRewarded_eggplantNum.setText(dataBeanList.get(i).getCoinAmount() + "个未成熟的茄子");
-            }
+            /*if (dataBeanList.get(i).getTitleDto() != null) {
 
-            holder.itemByRewarded_introduction.setText("在" + "《" + dataBeanList.get(i).getTitle() + "》" + "中打赏了你");
+                MyClickSpan.setTextHighLightWithClick(holder.itemByRewarded_introduction, byRewardedBean.getData().get(i).getTitleDto().getText(), byRewardedBean.getData().get(i).getTitleDto().getTextExtra(), new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+//                    Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                SpannableString spannableString = MyClickSpan.matcherSearchTitle(Color.parseColor("#000000"), dataBeanList.get(i).getTitle(), dataBeanList.get(i).getTitleDto().getTextExtra().get(0).getText());//黑色名字
+                SpannableString spannableStringEnd = MyClickSpan.matcherSearchTitle(Color.parseColor("#B37FEB"), dataBeanList.get(i).getTitle(), dataBeanList.get(i).getTitleDto().getTextExtra().get(1).getText());//紫色茄子
+                holder.itemByRewarded_introduction.setText(spannableString+"打赏了你"+spannableStringEnd);
+
+
+            }*/
+            SpannableString spannableString = MyClickSpan.matcherSearchTitle(Color.parseColor("#000000"), dataBeanList.get(i).getTitleDto().getText(), dataBeanList.get(i).getTitleDto().getTextExtra().get(0).getText());//黑色名字
+            SpannableString spannableStringEnd = MyClickSpan.matcherSearchTitle(Color.parseColor("#B37FEB"), dataBeanList.get(i).getTitleDto().getText(), dataBeanList.get(i).getTitleDto().getTextExtra().get(1).getText());//紫色茄子
+            holder.itemByRewarded_introduction.setText(spannableString+"在《"+dataBeanList.get(i).getTitle()+"》中"+spannableStringEnd);
+            Glide.with(context).load(dataBeanList.get(i).getFinalImg()).into(holder.itemByRewarded_chapter);
+
+            /*if (dataBeanList.get(i).getEggplantType().equals("1")) {//1代表完整茄子
+                String s = "<font color=\"#000000\">"+"@"+dataBeanList.get(i).getName()+"</font><font color=\"#999999\">"+"在《" + dataBeanList.get(i).getTitle() + "》" + "中打赏了你"+"</font><font color=\"#B37FEB\">"+dataBeanList.get(i).getCoinAmount() + "个茄子"+"</font>";
+                holder.itemByRewarded_introduction.setText(Html.fromHtml(s));
+            } else if (dataBeanList.get(i).getEggplantType().equals("2")) {//2是被咬了一口的茄子
+                String s = "<font color=\"#000000\">"+"@"+dataBeanList.get(i).getName()+"</font><font color=\"#999999\">"+"在《" + dataBeanList.get(i).getTitle() + "》" + "中打赏了你"+"</font><font color=\"#B37FEB\">"+dataBeanList.get(i).getCoinAmount() + "个被咬了一口的茄子"+"</font>";
+                holder.itemByRewarded_introduction.setText(Html.fromHtml(s));
+            } else {//3是未成熟的茄子
+                String s = "<font color=\"#000000\">"+"@"+dataBeanList.get(i).getName()+"</font><font color=\"#999999\">"+"在《" + dataBeanList.get(i).getTitle() + "》" + "中打赏了你"+"</font><font color=\"#B37FEB\">"+dataBeanList.get(i).getCoinAmount() + "个未成熟的茄子"+"</font>";
+                holder.itemByRewarded_introduction.setText(Html.fromHtml(s));
+            }*/
             holder.itemByRewarded_chapter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -66,15 +89,20 @@ public class ByRewardedAdapter extends RecyclerView.Adapter<ByRewardedAdapter.Ho
                 }
             });
         } else if (dataBeanList.get(i).getType() == 3) {//个人主页打赏
-            holder.itemByRewarded_avatar.setVisibility(View.INVISIBLE);
-            holder.itemByRewarded_introduction.setText("打赏了你");
-            if (dataBeanList.get(i).getEggplantType().equals("1")) {//1代表完整茄子
-                holder.itemByRewarded_eggplantNum.setText(dataBeanList.get(i).getCoinAmount() + "个茄子");
+            holder.itemByRewarded_chapter.setVisibility(View.INVISIBLE);
+            /*if (dataBeanList.get(i).getEggplantType().equals("1")) {//1代表完整茄子
+                String s = "<font color=\"#000000\">"+"@"+dataBeanList.get(i).getName()+"</font><font color=\"#999999\">"+"打赏了你"+"</font><font color=\"#B37FEB\">"+dataBeanList.get(i).getCoinAmount() + "个茄子"+"</font>";
+                holder.itemByRewarded_introduction.setText(Html.fromHtml(s));
             } else if (dataBeanList.get(i).getEggplantType().equals("2")) {//2是被咬了一口的茄子
-                holder.itemByRewarded_eggplantNum.setText(dataBeanList.get(i).getCoinAmount() + "个被咬了一口的茄子");
+                String s = "<font color=\"#000000\">"+"@"+dataBeanList.get(i).getName()+"</font><font color=\"#999999\">"+"打赏了你"+"</font><font color=\"#B37FEB\">"+dataBeanList.get(i).getCoinAmount() + "个被咬了一口的茄子"+"</font>";
+                holder.itemByRewarded_introduction.setText(Html.fromHtml(s));
             } else {//3是未成熟的茄子
-                holder.itemByRewarded_eggplantNum.setText(dataBeanList.get(i).getCoinAmount() + "个未成熟的茄子");
-            }
+                String s = "<font color=\"#000000\">"+"@"+dataBeanList.get(i).getName()+"</font><font color=\"#999999\">"+"打赏了你"+"</font><font color=\"#B37FEB\">"+dataBeanList.get(i).getCoinAmount() + "个未成熟的茄子"+"</font>";
+                holder.itemByRewarded_introduction.setText(Html.fromHtml(s));
+            }*/
+            SpannableString spannableString = MyClickSpan.matcherSearchTitle(Color.parseColor("#000000"), dataBeanList.get(i).getTitleDto().getText(), dataBeanList.get(i).getTitleDto().getTextExtra().get(0).getText());//黑色名字
+            SpannableString spannableStringEnd = MyClickSpan.matcherSearchTitle(Color.parseColor("#B37FEB"), dataBeanList.get(i).getTitleDto().getText(), dataBeanList.get(i).getTitleDto().getTextExtra().get(1).getText());//紫色茄子
+            holder.itemByRewarded_introduction.setText(spannableString);
         }
     }
 
@@ -84,7 +112,6 @@ public class ByRewardedAdapter extends RecyclerView.Adapter<ByRewardedAdapter.Ho
             myCLick.myClick(v, (int) v.getTag());
         }
     }
-
     public interface OnShortCLickListener {
         void myClick(View view, int position);
     }
@@ -99,17 +126,13 @@ public class ByRewardedAdapter extends RecyclerView.Adapter<ByRewardedAdapter.Ho
 
     public class Holder extends RecyclerView.ViewHolder {
         public CircleImageView itemByRewarded_avatar;
-        public TextView itemByRewarded_name;
         public TextView itemByRewarded_introduction;
-        public TextView itemByRewarded_eggplantNum;
         public ImageView itemByRewarded_chapter;
 
         public Holder(@NonNull View rootView) {
             super(rootView);
             this.itemByRewarded_avatar = (CircleImageView) rootView.findViewById(R.id.itemByRewarded_avatar);
-            this.itemByRewarded_name = (TextView) rootView.findViewById(R.id.itemByRewarded_name);
             this.itemByRewarded_introduction = (TextView) rootView.findViewById(R.id.itemByRewarded_introduction);
-            this.itemByRewarded_eggplantNum = (TextView) rootView.findViewById(R.id.itemByRewarded_eggplantNum);
             this.itemByRewarded_chapter = (ImageView) rootView.findViewById(R.id.itemByRewarded_chapter);
         }
     }

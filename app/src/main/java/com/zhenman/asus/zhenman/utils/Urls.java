@@ -108,5 +108,7 @@ public class Urls {
     //  微信提现
     public static final String WEIXIN_TIXIAN = "userOrder/withdraw";
     //  被打赏列表
-    public static final String BY_REWARDED="newsRewardInfo/getNewsRewardInfoList";
+    public static final String BY_REWARDED = "newsRewardInfo/getNewsRewardInfoList";
+    //  消息页面被关注列表(也就是粉丝列表)
+    public static final String BY_FANS = "newsFansInfo/getNewsFansInfoList";
 }

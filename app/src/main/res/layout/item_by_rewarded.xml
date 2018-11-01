@@ -1,52 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="198px">
+    android:layout_height="wrap_content"
+    android:background="@color/h9">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/itemByRewarded_avatar"
-        android:layout_width="@dimen/px_80"
-        android:layout_height="@dimen/px_80"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/px_24"
-        android:src="@mipmap/my_qiezi" />
-
-    <TextView
-        android:id="@+id/itemByRewarded_name"
-        style="@style/Style32H2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/itemByRewarded_avatar"
-        android:layout_marginLeft="@dimen/px_24"
-        android:layout_toRightOf="@id/itemByRewarded_avatar"
-        android:text="Sunny" />
+        android:layout_width="@dimen/px_128"
+        android:layout_height="@dimen/px_128"
+        android:layout_margin="@dimen/px_24" />
 
     <TextView
         android:id="@+id/itemByRewarded_introduction"
-        style="@style/Style32H4"
+        style="@style/Style32H2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/itemByRewarded_avatar"
-        android:layout_toRightOf="@+id/itemByRewarded_name"
-        android:text="2342" />
+        android:layout_marginLeft="@dimen/px_24"
+        android:layout_marginTop="@dimen/px_32"
+        android:layout_toRightOf="@id/itemByRewarded_avatar"
+        android:text="每个人都不应该被亏待" />
 
     <TextView
-        android:id="@+id/itemByRewarded_eggplantNum"
-        style="@style/Style32C1"
+        android:id="@+id/itemMyAttenTheme_decription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/itemByRewarded_introduction"
-        android:layout_toRightOf="@id/itemByRewarded_introduction"
-        android:text="1个茄子" />
+        android:layout_alignLeft="@id/itemByRewarded_introduction"
+        android:layout_below="@id/itemByRewarded_introduction"
+        android:layout_marginTop="@dimen/px_24"
+        android:layout_toRightOf="@id/itemByRewarded_avatar"
+        android:text="只有变得优秀才会被另眼相看" />
 
     <ImageView
         android:id="@+id/itemByRewarded_chapter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/px_128"
+        android:layout_height="@dimen/px_128"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/px_24"
-        android:layout_marginRight="@dimen/px_24" />
+        android:layout_marginRight="@dimen/px_24"
+        android:background="@drawable/image_shape"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/my_qiezi" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_1"
+        android:layout_marginTop="176px"
+        android:background="@color/h7" />
 
 </com.zhy.autolayout.AutoRelativeLayout>

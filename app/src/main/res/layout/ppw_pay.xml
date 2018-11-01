@@ -56,6 +56,7 @@
         android:background="@color/h7"></View>
 
     <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/ppwPay_zhifubao"
         android:layout_width="match_parent"
         android:layout_height="128px">
 
@@ -95,6 +96,7 @@
         android:background="@color/h7"></View>
 
     <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/ppwPay_weixin"
         android:layout_width="match_parent"
         android:layout_height="128px">
 

@@ -95,14 +95,20 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
     TextView ppwPayOther01;
     private String paymentMethod = "2";
     private boolean tag = false;
-    private int eggplantAmount = 0;
-    private int biteEggplantAmount;
-    private int unripeEggplantAmount;
+
     AutoRelativeLayout ppwPay_footView;
+    AutoRelativeLayout ppwPayZhifubao;
+    AutoRelativeLayout ppwPayWeixin;
     TextView ppwPay_eggplantNum;
     TextView ppwPay_money;
     ImageView ppwPay_question;
     Button ppwPay_sellBtn;
+    private boolean itemTag01 = false;
+    private boolean itemTag02 = false;
+    private boolean itemTag03 = false;
+    private boolean isZhifubao = false;
+    private boolean isWeixin = false;
+    private SellEggplantBean.DataBean eggplantDetailsBeanData;
 
     @Override
     protected int getLayoutId() {
@@ -124,7 +130,7 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
 
     }
 
-    @OnClick({R.id.app_back, R.id.app_otherID, R.id.sellEggplant_question, R.id.sellEggplant_sellBtn})
+    @OnClick({R.id.app_back, R.id.app_otherID, R.id.sellEggplant_question, R.id.sellEggplant_sellBtn, R.id.sellEggplant_item01, R.id.sellEggplant_item02, R.id.sellEggplant_item03, R.id.ppwPay_zhifubao, R.id.ppwPay_weixin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_back:
@@ -137,7 +143,66 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
                 break;
             case R.id.sellEggplant_sellBtn:
                 showPaypopupView();
-                sellEggplantFootView.setVisibility(View.GONE);
+                break;
+            case R.id.sellEggplant_item01:
+                if (itemTag01 == false) {
+                    itemTag01 = true;
+                    sellEggplantIsSelect01.setChecked(true);
+
+                    sellEggplantCallback(1, eggplantDetailsBeanData.getEggplantAmount());
+                } else {
+                    itemTag01 = false;
+                    sellEggplantIsSelect01.setChecked(false);
+
+                    sellEggplantNoSelectCallback(1, eggplantDetailsBeanData.getEggplantAmount());
+                }
+                break;
+            case R.id.sellEggplant_item02:
+                if (itemTag02 == false) {
+                    itemTag02 = true;
+                    sellEggplantIsSelect02.setChecked(true);
+                    sellEggplantCallback(2, eggplantDetailsBeanData.getBiteEggplantAmount());
+
+                } else {
+                    itemTag02 = false;
+                    sellEggplantIsSelect02.setChecked(false);
+                    sellEggplantNoSelectCallback(2, eggplantDetailsBeanData.getBiteEggplantAmount());
+                }
+                break;
+            case R.id.sellEggplant_item03:
+                if (itemTag03 == false) {
+                    itemTag03 = true;
+                    sellEggplantIsSelect03.setChecked(true);
+                    sellEggplantCallback(3, eggplantDetailsBeanData.getUnripeEggplantAmount());
+                } else {
+                    itemTag03 = false;
+                    sellEggplantIsSelect03.setChecked(false);
+                    sellEggplantNoSelectCallback(3, eggplantDetailsBeanData.getUnripeEggplantAmount());
+                }
+                break;
+            case R.id.ppwPay_zhifubao:
+                if (isZhifubao == false) {
+                    isZhifubao = true;
+                    paymentMethod = "2";
+                    ppwPayZhifubaoBtn.setChecked(true);
+                    ppwPayWeixinBtn.setChecked(false);
+                } else {
+                    isZhifubao=false;
+                    ppwPayZhifubaoBtn.setChecked(false);
+                    ppwPayWeixinBtn.setChecked(true);
+                }
+                break;
+            case R.id.ppwPay_weixin:
+                if (isWeixin==false){
+                    isWeixin = true;
+                    paymentMethod = "1";
+                    ppwPayZhifubaoBtn.setChecked(false);
+                    ppwPayWeixinBtn.setChecked(true);
+                }else {
+                    isWeixin=false;
+                    ppwPayZhifubaoBtn.setChecked(true);
+                    ppwPayWeixinBtn.setChecked(false);
+                }
                 break;
         }
 
@@ -149,6 +214,8 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
         ppwPayProductList = PaypopupView.findViewById(R.id.ppwPay_productList);
         ppwPayZhifubaoBtn = PaypopupView.findViewById(R.id.ppwPay_zhifubaoBtn);
         ppwPayWeixinBtn = PaypopupView.findViewById(R.id.ppwPay_weixinBtn);
+        ppwPayWeixin = PaypopupView.findViewById(R.id.ppwPay_weixin);
+        ppwPayZhifubao = PaypopupView.findViewById(R.id.ppwPay_zhifubao);
         ppwQuestion = PaypopupView.findViewById(R.id.ppw_question);
         ppwPayBottom = PaypopupView.findViewById(R.id.ppwPay_bottom);
         ppwPayOther01 = PaypopupView.findViewById(R.id.ppwPay_other01);
@@ -165,18 +232,11 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
         ppwPayOther01.setVisibility(View.GONE);
         ppwPay_eggplantNum.setText(sellEggplantEggplantNum.getText().toString());
         ppwPay_money.setText(sellEggplantMoney.getText().toString());
-
-//        PopUpwindowLayout popUpwindowLayout = (PopUpwindowLayout) view.findViewById(R.id.llayout_popupwindow);
-//        popUpwindowLayout.initViews(mContext, titles, false);
         final PopupWindow popupWindow = new PopupWindow(PaypopupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         PaypopupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        int popupWidth = PaypopupView.getMeasuredWidth();
-        int popupHeight = PaypopupView.getMeasuredHeight();
-        int[] location = new int[2];
 // 允许点击外部消失
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         popupWindow.setOutsideTouchable(true);
-
         popupWindow.setFocusable(true);
 // 获得位置
 //        sellEggplantFootView.getLocationOnScreen(location);
@@ -241,6 +301,7 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
 
     @Override
     public void showSellEggplant(final SellEggplantBean eggplantDetailsBean) {
+        eggplantDetailsBeanData = eggplantDetailsBean.getData();
         if (eggplantDetailsBean.getData() == null) {
             sellEggplantNone.setVisibility(View.VISIBLE);
             sellEggplantItem01.setVisibility(View.INVISIBLE);
@@ -261,12 +322,10 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (sellEggplantIsSelect01.isChecked()) {
-                        eggplantAmount = eggplantDetailsBean.getData().getEggplantAmount();
-                        sellEggplantCallback(1, eggplantDetailsBean.getData().getEggplantAmount());
+                        sellEggplantCallback(1, eggplantDetailsBeanData.getEggplantAmount());
 
                     } else {
-                        eggplantAmount = 0;
-                        sellEggplantNoSelectCallback(1, eggplantDetailsBean.getData().getEggplantAmount());
+                        sellEggplantNoSelectCallback(1, eggplantDetailsBeanData.getEggplantAmount());
                     }
                 }
             });
@@ -274,12 +333,11 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (sellEggplantIsSelect02.isChecked()) {
-                        biteEggplantAmount = eggplantDetailsBean.getData().getBiteEggplantAmount();
-                        sellEggplantCallback(2, eggplantDetailsBean.getData().getBiteEggplantAmount());
+
+                        sellEggplantCallback(2, eggplantDetailsBeanData.getBiteEggplantAmount());
 
                     } else {
-                        biteEggplantAmount = 0;
-                        sellEggplantNoSelectCallback(2, eggplantDetailsBean.getData().getBiteEggplantAmount());
+                        sellEggplantNoSelectCallback(2, eggplantDetailsBeanData.getBiteEggplantAmount());
                     }
                 }
             });
@@ -287,12 +345,10 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (sellEggplantIsSelect03.isChecked()) {
-                        unripeEggplantAmount = eggplantDetailsBean.getData().getUnripeEggplantAmount();
-                        sellEggplantCallback(3, eggplantDetailsBean.getData().getUnripeEggplantAmount());
+                        sellEggplantCallback(3, eggplantDetailsBeanData.getUnripeEggplantAmount());
 
                     } else {
-                        unripeEggplantAmount = 0;
-                        sellEggplantNoSelectCallback(3, eggplantDetailsBean.getData().getUnripeEggplantAmount());
+                        sellEggplantNoSelectCallback(3, eggplantDetailsBeanData.getUnripeEggplantAmount());
                     }
                 }
             });
@@ -314,7 +370,6 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
 
     //  回调
     public void sellEggplantCallback(int type, int amount) {
-        sellEggplantFootView.setVisibility(View.VISIBLE);
         eggplantCount += amount;
         sellEggplantEggplantNum.setText(eggplantCount + "");
         double v;

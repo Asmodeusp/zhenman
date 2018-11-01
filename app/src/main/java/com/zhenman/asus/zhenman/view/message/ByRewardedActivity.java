@@ -40,7 +40,7 @@ public class ByRewardedActivity extends BaseActivity<ByRewardedPresenter> implem
     @Override
     protected void init() {
         appTitle.setText("打赏");
-        presenter.sendByRewardedData("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1NDA4ODMzMzIsInN1YiI6IntcInVzZXJJZFwiOjQwNixcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiRTk1NjlENkRCMDREQUJFNzc0NjE0RkI1OTFBQTkxMjRcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4zLjBcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU3MjQxOTMzMn0.jJT8sOS4JtOJQ9W0RFYGf-zNIfeGUKzv_fUUc78JqqA","1","20");
+        presenter.sendByRewardedData("1","20");
     }
 
     @Override
@@ -82,7 +82,7 @@ public class ByRewardedActivity extends BaseActivity<ByRewardedPresenter> implem
 
     @Override
     public void showError(String string) {
-
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
     }
 
     @Override
