@@ -92,7 +92,6 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
                 for (TextExtraBean textExtraBean : textExtra) {
                     oneTextExtralist.add(textExtraBean);
                 }
-                Log.d("CommentRecyclerAdapter", listBean.getTextDto().getTextExtra().get(0).getText());
                 MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getCommentDtoList().get(0).getTextDto().getText(), oneTextExtralist, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -140,7 +139,7 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
         //加载添加时间
         holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
         //设置共多少评论
-        holder.comment_fill_SeeMoreText.setText("共" + listBean.getCommentDtoList().size() + "条评论");
+        holder.comment_fill_SeeMoreText.setText("查看更多评论");
         holder.comment_fill_fromUserText.setVisibility(View.GONE);
 
     }

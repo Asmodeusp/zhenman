@@ -90,7 +90,7 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
         holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
         holder.comment_Two_ItemLinearLayout.setVisibility(View.GONE);
         holder.comment_fill_fromUserText.setVisibility(View.GONE);
-
+        holder.comment_fill_likeButton.setVisibility(View.GONE);
     }
 
     @Override
