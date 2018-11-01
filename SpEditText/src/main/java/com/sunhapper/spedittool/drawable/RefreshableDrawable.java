@@ -11,6 +11,7 @@ public interface RefreshableDrawable {
 
   void addCallback(Drawable.Callback callback);
 
+
   void removeCallback(Drawable.Callback callback);
 
 }
