@@ -11,28 +11,29 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.Html;
-import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sunhapper.spedittool.view.SpEditText;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.view.adapter.comment.CommentRecyclerAdapter;
-import com.zhenman.asus.zhenman.view.ui.AtEditText;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +42,7 @@ import butterknife.Unbinder;
 
 
 @SuppressLint("ValidFragment")
-public class FullFragment extends BottomSheetDialogFragment {
+public class FullFragment extends BottomSheetDialogFragment implements SpEditText.KeyReactListener {
     //无评论时的提示字
     @BindView(R.id.CommentPopu_Tip)
     TextView CommentPopuTip;
@@ -67,11 +68,14 @@ public class FullFragment extends BottomSheetDialogFragment {
 
     private BottomSheetBehavior mBehavior;
 
-    private AtEditText commentPopu_edit_editText;
+    private SpEditText commentPopu_edit_editText;
     private AutoRelativeLayout commentPopu_edit_common_at;
-    private String name;
+    private String name = null;
     CommentListBean commentListBean;
     private String Type;
+    private AutoRelativeLayout commentPopu_edit_sendButton;
+    private ArrayList<String> list = new ArrayList<>();
+
 
     public FullFragment(CommentListBean commentListBean, String Type) {
         this.commentListBean = commentListBean;
@@ -98,7 +102,7 @@ public class FullFragment extends BottomSheetDialogFragment {
             CommentPopuTip.setVisibility(View.GONE);
             if (commentListBean.getData().getCommentDtoList().size() != 0) {
                 CommentPopuNumber.setText(commentListBean.getData().getCommentDtoList().size() + "条评论");
-                 CommentRecyclerAdapter commentRecyclerAdapter = new CommentRecyclerAdapter(commentListBean.getData().getCommentDtoList());
+                CommentRecyclerAdapter commentRecyclerAdapter = new CommentRecyclerAdapter(commentListBean.getData().getCommentDtoList());
                 CommentPopuRecy.setAdapter(commentRecyclerAdapter);
                 commentRecyclerAdapter.setRecyclerViewOnCLickListener(new CommentRecyclerAdapter.RecyclerViewOnCLickListener() {
                     @Override
@@ -156,24 +160,21 @@ public class FullFragment extends BottomSheetDialogFragment {
         });
         bottomSheetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-//        commentPopu_edit_editText.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
         bottomSheetDialog.setContentView(view);
         bottomSheetDialog.show();
+        commentPopu_edit_editText.setKeyReactListener(this);
+        //点击发送得到数据
+        commentPopu_edit_sendButton = view.findViewById(R.id.CommentPopu_edit_SendButton);
+
+        commentPopu_edit_sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = String.valueOf(commentPopu_edit_editText.getText());
+
+
+            }
+        });
+
     }
 
     private void BouncingAtUser() {
@@ -181,12 +182,18 @@ public class FullFragment extends BottomSheetDialogFragment {
         startActivityForResult(intent, 200);
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 200 && resultCode == 500) {
             name = data.getStringExtra("name");
-            commentPopu_edit_editText.addAtContent("",name);
+            if (name != null) {
+                commentPopu_edit_editText
+                        .insertSpecialStr("@" + name, false, 1, new ForegroundColorSpan(Color.parseColor("#B37FEB")));
+                list.add("@" + name);
+                int start = commentPopu_edit_editText.getStart();
+                int length = commentPopu_edit_editText.getLength();
+
+            }
         }
     }
 
@@ -195,5 +202,20 @@ public class FullFragment extends BottomSheetDialogFragment {
         super.onDestroy();
         unbinder.unbind();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onKeyReact(String s) {
+        switch (s) {
+            case "@":
+                BouncingAtUser();
+                break;
+            case "#":
+                break;
+            case "%":
+                break;
+            case "*":
+                break;
+        }
     }
 }
