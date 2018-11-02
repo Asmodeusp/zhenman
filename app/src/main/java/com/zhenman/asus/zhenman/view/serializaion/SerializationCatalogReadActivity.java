@@ -282,8 +282,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         presenter.getSerializationCatalogBean(pgcId);
         //作品详情集合
         presenter.getSerializationDetailsBean(pgcId);
-        //作品评论集合
-        presenter.getCommentList(StartcatalogId, "1", "50", "3", "1");
+
     }
 
     //设置开关监听
@@ -415,7 +414,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     //消息弹出BottomSheetDialog
     private void initCommentpopu() {
-        FullFragment fullFragment = new FullFragment(commentListBean,"3");
+        FullFragment fullFragment = new FullFragment(commentListBean,"3",pgcId);
         fullFragment.show(getSupportFragmentManager(), "dialog");
 
     }
@@ -481,6 +480,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                 break;
             //评论
             case R.id.serializationCatalogReadCommentBtn:
+                //作品评论集合
+                presenter.getCommentList(StartcatalogId, "1", "50", "3", "1");
                 initCommentpopu();
                 break;
             //下一章

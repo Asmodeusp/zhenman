@@ -84,7 +84,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             @Override
             public void onLoadingError(String source, Exception e) {
             }
-        });
+        },R.mipmap.common_portrait_m);
         holder.fill_Home_Attention_RecyHeadIew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

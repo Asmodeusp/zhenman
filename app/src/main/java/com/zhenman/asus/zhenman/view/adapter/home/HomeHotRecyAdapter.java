@@ -177,7 +177,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
             @Override
             public void onLoadingError(String source, Exception e) {
             }
-        });
+        },R.mipmap.common_portrait_m);
         holder.Home_Hot_HeadImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

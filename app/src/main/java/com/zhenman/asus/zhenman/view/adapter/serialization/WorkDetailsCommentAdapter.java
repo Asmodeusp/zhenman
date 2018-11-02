@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,28 +15,26 @@ import android.widget.Toast;
 
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
-import com.zhenman.asus.zhenman.model.bean.CommentListBean;
-import com.zhenman.asus.zhenman.presenter.WorkDetailsCommentPresenterImp;
+import com.zhenman.asus.zhenman.model.bean.CommentDtoListBean;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.MyClickSpan;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class WorkDetailsCommentAdapter extends RecyclerView.Adapter<WorkDetailsCommentAdapter.Holder> implements View.OnClickListener {
-    private List<CommentListBean.DataBean.CommentDtoListBeanX> list;
+    private List<CommentDtoListBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
     private boolean followCount = true;
 
 
-    public WorkDetailsCommentAdapter(List<CommentListBean.DataBean.CommentDtoListBeanX> list) {
-        this.list = list;
 
+    public WorkDetailsCommentAdapter(List<CommentDtoListBean> commentDtoList) {
+        this.list = commentDtoList;
     }
 
     @NonNull
@@ -74,7 +71,7 @@ public class WorkDetailsCommentAdapter extends RecyclerView.Adapter<WorkDetailsC
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
         holder.itemView.setTag(position);
-        final CommentListBean.DataBean.CommentDtoListBeanX listBean = list.get(position);
+        final CommentDtoListBean listBean = list.get(position);
         GlideUtils.loadCircleImage(listBean.getImageUrl(), holder.work_commentRecy_headView, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
             @Override
             public void onLoadingComplete(String uri, ImageView view, GlideDrawable resource) {
@@ -85,10 +82,8 @@ public class WorkDetailsCommentAdapter extends RecyclerView.Adapter<WorkDetailsC
             public void onLoadingError(String source, Exception e) {
 
             }
-        },R.mipmap.my_qiezi);
+        },R.mipmap.common_portrait_m);
 
-        Log.d("WorkDetailsCommentAdapt", listBean.getTextDto().getText());
-        Log.d("WorkDetailsCommentAdapt", "listBean.getTextDto().getTextExtra().size():" + listBean.getTextDto().getTextExtra().size());
         MyClickSpan.setTextHighLightWithClick(holder.Work_commentRecy_Comment, listBean.getTextDto().getText(), listBean.getTextDto().getTextExtra(), new View.OnClickListener() {
             @Override
             public void onClick(View v) {

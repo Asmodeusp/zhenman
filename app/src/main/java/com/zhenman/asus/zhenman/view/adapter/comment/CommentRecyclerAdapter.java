@@ -3,7 +3,6 @@ package com.zhenman.asus.zhenman.view.adapter.comment;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
-import com.zhenman.asus.zhenman.model.bean.CommentListBean;
+import com.zhenman.asus.zhenman.model.bean.CommentDtoListBean;
 import com.zhenman.asus.zhenman.model.bean.TextExtraBean;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.MyClickSpan;
@@ -26,14 +25,15 @@ import java.util.List;
 
 
 public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecyclerAdapter.Holder> implements View.OnClickListener {
-    private List<CommentListBean.DataBean.CommentDtoListBeanX> list;
+    private List<CommentDtoListBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
 
 
-    public CommentRecyclerAdapter(List<CommentListBean.DataBean.CommentDtoListBeanX> list) {
-        this.list = list;
 
+
+    public CommentRecyclerAdapter(List<CommentDtoListBean> commentDtoList) {
+        this.list = commentDtoList;
     }
 
     @NonNull
@@ -59,7 +59,7 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
-        final CommentListBean.DataBean.CommentDtoListBeanX listBean = list.get(position);
+        final CommentDtoListBean listBean = list.get(position);
         holder.itemView.setTag(position);
         //加载头像
         GlideUtils.loadCircleImage(listBean.getImageUrl(), holder.comment_fill_HeadView, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
@@ -72,7 +72,7 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
             public void onLoadingError(String source, Exception e) {
                 Toast.makeText(context, source, Toast.LENGTH_SHORT).show();
             }
-        }, R.mipmap.my_qiezi);
+        },R.mipmap.common_portrait_m);
         //加载富文本
         holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
         if (listBean.getTextDto() != null) {

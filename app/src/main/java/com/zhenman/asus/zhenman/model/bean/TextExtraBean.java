@@ -1,7 +1,7 @@
 package com.zhenman.asus.zhenman.model.bean;
 
 public class TextExtraBean {
-    public TextExtraBean(int start, int length, String id, String text, int textType, Object link) {
+    public TextExtraBean(int start, int length, String id, String text, int textType, String link) {
         this.start = start;
         this.length = length;
         this.id = id;
@@ -25,7 +25,7 @@ public class TextExtraBean {
     private String id;
     private String text;
     private int textType;
-    private Object link;
+    private String link;
 
     public int getStart() {
         return start;
@@ -67,11 +67,11 @@ public class TextExtraBean {
         this.textType = textType;
     }
 
-    public Object getLink() {
+    public String getLink() {
         return link;
     }
 
-    public void setLink(Object link) {
+    public void setLink(String link) {
         this.link = link;
     }
 
