@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
@@ -12,11 +13,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +41,7 @@ import com.zhenman.asus.zhenman.utils.Urls;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.comment.CommentItemRecyAdapter;
+import com.zhenman.asus.zhenman.view.adapter.comment.CommentRecyclerAdapter;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
@@ -92,6 +98,8 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
     AutoRelativeLayout ItemCommentPopuSendButton;
     @BindView(R.id.Item_comment_SendRelativeLayout)
     AutoRelativeLayout Item_comment_SendRelativeLayout;
+    @BindView(R.id.itemparent)
+    AutoLinearLayout itemparent;
     @BindView(R.id.Item_comment_CommentNumber)
     TextView Item_comment_CommentNumber;
     @BindView(R.id.xian)
@@ -111,6 +119,7 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
     private String ugcId;
     private CommentItemRecyAdapter commentItemRecyAdapter;
     List<CommentDtoListBean> commentDtoList = new ArrayList<>();
+    private PopupWindow window;
 
     public ItemFullFragment(String commentId, String Type, String ugcId) {
         this.commentId = commentId;
@@ -202,8 +211,90 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
         if (commentItemListBean.getData().getCommentDtoList().size() == 0) {
             xian.setVisibility(View.GONE);
         }
+        commentItemRecyAdapter.setRecyclerViewOnCLickListener(new CommentItemRecyAdapter.RecyclerViewOnCLickListener() {
+            @Override
+            public void myClick(View view, int position) {
+                String MyuserId = (String) SPUtils.get(getContext(), SPKey.USER_ID, "");
+                if (commentDtoList.get(position).getUserId().equals(MyuserId)) {
+                    initDeleteCommentPopu(position);
+                }else{
+                    Pull_upEdText(commentDtoList.get(position).getDetailId());
+                }
+            }
+        });
     }
 
+    private void initDeleteCommentPopu(final int position) {
+        // 用于PopupWindow的View
+        View contentView = LayoutInflater.from(getContext()).inflate(R.layout.comment_delete_popu, null, false);
+        // 创建PopupWindow对象，其中：
+        // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
+        // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
+        window = new PopupWindow(contentView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        // 设置PopupWindow的背景
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        // 设置PopupWindow是否能响应外部点击事件
+        window.setOutsideTouchable(true);
+        // 设置PopupWindow是否能响应点击事件
+        window.setTouchable(true);
+        // 显示PopupWindow，其中：
+        // 第一个参数是PopupWindow的锚点，第二和第三个参数分别是PopupWindow相对锚点的x、y偏移
+        window.showAtLocation(itemparent, Gravity.BOTTOM, 0, 0);
+        final Button deleteCommentButton = contentView.findViewById(R.id.deleteCommentButton);
+        Button cancelCommentButton = contentView.findViewById(R.id.cancelCommentButton);
+        //删除监听事件
+        deleteCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String detailId = commentDtoList.get(position).getDetailId();
+
+                deleteComment(detailId, position);
+            }
+        });
+        cancelCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                window.dismiss();
+            }
+        });
+    }
+
+    private void deleteComment(String commentId, final int position) {
+        FormBody.Builder params = new FormBody.Builder();
+        if (Integer.parseInt(Type) == 3) {
+            this.Type = "3";
+        }
+        params.add("commentType", Type);
+        params.add("commentId", commentId);
+        params.add("commentSubType", "2");
+        OkHttpClient client = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(Urls.BASE_URL + "ugcCommentInfo/deleteComment")
+                .post(params.build())
+                .addHeader("accessToken", ((String) SPUtils.get(App.context, SPKey.USER_TOKEN, "")))
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        commentDtoList.remove(position);
+                        commentItemRecyAdapter = new CommentItemRecyAdapter(commentDtoList);
+                        ItemCommentItemRecy.setAdapter(commentItemRecyAdapter);
+                        commentItemRecyAdapter.notifyDataSetChanged();
+                        window.dismiss();
+                    }
+                });
+            }
+        });
+
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -212,10 +303,10 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
 
     @OnClick(R.id.Item_comment_SendRelativeLayout)
     public void onViewClicked() {
-        Pull_upEdText();
+        Pull_upEdText("");
     }
 
-    private void Pull_upEdText() {
+    private void Pull_upEdText(final String DetailId) {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
         View view = LayoutInflater.from(getContext()).inflate(R.layout.bottom_sheet_edtext, null, false);
         commentPopu_edit_editText = view.findViewById(R.id.CommentPopu_edit_EditText);
@@ -252,7 +343,7 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
                 }
                 SendCommentBean sendCommentBean = new SendCommentBean(text, list);
                 json = new Gson().toJson(sendCommentBean);
-                SendComment();
+                SendComment(DetailId);
                 bottomSheetDialog.dismiss();
             }
         });
@@ -281,7 +372,7 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
 
     }
 
-    private void SendComment() {
+    private void SendComment(String DetailId) {
         FormBody.Builder params = new FormBody.Builder();
         if (Integer.parseInt(Type) == 3) {
             this.Type = "3";
@@ -293,7 +384,7 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
         params.add("json", json);
         params.add("commentType", Type);
         params.add("commentSubType", "2");
-        params.add("commentId", "");
+        params.add("commentId", DetailId);
         OkHttpClient client = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(Urls.BASE_URL + "ugcCommentInfo/saveComment")
@@ -314,7 +405,6 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
                     @Override
                     public void run() {
                         commentDtoList.add(0, data);
-
                         commentItemRecyAdapter = new CommentItemRecyAdapter(commentDtoList);
                         //设置适配器
                         ItemCommentItemRecy.setAdapter(commentItemRecyAdapter);

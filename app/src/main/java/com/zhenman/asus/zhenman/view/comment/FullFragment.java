@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
@@ -11,10 +12,14 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -72,6 +77,9 @@ public class FullFragment extends BottomSheetDialogFragment implements SpEditTex
     //@按钮
     @BindView(R.id.CommentPopu_Common_at)
     AutoRelativeLayout CommentPopuCommonAt;
+    //父容器
+    @BindView(R.id.parent)
+    AutoRelativeLayout parent;
     //发送Imageview
     @BindView(R.id.CommentPopu_SendImage)
     ImageView CommentPopuSendImage;
@@ -98,6 +106,7 @@ public class FullFragment extends BottomSheetDialogFragment implements SpEditTex
     private String ugcId;
     private List<CommentDtoListBean> commentDtoList = new ArrayList<>();
     private CommentRecyclerAdapter commentRecyclerAdapter;
+    private PopupWindow window;
 
     public FullFragment(CommentListBean commentListBean, String Type, String ugcId) {
         this.commentListBean = commentListBean;
@@ -130,17 +139,102 @@ public class FullFragment extends BottomSheetDialogFragment implements SpEditTex
                 commentRecyclerAdapter.setRecyclerViewOnCLickListener(new CommentRecyclerAdapter.RecyclerViewOnCLickListener() {
                     @Override
                     public void myClick(View view, int position) {
-                        ItemFullFragment fullFragment = new ItemFullFragment(commentListBean.getData().getCommentDtoList().get(position).getCommentId(), Type,ugcId);
+                        ItemFullFragment fullFragment = new ItemFullFragment(commentListBean.getData().getCommentDtoList().get(position).getCommentId(), Type, ugcId);
                         fullFragment.show(getActivity().getSupportFragmentManager(), "dialog");
                     }
                 });
             }
+            commentRecyclerAdapter.setRecyclerViewOnLongCLickListener(new CommentRecyclerAdapter.RecyclerViewOnLongCLickListener() {
+                @Override
+                public void myLongCLick(View view, int position) {
+                    String userId = commentListBean.getData().getCommentDtoList().get(position).getUserId();
+                    String MyuserId = (String) SPUtils.get(getContext(), SPKey.USER_ID, "");
+                    if (userId.equals(MyuserId)) {
+                        initDeleteCommentPopu(position);
+                    } else {
+                        ItemFullFragment fullFragment = new ItemFullFragment(commentListBean.getData().getCommentDtoList().get(position).getCommentId(), Type, ugcId);
+                        fullFragment.show(getActivity().getSupportFragmentManager(), "dialog");
+                    }
+                }
+            });
         } else {
             CommentPopuNumber.setText("0条评论");
             CommentPopuTip.setVisibility(View.VISIBLE);
             CommentPopuRecy.setVisibility(View.GONE);
         }
 
+
+    }
+
+    private void initDeleteCommentPopu(final int position) {
+        // 用于PopupWindow的View
+        View contentView = LayoutInflater.from(getContext()).inflate(R.layout.comment_delete_popu, null, false);
+        // 创建PopupWindow对象，其中：
+        // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
+        // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
+        window = new PopupWindow(contentView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        // 设置PopupWindow的背景
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        // 设置PopupWindow是否能响应外部点击事件
+        window.setOutsideTouchable(true);
+        // 设置PopupWindow是否能响应点击事件
+        window.setTouchable(true);
+        // 显示PopupWindow，其中：
+        // 第一个参数是PopupWindow的锚点，第二和第三个参数分别是PopupWindow相对锚点的x、y偏移
+        window.showAtLocation(parent, Gravity.BOTTOM, 0, 0);
+        final Button deleteCommentButton = contentView.findViewById(R.id.deleteCommentButton);
+        Button cancelCommentButton = contentView.findViewById(R.id.cancelCommentButton);
+        //删除监听事件
+        deleteCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String commentId = commentListBean.getData().getCommentDtoList().get(position).getCommentId();
+                deleteComment(commentId,position);
+            }
+        });
+        cancelCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                window.dismiss();
+            }
+        });
+    }
+
+    private void deleteComment(String commentId, final int position) {
+        FormBody.Builder params = new FormBody.Builder();
+        if (Integer.parseInt(Type) == 3) {
+            this.Type = "3";
+        }
+        params.add("commentType", Type);
+        params.add("commentId", commentId);
+        params.add("commentSubType", "1");
+        OkHttpClient client = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(Urls.BASE_URL + "ugcCommentInfo/deleteComment")
+                .post(params.build())
+                .addHeader("accessToken", ((String) SPUtils.get(App.context, SPKey.USER_TOKEN, "")))
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                commentDtoList.remove(position);
+                                commentRecyclerAdapter = new CommentRecyclerAdapter(commentDtoList);
+                                CommentPopuRecy.setAdapter(commentRecyclerAdapter);
+                                commentRecyclerAdapter.notifyDataSetChanged();
+                                window.dismiss();
+                            }
+                        });
+            }
+        });
 
     }
 

@@ -24,14 +24,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecyclerAdapter.Holder> implements View.OnClickListener {
+public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecyclerAdapter.Holder> implements View.OnClickListener, View.OnLongClickListener {
     private List<CommentDtoListBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
+    private RecyclerViewOnLongCLickListener myLongCLick;
+    @Override
+    public void onClick(View v) {
+        if (myCLick != null) {
+            myCLick.myClick(v, (int) v.getTag());
+        }
+    }
+    public void setRecyclerViewOnCLickListener(RecyclerViewOnCLickListener myCLick) {
+        this.myCLick = myCLick;
+    }
 
+    @Override
+    public boolean onLongClick(View v) {
+        myLongCLick.myLongCLick(v, (int) v.getTag());
+        return true;
+    }
 
+    public void setRecyclerViewOnLongCLickListener(RecyclerViewOnLongCLickListener myLongCLick) {
+        this.myLongCLick = myLongCLick;
+    }
+    public interface RecyclerViewOnCLickListener {
+        void myClick(View view, int position);
+    }
 
-
+    public interface RecyclerViewOnLongCLickListener {
+        void myLongCLick(View view, int position);
+    }
     public CommentRecyclerAdapter(List<CommentDtoListBean> commentDtoList) {
         this.list = commentDtoList;
     }
@@ -43,19 +66,13 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
         View inflate = LayoutInflater.from(context).inflate(R.layout.comment_fill, parent, false);
         Holder holder = new Holder(inflate);
         inflate.setOnClickListener(this);
+        inflate.setOnLongClickListener(this);
         return holder;
     }
 
-    @Override
-    public void onClick(View v) {
-        if (myCLick != null) {
-            myCLick.myClick(v, (int) v.getTag());
-        }
-    }
 
-    public void setRecyclerViewOnCLickListener(RecyclerViewOnCLickListener myCLick) {
-        this.myCLick = myCLick;
-    }
+
+
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
@@ -72,7 +89,7 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
             public void onLoadingError(String source, Exception e) {
                 Toast.makeText(context, source, Toast.LENGTH_SHORT).show();
             }
-        },R.mipmap.common_portrait_m);
+        }, R.mipmap.common_portrait_m);
         //加载富文本
         holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
         if (listBean.getTextDto() != null) {
@@ -149,9 +166,8 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
         return list.isEmpty() ? 0 : list.size();
     }
 
-    public interface RecyclerViewOnCLickListener {
-        void myClick(View view, int position);
-    }
+
+
 
     public class Holder extends RecyclerView.ViewHolder {
         //头像

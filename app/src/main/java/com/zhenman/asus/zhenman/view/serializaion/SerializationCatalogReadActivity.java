@@ -305,9 +305,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
 
     @Override
     public void showError(String msg) {
-        if (!msg.equals("成功")) {
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-        }
+
     }
 
     // 右边菜单开关事件

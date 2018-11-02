@@ -71,7 +71,10 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
             }
         },R.mipmap.common_portrait_m);
         //加载富文本
-        holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
+        if (listBean.getAddTime()!=null) {
+            holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
+        }
+
         if (listBean.getTextDto() != null) {
             MyClickSpan.setTextHighLightWithClick(holder.comment_fill_conent, listBean.getTextDto().getText(), listBean.getTextDto().getTextExtra(), new View.OnClickListener() {
                 @Override
@@ -87,7 +90,9 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
         //加载喜欢个数
         holder.comment_fill_likeNumberText.setText(listBean.getLikeNum() + "");
         //加载添加时间
-        holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
+        if (listBean.getAddTime()!=null) {
+            holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
+        }
         holder.comment_Two_ItemLinearLayout.setVisibility(View.GONE);
         holder.comment_fill_fromUserText.setVisibility(View.GONE);
         holder.comment_fill_likeButton.setVisibility(View.GONE);

@@ -44,7 +44,7 @@ public class CommentDtoListBean {
         private boolean reAuthor;
         private String imageUrl;
         private String name;
-        private Object detailId;
+        private String detailId;
         private String title;
         private Object roleNameList;
         private String chapterSort;
@@ -173,11 +173,11 @@ public class CommentDtoListBean {
             this.name = name;
         }
 
-        public Object getDetailId() {
+        public String getDetailId() {
             return detailId;
         }
 
-        public void setDetailId(Object detailId) {
+        public void setDetailId(String detailId) {
             this.detailId = detailId;
         }
 
