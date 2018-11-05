@@ -85,7 +85,7 @@ public class WorkDetailsActorRecyAdapter extends RecyclerView.Adapter<WorkDetail
             public void onLoadingError(String source, Exception e) {
                 Toast.makeText(context, source, Toast.LENGTH_SHORT).show();
             }
-        });
+        },R.mipmap.common_portrait_m);
         followCount = listBean.isFollow();
         if (followCount) {
             holder.Actor_followImg.setImageResource(R.mipmap.home_follow_on);

@@ -70,7 +70,7 @@ public class CommentAtActorRecyAdapter extends RecyclerView.Adapter<CommentAtAct
             public void onLoadingError(String source, Exception e) {
                 Toast.makeText(context, source, Toast.LENGTH_SHORT).show();
             }
-        });
+        },R.mipmap.common_portrait_m);
 
 
     }

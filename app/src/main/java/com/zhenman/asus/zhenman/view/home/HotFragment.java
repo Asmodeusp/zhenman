@@ -29,6 +29,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     private ViewPagerLayoutManager linearLayoutManager;
     private HomeHotRecyAdapter homeHotRecyAdapter;
     private List<HomeHotBean.DataBean> data;
+    private String ugcId;
 
 
     public HotFragment() {
@@ -119,14 +120,14 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     @Override
     public void showCommentList(CommentListBean commentListBean) {
-        FullFragment fullFragment = new FullFragment(commentListBean,Type+"");
-
+        FullFragment fullFragment = new FullFragment(commentListBean,Type+"",ugcId);
         fullFragment.show(getActivity().getSupportFragmentManager(), "dialog");
     }
     int Type;
     @Override
     public void getComment(String UgcId, int Type) {
         this.Type = Type;
-        presenter.getCommentList(UgcId, "1", "20", Type + "", "1");
+        this.ugcId=UgcId;
+        presenter.getCommentList(ugcId+"", "1", "20", Type + "", "1");
     }
 }

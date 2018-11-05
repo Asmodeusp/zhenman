@@ -70,6 +70,7 @@ public class CommentAtUeserlistActivity extends BaseActivity<CommentAtPresenterI
                         String name = attentionUserBean.getData().getResult().get(position).getName();
                         Intent intent = new Intent();
                         intent.putExtra("name", name);
+                        intent.putExtra("id",attentionUserBean.getData().getResult().get(position).getUserId());
                         CommentAtUeserlistActivity.this.setResult(500, intent);
                         finish();
 
@@ -103,6 +104,7 @@ public class CommentAtUeserlistActivity extends BaseActivity<CommentAtPresenterI
                         String name = serializationDetailsBean.getData().getActorList().get(position).getName();
                         Intent intent = new Intent();
                         intent.putExtra("name", name);
+                        intent.putExtra("id",serializationDetailsBean.getData().getActorList().get(position).getUserId());
                         setResult(500, intent);
                         finish();
                     }
