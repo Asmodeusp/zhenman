@@ -4,20 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/gray_prograss_bg"
+    android:orientation="vertical"
     tools:context=".view.message.ByRewardedActivity">
-
     <include layout="@layout/above_head" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/byRewarded_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
-
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_2"
         android:background="@color/h7" />
+
+    <TextView
+        style="@style/Style32H2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/px_24"
+        android:text="没有更多数据了~" />
 </com.zhy.autolayout.AutoLinearLayout>

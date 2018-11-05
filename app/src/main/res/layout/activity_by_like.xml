@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/gray_prograss_bg"
     android:orientation="vertical"
-    tools:context=".view.message.ByFansActivity">
-    <include layout="@layout/above_head" />
-
+    tools:context=".view.message.ByLikeActivity">
+    <include layout="@layout/above_head"/>
     <android.support.v7.widget.RecyclerView
 
-        android:id="@+id/byFans_recy"
+        android:id="@+id/byLike_recy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
@@ -28,12 +27,11 @@
         android:text="没有更多数据了~" />
 
     <TextView
-        android:id="@+id/byFans_none"
+        android:id="@+id/byLike_none"
         style="@style/Style32H2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="本宝宝暂时没有粉丝哦"
+        android:text="暂时没有数据哦~"
         android:visibility="gone" />
-
 </com.zhy.autolayout.AutoLinearLayout>

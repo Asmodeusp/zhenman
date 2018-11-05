@@ -8,12 +8,13 @@
         android:id="@+id/itemMyAttenTheme_headImage"
         android:layout_width="@dimen/px_128"
         android:layout_height="@dimen/px_128"
+        android:src="@mipmap/common_portrait_m"
         android:layout_margin="@dimen/px_24" />
 
     <TextView
         android:id="@+id/itemMyAttenTheme_title"
         style="@style/Style32H2"
-        android:layout_width="wrap_content"
+        android:layout_width="370px"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/px_24"
         android:layout_marginTop="@dimen/px_32"

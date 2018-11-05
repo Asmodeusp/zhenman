@@ -44,7 +44,6 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     @Override
     protected void init() {
         //请求数据
-
         initView();
     }
 

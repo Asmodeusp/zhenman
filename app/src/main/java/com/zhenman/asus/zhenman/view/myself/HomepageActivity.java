@@ -326,7 +326,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
             my_Resume.setText(homePageHeadBean.getData().getIntroduction());
             homePage_works.setText(homePageHeadBean.getData().getWorks() + "");
             homePage_fans.setText(homePageHeadBean.getData().getFans() + "");
-            homePage_attention.setText(homePageHeadBean.getData().getFollows() - 1 + "");
+            homePage_attention.setText(homePageHeadBean.getData().getFollows() + "");
             homePage_theme.setText(homePageHeadBean.getData().getFollowSubject() + "");
             if (homePageHeadBean.getData().getFollow() == 1) {
                 homePage_attentionHe.setText("+关注");

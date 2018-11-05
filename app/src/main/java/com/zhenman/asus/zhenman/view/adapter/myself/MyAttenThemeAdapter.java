@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.zhenman.asus.zhenman.model.bean.MyFansBean;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -147,12 +149,24 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
         }
         if (object instanceof ByFansBean.DataBean) {
             final ByFansBean.DataBean resultBean = (ByFansBean.DataBean) object;
-            Glide.with(context).load(resultBean.getHeadImg()).into(holder.itemMyAttenTheme_headImage);
-            holder.itemMyAttenTheme_title.setText(resultBean.getName());
+            String s = "<font color=\"#000000\">"+"@"+resultBean.getName()+"</font><font color=\"#999999\">关注了你</font>";
+            holder.itemMyAttenTheme_title.setText(Html.fromHtml(s));
+            Glide.with(context)
+                    .load(resultBean.getHeadImg())
+                    .centerCrop()
+                    .dontAnimate()//防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
+                    .error(R.mipmap.common_portrait_m)
+                    .placeholder(R.mipmap.common_portrait_m)
+                    .into(holder.itemMyAttenTheme_headImage);
 //           时间转换
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YY-MM-DD");
-            String format = simpleDateFormat.format(new Date(Long.parseLong(resultBean.getAddTime())));
-            holder.itemMyAttenTheme_decription.setText(format);
+            Date date = new Date(Long.parseLong(resultBean.getAddTime()));
+            SimpleDateFormat format = new SimpleDateFormat("MM-dd", Locale.getDefault());
+            String format2 = format.format(date);
+            holder.itemMyAttenTheme_decription.setText(format2);
+
+
+
+
             if (resultBean.getFollow() == 2) {
                 holder.itemMyAttenTheme_attention.setText("+关注");
                 holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#ffffff"));

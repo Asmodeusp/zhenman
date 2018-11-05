@@ -3,7 +3,6 @@ package com.zhenman.asus.zhenman.view.message;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +16,7 @@ import com.zhenman.asus.zhenman.view.adapter.message.ByRewardedAdapter;
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 import com.zhy.autolayout.AutoRelativeLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -61,22 +61,17 @@ public class ByRewardedActivity extends BaseActivity<ByRewardedPresenter> implem
 
     @Override
     public void showByRewardedData(ByRewardedBean byRewardedBean) {
-        Log.e("Sunny",byRewardedBean.getData().size()+"");
         if (byRewardedBean.getData().size()==0){
             Toast.makeText(this, "暂时没有数据", Toast.LENGTH_SHORT).show();
         }else {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
             byRewardedList.setLayoutManager(linearLayoutManager);
             List<ByRewardedBean.DataBean> dataBeanList = byRewardedBean.getData();
-            ByRewardedAdapter byRewardedAdapter = new ByRewardedAdapter(dataBeanList, this);
+            List<Object> list1 = new ArrayList<>();
+            list1.addAll(dataBeanList);
+            ByRewardedAdapter byRewardedAdapter = new ByRewardedAdapter(list1, this);
             byRewardedList.setAdapter(byRewardedAdapter);
             byRewardedAdapter.ByRewardedCallback(this);
-            byRewardedAdapter.setOnShortCLickListener(new ByRewardedAdapter.OnShortCLickListener() {
-                @Override
-                public void myClick(View view, int position) {
-
-                }
-            });
         }
     }
 
@@ -89,6 +84,7 @@ public class ByRewardedActivity extends BaseActivity<ByRewardedPresenter> implem
     public void showChapterList(int chapter) {
         Intent intent = new Intent(this, WorkDetailsActivity.class);
         intent.putExtra("pgcid", chapter);
+
         startActivity(intent);
     }
 }

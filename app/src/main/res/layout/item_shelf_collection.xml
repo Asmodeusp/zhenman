@@ -30,6 +30,7 @@
         android:padding="2px"
         android:scaleType="fitXY"
         android:src="@mipmap/home_mask_bottom"
+        android:visibility="gone"
         />
 
     <CheckBox
@@ -39,12 +40,14 @@
         android:layout_marginLeft="180px"
         android:layout_marginTop="@dimen/px_8"
         android:checked="false"
+        android:visibility="gone"
         android:button="@drawable/pay_selector" />
 
     <TextView
         android:id="@+id/itemShelfColl_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/itemShelfColl_iamge"
         android:text="Sunny" />
 </com.zhy.autolayout.AutoRelativeLayout>

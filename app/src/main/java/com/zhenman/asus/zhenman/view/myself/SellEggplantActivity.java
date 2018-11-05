@@ -83,19 +83,14 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
     AutoRelativeLayout sellEggplantItem01;
     @BindView(R.id.sellEggplant_item03)
     AutoRelativeLayout sellEggplantItem03;
-    //支付popuwindow
-    private PopupWindow paypopupWindow;
     TextView ppwPayUserName;
     RecyclerView ppwPayProductList;
     CheckBox ppwPayZhifubaoBtn;
     CheckBox ppwPayWeixinBtn;
-    Button ppwPayPayBtn;
     ImageView ppwQuestion;
     AutoLinearLayout ppwPayBottom;
     TextView ppwPayOther01;
     private String paymentMethod = "2";
-    private boolean tag = false;
-
     AutoRelativeLayout ppwPay_footView;
     AutoRelativeLayout ppwPayZhifubao;
     AutoRelativeLayout ppwPayWeixin;
@@ -109,6 +104,9 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
     private boolean isZhifubao = false;
     private boolean isWeixin = false;
     private SellEggplantBean.DataBean eggplantDetailsBeanData;
+    private double eggplantProportion;
+    private double biteEggplantProportion;
+    private double unripeEggplantProportion;
 
     @Override
     protected int getLayoutId() {
@@ -130,7 +128,7 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
 
     }
 
-    @OnClick({R.id.app_back, R.id.app_otherID, R.id.sellEggplant_question, R.id.sellEggplant_sellBtn, R.id.sellEggplant_item01, R.id.sellEggplant_item02, R.id.sellEggplant_item03, R.id.ppwPay_zhifubao, R.id.ppwPay_weixin})
+    @OnClick({R.id.app_back, R.id.app_otherID, R.id.sellEggplant_question, R.id.sellEggplant_sellBtn, R.id.sellEggplant_item01, R.id.sellEggplant_item02, R.id.sellEggplant_item03})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_back:
@@ -180,30 +178,6 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
                     sellEggplantNoSelectCallback(3, eggplantDetailsBeanData.getUnripeEggplantAmount());
                 }
                 break;
-            case R.id.ppwPay_zhifubao:
-                if (isZhifubao == false) {
-                    isZhifubao = true;
-                    paymentMethod = "2";
-                    ppwPayZhifubaoBtn.setChecked(true);
-                    ppwPayWeixinBtn.setChecked(false);
-                } else {
-                    isZhifubao=false;
-                    ppwPayZhifubaoBtn.setChecked(false);
-                    ppwPayWeixinBtn.setChecked(true);
-                }
-                break;
-            case R.id.ppwPay_weixin:
-                if (isWeixin==false){
-                    isWeixin = true;
-                    paymentMethod = "1";
-                    ppwPayZhifubaoBtn.setChecked(false);
-                    ppwPayWeixinBtn.setChecked(true);
-                }else {
-                    isWeixin=false;
-                    ppwPayZhifubaoBtn.setChecked(true);
-                    ppwPayWeixinBtn.setChecked(false);
-                }
-                break;
         }
 
     }
@@ -243,7 +217,36 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
 ////        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
 //        popupWindow.showAtLocation(sellEggplantFootView, Gravity.NO_GRAVITY, (location[0] + sellEggplantFootView.getWidth() / 2) - popupWidth / 2, location[1] - popupHeight);
         popupWindow.showAtLocation(PaypopupView, Gravity.BOTTOM, 0, 0);
-
+        ppwPayWeixin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isWeixin==false){
+                    isWeixin = true;
+                    paymentMethod = "1";
+                    ppwPayZhifubaoBtn.setChecked(false);
+                    ppwPayWeixinBtn.setChecked(true);
+                }else {
+                    isWeixin=false;
+                    ppwPayZhifubaoBtn.setChecked(true);
+                    ppwPayWeixinBtn.setChecked(false);
+                }
+            }
+        });
+        ppwPayZhifubao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isZhifubao == false) {
+                    isZhifubao = true;
+                    paymentMethod = "2";
+                    ppwPayZhifubaoBtn.setChecked(true);
+                    ppwPayWeixinBtn.setChecked(false);
+                } else {
+                    isZhifubao=false;
+                    ppwPayZhifubaoBtn.setChecked(false);
+                    ppwPayWeixinBtn.setChecked(true);
+                }
+            }
+        });
 //        支付宝
         ppwPayZhifubaoBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -274,7 +277,6 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
                 popupWindow.dismiss();
                 if (paymentMethod.equals("1")) {
 //                        提现到微信
-//                        presenter.sendWeixinTixian(eggplantAmount + "", biteEggplantAmount + "", unripeEggplantAmount + "", sellEggplantMoney.getText().toString());
                     presenter.sendWeixinTixian(0 + "", 5 + "", 0 + "", 3 + "");
 
                 } else {
@@ -318,7 +320,11 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
             sellEggplantKind01.setText("茄子" + eggplantDetailsBean.getData().getEggplantAmount());
             sellEggplantKind02.setText("被咬一口的茄子" + eggplantDetailsBean.getData().getBiteEggplantAmount());
             sellEggplantKind03.setText("未成熟的茄子" + eggplantDetailsBean.getData().getUnripeEggplantAmount());
-            sellEggplantIsSelect01.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            eggplantProportion = eggplantDetailsBean.getData().getEggplantProportion();
+            biteEggplantProportion = eggplantDetailsBean.getData().getBiteEggplantProportion();
+            unripeEggplantProportion = eggplantDetailsBean.getData().getUnripeEggplantProportion();
+
+           /* sellEggplantIsSelect01.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (sellEggplantIsSelect01.isChecked()) {
@@ -351,7 +357,7 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
                         sellEggplantNoSelectCallback(3, eggplantDetailsBeanData.getUnripeEggplantAmount());
                     }
                 }
-            });
+            });*/
         }
 
     }
@@ -376,21 +382,21 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
         NumberFormat nf = NumberFormat.getNumberInstance();
         nf.setMaximumFractionDigits(2);
         if (type == 1) {
-            v = 0.9;
+            v = eggplantProportion;
             double v1 = amount * v;
             eggplantMoney += v1;
             String format = nf.format(eggplantMoney);
             sellEggplantMoney.setText(format);
         }
         if (type == 2) {
-            v = 0.6;
+            v = biteEggplantProportion;
             double v1 = amount * v;
             eggplantMoney += v1;
             String format = nf.format(eggplantMoney);
             sellEggplantMoney.setText(format);
         }
         if (type == 3) {
-            v = 0.05;
+            v = unripeEggplantProportion;
             double v1 = amount * v;
             eggplantMoney += v1;
             String format = nf.format(eggplantMoney);
@@ -408,21 +414,21 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
         nf.setMaximumFractionDigits(2);
         if (eggplantCount >= 0) {
             if (type == 1) {
-                v = 0.9;
+                v = eggplantProportion;
                 double v1 = amount * v;
                 eggplantMoney -= v1;
                 String format = nf.format(eggplantMoney);
                 sellEggplantMoney.setText(format);
             }
             if (type == 2) {
-                v = 0.6;
+                v = biteEggplantProportion;
                 double v1 = amount * v;
                 eggplantMoney -= v1;
                 String format = nf.format(eggplantMoney);
                 sellEggplantMoney.setText(format);
             }
             if (type == 3) {
-                v = 0.05;
+                v = unripeEggplantProportion;
                 double v1 = amount * v;
                 eggplantMoney -= v1;
                 String format = nf.format(eggplantMoney);

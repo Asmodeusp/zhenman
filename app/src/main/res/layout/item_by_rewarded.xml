@@ -6,14 +6,16 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/itemByRewarded_avatar"
-        android:layout_width="@dimen/px_128"
-        android:layout_height="@dimen/px_128"
-        android:layout_margin="@dimen/px_24" />
+        android:layout_width="@dimen/px_98"
+        android:layout_height="@dimen/px_98"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/px_24"
+        android:src="@mipmap/common_portrait_m" />
 
     <TextView
         android:id="@+id/itemByRewarded_introduction"
-        style="@style/Style32H2"
-        android:layout_width="wrap_content"
+        style="@style/Style32H4"
+        android:layout_width="420px"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/px_24"
         android:layout_marginTop="@dimen/px_32"
@@ -21,8 +23,8 @@
         android:text="每个人都不应该被亏待" />
 
     <TextView
-        android:id="@+id/itemMyAttenTheme_decription"
-        android:layout_width="wrap_content"
+        android:id="@+id/itemByRewarded_time"
+        android:layout_width="420px"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/itemByRewarded_introduction"
         android:layout_below="@id/itemByRewarded_introduction"

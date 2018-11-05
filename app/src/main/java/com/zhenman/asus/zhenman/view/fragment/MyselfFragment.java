@@ -167,7 +167,9 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 break;
             case R.id.my_FansPage:
 //                粉丝
-                startActivity(new Intent(getActivity(), MyFansActivity.class));
+                Intent intentMyFans = new Intent(getActivity(), MyFansActivity.class);
+                intentMyFans.putExtra("him_id", "myself");
+                startActivity(intentMyFans);
                 break;
             case R.id.my_CarePage:
 //                我的关注
@@ -177,7 +179,10 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 break;
             case R.id.my_themePage:
 //                关注的主题
-                startActivity(new Intent(getActivity(), AttentionThemeActivity.class));
+                Intent intentThemePage = new Intent(getActivity(), AttentionThemeActivity.class);
+                intentThemePage.putExtra("him_id", "myself");
+
+                startActivity(intentThemePage);
                 break;
             case R.id.my_ShelfPage:
 //                书架

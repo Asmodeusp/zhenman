@@ -20,6 +20,7 @@ import com.zhenman.asus.zhenman.view.adapter.message.ThemeAdapter;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.message.ByCommentActivity;
 import com.zhenman.asus.zhenman.view.message.ByFansActivity;
+import com.zhenman.asus.zhenman.view.message.ByLikeActivity;
 import com.zhenman.asus.zhenman.view.message.ByRewardedActivity;
 import com.zhenman.asus.zhenman.view.message.ThemeDetailsActivity;
 import com.zhy.autolayout.AutoLinearLayout;
@@ -86,7 +87,7 @@ public class MessageFragment extends BaseFragment<TheamBeanPresenter> implements
         switch (v.getId()) {
 
             case R.id.message_like:
-
+                startActivity(new Intent(getContext(), ByLikeActivity.class));
                 break;
             case R.id.message_comment:
                 startActivity(new Intent(getActivity(), ByCommentActivity.class));
