@@ -6,7 +6,7 @@ public class SellEggplantBean {
     /**
      * state : 0
      * msg : 成功
-     * data : {"id":1,"userId":299,"coinAmount":82,"eggplantAmount":10,"biteEggplantAmount":0,"unripeEggplantAmount":0,"addTime":"1540291478000"}
+     * data : {"coinAmount":10000,"eggplantAmount":2,"biteEggplantAmount":3,"unripeEggplantAmount":0,"eggplantProportion":0.9,"biteEggplantProportion":0.6,"unripeEggplantProportion":0.05}
      */
 
     private int state;
@@ -39,38 +39,22 @@ public class SellEggplantBean {
 
     public static class DataBean {
         /**
-         * id : 1
-         * userId : 299
-         * coinAmount : 82
-         * eggplantAmount : 10
-         * biteEggplantAmount : 0
+         * coinAmount : 10000
+         * eggplantAmount : 2
+         * biteEggplantAmount : 3
          * unripeEggplantAmount : 0
-         * addTime : 1540291478000
+         * eggplantProportion : 0.9
+         * biteEggplantProportion : 0.6
+         * unripeEggplantProportion : 0.05
          */
 
-        private int id;
-        private int userId;
         private int coinAmount;
         private int eggplantAmount;
         private int biteEggplantAmount;
         private int unripeEggplantAmount;
-        private String addTime;
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public int getUserId() {
-            return userId;
-        }
-
-        public void setUserId(int userId) {
-            this.userId = userId;
-        }
+        private double eggplantProportion;
+        private double biteEggplantProportion;
+        private double unripeEggplantProportion;
 
         public int getCoinAmount() {
             return coinAmount;
@@ -104,12 +88,28 @@ public class SellEggplantBean {
             this.unripeEggplantAmount = unripeEggplantAmount;
         }
 
-        public String getAddTime() {
-            return addTime;
+        public double getEggplantProportion() {
+            return eggplantProportion;
         }
 
-        public void setAddTime(String addTime) {
-            this.addTime = addTime;
+        public void setEggplantProportion(double eggplantProportion) {
+            this.eggplantProportion = eggplantProportion;
+        }
+
+        public double getBiteEggplantProportion() {
+            return biteEggplantProportion;
+        }
+
+        public void setBiteEggplantProportion(double biteEggplantProportion) {
+            this.biteEggplantProportion = biteEggplantProportion;
+        }
+
+        public double getUnripeEggplantProportion() {
+            return unripeEggplantProportion;
+        }
+
+        public void setUnripeEggplantProportion(double unripeEggplantProportion) {
+            this.unripeEggplantProportion = unripeEggplantProportion;
         }
     }
 }

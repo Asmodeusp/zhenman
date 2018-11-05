@@ -227,7 +227,8 @@
         <activity android:name=".view.myself.EggplantDetailsActivity" />
         <activity android:name=".view.message.ByRewardedActivity" />
         <activity android:name=".view.message.ByFansActivity" />
-        <activity android:name=".view.message.ByCommentActivity"></activity>
+        <activity android:name=".view.message.ByCommentActivity" />
+        <activity android:name=".view.message.ByLikeActivity"></activity>
     </application>
 
 </manifest>

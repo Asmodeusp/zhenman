@@ -17,12 +17,14 @@ import com.zhenman.asus.zhenman.contract.ShelfCollectionContract;
 import com.zhenman.asus.zhenman.model.bean.ShelfCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.VerificationCodeBean;
 import com.zhenman.asus.zhenman.presenter.ShelfCollectionPresenter;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.ShelfCollectionAdapter;
 import com.zhenman.asus.zhenman.view.serializaion.BookshelfActivity;
 import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -87,7 +89,9 @@ public class ShelfCollectionFragment extends BaseFragment<ShelfCollectionPresent
             resultBeanList = shelfCollectionBean.getData().getResult();
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
             shelfColl_recy.setLayoutManager(gridLayoutManager);
-            shelfCollectionAdapter = new ShelfCollectionAdapter(resultBeanList, getContext());
+            List<Object> list1 = new ArrayList<>();
+            list1.addAll(resultBeanList);
+            shelfCollectionAdapter = new ShelfCollectionAdapter(list1, getContext());
             shelfColl_recy.setAdapter(shelfCollectionAdapter);
             shelfCollectionAdapter.setOnShortCLickListener(new ShelfCollectionAdapter.OnShortCLickListener() {
                 @Override
@@ -97,9 +101,8 @@ public class ShelfCollectionFragment extends BaseFragment<ShelfCollectionPresent
                         shelfCollectionAdapter.setupAllChecked(position);
                     } else {
                         int pgcId = shelfCollectionBean.getData().getResult().get(position).getPgcId();
-                        SPUtils.put(getContext(), "pgcid", pgcId + "");
                         Intent intent = new Intent(getActivity(), WorkDetailsActivity.class);
-                        intent.putExtra("pgcid", pgcId);
+                        SPUtils.put(getContext(), SPKey.PGC_ID,pgcId+"");
                         getActivity().startActivity(intent);
 //                    短按的时候隐藏底部布局
                         shelf_foot.setVisibility(View.GONE);

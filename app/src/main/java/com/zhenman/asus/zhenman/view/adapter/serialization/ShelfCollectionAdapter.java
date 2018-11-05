@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.adapter.serialization;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,12 +15,17 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.ShelfCollectionBean;
+import com.zhenman.asus.zhenman.model.bean.ShelfHistoryListBean;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShelfCollectionAdapter extends RecyclerView.Adapter<ShelfCollectionAdapter.Holder> implements View.OnClickListener, View.OnLongClickListener {
-    private List<ShelfCollectionBean.DataBean.ResultBean> resultBeanList;
+    private List<Object> resultBeanList;
+//    ShelfCollectionBean.DataBean.ResultBean
     private Context context;
     private OnShortCLickListener myCLick;
     private OnLongCLickListener myLongCLick;
@@ -28,7 +34,7 @@ public class ShelfCollectionAdapter extends RecyclerView.Adapter<ShelfCollection
     public static String isSelectAll="全选";
     private boolean isClick=false;
     public static ArrayList<String> checkList=new ArrayList<>();
-    public ShelfCollectionAdapter(List<ShelfCollectionBean.DataBean.ResultBean> resultBeanList, Context context) {
+    public ShelfCollectionAdapter(List<Object> resultBeanList, Context context) {
         this.resultBeanList = resultBeanList;
         this.context = context;
     }
@@ -46,75 +52,92 @@ public class ShelfCollectionAdapter extends RecyclerView.Adapter<ShelfCollection
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int i) {
-        Glide.with(context).load(resultBeanList.get(i).getImageUrl()).into(holder.itemShelfColl_iamge);
-        holder.itemShelfColl_title.setText(resultBeanList.get(i).getTitle());
-
+        Object object = resultBeanList.get(i);
+        if (object instanceof ShelfCollectionBean.DataBean.ResultBean) {
+            final ShelfCollectionBean.DataBean.ResultBean resultBean = (ShelfCollectionBean.DataBean.ResultBean) object;
+            Glide.with(context).load(resultBean.getImageUrl()).into(holder.itemShelfColl_iamge);
+            holder.itemShelfColl_title.setText(resultBean.getTitle());
 //        是否显示蒙板
-        if (resultBeanList.get(i).isDisplay()) {//显示蒙板
-            holder.itemShelfColl_mask.setVisibility(View.VISIBLE);//蒙板
-            holder.itemShelfColl_check.setVisibility(View.VISIBLE);//选项  选项初始化是未选中
-            holder.itemShelfColl_off.setVisibility(View.VISIBLE);
-            holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_off);
-            isDisplay = "显示";
+            if (resultBean.isDisplay()) {//显示蒙板
+                holder.itemShelfColl_mask.setVisibility(View.VISIBLE);//蒙板
+                holder.itemShelfColl_check.setVisibility(View.VISIBLE);//选项  选项初始化是未选中
+                holder.itemShelfColl_off.setVisibility(View.VISIBLE);
+                holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_off);
+                isDisplay = "显示";
+                holder.itemShelfColl_iamge.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (isClick == false) {
+                            isClick = true;
+                            holder.itemShelfColl_check.setChecked(true);
+                            holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_on);
+                            checkList.add(resultBean.getLid() + "");
+                        } else {
+                            isClick = false;
+                            holder.itemShelfColl_check.setChecked(false);
+                            holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_off);
+                            checkList.remove(resultBean.getLid() + "");
+                        }
+                    }
+                });
+                holder.itemShelfColl_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (holder.itemShelfColl_check.isChecked()) {
+                            holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_on);
+                            checkList.add(resultBean.getLid() + "");
+                        } else {
+                            holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_off);
+                            checkList.remove(resultBean.getLid() + "");
+                        }
+                    }
+                });
+
+            } else {
+                holder.itemShelfColl_mask.setVisibility(View.GONE);
+                holder.itemShelfColl_check.setVisibility(View.GONE);
+                holder.itemShelfColl_off.setVisibility(View.GONE);
+                isDisplay = "隐藏";
+            }
+//        是否全选
+            if (resultBean.isCheck()) {
+                checkList.add(resultBean.getLid() + "");
+                holder.itemShelfColl_check.setChecked(true);
+                holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_on);
+                holder.itemShelfColl_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (holder.itemShelfColl_check.isChecked()) {
+                            checkList.add(resultBean.getLid() + "");
+                            holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_on);
+                            isSelectAll = "取消全选";
+                        } else {
+                            checkList.remove(resultBean.getLid() + "");
+                            holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_off);
+                            isSelectAll = "全选";
+                        }
+                    }
+                });
+            } else {
+                holder.itemShelfColl_check.setChecked(false);
+                holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_off);
+            }
+            holder.itemView.setTag(i);
+        }
+        if (object instanceof ShelfHistoryListBean.DataBean.ResultBean){
+            final ShelfHistoryListBean.DataBean.ResultBean resultBean = (ShelfHistoryListBean.DataBean.ResultBean) object;
+            Glide.with(context).load(resultBean.getImageUrl()).into(holder.itemShelfColl_iamge);
+            holder.itemShelfColl_title.setText(resultBean.getTitle());
             holder.itemShelfColl_iamge.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (isClick==false){
-                        isClick=true;
-                        holder.itemShelfColl_check.setChecked(true);
-                        holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_on);
-                        checkList.add(resultBeanList.get(i).getLid()+"");
-                    }else {
-                        isClick=false;
-                        holder.itemShelfColl_check.setChecked(false);
-                        holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_off);
-                        checkList.remove(resultBeanList.get(i).getLid()+"");
-                    }
+                    Intent intent = new Intent(context, WorkDetailsActivity.class);
+                    SPUtils.put(context, SPKey.PGC_ID,resultBean.getPgcId()+"");
+//                    intent.putExtra("pgcid", resultBean.getPgcId());
+                    context.startActivity(intent);
                 }
             });
-            holder.itemShelfColl_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (holder.itemShelfColl_check.isChecked()){
-                        holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_on);
-                        checkList.add(resultBeanList.get(i).getLid()+"");
-                    }else {
-                        holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_off);
-                        checkList.remove(resultBeanList.get(i).getLid()+"");
-                    }
-                }
-            });
-
-        } else {
-            holder.itemShelfColl_mask.setVisibility(View.GONE);
-            holder.itemShelfColl_check.setVisibility(View.GONE);
-            holder.itemShelfColl_off.setVisibility(View.GONE);
-            isDisplay = "隐藏";
         }
-//        是否全选
-        if (resultBeanList.get(i).isCheck()) {
-            checkList.add(resultBeanList.get(i).getLid()+"");
-            holder.itemShelfColl_check.setChecked(true);
-            holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_on);
-            holder.itemShelfColl_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (holder.itemShelfColl_check.isChecked()){
-                        checkList.add(resultBeanList.get(i).getLid()+"");
-                        holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_on);
-                        isSelectAll="取消全选";
-                    }else {
-                        checkList.remove(resultBeanList.get(i).getLid()+"");
-                        holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_off);
-                        isSelectAll="全选";
-                    }
-                }
-            });
-        } else {
-            holder.itemShelfColl_check.setChecked(false);
-            holder.itemShelfColl_off.setImageResource(R.mipmap.serial_shelf_off);
-        }
-        holder.itemView.setTag(i);
     }
 
     @Override

@@ -14,9 +14,10 @@ import com.zhenman.asus.zhenman.model.bean.ThemeFeaturedBean;
 
 import java.util.List;
 
-public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Holder> {
+public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Holder> implements View.OnClickListener {
     private List<ThemeFeaturedBean.DataBean.ResultBean> resultBeanList;
     private Context context;
+    private OnShortCLickListener myCLick;
 
     public FeaturedAdapter(List<ThemeFeaturedBean.DataBean.ResultBean> resultBeanList, Context context) {
         this.resultBeanList = resultBeanList;
@@ -29,12 +30,29 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Holder
         this.context = viewGroup.getContext();
         View inflate = LayoutInflater.from(context).inflate(R.layout.item_work_short, viewGroup, false);
         Holder holder = new Holder(inflate);
+        inflate.setOnClickListener(this);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int i) {
         Glide.with(context).load(resultBeanList.get(i).getCoverImg()).into(holder.itemWorkShort_Img);
+        holder.itemView.setTag(i);
+    }
+
+
+    public interface OnShortCLickListener {
+        void myClick(View view, int position);
+    }
+
+    public void setOnShortCLickListener(OnShortCLickListener myCLick) {
+        this.myCLick = myCLick;
+    }
+    @Override
+    public void onClick(View v) {
+        if (myCLick != null) {
+            myCLick.myClick(v, (int) v.getTag());
+        }
     }
     @Override
     public int getItemCount() {
@@ -48,7 +66,6 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Holder
         public Holder(@NonNull View itemView) {
             super(itemView);
             this.itemWorkShort_Img = (ImageView) itemView.findViewById(R.id.itemWorkShort_Img);
-//            this.itemWorkShort_CoverImg = (ImageView) itemView.findViewById(R.id.itemWorkShort_CoverImg);
 
         }
     }

@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.message.fragment;
 
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import com.zhenman.asus.zhenman.model.bean.ThemeFeaturedBean;
 import com.zhenman.asus.zhenman.presenter.ThemeFeaturedSquarePresenter;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.view.ContentActivity;
 import com.zhenman.asus.zhenman.view.adapter.message.FeaturedAdapter;
 
 import java.util.List;
@@ -69,6 +71,15 @@ public class FeaturedFragment extends BaseFragment<ThemeFeaturedSquarePresenter>
                 featuredRecy.setLayoutManager(gridLayoutManager);
                 FeaturedAdapter featuredAdapter = new FeaturedAdapter(resultBeanList, getContext());
                 featuredRecy.setAdapter(featuredAdapter);
+//                跳转到首页
+                featuredAdapter.setOnShortCLickListener(new FeaturedAdapter.OnShortCLickListener() {
+                    @Override
+                    public void myClick(View view, int position) {
+                        Intent intent = new Intent(getContext(), ContentActivity.class);
+                        getActivity().startActivity(intent);
+
+                    }
+                });
             }
         } else {
             Toast.makeText(getContext(), "获取数据失败", Toast.LENGTH_SHORT).show();

@@ -81,6 +81,8 @@ public class Urls {
     public static final String MY_ATTENTION_THEME = "ugcSubjectUser/getUserSubjectList";
     //  书架中我的收藏
     public static final String SHELF_COLLECTION = "userLikesPgc/getLikesPgcList";
+    //    书架中的历史列表
+    public static final String SHELF_HISTORY = "readPgcHistory/getPgcReadHistoryList";
     //  批量删除收藏作品
     public static final String DELETE_COLLECTION = "userLikesPgc/deleteUserLikesPgc";
     //  手机号登录 手机号绑定三方账号
@@ -108,5 +110,9 @@ public class Urls {
     //  微信提现
     public static final String WEIXIN_TIXIAN = "userOrder/withdraw";
     //  被打赏列表
-    public static final String BY_REWARDED="newsRewardInfo/getNewsRewardInfoList";
+    public static final String BY_REWARDED = "newsRewardInfo/getNewsRewardInfoList";
+    //  消息页面被关注列表(也就是粉丝列表)
+    public static final String BY_FANS = "newsFansInfo/getNewsFansInfoList";
+//    被点赞的列表
+    public static final String BY_LIKE="newsLikeInfo/getNewsLikeInfoList";
 }

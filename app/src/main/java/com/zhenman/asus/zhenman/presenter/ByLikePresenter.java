@@ -1,8 +1,8 @@
 package com.zhenman.asus.zhenman.presenter;
 
-import com.zhenman.asus.zhenman.contract.ByRewardedContract;
-import com.zhenman.asus.zhenman.model.bean.ByRewardedBean;
-import com.zhenman.asus.zhenman.model.service.ByRewardedService;
+import com.zhenman.asus.zhenman.contract.ByLikeContract;
+import com.zhenman.asus.zhenman.model.bean.ByLikeBean;
+import com.zhenman.asus.zhenman.model.service.ByLikeService;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 
 import java.util.HashMap;
@@ -13,31 +13,30 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class ByRewardedPresenter implements ByRewardedContract.ByRewardedInPresenter {
-    ByRewardedContract.ByRewardedInView byRewardedInView;
+public class ByLikePresenter implements ByLikeContract.ByLikeInPresenter {
+    ByLikeContract.ByLikeInView byLikeInView;
 
     @Override
-    public void sendByRewardedData(String pageNum, String pageSize) {
+    public void sendByLikeData(String pageNum, String pageSize) {
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("pageNum", pageNum);
         paramMap.put("pageSize", pageSize);
-
-        RetrofitUtils.getInstance().getService(ByRewardedService.class)
-                .getByRewarded(paramMap)
+        RetrofitUtils.getInstance().getService(ByLikeService.class)
+                .getByLikeBean(paramMap)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ByRewardedBean>() {
+                .subscribe(new Observer<ByLikeBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(ByRewardedBean byRewardedBean) {
-                        if (byRewardedBean.getState() == 0) {
-                            byRewardedInView.showByRewardedData(byRewardedBean);
+                    public void onNext(ByLikeBean byLikeBean) {
+                        if (byLikeBean.getState() == 0) {
+                            byLikeInView.showByLikeData(byLikeBean);
                         } else {
-                            byRewardedInView.showError(byRewardedBean.getMsg());
+                            byLikeInView.showError(byLikeBean.getMsg());
                         }
                     }
 
@@ -54,12 +53,12 @@ public class ByRewardedPresenter implements ByRewardedContract.ByRewardedInPrese
     }
 
     @Override
-    public void actualView(ByRewardedContract.ByRewardedInView byRewardedInView) {
-        this.byRewardedInView = byRewardedInView;
+    public void actualView(ByLikeContract.ByLikeInView byLikeInView) {
+        this.byLikeInView = byLikeInView;
     }
 
     @Override
     public void unActualView() {
-        this.byRewardedInView = null;
+        this.byLikeInView = null;
     }
 }

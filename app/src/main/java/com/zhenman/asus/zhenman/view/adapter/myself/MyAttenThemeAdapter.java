@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
+import com.zhenman.asus.zhenman.model.bean.ByFansBean;
 import com.zhenman.asus.zhenman.model.bean.MyAttenThemeBean;
 import com.zhenman.asus.zhenman.model.bean.MyAttentionUserBean;
 import com.zhenman.asus.zhenman.model.bean.MyFansBean;
@@ -19,13 +20,15 @@ import com.zhenman.asus.zhenman.model.bean.MyFansBean;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapter.Holder> {
+public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapter.Holder> implements View.OnClickListener {
     //    private List<MyAttenThemeBean.DataBean.ResultBean> dataBeanList;
     List<Object> resultBeanList;
     private Context context;
+    private OnShortCLickListener myCLick;
     private MyAttenThemeCallback myAttenThemeCallback;
     private boolean tag = true;
 
@@ -48,6 +51,7 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
         this.context = viewGroup.getContext();
         View inflate = LayoutInflater.from(context).inflate(R.layout.item_atten_theme, viewGroup, false);
         Holder holder = new Holder(inflate);
+        inflate.setOnClickListener(this);
         return holder;
     }
 
@@ -93,20 +97,21 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
                 holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#aaaaaa"));
                 holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.comment_popubackgound);
             }
-//           时间转换
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YY-MM-DD");
-            String format = simpleDateFormat.format(new Date(Long.parseLong(resultBean.getAddTime())));
-            holder.itemMyAttenTheme_decription.setText(format);
+            if (resultBean.getIntroduction() != null) {
+                holder.itemMyAttenTheme_decription.setText(resultBean.getIntroduction());
+            } else {
+                holder.itemMyAttenTheme_decription.setText("本宝宝暂时没有简介哦~");
+            }
+            holder.itemMyAttenTheme_decription.setText("");
             holder.itemMyAttenTheme_attention.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (resultBean.getFollow() == 1) {
-
+                    if (holder.itemMyAttenTheme_attention.getText().toString().equals("+关注")) {
                         holder.itemMyAttenTheme_attention.setText("相互关注");
                         holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#aaaaaa"));
                         holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.comment_popubackgound);
                         myAttenThemeCallback.makeAttention(resultBean.getUserId(), 1 + "");//关注
-                    } else if (resultBean.getFollow() == 3) {
+                    } else if (holder.itemMyAttenTheme_attention.getText().toString().equals("相互关注")) {
                         holder.itemMyAttenTheme_attention.setText("+关注");
                         holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#ffffff"));
                         holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.fans_attention_btn);
@@ -134,30 +139,6 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
             holder.itemMyAttenTheme_attention.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    /*if (resultBean.getFollow() == 1) {
-                        holder.itemMyAttenTheme_attention.setText("已关注");
-                        holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#aaaaaa"));
-                        holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.comment_popubackgound);
-                        myAttenThemeCallback.makeAttention(resultBean.getUserId(), 1+"");//关注
-                    } else if (resultBean.getFollow() == 3){*/
-
-
-//                    }
-//                    if (holder.itemMyAttenTheme_attention.equals("+关注")) {
-//                        myAttenThemeCallback.makeAttention(resultBean.getUserId(), 1 + "");//关注
-                       /* if (resultBean.getFollow() == 1) {
-                            holder.itemMyAttenTheme_attention.setText("已关注");
-                            holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#aaaaaa"));
-                            holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.comment_popubackgound);
-                        } else if (resultBean.getFollow() == 3) {
-                            holder.itemMyAttenTheme_attention.setText("相互关注");
-                            holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#aaaaaa"));
-                            holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.comment_popubackgound);
-                        }*/
-//                        notifyDataSetChanged();
-//                    } else {
-//                        holder.itemMyAttenTheme_attention.setText("+关注");
                     holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#ffffff"));
                     holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.fans_attention_btn);
                     myAttenThemeCallback.makeAttention(resultBean.getUserId(), 0 + "");//取消关注
@@ -166,6 +147,69 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
                 }
             });
         }
+        if (object instanceof ByFansBean.DataBean) {
+            final ByFansBean.DataBean resultBean = (ByFansBean.DataBean) object;
+            String s = "<font color=\"#000000\">"+"@"+resultBean.getName()+"</font><font color=\"#999999\">关注了你</font>";
+            holder.itemMyAttenTheme_title.setText(Html.fromHtml(s));
+            Glide.with(context)
+                    .load(resultBean.getHeadImg())
+                    .centerCrop()
+                    .dontAnimate()//防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
+                    .error(R.mipmap.common_portrait_m)
+                    .placeholder(R.mipmap.common_portrait_m)
+                    .into(holder.itemMyAttenTheme_headImage);
+//           时间转换
+            Date date = new Date(Long.parseLong(resultBean.getAddTime()));
+            SimpleDateFormat format = new SimpleDateFormat("MM-dd", Locale.getDefault());
+            String format2 = format.format(date);
+            holder.itemMyAttenTheme_decription.setText(format2);
+
+
+
+
+            if (resultBean.getFollow() == 2) {
+                holder.itemMyAttenTheme_attention.setText("+关注");
+                holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#ffffff"));
+                holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.fans_attention_btn);
+            } else if (resultBean.getFollow() == 3) {
+                holder.itemMyAttenTheme_attention.setText("相互关注");
+                holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#aaaaaa"));
+                holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.comment_popubackgound);
+            }
+
+            holder.itemMyAttenTheme_attention.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (holder.itemMyAttenTheme_attention.getText().toString().equals("+关注")) {
+                        holder.itemMyAttenTheme_attention.setText("相互关注");
+                        holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#aaaaaa"));
+                        holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.comment_popubackgound);
+                        myAttenThemeCallback.makeAttention(resultBean.getUserId(), 1 + "");//关注
+                    } else if (holder.itemMyAttenTheme_attention.getText().toString().equals("相互关注")) {
+                        holder.itemMyAttenTheme_attention.setText("+关注");
+                        holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#ffffff"));
+                        holder.itemMyAttenTheme_attention.setBackgroundResource(R.drawable.fans_attention_btn);
+                        myAttenThemeCallback.makeAttention(resultBean.getUserId(), 0 + "");//取消关注
+                    }
+                }
+            });
+            holder.itemView.setTag(i);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (myCLick != null) {
+            myCLick.myClick(v, (int) v.getTag());
+        }
+    }
+
+    public interface OnShortCLickListener {
+        void myClick(View view, int position);
+    }
+
+    public void setOnShortCLickListener(OnShortCLickListener myCLick) {
+        this.myCLick = myCLick;
     }
 
     @Override

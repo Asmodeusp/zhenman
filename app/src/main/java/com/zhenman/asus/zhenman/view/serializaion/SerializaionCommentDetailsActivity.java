@@ -3,7 +3,6 @@ package com.zhenman.asus.zhenman.view.serializaion;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -16,6 +15,7 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.SerializaionCommentDetailsContract;
 import com.zhenman.asus.zhenman.model.bean.CommentItemListBean;
 import com.zhenman.asus.zhenman.model.bean.PgcFabulousBean;
+import com.zhenman.asus.zhenman.model.bean.TextExtraBean;
 import com.zhenman.asus.zhenman.presenter.SerializaionCommentDetailsPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.MyClickSpan;
@@ -25,6 +25,7 @@ import com.zhenman.asus.zhenman.view.adapter.comment.CommentItemRecyAdapter;
 import com.zhy.autolayout.AutoLinearLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SerializaionCommentDetailsActivity extends BaseActivity<SerializaionCommentDetailsPresenterImp> implements SerializaionCommentDetailsContract.SerializaionCommentDetailsView, View.OnClickListener {
 
@@ -118,7 +119,8 @@ public class SerializaionCommentDetailsActivity extends BaseActivity<Serializaio
         ArrayList<String> list = new ArrayList<>();
         if (commentItemListBean.getData().getTextDto() != null) {
 
-            MyClickSpan.setTextHighLightWithClick(SerializaionCommentDetails_Comment, commentItemListBean.getData().getTextDto().getText(), commentItemListBean.getData().getTextDto().getTextExtra(), new View.OnClickListener() {
+            List<TextExtraBean> textExtra = commentItemListBean.getData().getTextDto().getTextExtra();
+            MyClickSpan.setTextHighLightWithClick(SerializaionCommentDetails_Comment, commentItemListBean.getData().getTextDto().getText(), textExtra, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();

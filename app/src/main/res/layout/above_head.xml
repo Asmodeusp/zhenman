@@ -2,11 +2,12 @@
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="horizontal"
-    android:layout_height="100px">
+    android:background="@color/h9"
+    android:layout_height="128px">
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/app_back"
         android:layout_width="200px"
-        android:layout_height="100px">
+        android:layout_height="128px">
         <ImageView
 
             android:layout_width="wrap_content"
@@ -51,7 +52,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
-        android:layout_marginTop="@dimen/px_98"
+        android:layout_marginTop="126px"
         android:background="@color/h7"></View>
 
 </com.zhy.autolayout.AutoRelativeLayout>

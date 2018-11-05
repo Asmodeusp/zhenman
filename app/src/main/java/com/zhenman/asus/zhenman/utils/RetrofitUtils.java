@@ -71,14 +71,13 @@ public class RetrofitUtils {
      * 设置请求头
      */
     private static Interceptor addHeaderInterceptor() {
-
         Interceptor headerInterceptor = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request originalRequest = chain.request();
                 Request.Builder requestBuilder = originalRequest.newBuilder()
                         .header("os", "Android")
-                        .header("accessToken",((String)SPUtils.get(App.context, SPKey.USER_TOKEN, "")))
+                        .header("accessToken",((String) SPUtils.get(App.context, SPKey.USER_TOKEN, "")))
 //                        .header("accessToken","eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1NDA4ODMzMzIsInN1YiI6IntcInVzZXJJZFwiOjQwNixcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiRTk1NjlENkRCMDREQUJFNzc0NjE0RkI1OTFBQTkxMjRcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4zLjBcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU3MjQxOTMzMn0.jJT8sOS4JtOJQ9W0RFYGf-zNIfeGUKzv_fUUc78JqqA")
                         .header("osVersion", Build.VERSION.RELEASE)
                         .header("version", "1.0.0")
