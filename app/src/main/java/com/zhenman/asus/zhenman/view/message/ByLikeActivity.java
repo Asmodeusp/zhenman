@@ -42,7 +42,6 @@ public class ByLikeActivity extends BaseActivity<ByLikePresenter> implements ByL
         appTitle.setText("赞");
         presenter.sendByLikeData("1", "20");
     }
-
     @Override
     protected void loadDate() {
 
@@ -75,7 +74,7 @@ public class ByLikeActivity extends BaseActivity<ByLikePresenter> implements ByL
             byRewardedAdapter.setOnShortCLickListener(new ByRewardedAdapter.OnShortCLickListener() {
                 @Override
                 public void myClick(View view, int position) {
-
+                    Toast.makeText(ByLikeActivity.this, "后期跳转到评论", Toast.LENGTH_SHORT).show();
                 }
             });
         }
