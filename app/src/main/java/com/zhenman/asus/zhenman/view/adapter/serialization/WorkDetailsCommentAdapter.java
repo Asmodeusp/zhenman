@@ -21,6 +21,7 @@ import com.zhenman.asus.zhenman.utils.MyClickSpan;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
+import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 
 import java.util.List;
 
@@ -87,7 +88,9 @@ public class WorkDetailsCommentAdapter extends RecyclerView.Adapter<WorkDetailsC
         MyClickSpan.setTextHighLightWithClick(holder.Work_commentRecy_Comment, listBean.getTextDto().getText(), listBean.getTextDto().getTextExtra(), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, HomepageActivity.class);
+                intent.putExtra(SPKey.HIM_ID, listBean.getTextDto().getTextExtra().get(0).getId());
+                context.startActivity(intent);
             }
         });
         holder.Work_commentRecy_UserName.setText(listBean.getName());

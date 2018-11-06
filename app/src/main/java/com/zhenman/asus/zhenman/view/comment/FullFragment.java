@@ -227,8 +227,8 @@ public class FullFragment extends BottomSheetDialogFragment implements SpEditTex
                             @Override
                             public void run() {
                                 commentDtoList.remove(position);
-                                commentRecyclerAdapter = new CommentRecyclerAdapter(commentDtoList);
-                                CommentPopuRecy.setAdapter(commentRecyclerAdapter);
+//                                commentRecyclerAdapter = new CommentRecyclerAdapter(commentDtoList);
+//                                CommentPopuRecy.setAdapter(commentRecyclerAdapter);
                                 commentRecyclerAdapter.notifyDataSetChanged();
                                 window.dismiss();
                             }
@@ -338,8 +338,7 @@ public class FullFragment extends BottomSheetDialogFragment implements SpEditTex
                     @Override
                     public void run() {
                         commentDtoList.add(0, data);
-                        commentRecyclerAdapter = new CommentRecyclerAdapter(commentDtoList);
-                        CommentPopuRecy.setAdapter(commentRecyclerAdapter);
+
                         commentRecyclerAdapter.notifyDataSetChanged();
                     }
                 });

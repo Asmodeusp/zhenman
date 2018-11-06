@@ -96,7 +96,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         double i = (double) dataBean.getHeight() / dataBean.getWidth();
         double InsideHight = i * (double) ScreenUtils.getScreenWidth(context);
         Log.e("HomeHotRecyAdapter", "InsideHight:" + InsideHight);
-        ViewLayoutManager.setScrollEnabled(false);
+//        ViewLayoutManager.setScrollEnabled(false);
         if (list.get(position).getPageDtoList().size() < 2) {
             ViewLayoutManager.setScrollEnabled(true);
         }
@@ -154,12 +154,6 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                  * **/
                 if (dy < 0) {
                 }
-
-                /*
-                 *   当里面向下滑动时
-                 *       开启里面滑动
-                 *       关闭外层滑动
-                 * **/
 
 
                 //如果两个条件都满足则说明是真正的滑动到了顶部

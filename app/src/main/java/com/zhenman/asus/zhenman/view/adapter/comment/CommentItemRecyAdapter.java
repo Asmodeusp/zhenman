@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.adapter.comment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +17,9 @@ import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.CommentDtoListBean;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.MyClickSpan;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 
 import java.util.List;
@@ -56,7 +59,7 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
-        CommentDtoListBean listBean = list.get(position);
+        final CommentDtoListBean listBean = list.get(position);
         holder.itemView.setTag(position);
         //加载头像
         GlideUtils.loadCircleImage(listBean.getImageUrl(), holder.comment_fill_HeadView, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
@@ -70,7 +73,6 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
                 Toast.makeText(context, source, Toast.LENGTH_SHORT).show();
             }
         },R.mipmap.common_portrait_m);
-        //加载富文本
         if (listBean.getAddTime()!=null) {
             holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
         }
@@ -79,7 +81,9 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
             MyClickSpan.setTextHighLightWithClick(holder.comment_fill_conent, listBean.getTextDto().getText(), listBean.getTextDto().getTextExtra(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, HomepageActivity.class);
+                    intent.putExtra(SPKey.HIM_ID, listBean.getTextDto().getTextExtra().get(0).getId());
+                    context.startActivity(intent);
                 }
             });
         }

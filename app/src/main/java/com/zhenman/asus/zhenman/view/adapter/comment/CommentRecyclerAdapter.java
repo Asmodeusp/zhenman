@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.adapter.comment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +18,9 @@ import com.zhenman.asus.zhenman.model.bean.CommentDtoListBean;
 import com.zhenman.asus.zhenman.model.bean.TextExtraBean;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.MyClickSpan;
+import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 
 import java.util.ArrayList;
@@ -29,25 +32,33 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
     private RecyclerViewOnLongCLickListener myLongCLick;
+
     @Override
     public void onClick(View v) {
         if (myCLick != null) {
             myCLick.myClick(v, (int) v.getTag());
         }
     }
+
     public void setRecyclerViewOnCLickListener(RecyclerViewOnCLickListener myCLick) {
         this.myCLick = myCLick;
     }
 
     @Override
     public boolean onLongClick(View v) {
-        myLongCLick.myLongCLick(v, (int) v.getTag());
+        if (myLongCLick != null){
+            myLongCLick.myLongCLick(v, (int) v.getTag());
+        }
         return true;
     }
 
     public void setRecyclerViewOnLongCLickListener(RecyclerViewOnLongCLickListener myLongCLick) {
-        this.myLongCLick = myLongCLick;
+        if (myLongCLick!=null) {
+            this.myLongCLick = myLongCLick;
+        }
+
     }
+
     public interface RecyclerViewOnCLickListener {
         void myClick(View view, int position);
     }
@@ -55,6 +66,7 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
     public interface RecyclerViewOnLongCLickListener {
         void myLongCLick(View view, int position);
     }
+
     public CommentRecyclerAdapter(List<CommentDtoListBean> commentDtoList) {
         this.list = commentDtoList;
     }
@@ -69,9 +81,6 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
         inflate.setOnLongClickListener(this);
         return holder;
     }
-
-
-
 
 
     @Override
@@ -96,7 +105,9 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
             MyClickSpan.setTextHighLightWithClick(holder.comment_fill_conent, listBean.getTextDto().getText(), listBean.getTextDto().getTextExtra(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, HomepageActivity.class);
+                    intent.putExtra(SPKey.HIM_ID, listBean.getTextDto().getTextExtra().get(0).getId());
+                    context.startActivity(intent);
                 }
             });
         }
@@ -104,7 +115,7 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
             if (listBean.getCommentDtoList().size() == 1) {
                 holder.comment_fill_SeeMoreText.setVisibility(View.GONE);
                 holder.Comment_fill_SecondItem.setVisibility(View.GONE);
-                ArrayList<TextExtraBean> oneTextExtralist = new ArrayList<>();
+                final ArrayList<TextExtraBean> oneTextExtralist = new ArrayList<>();
                 List<TextExtraBean> textExtra = listBean.getCommentDtoList().get(0).getTextDto().getTextExtra();
                 for (TextExtraBean textExtraBean : textExtra) {
                     oneTextExtralist.add(textExtraBean);
@@ -112,7 +123,9 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
                 MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getCommentDtoList().get(0).getTextDto().getText(), oneTextExtralist, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, HomepageActivity.class);
+                        intent.putExtra(SPKey.HIM_ID, oneTextExtralist.get(0).getId());
+                        context.startActivity(intent);
                     }
                 });
             } else {
@@ -120,7 +133,7 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
                 holder.Comment_fill_SecondItem.setVisibility(View.VISIBLE);
             }
             if (listBean.getCommentDtoList().size() == 2) {
-                ArrayList<TextExtraBean> oneTextExtralist = new ArrayList<>();
+                final ArrayList<TextExtraBean> oneTextExtralist = new ArrayList<>();
                 List<TextExtraBean> textExtra = listBean.getCommentDtoList().get(0).getTextDto().getTextExtra();
                 for (TextExtraBean textExtraBean : textExtra) {
                     oneTextExtralist.add(textExtraBean);
@@ -128,10 +141,12 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
                 MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_FirstItem, listBean.getCommentDtoList().get(0).getTextDto().getText(), oneTextExtralist, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, HomepageActivity.class);
+                        intent.putExtra(SPKey.HIM_ID, oneTextExtralist.get(0).getId());
+                        context.startActivity(intent);
                     }
                 });
-                ArrayList<TextExtraBean> TwoTextExtralist = new ArrayList<>();
+                final ArrayList<TextExtraBean> TwoTextExtralist = new ArrayList<>();
                 List<TextExtraBean> textExtra1 = listBean.getCommentDtoList().get(1).getTextDto().getTextExtra();
                 for (TextExtraBean textExtraBean : textExtra1) {
                     TwoTextExtralist.add(textExtraBean);
@@ -139,7 +154,9 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
                 MyClickSpan.setTextHighLightWithClick(holder.Comment_fill_SecondItem, listBean.getCommentDtoList().get(1).getTextDto().getText(), TwoTextExtralist, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context, listBean.getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, HomepageActivity.class);
+                        intent.putExtra(SPKey.HIM_ID, TwoTextExtralist.get(1).getId());
+                        context.startActivity(intent);
                     }
                 });
             } else {
@@ -165,8 +182,6 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
     public int getItemCount() {
         return list.isEmpty() ? 0 : list.size();
     }
-
-
 
 
     public class Holder extends RecyclerView.ViewHolder {

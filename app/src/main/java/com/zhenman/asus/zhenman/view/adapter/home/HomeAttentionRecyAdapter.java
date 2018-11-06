@@ -135,7 +135,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         //设置发布时间
         holder.fill_Home_Attention_RecyTimeText.setText(SPUtils.transferLongToDate(Long.parseLong(dataBean.getAddTime())));
         //设置描述
-        if (dataBean.getDescription().equals("")) {
+        if (dataBean.getDescription()==null) {
             holder.fill_Home_Attention_RecyDescriptionText.setVisibility(View.GONE);
         } else {
             holder.fill_Home_Attention_RecyDescriptionText.setVisibility(View.VISIBLE);
@@ -360,7 +360,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             //评论数量
             fill_Home_Attention_RecyCommentNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyCommentNumberText);
             //喜欢数量
-            fill_Home_Attention_RecyLikeNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeNumberText);
+            fill_Home_Attention_RecyLikeNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeNumberText); 
             //喜欢图片
             fill_Home_Attention_RecyLikeImageView = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeImageView);
             //主题名字

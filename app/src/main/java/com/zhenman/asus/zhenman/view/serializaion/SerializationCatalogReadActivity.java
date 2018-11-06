@@ -282,7 +282,8 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
         presenter.getSerializationCatalogBean(pgcId);
         //作品详情集合
         presenter.getSerializationDetailsBean(pgcId);
-
+        //作品评论集合
+        presenter.getCommentList(StartcatalogId, "1", "50", "3", "1");
     }
 
     //设置开关监听

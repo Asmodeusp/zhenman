@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -71,16 +73,24 @@ public class RetrofitUtils {
      * 设置请求头
      */
     private static Interceptor addHeaderInterceptor() {
+
         Interceptor headerInterceptor = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request originalRequest = chain.request();
                 Request.Builder requestBuilder = originalRequest.newBuilder()
+                        //添加请求头  判断IOS 还是 Android
                         .header("os", "Android")
-                        .header("accessToken",((String) SPUtils.get(App.context, SPKey.USER_TOKEN, "")))
+                        .header("accessToken",((String)SPUtils.get(App.context, SPKey.USER_TOKEN, "")))
 //                        .header("accessToken","eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1NDA4ODMzMzIsInN1YiI6IntcInVzZXJJZFwiOjQwNixcInJvbGVUeXBlXCI6bnVsbCxcInNlc3Npb25JZFwiOlwiRTk1NjlENkRCMDREQUJFNzc0NjE0RkI1OTFBQTkxMjRcIixcInVzZXJBZ2VudFwiOlwiUG9zdG1hblJ1bnRpbWUvNy4zLjBcIixcImluZGV4XCI6MCxcInJlZnJlc2hUb2tlblwiOmZhbHNlfSIsImV4cCI6MTU3MjQxOTMzMn0.jJT8sOS4JtOJQ9W0RFYGf-zNIfeGUKzv_fUUc78JqqA")
+                        //当前手机版本号
                         .header("osVersion", Build.VERSION.RELEASE)
+                        //当前项目版本号
                         .header("version", "1.0.0")
+                        //添加设备唯一标识
+                        .header("deviceId",Build.FINGERPRINT)
+                        //添加手机设备名
+                        .header("deviceModel",Build.PRODUCT)
                         .header("AppType", "TPOS")
                         .header("Accept", "application/json")
                         .method(originalRequest.method(), originalRequest.body());
@@ -88,6 +98,7 @@ public class RetrofitUtils {
                 return chain.proceed(request);
             }
         };
+
         return headerInterceptor;
     }
 

@@ -42,6 +42,7 @@ import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.comment.CommentItemRecyAdapter;
 import com.zhenman.asus.zhenman.view.adapter.comment.CommentRecyclerAdapter;
+import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
@@ -183,7 +184,10 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
             MyClickSpan.setTextHighLightWithClick(ItemCommentConent, commentItemListBean.getData().getTextDto().getText(), commentItemListBean.getData().getTextDto().getTextExtra(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getContext(), commentItemListBean.getData().getTextDto().getTextExtra().get(0).getText(), Toast.LENGTH_SHORT).show();
+                    String id = commentItemListBean.getData().getTextDto().getTextExtra().get(0).getId();
+                    Intent intent = new Intent(getContext(), HomepageActivity.class);
+                    intent.putExtra(SPKey.HIM_ID, id);
+                    getActivity().startActivity(intent);
                 }
             });
         }
@@ -227,9 +231,6 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
     private void initDeleteCommentPopu(final int position) {
         // 用于PopupWindow的View
         View contentView = LayoutInflater.from(getContext()).inflate(R.layout.comment_delete_popu, null, false);
-        // 创建PopupWindow对象，其中：
-        // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
-        // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
         window = new PopupWindow(contentView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
         // 设置PopupWindow的背景
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -237,7 +238,6 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
         window.setOutsideTouchable(true);
         // 设置PopupWindow是否能响应点击事件
         window.setTouchable(true);
-        // 显示PopupWindow，其中：
         // 第一个参数是PopupWindow的锚点，第二和第三个参数分别是PopupWindow相对锚点的x、y偏移
         window.showAtLocation(itemparent, Gravity.BOTTOM, 0, 0);
         final Button deleteCommentButton = contentView.findViewById(R.id.deleteCommentButton);
@@ -369,7 +369,17 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
 
     @Override
     public void onKeyReact(String key) {
-
+        switch (key) {
+            case "@":
+                BouncingAtUser();
+                break;
+            case "#":
+                break;
+            case "%":
+                break;
+            case "*":
+                break;
+        }
     }
 
     private void SendComment(String DetailId) {
@@ -405,9 +415,7 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
                     @Override
                     public void run() {
                         commentDtoList.add(0, data);
-                        commentItemRecyAdapter = new CommentItemRecyAdapter(commentDtoList);
-                        //设置适配器
-                        ItemCommentItemRecy.setAdapter(commentItemRecyAdapter);
+
                         commentItemRecyAdapter.notifyDataSetChanged();
                     }
                 });

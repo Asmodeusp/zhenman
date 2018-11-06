@@ -2,8 +2,11 @@ package com.zhenman.asus.zhenman.view.home;
 
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
@@ -70,6 +73,28 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
         });
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         HomeHot_List.setLayoutManager(linearLayoutManager);
+        HomeHot_List.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+
+                if (dy > 0) {
+                    Log.d("HomeHotRecyAdapter", "HomeHot_List---dy:" + dy);
+                }
+                /*
+                 *   当里面向上滑动时
+                 *       开启里面滑动
+                 *       关闭外层滑动
+                 * **/
+                if (dy < 0) {
+                    Log.d("HomeHotRecyAdapter", "HomeHot_List---dy:" + dy);
+                }
+            }
+        });
     }
 
 
@@ -120,14 +145,16 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     @Override
     public void showCommentList(CommentListBean commentListBean) {
-        FullFragment fullFragment = new FullFragment(commentListBean,Type+"",ugcId);
+        FullFragment fullFragment = new FullFragment(commentListBean, Type + "", ugcId);
         fullFragment.show(getActivity().getSupportFragmentManager(), "dialog");
     }
+
     int Type;
+
     @Override
     public void getComment(String UgcId, int Type) {
         this.Type = Type;
-        this.ugcId=UgcId;
-        presenter.getCommentList(ugcId+"", "1", "20", Type + "", "1");
+        this.ugcId = UgcId;
+        presenter.getCommentList(ugcId + "", "1", "20", Type + "", "1");
     }
 }

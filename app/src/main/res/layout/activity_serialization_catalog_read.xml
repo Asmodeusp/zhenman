@@ -307,6 +307,7 @@
                                     android:layout_height="350dp"
                                     android:gravity="center"
                                     android:text="还没有评论，快来占沙发" />
+
                             </com.zhy.autolayout.AutoLinearLayout>
 
                         </com.zhy.autolayout.AutoLinearLayout>
@@ -320,32 +321,34 @@
 
         <com.zhy.autolayout.AutoRelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true">
 
             <com.zhy.autolayout.AutoRelativeLayout
                 android:id="@+id/serializationCatalogReadFootLin"
                 android:layout_width="match_parent"
                 android:layout_height="290px"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:background="@drawable/home_footbackground"
-                >
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/home_footbackground">
 
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
                     android:orientation="vertical">
 
                     <com.zhy.autolayout.AutoLinearLayout
                         android:id="@+id/serializationCatalogReadCommentBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="40px"
                         android:layout_marginRight="24px"
+                        android:layout_marginBottom="40px"
                         android:orientation="vertical">
 
                         <ImageView
@@ -368,8 +371,8 @@
                         android:id="@+id/serializationCatalogReadCatalogBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="40px"
                         android:layout_marginRight="24px"
+                        android:layout_marginBottom="40px"
                         android:orientation="vertical">
 
                         <ImageView
@@ -398,17 +401,19 @@
                 <com.zhy.autolayout.AutoRelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <com.zhy.autolayout.AutoRelativeLayout
-                    android:id="@+id/serializationCatalogReadReturnImg"
-                    android:layout_width="100px"
-                    android:layout_height="wrap_content">
-                    <ImageView
 
-                        android:layout_width="50px"
-                        android:layout_height="36px"
-                        android:layout_margin="24px"
-                        android:src="@mipmap/common_return_white" />
-                </com.zhy.autolayout.AutoRelativeLayout>
+                    <com.zhy.autolayout.AutoRelativeLayout
+                        android:id="@+id/serializationCatalogReadReturnImg"
+                        android:layout_width="100px"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+
+                            android:layout_width="50px"
+                            android:layout_height="36px"
+                            android:layout_margin="24px"
+                            android:src="@mipmap/common_return_white" />
+                    </com.zhy.autolayout.AutoRelativeLayout>
 
 
                     <com.zhy.autolayout.AutoRelativeLayout
@@ -426,8 +431,7 @@
                             android:gravity="center_horizontal"
                             android:text="第一话"
                             android:textColor="@color/h8"
-                            android:textSize="36px"
-                            />
+                            android:textSize="36px" />
                     </com.zhy.autolayout.AutoRelativeLayout>
                 </com.zhy.autolayout.AutoRelativeLayout>
             </com.zhy.autolayout.AutoLinearLayout>
@@ -465,6 +469,7 @@
                 android:id="@+id/CataLog_PopuRecy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
         </com.zhy.autolayout.AutoRelativeLayout>
 
         <com.zhy.autolayout.AutoLinearLayout

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/SerializaionCommentDetails_QUAN"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".view.serializaion.SerializaionCommentDetailsActivity">
@@ -136,7 +137,7 @@
             android:text="全部评论" />
     </com.zhy.autolayout.AutoLinearLayout>
 
-    <com.zhy.autolayout.AutoLinearLayout
+    <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginRight="4px"
@@ -146,6 +147,73 @@
             android:id="@+id/SerializaionCommentDetails_CommentRecy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-    </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="98px"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/image_code_ed">
+
+            <TextView
+                android:id="@+id/SerializaionCommentDetails_TextView"
+                android:layout_width="574px"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginBottom="0dp"
+                android:hint="发表评论~"
+                android:padding="24px"
+                android:textColorHint="@color/h4"
+                android:textSize="30px" />
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="98px"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="24px"
+                tools:ignore="RtlCompat">
+
+                <com.zhy.autolayout.AutoRelativeLayout
+                    android:id="@+id/SerializaionCommentDetails_atRelativeLayout"
+                    android:layout_width="@dimen/px_64"
+                    android:layout_height="@dimen/px_64"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/px_24">
+
+                    <ImageView
+                        android:layout_width="50px"
+                        android:layout_height="50px"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="0dp"
+                        android:src="@mipmap/common_at" />
+                </com.zhy.autolayout.AutoRelativeLayout>
+
+                <com.zhy.autolayout.AutoRelativeLayout
+                    android:id="@+id/SerializaionCommentDetails_SendButton"
+                    android:layout_width="@dimen/px_64"
+                    android:layout_height="@dimen/px_64"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/SerializaionCommentDetails_SendImage"
+                        android:layout_width="50px"
+                        android:layout_height="50px"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="7dp"
+                        android:src="@mipmap/send"
+                        android:textSize="26px" />
+                </com.zhy.autolayout.AutoRelativeLayout>
+            </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoRelativeLayout>
+    </com.zhy.autolayout.AutoRelativeLayout>
 
 </com.zhy.autolayout.AutoLinearLayout>
