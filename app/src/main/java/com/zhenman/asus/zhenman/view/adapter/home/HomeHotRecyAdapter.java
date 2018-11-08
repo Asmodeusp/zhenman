@@ -11,6 +11,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -31,6 +32,7 @@ import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
+import com.zhenman.asus.zhenman.view.ui.MyRecyclerView;
 import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.MyLayoutMessage;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
@@ -38,14 +40,19 @@ import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.List;
 
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_SETTLING;
+
+
 public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.Holder> {
     private List<HomeHotBean.DataBean> list;
     private Context context;
     ViewPagerLayoutManager ViewLayoutManager;
-    RecyclerView homeHot_list;
+    MyRecyclerView homeHot_list;
     HomeHotPresenterImp presenter;
 
-    public HomeHotRecyAdapter(List<HomeHotBean.DataBean> list, ViewPagerLayoutManager linearLayoutManager, RecyclerView homeHot_list, HomeHotPresenterImp presenter) {
+    public HomeHotRecyAdapter(List<HomeHotBean.DataBean> list, ViewPagerLayoutManager linearLayoutManager, MyRecyclerView homeHot_list, HomeHotPresenterImp presenter) {
         this.list = list;
         this.ViewLayoutManager = linearLayoutManager;
         this.homeHot_list = homeHot_list;
@@ -86,81 +93,96 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
         final HomeHotBean.DataBean dataBean = list.get(position);
+        double i = (double) dataBean.getHeight() / dataBean.getWidth();
+        double InsideHight = i * (double) ScreenUtils.getScreenWidth(context);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.getScreenHeight(context));
         holder.home_fillView.setLayoutParams(layoutParams);
         final MyLayoutMessage myLayoutMessage = new MyLayoutMessage(context);
         final HomeHotRecyItemAdapter homeHotRecyItemAdapter = new HomeHotRecyItemAdapter(dataBean.getPageDtoList());
         holder.home_Recy_fill_Recy.setLayoutManager(myLayoutMessage);
         holder.home_Recy_fill_Recy.setAdapter(homeHotRecyItemAdapter);
-        //计算填充Recycler View高度
-        double i = (double) dataBean.getHeight() / dataBean.getWidth();
-        double InsideHight = i * (double) ScreenUtils.getScreenWidth(context);
-        Log.e("HomeHotRecyAdapter", "InsideHight:" + InsideHight);
-//        ViewLayoutManager.setScrollEnabled(false);
-        if (list.get(position).getPageDtoList().size() < 2) {
-            ViewLayoutManager.setScrollEnabled(true);
-        }
-        //内部滑动监听
-        holder.home_Recy_fill_Recy.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                //得到当前显示的第一个item的view
-                View firstChildView = recyclerView.getLayoutManager().getChildAt(0);
-                //得到firstChildView的Top坐标值
-                int firstChildTop = firstChildView.getTop();
-                //得到Recyclerview的顶坐标减去顶部padding值，也就是显示内容最顶部的坐标
-                int recyclerTop = recyclerView.getTop() - recyclerView.getPaddingTop();
-                //通过这个firstChildView得到这个view当前的position值
-                int firstPosition = recyclerView.getLayoutManager().getPosition(firstChildView);
-                //得到当前显示的最后一个item的view
-                View lastChildView = recyclerView.getLayoutManager().getChildAt(recyclerView.getLayoutManager().getChildCount() - 1);
-                //得到lastChildView的bottom坐标值
-                int lastChildBottom = lastChildView.getBottom();
-                //得到Recyclerview的底部坐标减去底部padding值，也就是显示内容最底部的坐标
-                int recyclerBottom = recyclerView.getBottom() - recyclerView.getPaddingBottom();
-                //通过这个lastChildView得到这个view当前的position值
-                int lastPosition = recyclerView.getLayoutManager().getPosition(lastChildView);
-                //如果两个条件都满足则说明是真正的滑动到了底部
-                if (lastChildBottom == recyclerBottom && lastPosition == recyclerView.getLayoutManager().getItemCount() - 1 && dy > 0) {
-                    Log.e("HomeHotRecyAdapter", "两个");
-//                    ViewLayoutManager.setScrollEnabled(true);
-                }
-                if (lastChildBottom == recyclerBottom) {
-                    Log.e("HomeHotRecyAdapter", "坐标");
-//                    ViewLayoutManager.setScrollEnabled(true);e
-                }
-                if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1 && dy > 0) {
-                    Log.e("HomeHotRecyAdapter", "position");
-//                    ViewLayoutManager.setScrollEnabled(true);
-                }
-                /*
-                 * home_Recy_fill_Recy(里面填充的RecyclerView)
-                 * 向下滑动
-                 *
-                 * **/
-                if (dy > 0) {
-                    Log.d("HomeHotRecyAdapter", "dy:" + dy);
-                }
-
-                /*
-                 *   当里面向上滑动时
-                 *       开启里面滑动
-                 *       关闭外层滑动
-                 * **/
-                if (dy < 0) {
-                }
-
-
-                //如果两个条件都满足则说明是真正的滑动到了顶部
-                else if (firstChildTop == recyclerTop && firstPosition == 0 && dy < 0) {
-                }
-            }
-        });
+        homeHot_list.setInnerListView(holder.home_Recy_fill_Recy);
+//        //计算填充Recycler View高度
+//        if (InsideHight > ScreenUtils.getScreenHeight(context)) {
+//            ViewLayoutManager.setScrollEnabled(false);
+//        } else {
+//            ViewLayoutManager.setScrollEnabled(true);
+//        }
+//
+//        if (list.get(position).getPageDtoList().size() < 2) {
+//            ViewLayoutManager.setScrollEnabled(true);
+//        }
+//        //内部滑动监听
+//        holder.home_Recy_fill_Recy.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            /*  newState 滑动状态
+//             * **/
+//            @Override
+//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+//                switch (newState) {
+//                    //静止滚动
+//                    case SCROLL_STATE_IDLE:
+//                        Log.d("HomeHotRecyAdapter", "静止滚动");
+//                        break;
+//                    //手指滑动
+//                    case SCROLL_STATE_DRAGGING:
+//                        Log.d("HomeHotRecyAdapter", "手指滑动");
+//                        break;
+//                    //自由滑动
+//                    case SCROLL_STATE_SETTLING:
+//                        Log.d("HomeHotRecyAdapter", "自由滑动");
+//                        break;
+//                }
+//                super.onScrollStateChanged(recyclerView, newState);
+//            }
+//
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                //得到当前显示的第一个item的view
+//                View firstChildView = recyclerView.getLayoutManager().getChildAt(0);
+//                //得到firstChildView的Top坐标值
+//                int firstChildTop = firstChildView.getTop();
+//                //得到Recyclerview的顶坐标减去顶部padding值，也就是显示内容最顶部的坐标
+//                int recyclerTop = recyclerView.getTop() - recyclerView.getPaddingTop();
+//                //通过这个firstChildView得到这个view当前的position值
+//                int firstPosition = recyclerView.getLayoutManager().getPosition(firstChildView);
+//                //得到当前显示的最后一个item的view
+//                View lastChildView = recyclerView.getLayoutManager().getChildAt(recyclerView.getLayoutManager().getChildCount() - 1);
+//                //得到lastChildView的bottom坐标值
+//                int lastChildBottom = lastChildView.getBottom();
+//                //得到Recyclerview的底部坐标减去底部padding值，也就是显示内容最底部的坐标
+//                int recyclerBottom = recyclerView.getBottom() - recyclerView.getPaddingBottom();
+//                //通过这个lastChildView得到这个view当前的position值
+//                int lastPosition = recyclerView.getLayoutManager().getPosition(lastChildView);
+//                Log.d("HomeHotRecyAdapter", "ViewLayoutManager.isScrollEnabled():" + ViewLayoutManager.isScrollEnabled());
+//                Log.d("HomeHotRecyAdapter", "myLayoutMessage.isScrollEnabled():" + myLayoutMessage.isScrollEnabled());
+////                如果两个条件都满足则说明是真正的滑动到了底部
+//                if (lastChildBottom == recyclerBottom && lastPosition == recyclerView.getLayoutManager().getItemCount() - 1 && dy > 0) {
+//                        holder.home_fillView.getParent().requestDisallowInterceptTouchEvent(true);
+//                }else {
+//                    holder.home_fillView.getParent().requestDisallowInterceptTouchEvent(false);
+//                }
+//                //如果两个条件都满足则说明是真正的滑动到了顶部
+//                if (firstChildTop == recyclerTop && firstPosition == 0) {
+//                    holder.home_fillView.getParent().requestDisallowInterceptTouchEvent(true);
+//                }else {
+//                    holder.home_fillView.getParent().requestDisallowInterceptTouchEvent(false);
+//                }
+//                /*
+//                 *   当里面向上滑动时
+//                 * **/
+//                if (dy < 0) {
+//
+//                }
+//                /*
+//                 * 向下滑动
+//                 * **/
+//                if (dy > 0) {
+//
+//                }
+//
+//
+//            }
+//        });
         //加载头像圆形图片
         GlideUtils.loadCircleImage(dataBean.getHeadImg(), holder.Home_Hot_HeadImageView, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
             @Override
@@ -170,8 +192,9 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
 
             @Override
             public void onLoadingError(String source, Exception e) {
+
             }
-        },R.mipmap.common_portrait_m);
+        }, R.mipmap.common_portrait_m);
         holder.Home_Hot_HeadImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

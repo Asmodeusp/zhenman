@@ -88,6 +88,7 @@ public class HomeHotBean implements Serializable {
         private boolean reCreate;
         private String subjectName;
         private int subjectId;
+
         private List<PageDtoListBean> pageDtoList;
 
         public String getName() {
