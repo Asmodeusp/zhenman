@@ -136,8 +136,9 @@ public class WorkDetailsFragment extends BaseFragment<WorkDetailsCommentPresente
             workDetailsActorRecyAdapter.setgoUserInfo(new WorkDetailsActorRecyAdapter.goUserInfo() {
                 @Override
                 public void go(String UserId) {
-                    getContext().startActivity(new Intent(getContext(), MainActivity.class));
-                    getActivity().finish();
+                    Intent intent = new Intent(getContext(), HomepageActivity.class);
+                    intent.putExtra(SPKey.HIM_ID, UserId);
+                    getActivity().startActivity(intent);
                 }
             });
         }

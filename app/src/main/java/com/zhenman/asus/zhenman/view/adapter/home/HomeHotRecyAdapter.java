@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -32,6 +34,7 @@ import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
+import com.zhenman.asus.zhenman.view.serializaion.SerializationCatalogReadActivity;
 import com.zhenman.asus.zhenman.view.ui.MyRecyclerView;
 import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.MyLayoutMessage;
@@ -102,6 +105,9 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         holder.home_Recy_fill_Recy.setLayoutManager(myLayoutMessage);
         holder.home_Recy_fill_Recy.setAdapter(homeHotRecyItemAdapter);
         homeHot_list.setInnerListView(holder.home_Recy_fill_Recy);
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, R.anim.recy_item);
+        holder.home_Recy_fill_Recy.setLayoutAnimation(animation);
+        myLayoutMessage.setRecycleChildrenOnDetach(true);
 //        //计算填充Recycler View高度
 //        if (InsideHight > ScreenUtils.getScreenHeight(context)) {
 //            ViewLayoutManager.setScrollEnabled(false);
@@ -313,7 +319,6 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                     }
                 }
             });
-
         }
         //分享
         holder.Home_Hot_ShareImageView.setOnClickListener(new View.OnClickListener() {
