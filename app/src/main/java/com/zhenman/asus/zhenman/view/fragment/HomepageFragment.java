@@ -41,16 +41,18 @@ public class HomepageFragment extends BaseFragment {
     protected void init() {
         //主页Viewpager
         HomePage_Pager = getActivity().findViewById(R.id.HomePage_Pager);
-        //关注fragment
-        attentionFragment = new AttentionFragment();
-        //热门Fragment
-        hotFragment = new HotFragment();
+
         //HeadView头布局
         home_headView = getActivity().findViewById(R.id.Home_HeadView);
         //搜索
         homeHot_search_img = getActivity().findViewById(R.id.HomeHot_search_Img);
         //TabLayout
         home_tablayout = getActivity().findViewById(R.id.Home_Tablayout);
+
+        //关注fragment
+        attentionFragment = new AttentionFragment(home_headView);
+        //热门Fragment
+        hotFragment = new HotFragment(home_headView);
         //添加Title
         Titles.add("热门");
         Titles.add("关注");
@@ -69,7 +71,7 @@ public class HomepageFragment extends BaseFragment {
         linearLayout.setDividerDrawable(ContextCompat.getDrawable(getContext(),
                 R.drawable.layout_divider_vertical));
         linearLayout.setDividerPadding(24);
-        group = ((ContentActivity) getActivity()).group;
+
 
     }
 

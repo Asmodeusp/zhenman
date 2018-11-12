@@ -20,15 +20,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
+import com.zhenman.asus.zhenman.view.adapter.serialization.ClassifySubjectTagsRecyAdapter;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
 
 
-public class HomeHotRecyItemAdapter extends RecyclerView.Adapter<HomeHotRecyItemAdapter.Holder> {
+public class HomeHotRecyItemAdapter extends RecyclerView.Adapter<HomeHotRecyItemAdapter.Holder> implements View.OnClickListener {
     private List<HomeHotBean.DataBean.PageDtoListBean> list;
     private Context context;
 
+    private RecyclerViewOnCLickListener myCLick;
     public HomeHotRecyItemAdapter(List<HomeHotBean.DataBean.PageDtoListBean> list) {
         this.list = list;
     }
@@ -39,9 +41,21 @@ public class HomeHotRecyItemAdapter extends RecyclerView.Adapter<HomeHotRecyItem
         context = parent.getContext();
         View inflate = LayoutInflater.from(context).inflate(R.layout.home_recy_fillview, parent, false);
         Holder holder = new Holder(inflate);
+        inflate.setOnClickListener(this);
         return holder;
     }
-
+    @Override
+    public void onClick(View v) {
+        if (myCLick != null) {
+            myCLick.myClick(v);
+        }
+    }
+    public interface RecyclerViewOnCLickListener {
+        void myClick(View view);
+    }
+    public void setRecyclerViewOnCLickListener(RecyclerViewOnCLickListener myCLick) {
+        this.myCLick = myCLick;
+    }
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {

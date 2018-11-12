@@ -1,7 +1,9 @@
 package com.zhenman.asus.zhenman.view.home;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,9 +25,11 @@ import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeAttentionRecyAdapter;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 import butterknife.BindView;
 
+@SuppressLint("ValidFragment")
 public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> implements HomeAttentionContract.HomeAttentionView {
     @BindView(R.id.Home_Attention_Recy)
     RecyclerView HomeAttentionRecy;
@@ -33,9 +37,15 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
     SmartRefreshLayout HomeAttentionSmartRefreshLayout;
     @BindView(R.id.Home_Attention_Recy_Tip)
     TextView Home_Attention_Recy_Tip;
-    public AttentionFragment() {
+    private TabLayout home_tablayout;
+    public AttentionFragment(TabLayout home_tablayout) {
+        this.home_tablayout =home_tablayout;
+    }
+
+    public AttentionFragment(AutoRelativeLayout home_headView) {
 
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_attention;
