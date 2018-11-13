@@ -10,10 +10,9 @@
         android:id="@+id/itemProductList_bite"
         android:layout_width="@dimen/px_64"
         android:layout_height="@dimen/px_64"
-        android:layout_marginLeft="@dimen/px_40"
+        android:layout_marginLeft="@dimen/px_28"
         android:layout_marginTop="@dimen/px_38"
         android:src="@mipmap/my_qiezi_bite" />
-
     <TextView
         android:id="@+id/itemProductList_num"
         style="@style/Style32H2"
@@ -22,15 +21,6 @@
         android:layout_marginTop="@dimen/px_48"
         android:layout_toRightOf="@id/itemProductList_bite"
         android:text="X2" />
-
-    <!--<CheckBox
-        android:id="@+id/itemProductList_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:button="@null"
-        android:drawableLeft="@mipmap/my_qiezi_bite"
-        android:text="X" />-->
 
     <ImageView
         android:id="@+id/itemProductList_moneyBg"

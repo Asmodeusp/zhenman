@@ -16,6 +16,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SerializationClassifyPresenterImp implements SerializationClassifyContract.SerializationClassifyPresenter {
     SerializationClassifyContract.SerializationClassifyView serializationClassifyView ;
+//    得到pgc列表标签
     @Override
     public void getClassifyTagBean() {
         RetrofitUtils.getInstance().getService(SerializationClassifyService.class)

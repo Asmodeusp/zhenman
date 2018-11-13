@@ -132,8 +132,14 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
         if (themeDetailHeadBean.getState() == 0) {
             Glide.with(this).load(themeDetailHeadBean.getData().getImage()).into(themeDetail_Avatar);
             themeDetail_Name.setText(themeDetailHeadBean.getData().getName());
-            themeDetail_introduction.setText(themeDetailHeadBean.getData().getDescription());
+            if (themeDetailHeadBean.getData().getDescription() != null) {
+
+                themeDetail_introduction.setText(themeDetailHeadBean.getData().getDescription());
+            } else {
+                themeDetail_introduction.setText("本宝宝暂时没有介绍哦~");
+            }
             themeDetail_attenNum.setText(themeDetailHeadBean.getData().getFollowNum() + "人关注");
+
             followSubject = themeDetailHeadBean.getData().getFollowSubject();
             if (followSubject == 2) {
                 themeDetail_attention.setText("关注");

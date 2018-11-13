@@ -101,14 +101,13 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/px_24"
-
                             android:text="7关注" />
 
                         <TextView
                             android:id="@+id/themeDetail_attention"
                             style="@style/Style32H9"
-                            android:layout_width="148px"
-                            android:layout_height="wrap_content"
+                            android:layout_width="128px"
+                            android:layout_height="@dimen/px_56"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="@dimen/px_24"
                             android:background="@drawable/guanzhuzhuti"

@@ -22,62 +22,61 @@ import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.Unbinder;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WorkShortFragment extends BaseFragment<WorkShortComicPresenter> implements WorkShortComicContract.WorkShortComicInView {
+public class MyLikeShortFragment extends BaseFragment<WorkShortComicPresenter> implements WorkShortComicContract.WorkShortComicInView {
 
 
-    private RecyclerView workShort_recy;
-    private TextView workShort_noData;
+    @BindView(R.id.likeShort_recy)
+    RecyclerView likeShortRecy;
+    @BindView(R.id.likeShort_noData)
+    TextView likeShortNoData;
+    Unbinder unbinder;
 
-    public WorkShortFragment() {
+    public MyLikeShortFragment() {
+        // Required empty public constructor
     }
-
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_work_short;
+        return R.layout.fragment_my_like_short;
     }
 
     @Override
     protected void init() {
-        workShort_recy = getActivity().findViewById(R.id.workShort_recy);
-        workShort_noData = getActivity().findViewById(R.id.workShort_noData);
         if (HomepageActivity.him_id.equals("myself")) {
-            presenter.sendWorkShortComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""), "1", "1", "20");
+            presenter.sendWorkShortComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""), "2", "1", "20");
         } else {
-            presenter.sendWorkShortComic(HomepageActivity.him_id, "1", "1", "20");
+            presenter.sendWorkShortComic(HomepageActivity.him_id, "2", "1", "20");
         }
-
-
     }
-
 
     @Override
     protected void loadDate() {
 
     }
 
-
     @Override
     public void showWorkShortComic(WorkShortComicBean workShortComicBean) {
-        Toast.makeText(getContext(), workShortComicBean.getData().getResult().size() + "", Toast.LENGTH_SHORT).show();
         if (workShortComicBean.getMsg().equals(GetData.MSG_SUCCESS)) {
             if (workShortComicBean.getData().getResult().size() == 0) {
-                workShort_noData.setVisibility(View.VISIBLE);
-                workShort_recy.setVisibility(View.GONE);
+                likeShortNoData.setVisibility(View.VISIBLE);
+                likeShortRecy.setVisibility(View.GONE);
             } else {
-                workShort_noData.setVisibility(View.VISIBLE);
-                workShort_noData.setVisibility(View.GONE);
+                likeShortNoData.setVisibility(View.VISIBLE);
+                likeShortNoData.setVisibility(View.GONE);
                 WorkShortComicBean.DataBean data = workShortComicBean.getData();
                 List<WorkShortComicBean.DataBean.ResultBean> result = data.getResult();
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
-                workShort_recy.setLayoutManager(gridLayoutManager);
+                likeShortRecy.setLayoutManager(gridLayoutManager);
                 List<Object> objects = new ArrayList<>();
                 objects.addAll(result);
                 WorkShortAdapter workShortAdapter = new WorkShortAdapter(objects, getContext());
-                workShort_recy.setAdapter(workShortAdapter);
+                likeShortRecy.setAdapter(workShortAdapter);
                 Toast.makeText(getContext(), result.size() + "", Toast.LENGTH_SHORT).show();
             }
 
@@ -86,9 +85,9 @@ public class WorkShortFragment extends BaseFragment<WorkShortComicPresenter> imp
         }
     }
 
-
     @Override
     public void showError(String string) {
         Toast.makeText(getContext(), string, Toast.LENGTH_SHORT).show();
+
     }
 }

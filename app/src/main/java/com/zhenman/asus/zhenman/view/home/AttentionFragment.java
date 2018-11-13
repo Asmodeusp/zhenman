@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -64,7 +63,6 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
             }
         });
     }
-
     @Override
     protected void loadDate() {
         HomeAttentionSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -74,7 +72,6 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
                 HomeAttentionSmartRefreshLayout.finishRefresh();
             }
         });
-
     }
     @Override
     public void showError(String msg) {

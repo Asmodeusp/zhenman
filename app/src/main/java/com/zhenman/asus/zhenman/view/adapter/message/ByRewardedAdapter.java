@@ -6,13 +6,18 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
@@ -22,6 +27,7 @@ import com.zhenman.asus.zhenman.utils.DataUtils;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -79,23 +85,50 @@ public class ByRewardedAdapter extends RecyclerView.Adapter<ByRewardedAdapter.Ho
                         byRewardedCallback.showChapterList(resultBean.getCatalogId());
                     }
                 });
-                SpannableString s = new SpannableString(resultBean.getTitleDto().getText());
-                s.setSpan(new ForegroundColorSpan(Color.parseColor("#000000")), resultBean.getTitleDto().getTextExtra().get(0).getStart(), (resultBean.getTitleDto().getTextExtra().get(0).getStart() + resultBean.getTitleDto().getTextExtra().get(0).getLength()), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-                s.setSpan(new ForegroundColorSpan(Color.parseColor("#B37FEB")), resultBean.getTitleDto().getTextExtra().get(1).getStart(), (resultBean.getTitleDto().getTextExtra().get(1).getStart() + resultBean.getTitleDto().getTextExtra().get(1).getLength()), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-                holder.itemByRewarded_introduction.setText(s);
+
+                final ArrayList<Integer> integers = new ArrayList<>();
+                for (int i1 = 0; i1 < resultBean.getTitleDto().getTextExtra().size(); i1++) {
+                    integers.add(resultBean.getTitleDto().getTextExtra().get(i1).getTextType());
+                }
+                //        设置富文本显示
+                SpannableStringBuilder spannable = new SpannableStringBuilder(resultBean.getTitleDto().getText());
+                for (int i1 = 0; i1 < integers.size(); i1++) {
+                    final int finalI = i1;
+                    spannable.setSpan(new ClickableSpan() {
+                        @Override
+                        public void onClick(View widget) {
+                            if (integers.get(finalI) == 1) {//用户
+                                Intent intent = new Intent(context, HomepageActivity.class);
+                                intent.putExtra("him_id",resultBean.getUserId()+"");
+                                context.startActivity(intent);
+                            }
+                            if (integers.get(finalI)==0){
+                                Toast.makeText(context, "234343434r", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        @Override
+                        public void updateDrawState(TextPaint ds) {
+                            super.updateDrawState(ds);
+                            if (integers.get(finalI) == 1) {
+                                ds.setColor(Color.parseColor("#000000")); // 设置文本颜色
+                                // 去掉下划线
+                                ds.setUnderlineText(false);
+                            }else if (integers.get(finalI)==0){//B37FEB
+                                ds.setColor(Color.parseColor("#B37FEB")); // 设置紫色文本颜色
+                                // 去掉下划线
+                                ds.setUnderlineText(false);
+                            }
+                        }
+                    },resultBean.getTitleDto().getTextExtra().get(i1).getStart(),resultBean.getTitleDto().getTextExtra().get(i1).getStart()+resultBean.getTitleDto().getTextExtra().get(i1).getLength(),Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+                }
+                //这个一定要记得设置，不然点击不生效
+                holder.itemByRewarded_introduction.setMovementMethod(LinkMovementMethod.getInstance());
+                holder.itemByRewarded_introduction.setText(spannable);
 //            时间转换
                 Date date = new Date(Long.parseLong(resultBean.getAddTime()));
                 SimpleDateFormat format = new SimpleDateFormat("MM-dd", Locale.getDefault());
                 String format2 = format.format(date);
                 holder.itemByRewarded_time.setText(format2);
-                holder.itemByRewarded_introduction.setOnClickListener(new View.OnClickListener() {//跳转到个人首页
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(context, HomepageActivity.class);
-                        intent.putExtra("him_id", resultBean.getUserId() + "");
-                        context.startActivity(intent);
-                    }
-                });
             }
         }if (object instanceof ByLikeBean.DataBean){
             final ByLikeBean.DataBean resultBean = (ByLikeBean.DataBean) object;
@@ -120,14 +153,6 @@ public class ByRewardedAdapter extends RecyclerView.Adapter<ByRewardedAdapter.Ho
             String newChatTime = DataUtils.getNewChatTime(Long.parseLong(resultBean.getAddTime()));
             holder.itemByRewarded_time.setText(newChatTime);
             holder.itemView.setTag(i);
-            /*holder.itemByRewarded_introduction.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, WorkDetailsActivity.class);
-                    intent.putExtra("pgcid", resultBean.getProductId());
-                    context.startActivity(intent);
-                }
-            });*/
         }
     }
     @Override

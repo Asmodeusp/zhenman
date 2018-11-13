@@ -86,7 +86,14 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
         }
         if (object instanceof MyFansBean.DataBean.ResultBean) {//粉丝列表
             final MyFansBean.DataBean.ResultBean resultBean = (MyFansBean.DataBean.ResultBean) object;
-            Glide.with(context).load(resultBean.getImageUrl()).into(holder.itemMyAttenTheme_headImage);
+            Glide.with(context)
+                    .load(resultBean.getImageUrl())
+                    .centerCrop()
+                    .dontAnimate()//防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
+                    .error(R.mipmap.common_portrait_m)
+                    .placeholder(R.mipmap.common_portrait_m)
+                    .into(holder.itemMyAttenTheme_headImage);
+
             holder.itemMyAttenTheme_title.setText("@" + resultBean.getName());
             if (resultBean.getFollow() == 1) {
                 holder.itemMyAttenTheme_attention.setText("+关注");

@@ -73,6 +73,8 @@ public class Urls {
 
     //  个人主页 我的作品   短漫画
     public static final String UGS_SHORT_COMIC = "userUgcInfo/getUgcListByType";
+    //  个人主页  我的作品  长漫画
+    public static final String PGC_SHORT_COMIC = "userUgcInfo/getPgcListByType";
     //  消息页面 3个的主题及对应的4个ugc作品
     public static final String UGC_THEME_INFO = "ugcSubjectUser/getNewsSubjectListByUserId";
     //  关注主题
@@ -113,6 +115,6 @@ public class Urls {
     public static final String BY_REWARDED = "newsRewardInfo/getNewsRewardInfoList";
     //  消息页面被关注列表(也就是粉丝列表)
     public static final String BY_FANS = "newsFansInfo/getNewsFansInfoList";
-//    被点赞的列表
-    public static final String BY_LIKE="newsLikeInfo/getNewsLikeInfoList";
+    //    被点赞的列表
+    public static final String BY_LIKE = "newsLikeInfo/getNewsLikeInfoList";
 }

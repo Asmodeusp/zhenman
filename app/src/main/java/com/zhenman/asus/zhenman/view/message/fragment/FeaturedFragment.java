@@ -55,7 +55,7 @@ public class FeaturedFragment extends BaseFragment<ThemeFeaturedSquarePresenter>
     }
 
     @Override
-    public void showThemeFeaturedSquareData(ThemeFeaturedBean themeFeaturedBean) {
+    public void showThemeFeaturedSquareData(final ThemeFeaturedBean themeFeaturedBean) {
         if (themeFeaturedBean.getState() == 0) {
 
             ThemeFeaturedBean.DataBean data = themeFeaturedBean.getData();
@@ -63,7 +63,6 @@ public class FeaturedFragment extends BaseFragment<ThemeFeaturedSquarePresenter>
             if (resultBeanList.size() == 0) {
                 featured_none.setVisibility(View.VISIBLE);
                 featuredRecy.setVisibility(View.GONE);
-
             } else {
                 featured_none.setVisibility(View.GONE);
                 featuredRecy.setVisibility(View.VISIBLE);
@@ -75,6 +74,8 @@ public class FeaturedFragment extends BaseFragment<ThemeFeaturedSquarePresenter>
                 featuredAdapter.setOnShortCLickListener(new FeaturedAdapter.OnShortCLickListener() {
                     @Override
                     public void myClick(View view, int position) {
+                        //新开一个界面，跳转到作品展示页面
+                        List<ThemeFeaturedBean.DataBean.ResultBean> result = themeFeaturedBean.getData().getResult();
                         Intent intent = new Intent(getContext(), ContentActivity.class);
                         getActivity().startActivity(intent);
 

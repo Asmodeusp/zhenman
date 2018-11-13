@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
@@ -60,8 +59,8 @@ public class ClassifyActivity extends BaseActivity<SerializationClassifyPresente
 
     @Override
     protected void init() {
-        presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);
-        presenter.getClassifyTagBean();
+        presenter.getClassifyTagBean();//得到标签
+        presenter.getClassifyBean("1","20",statusTag,subjectTag,backgroundTag,typeTag);//发送网络请求更新
         //返回
         Classify_returnImg = findViewById(R.id.Classify_returnImg);
         //背景标签Recy

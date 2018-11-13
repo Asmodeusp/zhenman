@@ -85,7 +85,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             @Override
             public void onLoadingError(String source, Exception e) {
             }
-        }, R.mipmap.common_portrait_m);
+        },R.mipmap.common_portrait_m);
         holder.fill_Home_Attention_RecyHeadIew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -367,7 +367,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             //评论数量
             fill_Home_Attention_RecyCommentNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyCommentNumberText);
             //喜欢数量
-            fill_Home_Attention_RecyLikeNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeNumberText);
+            fill_Home_Attention_RecyLikeNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeNumberText); 
             //喜欢图片
             fill_Home_Attention_RecyLikeImageView = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeImageView);
             //主题名字

@@ -25,8 +25,9 @@ public class HomePageMyLikeFragment extends BaseFragment {
     ViewPager myLikeComicViewPage;
     private ArrayList<String> ComicTab_title;
     private ArrayList<Fragment> ComicViewPage_fragment;
-    private WorkShortFragment workShortFragment= new WorkShortFragment();
-    private WorkLongFragment workLongFragment=new WorkLongFragment();
+    private MyLikeShortFragment workShortFragment = new MyLikeShortFragment();
+    private MyLikeLongFragment workLongFragment = new MyLikeLongFragment();
+
     public HomePageMyLikeFragment() {
     }
 
@@ -37,8 +38,8 @@ public class HomePageMyLikeFragment extends BaseFragment {
 
     @Override
     protected void init() {
-        ComicTab_title=new ArrayList<>();
-        ComicViewPage_fragment=new ArrayList<>();
+        ComicTab_title = new ArrayList<>();
+        ComicViewPage_fragment = new ArrayList<>();
         ComicTab_title.add("短漫画");
         ComicTab_title.add("长漫画");
         ComicViewPage_fragment.add(workShortFragment);
@@ -46,7 +47,7 @@ public class HomePageMyLikeFragment extends BaseFragment {
         myLikeComicTab.setupWithViewPager(myLikeComicViewPage);
         MyLikeAdapter myLikeAdapter = new MyLikeAdapter(getActivity().getSupportFragmentManager(), ComicTab_title, ComicViewPage_fragment);
         myLikeComicViewPage.setAdapter(myLikeAdapter);
-//        这里设置适配器就崩了
+
     }
 
     @Override

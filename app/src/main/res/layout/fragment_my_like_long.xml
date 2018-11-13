@@ -4,22 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.myself.fragment.WorkShortFragment">
+    tools:context=".view.myself.fragment.MyLikeLongFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginLeft="@dimen/px_12"
-        android:layout_marginRight="@dimen/px_12"
-        android:id="@+id/workShort_recy"
+        android:id="@+id/likeLong_recy"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/px_12"
+        android:layout_marginRight="@dimen/px_12"></android.support.v7.widget.RecyclerView>
 
     <TextView
-        android:id="@+id/workShort_noData"
+        android:id="@+id/likeLong_noData"
+        style="@style/Style32H2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="没有更多数据了~"
-        />
-
+        android:gravity="center"
+        android:text="您暂时还没有作品哦" />
 
 </com.zhy.autolayout.AutoFrameLayout>

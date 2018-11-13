@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.model.bean.TheamBean;
+import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.List;
@@ -46,7 +48,6 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
         View view = LayoutInflater.from(context).inflate(R.layout.item_theme, viewGroup, false);
         Holder holder = new Holder(view);
         view.setOnClickListener(this);
-
         return holder;
     }
 
@@ -56,6 +57,20 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
         holder.itemTheme_title.setText(dataBeanList.get(i).getName());
         holder.itemTheme_description.setText(dataBeanList.get(i).getDescription());
         List<String> list = dataBeanList.get(i).getList();
+        //        获取屏幕的宽
+        int screenWidth = ScreenUtils.getScreenWidth(context);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.itemTheme_1.getLayoutParams();
+        int imageWidth = (screenWidth - (12 * 2 + 8 * 3)) / 4;
+        int imageHeight = imageWidth * 332 /216;
+        params.height=imageHeight;
+        params.width =imageWidth;
+        params.setMargins(0,0,8,0);
+        holder.itemTheme_1.setLayoutParams(params);
+        holder.itemTheme_2.setLayoutParams(params);
+        holder.itemTheme_3.setLayoutParams(params);
+        holder.itemTheme_4.setLayoutParams(params);
+
+
         if (list.size() == 0) {
             holder.itemTheme_coverImage1.setVisibility(View.INVISIBLE);
             holder.itemTheme_coverImage2.setVisibility(View.INVISIBLE);
@@ -154,6 +169,10 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
         public ImageView itemTheme_coverImage3;
         public ImageView itemTheme_coverImage4;
         public AutoRelativeLayout theme_details;
+        public AutoRelativeLayout itemTheme_1;
+        public AutoRelativeLayout itemTheme_2;
+        public AutoRelativeLayout itemTheme_3;
+        public AutoRelativeLayout itemTheme_4;
 
         public Holder(@NonNull View rootView) {
             super(rootView);
@@ -166,6 +185,10 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
             this.itemTheme_coverImage3 = (ImageView) rootView.findViewById(R.id.itemTheme_coverImage3);
             this.itemTheme_coverImage4 = (ImageView) rootView.findViewById(R.id.itemTheme_coverImage4);
             this.theme_details = (AutoRelativeLayout) rootView.findViewById(R.id.theme_details);
+            this.itemTheme_1 = (AutoRelativeLayout) rootView.findViewById(R.id.itemTheme_1);
+            this.itemTheme_2 = (AutoRelativeLayout) rootView.findViewById(R.id.itemTheme_2);
+            this.itemTheme_3 = (AutoRelativeLayout) rootView.findViewById(R.id.itemTheme_3);
+            this.itemTheme_4 = (AutoRelativeLayout) rootView.findViewById(R.id.itemTheme_4);
         }
     }
 }

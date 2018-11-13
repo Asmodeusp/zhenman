@@ -1,18 +1,27 @@
 package com.zhenman.asus.zhenman.view.myself;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseActivity;
+import com.zhenman.asus.zhenman.contract.EggplantDetailsContract;
+import com.zhenman.asus.zhenman.model.bean.EggplantDetailsBean;
+import com.zhenman.asus.zhenman.presenter.EggplantDetailsPresenter;
+import com.zhenman.asus.zhenman.view.adapter.myself.EggplantDetailsAdapter;
 import com.zhy.autolayout.AutoRelativeLayout;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class EggplantDetailsActivity extends BaseActivity {
+public class EggplantDetailsActivity extends BaseActivity<EggplantDetailsPresenter> implements EggplantDetailsContract.EggplantDetailsInView {
 
 
     @BindView(R.id.app_back)
@@ -36,6 +45,7 @@ public class EggplantDetailsActivity extends BaseActivity {
         appTitle.setText("茄子明细");
         appOtherID.setText("帮助");
 
+        presenter.sendEggplantDetailsData("1","20");
     }
 
     @Override
@@ -55,4 +65,23 @@ public class EggplantDetailsActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void showError(String string) {
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showEggplantDetailsData(EggplantDetailsBean eggplantDetailsBean) {
+        if (eggplantDetailsBean.getData().size()==0) {
+            eggplantDetailsList.setVisibility(View.GONE);
+        }else {
+            eggplantDetailsList.setVisibility(View.VISIBLE);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            eggplantDetailsList.setLayoutManager(linearLayoutManager);
+            List<EggplantDetailsBean.DataBean> dataBeanList = eggplantDetailsBean.getData();
+            Log.e("Sunny",dataBeanList.toString());
+            EggplantDetailsAdapter eggplantDetailsAdapter = new EggplantDetailsAdapter(dataBeanList, this);
+            eggplantDetailsList.setAdapter(eggplantDetailsAdapter);
+        }
+    }
 }
