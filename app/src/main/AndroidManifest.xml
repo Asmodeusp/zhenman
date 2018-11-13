@@ -228,7 +228,9 @@
         <activity android:name=".view.message.ByRewardedActivity" />
         <activity android:name=".view.message.ByFansActivity" />
         <activity android:name=".view.message.ByCommentActivity" />
-        <activity android:name=".view.message.ByLikeActivity"></activity>
+        <activity android:name=".view.message.ByLikeActivity" />
+        <activity android:name=".view.myself.SaleDetailsActivity" />
+        <activity android:name=".view.myself.WorkDisplayActivity"></activity>
     </application>
 
 </manifest>

@@ -4,7 +4,6 @@ package com.zhenman.asus.zhenman.view.myself.fragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,29 +27,29 @@ import butterknife.BindView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WorkLongFragment extends BaseFragment<WorkShortPgcComicPresenter> implements WorkShortPgcComicContract.WorkShortPgcComicInView {
+public class MyLikeLongFragment extends BaseFragment<WorkShortPgcComicPresenter> implements WorkShortPgcComicContract.WorkShortPgcComicInView{
 
 
-    @BindView(R.id.workLong_recy)
-    RecyclerView workLongRecy;
-    @BindView(R.id.workLong_noData)
-    TextView workLongNoData;
+    @BindView(R.id.likeLong_recy)
+    RecyclerView likeLongRecy;
+    @BindView(R.id.likeLong_noData)
+    TextView likeLongNoData;
 
-    public WorkLongFragment() {
+    public MyLikeLongFragment() {
         // Required empty public constructor
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_work_long;
+        return R.layout.fragment_my_like_long;
     }
 
     @Override
     protected void init() {
         if (HomepageActivity.him_id.equals("myself")) {
-            presenter.sendWorkShortPgcComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""), "1", "1", "20");
+            presenter.sendWorkShortPgcComic((String) SPUtils.get(getContext(), SPKey.USER_ID, ""), "2", "1", "20");
         } else {
-            presenter.sendWorkShortPgcComic(HomepageActivity.him_id, "1", "1", "20");
+            presenter.sendWorkShortPgcComic(HomepageActivity.him_id, "2", "1", "20");
         }
     }
 
@@ -59,28 +58,25 @@ public class WorkLongFragment extends BaseFragment<WorkShortPgcComicPresenter> i
 
     }
 
-
-//    长漫画
     @Override
     public void showWorkPgcComic(WorkShortPgcComicBean workShortPgcComicBean) {
-        Log.e("Sunny",workShortPgcComicBean.getData().getResult().size()+"");
         if (workShortPgcComicBean.getMsg().equals(GetData.MSG_SUCCESS)) {
             if (workShortPgcComicBean.getData().getResult().size() == 0) {
-                workLongNoData.setVisibility(View.VISIBLE);
-                workLongRecy.setVisibility(View.GONE);
+                likeLongNoData.setVisibility(View.VISIBLE);
+                likeLongRecy.setVisibility(View.GONE);
             } else {
                 Toast.makeText(getContext(), workShortPgcComicBean.getData().getResult().size()+"", Toast.LENGTH_SHORT).show();
-                workLongRecy.setVisibility(View.VISIBLE);
-                workLongNoData.setVisibility(View.GONE);
+                likeLongRecy.setVisibility(View.VISIBLE);
+                likeLongNoData.setVisibility(View.GONE);
 //                WorkShortComicBean.DataBean data = workShortPgcComicBean.getData();
                 WorkShortPgcComicBean.DataBean data = workShortPgcComicBean.getData();
                 List<WorkShortPgcComicBean.DataBean.ResultBean> result = data.getResult();
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
-                workLongRecy.setLayoutManager(gridLayoutManager);
+                likeLongRecy.setLayoutManager(gridLayoutManager);
                 List<Object> objects = new ArrayList<>();
                 objects.addAll(result);
                 WorkShortAdapter workShortAdapter = new WorkShortAdapter(objects, getContext());
-                workLongRecy.setAdapter(workShortAdapter);
+                likeLongRecy.setAdapter(workShortAdapter);
                 Toast.makeText(getContext(), result.size() + "", Toast.LENGTH_SHORT).show();
             }
 
@@ -91,6 +87,6 @@ public class WorkLongFragment extends BaseFragment<WorkShortPgcComicPresenter> i
 
     @Override
     public void showError(String string) {
-        Toast.makeText(getContext(), string, Toast.LENGTH_SHORT).show();
+
     }
 }

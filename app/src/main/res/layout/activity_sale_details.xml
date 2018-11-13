@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_prograss_bg"
+    android:orientation="vertical"
+    tools:context=".view.myself.SaleDetailsActivity">
+
+    <include layout="@layout/above_head"
+        android:id="@+id/saleDetails_top"/>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_below="@+id/saleDetails_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="128px"
+            android:background="@color/h9">
+
+            <ImageView
+                android:id="@+id/saleDetails_other01"
+                android:layout_width="@dimen/px_80"
+                android:layout_height="@dimen/px_80"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="32px"
+                android:src="@mipmap/my_qiezi" />
+
+            <TextView
+                android:id="@+id/saleDetails_qiezi"
+                style="@style/Style32H2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="32px"
+                android:layout_toRightOf="@id/saleDetails_other01"
+                android:text="茄子：" />
+
+            <TextView
+                android:id="@+id/saleDetails_qieziNum"
+                style="@style/Style32H2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/saleDetails_qiezi" />
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_1"
+            android:background="@color/h7" />
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="128px"
+            android:background="@color/h9">
+
+            <ImageView
+                android:id="@+id/saleDetails_other02"
+                android:layout_width="@dimen/px_80"
+                android:layout_height="@dimen/px_80"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="32px"
+                android:src="@mipmap/my_qiezi_bite" />
+
+            <TextView
+                android:id="@+id/saleDetails_biteQiezi"
+                style="@style/Style32H2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="32px"
+
+                android:layout_toRightOf="@id/saleDetails_other02"
+                android:text="被咬一口的茄子：" />
+
+            <TextView
+                android:id="@+id/saleDetails_biteQieziNum"
+                style="@style/Style32H2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/saleDetails_biteQiezi" />
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_1"
+            android:background="@color/h7" />
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="128px"
+            android:background="@color/h9">
+
+            <ImageView
+                android:id="@+id/saleDetails_other03"
+                android:layout_width="@dimen/px_80"
+                android:layout_height="@dimen/px_80"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="32px"
+                android:src="@mipmap/my_qiezi_green" />
+
+            <TextView
+                android:id="@+id/saleDetails_unripeQiezi"
+                style="@style/Style32H2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="32px"
+
+                android:layout_toRightOf="@id/saleDetails_other03"
+                android:text="未成熟的茄子：" />
+
+            <TextView
+                android:id="@+id/saleDetails_unripeQieziNum"
+                style="@style/Style32H2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/saleDetails_unripeQiezi" />
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_1"
+            android:background="@color/h7" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/saleDetails_footView"
+        android:layout_width="fill_parent"
+        android:layout_height="118px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/h9"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/saleDetails_other04"
+            style="@style/Style26H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="@dimen/px_24"
+            android:layout_marginTop="@dimen/px_24"
+            android:text="本次共计打包卖出" />
+
+        <TextView
+            android:id="@+id/saleDetails_aboveQieziNum"
+            style="@style/Style32C1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/saleDetails_other04"
+            android:layout_toRightOf="@+id/saleDetails_other04"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/saleDetails_other05"
+            style="@style/Style26H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/saleDetails_other04"
+            android:layout_toRightOf="@id/saleDetails_aboveQieziNum"
+            android:text="个茄子，收益" />
+
+
+        <TextView
+            android:id="@+id/saleDetails_aboveQieziMoney"
+            style="@style/Style32C1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/saleDetails_other04"
+            android:layout_toRightOf="@id/saleDetails_other05"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/saleDetails_sellTo"
+            style="@style/Style26H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/saleDetails_other04"
+            android:layout_toRightOf="@id/saleDetails_aboveQieziMoney"
+            android:text="元，卖向支付宝" />
+
+        <TextView
+            android:id="@+id/saleDetails_data"
+            style="@style/Style24H5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/saleDetails_other04"
+            android:layout_marginTop="@dimen/px_8"
+            android:layout_marginBottom="@dimen/px_24"
+            android:layout_marginLeft="@dimen/px_24"
+            android:text="12-27" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+</com.zhy.autolayout.AutoRelativeLayout>

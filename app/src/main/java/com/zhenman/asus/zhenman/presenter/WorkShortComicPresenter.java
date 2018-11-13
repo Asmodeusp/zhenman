@@ -53,6 +53,7 @@ public class WorkShortComicPresenter implements WorkShortComicContract.WorkShort
                 });
     }
 
+
     @Override
     public void actualView(WorkShortComicContract.WorkShortComicInView workShortComicInView) {
             this.workShortComicInView=workShortComicInView;

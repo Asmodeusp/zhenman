@@ -7,13 +7,11 @@ import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.model.bean.TextExtraBean;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +21,6 @@ public class MyClickSpan extends ClickableSpan {
     private int mHighLightColor = Color.parseColor("#b37feb");
     private boolean mUnderLine = false;
     private View.OnClickListener mClickListener;
-
     public MyClickSpan(View.OnClickListener listener) {
         this.mClickListener = listener;
     }
@@ -42,11 +39,10 @@ public class MyClickSpan extends ClickableSpan {
             mClickListener.onClick(widget);
     }
 
-
     @Override
     public void updateDrawState(TextPaint ds) {
-        ds.setColor(mHighLightColor);
-        ds.setUnderlineText(mUnderLine);
+            ds.setColor(mHighLightColor);
+            ds.setUnderlineText(mUnderLine);
     }
 
 
@@ -70,8 +66,6 @@ public class MyClickSpan extends ClickableSpan {
         }
         tv.setText(s);
     }
-
-
     /**
      * 关键字高亮变色
      *

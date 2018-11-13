@@ -119,7 +119,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginRight="29px"
                                 android:layout_toLeftOf="@id/homePage_rewardHe"
-                                android:background="@drawable/actor_shape"
+                                android:background="@drawable/fans_attention_btn"
                                 android:gravity="center"
                                 android:text="关注他" />
                         </com.zhy.autolayout.AutoRelativeLayout>
@@ -269,11 +269,11 @@
                 android:orientation="vertical">
 
 
-                <com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage
+
+                <FrameLayout
                     android:id="@+id/HomePage_Viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="1200px">
-                </com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage>
+                    android:layout_height="1200px"></FrameLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>

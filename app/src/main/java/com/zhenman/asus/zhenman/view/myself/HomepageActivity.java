@@ -4,7 +4,6 @@ package com.zhenman.asus.zhenman.view.myself;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -14,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -34,15 +34,12 @@ import com.zhenman.asus.zhenman.utils.GetData;
 import com.zhenman.asus.zhenman.utils.PayUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
-import com.zhenman.asus.zhenman.view.adapter.myself.HomePageAdapter;
 import com.zhenman.asus.zhenman.view.adapter.serialization.ProductListAdapter;
 import com.zhenman.asus.zhenman.view.myself.fragment.HomePageMyLikeFragment;
 import com.zhenman.asus.zhenman.view.myself.fragment.HomePageMyWorkFragment;
-import com.zhenman.asus.zhenman.view.ui.NoSrcollViewPage;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -64,9 +61,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
     private AutoLinearLayout homePage_other01;
     private AutoRelativeLayout my_data;
     private TabLayout homePage_himTab;
-    private NoSrcollViewPage HomePage_Viewpager;
-    private ArrayList<String> homePageTab_title;
-    private ArrayList<Fragment> homePageTab_fragment;
+    private FrameLayout HomePage_Viewpager;
     private HomePageMyWorkFragment homePageMyWorkFragment;//TA的作品
     private HomePageMyLikeFragment homePageMyLikeFragment;//喜欢
     private AutoLinearLayout homePage_worksPage;
@@ -74,7 +69,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
     private AutoLinearLayout homePage_attentionPage;
     private AutoLinearLayout homePage_themePage;
     private String fromMyself = "myself";
-    private String fromHome = "home";
+
     private TextView homePage_rewardHe;
     private TextView homePage_attentionHe;
     //支付popuwindow
@@ -89,8 +84,8 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
     private String paymentMethod="2";
     private boolean tag = false;
     private AutoRelativeLayout homePage_aboutHim;
-    public static String him_id;
-    public static String tabSelect;//tabLayout选择的是TA的作品还是TA的喜欢
+    public static String him_id="myself";
+    public  String tabSelect="1";//tabLayout选择的是TA的作品还是TA的喜欢
 
     protected int getLayoutId() {
         return R.layout.activity_homepage;
@@ -117,19 +112,16 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         homePage_themePage = (AutoLinearLayout) findViewById(R.id.homePage_themePage);
         my_data = (AutoRelativeLayout) findViewById(R.id.my_data);
         homePage_himTab = (TabLayout) findViewById(R.id.homePage_himTab);
-        HomePage_Viewpager = (NoSrcollViewPage) findViewById(R.id.HomePage_Viewpager);
+        HomePage_Viewpager = (FrameLayout) findViewById(R.id.HomePage_Viewpager);
         homePage_rewardHe = (TextView) findViewById(R.id.homePage_rewardHe);
         homePage_attentionHe = (TextView) findViewById(R.id.homePage_attentionHe);
         homePage_aboutHim = (AutoRelativeLayout) findViewById(R.id.homePage_aboutHim);
         app_title.setVisibility(View.GONE);
-        homePageTab_title = new ArrayList<>();
-        homePageTab_fragment = new ArrayList<>();
-        homePageMyWorkFragment = new HomePageMyWorkFragment();
-        homePageMyLikeFragment = new HomePageMyLikeFragment();
-        homePageTab_title.add("TA的作品");
-        homePageTab_title.add("TA喜欢的");
-        homePageTab_fragment.add(homePageMyWorkFragment);
-        homePageTab_fragment.add(homePageMyLikeFragment);
+        homePage_himTab.addTab(homePage_himTab.newTab().setText("TA的作品"));
+        homePage_himTab.addTab(homePage_himTab.newTab().setText("TA喜欢的"));
+        tabSelect = "1";//作品的话是1
+        setContentView(R.id.HomePage_Viewpager,HomePageMyWorkFragment.class);
+
         idListener();
         Intent intent = getIntent();
         him_id = intent.getStringExtra("him_id");
@@ -140,9 +132,9 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
             homePage_aboutHim.setVisibility(View.VISIBLE);
             presenter.sendHomePageHeadData(him_id);
         }
-        homePage_himTab.setupWithViewPager(HomePage_Viewpager);
-        HomePageAdapter homePageAdapter = new HomePageAdapter(getSupportFragmentManager(), homePageTab_title, homePageTab_fragment);
-        HomePage_Viewpager.setAdapter(homePageAdapter);
+//        homePage_himTab.setupWithViewPager(HomePage_Viewpager);
+//        HomePageAdapter homePageAdapter = new HomePageAdapter(getSupportFragmentManager(), homePageTab_title, homePageTab_fragment);
+//        HomePage_Viewpager.setAdapter(homePageAdapter);
 
     }
 
@@ -158,11 +150,14 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
+
                     case 0:
                         tabSelect = "1";//作品的话是1
+                        setContentView(R.id.HomePage_Viewpager,HomePageMyWorkFragment.class);
                         break;
                     case 1:
                         tabSelect = "2";//TA的喜欢  type是2
+                        setContentView(R.id.HomePage_Viewpager,HomePageMyLikeFragment.class);
                         break;
                 }
             }
@@ -225,7 +220,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
                     homePage_attentionHe.setText("关注");
                     homePage_attentionHe.setTextColor(Color.parseColor("#b37feb"));
 
-                    homePage_attentionHe.setBackgroundResource(R.drawable.actor_shape);
+                    homePage_attentionHe.setBackgroundResource(R.drawable.fans_attention_btn);
                     if (him_id.equals("myself")) {
                         homePage_aboutHim.setVisibility(View.GONE);
                         presenter.sendAttentionUserData((String) SPUtils.get(this, SPKey.USER_ID, ""), 0 + "");
@@ -316,7 +311,13 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
     @Override
     public void showHomePageHead(HomePageHeadBean homePageHeadBean) {
         if (homePageHeadBean.getMsg().equals(GetData.MSG_SUCCESS)) {
-            Glide.with(this).load(homePageHeadBean.getData().getHeadImg()).into(homePage_Avatar);
+            Glide.with(this)
+                    .load(homePageHeadBean.getData().getHeadImg())
+                    .centerCrop()
+                    .dontAnimate()//防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
+                    .error(R.mipmap.common_portrait_m)
+                    .placeholder(R.mipmap.common_portrait_m)
+                    .into(homePage_Avatar);
             homePage_Name.setText(homePageHeadBean.getData().getName());
             if ("2".equals(homePageHeadBean.getData().getSex())) {
                 homePage_Sex.setImageResource(R.mipmap.my_f);

@@ -4,13 +4,40 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/itemShelfColl_1"
+        android:layout_width="234px"
+        android:layout_height="328px"
+        android:layout_marginLeft="@dimen/px_8"
+        android:background="@drawable/iamge_frame">
+
+        <ImageView
+            android:id="@+id/itemShelfColl_iamge"
+            android:layout_width="232px"
+            android:layout_height="326px"
+            android:padding="@dimen/px_2"
+            android:scaleType="fitXY"
+            android:src="@mipmap/common_qiezi" />
+
+        <ImageView
+            android:id="@+id/itemShelfColl_mask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.6"
+            android:scaleType="centerCrop"
+            android:background="@color/h1"
+android:visibility="gone"
+            />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
     <ImageView
-        android:id="@+id/itemShelfColl_iamge"
+        android:id="@+id/itemShelfColl_iamge2"
         android:layout_width="232px"
         android:layout_height="326px"
         android:padding="2px"
         android:scaleType="fitXY"
-        android:src="@mipmap/common_qiezi" />
+        android:src="@mipmap/common_qiezi"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/itemShelfColl_off"
@@ -21,33 +48,21 @@
         android:src="@mipmap/serial_shelf_off"
         android:visibility="gone" />
 
-
-
-    <ImageView
-        android:id="@+id/itemShelfColl_mask"
-        android:layout_width="232px"
-        android:layout_height="326px"
-        android:padding="2px"
-        android:scaleType="fitXY"
-        android:src="@mipmap/home_mask_bottom"
-        android:visibility="gone"
-        />
-
     <CheckBox
         android:id="@+id/itemShelfColl_check"
         android:layout_width="@dimen/px_44"
         android:layout_height="@dimen/px_44"
         android:layout_marginLeft="180px"
         android:layout_marginTop="@dimen/px_8"
+        android:button="@drawable/pay_selector"
         android:checked="false"
-        android:visibility="gone"
-        android:button="@drawable/pay_selector" />
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/itemShelfColl_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/itemShelfColl_1"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/itemShelfColl_iamge"
         android:text="Sunny" />
 </com.zhy.autolayout.AutoRelativeLayout>

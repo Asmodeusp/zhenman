@@ -7,7 +7,8 @@
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
-
+        android:layout_marginLeft="@dimen/px_12"
+        android:layout_marginRight="@dimen/px_12"
         android:id="@+id/featuredRecy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>

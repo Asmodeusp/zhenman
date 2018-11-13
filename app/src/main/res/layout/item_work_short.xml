@@ -5,24 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!--<com.zhenman.asus.zhenman.view.ui.RectImageBorder
-        android:id="@+id/itemWorkShort_Img"
-        android:layout_width="250px"
-        android:layout_height="350px"
-        android:layout_centerInParent="true"
-        app:rectImage_background="@drawable/my_f"
-        app:rectImage_border_color="@color/c1"
-        app:rectImage_border_width="@dimen/px_4" />-->
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/itemWorkShort_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px_8"
+        android:background="@drawable/iamge_frame">
 
-    <ImageView
-        android:id="@+id/itemWorkShort_Img"
-        android:layout_width="228px"
-        android:layout_height="338px"
-        android:layout_marginBottom="@dimen/px_6"
-        android:layout_marginLeft="@dimen/px_4"
-        android:layout_marginRight="@dimen/px_4"
-        android:layout_marginTop="@dimen/px_4"
-        android:scaleType="fitXY"
-        android:src="@mipmap/common_qiezi" />
+        <ImageView
+            android:id="@+id/itemWorkShort_Img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/px_6"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/common_qiezi" />
+
+        <ImageView
+            android:id="@+id/itemWorkShort_mask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/px_4"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/home_mask_bottom" />
+
+        <ImageView
+            android:id="@+id/itemWorkShort_like"
+            android:layout_width="@dimen/px_24"
+            android:layout_height="@dimen/px_24"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/px_8"
+            android:src="@mipmap/my_like_off" />
+
+        <TextView
+            android:id="@+id/itemWorkShort_likeNum"
+            style="@style/Style22H9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/itemWorkShort_like"
+            android:layout_toRightOf="@id/itemWorkShort_like" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+
 </com.zhy.autolayout.AutoRelativeLayout>
 

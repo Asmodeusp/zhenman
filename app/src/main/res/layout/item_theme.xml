@@ -31,65 +31,97 @@
         android:layout_marginRight="@dimen/px_24"
         android:layout_marginTop="@dimen/px_8"
         android:layout_toRightOf="@id/itemTheme_headImage"
-        android:text="愿你期待的明天是你想要的" />
+        android:text="SunnySunnySunnySunny" />
 
     <TextView
         android:id="@+id/itemTheme_attention"
         style="@style/Style32H9"
         android:layout_width="@dimen/px_128"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/px_58"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/px_24"
         android:layout_marginTop="@dimen/px_32"
         android:background="@drawable/guanzhuzhuti"
-        android:gravity="center"
         android:button="@null"
+        android:gravity="center"
         android:text="关注" />
-
+    <!--屏幕宽-（12*2+8*3）/4=宽-->
+    <!--宽*332/216=高-->
     <com.zhy.autolayout.AutoLinearLayout
         android:id="@+id/itemTheme_skipSquare"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/itemTheme_headImage"
-        android:layout_marginLeft="@dimen/px_24"
-        android:background="@drawable/cover_corners">
+        android:layout_marginLeft="@dimen/px_12"
+        android:layout_marginRight="@dimen/px_12"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/itemTheme_coverImage1"
-            android:layout_width="0px"
-            android:layout_height="326px"
-            android:layout_weight="1"
-            android:padding="2px"
-            android:scaleType="fitXY"
-            android:src="@mipmap/common_qiezi" />
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:id="@+id/itemTheme_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cover_corners"
+            android:scaleType="fitXY">
 
-        <ImageView
-            android:id="@+id/itemTheme_coverImage2"
-            android:layout_width="0px"
-            android:layout_height="326px"
-            android:layout_weight="1"
-            android:padding="2px"
-            android:scaleType="fitXY"
-            android:src="@mipmap/common_qiezi" />
+            <ImageView
+                android:id="@+id/itemTheme_coverImage1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/px_4"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/common_qiezi" />
+        </com.zhy.autolayout.AutoRelativeLayout>
 
-        <ImageView
-            android:id="@+id/itemTheme_coverImage3"
-            android:layout_width="0px"
-            android:layout_height="326px"
-            android:layout_weight="1"
-            android:padding="2px"
-            android:scaleType="fitXY"
-            android:src="@mipmap/common_qiezi" />
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:id="@+id/itemTheme_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_8"
+            android:background="@drawable/cover_corners"
+            android:scaleType="fitXY">
 
-        <ImageView
-            android:id="@+id/itemTheme_coverImage4"
-            android:layout_width="0px"
-            android:layout_height="326px"
-            android:layout_weight="1"
-            android:padding="2px"
-            android:scaleType="fitXY"
-            android:src="@mipmap/common_qiezi" />
+            <ImageView
+                android:id="@+id/itemTheme_coverImage2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/px_4"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/common_qiezi" />
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:id="@+id/itemTheme_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_8"
+            android:background="@drawable/cover_corners"
+            android:scaleType="fitXY">
+
+            <ImageView
+                android:id="@+id/itemTheme_coverImage3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/px_4"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/common_qiezi" />
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:id="@+id/itemTheme_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_8"
+            android:background="@drawable/cover_corners"
+
+            android:scaleType="fitXY">
+
+            <ImageView
+                android:id="@+id/itemTheme_coverImage4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/px_4"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/common_qiezi" />
+        </com.zhy.autolayout.AutoRelativeLayout>
     </com.zhy.autolayout.AutoLinearLayout>
-
-
 </com.zhy.autolayout.AutoRelativeLayout>

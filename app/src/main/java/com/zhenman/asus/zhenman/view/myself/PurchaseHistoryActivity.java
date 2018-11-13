@@ -17,7 +17,7 @@ import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.List;
 
-public class PurchaseHistoryActivity extends BaseActivity<PurchaseHistoryPresenter> implements PurchaseHistoryContract.PurchaseHistoryInView {
+public class PurchaseHistoryActivity extends BaseActivity<PurchaseHistoryPresenter> implements PurchaseHistoryContract.PurchaseHistoryInView, View.OnClickListener {
 
     private AutoRelativeLayout app_back;
     private TextView app_title;
@@ -35,7 +35,8 @@ public class PurchaseHistoryActivity extends BaseActivity<PurchaseHistoryPresent
         app_title = (TextView) findViewById(R.id.app_title);
         purchaseHistory_recy = (RecyclerView) findViewById(R.id.purchaseHistory_recy);
         purchaseHistory_none = (TextView) findViewById(R.id.purchaseHistory_none);
-        app_title.setText("历史纪录");
+        app_back.setOnClickListener(this);
+        app_title.setText("交易纪录");
 
     }
 
@@ -47,9 +48,9 @@ public class PurchaseHistoryActivity extends BaseActivity<PurchaseHistoryPresent
 
     @Override
     public void showPurchaseHistory(PurchaseHistoryBean purchaseHistoryBean) {
-        Log.e("Sunny",purchaseHistoryBean.getData().getResult().size()+"");
+        Log.e("Sunny",purchaseHistoryBean.getData().size()+"");
         if (purchaseHistoryBean.getMsg().equals(GetData.MSG_SUCCESS)) {
-            if (purchaseHistoryBean.getData().getResult().size() == 0) {
+            if (purchaseHistoryBean.getData().size() == 0) {
                 purchaseHistory_none.setVisibility(View.VISIBLE);
                 purchaseHistory_recy.setVisibility(View.GONE);
             } else {
@@ -57,10 +58,19 @@ public class PurchaseHistoryActivity extends BaseActivity<PurchaseHistoryPresent
                 purchaseHistory_recy.setVisibility(View.VISIBLE);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                 purchaseHistory_recy.setLayoutManager(linearLayoutManager);
-                List<PurchaseHistoryBean.DataBean.ResultBean> result = purchaseHistoryBean.getData().getResult();
+                List<PurchaseHistoryBean.DataBean> result = purchaseHistoryBean.getData();
                 PurchaseHistoryAdapter purchaseHistoryAdapter = new PurchaseHistoryAdapter(result, this);
                 purchaseHistory_recy.setAdapter(purchaseHistoryAdapter);
             }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.app_back:
+                finish();
+                break;
         }
     }
 }

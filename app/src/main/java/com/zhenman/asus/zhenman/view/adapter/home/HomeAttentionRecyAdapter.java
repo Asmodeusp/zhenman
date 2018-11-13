@@ -29,8 +29,6 @@ import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
-import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
-import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.message.ThemeDetailsActivity;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhy.autolayout.AutoLinearLayout;
@@ -98,7 +96,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         int MaxWidth = 450;
         //图片加载最大高度
         int MaxHeight = ScreenUtils.getScreenWidth(context) * 3 / 5;
-        //超过一屏长图
+            //超过一屏长图
         if (dataBean.getThumbnailWidth() / dataBean.getThumbnailHeight() <= 216 / 332) {
             holder.fill_Home_Attention_RecyImageView.setLayoutParams(new LinearLayout.LayoutParams(MaxHeight * 216 / 332, MaxHeight));
             holder.fill_Home_Attention_RecyImageView.setScaleType(ImageView.ScaleType.FIT_XY);

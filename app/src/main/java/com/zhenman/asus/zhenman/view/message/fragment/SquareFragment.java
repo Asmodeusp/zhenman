@@ -64,7 +64,7 @@ public class SquareFragment extends BaseFragment<ThemeFeaturedSquarePresenter> i
             } else {
                 square_none.setVisibility(View.GONE);
                 squareRecy.setVisibility(View.VISIBLE);
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4);
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
                 squareRecy.setLayoutManager(gridLayoutManager);
                 FeaturedAdapter featuredAdapter = new FeaturedAdapter(resultBeanList, getContext());
                 squareRecy.setAdapter(featuredAdapter);

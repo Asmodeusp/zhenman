@@ -174,7 +174,6 @@ public class ShelfCollectionFragment extends BaseFragment<ShelfCollectionPresent
 
     //    设置全选
     private void setCheck(ShelfCollectionAdapter adapter, boolean ischeck, List<ShelfCollectionBean.DataBean.ResultBean> resultBeanList) {
-
         for (int i = 0; i < resultBeanList.size(); i++) {
             ShelfCollectionBean.DataBean.ResultBean resultBean = resultBeanList.get(i);
             resultBean.setCheck(ischeck);

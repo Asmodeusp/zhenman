@@ -4,22 +4,60 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/itemPurHis_use"
-        style="@style/Style32H2"
-        android:layout_width="wrap_content"
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/itemPurHis_other01"
+        android:layout_width="580px"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/px_24"
-        android:layout_marginTop="@dimen/px_24"
-        android:text="购买" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/itemPurHis_use"
+            style="@style/Style32H2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_24"
+            android:layout_marginTop="@dimen/px_24"
+            android:text="购买" />
+
+        <TextView
+            android:id="@+id/itemPurHis_introduction"
+            style="@style/Style26H3"
+            android:layout_width="540px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="clip_vertical"
+            android:layout_marginLeft="@dimen/px_24"
+            android:layout_marginTop="@dimen/px_10"
+            android:text="您购买了" />
+        <TextView
+            android:id="@+id/itemPurHis_introduction2"
+            style="@style/Style26H3"
+            android:visibility="gone"
+            android:layout_width="540px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="clip_vertical"
+            android:layout_marginLeft="@dimen/px_24"
+            android:layout_marginTop="@dimen/px_24"
+            android:text="2434234" />
+
+        <TextView
+            android:id="@+id/itemPurHis_date"
+            style="@style/Style24H5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_24"
+            android:layout_marginTop="@dimen/px_8"
+            android:text="2000_127" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
 
     <ImageView
-        android:id="@+id/itemPurHis_other04"
+        android:id="@+id/itemPurHis_eggplantSeeds"
         android:layout_width="48px"
         android:layout_height="48px"
         android:layout_alignBottom="@id/itemPurHis_use"
         android:layout_alignParentRight="true"
         android:layout_marginRight="24px"
+        android:layout_marginTop="@dimen/px_24"
         android:src="@mipmap/my_coin" />
 
     <TextView
@@ -29,87 +67,17 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/itemPurHis_use"
         android:layout_marginRight="@dimen/px_10"
-        android:layout_toLeftOf="@id/itemPurHis_other04"
+        android:layout_marginTop="@dimen/px_24"
+        android:layout_toLeftOf="@id/itemPurHis_eggplantSeeds"
         android:text="-100" />
 
-    <LinearLayout
-        android:id="@+id/itemPurHis_other05"
-        android:layout_width="540px"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/itemPurHis_use"
-        android:layout_below="@id/itemPurHis_use"
-        android:layout_marginTop="@dimen/px_10">
-
-        <TextView
-            android:id="@+id/itemPurHis_other01"
-            style="@style/Style26H3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_gravity="clip_vertical"
-            android:text="您购买了" />
-
-        <TextView
-            android:id="@+id/itemPurHis_title"
-            style="@style/Style26C5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="clip_vertical"
-            android:text="我不" />
-        <!--购买   章节-->
-        <TextView
-            android:id="@+id/itemPurHis_chapter"
-            style="@style/Style26C5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="clip_vertical"
-            android:gravity="left"
-            android:text="#星辰不问过路人" />
-        <!--打赏-->
-        <TextView
-            android:id="@+id/itemPurHis_other02"
-            style="@style/Style26H3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="clip_vertical"
-            android:text="章节中向"
-            android:visibility="gone" />
-        <!--打赏    用户ID-->
-        <TextView
-            android:id="@+id/itemPurHis_userId"
-            style="@style/Style26C5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="clip_vertical"
-            android:text="#绝版青春"
-            android:visibility="gone" />
-        <!--购买    -->
-        <TextView
-            android:id="@+id/itemPurHis_other03"
-            style="@style/Style26H3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="clip_vertical"
-            android:gravity="left"
-            android:text="章节" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/itemPurHis_date"
-        style="@style/Style24H5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/itemPurHis_use"
-        android:layout_below="@id/itemPurHis_other05"
-        android:layout_marginTop="@dimen/px_8"
-        android:text="2000_127" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_1"
-        android:layout_below="@id/itemPurHis_date"
+        android:layout_below="@+id/itemPurHis_other01"
         android:layout_marginTop="@dimen/px_24"
-        android:background="@color/h7" />
+        android:background="@color/h4" />
 
 
 </com.zhy.autolayout.AutoRelativeLayout>
