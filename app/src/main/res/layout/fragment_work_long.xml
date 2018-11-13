@@ -19,6 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="您暂时还没有作品哦" />
+        android:text="没有更多数据了~" />
 
 </com.zhy.autolayout.AutoFrameLayout>
