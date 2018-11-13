@@ -1,8 +1,10 @@
 package com.zhenman.asus.zhenman.view.home;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,26 +20,33 @@ import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.view.ContentActivity;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
 import com.zhenman.asus.zhenman.view.comment.FullFragment;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhenman.asus.zhenman.view.ui.MyRecyclerView;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.OnViewPagerListener;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
+import com.zhy.autolayout.AutoLinearLayout;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.List;
 
 
+@SuppressLint("ValidFragment")
 public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements HomeHotContract.HomeHotView, HomeHotRecyAdapter.BouncingComment {
     private MyRecyclerView HomeHot_List;
     private ViewPagerLayoutManager linearLayoutManager;
     private HomeHotRecyAdapter homeHotRecyAdapter;
     private List<HomeHotBean.DataBean> data;
     private String ugcId;
+    private AutoLinearLayout group;
+    private AutoRelativeLayout home_tablayout;
 
-
-    public HotFragment() {
+    @SuppressLint("ValidFragment")
+    public HotFragment(AutoRelativeLayout home_tablayout) {
         super();
+        this.home_tablayout = home_tablayout;
     }
 
 
@@ -50,6 +59,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     protected void init() {
         //请求数据
         initView();
+        group = ((ContentActivity) getActivity()).getGroup();
     }
 
     private void initView() {
@@ -74,28 +84,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
         });
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         HomeHot_List.setLayoutManager(linearLayoutManager);
-        HomeHot_List.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
 
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-
-                if (dy > 0) {
-                    Log.d("HomeHotRecyAdapter", "HomeHot_List---dy:" + dy);
-                }
-                /*
-                 *   当里面向上滑动时
-                 *       开启里面滑动
-                 *       关闭外层滑动
-                 * **/
-                if (dy < 0) {
-                    Log.d("HomeHotRecyAdapter", "HomeHot_List---dy:" + dy);
-                }
-            }
-        });
     }
 
 
@@ -115,7 +104,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     public void showHotBean(HomeHotBean homeHotBean) {
         if (homeHotBean.getData().size() != 0) {
             data = homeHotBean.getData();
-            homeHotRecyAdapter = new HomeHotRecyAdapter(data, linearLayoutManager, HomeHot_List, presenter);
+            homeHotRecyAdapter = new HomeHotRecyAdapter(data, HomeHot_List, presenter, group,home_tablayout);
             HomeHot_List.setAdapter(homeHotRecyAdapter);
             homeHotRecyAdapter.setgoUserInfo(new HomeHotRecyAdapter.goUserInfo() {
                 @Override

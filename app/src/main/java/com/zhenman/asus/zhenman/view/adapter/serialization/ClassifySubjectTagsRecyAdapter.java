@@ -40,7 +40,9 @@ public class ClassifySubjectTagsRecyAdapter extends RecyclerView.Adapter<Classif
             myCLick.myClick(v, (int) v.getTag());
         }
     }
-
+    public interface RecyclerViewOnCLickListener {
+        void myClick(View view, int position);
+    }
     public void setRecyclerViewOnCLickListener(RecyclerViewOnCLickListener myCLick) {
         this.myCLick = myCLick;
     }
@@ -56,9 +58,7 @@ public class ClassifySubjectTagsRecyAdapter extends RecyclerView.Adapter<Classif
         return list.isEmpty() ? 0 : list.size();
     }
 
-    public interface RecyclerViewOnCLickListener {
-        void myClick(View view, int position);
-    }
+
 
     public class Holder extends RecyclerView.ViewHolder {
 

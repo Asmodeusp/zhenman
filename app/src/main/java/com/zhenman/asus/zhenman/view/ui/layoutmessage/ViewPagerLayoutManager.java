@@ -38,11 +38,7 @@ public class ViewPagerLayoutManager extends LinearLayoutManager {
         mRecyclerView.addOnChildAttachStateChangeListener(mChildAttachStateChangeListener);
     }
 
-    @Override
-    public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
-        super.onLayoutChildren(recycler, state);
-//
-    }
+
 
     /**
      * 滑动状态的改变
