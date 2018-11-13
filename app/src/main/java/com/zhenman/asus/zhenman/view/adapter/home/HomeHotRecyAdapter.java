@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.adapter.home;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +12,9 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -32,7 +35,6 @@ import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.ui.MyRecyclerView;
-import com.zhenman.asus.zhenman.view.ui.MyScrollView;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.MyLayoutMessage;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -45,7 +47,7 @@ import static android.support.v7.widget.RecyclerView.SCROLL_STATE_SETTLING;
 public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.Holder> {
     private List<HomeHotBean.DataBean> list;
     private Context context;
-
+    private int position =-1;
     private MyRecyclerView homeHot_list;
     private HomeHotPresenterImp presenter;
     private boolean count = true;
@@ -91,9 +93,18 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         void getComment(String UgcId, int Type);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
+        if (this.position!=position) {
+            group.setVisibility(View.VISIBLE);
+            home_tablayout.setVisibility(View.VISIBLE);
+            holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.VISIBLE);
+            holder.Home_Hot_describeText.setVisibility(View.VISIBLE);
+            holder.Home_Hot_UserNameText.setVisibility(View.VISIBLE);
+            holder.Home_Hot_ThemLin.setVisibility(View.VISIBLE);
+        }
         final HomeHotBean.DataBean dataBean = list.get(position);
         double i = (double) dataBean.getHeight() / dataBean.getWidth();
         double InsideHight = i * (double) ScreenUtils.getScreenWidth(context);
@@ -111,13 +122,19 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         ((SimpleItemAnimator) homeHot_list.getItemAnimator()).setSupportsChangeAnimations(false);
         ((SimpleItemAnimator) holder.home_Recy_fill_Recy.getItemAnimator()).setSupportsChangeAnimations(false);
         myLayoutMessage.setRecycleChildrenOnDetach(true);
+        group.setVisibility(View.VISIBLE);
+        home_tablayout.setVisibility(View.VISIBLE);
+        holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.VISIBLE);
+        holder.Home_Hot_describeText.setVisibility(View.VISIBLE);
+        holder.Home_Hot_UserNameText.setVisibility(View.VISIBLE);
+        holder.Home_Hot_ThemLin.setVisibility(View.VISIBLE);
         homeHotRecyItemAdapter.setRecyclerViewOnCLickListener(new HomeHotRecyItemAdapter.RecyclerViewOnCLickListener() {
             @Override
             public void myClick(View view) {
                 if (count) {
                     group.setVisibility(View.INVISIBLE);
                     home_tablayout.setVisibility(View.INVISIBLE);
-                    holder.Home_Hot_Page_turningScrollView.setVisibility(View.INVISIBLE);
+                    holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.INVISIBLE);
                     holder.Home_Hot_describeText.setVisibility(View.INVISIBLE);
                     holder.Home_Hot_UserNameText.setVisibility(View.INVISIBLE);
                     holder.Home_Hot_ThemLin.setVisibility(View.INVISIBLE);
@@ -125,7 +142,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                 } else {
                     group.setVisibility(View.VISIBLE);
                     home_tablayout.setVisibility(View.VISIBLE);
-                    holder.Home_Hot_Page_turningScrollView.setVisibility(View.VISIBLE);
+                    holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.VISIBLE);
                     holder.Home_Hot_describeText.setVisibility(View.VISIBLE);
                     holder.Home_Hot_UserNameText.setVisibility(View.VISIBLE);
                     holder.Home_Hot_ThemLin.setVisibility(View.VISIBLE);
@@ -146,7 +163,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                         count = false;
                         group.setVisibility(View.INVISIBLE);
                         home_tablayout.setVisibility(View.INVISIBLE);
-                        holder.Home_Hot_Page_turningScrollView.setVisibility(View.INVISIBLE);
+                        holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.INVISIBLE);
                         holder.Home_Hot_describeText.setVisibility(View.INVISIBLE);
                         holder.Home_Hot_UserNameText.setVisibility(View.INVISIBLE);
                         holder.Home_Hot_ThemLin.setVisibility(View.INVISIBLE);
@@ -156,7 +173,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                         count = false;
                         group.setVisibility(View.INVISIBLE);
                         home_tablayout.setVisibility(View.INVISIBLE);
-                        holder.Home_Hot_Page_turningScrollView.setVisibility(View.INVISIBLE);
+                        holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.INVISIBLE);
                         holder.Home_Hot_describeText.setVisibility(View.INVISIBLE);
                         holder.Home_Hot_UserNameText.setVisibility(View.INVISIBLE);
                         holder.Home_Hot_ThemLin.setVisibility(View.INVISIBLE);
@@ -170,6 +187,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
             @Override
             public void onLoadingComplete(String uri, ImageView view, GlideDrawable resource) {
             }
+
             @Override
             public void onLoadingError(String source, Exception e) {
             }
@@ -264,17 +282,33 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                 bouncingComment.getComment(dataBean.getId(), dataBean.getType());
             }
         });
-
-        //滑动跟换条目
-        holder.Home_Hot_Page_turningScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+        holder.Home_Hot_Page_turningLinearLayout.setOnGenericMotionListener(new View.OnGenericMotionListener() {
             @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                Log.d("HomeHotRecyAdapter", "scrollX:" + scrollX);
-                Log.d("HomeHotRecyAdapter", "scrollY:" + scrollY);
-                Log.d("HomeHotRecyAdapter", "oldScrollX:" + oldScrollX);
-                Log.d("HomeHotRecyAdapter", "oldScrollY:" + oldScrollY);
+            public boolean onGenericMotion(View v, MotionEvent event) {
+                return false;
             }
         });
+        //滑动跟换条目
+        holder.Home_Hot_Page_turningLinearLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int newY = 0;
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        Log.d("HomeHotRecyAdapter", "ACTION_DOWN");
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        Log.d("HomeHotRecyAdapter", "ACTION_MOVE");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        Log.d("HomeHotRecyAdapter", "ACTION_UP");
+                        break;
+
+                }
+                return false;
+            }
+        });
+
         //关注的按钮
         if (dataBean.isFollow()) {
             holder.Home_Hot_FollowCheckBox.setVisibility(View.GONE);
@@ -316,7 +350,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         //整个布局ID
         private RelativeLayout home_fillView;
         //ScrollView
-        private MyScrollView Home_Hot_Page_turningScrollView;
+        private AutoRelativeLayout Home_Hot_Page_turningLinearLayout;
         //加载一张图片
         private ImageView Home_Recy_OneImage;
         //头像
@@ -347,7 +381,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         public Holder(View itemView) {
             super(itemView);
             home_Recy_fill_Recy = itemView.findViewById(R.id.home_Recy_fill_Recy);
-            Home_Hot_Page_turningScrollView = itemView.findViewById(R.id.Home_Hot_Page_turningScrollView);
+            Home_Hot_Page_turningLinearLayout = itemView.findViewById(R.id.Home_Hot_Page_turningLinearLayout);
             home_fillView = itemView.findViewById(R.id.home_fillView);
             Home_Recy_OneImage = itemView.findViewById(R.id.Home_Recy_OneImage);
             Home_Hot_HeadImageView = itemView.findViewById(R.id.Home_Hot_HeadImageView);

@@ -72,7 +72,6 @@ public class HomepageFragment extends BaseFragment {
                 R.drawable.layout_divider_vertical));
         linearLayout.setDividerPadding(24);
 
-
     }
 
     @Override
