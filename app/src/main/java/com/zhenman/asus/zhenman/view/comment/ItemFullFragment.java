@@ -36,6 +36,7 @@ import com.zhenman.asus.zhenman.model.bean.CommentReturnBean;
 import com.zhenman.asus.zhenman.model.bean.SendCommentBean;
 import com.zhenman.asus.zhenman.model.bean.TextExtraBean;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
+import com.zhenman.asus.zhenman.utils.LoginUtils;
 import com.zhenman.asus.zhenman.utils.MyClickSpan;
 import com.zhenman.asus.zhenman.utils.Urls;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
@@ -218,15 +219,22 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
         commentItemRecyAdapter.setRecyclerViewOnCLickListener(new CommentItemRecyAdapter.RecyclerViewOnCLickListener() {
             @Override
             public void myClick(View view, int position) {
+                commentId = commentDtoList.get(position).getCommentId();
                 String MyuserId = (String) SPUtils.get(getContext(), SPKey.USER_ID, "");
                 if (commentDtoList.get(position).getUserId().equals(MyuserId)) {
                     initDeleteCommentPopu(position);
+
                 }else{
-                    Pull_upEdText(commentDtoList.get(position).getDetailId());
+                    if (!LoginUtils.isLoginNotFinish(getContext())) {
+                        Pull_upEdText(commentDtoList.get(position).getDetailId());
+                    }
                 }
             }
         });
+
     }
+
+
 
     private void initDeleteCommentPopu(final int position) {
         // 用于PopupWindow的View
@@ -247,7 +255,6 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
             @Override
             public void onClick(View v) {
                 String detailId = commentDtoList.get(position).getDetailId();
-
                 deleteComment(detailId, position);
             }
         });
@@ -303,7 +310,9 @@ public class ItemFullFragment extends BottomSheetDialogFragment implements SpEdi
 
     @OnClick(R.id.Item_comment_SendRelativeLayout)
     public void onViewClicked() {
-        Pull_upEdText("");
+        if (!LoginUtils.isLoginNotFinish(getContext())) {
+            Pull_upEdText("");
+        }
     }
 
     private void Pull_upEdText(final String DetailId) {

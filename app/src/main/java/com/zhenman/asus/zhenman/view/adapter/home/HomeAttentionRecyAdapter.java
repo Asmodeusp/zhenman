@@ -30,6 +30,7 @@ import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
+import com.zhenman.asus.zhenman.view.comment.FullFragment;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.message.ThemeDetailsActivity;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
@@ -84,7 +85,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             @Override
             public void onLoadingError(String source, Exception e) {
             }
-        },R.mipmap.common_portrait_m);
+        }, R.mipmap.common_portrait_m);
         holder.fill_Home_Attention_RecyHeadIew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +136,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         //设置发布时间
         holder.fill_Home_Attention_RecyTimeText.setText(SPUtils.transferLongToDate(Long.parseLong(dataBean.getAddTime())));
         //设置描述
-        if (dataBean.getDescription()==null) {
+        if (dataBean.getDescription() == null) {
             holder.fill_Home_Attention_RecyDescriptionText.setVisibility(View.GONE);
         } else {
             holder.fill_Home_Attention_RecyDescriptionText.setVisibility(View.VISIBLE);
@@ -299,6 +300,12 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
                 context.startActivity(intent);
             }
         });
+//        holder.fill_Home_Attention_RecyCommentButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
 
 
@@ -360,7 +367,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             //评论数量
             fill_Home_Attention_RecyCommentNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyCommentNumberText);
             //喜欢数量
-            fill_Home_Attention_RecyLikeNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeNumberText); 
+            fill_Home_Attention_RecyLikeNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeNumberText);
             //喜欢图片
             fill_Home_Attention_RecyLikeImageView = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeImageView);
             //主题名字

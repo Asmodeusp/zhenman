@@ -3,10 +3,12 @@ package com.zhenman.asus.zhenman.view.ui.layoutmessage;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 
 public class MyLayoutMessage extends LinearLayoutManager {
     private boolean isScrollEnabled = true;
-
+    private double speedRatio;
     public MyLayoutMessage(Context context) {
         super(context);
     }
@@ -31,4 +33,6 @@ public class MyLayoutMessage extends LinearLayoutManager {
         manager.scrollToPositionWithOffset(n, 0);
         manager.setStackFromEnd(true);
     }
+
+
 }

@@ -39,6 +39,7 @@ public class HomeHotRecyItemAdapter extends RecyclerView.Adapter<HomeHotRecyItem
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
+
         View inflate = LayoutInflater.from(context).inflate(R.layout.home_recy_fillview, parent, false);
         Holder holder = new Holder(inflate);
         inflate.setOnClickListener(this);
@@ -59,10 +60,8 @@ public class HomeHotRecyItemAdapter extends RecyclerView.Adapter<HomeHotRecyItem
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
-//
+
         Glide.with(context).load(list.get(position).getImageUrl()).skipMemoryCache(true).error(R.mipmap.my_qiezi).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.home_Recy_recy_Image);
-
-
     }
 
 

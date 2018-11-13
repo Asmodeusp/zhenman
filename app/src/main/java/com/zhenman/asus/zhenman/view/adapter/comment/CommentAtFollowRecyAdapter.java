@@ -23,7 +23,6 @@ public class CommentAtFollowRecyAdapter extends RecyclerView.Adapter<CommentAtFo
     private List<MyAttentionUserBean.DataBean.ResultBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
-    private boolean followCount = true;
 
 
     public CommentAtFollowRecyAdapter(List<MyAttentionUserBean.DataBean.ResultBean> list) {

@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -34,6 +36,7 @@ import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
+import com.zhenman.asus.zhenman.view.serializaion.SerializationCatalogReadActivity;
 import com.zhenman.asus.zhenman.view.ui.MyRecyclerView;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.MyLayoutMessage;
 import com.zhy.autolayout.AutoLinearLayout;
@@ -47,7 +50,7 @@ import static android.support.v7.widget.RecyclerView.SCROLL_STATE_SETTLING;
 public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.Holder> {
     private List<HomeHotBean.DataBean> list;
     private Context context;
-    private int position =-1;
+    private int position = -1;
     private MyRecyclerView homeHot_list;
     private HomeHotPresenterImp presenter;
     private boolean count = true;
@@ -97,7 +100,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
-        if (this.position!=position) {
+        if (this.position != position) {
             group.setVisibility(View.VISIBLE);
             home_tablayout.setVisibility(View.VISIBLE);
             holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.VISIBLE);
@@ -114,13 +117,14 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         final HomeHotRecyItemAdapter homeHotRecyItemAdapter = new HomeHotRecyItemAdapter(dataBean.getPageDtoList());
         holder.home_Recy_fill_Recy.setLayoutManager(myLayoutMessage);
         holder.home_Recy_fill_Recy.setAdapter(homeHotRecyItemAdapter);
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, R.anim.recy_item);
+        holder. home_Recy_fill_Recy.setLayoutAnimation(animation);
         homeHot_list.setInnerListView(holder.home_Recy_fill_Recy);
         homeHot_list.getItemAnimator().setAddDuration(0);
         homeHot_list.getItemAnimator().setChangeDuration(0);
         homeHot_list.getItemAnimator().setMoveDuration(0);
         homeHot_list.getItemAnimator().setRemoveDuration(0);
         ((SimpleItemAnimator) homeHot_list.getItemAnimator()).setSupportsChangeAnimations(false);
-        ((SimpleItemAnimator) holder.home_Recy_fill_Recy.getItemAnimator()).setSupportsChangeAnimations(false);
         myLayoutMessage.setRecycleChildrenOnDetach(true);
         group.setVisibility(View.VISIBLE);
         home_tablayout.setVisibility(View.VISIBLE);
@@ -128,6 +132,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         holder.Home_Hot_describeText.setVisibility(View.VISIBLE);
         holder.Home_Hot_UserNameText.setVisibility(View.VISIBLE);
         holder.Home_Hot_ThemLin.setVisibility(View.VISIBLE);
+        holder. home_Recy_fill_Recy.setItemViewCacheSize(50);
         homeHotRecyItemAdapter.setRecyclerViewOnCLickListener(new HomeHotRecyItemAdapter.RecyclerViewOnCLickListener() {
             @Override
             public void myClick(View view) {

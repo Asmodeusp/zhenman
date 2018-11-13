@@ -12,6 +12,7 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.zhenman.asus.zhenman.model.bean.CommentReturnBean;
 import com.zhenman.asus.zhenman.model.bean.MyAttentionUserBean;
 import com.zhenman.asus.zhenman.model.bean.SendCommentBean;
 import com.zhenman.asus.zhenman.model.bean.TextExtraBean;
+import com.zhenman.asus.zhenman.utils.LoginUtils;
 import com.zhenman.asus.zhenman.utils.Urls;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
@@ -128,14 +130,15 @@ public class FullFragment extends BottomSheetDialogFragment implements SpEditTex
 
     private void initData() {
         CommentPopuRecy.setLayoutManager(new LinearLayoutManager(getActivity()));
+        commentRecyclerAdapter = new CommentRecyclerAdapter(commentDtoList, Type, ugcId);
         if (commentListBean != null) {
             CommentPopuRecy.setVisibility(View.VISIBLE);
             CommentPopuTip.setVisibility(View.GONE);
             if (commentListBean.getData().getCommentDtoList().size() != 0) {
                 CommentPopuNumber.setText(commentListBean.getData().getCommentDtoList().size() + "条评论");
                 commentDtoList.addAll(commentListBean.getData().getCommentDtoList());
-                commentRecyclerAdapter = new CommentRecyclerAdapter(commentDtoList);
                 CommentPopuRecy.setAdapter(commentRecyclerAdapter);
+                commentRecyclerAdapter.notifyDataSetChanged();
                 commentRecyclerAdapter.setRecyclerViewOnCLickListener(new CommentRecyclerAdapter.RecyclerViewOnCLickListener() {
                     @Override
                     public void myClick(View view, int position) {
@@ -143,20 +146,21 @@ public class FullFragment extends BottomSheetDialogFragment implements SpEditTex
                         fullFragment.show(getActivity().getSupportFragmentManager(), "dialog");
                     }
                 });
-            }
-            commentRecyclerAdapter.setRecyclerViewOnLongCLickListener(new CommentRecyclerAdapter.RecyclerViewOnLongCLickListener() {
-                @Override
-                public void myLongCLick(View view, int position) {
-                    String userId = commentListBean.getData().getCommentDtoList().get(position).getUserId();
-                    String MyuserId = (String) SPUtils.get(getContext(), SPKey.USER_ID, "");
-                    if (userId.equals(MyuserId)) {
-                        initDeleteCommentPopu(position);
-                    } else {
-                        ItemFullFragment fullFragment = new ItemFullFragment(commentListBean.getData().getCommentDtoList().get(position).getCommentId(), Type, ugcId);
-                        fullFragment.show(getActivity().getSupportFragmentManager(), "dialog");
+                commentRecyclerAdapter.setRecyclerViewOnLongCLickListener(new CommentRecyclerAdapter.RecyclerViewOnLongCLickListener() {
+                    @Override
+                    public void myLongCLick(View view, int position) {
+                        String userId = commentListBean.getData().getCommentDtoList().get(position).getUserId();
+                        String MyuserId = (String) SPUtils.get(getContext(), SPKey.USER_ID, "");
+                        if (userId.equals(MyuserId)) {
+                            initDeleteCommentPopu(position);
+                        } else {
+                            ItemFullFragment fullFragment = new ItemFullFragment(commentListBean.getData().getCommentDtoList().get(position).getCommentId(), Type, ugcId);
+                            fullFragment.show(getActivity().getSupportFragmentManager(), "dialog");
+                        }
                     }
-                }
-            });
+                });
+            }
+
         } else {
             CommentPopuNumber.setText("0条评论");
             CommentPopuTip.setVisibility(View.VISIBLE);
@@ -190,7 +194,7 @@ public class FullFragment extends BottomSheetDialogFragment implements SpEditTex
             public void onClick(View v) {
 
                 String commentId = commentListBean.getData().getCommentDtoList().get(position).getCommentId();
-                deleteComment(commentId,position);
+                deleteComment(commentId, position);
             }
         });
         cancelCommentButton.setOnClickListener(new View.OnClickListener() {
@@ -223,16 +227,16 @@ public class FullFragment extends BottomSheetDialogFragment implements SpEditTex
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                commentDtoList.remove(position);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        commentDtoList.remove(position);
 //                                commentRecyclerAdapter = new CommentRecyclerAdapter(commentDtoList);
 //                                CommentPopuRecy.setAdapter(commentRecyclerAdapter);
-                                commentRecyclerAdapter.notifyDataSetChanged();
-                                window.dismiss();
-                            }
-                        });
+                        commentRecyclerAdapter.notifyDataSetChanged();
+                        window.dismiss();
+                    }
+                });
             }
         });
 
@@ -249,15 +253,23 @@ public class FullFragment extends BottomSheetDialogFragment implements SpEditTex
         switch (view.getId()) {
             //模拟输入框
             case R.id.CommentPopu_TextView:
-                Pull_upEdText();
+                if (!LoginUtils.isLoginNotFinish(getContext())) {
+                    Pull_upEdText();
+                }
+
                 break;
             //@按钮
             case R.id.CommentPopu_Common_at:
-                Pull_upEdText();
+                if (!LoginUtils.isLoginNotFinish(getContext())) {
+                    Pull_upEdText();
+                }
+
                 break;
             //发送按钮
             case R.id.CommentPopu_SendButton:
-                Pull_upEdText();
+                if (!LoginUtils.isLoginNotFinish(getContext())) {
+                    Pull_upEdText();
+                }
                 break;
         }
     }
@@ -299,7 +311,10 @@ public class FullFragment extends BottomSheetDialogFragment implements SpEditTex
                 }
                 SendCommentBean sendCommentBean = new SendCommentBean(text, list);
                 json = new Gson().toJson(sendCommentBean);
+
                 SendComment();
+
+
                 bottomSheetDialog.dismiss();
             }
         });
@@ -338,7 +353,6 @@ public class FullFragment extends BottomSheetDialogFragment implements SpEditTex
                     @Override
                     public void run() {
                         commentDtoList.add(0, data);
-
                         commentRecyclerAdapter.notifyDataSetChanged();
                     }
                 });

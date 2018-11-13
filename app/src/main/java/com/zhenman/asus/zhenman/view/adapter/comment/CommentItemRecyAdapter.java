@@ -29,11 +29,11 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
     private List<CommentDtoListBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
-
+    private ClickLike clickLike;
 
 
     public CommentItemRecyAdapter(List<CommentDtoListBean> commentDtoList) {
-        this.list =commentDtoList;
+        this.list = commentDtoList;
     }
 
     @NonNull
@@ -57,9 +57,14 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
         this.myCLick = myCLick;
     }
 
+    public void setClickLike(ClickLike clickLike) {
+        this.clickLike = clickLike;
+    }
+
     @Override
-    public void onBindViewHolder(@NonNull final Holder holder, int position) {
+    public void onBindViewHolder(@NonNull final Holder holder, final int position) {
         final CommentDtoListBean listBean = list.get(position);
+
         holder.itemView.setTag(position);
         //加载头像
         GlideUtils.loadCircleImage(listBean.getImageUrl(), holder.comment_fill_HeadView, new GlideUtils.ImageLoadListener<String, GlideDrawable>() {
@@ -72,8 +77,8 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
             public void onLoadingError(String source, Exception e) {
                 Toast.makeText(context, source, Toast.LENGTH_SHORT).show();
             }
-        },R.mipmap.common_portrait_m);
-        if (listBean.getAddTime()!=null) {
+        }, R.mipmap.common_portrait_m);
+        if (listBean.getAddTime() != null) {
             holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
         }
 
@@ -87,19 +92,29 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
                 }
             });
         }
-
-
+        if (listBean.isLike()) {
+            holder.comment_fill_likeImg.setButtonDrawable(R.mipmap.my_like_on);
+        } else {
+            holder.comment_fill_likeImg.setButtonDrawable(R.mipmap.my_like_off);
+        }
         //加载用户名
         holder.comment_fill_UserName.setText(listBean.getName());
         //加载喜欢个数
         holder.comment_fill_likeNumberText.setText(listBean.getLikeNum() + "");
         //加载添加时间
-        if (listBean.getAddTime()!=null) {
+        if (listBean.getAddTime() != null) {
             holder.comment_fill_AddTime.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
         }
+        holder.comment_fill_likeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickLike.Click(holder.comment_fill_likeImg, position, holder.comment_fill_likeNumberText);
+            }
+        });
         holder.comment_Two_ItemLinearLayout.setVisibility(View.GONE);
         holder.comment_fill_fromUserText.setVisibility(View.GONE);
         holder.comment_fill_likeButton.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -109,6 +124,10 @@ public class CommentItemRecyAdapter extends RecyclerView.Adapter<CommentItemRecy
 
     public interface RecyclerViewOnCLickListener {
         void myClick(View view, int position);
+    }
+
+    public interface ClickLike {
+        void Click(CheckBox checkBox, int position, TextView likeNumber);
     }
 
     public class Holder extends RecyclerView.ViewHolder {

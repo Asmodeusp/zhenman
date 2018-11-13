@@ -1,8 +1,7 @@
 package com.zhenman.asus.zhenman.view.adapter.comment;
 
-import android.app.Activity;
+
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,12 +18,10 @@ import com.zhenman.asus.zhenman.utils.GlideUtils;
 
 import java.util.List;
 
-
 public class CommentAtActorRecyAdapter extends RecyclerView.Adapter<CommentAtActorRecyAdapter.Holder> implements View.OnClickListener {
     private List<SerializationDetailsBean.DataBean.ActorListBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
-    private boolean followCount = true;
 
 
     public CommentAtActorRecyAdapter(List<SerializationDetailsBean.DataBean.ActorListBean> list) {

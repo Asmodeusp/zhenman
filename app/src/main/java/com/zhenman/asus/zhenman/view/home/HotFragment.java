@@ -64,6 +64,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     private void initView() {
         HomeHot_List = getActivity().findViewById(R.id.HomeHot_List);
+        HomeHot_List.setItemViewCacheSize(1 );
         linearLayoutManager = new ViewPagerLayoutManager(getContext(), LinearLayoutManager.VERTICAL) {
         };
         linearLayoutManager.setOnViewPagerListener(new OnViewPagerListener() {
