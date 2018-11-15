@@ -126,6 +126,7 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
                     }
                 }
             });
+            holder.itemView.setTag(i);
         }//MyAttentionUserBean.DataBean.ResultBean
         if (object instanceof MyAttentionUserBean.DataBean.ResultBean) {//关注列表
             final MyAttentionUserBean.DataBean.ResultBean resultBean = (MyAttentionUserBean.DataBean.ResultBean) object;
@@ -170,10 +171,6 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
             SimpleDateFormat format = new SimpleDateFormat("MM-dd", Locale.getDefault());
             String format2 = format.format(date);
             holder.itemMyAttenTheme_decription.setText(format2);
-
-
-
-
             if (resultBean.getFollow() == 2) {
                 holder.itemMyAttenTheme_attention.setText("+关注");
                 holder.itemMyAttenTheme_attention.setTextColor(Color.parseColor("#ffffff"));

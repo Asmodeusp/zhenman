@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,7 +91,7 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
         } else if (isBind.equals("已有手机号，更换绑定")) {
             register_text.setText("更换绑定");
             mRegisterNextBtn.setText("下一步");
-        }else {//注册
+        }else if (isBind.equals("注册")){//注册
             register_text.setText("绑定手机号");
             mRegisterNextBtn.setText("下一步");
         }
@@ -135,13 +134,16 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
                 if (mRegisterPhotoCodeEd.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (register_text.getText().toString().equals("绑定手机号")) {
+                    if (isBind.equals("未绑定手机号")){
                         //        三方账号绑定手机号（手机未绑定过）
                         presenter.sendThirdBindData(mRegisterPhoneNumber.getText().toString()
                                 , mRegisterPhotoCodeEd.getText().toString()
                                 , (String) SPUtils.get(this, SPKey.LOGIN_TYPE, "")
                                 , (String) SPUtils.get(this, SPKey.USER_OAUTHID, ""));
-                    } else {
+                    }
+                    /*if (register_text.getText().toString().equals("绑定手机号")) {
+
+                    }*/ else {
                         //  账号绑定前的密码校验
                         presenter.sendCheckCodeData(mRegisterPhoneNumber.getText().toString(), mRegisterPhotoCodeEd.getText().toString());
 
@@ -243,8 +245,8 @@ public class BindPhotoActivity extends BaseActivity<AlartPhoneNumPresenter> impl
 
     //    获取的验证码无效
     @Override
-    public void showError() {
-        Toast.makeText(this, "获取验证码失败", Toast.LENGTH_SHORT).show();
+    public void showError(String string) {
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
     }
 
     //        三方账号绑定手机号（手机未绑定过）

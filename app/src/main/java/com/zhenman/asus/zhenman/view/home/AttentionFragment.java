@@ -88,7 +88,7 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
     }
     @Override
     public void showHomeAttentionBean(HomeAttentionBean homeAttentionBean) {
-        if (!homeAttentionBean.getMsg().equals("未登陆")) {
+        if (!homeAttentionBean.getMsg().equals("未登陆")) { 
             HomeAttentionRecy.setVisibility(View.VISIBLE);
             Home_Attention_Recy_Tip.setVisibility(View.GONE);
             if (homeAttentionBean.getData().getResult()!=null) {

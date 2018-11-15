@@ -89,6 +89,7 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
         themeDetail_himTab.setupWithViewPager(themeDetail_Viewpager);
         MessageAdapter messageAdapter = new MessageAdapter(getSupportFragmentManager(), title_List, frag_List);
         themeDetail_Viewpager.setAdapter(messageAdapter);
+
         presenter.sendThemeDetailHeadData(chapterId);
     }
 

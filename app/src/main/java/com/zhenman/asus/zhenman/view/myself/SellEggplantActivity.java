@@ -120,7 +120,39 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
         appOtherID.setText("茄子明细");
         //卖茄子
         presenter.sendSellEggplant();
+        sellEggplantIsSelect01.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    sellEggplantCallback(1, eggplantDetailsBeanData.getEggplantAmount());
 
+                }else {
+                    sellEggplantNoSelectCallback(1, eggplantDetailsBeanData.getEggplantAmount());
+                }
+            }
+        });
+        sellEggplantIsSelect02.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    sellEggplantCallback(2, eggplantDetailsBeanData.getBiteEggplantAmount());
+                }else {
+                    sellEggplantNoSelectCallback(2, eggplantDetailsBeanData.getBiteEggplantAmount());
+                }
+            }
+        });
+        sellEggplantIsSelect03.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    sellEggplantCallback(3, eggplantDetailsBeanData.getUnripeEggplantAmount());
+
+                }else {
+                    sellEggplantNoSelectCallback(3, eggplantDetailsBeanData.getUnripeEggplantAmount());
+
+                }
+            }
+        });
     }
 
     @Override
@@ -146,36 +178,29 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
                 if (itemTag01 == false) {
                     itemTag01 = true;
                     sellEggplantIsSelect01.setChecked(true);
-
-                    sellEggplantCallback(1, eggplantDetailsBeanData.getEggplantAmount());
                 } else {
                     itemTag01 = false;
                     sellEggplantIsSelect01.setChecked(false);
 
-                    sellEggplantNoSelectCallback(1, eggplantDetailsBeanData.getEggplantAmount());
                 }
                 break;
             case R.id.sellEggplant_item02:
                 if (itemTag02 == false) {
                     itemTag02 = true;
                     sellEggplantIsSelect02.setChecked(true);
-                    sellEggplantCallback(2, eggplantDetailsBeanData.getBiteEggplantAmount());
 
                 } else {
                     itemTag02 = false;
                     sellEggplantIsSelect02.setChecked(false);
-                    sellEggplantNoSelectCallback(2, eggplantDetailsBeanData.getBiteEggplantAmount());
                 }
                 break;
             case R.id.sellEggplant_item03:
                 if (itemTag03 == false) {
                     itemTag03 = true;
                     sellEggplantIsSelect03.setChecked(true);
-                    sellEggplantCallback(3, eggplantDetailsBeanData.getUnripeEggplantAmount());
                 } else {
                     itemTag03 = false;
                     sellEggplantIsSelect03.setChecked(false);
-                    sellEggplantNoSelectCallback(3, eggplantDetailsBeanData.getUnripeEggplantAmount());
                 }
                 break;
         }
@@ -323,41 +348,6 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
             eggplantProportion = eggplantDetailsBean.getData().getEggplantProportion();
             biteEggplantProportion = eggplantDetailsBean.getData().getBiteEggplantProportion();
             unripeEggplantProportion = eggplantDetailsBean.getData().getUnripeEggplantProportion();
-
-           /* sellEggplantIsSelect01.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (sellEggplantIsSelect01.isChecked()) {
-                        sellEggplantCallback(1, eggplantDetailsBeanData.getEggplantAmount());
-
-                    } else {
-                        sellEggplantNoSelectCallback(1, eggplantDetailsBeanData.getEggplantAmount());
-                    }
-                }
-            });
-            sellEggplantIsSelect02.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (sellEggplantIsSelect02.isChecked()) {
-
-                        sellEggplantCallback(2, eggplantDetailsBeanData.getBiteEggplantAmount());
-
-                    } else {
-                        sellEggplantNoSelectCallback(2, eggplantDetailsBeanData.getBiteEggplantAmount());
-                    }
-                }
-            });
-            sellEggplantIsSelect03.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (sellEggplantIsSelect03.isChecked()) {
-                        sellEggplantCallback(3, eggplantDetailsBeanData.getUnripeEggplantAmount());
-
-                    } else {
-                        sellEggplantNoSelectCallback(3, eggplantDetailsBeanData.getUnripeEggplantAmount());
-                    }
-                }
-            });*/
         }
 
     }
@@ -367,7 +357,6 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
     public void showWeiXinTixian(WeiXinTiXianBean weiXinTiXianBean) {
         if (weiXinTiXianBean.getData() == null) {
             Toast.makeText(this, weiXinTiXianBean.getMsg(), Toast.LENGTH_SHORT).show();
-
         } else {
             Toast.makeText(this, weiXinTiXianBean.getData().getErr_code_des(), Toast.LENGTH_SHORT).show();
         }
@@ -441,6 +430,7 @@ public class SellEggplantActivity extends BaseActivity<SellEggplantPresenter> im
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         sellEggplantIsSelect01.setChecked(false);
         sellEggplantIsSelect02.setChecked(false);
         sellEggplantIsSelect03.setChecked(false);

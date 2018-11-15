@@ -1,8 +1,8 @@
 package com.zhenman.asus.zhenman.view.myself;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -77,7 +77,7 @@ public class MyFansActivity extends BaseActivity<MyFansPresenter> implements MyF
     @Override
     public void showMyFansData(MyFansBean myFansBean) {
         if (myFansBean.getState() == 0) {
-            List<MyFansBean.DataBean.ResultBean> result = myFansBean.getData().getResult();
+            final List<MyFansBean.DataBean.ResultBean> result = myFansBean.getData().getResult();
             if (result.size() == 0) {
                 myFansNone.setVisibility(View.VISIBLE);
                 myFansRecy.setVisibility(View.GONE);
@@ -94,6 +94,14 @@ public class MyFansActivity extends BaseActivity<MyFansPresenter> implements MyF
                 MyAttenThemeAdapter myAttenThemeAdapter = new MyAttenThemeAdapter(list1, this);
                 myAttenThemeAdapter.MyAttenThemeCallback(this);
                 myFansRecy.setAdapter(myAttenThemeAdapter);
+                myAttenThemeAdapter.setOnShortCLickListener(new MyAttenThemeAdapter.OnShortCLickListener() {
+                    @Override
+                    public void myClick(View view, int position) {
+                        Intent intent = new Intent(MyFansActivity.this, HomepageActivity.class);
+                        intent.putExtra("him_id",result.get(position).getUserId());
+                        startActivity(intent);
+                    }
+                });
             }
         } else {
             Toast.makeText(this, "获取数据失败", Toast.LENGTH_SHORT).show();
