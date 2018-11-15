@@ -1,5 +1,4 @@
-package com.zhenman.asus.zhenman.view.adapter.home;
-
+package com.zhenman.asus.zhenman.view.adapter.myself;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,8 +15,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -27,18 +24,16 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
-import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
-import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
+import com.zhenman.asus.zhenman.model.bean.WorkShortComicBean;
+import com.zhenman.asus.zhenman.presenter.WorkDisplayPresenter;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
-import com.zhenman.asus.zhenman.view.serializaion.SerializationCatalogReadActivity;
 import com.zhenman.asus.zhenman.view.ui.MyRecyclerView;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.MyLayoutMessage;
-import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.List;
@@ -46,43 +41,39 @@ import java.util.List;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_SETTLING;
 
-public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.Holder> {
-    private List<HomeHotBean.DataBean> list;
+public class WorkDisplayAdapter extends RecyclerView.Adapter<WorkDisplayAdapter.Holder> {
+    private List<WorkShortComicBean.DataBean.ResultBean> list;
     private Context context;
-    private int position = -1;
     private MyRecyclerView homeHot_list;
-    private HomeHotPresenterImp presenter;
+    private WorkDisplayPresenter workDisplayPresenter;
+    private int position = -1;
     private boolean count = true;
-    private AutoLinearLayout group;
-    private AutoRelativeLayout home_tablayout;
 
-    public HomeHotRecyAdapter(List<HomeHotBean.DataBean> list, MyRecyclerView homeHot_list, HomeHotPresenterImp presenter, AutoLinearLayout group, AutoRelativeLayout home_tablayout) {
+    public WorkDisplayAdapter(List<WorkShortComicBean.DataBean.ResultBean> list, Context context, MyRecyclerView homeHot_list, WorkDisplayPresenter workDisplayPresenter) {
         this.list = list;
-
+        this.context = context;
         this.homeHot_list = homeHot_list;
-        this.presenter = presenter;
-        this.group = group;
-        this.home_tablayout = home_tablayout;
+        this.workDisplayPresenter = workDisplayPresenter;
     }
-
 
     @NonNull
     @Override
-    public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context = parent.getContext();
+    public Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        context = viewGroup.getContext();
         View inflate = LayoutInflater.from(context).inflate(R.layout.home_fill_recy, null);
         Holder holder = new Holder(inflate);
         return holder;
+
     }
 
     private goUserInfo clickZan;
 
-    public void setgoUserInfo(goUserInfo clickZan) {
-        this.clickZan = clickZan;
-    }
-
     public interface goUserInfo {
         void go(String UserId);
+    }
+
+    public void setgoUserInfo(goUserInfo clickZan) {
+        this.clickZan = clickZan;
     }
 
     private BouncingComment bouncingComment;
@@ -98,55 +89,45 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
     @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onBindViewHolder(@NonNull final Holder holder, final int position) {
-        if (this.position != position) {
-            group.setVisibility(View.VISIBLE);
-            home_tablayout.setVisibility(View.VISIBLE);
+    public void onBindViewHolder(@NonNull final Holder holder, final int i) {
+        if (this.position != i) {
             holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.VISIBLE);
             holder.Home_Hot_describeText.setVisibility(View.VISIBLE);
             holder.Home_Hot_UserNameText.setVisibility(View.VISIBLE);
             holder.Home_Hot_ThemLin.setVisibility(View.VISIBLE);
         }
-        final HomeHotBean.DataBean dataBean = list.get(position);
-        double i = (double) dataBean.getHeight() / dataBean.getWidth();
-        double InsideHight = i * (double) ScreenUtils.getScreenWidth(context);
+        final WorkShortComicBean.DataBean.ResultBean dataBean = list.get(i);
+        double i1 = (double) dataBean.getHeight() / dataBean.getWidth();
+        double InsideHight = i1 * (double) ScreenUtils.getScreenWidth(context);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.getScreenHeight(context));
         holder.home_fillView.setLayoutParams(layoutParams);
         final MyLayoutMessage myLayoutMessage = new MyLayoutMessage(context);
-        List<HomeHotBean.DataBean.PageDtoListBean> pageDtoList = dataBean.getPageDtoList();
-        final HomeHotRecyItemAdapter homeHotRecyItemAdapter = new HomeHotRecyItemAdapter(pageDtoList);
+        List<WorkShortComicBean.DataBean.ResultBean.PageDtoListBean> pageDtoList = dataBean.getPageDtoList();
+        final WorkDisplayItemAdapter homeHotRecyItemAdapter = new WorkDisplayItemAdapter(pageDtoList);
         holder.home_Recy_fill_Recy.setLayoutManager(myLayoutMessage);
         holder.home_Recy_fill_Recy.setAdapter(homeHotRecyItemAdapter);
-        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, R.anim.recy_item);
-        holder. home_Recy_fill_Recy.setLayoutAnimation(animation);
         homeHot_list.setInnerListView(holder.home_Recy_fill_Recy);
         homeHot_list.getItemAnimator().setAddDuration(0);
         homeHot_list.getItemAnimator().setChangeDuration(0);
         homeHot_list.getItemAnimator().setMoveDuration(0);
         homeHot_list.getItemAnimator().setRemoveDuration(0);
         ((SimpleItemAnimator) homeHot_list.getItemAnimator()).setSupportsChangeAnimations(false);
+        ((SimpleItemAnimator) holder.home_Recy_fill_Recy.getItemAnimator()).setSupportsChangeAnimations(false);
         myLayoutMessage.setRecycleChildrenOnDetach(true);
-        group.setVisibility(View.VISIBLE);
-        home_tablayout.setVisibility(View.VISIBLE);
         holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.VISIBLE);
         holder.Home_Hot_describeText.setVisibility(View.VISIBLE);
         holder.Home_Hot_UserNameText.setVisibility(View.VISIBLE);
         holder.Home_Hot_ThemLin.setVisibility(View.VISIBLE);
-        holder. home_Recy_fill_Recy.setItemViewCacheSize(50);
-        homeHotRecyItemAdapter.setRecyclerViewOnCLickListener(new HomeHotRecyItemAdapter.RecyclerViewOnCLickListener() {
+        homeHotRecyItemAdapter.setRecyclerViewOnCLickListener(new WorkDisplayItemAdapter.RecyclerViewOnCLickListener() {
             @Override
             public void myClick(View view) {
                 if (count) {
-                    group.setVisibility(View.INVISIBLE);
-                    home_tablayout.setVisibility(View.INVISIBLE);
                     holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.INVISIBLE);
                     holder.Home_Hot_describeText.setVisibility(View.INVISIBLE);
                     holder.Home_Hot_UserNameText.setVisibility(View.INVISIBLE);
                     holder.Home_Hot_ThemLin.setVisibility(View.INVISIBLE);
                     count = false;
                 } else {
-                    group.setVisibility(View.VISIBLE);
-                    home_tablayout.setVisibility(View.VISIBLE);
                     holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.VISIBLE);
                     holder.Home_Hot_describeText.setVisibility(View.VISIBLE);
                     holder.Home_Hot_UserNameText.setVisibility(View.VISIBLE);
@@ -166,8 +147,6 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                     //手指滑动
                     case SCROLL_STATE_DRAGGING:
                         count = false;
-                        group.setVisibility(View.INVISIBLE);
-                        home_tablayout.setVisibility(View.INVISIBLE);
                         holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.INVISIBLE);
                         holder.Home_Hot_describeText.setVisibility(View.INVISIBLE);
                         holder.Home_Hot_UserNameText.setVisibility(View.INVISIBLE);
@@ -176,8 +155,6 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                     //自由滑动
                     case SCROLL_STATE_SETTLING:
                         count = false;
-                        group.setVisibility(View.INVISIBLE);
-                        home_tablayout.setVisibility(View.INVISIBLE);
                         holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.INVISIBLE);
                         holder.Home_Hot_describeText.setVisibility(View.INVISIBLE);
                         holder.Home_Hot_UserNameText.setVisibility(View.INVISIBLE);
@@ -253,7 +230,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                             holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_unlike);
                             AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
                             animationDrawable.start();
-                            presenter.UgcFabulous(dataBean.getId(), "0");
+                            workDisplayPresenter.UgcFabulous(dataBean.getId(), "0");
                             holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) - 1 + "");
                         } else {
                             holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_like);
@@ -267,7 +244,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                             holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_like);
                             AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
                             animationDrawable.start();
-                            presenter.UgcFabulous(dataBean.getId(), "1");
+                            workDisplayPresenter.UgcFabulous(dataBean.getId(), "1");
                             holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
                         } else {
                             holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_unlike);
@@ -328,7 +305,7 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
                             context.startActivity(new Intent(context, MainActivity.class));
                             ((Activity) context).finish();
                         } else {
-                            presenter.FollowUser(dataBean.getUserId(), "1");
+                            workDisplayPresenter.FollowUser(dataBean.getUserId(), "1");
                             holder.Home_Hot_FollowCheckBox.setVisibility(View.GONE);
                         }
                     }
@@ -339,7 +316,11 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         holder.Home_Hot_ShareImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UMengHelp.shareImg((Activity) context, dataBean.getShareImg(), true);
+                if (dataBean.getShareImg() != null) {
+                    UMengHelp.shareImg((Activity) context, (String) dataBean.getShareImg(), true);
+                } else {
+
+                }
             }
         });
     }

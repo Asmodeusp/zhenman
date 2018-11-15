@@ -289,6 +289,8 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
                 holder.fill_Home_Attention_RecyThemLin.setVisibility(View.VISIBLE);
                 holder.fill_Home_Attention_RecyThemText.setText(list.get(position).getUgcDynamicDto().getSubjectName());
             }
+        }else{
+            holder.fill_Home_Attention_RecyThemLin.setVisibility(View.GONE);
         }
 
         //点击主题跳转主题页
@@ -296,7 +298,8 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ThemeDetailsActivity.class);
-                intent.putExtra("SubjectId", dataBean.getUgcDynamicDto().getSubjectId());
+                intent.putExtra("chapterId", dataBean.getUgcDynamicDto().getSubjectId());
+                SPUtils.put(context, SPKey.SUBJECT_ID,dataBean.getUgcDynamicDto().getSubjectId()+"");
                 context.startActivity(intent);
             }
         });

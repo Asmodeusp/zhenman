@@ -35,7 +35,7 @@ import com.zhy.autolayout.AutoRelativeLayout;
 import java.util.Map;
 
 
-public class MainActivity extends BaseActivity<LoginPresenterImp> implements View.OnClickListener, LoginContract.LoginView{
+public class MainActivity extends BaseActivity<LoginPresenterImp> implements View.OnClickListener, LoginContract.LoginView {
 
     private TextView mFastLanding;
     private AutoRelativeLayout mCommonCloseImage;
@@ -125,8 +125,8 @@ public class MainActivity extends BaseActivity<LoginPresenterImp> implements Vie
             }
             if (TYPE.equals("1")) {//微信
                 SPUtils.put(MainActivity.this, SPKey.UMeng_OTHERUSERId, data.get("unionid"));
-Log.e("Sunny",data.get("unionid"));
-Log.e("Sunny",data.get("openid"));
+                Log.e("Sunny", data.get("unionid"));
+                Log.e("Sunny", data.get("openid"));
                 presenter.sendUMengLoginData(data.get("unionid"), data.get("name"), "",
                         data.get("iconurl"), sex, TYPE, data.get("openid"));
 
@@ -233,11 +233,11 @@ Log.e("Sunny",data.get("openid"));
                 break;
             case R.id.ForgetPasswordBtn:
                 String userName = (String) SPUtils.get(this, SPKey.UMeng_NAME, "");
-                if (userName.isEmpty()) {
+                /*if (userName.isEmpty()) {
                     Toast.makeText(this, "请先完成登陆", Toast.LENGTH_SHORT).show();
                 } else {
-                    startActivity(new Intent(this, ForgetPasswordActivity.class));
-                }
+                }*/
+                startActivity(new Intent(this, ForgetPasswordActivity.class));
                 break;
             case R.id.login_weiboImage:
                 //微博登录
@@ -297,30 +297,32 @@ Log.e("Sunny",data.get("openid"));
     public void gotoContent(UserBean userBean) {
 
         //如果登陆成功就利用SP储存用户信息
-        if (userBean.getData().getToken()!=null){
+        if (userBean.getData().getToken() != null) {
             SPUtils.put(App.context, SPKey.USER_TOKEN, userBean.getData().getToken());
-            Log.e("Sunny",userBean.getData().getToken());
+            Log.e("Sunny", userBean.getData().getToken());
 
-        }if (userBean.getData().getRefreshToken()!=null){
+        }
+        if (userBean.getData().getRefreshToken() != null) {
             SPUtils.put(App.context, SPKey.USER_REFRESHTOKEN, userBean.getData().getRefreshToken());
         }
-        if ((String)userBean.getData().getSex()!=null) {
+        if ((String) userBean.getData().getSex() != null) {
             SPUtils.put(App.context, SPKey.USER_SEX, userBean.getData().getSex() + "");
-        }else {
+        } else {
             SPUtils.put(App.context, SPKey.USER_SEX, 1 + "");
         }
         SPUtils.put(App.context, SPKey.UMeng_NAME, userBean.getData().getName());
         if (userBean.getData().getIntroduction() != null) {
             SPUtils.put(App.context, SPKey.USER_INTRODUCTION, userBean.getData().getIntroduction());
-        }else {
-            SPUtils.put(App.context, SPKey.USER_INTRODUCTION,"本宝宝暂时没有介绍呢~");
+        } else {
+            SPUtils.put(App.context, SPKey.USER_INTRODUCTION, "本宝宝暂时没有介绍呢~");
         }
-        SPUtils.put(App.context, SPKey.USER_ID, userBean.getData().getId()+"");
+        SPUtils.put(App.context, SPKey.USER_ID, userBean.getData().getId() + "");
 //                            保存登陆成功
         SPUtils.put(App.context, SPKey.IS_LOGIN, true);
         startActivity(new Intent(MainActivity.this, ContentActivity.class));
         finish();
     }
+
     //    得到友盟返回的数据
     @Override
     public void showUMengLoginData(ThirdPartyLoginBean uMengLoginBean) {
@@ -474,30 +476,30 @@ Log.e("Sunny",data.get("openid"));
         }
     }
 
-//输入框的监听
-        TextWatcher textWatcher = new TextWatcher() {
-            // 输入文本之前的状态
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    //输入框的监听
+    TextWatcher textWatcher = new TextWatcher() {
+        // 输入文本之前的状态
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+        }
+
+        // 输入文本中的状态
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+        }
+
+        // 输入文本之后的状态
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (mPhoneNumber.getText().toString().isEmpty() || mInputPassword.getText().toString().isEmpty()) {
+                mLoginbtn.setAlpha(0.5f);
+            } else {
+                mLoginbtn.setAlpha(1.0f);
             }
-
-            // 输入文本中的状态
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-            }
-
-            // 输入文本之后的状态
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (mPhoneNumber.getText().toString().isEmpty() || mInputPassword.getText().toString().isEmpty()) {
-                    mLoginbtn.setAlpha(0.5f);
-                } else {
-                    mLoginbtn.setAlpha(1.0f);
-                }
-            }
-        };
-    }
+        }
+    };
+}
 

@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,7 +70,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         mRegisterPhotoCode = findViewById(R.id.Register_PhotoCodeText);
         //下一步按钮
         mRegisterNextBtn = findViewById(R.id.Register_NextBtn);
-//设置EditText文本框输入监听事件
+        //设置EditText文本框输入监听事件
         mRegisterPhoneNumber.addTextChangedListener(textWatcher);
         mRegisterPhotoCodeEd.addTextChangedListener(textWatcher);
         mRegisterReturn.setOnClickListener(this);
@@ -109,7 +108,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                 }
                 if (mRegisterPhotoCodeEd.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     finish();
                 }
 
@@ -165,10 +164,11 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+
             }
 
             @Override
-            public void onResponse(Call call, final Response response){
+            public void onResponse(Call call, final Response response) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

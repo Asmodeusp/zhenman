@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.myself.fragment;
 
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +19,9 @@ import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.myself.WorkShortAdapter;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
+import com.zhenman.asus.zhenman.view.myself.WorkDisplayActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +64,7 @@ public class MyLikeShortFragment extends BaseFragment<WorkShortComicPresenter> i
     }
 
     @Override
-    public void showWorkShortComic(WorkShortComicBean workShortComicBean) {
+    public void showWorkShortComic(final WorkShortComicBean workShortComicBean) {
         if (workShortComicBean.getMsg().equals(GetData.MSG_SUCCESS)) {
             if (workShortComicBean.getData().getResult().size() == 0) {
                 likeShortNoData.setVisibility(View.VISIBLE);
@@ -78,6 +81,19 @@ public class MyLikeShortFragment extends BaseFragment<WorkShortComicPresenter> i
                 WorkShortAdapter workShortAdapter = new WorkShortAdapter(objects, getContext());
                 likeShortRecy.setAdapter(workShortAdapter);
                 Toast.makeText(getContext(), result.size() + "", Toast.LENGTH_SHORT).show();
+                workShortAdapter.setOnShortCLickListener(new WorkShortAdapter.OnShortCLickListener() {
+                    @Override
+                    public void myClick(View view, int position) {
+                        Intent intent = new Intent(getContext(), WorkDisplayActivity.class);
+                        if (workShortComicBean.getData().getResult() != null) {
+                            List<WorkShortComicBean.DataBean.ResultBean> resultBeanArrayList = workShortComicBean.getData().getResult();
+                            intent.putExtra("workData", (Serializable) resultBeanArrayList);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(getContext(), "加载数据失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
 
         } else {

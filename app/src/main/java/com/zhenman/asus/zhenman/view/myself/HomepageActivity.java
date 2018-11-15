@@ -45,7 +45,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class HomepageActivity extends BaseActivity<HomePagePresenter> implements View.OnClickListener, HomePageContract.HomePageInView ,ProductListAdapter.ProductListCallback{
+public class HomepageActivity extends BaseActivity<HomePagePresenter> implements View.OnClickListener, HomePageContract.HomePageInView, ProductListAdapter.ProductListCallback {
 
     private AutoRelativeLayout app_back;
     private TextView app_title;
@@ -81,17 +81,18 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
     Button ppwPayPayBtn;
     ImageView ppwQuestion;
 
-    private String paymentMethod="2";
+    private String paymentMethod = "2";
     private boolean tag = false;
     private AutoRelativeLayout homePage_aboutHim;
-    public static String him_id="myself";
-    public  String tabSelect="1";//tabLayout选择的是TA的作品还是TA的喜欢
+    public static String him_id = "myself";
 
     protected int getLayoutId() {
         return R.layout.activity_homepage;
     }
+
     private int qieziId;
     private int qieziMoney;
+
     @Override
     protected void init() {
 
@@ -119,9 +120,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         app_title.setVisibility(View.GONE);
         homePage_himTab.addTab(homePage_himTab.newTab().setText("TA的作品"));
         homePage_himTab.addTab(homePage_himTab.newTab().setText("TA喜欢的"));
-        tabSelect = "1";//作品的话是1
-        setContentView(R.id.HomePage_Viewpager,HomePageMyWorkFragment.class);
-
+        setContentView(R.id.HomePage_Viewpager, HomePageMyWorkFragment.class);
         idListener();
         Intent intent = getIntent();
         him_id = intent.getStringExtra("him_id");
@@ -132,10 +131,6 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
             homePage_aboutHim.setVisibility(View.VISIBLE);
             presenter.sendHomePageHeadData(him_id);
         }
-//        homePage_himTab.setupWithViewPager(HomePage_Viewpager);
-//        HomePageAdapter homePageAdapter = new HomePageAdapter(getSupportFragmentManager(), homePageTab_title, homePageTab_fragment);
-//        HomePage_Viewpager.setAdapter(homePageAdapter);
-
     }
 
     private void idListener() {
@@ -152,12 +147,10 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
                 switch (tab.getPosition()) {
 
                     case 0:
-                        tabSelect = "1";//作品的话是1
-                        setContentView(R.id.HomePage_Viewpager,HomePageMyWorkFragment.class);
+                        setContentView(R.id.HomePage_Viewpager, HomePageMyWorkFragment.class);
                         break;
                     case 1:
-                        tabSelect = "2";//TA的喜欢  type是2
-                        setContentView(R.id.HomePage_Viewpager,HomePageMyLikeFragment.class);
+                        setContentView(R.id.HomePage_Viewpager, HomePageMyLikeFragment.class);
                         break;
                 }
             }
@@ -186,7 +179,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
                 break;
             case R.id.homePage_attentionPage:
                 Intent intent = new Intent(HomepageActivity.this, MyAttentionActivity.class);
-                intent.putExtra("him_id",him_id);
+                intent.putExtra("him_id", him_id);
                 startActivity(intent);
                 break;
             case R.id.homePage_fansPage:
@@ -253,11 +246,11 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
                 if (paymentMethod.equals("1")) {
 //                    presenter.setWxMakeOrderData(qieziId + "", "1", StartcatalogId, "262", "0.1", "支付");
 //                    创建微信订单
-                    presenter.setWxMakeOrderData(qieziId+"","3",him_id,"0.1","打赏");
+                    presenter.setWxMakeOrderData(qieziId + "", "3", him_id, "2", "打赏");
                 } else if (paymentMethod.equals("2")) {
 //                    presenter.setMakeOrderData(qieziId + "", "1", StartcatalogId, "262", "1", "支付");
 //                    创建支付宝订单
-                    presenter.setMakeOrderData(qieziId+"","3",him_id,"0.1","打赏");
+                    presenter.setMakeOrderData(qieziId + "", "3", him_id, "0.1", "打赏");
 
                 } else {
                     Toast.makeText(HomepageActivity.this, "请选择支付方式", Toast.LENGTH_SHORT).show();
@@ -357,7 +350,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
     //得到产品列表
     @Override
     public void showProductListBean(ProductListBean productListBean) {
-        if (productListBean.getData().size()!=0){
+        if (productListBean.getData().size() != 0) {
             List<ProductListBean.DataBean> listBeanData = productListBean.getData();
             GridLayoutManager linearLayoutManager = new GridLayoutManager(this, 3);
             ppwPayProductList.setLayoutManager(linearLayoutManager);
@@ -373,7 +366,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         if (productListBean.getData().getOrderNumber() != null) {
             String orderNumber = productListBean.getData().getOrderNumber();
             presenter.sendGetPayData(orderNumber);//发送支付宝支付
-        }else {
+        } else {
             Toast.makeText(this, productListBean.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
@@ -384,7 +377,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         if (productListBean.getData().getOrderNumber() != null) {
             String orderNumber = productListBean.getData().getOrderNumber();
             presenter.sendGetWxPayData(orderNumber);//发送微信支付
-        }else {
+        } else {
             Toast.makeText(this, productListBean.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
@@ -395,7 +388,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
         if (getPayDataBean.getData().getOrderSign() != null) {
 //            支付宝支付
 //            PayUtils.getInstance().authV2(getPayDataBean.getData().getOrderSign(),this);
-            PayUtils.getInstance().AliPay(getPayDataBean.getData().getOrderSign(),this);
+            PayUtils.getInstance().AliPay(getPayDataBean.getData().getOrderSign(), this);
         } else {
             Toast.makeText(this, "失败", Toast.LENGTH_SHORT).show();
         }
@@ -411,11 +404,12 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
             Toast.makeText(this, "失败", Toast.LENGTH_SHORT).show();
         }
     }
-//    得到章节产品ID
+
+    //    得到章节产品ID
     @Override
-    public void showProductList(int position,int amount) {
-        qieziId=position;
-        qieziMoney=amount;
+    public void showProductList(int position, int amount) {
+        qieziId = position;
+        qieziMoney = amount;
 
 //        ShowPaypopupView();
     }

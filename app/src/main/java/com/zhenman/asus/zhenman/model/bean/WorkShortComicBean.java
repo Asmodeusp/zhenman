@@ -1,8 +1,9 @@
 package com.zhenman.asus.zhenman.model.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class WorkShortComicBean {
+public class WorkShortComicBean{
     /**
      * state : 0
      * msg : 成功
@@ -37,7 +38,7 @@ public class WorkShortComicBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean{
         /**
          * pageNum : 1
          * pageSize : 20
@@ -112,7 +113,7 @@ public class WorkShortComicBean {
             this.result = result;
         }
 
-        public static class ResultBean {
+        public static class ResultBean implements Serializable {
             /**
              * name : 玩照片小助手
              * id : 785
@@ -347,7 +348,7 @@ public class WorkShortComicBean {
                 this.pageDtoList = pageDtoList;
             }
 
-            public static class PageDtoListBean {
+            public static class PageDtoListBean implements Serializable{
                 /**
                  * imageUrl : http://pa1qj1jlg.bkt.clouddn.com/PPN/1541496420750/674.jpg?imageMogr2/crop/!1080.0x864.0a0a0.0
                  * width : 1080.0

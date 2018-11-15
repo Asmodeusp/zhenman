@@ -13,7 +13,7 @@ public interface AlartPhoneNumContract {
         void showCheckCodeData(VerificationCodeBean verificationCodeBean);
 
         //        验证码无效
-        void showError();
+        void showError(String string);
 
         //        三方账号绑定手机号（手机未绑定过）
         void showThirdBindData(VerificationCodeBean verificationCodeBean);

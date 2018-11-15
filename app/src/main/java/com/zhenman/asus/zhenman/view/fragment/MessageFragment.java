@@ -117,7 +117,6 @@ public class MessageFragment extends BaseFragment<TheamBeanPresenter> implements
                     Intent intent = new Intent(getContext(), ThemeDetailsActivity.class);
                     intent.putExtra("chapterId",dataBeanList.get(position).getSubjectId()+"");
                     SPUtils.put(getContext(), SPKey.SUBJECT_ID,dataBeanList.get(position).getSubjectId()+"");
-                    intent.putExtra("isAttention", ThemeAdapter.isAttention);
                     startActivity(intent);
                 }
             });

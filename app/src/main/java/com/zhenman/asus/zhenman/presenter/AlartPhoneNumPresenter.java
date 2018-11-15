@@ -39,7 +39,7 @@ public class AlartPhoneNumPresenter implements AlartPhoneNumContract.AlartPhoneN
                         if (verificationCodeBean.getState() == 0) {
                             alartPhoneNumInView.showAlartPhoneNumData(verificationCodeBean);
                         } else {
-                            alartPhoneNumInView.showError();
+                            alartPhoneNumInView.showError(verificationCodeBean.getMsg());
                         }
                     }
 
@@ -75,7 +75,7 @@ public class AlartPhoneNumPresenter implements AlartPhoneNumContract.AlartPhoneN
                         if (verificationCodeBean.getState() == 0) {
                             alartPhoneNumInView.showCheckCodeData(verificationCodeBean);
                         } else {
-                            alartPhoneNumInView.showError();
+                            alartPhoneNumInView.showError(verificationCodeBean.getMsg());
                         }
                     }
 
@@ -114,7 +114,7 @@ public class AlartPhoneNumPresenter implements AlartPhoneNumContract.AlartPhoneN
                         if (verificationCodeBean.getState() == 0) {
                             alartPhoneNumInView.showThirdBindData(verificationCodeBean);
                         } else {
-                            alartPhoneNumInView.showError();
+                            alartPhoneNumInView.showError(verificationCodeBean.getMsg());
                         }
                     }
 
