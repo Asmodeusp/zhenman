@@ -57,7 +57,7 @@ public class CommentAtUeserlistActivity extends BaseActivity<CommentAtPresenterI
 
     @Override
     public void showMyAttentionUserData(final MyAttentionUserBean attentionUserBean) {
-        if (attentionUserBean != null) {
+        if (attentionUserBean != null&&attentionUserBean.getData().getResult().size()!=0) {
             CommentAtFollowUserRecycler.setLayoutManager(new LinearLayoutManager(this));
             if (attentionUserBean.getData().getResult().size() != 0) {
                 CommentAtFollowUserRecycler.setVisibility(View.VISIBLE);
@@ -91,7 +91,7 @@ public class CommentAtUeserlistActivity extends BaseActivity<CommentAtPresenterI
 
     @Override
     public void showSerializationDetailsBean(final SerializationDetailsBean serializationDetailsBean) {
-        if (serializationDetailsBean != null) {
+        if (serializationDetailsBean != null&&serializationDetailsBean.getData().getActorList().size()!=0) {
             CommentAtActorRecycler.setLayoutManager(new LinearLayoutManager(this));
             if (serializationDetailsBean.getData().getActorList().size() != 0) {
                 CommentAtActorRecycler.setVisibility(View.VISIBLE);
@@ -114,7 +114,6 @@ public class CommentAtUeserlistActivity extends BaseActivity<CommentAtPresenterI
                 CommentAtActoText.setVisibility(View.GONE);
             }
         }
-
     }
 
     @OnClick({R.id.Comment_At_BackButton})
