@@ -18,7 +18,7 @@
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/Home_HeadView"
         android:layout_width="match_parent"
-        android:layout_height="146px"
+        android:layout_height="100px"
         android:background="@drawable/home_headbackground">
 
         <ImageView
@@ -30,7 +30,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="48px"
             android:layout_marginRight="48px"
-            android:layout_marginTop="48px"
+            android:layout_marginTop="20px"
             android:src="@mipmap/home_search" />
 
         <com.zhy.autolayout.AutoLinearLayout

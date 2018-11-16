@@ -20,7 +20,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="24px"
                 android:src="@mipmap/serial_catalog_lock"
-                android:visibility="gone" />
+               />
 
             <TextView
                 android:id="@+id/ChapterText"

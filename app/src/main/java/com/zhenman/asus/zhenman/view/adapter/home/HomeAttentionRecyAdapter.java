@@ -18,27 +18,37 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.google.gson.Gson;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
+import com.zhenman.asus.zhenman.App;
 import com.zhenman.asus.zhenman.R;
+import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.model.bean.HomeAttentionBean;
 import com.zhenman.asus.zhenman.presenter.HomeAttentionPresenterImp;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
+import com.zhenman.asus.zhenman.utils.Urls;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
-import com.zhenman.asus.zhenman.utils.umeng.UMengHelp;
+import com.zhenman.asus.zhenman.view.ContentActivity;
 import com.zhenman.asus.zhenman.view.comment.FullFragment;
-import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.message.ThemeDetailsActivity;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 import com.zhy.autolayout.utils.AutoUtils;
 
+import java.io.IOException;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttentionRecyAdapter.Holder> {
@@ -47,7 +57,8 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
     private boolean isLike = true;
     private HomeAttentionPresenterImp presenter;
     private int ShareCount = 1;
-
+    private String Type;
+    private String commentId;
     public HomeAttentionRecyAdapter(List<HomeAttentionBean.DataBean.ResultBean> list, HomeAttentionPresenterImp presenter) {
         this.list = list;
         this.presenter = presenter;
@@ -85,7 +96,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             @Override
             public void onLoadingError(String source, Exception e) {
             }
-        },R.mipmap.common_portrait_m);
+        }, R.mipmap.common_portrait_m);
         holder.fill_Home_Attention_RecyHeadIew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,9 +224,15 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
         holder.fill_Home_Attention_RecyCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getCommentData();
             }
         });
+        this.Type  = dataBean.getType()+"";
+        if (dataBean.getType()==1) {
+           commentId = dataBean.getUgcDynamicDto().getUgcId();
+        }  if (dataBean.getType()==2) {
+           commentId = dataBean.getPgcDynamicDto().getPgcId();
+        }
 
         //设置喜欢图片
         if (list.get(position).isLike()) {
@@ -303,12 +320,37 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
                 context.startActivity(intent);
             }
         });
-//        holder.fill_Home_Attention_RecyCommentButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+    }
+
+    private void getCommentData() {
+        OkHttpClient client = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(Urls.BASE_URL + "ugcCommentInfo/getCommentList?id="+commentId+"&pageNum=1&pageSize=1000&commentType=1&commentSubType="+Type)
+                .get()
+                .addHeader("accessToken", ((String) SPUtils.get(App.context, SPKey.USER_TOKEN, "")))
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final CommentListBean commentListBean = new Gson().fromJson(response.body().string(), CommentListBean.class);
+
+                ((Activity) context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        FullFragment fullFragment = new FullFragment(commentListBean, Type, commentId);
+                        fullFragment.show(((ContentActivity) context).getSupportFragmentManager(), "dialog");
+                    }
+                });
+            }
+        });
+
+
+
     }
 
 
@@ -370,7 +412,7 @@ public class HomeAttentionRecyAdapter extends RecyclerView.Adapter<HomeAttention
             //评论数量
             fill_Home_Attention_RecyCommentNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyCommentNumberText);
             //喜欢数量
-            fill_Home_Attention_RecyLikeNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeNumberText); 
+            fill_Home_Attention_RecyLikeNumberText = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeNumberText);
             //喜欢图片
             fill_Home_Attention_RecyLikeImageView = itemView.findViewById(R.id.fill_Home_Attention_RecyLikeImageView);
             //主题名字

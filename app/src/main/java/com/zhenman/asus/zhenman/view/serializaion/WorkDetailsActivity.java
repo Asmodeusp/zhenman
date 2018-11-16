@@ -130,7 +130,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                 break;
             //收藏
             case R.id.Work_Detaails_collectionImg:
-                if (serializationDetailsBeandata!=null) {
+                if (serializationDetailsBeandata != null) {
                     Boolean ISlogin = (Boolean) SPUtils.get(this, SPKey.IS_LOGIN, false);
                     if (!ISlogin) {
                         startActivity(new Intent(this, MainActivity.class));
@@ -162,7 +162,7 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
                     Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
                 } else {
                     if (serializationCatalogBeandata.size() != 0) {
-                        SPUtils.put(WorkDetailsActivity.this, SPKey.CATALOGID_ID,SPUtils.get(this,"FirstCatalogId",""));
+                        SPUtils.put(WorkDetailsActivity.this, SPKey.CATALOGID_ID, SPUtils.get(this, "FirstCatalogId", ""));
                         SPUtils.put(WorkDetailsActivity.this, SPKey.PGC_ID, serializationCatalogBeandata.get(0).getPgcId());
                         startActivity(intent);
                     }
@@ -189,12 +189,15 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
             Work_Detaails_Tag.setText(serializationDetailsBean.getData().getTag());
             serializationDetailsBeandata = serializationDetailsBean.getData();
             setContentView(R.id.Work_Detaails_FrameLayout, WorkDetailsFragment.class);
+            boolean openAuto = serializationDetailsBean.getData().isOpenAuto();
+            SPUtils.put(this, "IsOpenAuto",openAuto);
+            if (serializationDetailsBeandata.isCollect()) {
+                Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
+            } else {
+                Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
+            }
         }
-        if (serializationDetailsBeandata.isCollect()) {
-            Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_on);
-        } else {
-            Work_Detaails_collectionImg.setButtonDrawable(R.mipmap.common_collection_off);
-        }
+
     }
 
     @Override
@@ -204,17 +207,21 @@ public class WorkDetailsActivity extends BaseActivity<SerializationDetailsPresen
         } else {
             this.serializationCatalogBean = serializationCatalogBean;
             serializationCatalogBeandata.addAll(serializationCatalogBean.getData());
-            String catalogId = serializationCatalogBeandata.get(serializationCatalogBeandata.size()-1).getCatalogId();
-            SPUtils.put(this,"FirstCatalogId",catalogId);
+            String catalogId = serializationCatalogBeandata.get(serializationCatalogBeandata.size() - 1).getCatalogId();
+            SPUtils.put(this, "FirstCatalogId", catalogId);
+
         }
     }
+
     @Override
     public void showPgcCollectionBean(PgcCollectionBean pgcCollectionBean) {
     }
+
     private void setCatalogText() {
         work_detaails_catalogText.setTextColor(Color.parseColor("#b37feb"));
         work_detaails_detailsText.setTextColor(Color.parseColor("#333333"));
     }
+
     private void setDetaailsText() {
         work_detaails_catalogText.setTextColor(Color.parseColor("#333333"));
         work_detaails_detailsText.setTextColor(Color.parseColor("#b37feb"));

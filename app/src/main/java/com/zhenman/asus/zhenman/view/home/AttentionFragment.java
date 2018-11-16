@@ -3,6 +3,7 @@ package com.zhenman.asus.zhenman.view.home;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.HomeAttentionPresenterImp;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
+import com.zhenman.asus.zhenman.view.ContentActivity;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeAttentionRecyAdapter;
 import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -36,14 +38,14 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
     SmartRefreshLayout HomeAttentionSmartRefreshLayout;
     @BindView(R.id.Home_Attention_Recy_Tip)
     TextView Home_Attention_Recy_Tip;
-    private TabLayout home_tablayout;
-    public AttentionFragment(TabLayout home_tablayout) {
-        this.home_tablayout =home_tablayout;
+    private TextView homeText;
+    private TextView messageText;
+    private TextView myselfText;
+    private TextView serializationText;
+    public AttentionFragment() {
+
     }
 
-    public AttentionFragment(AutoRelativeLayout home_headView) {
-
-    }
 
     @Override
     protected int getLayoutId() {
@@ -62,6 +64,10 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
                 HomeAttentionSmartRefreshLayout.finishRefresh();
             }
         });
+        homeText = ((ContentActivity) getActivity()).getHomeText();
+        messageText = ((ContentActivity) getActivity()).getMessageText();
+        myselfText = ((ContentActivity) getActivity()).getMyselfText();
+        serializationText = ((ContentActivity) getActivity()).getSerializationText();
     }
     @Override
     protected void loadDate() {
@@ -80,6 +86,7 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
     public void setUserVisibleHint(boolean isVisibleToUser) {
         if (isVisibleToUser) {
             Boolean ISlogin = (Boolean) SPUtils.get(getContext(), SPKey.IS_LOGIN, false);
+            setTextColor("#000000");
             if (!ISlogin) {
                 startActivity(new Intent(getContext(), MainActivity.class));
                 getActivity().finish();
@@ -127,6 +134,15 @@ public class AttentionFragment extends BaseFragment<HomeAttentionPresenterImp> i
 
     @Override
     public void showAttentionTheme(ThemeAttentionBean themeAttentionBean) {
+
+    }
+    //设置字体颜色
+    private void setTextColor(String color) {
+
+        homeText.setTextColor(Color.parseColor(color));
+        serializationText.setTextColor(Color.parseColor(color));
+        messageText.setTextColor(Color.parseColor(color));
+        myselfText.setTextColor(Color.parseColor(color));
 
     }
 }

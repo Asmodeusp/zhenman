@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
+import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -19,13 +20,13 @@ import com.zhy.autolayout.utils.AutoUtils;
 import java.util.List;
 //连载页面的演员适配器
 public class CatalogReadActorAdapter extends RecyclerView.Adapter<CatalogReadActorAdapter.Holder> implements View.OnClickListener {
-    private List<SerializationDetailsBean.DataBean.ActorListBean> list;
+    private List<SerializationCatalogReadBean.DataBean.PgcChapterInfoDtoBean.ActorListBean> list;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
 
     private CatalogReadActorCallback CatalogReadActorCallback;
 
-    public CatalogReadActorAdapter(List<SerializationDetailsBean.DataBean.ActorListBean> list) {
+    public CatalogReadActorAdapter(List<SerializationCatalogReadBean.DataBean.PgcChapterInfoDtoBean.ActorListBean> list) {
         this.list = list;
     }
     public void CatalogReadActorCallback(CatalogReadActorCallback CatalogReadActorCallback) {
@@ -56,7 +57,7 @@ public class CatalogReadActorAdapter extends RecyclerView.Adapter<CatalogReadAct
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int position) {
-        SerializationDetailsBean.DataBean.ActorListBean listBean = list.get(position);
+        SerializationCatalogReadBean.DataBean.PgcChapterInfoDtoBean.ActorListBean listBean = list.get(position);
         holder.Actor_Position.setText(listBean.getTagName());
         holder.Actor_Name.setText(listBean.getName());
         holder.itemView.setTag(position);

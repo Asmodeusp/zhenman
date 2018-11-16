@@ -109,7 +109,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AutoLayoutAc
 
 //            Toast.makeText(this, "安装应用", Toast.LENGTH_SHORT).show();
 //            开始下载应用
-            install(App.context.getPackageResourcePath());
+//            install(App.context.getPackageResourcePath());
         }
     }
 

@@ -9,10 +9,12 @@ import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
 import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
+import com.zhenman.asus.zhenman.model.bean.RenewBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
 import com.zhenman.asus.zhenman.model.service.SerializationCatalogReadService;
+import com.zhenman.asus.zhenman.model.service.WorkCatalogService;
 import com.zhenman.asus.zhenman.utils.GetData;
 import com.zhenman.asus.zhenman.utils.RetrofitUtils;
 
@@ -29,12 +31,8 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
 
     @Override
     public void getSerializationCatalogReadBean(String catalogId) {
-
-        Map<String, String> map = new HashMap<>();
-
-        map.put("catalogId", catalogId);
         RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class)
-                .getSerializationCatalogReadBean(map)
+                .getSerializationCatalogReadBean(catalogId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<SerializationCatalogReadBean>() {
@@ -99,37 +97,6 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                 });
     }
 
-    @Override
-    public void getSerializationDetailsBean(String PgcId) {
-        Map<String, String> map = new HashMap<>();
-        map.put("pgcId", PgcId);
-        RetrofitUtils.getInstance().getSerializationDetailsService().GetSerializationDetailsBean(map).subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<SerializationDetailsBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                    }
-
-                    @Override
-                    public void onNext(SerializationDetailsBean userBean) {
-                        if (userBean.getState() == 0) {
-                            serializationCatalogReadView.showError(userBean.getMsg());
-                            serializationCatalogReadView.showSerializationDetailsBean(userBean);
-                        } else {
-                            serializationCatalogReadView.showError(userBean.getMsg());
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 
     //    创建订单
     @Override
@@ -221,42 +188,6 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                     @Override
                     public void onNext(GetPayDataBean getPayDataBean) {
                         serializationCatalogReadView.showGetPayData(getPayDataBean);
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-    @Override
-    public void PGCReadFabulous(String productId, String commentId, String status, String pgcId) {
-        Map<String, String> map = new HashMap<>();
-        map.put("productId", productId);
-        map.put("commentId", commentId);
-        map.put("status", status);
-        map.put("pgcId", pgcId);
-        RetrofitUtils.getInstance()
-                .getService(SerializationCatalogReadService.class)
-                .GetPGCReadFabulousBean(map)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<PgcReadFabulousBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                    }
-
-                    @Override
-                    public void onNext(PgcReadFabulousBean pgcReadFabulousBean) {
-                        if (pgcReadFabulousBean != null) {
-                            serializationCatalogReadView.showError(pgcReadFabulousBean.getMsg());
-                            serializationCatalogReadView.showPGCReadFabulousBean(pgcReadFabulousBean);
-                        }
 
                     }
 
@@ -395,6 +326,37 @@ public class SerializationCatalogReadPresenterImp implements SerializationCatalo
                         }
                     }
 
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void getRenewBean(String status, String pgcId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("status", status);
+        map.put("pgcId", pgcId);
+
+        RetrofitUtils.getInstance().getService(SerializationCatalogReadService.class).GetRenewBean(map).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<RenewBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(RenewBean renewBean) {
+                        if (renewBean.getState() == 0) {
+                            serializationCatalogReadView.showError(renewBean.getMsg());
+                        }
+                    }
                     @Override
                     public void onError(Throwable e) {
                     }

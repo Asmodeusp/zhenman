@@ -37,7 +37,7 @@ public class Urls {
     //连载目录页
     public static final String SERIALIZATION_CATALOG = "userPgcInfo/getPgcCatalogInfo";
     //连载页阅读
-    public static final String SERIALIZATION_CATALOG_READ = "pgcCatalogPage/getPgcImageShowByCatalog";
+    public static final String SERIALIZATION_CATALOG_READ = "userPgcInfo/getCatalogInfoPayPage";
     //评论列表
     public static final String COMMENT_LIST = "ugcCommentInfo/getCommentList";
     //Pgc点赞
@@ -117,4 +117,6 @@ public class Urls {
     public static final String BY_FANS = "newsFansInfo/getNewsFansInfoList";
     //    被点赞的列表
     public static final String BY_LIKE = "newsLikeInfo/getNewsLikeInfoList";
+    //续购开关
+    public static final String RENEW = "userSetting/autoContinuedPurchase";
 }

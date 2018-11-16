@@ -14,9 +14,9 @@ import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import java.util.List;
 //阅读的RecyclerView的适配器
 public class SerializationCatalogReadRecyAdapter extends RecyclerView.Adapter<SerializationCatalogReadRecyAdapter.Holder> implements View.OnClickListener {
-    private List<SerializationCatalogReadBean.DataBean.ListBean> list;
+    private List<SerializationCatalogReadBean.DataBean.TransferBean> list;
     private Context context;
-    public SerializationCatalogReadRecyAdapter(List<SerializationCatalogReadBean.DataBean.ListBean> list) {
+    public SerializationCatalogReadRecyAdapter(List<SerializationCatalogReadBean.DataBean.TransferBean> list) {
         this.list = list;
     }
     @NonNull
@@ -30,7 +30,7 @@ public class SerializationCatalogReadRecyAdapter extends RecyclerView.Adapter<Se
     }
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
-        SerializationCatalogReadBean.DataBean.ListBean dataBean = list.get(position);
+        SerializationCatalogReadBean.DataBean.TransferBean dataBean = list.get(position);
 
         Glide.with(context).load(dataBean.getImageUrl()).into(holder.home_Recy_recy_Image);
         holder.itemView.setTag(position);

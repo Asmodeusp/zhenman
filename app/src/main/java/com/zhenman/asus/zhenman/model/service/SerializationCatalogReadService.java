@@ -7,6 +7,7 @@ import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
 import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
+import com.zhenman.asus.zhenman.model.bean.RenewBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.utils.Urls;
@@ -23,9 +24,9 @@ import retrofit2.http.QueryMap;
 
 public interface SerializationCatalogReadService {
     //连载阅读
-    @FormUrlEncoded
-    @POST(Urls.SERIALIZATION_CATALOG_READ)
-    Observable<SerializationCatalogReadBean> getSerializationCatalogReadBean(@FieldMap Map<String, String> params);
+
+    @GET(Urls.SERIALIZATION_CATALOG_READ)
+    Observable<SerializationCatalogReadBean> getSerializationCatalogReadBean(@Query("chapterId")String chapterId );
 
     //连载章节
     @GET(Urls.SERIALIZATION_CATALOG)
@@ -34,13 +35,6 @@ public interface SerializationCatalogReadService {
     //评论列表
     @GET(Urls.COMMENT_LIST)
     Observable<CommentListBean> getCommentListBean(@QueryMap Map<String, String> paramMap);
-
-    //PGC评论点赞
-    @FormUrlEncoded
-    @POST(Urls.PGCFABULOUS)
-    Observable<PgcReadFabulousBean> GetPGCReadFabulousBean(@FieldMap Map<String, String> params);
-
-
     //产品列表
     @GET(Urls.PRODUCT_LIST)
     Observable<ProductListBean> getProductList(@QueryMap Map<String, String> paramMap);
@@ -68,5 +62,9 @@ public interface SerializationCatalogReadService {
     @FormUrlEncoded
     @POST(Urls.PGC_COLLECTION)
     Observable<PgcCollectionBean> GetPgcCollectionBean(@FieldMap Map<String, String> params);
+    //续购开关
+    @FormUrlEncoded
+    @POST(Urls.RENEW)
+    Observable<RenewBean> GetRenewBean(@FieldMap Map<String, String> params);
 }
 

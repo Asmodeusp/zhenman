@@ -27,22 +27,40 @@ import com.zhy.autolayout.AutoRelativeLayout;
 
 public class ContentActivity extends BaseActivity implements View.OnClickListener {
     public AutoFrameLayout contentview;
-    public TextView HomeText;
     private AutoRelativeLayout HomeButton;
     private AutoRelativeLayout SerializationButton;
     private AutoRelativeLayout ReleaseButton;
     private AutoRelativeLayout MessageButton;
     private AutoRelativeLayout MyselfButton;
     public AutoLinearLayout group;
-    private TextView SerializationText;
+
+    public TextView getSerializationText() {
+        return SerializationText;
+    }
+
+    public TextView getMessageText() {
+        return MessageText;
+    }
+
+    public TextView getMyselfText() {
+        return MyselfText;
+    }
+
+    public TextView getHomeText() {
+        return HomeText;
+    }
+
+    public TextView SerializationText;
+    public TextView MessageText;
+    public TextView MyselfText;
+    public TextView HomeText;
     private Boolean iSlogin;
 
     public AutoLinearLayout getGroup() {
         return group;
     }
 
-    private TextView MessageText;
-    private TextView MyselfText;
+
 
     @Override
     protected int getLayoutId() {

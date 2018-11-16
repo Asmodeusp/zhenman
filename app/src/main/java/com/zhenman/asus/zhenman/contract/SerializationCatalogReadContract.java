@@ -8,6 +8,7 @@ import com.zhenman.asus.zhenman.model.bean.PayWeChatBean;
 import com.zhenman.asus.zhenman.model.bean.PgcCollectionBean;
 import com.zhenman.asus.zhenman.model.bean.PgcReadFabulousBean;
 import com.zhenman.asus.zhenman.model.bean.ProductListBean;
+import com.zhenman.asus.zhenman.model.bean.RenewBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationDetailsBean;
@@ -16,9 +17,8 @@ public interface SerializationCatalogReadContract {
     //连载页阅读View
     interface serializationCatalogReadView {
         void showError(String msg);
-
-        //PGC详情
-        void showSerializationDetailsBean(SerializationDetailsBean serializationDetailsBean);
+        //自动续购
+        void showRenewBean (RenewBean renewBean);
 
         //PGC观看
         void showserializationCatalogReadBean(SerializationCatalogReadBean serializationCatalogReadBean);
@@ -41,9 +41,6 @@ public interface SerializationCatalogReadContract {
         //得到作品章节下页对应的评论列表
         void showCommentListBean(CommentListBean commentListBean);
 
-        //Pgc点赞
-        void showPGCReadFabulousBean(PgcReadFabulousBean pgcReadFabulousBean);
-
         //        得到微信支付数据
         void showGetWxPayData(PayWeChatBean payWeChatBean);
 
@@ -52,6 +49,7 @@ public interface SerializationCatalogReadContract {
 
 
     }
+
     //连载页阅读Presenter
     interface serializationCatalogReadPresenter extends BasePresenter<SerializationCatalogReadContract.serializationCatalogReadView> {
         //PGC阅读
@@ -59,9 +57,6 @@ public interface SerializationCatalogReadContract {
 
         //PGC章节
         void getSerializationCatalogBean(String PgcId);
-
-        //PGC详情
-        void getSerializationDetailsBean(String PgcId);
 
         //创建订单
         void setMakeOrderData(String productId, String type, String catalogId, String amount, String comment);
@@ -72,8 +67,6 @@ public interface SerializationCatalogReadContract {
         //得到支付宝支付数据
         void sendGetPayData(String orderSn);
 
-        //点赞  1 点赞   0 取消
-        void PGCReadFabulous(String productId, String commentId, String status, String pgcId);
 
         //得到微信支付数据
         void sendGetWxPayData(String orderSn);
@@ -86,6 +79,7 @@ public interface SerializationCatalogReadContract {
 
         /**
          * 章节评论
+         *
          * @param id             所有ID
          * @param pageNum
          * @param pageSize
@@ -93,7 +87,12 @@ public interface SerializationCatalogReadContract {
          * @param commentSubType 1：主评论 2：子评论
          */
         void getCommentList(String id, String pageNum, String pageSize, String commentType, String commentSubType);
-
+        /**
+         *
+         * @param pgcId PgcID
+         * @param status 1 开启  0 关闭
+         */
+        void getRenewBean(String status,String pgcId );
 
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,15 +85,16 @@ public class WorkDetailsCommentAdapter extends RecyclerView.Adapter<WorkDetailsC
 
             }
         },R.mipmap.common_portrait_m);
-
-        MyClickSpan.setTextHighLightWithClick(holder.Work_commentRecy_Comment, listBean.getTextDto().getText(), listBean.getTextDto().getTextExtra(), new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, HomepageActivity.class);
-                intent.putExtra(SPKey.HIM_ID, listBean.getTextDto().getTextExtra().get(0).getId());
-                context.startActivity(intent);
-            }
-        });
+        if (listBean.getTextDto()!=null) {
+            MyClickSpan.setTextHighLightWithClick(holder.Work_commentRecy_Comment, listBean.getTextDto().getText(), listBean.getTextDto().getTextExtra(), new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, HomepageActivity.class);
+                    intent.putExtra(SPKey.HIM_ID, listBean.getTextDto().getTextExtra().get(0).getId());
+                    context.startActivity(intent);
+                }
+            });
+        }
         holder.Work_commentRecy_UserName.setText(listBean.getName());
         holder.Work_commentRecy_LikeNumber.setText(listBean.getLikeNum()+"");
         holder.Work_commentRecy_Time.setText(SPUtils.transferLongToDate(Long.parseLong(listBean.getAddTime())));
@@ -105,6 +107,7 @@ public class WorkDetailsCommentAdapter extends RecyclerView.Adapter<WorkDetailsC
                     context.startActivity(new Intent(context, MainActivity.class));
                     ((Activity) context).finish();
                 }else {
+                    Log.d("WorkDetailsCommentAdapt", listBean.getUserId());
                     clickGoUserInfo.go(listBean.getUserId());
                 }
 

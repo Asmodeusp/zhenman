@@ -12,7 +12,10 @@ import android.widget.TextView;
 
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
+import com.zhenman.asus.zhenman.contract.WorkCatalogContract;
+import com.zhenman.asus.zhenman.model.bean.RenewBean;
 import com.zhenman.asus.zhenman.model.bean.SerializationCatalogBean;
+import com.zhenman.asus.zhenman.presenter.WorkCatalogPresenterImp;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.serialization.SerializationCatalogAdapter;
@@ -23,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class WorkCatalogFragment extends BaseFragment implements View.OnClickListener {
+public class WorkCatalogFragment extends BaseFragment<WorkCatalogPresenterImp> implements View.OnClickListener,WorkCatalogContract.WorkCatalogView {
     private TextView PositiveSequenceBtn;
     private TextView ReverseOrderBtn;
     private TextView All_chaptersText;
@@ -33,6 +36,8 @@ public class WorkCatalogFragment extends BaseFragment implements View.OnClickLis
     private List<SerializationCatalogBean.DataBean> serializationCatalogBeandata = new ArrayList<>();
     private List<SerializationCatalogBean.DataBean> PositiveDataBeans = new ArrayList<>();
     private List<SerializationCatalogBean.DataBean> ReverseDataBeans = new ArrayList<>();
+    private Boolean isOpenAuto;
+    private String pgcId;
 
     @Override
     protected int getLayoutId() {
@@ -61,9 +66,15 @@ public class WorkCatalogFragment extends BaseFragment implements View.OnClickLis
         ReverseDataBeans.addAll(serializationCatalogBeandata);
         Collections.reverse(serializationCatalogBeandata);
         PositiveDataBeans.addAll(serializationCatalogBeandata);
+
+        isOpenAuto = (Boolean) SPUtils.get(getContext(), "IsOpenAuto", false);
+        pgcId = (String) SPUtils.get(getContext(), SPKey.PGC_ID, "");
+        if (isOpenAuto) {
+            AutoRrepurchaseImg.setImageResource(R.mipmap.edit_outline_button_on);
+        }else{
+            AutoRrepurchaseImg.setImageResource(R.mipmap.edit_outline_button_off);
+        }
         InitReverseAdapter();
-
-
     }
 
     private void InitReverseAdapter() {
@@ -115,9 +126,18 @@ public class WorkCatalogFragment extends BaseFragment implements View.OnClickLis
                 break;
             case R.id.ReverseOrderBtn:
                 InitReverseAdapter();
-                setReverseOrderTexColort();
+                setReverseOrderTexColor();
                 break;
             case R.id.AutoRrepurchaseBtn:
+                if (isOpenAuto) {
+                    AutoRrepurchaseImg.setImageResource(R.mipmap.edit_outline_button_off);
+                    presenter.getRenewBean("0",pgcId);
+                    isOpenAuto=false;
+                }else{
+                    AutoRrepurchaseImg.setImageResource(R.mipmap.edit_outline_button_on);
+                    presenter.getRenewBean("1",pgcId);
+                    isOpenAuto=true;
+                }
                 break;
 
         }
@@ -126,9 +146,19 @@ public class WorkCatalogFragment extends BaseFragment implements View.OnClickLis
         PositiveSequenceBtn.setTextColor(Color.parseColor("#b37feb"));
         ReverseOrderBtn.setTextColor(Color.parseColor("#666666"));
     }
-    private void setReverseOrderTexColort() {
+    private void setReverseOrderTexColor() {
         PositiveSequenceBtn.setTextColor(Color.parseColor("#666666"));
         ReverseOrderBtn.setTextColor(Color.parseColor("#b37feb"));
+
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    @Override
+    public void showRenewBean(RenewBean renewBean) {
 
     }
 }

@@ -61,7 +61,10 @@ public class SerializationCatalogAdapter extends RecyclerView.Adapter<Serializat
             holder.ChapterNameText.setText("");
         }
         holder.itemView.setTag(position);
+        //1 免费   2付费
+        if (listBean.getIsFree()==1) {
 
+        }
     }
 
     @Override

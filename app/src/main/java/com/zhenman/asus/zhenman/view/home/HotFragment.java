@@ -3,12 +3,14 @@ package com.zhenman.asus.zhenman.view.home;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhenman.asus.zhenman.R;
@@ -20,15 +22,19 @@ import com.zhenman.asus.zhenman.model.bean.HomeHotBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
 import com.zhenman.asus.zhenman.presenter.HomeHotPresenterImp;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
+import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.ContentActivity;
 import com.zhenman.asus.zhenman.view.adapter.home.HomeHotRecyAdapter;
 import com.zhenman.asus.zhenman.view.comment.FullFragment;
+import com.zhenman.asus.zhenman.view.login.MainActivity;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhenman.asus.zhenman.view.ui.MyRecyclerView;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.OnViewPagerListener;
 import com.zhenman.asus.zhenman.view.ui.layoutmessage.ViewPagerLayoutManager;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -42,6 +48,10 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     private String ugcId;
     private AutoLinearLayout group;
     private AutoRelativeLayout home_tablayout;
+    private TextView homeText;
+    private TextView messageText;
+    private TextView myselfText;
+    private TextView serializationText;
 
     @SuppressLint("ValidFragment")
     public HotFragment(AutoRelativeLayout home_tablayout) {
@@ -60,6 +70,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
         //请求数据
         initView();
         group = ((ContentActivity) getActivity()).getGroup();
+
     }
 
     private void initView() {
@@ -91,6 +102,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     @Override
     protected void loadDate() {
+
         presenter.getHomeHotBean(1 + "");
     }
 
@@ -125,8 +137,6 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
         if (ugcFabulousBean.getMsg().equals("未登录")) {
 
         }
-
-
     }
 
     @Override
@@ -147,5 +157,13 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
         this.Type = Type;
         this.ugcId = UgcId;
         presenter.getCommentList(ugcId + "", "1", "20", Type + "", "1");
+    }
+    //设置字体颜色
+    private void setTextColor() {
+        homeText.setTextColor(getResources().getColor(R.color.h9));
+        serializationText.setTextColor(getResources().getColor(R.color.h9));
+        messageText.setTextColor(getResources().getColor(R.color.h9));
+        myselfText.setTextColor(getResources().getColor(R.color.h9));
+
     }
 }
