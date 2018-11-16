@@ -20,5 +20,4 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="暂时没有关注的主题哦" />
-
 </com.zhy.autolayout.AutoLinearLayout>

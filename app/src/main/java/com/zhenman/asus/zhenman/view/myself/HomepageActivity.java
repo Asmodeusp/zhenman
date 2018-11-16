@@ -69,7 +69,6 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
     private AutoLinearLayout homePage_attentionPage;
     private AutoLinearLayout homePage_themePage;
     private String fromMyself = "myself";
-
     private TextView homePage_rewardHe;
     private TextView homePage_attentionHe;
     //支付popuwindow
@@ -183,10 +182,14 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
                 startActivity(intent);
                 break;
             case R.id.homePage_fansPage:
-                startActivity(new Intent(HomepageActivity.this, MyFansActivity.class));
+                Intent intentFans = new Intent(HomepageActivity.this, MyFansActivity.class);
+                intentFans.putExtra("him_id", him_id);
+                startActivity(intentFans);
                 break;
             case R.id.homePage_themePage:
-                startActivity(new Intent(HomepageActivity.this, AttentionThemeActivity.class));
+                Intent intentTheme = new Intent(HomepageActivity.this, AttentionThemeActivity.class);
+                intentTheme.putExtra("him_id", him_id);
+                startActivity(intentTheme);
                 break;
             case R.id.homePage_worksPage:
 //                startActivity(new Intent(HomepageActivity.this, HomepageActivity.class));
@@ -211,7 +214,7 @@ public class HomepageActivity extends BaseActivity<HomePagePresenter> implements
                 } else {
                     tag = false;
                     homePage_attentionHe.setText("关注");
-                    homePage_attentionHe.setTextColor(Color.parseColor("#b37feb"));
+                    homePage_attentionHe.setTextColor(Color.parseColor("#ffffff"));
 
                     homePage_attentionHe.setBackgroundResource(R.drawable.fans_attention_btn);
                     if (him_id.equals("myself")) {

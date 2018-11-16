@@ -45,6 +45,13 @@ public class AttentionThemeActivity extends BaseActivity<MyAttenThemePresenter> 
         app_otherID = (TextView) findViewById(R.id.app_otherID);
         app_otherImage = (ImageView) findViewById(R.id.app_otherImage);
         attentionTheme_recy = (RecyclerView) findViewById(R.id.attentionTheme_recy);
+        if (getIntent().getStringExtra("him_id").equals("myself")) {
+            app_title.setText("我的关注");
+            presenter.sendMyAttenThemeData((String) SPUtils.get(this, SPKey.USER_ID, ""), 1 + "", 20 + "");
+        } else {
+            presenter.sendMyAttenThemeData(HomepageActivity.him_id, 1 + "", 20 + "");
+
+        }
         app_title.setText("我关注的主题");
         app_otherImage.setVisibility(View.VISIBLE);
         app_otherImage.setImageResource(R.mipmap.common_search);
