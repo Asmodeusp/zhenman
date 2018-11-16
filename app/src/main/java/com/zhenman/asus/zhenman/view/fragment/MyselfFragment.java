@@ -212,7 +212,13 @@ public class MyselfFragment extends BaseFragment<MySelfPresenter> implements Vie
                 my_Sex.setImageResource(R.mipmap.my_m);
             }
             if (homePageHeadBean.getData().getHeadImg() != null) {
-                Glide.with(getActivity()).load(homePageHeadBean.getData().getHeadImg()).into(my_Avatar);
+                Glide.with(this)
+                        .load(homePageHeadBean.getData().getHeadImg())
+                        .centerCrop()
+                        .dontAnimate()//防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
+                        .error(R.mipmap.common_portrait_m)
+                        .placeholder(R.mipmap.common_portrait_m)
+                        .into(my_Avatar);
             }
             my_Name.setText(homePageHeadBean.getData().getName());
             if (homePageHeadBean.getData().getIntroduction() != null) {

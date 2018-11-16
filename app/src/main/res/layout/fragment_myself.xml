@@ -3,27 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_prograss_bg"
     android:orientation="vertical"
     tools:context=".view.fragment.MyselfFragment">
 
     <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="44px">
+        android:layout_height="88px"
+        android:background="@color/h9">
 
         <ImageView
             android:id="@+id/my_setting"
             android:layout_width="80px"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="48px"
-            android:layout_marginTop="10px"
             android:src="@mipmap/my_setup" />
     </com.zhy.autolayout.AutoRelativeLayout>
 
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/my_data"
         android:layout_width="match_parent"
-        android:layout_height="270px">
+        android:layout_height="270px"
+        android:background="@color/h9">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/my_Avatar"
@@ -190,6 +193,7 @@
         android:background="@color/h6">
 
     </View>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="24px"
@@ -200,7 +204,8 @@
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/my_PersonalHomePage"
         android:layout_width="match_parent"
-        android:layout_height="128px">
+        android:layout_height="128px"
+        android:background="@color/h9">
 
         <ImageView
             android:id="@+id/my_Home"
@@ -242,7 +247,8 @@
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/my_WalletPage"
         android:layout_width="match_parent"
-        android:layout_height="128px">
+        android:layout_height="128px"
+        android:background="@color/h9">
 
         <ImageView
             android:id="@+id/my_WalletPicture"
@@ -283,7 +289,8 @@
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/my_ShelfPage"
         android:layout_width="match_parent"
-        android:layout_height="128px">
+        android:layout_height="128px"
+        android:background="@color/h9">
 
         <ImageView
             android:id="@+id/my_BookPicture"
@@ -324,7 +331,8 @@
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/my_DraftPage"
         android:layout_width="match_parent"
-        android:layout_height="128px">
+        android:layout_height="128px"
+        android:background="@color/h9">
 
         <ImageView
             android:id="@+id/my_DraftPicture"
@@ -365,7 +373,8 @@
     <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/my_AccountNumberPage"
         android:layout_width="match_parent"
-        android:layout_height="128px">
+        android:layout_height="128px"
+        android:background="@color/h9">
 
         <ImageView
             android:id="@+id/my_AccountNumberPicture"
@@ -395,4 +404,11 @@
             android:layout_marginRight="48px"
             android:src="@mipmap/common_more" />
     </com.zhy.autolayout.AutoRelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/h7">
+
+    </View>
 </com.zhy.autolayout.AutoLinearLayout>

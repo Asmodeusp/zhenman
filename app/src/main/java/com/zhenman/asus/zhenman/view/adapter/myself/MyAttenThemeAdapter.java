@@ -60,7 +60,13 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
         Object object = resultBeanList.get(i);
         if (object instanceof MyAttenThemeBean.DataBean.ResultBean) {
             final MyAttenThemeBean.DataBean.ResultBean resultBean = (MyAttenThemeBean.DataBean.ResultBean) object;
-            Glide.with(context).load(resultBean.getImage()).into(holder.itemMyAttenTheme_headImage);
+            Glide.with(context)
+                    .load(resultBean.getImage())
+                    .centerCrop()
+                    .dontAnimate()//防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
+                    .error(R.mipmap.common_portrait_m)
+                    .placeholder(R.mipmap.common_portrait_m)
+                    .into(holder.itemMyAttenTheme_headImage);
             holder.itemMyAttenTheme_title.setText(resultBean.getName());
             holder.itemMyAttenTheme_decription.setText(resultBean.getDescription());
             holder.itemMyAttenTheme_attention.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +136,13 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
         }//MyAttentionUserBean.DataBean.ResultBean
         if (object instanceof MyAttentionUserBean.DataBean.ResultBean) {//关注列表
             final MyAttentionUserBean.DataBean.ResultBean resultBean = (MyAttentionUserBean.DataBean.ResultBean) object;
-            Glide.with(context).load(resultBean.getImageUrl()).into(holder.itemMyAttenTheme_headImage);
+            Glide.with(context)
+                    .load(resultBean.getImageUrl())
+                    .centerCrop()
+                    .dontAnimate()//防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
+                    .error(R.mipmap.common_portrait_m)
+                    .placeholder(R.mipmap.common_portrait_m)
+                    .into(holder.itemMyAttenTheme_headImage);
             holder.itemMyAttenTheme_title.setText(resultBean.getName());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YY-MM-DD");
             String format = simpleDateFormat.format(new Date(Long.parseLong(resultBean.getAddTime())));

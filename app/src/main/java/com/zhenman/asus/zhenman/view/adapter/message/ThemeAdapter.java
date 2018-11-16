@@ -53,7 +53,13 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> impl
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int i) {
-        Glide.with(context).load(dataBeanList.get(i).getImage()).into(holder.itemTheme_headImage);
+        Glide.with(context)
+                .load(dataBeanList.get(i).getImage())
+                .centerCrop()
+                .dontAnimate()//防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
+                .error(R.mipmap.common_portrait_m)
+                .placeholder(R.mipmap.common_portrait_m)
+                .into(holder.itemTheme_headImage);
         holder.itemTheme_title.setText(dataBeanList.get(i).getName());
         holder.itemTheme_description.setText(dataBeanList.get(i).getDescription());
         List<String> list = dataBeanList.get(i).getList();

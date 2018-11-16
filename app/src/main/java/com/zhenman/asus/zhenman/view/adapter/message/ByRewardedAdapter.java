@@ -72,7 +72,13 @@ public class ByRewardedAdapter extends RecyclerView.Adapter<ByRewardedAdapter.Ho
         if (object instanceof ByRewardedBean.DataBean){
             final ByRewardedBean.DataBean resultBean = (ByRewardedBean.DataBean) object;
             if (dataBeanList!=null) {
-                Glide.with(context).load(resultBean.getHeadImg()).into(holder.itemByRewarded_avatar);
+                Glide.with(context)
+                        .load(resultBean.getHeadImg())
+                        .centerCrop()
+                        .dontAnimate()//防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
+                        .error(R.mipmap.common_portrait_m)
+                        .placeholder(R.mipmap.common_portrait_m)
+                        .into(holder.itemByRewarded_avatar);
                 if (resultBean.getFinalImg()==null) {
                     holder.itemByRewarded_chapter.setVisibility(View.INVISIBLE);
                 }else{

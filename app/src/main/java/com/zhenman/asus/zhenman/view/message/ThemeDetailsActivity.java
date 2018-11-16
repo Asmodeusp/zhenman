@@ -131,7 +131,13 @@ public class ThemeDetailsActivity extends BaseActivity<ThemeDetailsPresenter> im
     @Override
     public void showThemeDetailHeadData(ThemeDetailHeadBean themeDetailHeadBean) {
         if (themeDetailHeadBean.getState() == 0) {
-            Glide.with(this).load(themeDetailHeadBean.getData().getImage()).into(themeDetail_Avatar);
+            Glide.with(this)
+                    .load(themeDetailHeadBean.getData().getImage())
+                    .centerCrop()
+                    .dontAnimate()//防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
+                    .error(R.mipmap.common_portrait_m)
+                    .placeholder(R.mipmap.common_portrait_m)
+                    .into(themeDetail_Avatar);
             themeDetail_Name.setText(themeDetailHeadBean.getData().getName());
             if (themeDetailHeadBean.getData().getDescription() != null) {
 
