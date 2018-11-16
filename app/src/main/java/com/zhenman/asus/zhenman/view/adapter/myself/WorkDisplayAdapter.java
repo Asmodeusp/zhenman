@@ -122,10 +122,10 @@ public class WorkDisplayAdapter extends RecyclerView.Adapter<WorkDisplayAdapter.
             @Override
             public void myClick(View view) {
                 if (count) {
-                    holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.INVISIBLE);
-                    holder.Home_Hot_describeText.setVisibility(View.INVISIBLE);
-                    holder.Home_Hot_UserNameText.setVisibility(View.INVISIBLE);
-                    holder.Home_Hot_ThemLin.setVisibility(View.INVISIBLE);
+                    holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.VISIBLE);
+                    holder.Home_Hot_describeText.setVisibility(View.VISIBLE);
+                    holder.Home_Hot_UserNameText.setVisibility(View.VISIBLE);
+                    holder.Home_Hot_ThemLin.setVisibility(View.VISIBLE);
                     count = false;
                 } else {
                     holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.VISIBLE);
@@ -147,18 +147,18 @@ public class WorkDisplayAdapter extends RecyclerView.Adapter<WorkDisplayAdapter.
                     //手指滑动
                     case SCROLL_STATE_DRAGGING:
                         count = false;
-                        holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.INVISIBLE);
-                        holder.Home_Hot_describeText.setVisibility(View.INVISIBLE);
-                        holder.Home_Hot_UserNameText.setVisibility(View.INVISIBLE);
-                        holder.Home_Hot_ThemLin.setVisibility(View.INVISIBLE);
+                        holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.VISIBLE);
+                        holder.Home_Hot_describeText.setVisibility(View.VISIBLE);
+                        holder.Home_Hot_UserNameText.setVisibility(View.VISIBLE);
+                        holder.Home_Hot_ThemLin.setVisibility(View.VISIBLE);
                         break;
                     //自由滑动
                     case SCROLL_STATE_SETTLING:
                         count = false;
-                        holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.INVISIBLE);
-                        holder.Home_Hot_describeText.setVisibility(View.INVISIBLE);
-                        holder.Home_Hot_UserNameText.setVisibility(View.INVISIBLE);
-                        holder.Home_Hot_ThemLin.setVisibility(View.INVISIBLE);
+                        holder.Home_Hot_Page_turningLinearLayout.setVisibility(View.VISIBLE);
+                        holder.Home_Hot_describeText.setVisibility(View.VISIBLE);
+                        holder.Home_Hot_UserNameText.setVisibility(View.VISIBLE);
+                        holder.Home_Hot_ThemLin.setVisibility(View.VISIBLE);
                         break;
                 }
                 super.onScrollStateChanged(recyclerView, newState);
@@ -185,6 +185,7 @@ public class WorkDisplayAdapter extends RecyclerView.Adapter<WorkDisplayAdapter.
         //设置主题名称
         if (dataBean.getSubjectName() != null) {
             holder.Home_Hot_ThemText.setText("" + dataBean.getSubjectName());
+            holder.Home_Hot_ThemLin.setVisibility(View.VISIBLE);
         } else {
             holder.Home_Hot_ThemLin.setVisibility(View.GONE);
         }

@@ -48,21 +48,17 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Holder
         params.height = imageHeight;
         params.width = imageWidth;
         params.setMargins(0, 20, 8, 0);
-
         holder.itemWorkShort_1.setLayoutParams(params);
-
         Glide.with(context)
                 .load(resultBeanList.get(i).getCoverImg())
                 .centerCrop()
                 .dontAnimate()//防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
-                .error(R.mipmap.common_portrait_m)
-                .placeholder(R.mipmap.common_portrait_m)
+                .error(R.mipmap.common_qiezi)
+                .placeholder(R.mipmap.common_placeimg)
                 .into(holder.itemWorkShort_Img);
         holder.itemWorkShort_likeNum.setText(resultBeanList.get(i).getLikeNum() + "");
         holder.itemView.setTag(i);
     }
-
-
     public interface OnShortCLickListener {
         void myClick(View view, int position);
     }
