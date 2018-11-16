@@ -57,7 +57,7 @@ public class SquareFragment extends BaseFragment<ThemeFeaturedSquarePresenter> i
     }
 
     @Override
-    public void showThemeFeaturedSquareData(ThemeFeaturedBean themeFeaturedBean) {
+    public void showThemeFeaturedSquareData(final ThemeFeaturedBean themeFeaturedBean) {
         if (themeFeaturedBean.getState() == 0) {
 
             ThemeFeaturedBean.DataBean data = themeFeaturedBean.getData();
@@ -77,8 +77,7 @@ public class SquareFragment extends BaseFragment<ThemeFeaturedSquarePresenter> i
                     @Override
                     public void myClick(View view, int position) {
                         Intent intent = new Intent(getContext(), WorkDisplayActivity.class);
-
-                        if (workShortComicBean.getData().getResult() != null) {
+                        if (themeFeaturedBean.getData().getResult() != null) {
                             intent.putExtra("position", position);
                             intent.putExtra("workData", (Serializable) resultBeanList);
                             startActivity(intent);

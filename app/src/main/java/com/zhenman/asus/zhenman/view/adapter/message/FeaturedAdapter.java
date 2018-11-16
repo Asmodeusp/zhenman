@@ -50,7 +50,14 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Holder
         params.setMargins(0, 20, 8, 0);
 
         holder.itemWorkShort_1.setLayoutParams(params);
-        Glide.with(context).load(resultBeanList.get(i).getCoverImg()).into(holder.itemWorkShort_Img);
+
+        Glide.with(context)
+                .load(resultBeanList.get(i).getCoverImg())
+                .centerCrop()
+                .dontAnimate()//防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
+                .error(R.mipmap.common_portrait_m)
+                .placeholder(R.mipmap.common_portrait_m)
+                .into(holder.itemWorkShort_Img);
         holder.itemWorkShort_likeNum.setText(resultBeanList.get(i).getLikeNum() + "");
         holder.itemView.setTag(i);
     }
