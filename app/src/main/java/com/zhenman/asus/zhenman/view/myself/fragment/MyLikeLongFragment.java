@@ -16,10 +16,9 @@ import com.zhenman.asus.zhenman.presenter.WorkShortPgcComicPresenter;
 import com.zhenman.asus.zhenman.utils.GetData;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
-import com.zhenman.asus.zhenman.view.adapter.myself.WorkShortAdapter;
+import com.zhenman.asus.zhenman.view.adapter.myself.WorkLongPgcAdapter;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -73,9 +72,7 @@ public class MyLikeLongFragment extends BaseFragment<WorkShortPgcComicPresenter>
                 List<WorkShortPgcComicBean.DataBean.ResultBean> result = data.getResult();
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
                 likeLongRecy.setLayoutManager(gridLayoutManager);
-                List<Object> objects = new ArrayList<>();
-                objects.addAll(result);
-                WorkShortAdapter workShortAdapter = new WorkShortAdapter(objects, getContext());
+                WorkLongPgcAdapter workShortAdapter = new WorkLongPgcAdapter(result, getContext());
                 likeLongRecy.setAdapter(workShortAdapter);
                 Toast.makeText(getContext(), result.size() + "", Toast.LENGTH_SHORT).show();
             }

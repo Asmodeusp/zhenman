@@ -17,7 +17,7 @@ import com.zhenman.asus.zhenman.presenter.WorkShortPgcComicPresenter;
 import com.zhenman.asus.zhenman.utils.GetData;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
-import com.zhenman.asus.zhenman.view.adapter.myself.WorkShortAdapter;
+import com.zhenman.asus.zhenman.view.adapter.myself.WorkLongPgcAdapter;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 
 import java.util.ArrayList;
@@ -79,7 +79,7 @@ public class WorkLongFragment extends BaseFragment<WorkShortPgcComicPresenter> i
                 workLongRecy.setLayoutManager(gridLayoutManager);
                 List<Object> objects = new ArrayList<>();
                 objects.addAll(result);
-                WorkShortAdapter workShortAdapter = new WorkShortAdapter(objects, getContext());
+                WorkLongPgcAdapter workShortAdapter = new WorkLongPgcAdapter(result, getContext());
                 workLongRecy.setAdapter(workShortAdapter);
                 Toast.makeText(getContext(), result.size() + "", Toast.LENGTH_SHORT).show();
             }

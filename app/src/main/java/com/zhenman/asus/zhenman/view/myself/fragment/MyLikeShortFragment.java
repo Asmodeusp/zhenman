@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.WorkShortComicContract;
+import com.zhenman.asus.zhenman.model.bean.ResultBean;
 import com.zhenman.asus.zhenman.model.bean.WorkShortComicBean;
 import com.zhenman.asus.zhenman.presenter.WorkShortComicPresenter;
 import com.zhenman.asus.zhenman.utils.GetData;
@@ -22,7 +23,6 @@ import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
 import com.zhenman.asus.zhenman.view.myself.WorkDisplayActivity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -73,12 +73,10 @@ public class MyLikeShortFragment extends BaseFragment<WorkShortComicPresenter> i
                 likeShortNoData.setVisibility(View.VISIBLE);
                 likeShortNoData.setVisibility(View.GONE);
                 WorkShortComicBean.DataBean data = workShortComicBean.getData();
-                List<WorkShortComicBean.DataBean.ResultBean> result = data.getResult();
+                List<ResultBean> result = data.getResult();
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
                 likeShortRecy.setLayoutManager(gridLayoutManager);
-                List<Object> objects = new ArrayList<>();
-                objects.addAll(result);
-                WorkShortAdapter workShortAdapter = new WorkShortAdapter(objects, getContext());
+                WorkShortAdapter workShortAdapter = new WorkShortAdapter(result, getContext());
                 likeShortRecy.setAdapter(workShortAdapter);
                 Toast.makeText(getContext(), result.size() + "", Toast.LENGTH_SHORT).show();
                 workShortAdapter.setOnShortCLickListener(new WorkShortAdapter.OnShortCLickListener() {
@@ -86,7 +84,8 @@ public class MyLikeShortFragment extends BaseFragment<WorkShortComicPresenter> i
                     public void myClick(View view, int position) {
                         Intent intent = new Intent(getContext(), WorkDisplayActivity.class);
                         if (workShortComicBean.getData().getResult() != null) {
-                            List<WorkShortComicBean.DataBean.ResultBean> resultBeanArrayList = workShortComicBean.getData().getResult();
+                            List<ResultBean> resultBeanArrayList = workShortComicBean.getData().getResult();
+                            intent.putExtra("position", position);
                             intent.putExtra("workData", (Serializable) resultBeanArrayList);
                             startActivity(intent);
                         } else {

@@ -12,22 +12,21 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
-import com.zhenman.asus.zhenman.model.bean.ResultBean;
+import com.zhenman.asus.zhenman.model.bean.WorkShortPgcComicBean;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.List;
 
-public class WorkShortAdapter extends RecyclerView.Adapter<WorkShortAdapter.Holder> implements View.OnClickListener {
-    private List<ResultBean> resultBeanList;
-    private OnShortCLickListener myCLick;
+public class WorkLongPgcAdapter extends RecyclerView.Adapter<WorkLongPgcAdapter.Holder> implements View.OnClickListener {
+    List<WorkShortPgcComicBean.DataBean.ResultBean> resultBeanList;
+    private Context context;
 
-    public WorkShortAdapter(List<ResultBean> resultBeanList, Context context) {
+    public WorkLongPgcAdapter(List<WorkShortPgcComicBean.DataBean.ResultBean> resultBeanList, Context context) {
         this.resultBeanList = resultBeanList;
         this.context = context;
     }
 
-    private Context context;
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -40,27 +39,27 @@ public class WorkShortAdapter extends RecyclerView.Adapter<WorkShortAdapter.Hold
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int i) {
-            //        获取屏幕的宽
-            int screenWidth = ScreenUtils.getScreenWidth(context);
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.itemWorkShort_1.getLayoutParams();
-            int imageWidth = (screenWidth - (12 * 2 + 8 * 2)) / 3;
-            int imageHeight = imageWidth * 332 / 216;
-            params.height = imageHeight;
-            params.width = imageWidth;
-            params.setMargins(0, 20, 8, 0);
-            holder.itemWorkShort_1.setLayoutParams(params);
-            Glide.with(context).load(resultBeanList.get(i).getCoverImg()).into(holder.itemWorkShort_Img);
-            holder.itemWorkShort_likeNum.setText(resultBeanList.get(i).getLikeNum() + "");
-            holder.itemView.setTag(i);
-
-
-
+//        获取屏幕的宽
+        int screenWidth = ScreenUtils.getScreenWidth(context);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.itemWorkShort_1.getLayoutParams();
+        int imageWidth = (screenWidth - (12 * 2 + 8 * 2)) / 3;
+        int imageHeight = imageWidth * 332 / 216;
+        params.height = imageHeight;
+        params.width = imageWidth;
+        params.setMargins(0, 20, 8, 0);
+        holder.itemWorkShort_1.setLayoutParams(params);
+        Glide.with(context).load(resultBeanList.get(i).getCoverImg()).into(holder.itemWorkShort_Img);
+//            holder.itemWorkShort_likeNum.setText(resultBean.get.getLikeNum() + "");
+        holder.itemWorkShort_mask.setVisibility(View.GONE);
+        holder.itemWorkShort_likeNum.setVisibility(View.GONE);
+        holder.itemView.setTag(i);
     }
 
     @Override
     public int getItemCount() {
         return resultBeanList.isEmpty() ? 0 : resultBeanList.size();
     }
+    private OnShortCLickListener myCLick;
 
     @Override
     public void onClick(View v) {
@@ -92,6 +91,4 @@ public class WorkShortAdapter extends RecyclerView.Adapter<WorkShortAdapter.Hold
 
         }
     }
-
-
 }

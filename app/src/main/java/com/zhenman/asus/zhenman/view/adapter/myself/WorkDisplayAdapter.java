@@ -24,7 +24,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.zhenman.asus.zhenman.R;
-import com.zhenman.asus.zhenman.model.bean.WorkShortComicBean;
+import com.zhenman.asus.zhenman.model.bean.ResultBean;
 import com.zhenman.asus.zhenman.presenter.WorkDisplayPresenter;
 import com.zhenman.asus.zhenman.utils.GlideUtils;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
@@ -42,14 +42,14 @@ import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_SETTLING;
 
 public class WorkDisplayAdapter extends RecyclerView.Adapter<WorkDisplayAdapter.Holder> {
-    private List<WorkShortComicBean.DataBean.ResultBean> list;
+    private List<ResultBean> list;
     private Context context;
     private MyRecyclerView homeHot_list;
     private WorkDisplayPresenter workDisplayPresenter;
     private int position = -1;
     private boolean count = true;
 
-    public WorkDisplayAdapter(List<WorkShortComicBean.DataBean.ResultBean> list, Context context, MyRecyclerView homeHot_list, WorkDisplayPresenter workDisplayPresenter) {
+    public WorkDisplayAdapter(List<ResultBean> list, Context context, MyRecyclerView homeHot_list, WorkDisplayPresenter workDisplayPresenter) {
         this.list = list;
         this.context = context;
         this.homeHot_list = homeHot_list;
@@ -96,13 +96,13 @@ public class WorkDisplayAdapter extends RecyclerView.Adapter<WorkDisplayAdapter.
             holder.Home_Hot_UserNameText.setVisibility(View.VISIBLE);
             holder.Home_Hot_ThemLin.setVisibility(View.VISIBLE);
         }
-        final WorkShortComicBean.DataBean.ResultBean dataBean = list.get(i);
+        final ResultBean dataBean = list.get(i);
         double i1 = (double) dataBean.getHeight() / dataBean.getWidth();
         double InsideHight = i1 * (double) ScreenUtils.getScreenWidth(context);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.getScreenHeight(context));
         holder.home_fillView.setLayoutParams(layoutParams);
         final MyLayoutMessage myLayoutMessage = new MyLayoutMessage(context);
-        List<WorkShortComicBean.DataBean.ResultBean.PageDtoListBean> pageDtoList = dataBean.getPageDtoList();
+        List<ResultBean.PageDtoListBean> pageDtoList = dataBean.getPageDtoList();
         final WorkDisplayItemAdapter homeHotRecyItemAdapter = new WorkDisplayItemAdapter(pageDtoList);
         holder.home_Recy_fill_Recy.setLayoutManager(myLayoutMessage);
         holder.home_Recy_fill_Recy.setAdapter(homeHotRecyItemAdapter);
@@ -231,12 +231,12 @@ public class WorkDisplayAdapter extends RecyclerView.Adapter<WorkDisplayAdapter.
                             AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
                             animationDrawable.start();
                             workDisplayPresenter.UgcFabulous(dataBean.getId(), "0");
-                            holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) - 1 + "");
+                            holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(i).getLikeNum()) - 1 + "");
                         } else {
                             holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_like);
                             AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
                             animationDrawable.start();
-                            holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
+                            holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(i).getLikeNum()) + "");
                         }
 
                     } else {
@@ -245,12 +245,12 @@ public class WorkDisplayAdapter extends RecyclerView.Adapter<WorkDisplayAdapter.
                             AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
                             animationDrawable.start();
                             workDisplayPresenter.UgcFabulous(dataBean.getId(), "1");
-                            holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) + 1 + "");
+                            holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(i).getLikeNum()) + 1 + "");
                         } else {
                             holder.Home_Hot_IsLikeImageView.setButtonDrawable(R.drawable.hot_guanzhu_unlike);
                             AnimationDrawable animationDrawable = (AnimationDrawable) holder.Home_Hot_IsLikeImageView.getButtonDrawable();
                             animationDrawable.start();
-                            holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(position).getLikeNum()) + "");
+                            holder.Home_Hot_IsLikeNumberText.setText(Integer.parseInt(list.get(i).getLikeNum()) + "");
                         }
                     }
                 }

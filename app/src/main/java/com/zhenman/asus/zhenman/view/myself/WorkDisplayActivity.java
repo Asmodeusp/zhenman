@@ -9,8 +9,8 @@ import com.zhenman.asus.zhenman.base.BaseActivity;
 import com.zhenman.asus.zhenman.contract.WorkDisplayContract;
 import com.zhenman.asus.zhenman.model.bean.CommentListBean;
 import com.zhenman.asus.zhenman.model.bean.FollowBean;
+import com.zhenman.asus.zhenman.model.bean.ResultBean;
 import com.zhenman.asus.zhenman.model.bean.UgcFabulousBean;
-import com.zhenman.asus.zhenman.model.bean.WorkShortComicBean;
 import com.zhenman.asus.zhenman.presenter.WorkDisplayPresenter;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.view.adapter.myself.WorkDisplayAdapter;
@@ -29,7 +29,7 @@ public class WorkDisplayActivity extends BaseActivity<WorkDisplayPresenter> impl
     private ViewPagerLayoutManager linearLayoutManager;
     private String ugcId;
 
-    private List<WorkShortComicBean.DataBean.ResultBean> workDataList;
+    private List<ResultBean> workDataList;
     private int position;
 
     @Override
@@ -39,7 +39,6 @@ public class WorkDisplayActivity extends BaseActivity<WorkDisplayPresenter> impl
 
     @Override
     protected void init() {
-
         linearLayoutManager = new ViewPagerLayoutManager(this, LinearLayoutManager.VERTICAL) {
 
         };
@@ -64,9 +63,12 @@ public class WorkDisplayActivity extends BaseActivity<WorkDisplayPresenter> impl
         WorkDisplayList.setLayoutManager(linearLayoutManager);
         //       得到数据集合
         Intent intent = getIntent();
-        workDataList = (List<WorkShortComicBean.DataBean.ResultBean>) intent.getSerializableExtra("workData");
-        position = intent.getIntExtra("position",0);
 
+        workDataList = (List<ResultBean>) intent.getSerializableExtra("workData");
+        List<ResultBean> squareData = (List<ResultBean>) intent.getSerializableExtra("squareData");
+
+
+        position = intent.getIntExtra("position",0);
         initData();
     }
 

@@ -12,18 +12,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zhenman.asus.zhenman.R;
-import com.zhenman.asus.zhenman.model.bean.ThemeFeaturedBean;
+import com.zhenman.asus.zhenman.model.bean.ResultBean;
 import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.List;
 
 public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Holder> implements View.OnClickListener {
-    private List<ThemeFeaturedBean.DataBean.ResultBean> resultBeanList;
+    private List<ResultBean> resultBeanList;
     private Context context;
     private OnShortCLickListener myCLick;
 
-    public FeaturedAdapter(List<ThemeFeaturedBean.DataBean.ResultBean> resultBeanList, Context context) {
+    public FeaturedAdapter(List<ResultBean> resultBeanList, Context context) {
         this.resultBeanList = resultBeanList;
         this.context = context;
     }

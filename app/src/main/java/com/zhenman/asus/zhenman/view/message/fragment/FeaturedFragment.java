@@ -12,13 +12,15 @@ import android.widget.Toast;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.ThemeFeaturedSquareContract;
+import com.zhenman.asus.zhenman.model.bean.ResultBean;
 import com.zhenman.asus.zhenman.model.bean.ThemeFeaturedBean;
 import com.zhenman.asus.zhenman.presenter.ThemeFeaturedSquarePresenter;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
-import com.zhenman.asus.zhenman.view.ContentActivity;
 import com.zhenman.asus.zhenman.view.adapter.message.FeaturedAdapter;
+import com.zhenman.asus.zhenman.view.myself.WorkDisplayActivity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -59,7 +61,7 @@ public class FeaturedFragment extends BaseFragment<ThemeFeaturedSquarePresenter>
         if (themeFeaturedBean.getState() == 0) {
 
             ThemeFeaturedBean.DataBean data = themeFeaturedBean.getData();
-            List<ThemeFeaturedBean.DataBean.ResultBean> resultBeanList = data.getResult();
+            final List<ResultBean> resultBeanList = data.getResult();
             if (resultBeanList.size() == 0) {
                 featured_none.setVisibility(View.VISIBLE);
                 featuredRecy.setVisibility(View.GONE);
@@ -75,9 +77,11 @@ public class FeaturedFragment extends BaseFragment<ThemeFeaturedSquarePresenter>
                     @Override
                     public void myClick(View view, int position) {
                         //新开一个界面，跳转到作品展示页面
-                        List<ThemeFeaturedBean.DataBean.ResultBean> result = themeFeaturedBean.getData().getResult();
-                        Intent intent = new Intent(getContext(), ContentActivity.class);
-                        getActivity().startActivity(intent);
+                        Intent intent = new Intent(getContext(), WorkDisplayActivity.class);
+                        intent.putExtra("position", position);
+                        intent.putExtra("workData", (Serializable) resultBeanList);
+                        startActivity(intent);
+
 
                     }
                 });

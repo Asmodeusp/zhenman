@@ -14,16 +14,16 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zhenman.asus.zhenman.R;
-import com.zhenman.asus.zhenman.model.bean.WorkShortComicBean;
+import com.zhenman.asus.zhenman.model.bean.ResultBean;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
 
 public class WorkDisplayItemAdapter extends RecyclerView.Adapter<WorkDisplayItemAdapter.Holder> implements View.OnClickListener {
-    List<WorkShortComicBean.DataBean.ResultBean.PageDtoListBean> pageDtoList;
+    List<ResultBean.PageDtoListBean> pageDtoList;
     private Context context;
     private RecyclerViewOnCLickListener myCLick;
-    public WorkDisplayItemAdapter(List<WorkShortComicBean.DataBean.ResultBean.PageDtoListBean> pageDtoList) {
+    public WorkDisplayItemAdapter(List<ResultBean.PageDtoListBean> pageDtoList) {
         this.pageDtoList = pageDtoList;
 
     }
