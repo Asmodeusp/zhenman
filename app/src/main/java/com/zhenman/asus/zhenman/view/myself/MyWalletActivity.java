@@ -2,6 +2,7 @@ package com.zhenman.asus.zhenman.view.myself;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +19,7 @@ public class MyWalletActivity extends BaseActivity<MyWalletPresenter> implements
     private AutoRelativeLayout app_back;
     private TextView app_title;
     private TextView myWallet_num;
-    private TextView myWallet_question;
+    private ImageView myWallet_question;
     private RelativeLayout myWallet_shop;
     private AutoRelativeLayout myWallet_history;
     private AutoRelativeLayout myWallet_sell;
@@ -37,7 +38,7 @@ public class MyWalletActivity extends BaseActivity<MyWalletPresenter> implements
         myWallet_shop = (RelativeLayout) findViewById(R.id.myWallet_shop);
         myWallet_history = (AutoRelativeLayout) findViewById(R.id.myWallet_history);
         myWallet_sell = (AutoRelativeLayout) findViewById(R.id.myWallet_sell);
-        myWallet_question = (TextView) findViewById(R.id.myWallet_question);
+        myWallet_question = (ImageView) findViewById(R.id.myWallet_question);
         app_title.setText("我的");
 //        茄子籽数量
         presenter.sendSellEggplant();

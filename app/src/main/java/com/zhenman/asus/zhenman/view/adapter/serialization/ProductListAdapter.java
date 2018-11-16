@@ -53,7 +53,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         } else {
             holder.itemProductList_bite.setImageResource(R.mipmap.my_coin_small);
         }
-        holder.itemProductList_num.setText("X " + listBeanData.get(i).getShowPrice()*100 + "");
+        holder.itemProductList_num.setText("x " + listBeanData.get(i).getShowPrice()*100 + "");
         holder.itemView.setTag(i);
         holder.itemProductList_money.setText("￥" + listBeanData.get(i).getPrice() + ".00");
         holder.itemProductList.setOnClickListener(new View.OnClickListener() {
