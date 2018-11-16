@@ -445,7 +445,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private void initCommentpopu() {
         FullFragment fullFragment = new FullFragment(commentListBean, "3", pgcId);
         fullFragment.show(getSupportFragmentManager(), "dialog");
-
     }
 
     @OnClick({R.id.SeeFirstBtn,
