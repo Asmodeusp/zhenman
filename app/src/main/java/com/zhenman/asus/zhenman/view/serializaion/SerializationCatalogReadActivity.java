@@ -13,9 +13,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
@@ -24,6 +26,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +52,7 @@ import com.zhenman.asus.zhenman.model.bean.SerializationCatalogReadBean;
 import com.zhenman.asus.zhenman.presenter.SerializationCatalogReadPresenterImp;
 import com.zhenman.asus.zhenman.utils.ButtonUtils;
 import com.zhenman.asus.zhenman.utils.GetData;
+import com.zhenman.asus.zhenman.utils.ScreenUtils;
 import com.zhenman.asus.zhenman.utils.alipay.AuthResult;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
@@ -244,7 +248,7 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
     private String pgcId;
     private boolean isCollect;
     private CommentListBean commentListBean;
-    private Boolean isOpenAuto;
+    private Boolean isOpenAuto =true;
 
     @Override
     protected int getLayoutId() {
@@ -367,74 +371,89 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             Toast.makeText(this, "无网络或网速过慢", Toast.LENGTH_SHORT).show();
             this.serializationCatalogReadBean = serializationCatalogReadBean;
         } else {
-            //过渡页续购开关
-            isOpenAuto =serializationCatalogReadBean.getData().getCatalogPayInfo().isOpenAuto();
-            if (isOpenAuto) {
-                TransitionAutoRrepurChaseImg.setImageResource(R.mipmap.edit_outline_button_on);
-            }else{
-                TransitionAutoRrepurChaseImg.setImageResource(R.mipmap.edit_outline_button_off);
-            }
-            //过渡页标题
-            TransitionTitle.setText(serializationCatalogReadBean.getData().getCatalogPayInfo().getTitle());
-            //过渡页本章需要茄子籽数量
-            TransitionCoinAmountNumber.setText(serializationCatalogReadBean.getData().getCatalogPayInfo().getCoinAmount()+"个");
-            //过渡页自己所剩茄子籽
-            TransitionMyAmountNumber.setText("x"+serializationCatalogReadBean.getData().getCatalogPayInfo().getAmount());
-            //阅读adapter
-            serializationCatalogReadRecyAdapter = new SerializationCatalogReadRecyAdapter(serializationCatalogReadBean.getData().getTransfer());
-            serializationCatalogReadRecy.setAdapter(serializationCatalogReadRecyAdapter);
-            LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(SerializationCatalogReadActivity.this, R.anim.recy_item);
-            serializationCatalogReadRecy.setLayoutAnimation(animation);
-            //标题
-            serializationCatalogReadText.setText(serializationCatalogReadBean.getData().getCatalogPayInfo().getTitle());
-            serializationCatalogReadRecyAdapter.notifyDataSetChanged();
-            //评论数量
-            serializationCatalogReadCommentNumber.setText(String.valueOf(serializationCatalogReadBean.getData().getCatalogPayInfo().getCommentNum()));
-            //阅读页的点击事件
-            serializationCatalogReadRecyAdapter.setRecyclerViewOnCLickListener(new SerializationCatalogReadRecyAdapter.RecyclerViewOnCLickListener() {
-                @Override
-                public void myClick(View view, int position) {
-                    if (Touch) {
-                        serializationCatalogReadHeadRel.setVisibility(View.VISIBLE);
-                        serializationCatalogReadFootLin.setVisibility(View.VISIBLE);
-                        Touch = false;
-                    } else {
-                        serializationCatalogReadHeadRel.setVisibility(View.GONE);
-                        serializationCatalogReadFootLin.setVisibility(View.GONE);
-                        Touch = true;
-                    }
+            if (serializationCatalogReadBean.getData() != null) {
+                //过渡页续购开关
+                isOpenAuto = serializationCatalogReadBean.getData().getCatalogPayInfo().isOpenAuto();
+                if (isOpenAuto) {
+                    TransitionAutoRrepurChaseImg.setImageResource(R.mipmap.edit_outline_button_on);
+                } else {
+                    TransitionAutoRrepurChaseImg.setImageResource(R.mipmap.edit_outline_button_off);
                 }
-            });
-            //演员列表
-            if (serializationCatalogReadBean.getData().getPgcChapterInfoDto().getActorList().size() == 0) {
-                CataLog_FootViewActor_RecyTip.setVisibility(View.VISIBLE);
-                CataLogFootViewActorRecy.setVisibility(View.GONE);
-            } else {
-                CataLog_FootViewActor_RecyTip.setVisibility(View.GONE);
-                CataLogFootViewActorRecy.setVisibility(View.VISIBLE);
-            }
-            catalogReadActorAdapter = new CatalogReadActorAdapter(serializationCatalogReadBean.getData().getPgcChapterInfoDto().getActorList());
-            catalogReadActorAdapter.CatalogReadActorCallback(this);
-            CataLogFootViewActorRecy.setAdapter(catalogReadActorAdapter);
-            isCollect = serializationCatalogReadBean.getData().getPgcChapterInfoDto().isCollect();
-            //下方评论列表
-            if (serializationCatalogReadBean.getData().getPgcCommentListByChapterId() == null) {
-                CataLogFootViewCommentRecyTip.setVisibility(View.VISIBLE);
-                CataLogFootViewCommentRecy.setVisibility(View.GONE);
-            } else {
-                CataLogFootViewCommentRecyTip.setVisibility(View.GONE);
-                CataLogFootViewCommentRecy.setVisibility(View.VISIBLE);
-                CataLogFootViewCommentRecy.setLayoutManager(new LinearLayoutManager(this));
-                WorkDetailsCommentAdapter workDetailsCommentAdapter = new WorkDetailsCommentAdapter(serializationCatalogReadBean.getData().getPgcCommentListByChapterId());
-                workDetailsCommentAdapter.setgoUserInfo(new WorkDetailsCommentAdapter.goUserInfo() {
+                //过渡页标题
+                TransitionTitle.setText(serializationCatalogReadBean.getData().getCatalogPayInfo().getTitle());
+                //过渡页本章需要茄子籽数量
+                TransitionCoinAmountNumber.setText(serializationCatalogReadBean.getData().getCatalogPayInfo().getCoinAmount() + "个");
+                //过渡页自己所剩茄子籽
+                TransitionMyAmountNumber.setText("x" + serializationCatalogReadBean.getData().getCatalogPayInfo().getAmount());
+                //设置RecyclerVIew的高度
+                int Height =0;
+                for (SerializationCatalogReadBean.DataBean.TransferBean transferBean : serializationCatalogReadBean.getData().getTransfer()) {
+                   Height += (int) Double.parseDouble(transferBean.getHeight());
+                }
+
+
+                double i = (double) Height / 800;
+                double InsideHight = i * (double) ScreenUtils.getScreenWidth(this);
+                serializationCatalogReadRecy.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) InsideHight));
+                //阅读adapter
+                serializationCatalogReadRecyAdapter = new SerializationCatalogReadRecyAdapter(serializationCatalogReadBean.getData().getTransfer());
+                serializationCatalogReadRecy.setAdapter(serializationCatalogReadRecyAdapter);
+
+                LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(SerializationCatalogReadActivity.this, R.anim.recy_item);
+                serializationCatalogReadRecy.setLayoutAnimation(animation);
+
+                //标题
+                serializationCatalogReadText.setText(serializationCatalogReadBean.getData().getCatalogPayInfo().getTitle());
+                serializationCatalogReadRecyAdapter.notifyDataSetChanged();
+                //评论数量
+                serializationCatalogReadCommentNumber.setText(String.valueOf(serializationCatalogReadBean.getData().getCatalogPayInfo().getCommentNum()));
+                //阅读页的点击事件
+                serializationCatalogReadRecyAdapter.setRecyclerViewOnCLickListener(new SerializationCatalogReadRecyAdapter.RecyclerViewOnCLickListener() {
                     @Override
-                    public void go(String UserId) {
-                        Intent intent = new Intent(SerializationCatalogReadActivity.this, HomepageActivity.class);
-                        intent.putExtra(SPKey.HIM_ID, UserId);
-                        startActivity(intent);
+                    public void myClick(View view, int position) {
+                        if (Touch) {
+                            serializationCatalogReadHeadRel.setVisibility(View.VISIBLE);
+                            serializationCatalogReadFootLin.setVisibility(View.VISIBLE);
+                            Touch = false;
+                        } else {
+                            serializationCatalogReadHeadRel.setVisibility(View.GONE);
+                            serializationCatalogReadFootLin.setVisibility(View.GONE);
+                            Touch = true;
+                        }
                     }
                 });
-                CataLogFootViewCommentRecy.setAdapter(workDetailsCommentAdapter);
+                //演员列表
+                if (serializationCatalogReadBean.getData().getPgcChapterInfoDto().getActorList().size() == 0) {
+                    CataLog_FootViewActor_RecyTip.setVisibility(View.VISIBLE);
+                    CataLogFootViewActorRecy.setVisibility(View.GONE);
+                } else {
+                    CataLog_FootViewActor_RecyTip.setVisibility(View.GONE);
+                    CataLogFootViewActorRecy.setVisibility(View.VISIBLE);
+                }
+                catalogReadActorAdapter = new CatalogReadActorAdapter(serializationCatalogReadBean.getData().getPgcChapterInfoDto().getActorList());
+                catalogReadActorAdapter.CatalogReadActorCallback(this);
+                CataLogFootViewActorRecy.setAdapter(catalogReadActorAdapter);
+                isCollect = serializationCatalogReadBean.getData().getPgcChapterInfoDto().isCollect();
+                //下方评论列表
+                if (serializationCatalogReadBean.getData().getPgcCommentListByChapterId() == null) {
+                    CataLogFootViewCommentRecyTip.setVisibility(View.VISIBLE);
+                    CataLogFootViewCommentRecy.setVisibility(View.GONE);
+                } else {
+                    CataLogFootViewCommentRecyTip.setVisibility(View.GONE);
+                    CataLogFootViewCommentRecy.setVisibility(View.VISIBLE);
+                    CataLogFootViewCommentRecy.setLayoutManager(new LinearLayoutManager(this));
+                    WorkDetailsCommentAdapter workDetailsCommentAdapter = new WorkDetailsCommentAdapter(serializationCatalogReadBean.getData().getPgcCommentListByChapterId());
+                    workDetailsCommentAdapter.setgoUserInfo(new WorkDetailsCommentAdapter.goUserInfo() {
+                        @Override
+                        public void go(String UserId) {
+                            Intent intent = new Intent(SerializationCatalogReadActivity.this, HomepageActivity.class);
+                            intent.putExtra(SPKey.HIM_ID, UserId);
+                            startActivity(intent);
+                        }
+                    });
+                    CataLogFootViewCommentRecy.setAdapter(workDetailsCommentAdapter);
+                }
+
             }
             SetTextColorRules();
         }
@@ -561,12 +580,12 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
             case R.id.TransitionAutoRrepurChaseImg:
                 if (isOpenAuto) {
                     TransitionAutoRrepurChaseImg.setImageResource(R.mipmap.edit_outline_button_off);
-                    presenter.getRenewBean("0",pgcId);
-                    isOpenAuto =false;
-                }else{
+                    presenter.getRenewBean("0", pgcId);
+                    isOpenAuto = false;
+                } else {
                     TransitionAutoRrepurChaseImg.setImageResource(R.mipmap.edit_outline_button_on);
-                    presenter.getRenewBean("1",pgcId);
-                    isOpenAuto =true;
+                    presenter.getRenewBean("1", pgcId);
+                    isOpenAuto = true;
                 }
                 break;
             //购买本章Button

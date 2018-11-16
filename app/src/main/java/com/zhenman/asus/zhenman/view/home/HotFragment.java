@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zhenman.asus.zhenman.R;
 import com.zhenman.asus.zhenman.base.BaseFragment;
 import com.zhenman.asus.zhenman.contract.HomeHotContract;
@@ -36,6 +40,7 @@ import com.zhy.autolayout.AutoRelativeLayout;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -44,14 +49,13 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     private MyRecyclerView HomeHot_List;
     private ViewPagerLayoutManager linearLayoutManager;
     private HomeHotRecyAdapter homeHotRecyAdapter;
-    private List<HomeHotBean.DataBean> data;
+    private List<HomeHotBean.DataBean> data =new ArrayList<>();
     private String ugcId;
     private AutoLinearLayout group;
     private AutoRelativeLayout home_tablayout;
-    private TextView homeText;
-    private TextView messageText;
-    private TextView myselfText;
-    private TextView serializationText;
+    private SmartRefreshLayout HomeHot_SmartRefresh;
+    private int pageNumber =1;
+
 
     @SuppressLint("ValidFragment")
     public HotFragment(AutoRelativeLayout home_tablayout) {
@@ -75,9 +79,30 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
 
     private void initView() {
         HomeHot_List = getActivity().findViewById(R.id.HomeHot_List);
+        HomeHot_SmartRefresh = getActivity().findViewById(R.id.HomeHot_SmartRefresh);
         HomeHot_List.setItemViewCacheSize(1 );
         linearLayoutManager = new ViewPagerLayoutManager(getContext(), LinearLayoutManager.VERTICAL) {
         };
+         HomeHot_SmartRefresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                presenter.getHomeHotBean( 1+ "");
+                data.clear();
+                homeHotRecyAdapter.notifyDataSetChanged();
+                refreshLayout.finishRefresh(1000/*,false*/);//传入false表示刷新失败
+
+            }
+        });
+        HomeHot_SmartRefresh.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                pageNumber++;
+                presenter.getHomeHotBean(pageNumber + "");
+                homeHotRecyAdapter.notifyDataSetChanged();
+                refreshLayout.finishLoadMore(1000/*,false*/);//传入false表示刷新失败
+
+            }
+        });
         linearLayoutManager.setOnViewPagerListener(new OnViewPagerListener() {
             @Override
             public void onInitComplete() {
@@ -103,7 +128,7 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     @Override
     protected void loadDate() {
 
-        presenter.getHomeHotBean(1 + "");
+        presenter.getHomeHotBean(pageNumber + "");
     }
 
     @Override
@@ -116,7 +141,15 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
     @Override
     public void showHotBean(HomeHotBean homeHotBean) {
         if (homeHotBean.getData().size() != 0) {
-            data = homeHotBean.getData();
+            if (pageNumber!=1){
+                for (HomeHotBean.DataBean dataBean : homeHotBean.getData()) {
+                    data.add(dataBean);
+                }
+                homeHotRecyAdapter.notifyDataSetChanged();
+                HomeHot_List.scrollToPosition(data.size()-11);
+            }else{
+                data.addAll(homeHotBean.getData()) ;
+            }
             homeHotRecyAdapter = new HomeHotRecyAdapter(data, HomeHot_List, presenter, group,home_tablayout);
             HomeHot_List.setAdapter(homeHotRecyAdapter);
             homeHotRecyAdapter.setgoUserInfo(new HomeHotRecyAdapter.goUserInfo() {
@@ -158,12 +191,5 @@ public class HotFragment extends BaseFragment<HomeHotPresenterImp> implements Ho
         this.ugcId = UgcId;
         presenter.getCommentList(ugcId + "", "1", "20", Type + "", "1");
     }
-    //设置字体颜色
-    private void setTextColor() {
-        homeText.setTextColor(getResources().getColor(R.color.h9));
-        serializationText.setTextColor(getResources().getColor(R.color.h9));
-        messageText.setTextColor(getResources().getColor(R.color.h9));
-        myselfText.setTextColor(getResources().getColor(R.color.h9));
 
-    }
 }

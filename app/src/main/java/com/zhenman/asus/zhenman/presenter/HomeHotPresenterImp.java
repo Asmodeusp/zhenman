@@ -37,7 +37,7 @@ public class HomeHotPresenterImp implements HomeHotContract.HomeHotPresenter {
     public void getHomeHotBean(String pageNum) {
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", pageNum);
-        map.put("pageSize", "20");
+        map.put("pageSize", "10");
         RetrofitUtils.getInstance().getHomeHotService().GetHotBean(map).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HomeHotBean>() {

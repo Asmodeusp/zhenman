@@ -115,16 +115,12 @@ public class HomeHotRecyAdapter extends RecyclerView.Adapter<HomeHotRecyAdapter.
         final MyLayoutMessage myLayoutMessage = new MyLayoutMessage(context);
         List<HomeHotBean.DataBean.PageDtoListBean> pageDtoList = dataBean.getPageDtoList();
         final HomeHotRecyItemAdapter homeHotRecyItemAdapter = new HomeHotRecyItemAdapter(pageDtoList);
-        holder.home_Recy_fill_Recy.setLayoutManager(myLayoutMessage);
-        holder.home_Recy_fill_Recy.setAdapter(homeHotRecyItemAdapter);
         LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, R.anim.recy_item);
         holder. home_Recy_fill_Recy.setLayoutAnimation(animation);
+        holder.home_Recy_fill_Recy.setLayoutManager(myLayoutMessage);
+        holder.home_Recy_fill_Recy.setAdapter(homeHotRecyItemAdapter);
+
         homeHot_list.setInnerListView(holder.home_Recy_fill_Recy);
-        homeHot_list.getItemAnimator().setAddDuration(0);
-        homeHot_list.getItemAnimator().setChangeDuration(0);
-        homeHot_list.getItemAnimator().setMoveDuration(0);
-        homeHot_list.getItemAnimator().setRemoveDuration(0);
-        ((SimpleItemAnimator) homeHot_list.getItemAnimator()).setSupportsChangeAnimations(false);
         myLayoutMessage.setRecycleChildrenOnDetach(true);
         group.setVisibility(View.VISIBLE);
         home_tablayout.setVisibility(View.VISIBLE);
