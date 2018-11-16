@@ -1,5 +1,6 @@
 package com.zhenman.asus.zhenman.view.myself;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.zhenman.asus.zhenman.presenter.MyAttenThemePresenter;
 import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.myself.MyAttenThemeAdapter;
+import com.zhenman.asus.zhenman.view.message.ThemeDetailsActivity;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 import java.util.ArrayList;
@@ -84,26 +86,35 @@ public class AttentionThemeActivity extends BaseActivity<MyAttenThemePresenter> 
     }
 
     @Override
-    public void showMyAttenTheme(MyAttenThemeBean myAttenThemeBean) {
+    public void showMyAttenTheme(final MyAttenThemeBean myAttenThemeBean) {
 
         if (myAttenThemeBean.getState() == 0) {
 
-            List<MyAttenThemeBean.DataBean.ResultBean> result = myAttenThemeBean.getData().getResult();
+            final List<MyAttenThemeBean.DataBean.ResultBean> result = myAttenThemeBean.getData().getResult();
             if (result.size() == 0) {
                 attentionThemeNone.setVisibility(View.VISIBLE);
                 attentionTheme_recy.setVisibility(View.GONE);
             } else {
                 attentionThemeNone.setVisibility(View.GONE);
                 attentionTheme_recy.setVisibility(View.VISIBLE);
-                List<Object> list1 = new ArrayList<>();
+                final List<Object> list1 = new ArrayList<>();
 //                for (int i = 0; i < result.size(); i++) {
                     list1.addAll(result);
 //                }
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                 attentionTheme_recy.setLayoutManager(linearLayoutManager);
-                MyAttenThemeAdapter myAttenThemeAdapter = new MyAttenThemeAdapter(list1, this);
+                final MyAttenThemeAdapter myAttenThemeAdapter = new MyAttenThemeAdapter(list1, this);
                 myAttenThemeAdapter.MyAttenThemeCallback(this);
                 attentionTheme_recy.setAdapter(myAttenThemeAdapter);
+                myAttenThemeAdapter.setOnShortCLickListener(new MyAttenThemeAdapter.OnShortCLickListener() {
+                    @Override
+                    public void myClick(View view, int position) {
+                        Intent intent = new Intent(AttentionThemeActivity.this, ThemeDetailsActivity.class);
+                        intent.putExtra("chapterId",result.get(position).getSubjectId()+"");
+                        SPUtils.put(AttentionThemeActivity.this, SPKey.SUBJECT_ID,result.get(position).getSubjectId()+"");
+                        startActivity(intent);
+                    }
+                });
             }
         } else {
             Toast.makeText(this, "获取数据失败", Toast.LENGTH_SHORT).show();

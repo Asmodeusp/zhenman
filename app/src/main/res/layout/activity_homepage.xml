@@ -267,9 +267,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
-
-
                 <FrameLayout
                     android:id="@+id/HomePage_Viewpager"
                     android:layout_width="match_parent"

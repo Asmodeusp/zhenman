@@ -49,7 +49,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public void onBindViewHolder(@NonNull final Holder holder, final int i) {
         int productType = listBeanData.get(i).getProductType();
         if (productType == 1) {
-            holder.itemProductList_bite.setImageResource(R.mipmap.my_qiezi_bite);
+            holder.itemProductList_bite.setImageResource(R.mipmap.my_qiezi);
         } else {
             holder.itemProductList_bite.setImageResource(R.mipmap.my_coin_small);
         }

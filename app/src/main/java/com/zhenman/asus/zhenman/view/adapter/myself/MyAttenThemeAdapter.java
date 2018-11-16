@@ -59,6 +59,8 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
     public void onBindViewHolder(@NonNull final Holder holder, final int i) {
         Object object = resultBeanList.get(i);
         if (object instanceof MyAttenThemeBean.DataBean.ResultBean) {
+            holder.itemView.setTag(i);
+
             final MyAttenThemeBean.DataBean.ResultBean resultBean = (MyAttenThemeBean.DataBean.ResultBean) object;
             Glide.with(context)
                     .load(resultBean.getImage())
@@ -135,6 +137,8 @@ public class MyAttenThemeAdapter extends RecyclerView.Adapter<MyAttenThemeAdapte
             holder.itemView.setTag(i);
         }//MyAttentionUserBean.DataBean.ResultBean
         if (object instanceof MyAttentionUserBean.DataBean.ResultBean) {//关注列表
+            holder.itemView.setTag(i);
+
             final MyAttentionUserBean.DataBean.ResultBean resultBean = (MyAttentionUserBean.DataBean.ResultBean) object;
             Glide.with(context)
                     .load(resultBean.getImageUrl())

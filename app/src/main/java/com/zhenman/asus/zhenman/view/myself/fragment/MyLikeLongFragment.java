@@ -1,6 +1,7 @@
 package com.zhenman.asus.zhenman.view.myself.fragment;
 
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,7 @@ import com.zhenman.asus.zhenman.utils.sp.SPKey;
 import com.zhenman.asus.zhenman.utils.sp.SPUtils;
 import com.zhenman.asus.zhenman.view.adapter.myself.WorkLongPgcAdapter;
 import com.zhenman.asus.zhenman.view.myself.HomepageActivity;
+import com.zhenman.asus.zhenman.view.serializaion.WorkDetailsActivity;
 
 import java.util.List;
 
@@ -69,12 +71,20 @@ public class MyLikeLongFragment extends BaseFragment<WorkShortPgcComicPresenter>
                 likeLongNoData.setVisibility(View.GONE);
 //                WorkShortComicBean.DataBean data = workShortPgcComicBean.getData();
                 WorkShortPgcComicBean.DataBean data = workShortPgcComicBean.getData();
-                List<WorkShortPgcComicBean.DataBean.ResultBean> result = data.getResult();
+                final List<WorkShortPgcComicBean.DataBean.ResultBean> result = data.getResult();
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
                 likeLongRecy.setLayoutManager(gridLayoutManager);
                 WorkLongPgcAdapter workShortAdapter = new WorkLongPgcAdapter(result, getContext());
                 likeLongRecy.setAdapter(workShortAdapter);
-                Toast.makeText(getContext(), result.size() + "", Toast.LENGTH_SHORT).show();
+                workShortAdapter.setOnShortCLickListener(new WorkLongPgcAdapter.OnShortCLickListener() {
+                    @Override
+                    public void myClick(View view, int position) {
+                        String pgcId = result.get(position).getPgcId();
+                        Intent intent = new Intent(getActivity(), WorkDetailsActivity.class);
+                        SPUtils.put(getContext(), SPKey.PGC_ID,pgcId+"");
+                        getActivity().startActivity(intent);
+                    }
+                });
             }
 
         } else {

@@ -52,6 +52,7 @@ public class WorkLongPgcAdapter extends RecyclerView.Adapter<WorkLongPgcAdapter.
 //            holder.itemWorkShort_likeNum.setText(resultBean.get.getLikeNum() + "");
         holder.itemWorkShort_mask.setVisibility(View.GONE);
         holder.itemWorkShort_likeNum.setVisibility(View.GONE);
+        holder.itemWorkShort_like.setVisibility(View.GONE);
         holder.itemView.setTag(i);
     }
 
@@ -79,6 +80,7 @@ public class WorkLongPgcAdapter extends RecyclerView.Adapter<WorkLongPgcAdapter.
     public class Holder extends RecyclerView.ViewHolder {
         public ImageView itemWorkShort_Img;
         public ImageView itemWorkShort_mask;
+        public ImageView itemWorkShort_like;
         public AutoRelativeLayout itemWorkShort_1;
         public TextView itemWorkShort_likeNum;
 
@@ -86,6 +88,7 @@ public class WorkLongPgcAdapter extends RecyclerView.Adapter<WorkLongPgcAdapter.
             super(itemView);
             this.itemWorkShort_Img = (ImageView) itemView.findViewById(R.id.itemWorkShort_Img);
             this.itemWorkShort_mask = (ImageView) itemView.findViewById(R.id.itemWorkShort_mask);
+            this.itemWorkShort_like = (ImageView) itemView.findViewById(R.id.itemWorkShort_like);
             this.itemWorkShort_likeNum = (TextView) itemView.findViewById(R.id.itemWorkShort_likeNum);
             this.itemWorkShort_1 = (AutoRelativeLayout) itemView.findViewById(R.id.itemWorkShort_1);
 
