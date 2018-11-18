@@ -503,7 +503,6 @@ public class SerializationCatalogReadActivity extends BaseActivity<Serialization
                         StartcatalogId = data.get(i + 1).getCatalogId();
                         SPUtils.put(this, SPKey.CATALOGID_ID, StartcatalogId);
                     }
-
                     //填充头布局
                     serializationCatalogReadHeadRel.setVisibility(View.GONE);
                     //填充底布局
